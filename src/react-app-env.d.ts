@@ -1,1 +1,6 @@
-/// <reference types="react-scripts" />
+import React from "react";
+
+export interface IButtonProps{
+    Text: string,
+    Icon: JSX.Element
+}
