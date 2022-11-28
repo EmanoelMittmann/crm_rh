@@ -11,6 +11,8 @@ import { IconProjects } from "../../atoms/Icons/IconProjects";
 import { IconReports } from "../../atoms/Icons/IconReports";
 import { IconServices } from "../../atoms/Icons/IconServices";
 import { IconSetting } from "../../atoms/Icons/IconSetting";
+import InputToView from "../../atoms/InputPassword";
+import InputUser from "../../atoms/InputUser";
 
 const Home = () => {
   return (
