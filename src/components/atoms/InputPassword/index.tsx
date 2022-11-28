@@ -24,6 +24,8 @@ const InputToView = () => {
       placeholder="senha"
       iconRight={canSeePasswordIcon}
       iconRightAction={handleClick}
+      onChange={() => {}}
+      onBlur={()=> {}}
     />
   );
 }

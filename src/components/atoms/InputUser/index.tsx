@@ -17,6 +17,8 @@ const InputUser = () => {
       type="text"
       placeholder="E-mail"
       iconLeft={<InputIcon Icon={<IconUser />} />}
+      onChange={() => {}}
+      onBlur={() => {}}
     />
   );
 }
