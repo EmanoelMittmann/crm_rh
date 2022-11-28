@@ -1,7 +1,7 @@
 import { SVGProps } from "react";
 import styled from "styled-components";
 
-export const IconHome = ({width='18px', height='18px',fill='black',...props}:SVGProps<SVGElement>) => {
+export const IconHome = ({width='18px', height='18px',fill='black',...props}:SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={width}
