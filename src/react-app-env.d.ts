@@ -8,3 +8,4 @@ export interface IButtonProps{
 export interface IInputsProps{
   Icon: JSX.Element;
 }
+

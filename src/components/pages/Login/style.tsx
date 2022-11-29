@@ -1,15 +1,21 @@
 import styled from "styled-components";
 
+export const ContainerGlobalLogin = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+`;
+
 export const ContainerLogin = styled.div`
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
   position: absolute;
   width: 444px;
-  height: 635px;
+  height: 700px;
   left: 153px;
   top: 133px;
   padding: 2em;
+  opacity: 0.8;
   border-radius: 2px solid rgba(255, 255, 255, 1);
   border: 2px solid #ffffff;
   box-shadow: 0px 0px 80px 0px rgba(3, 42, 102, 0.1);
@@ -51,4 +57,19 @@ export const ConstinerCheckebox = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-top: 1em;
+`;
+
+export const LoginGoogle = styled.div`
+  margin-top: 3em;
+  width: 83%;
+  text-align: left;
+`;
+
+export const ImgTeam = styled.img`
+  min-width: 85%;
+`;
+
+export const ContainerButton = styled.div`
+  display: flex;
+  margin-top: 3em;
 `;
