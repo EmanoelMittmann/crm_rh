@@ -5,11 +5,10 @@ import {
   Button,
   useTheme,
 } from "@stardust-ds/react";
-import React, { useState } from "react";
-import { ComponentsLogin } from "../../atoms/ComponentsLogin/componentsLogin";
+import  { useState } from "react";
+import { ComponentsLogin } from "../../atoms/ComponentsLogin/ElementsPageLogin";
 import { IconEye } from "../../atoms/Icons/IconEye";
 import { IconEyeSlash } from "../../atoms/Icons/IconEyeSlash";
-import IconLogin1 from "../../atoms/ComponentsLogin/IconsComponenst/IconLogin1";
 import { IconUbistart } from "../../atoms/Icons/IconUbistart";
 import { IconUser } from "../../atoms/Icons/IconUserr";
 import InputIcon from "../../atoms/Input";
@@ -39,7 +38,9 @@ const Login = () => {
 
   return (
     <ContainerGlobalLogin>
+
       <ComponentsLogin />
+      
       <ContainerLogin>
         <ContainerIconUbistart>
           <InputIcon Icon={<IconUbistart />} />

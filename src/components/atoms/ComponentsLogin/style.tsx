@@ -1,23 +1,30 @@
 import styled from "styled-components";
 
+export const ContainerIcon = styled.div`
+  width: 100%;
+  height: auto;
+;
+
+`;
 
 export const StyleLogin01 = styled.div`
   position: absolute;
-
 `;
 
 export const StyleLogin02 = styled.div`
   position: relative;
 `;
+
 export const StyleLogin03 = styled.div`
   position: absolute;
-  left: 22%;
-  top: 67%;
+  left: 25em;
+  top: 41em;
+  
 `;
 
 export const StyleLogin04 = styled.div`
   position: absolute;
-
-  left: 19%;
-  top: 74%;
+  left: 22em;
+  top: 44.7em;
 `;
+
