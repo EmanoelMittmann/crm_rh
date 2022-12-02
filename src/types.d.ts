@@ -3,3 +3,20 @@ declare module "*.svg" {
     const content: (props: SVGProps<SVGElement>) => ReactElement;
     export default content;
   }
+
+interface IContainerRowProps{
+  paddingRight?: string
+  paddingLeft?:string
+}
+
+interface IContainerColumnProps{
+  height?: string
+  bottom?: string
+  left?:string
+  top?:string
+}
+
+interface IButtonColorProps{
+  color: string,
+  fill: fill
+}
