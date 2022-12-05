@@ -1,6 +1,8 @@
-import React from "react";
+import {MouseEvent} from "react";
 
-export interface IButtonProps{
+export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
     Text: string,
-    Icon: JSX.Element
+    Icon: JSX.Element,
+    color:string
+    fill: string
 }
