@@ -9,24 +9,31 @@ export const IconHome = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
-export const StyleLogin01 = styled.div`
+export const StyleLoginTop = styled.div`
   position: absolute;
+  top:-1em;
 `;
 
-export const StyleLogin02 = styled.div`
+export const StyleLoginTopBlue = styled.div`
   position: relative;
+  top: -5em;
 `;
 
-export const StyleLogin03 = styled.div`
+export const StyleLoginBottom = styled.div`
   position: absolute;
   left: 25em;
   top: 41em;
 `;
 
-export const StyleLogin04 = styled.div`
+export const StyleLoginBottomBlue = styled.div`
   position: absolute;
   left: 22em;
   top: 44.7em;
 `;
 
-export const ButtonApagarLuzes = styled.div``;
+export const ContainerButtonLights = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top:1.5em;
+  margin-right:2em;
+`;

@@ -1,39 +1,36 @@
 
-import IconLogin1 from './IconsElements/IconLogin1'
 import InputIcon from '../Input'
-import { ContainerIcon, IconHome, StyleLogin01, StyleLogin02, StyleLogin03, StyleLogin04 } from './style'
-import IconLogin2 from './IconsElements/IconLogin2'
-import IconLogin3 from './IconsElements/IconLogin3'
-import IconLogin4 from './IconsElements/IconLogin4'
-import { Badge, Button } from '@stardust-ds/react'
-import IconLua from './IconsElements/IconLua'
+import { ContainerButtonLights, ContainerIcon, IconHome, StyleLoginBottom, StyleLoginBottomBlue, StyleLoginTop, StyleLoginTopBlue } from './style'
+import {IconLua} from './IconsElements/IconLua'
+import IconLoginTop from './IconsElements/IconLoginTop'
+import IconLoginTopBlue from './IconsElements/IconLoginTopBlue'
+import IconLoginBottom from './IconsElements/IconLoginBottom'
+import IconLoginBottomBlue from './IconsElements/IconLoginBottomBlue'
+import ButtonLight from '../ButtonLight'
+
 
 
 export const ComponentsLogin = (props: any )=> {
   return (
     <ContainerIcon>
       {props.children}
+      <ContainerButtonLights>
+        <ButtonLight Text="Apagar as Luzes" Icon={<IconLua />} />
+      </ContainerButtonLights>
       <IconHome>
-        <StyleLogin01>
-          <InputIcon Icon={<IconLogin1 />} />
-        </StyleLogin01>
-        <Button
-          bgColor="#fff"
-          iconLeft={<InputIcon Icon={<IconLua />} />}
-          typographyProps={{ fontWeight: "light", type: "l1", color: "#000" }}
-        >
-          Apagar as Luzes
-        </Button>
+        <StyleLoginTop>
+          <InputIcon Icon={<IconLoginTop />} />
+        </StyleLoginTop>
       </IconHome>
-      <StyleLogin02>
-        <InputIcon Icon={<IconLogin2 />} />
-      </StyleLogin02>
-      <StyleLogin03>
-        <InputIcon Icon={<IconLogin3 />} />
-      </StyleLogin03>
-      <StyleLogin04>
-        <InputIcon Icon={<IconLogin4 />} />
-      </StyleLogin04>
+      <StyleLoginTopBlue>
+        <InputIcon Icon={<IconLoginTopBlue />} />
+      </StyleLoginTopBlue>
+      <StyleLoginBottom>
+        <InputIcon Icon={<IconLoginBottom />} />
+      </StyleLoginBottom>
+      <StyleLoginBottomBlue>
+        <InputIcon Icon={<IconLoginBottomBlue />} />
+      </StyleLoginBottomBlue>
     </ContainerIcon>
   );
 }

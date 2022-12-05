@@ -10,7 +10,7 @@ import { ComponentsLogin } from "../../atoms/ComponentsLogin/ElementsPageLogin";
 import { IconEye } from "../../atoms/Icons/IconEye";
 import { IconEyeSlash } from "../../atoms/Icons/IconEyeSlash";
 import { IconUbistart } from "../../atoms/Icons/IconUbistart";
-import { IconUser } from "../../atoms/Icons/IconUserr";
+import { IconUser } from "../../atoms/Icons/IconUser";
 import InputIcon from "../../atoms/Input";
 import {
   Containerdatas,
@@ -22,7 +22,7 @@ import {
   ContainerButton,
   LoginGoogle,
 } from "./style";
-import IconSeta from "../../atoms/Icons/IconSeta";
+import IconSeta from "../../atoms/Icons/IconArrow";
 
 const Login = () => {
   const [show, setShow] = useState(false);

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const IconLogin3 = ({
+const IconLoginBottom = ({
   width = "414",
   height = "284",
   color = "black",
@@ -23,4 +23,4 @@ const IconLogin3 = ({
   );
 }
 
-export default IconLogin3
+export default IconLoginBottom;

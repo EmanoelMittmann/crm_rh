@@ -1,6 +1,6 @@
 import React from 'react'
 
-const IconLogin1 = ({width="304px", height="231px", color="black", ...props}:React.SVGProps<SVGSVGElement>) => {
+const IconLoginTop = ({width="304px", height="231px", color="black", ...props}:React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={width}
@@ -18,4 +18,4 @@ const IconLogin1 = ({width="304px", height="231px", color="black", ...props}:Rea
   );
 }
 
-export default IconLogin1
+export default IconLoginTop;
