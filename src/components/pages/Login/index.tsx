@@ -23,6 +23,7 @@ import {
   LoginGoogle,
 } from "./style";
 import IconSeta from "../../atoms/Icons/IconArrow";
+import IconArrow from "../../atoms/Icons/IconArrow";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -85,13 +86,16 @@ const Login = () => {
           </Typography>
         </ConstinerCheckebox>
         <LoginGoogle>
+
           <Typography type="l1">Login Google</Typography>
+
+          
         </LoginGoogle>
         <ContainerButton>
           <Button
             isFullWidth
             bgColor={brand.color.primary.pure}
-            iconRight={<IconSeta />}
+            iconRight={<IconArrow />}
             bRadius="md"
             height={50}
           >

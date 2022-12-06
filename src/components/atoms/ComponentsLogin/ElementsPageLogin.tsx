@@ -15,7 +15,7 @@ export const ComponentsLogin = (props: any )=> {
     <ContainerIcon>
       {props.children}
       <ContainerButtonLights>
-        <ButtonLight Text="Apagar as Luzes" Icon={<IconLua />} />
+        <ButtonLight Text="Apagar as Luzes" Icon={<IconLua />} color={''} fill={''} />
       </ContainerButtonLights>
       <IconHome>
         <StyleLoginTop>

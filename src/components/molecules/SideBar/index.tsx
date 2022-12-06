@@ -10,7 +10,7 @@ import { IconProjects } from "../../atoms/Icons/IconProjects";
 import { IconReports } from "../../atoms/Icons/IconReports";
 import { IconServices } from "../../atoms/Icons/IconServices";
 import { IconSetting } from "../../atoms/Icons/IconSetting";
-import { IconUbistart } from "../../atoms/Icons/IconUbistart";
+import {IconUbistart} from "../../atoms/Icons/IconUbistart"
 import { ContainerColumn, ContainerMain, ContainerRow } from "./style";
 
 export const Sidebar = () => {
