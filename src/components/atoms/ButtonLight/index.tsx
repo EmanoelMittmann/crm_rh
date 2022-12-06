@@ -1,7 +1,7 @@
-import { IButtonProps } from "../../../react-app-env";
+import { IButtonPropsLightUp } from "../../../react-app-env";
 import { ContainerMain } from "./style";
 
-const ButtonLight = ({Text,Icon}: IButtonProps) => {
+const ButtonLight = ({ Text, Icon }: IButtonPropsLightUp) => {
   return (
     <>
       <ContainerMain>

@@ -30,10 +30,3 @@ export const StyleLoginBottomBlue = styled.div`
   left: 22em;
   top: 44.7em;
 `;
-
-export const ContainerButtonLights = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top:1.5em;
-  margin-right:2em;
-`;

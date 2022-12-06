@@ -22,8 +22,9 @@ import {
   ContainerButton,
   LoginGoogle,
 } from "./style";
-import IconSeta from "../../atoms/Icons/IconArrow";
+
 import IconArrow from "../../atoms/Icons/IconArrow";
+
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -38,72 +39,69 @@ const Login = () => {
   );
 
   return (
-    <ContainerGlobalLogin>
-
-      <ComponentsLogin />
-      
-      <ContainerLogin>
-        <ContainerIconUbistart>
-          <InputIcon Icon={<IconUbistart />} />
-        </ContainerIconUbistart>
-        <Containerdatas>
-          <Typography type="h1" color="#0066FF">
-            Faça seu Login
-          </Typography>
-          <Input
-            isFullWidth
-            label="E-mail"
-            type="text"
-            placeholder="exemplo@ubistart.com"
-            iconLeft={<InputIcon Icon={<IconUser />} />}
-            onChange={() => {}}
-            onBlur={() => {}}
-          />
-          <Input
-            isFullWidth
-            label="Senha"
-            type={show ? "text" : "password"}
-            placeholder="senha"
-            iconRight={canSeePasswordIcon}
-            iconRightAction={handleClick}
-            onChange={() => {}}
-            onBlur={() => {}}
-          />
-        </Containerdatas>
-        <ConstinerCheckebox>
-          <ConstinerCheccked>
-            <Checkbox
-              checked={isChecked}
-              activeColor="#fff"
-              inactiveColor="#000"
-              iconColor="#000"
-              onChange={() => setIsChecked(!isChecked)}
+    <>
+      <ContainerGlobalLogin>
+        <ComponentsLogin />
+        <ContainerLogin>
+          <ContainerIconUbistart>
+            <InputIcon Icon={<IconUbistart />} />
+          </ContainerIconUbistart>
+          <Containerdatas>
+            <Typography type="h1" color="#0066FF">
+              Faça seu Login
+            </Typography>
+            <Input
+              isFullWidth
+              label="E-mail"
+              type="text"
+              placeholder="exemplo@ubistart.com"
+              iconLeft={<InputIcon Icon={<IconUser />} />}
+              onChange={() => {}}
+              onBlur={() => {}}
             />
-            <Typography type="l1">Lembrar-me </Typography>
-          </ConstinerCheccked>
-          <Typography type="l1" color="#0066FF">
-            Esqueci a senha
-          </Typography>
-        </ConstinerCheckebox>
-        <LoginGoogle>
-
-          <Typography type="l1">Login Google</Typography>
-
-          
-        </LoginGoogle>
-        <ContainerButton>
-          <Button
-            isFullWidth
-            bgColor={brand.color.primary.pure}
-            iconRight={<IconArrow />}
-            bRadius="md"
-            height={50}
-          >
-            Entrar
-          </Button>
-        </ContainerButton>
-      </ContainerLogin>
-    </ContainerGlobalLogin>
+            <Input
+              isFullWidth
+              label="Senha"
+              type={show ? "text" : "password"}
+              placeholder="senha"
+              iconRight={canSeePasswordIcon}
+              iconRightAction={handleClick}
+              onChange={() => {}}
+              onBlur={() => {}}
+            />
+          </Containerdatas>
+          <ConstinerCheckebox>
+            <ConstinerCheccked>
+              <Checkbox
+                checked={isChecked}
+                activeColor="#fff"
+                inactiveColor="#000"
+                iconColor="#000"
+                onChange={() => setIsChecked(!isChecked)}
+              />
+              <Typography type="l1">Lembrar-me </Typography>
+            </ConstinerCheccked>
+            <Typography type="l1" color="#0066FF">
+              Esqueci a senha
+            </Typography>
+          </ConstinerCheckebox>
+          <LoginGoogle>
+            <Typography type="l1">Login Google</Typography>
+          </LoginGoogle>
+          <ContainerButton>
+            <Button
+              isFullWidth
+              bgColor={brand.color.primary.pure}
+              iconRight={<IconArrow />}
+              bRadius="md"
+              height={50}
+            >
+              Entrar
+            </Button>
+          </ContainerButton>
+        </ContainerLogin>
+      </ContainerGlobalLogin>
+    </>
   );
 };
 
