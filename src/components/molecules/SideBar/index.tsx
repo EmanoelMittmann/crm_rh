@@ -20,19 +20,19 @@ export const Sidebar = () => {
         <ContainerRow paddingRight="4em">
             <IconUbistart />
         </ContainerRow>
-        <ContainerColumn height="65%" bottom="1em" left="1.7em">
-          <ButtonWithHover Text="Início" Icon={<IconHome />} color='#0066ff' fill="#0066ff" />
-          <ButtonWithHover Text="Projetos" Icon={<IconProjects />}  color='#0066ff' fill="#0066ff" />
-          <ButtonWithHover Text="Horas Extras" Icon={<IconHours />}  color='#0066ff' fill="#0066ff" />
-          <ButtonWithHover Text="Notas Fiscais" Icon={<IconNotes />}  color='#0066ff' fill="#0066ff" />
-          <ButtonWithHover Text="Relatórios" Icon={<IconReports />}  color='#0066ff' fill="#0066ff" />
-          <ButtonWithHover Text="Ordem de Serviço" Icon={<IconServices />}  color='#0066ff' fill="#0066ff" />
-          <ButtonWithHover Text="Configurações" Icon={<IconSetting />}  color='#0066ff' fill="#0066ff" />
-          <ButtonWithHover Text="Empresas" Icon={<IconCompanies />}  color='#0066ff' fill="#0066ff" />
+        <ContainerColumn height="65%" bottom="1em" left="0">
+          <ButtonWithHover Text="Início" Icon={<IconHome />} color='#0066ff' fill="#0066ff" bgActive="#0066ff" colorActive="white" fillActive="white"/>
+          <ButtonWithHover Text="Projetos" Icon={<IconProjects />}  color='#0066ff' fill="#0066ff" bgActive="#0066ff" colorActive="white" fillActive="white" />
+          <ButtonWithHover Text="Horas Extras" Icon={<IconHours />}  color='#0066ff' fill="#0066ff"bgActive="#0066ff" colorActive="white" fillActive="white" />
+          <ButtonWithHover Text="Notas Fiscais" Icon={<IconNotes />}  color='#0066ff' fill="#0066ff" bgActive="#0066ff" colorActive="white" fillActive="white"/>
+          <ButtonWithHover Text="Relatórios" Icon={<IconReports />}  color='#0066ff' fill="#0066ff" bgActive="#0066ff" colorActive="white" fillActive="white"/>
+          <ButtonWithHover Text="Ordem de Serviço" Icon={<IconServices />}  color='#0066ff' fill="#0066ff" bgActive="#0066ff" colorActive="white" fillActive="white"/>
+          <ButtonWithHover Text="Configurações" Icon={<IconSetting />}  color='#0066ff' fill="#0066ff" bgActive="#0066ff" colorActive="white" fillActive="white" />
+          <ButtonWithHover Text="Empresas" Icon={<IconCompanies />}  color='#0066ff' fill="#0066ff" bgActive="#0066ff" colorActive="white" fillActive="white" />
         </ContainerColumn>
-        <ContainerColumn height="20%" top="2em" left="1.7em">
-          <ButtonWithHover Text="Apagar as Luzes" Icon={<IconDark />}  color='#00AAFF' fill="#00AAFF" />
-          <ButtonWithHover Text="Sair" Icon={<IconLogout />}  color='red' fill="red" />
+        <ContainerColumn height="20%" top="2em" left="0">
+          <ButtonWithHover Text="Apagar as Luzes" Icon={<IconDark />}  color='#00AAFF' fill="#00AAFF" bgActive="" colorActive="" fillActive=""/>
+          <ButtonWithHover Text="Sair" Icon={<IconLogout />}  color='red' fill="red" bgActive="" colorActive="" fillActive=""/>
         </ContainerColumn>
       </ContainerMain>
     </div>

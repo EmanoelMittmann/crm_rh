@@ -7,7 +7,7 @@ export const IconUbistart = () => {
         width="138"
         height="28"
         viewBox="0 0 138 28"
-        fill="none"
+        fill="#15161A"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path

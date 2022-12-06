@@ -5,4 +5,7 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
     Icon: JSX.Element,
     color:string
     fill: string
+    fillActive:string,
+    colorActive: string,
+    bgActive:string
 }
