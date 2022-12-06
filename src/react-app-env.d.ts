@@ -7,5 +7,6 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
     fill: string
     fillActive:string,
     colorActive: string,
-    bgActive:string
+    bgActive:string,
+    isActive:boolean
 }

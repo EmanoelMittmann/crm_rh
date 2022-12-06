@@ -21,5 +21,6 @@ interface IButtonColorProps{
   fill: fill,
   colorActive:string,
   fillActive:string,
-  bgActive:string
+  bgActive:string,
+  isActive?:boolean
 }

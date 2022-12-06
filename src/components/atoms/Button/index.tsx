@@ -9,6 +9,7 @@ const ButtonWithHover = ({
   colorActive,
   fillActive,
   bgActive,
+  isActive,
   ...props
 }: IButtonProps) => {
   return (
@@ -20,6 +21,7 @@ const ButtonWithHover = ({
         colorActive={colorActive}
         fillActive={fillActive}
         bgActive={bgActive}
+        isActive={isActive}
       >
         <div className="container"></div>
         {Icon}
