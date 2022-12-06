@@ -1,10 +1,10 @@
 import { IButtonProps } from "../../../react-app-env";
 import { ContainerMain } from "./style";
 
-const ButtonWithHover = ({Text,Icon}: IButtonProps) => {
+const ButtonWithHover = ({ Text, Icon,color, fill,...props}: IButtonProps) => {
   return (
     <>
-      <ContainerMain>
+      <ContainerMain {...props} color={color} fill={fill} >
         {Icon}
         {Text}
       </ContainerMain>

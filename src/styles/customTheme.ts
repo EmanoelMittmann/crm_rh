@@ -25,7 +25,7 @@ export const modes: Record<Scheme, DynamicSchemeColors> = {
   dark: { color: { bg: '#22272D', text: '#fff' } },
 };
 
-export const preferredMode = window?.matchMedia('(prefers-color-scheme: dark)')
+export const preferredMode = window?.matchMedia('(prefers-color-scheme: light)')
   ?.matches
   ? 'dark'
   : 'light';

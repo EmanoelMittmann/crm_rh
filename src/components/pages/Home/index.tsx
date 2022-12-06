@@ -11,24 +11,15 @@ import { IconProjects } from "../../atoms/Icons/IconProjects";
 import { IconReports } from "../../atoms/Icons/IconReports";
 import { IconServices } from "../../atoms/Icons/IconServices";
 import { IconSetting } from "../../atoms/Icons/IconSetting";
-import InputToView from "../../atoms/InputPassword";
-import InputUser from "../../atoms/InputUser";
 
 const Home = () => {
   return (
-    <div>
-      <ButtonWithHover Text="Início" Icon={<IconHome/>} />
-      <ButtonWithHover Text="Empresas" Icon={<IconCompanies />} />
-      <ButtonWithHover Text="Horas Extras" Icon={<IconHours />} />
-      <ButtonWithHover Text="Apagar as Luzes" Icon={<IconDark />} />
-      <ButtonWithHover Text="Profissional" Icon={<IconProfissional />} />
-      <ButtonWithHover Text="Fiscal Nota" Icon={<IconNotes />} />
-      <ButtonWithHover Text="Projeto" Icon={<IconProjects />} />
-      <ButtonWithHover Text="Relatorios" Icon={<IconReports />} />
-      <ButtonWithHover Text="Ordem de Serviços" Icon={<IconServices />} />
-      <ButtonWithHover Text="Configurações" Icon={<IconSetting />} />
-    </div>
+    <Master>
+      <Sidebar />
+      <Navbar />
+      <div>{children}</div>
+    </Master>
   );
 };
 
-export default Home;
+export default MasterPage;
