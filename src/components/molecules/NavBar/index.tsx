@@ -7,7 +7,7 @@ export const Navbar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate()
   const breadCrumber =
-    pathname === "/"
+    pathname === "/Home"
       ? "Home"
       : pathname === "/Professionals"
       ? "Profissionais"

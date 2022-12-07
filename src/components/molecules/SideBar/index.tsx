@@ -42,7 +42,7 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate('/')
+              navigate('/Home')
               handleSelect('home')
             }}
             isActive={selects.home}
@@ -182,6 +182,7 @@ export const Sidebar = () => {
             bgActive=""
             colorActive=""
             fillActive=""
+            onClick={() => navigate('/')}
             isActive={false}
           />
         </ContainerColumn>
