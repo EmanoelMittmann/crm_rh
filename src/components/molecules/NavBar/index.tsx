@@ -1,8 +1,32 @@
 import { Typography } from "@stardust-ds/react";
 import React from "react";
-import { Avatar, Children, ContainerMain } from "./style";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Avatar, Children, ContainerMain, To } from "./style";
 
 export const Navbar = () => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate()
+  const breadCrumber =
+    pathname === "/"
+      ? "Home"
+      : pathname === "/Professionals"
+      ? "Profissionais"
+      : pathname === "/Projects"
+      ? "Projetos"
+      : pathname === "/ExtrasHours"
+      ? "Horas Extras"
+      : pathname === "/Notes"
+      ? "Notas Fiscais"
+      : pathname === "/Reports"
+      ? "Relatórios"
+      : pathname === "/Services"
+      ? "Ordem de Serviço"
+      : pathname === "/Settings"
+      ? "Configurações"
+      : pathname === "/Company"
+      ? "Empresas"
+      : "";
+
   return (
     <>
       <ContainerMain>
@@ -11,8 +35,8 @@ export const Navbar = () => {
           top="0.5em 1em 1em 1.5em"
           align="flex-start"
         >
-          <Typography fontSize="xxxs" fontWeight="normal" color="#737D86" >
-            <a onClick={() => {}}>Home</a>
+          <Typography fontSize="xxxs" fontWeight="normal" color="#737D86">
+            <To onClick={() => navigate(pathname)}>{breadCrumber}</To>
           </Typography>
 
           <Children justify="space-around" w="10em" align="center">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ButtonWithHover from "../../atoms/Button";
 import { IconCompanies } from "../../atoms/Icons/IconCompanies";
 import { IconDark } from "../../atoms/Icons/IconDark";
@@ -13,10 +13,18 @@ import { IconReports } from "../../atoms/Icons/IconReports";
 import { IconServices } from "../../atoms/Icons/IconServices";
 import { IconSetting } from "../../atoms/Icons/IconSetting";
 import { IconUbistart } from "../../atoms/Icons/IconUbistart";
+import { alterObject, DEFAULTSELECT } from "../../utils/btnSelects";
 import { ContainerColumn, ContainerMain, ContainerRow } from "./style";
 
 export const Sidebar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [selects, setSelects] = useState(DEFAULTSELECT);
+
+  function handleSelect(btnSelect: string) {
+    setSelects(alterObject(selects,btnSelect))
+   
+  }
 
   return (
     <div>
@@ -33,8 +41,11 @@ export const Sidebar = () => {
             bgActive="#0066ff"
             colorActive="white"
             fillActive="white"
-            onClick={() => navigate('/')}
-            isActive={false}
+            onClick={() => {
+              navigate('/')
+              handleSelect('home')
+            }}
+            isActive={selects.home}
           />
           <ButtonWithHover
             Text="Profissionais"
@@ -44,10 +55,13 @@ export const Sidebar = () => {
             bgActive="#0066ff"
             colorActive="white"
             fillActive="white"
-            onClick={() => navigate('/Profissionais')}
-            isActive={false}
+            onClick={() => {
+              navigate('/Professionals')
+              handleSelect('professionals')
+            }}
+            isActive={selects.professionals}
           />
-        
+
           <ButtonWithHover
             Text="Projetos"
             Icon={<IconProjects />}
@@ -56,7 +70,11 @@ export const Sidebar = () => {
             bgActive="#0066ff"
             colorActive="white"
             fillActive="white"
-            isActive={false}
+            onClick={() => {
+              navigate('/Projects')
+              handleSelect('projects')
+            }}
+            isActive={selects.projects}
           />
           <ButtonWithHover
             Text="Horas Extras"
@@ -66,7 +84,11 @@ export const Sidebar = () => {
             bgActive="#0066ff"
             colorActive="white"
             fillActive="white"
-            isActive={false}
+            onClick={() => {
+              navigate('/ExtrasHours')
+              handleSelect('extraHours')
+            }}
+            isActive={selects.extraHours}
           />
           <ButtonWithHover
             Text="Notas Fiscais"
@@ -76,7 +98,11 @@ export const Sidebar = () => {
             bgActive="#0066ff"
             colorActive="white"
             fillActive="white"
-            isActive={false}
+            onClick={() => {
+              navigate('/Notes')
+              handleSelect('notes')
+            }}
+            isActive={selects.notes}
           />
           <ButtonWithHover
             Text="Relatórios"
@@ -86,7 +112,11 @@ export const Sidebar = () => {
             bgActive="#0066ff"
             colorActive="white"
             fillActive="white"
-            isActive={false}
+            onClick={() => {
+              navigate('/Reports')
+              handleSelect('reports')
+            }}
+            isActive={selects.reports}
           />
           <ButtonWithHover
             Text="Ordem de Serviço"
@@ -96,7 +126,11 @@ export const Sidebar = () => {
             bgActive="#0066ff"
             colorActive="white"
             fillActive="white"
-            isActive={false}
+            onClick={() => {
+              navigate('/Services')
+              handleSelect('services')
+            }}
+            isActive={selects.services}
           />
           <ButtonWithHover
             Text="Configurações"
@@ -106,7 +140,11 @@ export const Sidebar = () => {
             bgActive="#0066ff"
             colorActive="white"
             fillActive="white"
-            isActive={false}
+            onClick={() => {
+              navigate('/Settings')
+              handleSelect('settings')
+            }}
+            isActive={selects.settings}
           />
           <ButtonWithHover
             Text="Empresas"
@@ -116,7 +154,11 @@ export const Sidebar = () => {
             bgActive="#0066ff"
             colorActive="white"
             fillActive="white"
-            isActive={false}
+            onClick={() => {
+              navigate('/Company')
+              handleSelect('company')
+            }}
+            isActive={selects.company}
           />
         </ContainerColumn>
         <ContainerColumn height="20%" top="2em" left="0">
@@ -125,6 +167,7 @@ export const Sidebar = () => {
             Icon={<IconDark />}
             color="#00AAFF"
             fill="#00AAFF"
+            value="9"
             bgActive=""
             colorActive=""
             fillActive=""
@@ -135,6 +178,7 @@ export const Sidebar = () => {
             Icon={<IconLogout />}
             color="red"
             fill="red"
+            value="10"
             bgActive=""
             colorActive=""
             fillActive=""

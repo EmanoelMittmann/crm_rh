@@ -23,7 +23,6 @@ const ButtonWithHover = ({
         bgActive={bgActive}
         isActive={isActive}
       >
-        <div className="container"></div>
         {Icon}
         {Text}
       </ContainerMain>

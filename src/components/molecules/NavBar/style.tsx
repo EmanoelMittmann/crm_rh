@@ -19,3 +19,7 @@ export const Avatar = styled.img`
     width: 2.5em;
     height: 2.5em;
 `
+
+export const To = styled.a`
+    cursor: pointer;
+`

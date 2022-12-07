@@ -7,9 +7,15 @@ const Router = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/Inicio" element={<Home/>}/>
-          <Route path="/Profissionais" element={<Professionals/>}/>
+          <Route path="/" element={<Home/>} />
+          <Route path="/Professionals" element={<Professionals/>}/>
+          <Route path="/Projects" element={<Professionals/>}/>
+          <Route path="/ExtrasHours" element={<Professionals/>}/>
+          <Route path="/Notes" element={<Professionals/>}/>
+          <Route path="/Reports" element={<Professionals/>}/>
+          <Route path="/Services" element={<Professionals/>}/>
+          <Route path="/Settings" element={<Professionals/>}/>
+          <Route path="/Company" element={<Professionals/>}/>
         </Routes>
       </BrowserRouter>
     </>
