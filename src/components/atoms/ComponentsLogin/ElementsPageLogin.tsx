@@ -36,10 +36,9 @@ export const ComponentsLogin = () => {
       <StyleLoginBottomBlue>
         <IconLoginBottomBlue />
       </StyleLoginBottomBlue>
-
       <ContainerOffice>
         <ImgPageLogin />
-      </ContainerOffice>
+      </ContainerOffice>    
     </ContainerIcon>
   );
 };

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ContainerIcon = styled.div`
   width: 100%;
-  height: 700px;
+  height: 800px;
 `;
 export const IconHome = styled.div`
   display: flex
@@ -22,20 +22,21 @@ export const StyleLoginTopBlue = styled.div`
 export const StyleLoginBottom = styled.div`
   position: absolute;
   left: 25em;
-  top: 39em;
+  margin-top: 36.8em;
 `;
 
 export const StyleLoginBottomBlue = styled.div`
   position: absolute;
   left: 35em;
-  top: 42.7em;
+  margin-top: 40.5em;
 `;
 
 export const ContainerOffice = styled.div`
-  width: 900px;
-  height: 800px;
-  margin-left: 55em;
-  background: #fff;
+  width: 800px
+  height: 700px;
+  margin-top: 10em;
+  margin-left: 65em;
+  background-color: #fff;
 `;
 
 
