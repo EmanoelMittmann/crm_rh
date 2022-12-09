@@ -23,7 +23,7 @@ export const Shelf = ({ data }: any) => {
           {data.name}
         </AlignItens>
       </ContainerShelfColumn>
-      <ContainerShelfColumn width="15%">{data.company}</ContainerShelfColumn>
+      <ContainerShelfColumn width="15%">{data.job_id}</ContainerShelfColumn>
       <ContainerShelfColumn width="20%">{data.email}</ContainerShelfColumn>
       <ContainerShelfColumn width="12%">{data.phone}</ContainerShelfColumn>
       <ContainerShelfColumn width="10%">{data.address}</ContainerShelfColumn>

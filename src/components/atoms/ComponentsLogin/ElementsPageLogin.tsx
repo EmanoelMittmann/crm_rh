@@ -1,39 +1,49 @@
-import InputIcon from "../Input";
 import {
-  ContainerIcon,
-  IconHome,
+  ContainerIconGlobal,
+  ContainerOffice,
+  ContainerIconTop,
   StyleLoginBottom,
   StyleLoginBottomBlue,
   StyleLoginTop,
   StyleLoginTopBlue,
+  Container,
 } from "./style";
 import IconLoginTop from "./IconsElements/IconLoginTop";
 import IconLoginTopBlue from "./IconsElements/IconLoginTopBlue";
 import IconLoginBottom from "./IconsElements/IconLoginBottom";
 import IconLoginBottomBlue from "./IconsElements/IconLoginBottomBlue";
 import ButtonChangeTheme from "../ButtonChangeTheme";
-
+import { ImgPageLogin } from "./IconsElements/ImgPageLogin";
 
 export const ComponentsLogin = () => {
-
   return (
-    <ContainerIcon>
-      <IconHome>
+    <ContainerIconGlobal>
+      <ContainerIconTop>
         <StyleLoginTop>
-          <InputIcon Icon={<IconLoginTop />} />
+          <IconLoginTop />
         </StyleLoginTop>
-      </IconHome>
+      </ContainerIconTop>
+
       <StyleLoginTopBlue>
-        <InputIcon Icon={<IconLoginTopBlue />} />
+        <IconLoginTopBlue />
       </StyleLoginTopBlue>
-      <ButtonChangeTheme/>
-      <StyleLoginBottom>
-        <InputIcon Icon={<IconLoginBottom />} />
-      </StyleLoginBottom>
-      <StyleLoginBottomBlue>
-        <InputIcon Icon={<IconLoginBottomBlue />} />
-      </StyleLoginBottomBlue>
-      
-    </ContainerIcon>
+
+      {/* Botão de Login */}
+      <ButtonChangeTheme />
+
+      <Container>
+        <StyleLoginBottom>
+          <IconLoginBottom />
+        </StyleLoginBottom>
+
+        <StyleLoginBottomBlue>
+          <IconLoginBottomBlue />
+        </StyleLoginBottomBlue>
+
+        <ContainerOffice>
+          <ImgPageLogin />
+        </ContainerOffice>
+      </Container>
+    </ContainerIconGlobal>
   );
 };

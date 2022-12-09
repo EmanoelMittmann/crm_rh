@@ -10,6 +10,12 @@ export const ContainerSelect = styled.select<ISelectStylesProps>`
   font-family: "Poppins";
   padding-left: 1em;
   font-weight: 500;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url('Vector.png');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 12px) center;;
+  background-size: 10px;
 `;
 
 export const Option = styled.option`

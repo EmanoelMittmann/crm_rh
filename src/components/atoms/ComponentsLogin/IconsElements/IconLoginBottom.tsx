@@ -5,7 +5,7 @@ const IconLoginBottom = ({
   height = "284",
   color = "black",
   ...props
-}) => {
+}: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={width}
@@ -21,6 +21,6 @@ const IconLoginBottom = ({
       />
     </svg>
   );
-}
+};
 
 export default IconLoginBottom;

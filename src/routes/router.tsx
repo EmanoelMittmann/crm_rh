@@ -19,7 +19,6 @@ const Router = () => {
           <Route path="/Services" element={<Professionals/>}/>
           <Route path="/Settings" element={<Professionals/>}/>
           <Route path="/Company" element={<Professionals/>}/>
-
         </Routes>
       </BrowserRouter>
     </>

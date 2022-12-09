@@ -5,7 +5,7 @@ import { getTheme, preferredMode, Scheme } from './styles/customTheme';
 import { GlobalStyles } from './styles/globalStyles';
 
 const App = () => {
-  const [theme, setTheme] = useState(getTheme(preferredMode));
+  const [theme, setTheme] = useState(getTheme("light"));
 
   function changeTheme(scheme: Scheme) {
     setTheme(getTheme(scheme));
