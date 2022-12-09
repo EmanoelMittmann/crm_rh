@@ -9,4 +9,5 @@ export const ContainerButton = styled.button<IButtonColorProps>`
     border-radius: ${(props) => props.bRadius};
     border: none;
     margin-left: ${props => props.left};
+    cursor: pointer;
 `

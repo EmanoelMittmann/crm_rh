@@ -11,20 +11,23 @@ interface IContainerRowProps {
 }
 
 interface IContainerColumnProps {
-  height?: string;
   bottom?: string;
+  height?: string;
   left?: string;
   top?: string;
+  gap?: string;
+  justify?: string;
+  width?: string;
 }
 
 interface IButtonColorProps {
   bgColor?: string;
   bgActive?: string;
-  bRadius?:string;
+  bRadius?: string;
   colorActive?: string;
   color: string;
   fill?: fill;
-  left:string;
+  left?: string;
   fillActive?: string;
   height?: string;
   isActive?: boolean;
@@ -34,4 +37,11 @@ interface IButtonColorProps {
 interface ISelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   placeholder: string;
   value?: Array;
+}
+
+interface IModalProps{
+  optionOne:string,
+  optionTwo?:string,
+  eventOne: MouseEventHandler
+  eventTwo?: MouseEventHandler
 }
