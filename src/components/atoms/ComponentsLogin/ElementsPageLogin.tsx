@@ -1,11 +1,12 @@
 import {
-  ContainerIcon,
+  ContainerIconGlobal,
   ContainerOffice,
-  IconHome,
+  ContainerIconTop,
   StyleLoginBottom,
   StyleLoginBottomBlue,
   StyleLoginTop,
   StyleLoginTopBlue,
+  Container,
 } from "./style";
 import IconLoginTop from "./IconsElements/IconLoginTop";
 import IconLoginTopBlue from "./IconsElements/IconLoginTopBlue";
@@ -16,29 +17,33 @@ import { ImgPageLogin } from "./IconsElements/ImgPageLogin";
 
 export const ComponentsLogin = () => {
   return (
-    <ContainerIcon>
-      <IconHome>
+    <ContainerIconGlobal>
+      <ContainerIconTop>
         <StyleLoginTop>
           <IconLoginTop />
         </StyleLoginTop>
-      </IconHome>
+      </ContainerIconTop>
 
       <StyleLoginTopBlue>
         <IconLoginTopBlue />
       </StyleLoginTopBlue>
 
+      {/* Botão de Login */}
       <ButtonChangeTheme />
 
-      <StyleLoginBottom>
-        <IconLoginBottom />
-      </StyleLoginBottom>
+      <Container>
+        <StyleLoginBottom>
+          <IconLoginBottom />
+        </StyleLoginBottom>
 
-      <StyleLoginBottomBlue>
-        <IconLoginBottomBlue />
-      </StyleLoginBottomBlue>
-      <ContainerOffice>
-        <ImgPageLogin />
-      </ContainerOffice>    
-    </ContainerIcon>
+        <StyleLoginBottomBlue>
+          <IconLoginBottomBlue />
+        </StyleLoginBottomBlue>
+
+        <ContainerOffice>
+          <ImgPageLogin />
+        </ContainerOffice>
+      </Container>
+    </ContainerIconGlobal>
   );
 };

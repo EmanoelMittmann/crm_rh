@@ -24,6 +24,7 @@ import {
 } from "./style";
 
 import IconArrow from "../../atoms/Icons/IconArrow";
+import ButtonChangeTheme from "../../atoms/ButtonChangeTheme";
 
 
 const Login = () => {
@@ -71,6 +72,7 @@ const Login = () => {
             />
           </Containerdatas>
           <ConstinerCheckebox>
+
             <ConstinerCheccked>
               <Checkbox
                 checked={isChecked}
@@ -79,15 +81,19 @@ const Login = () => {
                 iconColor="#000"
                 onChange={() => setIsChecked(!isChecked)}
               />
+
               <Typography type="l1">Lembrar-me </Typography>
+
             </ConstinerCheccked>
             <Typography type="l1" color="#0066FF">
               Esqueci a senha
             </Typography>
           </ConstinerCheckebox>
+
           <LoginGoogle>
             <Typography type="l1">Login Google</Typography>
           </LoginGoogle>
+
           <ContainerButton>
             <Button
               isFullWidth
@@ -99,6 +105,7 @@ const Login = () => {
               Entrar
             </Button>
           </ContainerButton>
+          
         </ContainerLogin>
       </ContainerGlobalLogin>
     </>
