@@ -18,5 +18,9 @@ interface IContainerColumnProps{
 
 interface IButtonColorProps{
   color: string,
-  fill: fill
+  fill: fill,
+  colorActive:string,
+  fillActive:string,
+  bgActive:string,
+  isActive?:boolean
 }
