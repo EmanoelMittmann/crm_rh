@@ -43,7 +43,7 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate('/')
+              navigate('/Home')
               handleSelect('home')
             }}
             isActive={selects.home}
