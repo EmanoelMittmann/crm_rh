@@ -14,6 +14,7 @@ import { IconServices } from "../../atoms/Icons/IconServices";
 import { IconSetting } from "../../atoms/Icons/IconSetting";
 import { IconUbistart } from "../../atoms/Icons/IconUbistart";
 import { alterObject, DEFAULTSELECT } from "../../utils/btnSelects";
+
 import { ContainerColumn, ContainerMain, ContainerRow } from "./style";
 
 export const Sidebar = () => {

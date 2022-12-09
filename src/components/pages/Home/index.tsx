@@ -3,10 +3,10 @@ import { Sidebar } from "../../molecules/SideBar";
 import { Master } from "./style";
 
 type Props = {
-  children?:JSX.Element
-}
+  children?: JSX.Element;
+};
 
-const MasterPage = ({children}:Props) => {
+const MasterPage = ({ children }: Props) => {
   return (
     <Master>
       <Sidebar />

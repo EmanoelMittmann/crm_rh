@@ -10,3 +10,14 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
     bgActive:string,
     isActive:boolean
 }
+
+export interface IInputsProps{
+  Icon: JSX.Element;
+}
+
+export interface IButtonPropsLightUp
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  Text: string;
+  Icon: JSX.Element;
+}
+
