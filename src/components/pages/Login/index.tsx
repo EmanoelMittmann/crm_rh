@@ -24,20 +24,33 @@ import {
 } from "./style";
 
 import IconArrow from "../../atoms/Icons/IconArrow";
-import ButtonChangeTheme from "../../atoms/ButtonChangeTheme";
+import { useDispatch } from "react-redux";
+import { changeUser } from "../../../redux/reducers/userSlice";
+
 
 
 const Login = () => {
   const [show, setShow] = useState(false);
   const [isChecked, setIsChecked] = useState(true);
+  const [user, setUser] = useState('')
+  const [password, setPassword] = useState('')
+
   const handleClick = () => setShow(!show);
   const { brand } = useTheme();
+  const dispach = useDispatch();
+
+  const handleLogin = () => {
+    dispach(changeUser(user && password))
+  }
 
   const canSeePasswordIcon = !show ? (
     <InputIcon Icon={<IconEyeSlash />} />
   ) : (
     <InputIcon Icon={<IconEye />} />
   );
+
+
+  
 
   return (
     <>
@@ -57,7 +70,8 @@ const Login = () => {
               type="text"
               placeholder="exemplo@ubistart.com"
               iconLeft={<InputIcon Icon={<IconUser />} />}
-              onChange={() => {}}
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
               onBlur={() => {}}
             />
             <Input
@@ -67,7 +81,8 @@ const Login = () => {
               placeholder="senha"
               iconRight={canSeePasswordIcon}
               iconRightAction={handleClick}
-              onChange={() => {}}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               onBlur={() => {}}
             />
           </Containerdatas>
@@ -101,6 +116,7 @@ const Login = () => {
               iconRight={<IconArrow />}
               bRadius="md"
               height={50}
+              onClick={handleLogin}
             >
               Entrar
             </Button>
