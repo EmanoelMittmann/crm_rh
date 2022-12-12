@@ -1,32 +1,46 @@
 import styled from "styled-components";
 
-export const ContainerIcon = styled.div`
+export const ContainerIconGlobal = styled.div`
   width: 100%;
-  height: auto;
+  height: 100vh;
+  overflow: hidden;
 `;
-export const IconHome = styled.div`
+export const ContainerIconTop = styled.div`
   display: flex
   flex-direction: row;
   justify-content: space-between;
 `;
+
 export const StyleLoginTop = styled.div`
   position: absolute;
-  top:-1em;
+  top: -0.5em;
 `;
 
 export const StyleLoginTopBlue = styled.div`
   position: relative;
-  top: -5em;
+  top: -1em;
+  left: 1em;
 `;
 
 export const StyleLoginBottom = styled.div`
-  position: absolute;
-  left: 25em;
-  top: 41em;
+  position: relative;
+  transform: translate(32em, 25em);
 `;
 
 export const StyleLoginBottomBlue = styled.div`
-  position: absolute;
-  left: 22em;
-  top: 44.7em;
+  position: relative;
+  transform: translate(3em, 26.8em);
+`;
+
+export const ContainerOffice = styled.div`
+  width: 800px
+  height: 700px;
+  margin-top: 10em;
+  margin-left: 10em;
+  background-color: #fff;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  align-items: center;
 `;

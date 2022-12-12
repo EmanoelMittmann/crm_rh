@@ -10,8 +10,10 @@ const MasterPage = ({ children }: Props) => {
   return (
     <Master>
       <Sidebar />
-      <Navbar />
-      <div>{children}</div>
+      <div className="Main">
+        <Navbar />
+        {children}
+      </div>
     </Master>
   );
 };

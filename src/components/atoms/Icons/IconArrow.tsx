@@ -1,6 +1,6 @@
 import React from "react";
 
-const IconSeta = ({
+const IconArrow = ({
   width = "11",
   height = "17",
   color = "black",
@@ -23,4 +23,4 @@ const IconSeta = ({
   );
 };
 
-export default IconSeta;
+export default IconArrow;

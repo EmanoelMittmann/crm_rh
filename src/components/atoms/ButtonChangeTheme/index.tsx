@@ -9,14 +9,13 @@ const ButtonChangeTheme = () => {
 
 const [change, setChange] = useState<boolean>(false);
 
-
   return (
     <ContainerButtonLights>
-      {!change ? (
+      {change ? (
         <Button
+          iconLeft={<IconLight />}
           typographyProps={{ fontWeight: "light", type: "p2", color: "#fff" }}
-          iconLeft={<IconLight color="#000" />}
-          onClick={() => setChange(true)}
+          onClick={() => setChange(false)}
           bWidth={0.3}
           bColor="#ffff"
           bStyle="solid"
@@ -30,9 +29,10 @@ const [change, setChange] = useState<boolean>(false);
         <Button
           iconLeft={<IconLua />}
           typographyProps={{ fontWeight: "light", type: "p2", color: "#000" }}
-          onClick={() => setChange(false)}
+          onClick={() => setChange(true)}
           bgColor="#ffff"
-          bWidth={0.3}
+          bWidth={1}
+          bStyle="solid"
           bColor="#000"
           height={35}
           bRadius="md"
