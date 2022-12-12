@@ -14,6 +14,7 @@ interface IContainerColumnProps {
   bottom?: string;
   height?: string;
   left?: string;
+  right?:string;
   top?: string;
   gap?: string;
   justify?: string;
