@@ -47,3 +47,9 @@ interface IButtonColorProps{
   bgActive:string,
   isActive?:boolean
 }
+interface IModalProps {
+  optionOne: string;
+  optionTwo?: string;
+  eventOne: MouseEventHandler;
+  eventTwo?: MouseEventHandler;
+}
