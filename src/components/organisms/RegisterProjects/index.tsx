@@ -1,10 +1,14 @@
 import { brand } from "@stardust-ds/core/lib/esm/Brand";
 import { Button, Input, Typography } from "@stardust-ds/react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
+import ButtonTemplate from "../../atoms/ButtonTemplate";
 import { IconGlass } from "../../atoms/Icons/IconGlass";
 import { Select } from "../../atoms/Select";
 import { Footer } from "../../molecules/Footer";
 import HeaderProjects from "../../molecules/HeaderProjects";
+import { alterObject, DEFAULTSELECT } from "../../utils/btnSelects";
 import ProjectsListing from "./ProjectsListing";
 import {
   ContainerChildrenProjects,
@@ -17,7 +21,7 @@ const objectProject = [
     id: "12522",
     name: "Easy Delivery",
     tipo: "Planning",
-    inicio: Date,
+    inicio: "11/12/2022",
     status: true,
   },
 ];
@@ -28,6 +32,12 @@ export const RegisterProjects = () => {
   const handleNavigate = () => {
     navigate("/NewProject");
   };
+    const location = useLocation();
+    const [selects, setSelects] = useState(DEFAULTSELECT);
+
+    function handleSelect(btnSelect: string) {
+      setSelects(alterObject(selects, btnSelect));
+    }
 
   console.log(navigate);
 
@@ -40,18 +50,21 @@ export const RegisterProjects = () => {
         <Input iconLeft={<IconGlass />} placeholder="Buscar..." width={300} />
         <Select placeholder="Tipo" value={[]} />
         <Select placeholder="Status" value={[]} />
-        <div style={{ width: "15%", marginLeft:"30em" }}>
-          <Button
-            typographyProps={{ fontWeight: "light", type: "p2" }}
-            isFullWidth
-            bRadius="md"
-            height={45}
-            bgColor={brand.color.positive.pure}
-            mLeft="22em"
-            onClick={handleNavigate}
-          >
-            Cadastrar Novo
-          </Button>
+
+        <div style={{ marginLeft: "25em" }}>
+          <ButtonTemplate
+            Text="Cadastrar Novo"
+            color="#e6f3ea"
+            fill="#dee0df"
+            bgActive="#1ECB4F"
+            colorActive="white"
+            fillActive="white"
+            onClick={() => {
+              navigate("/NewProject");
+              handleSelect("newprojects");
+            }}
+            isActive={selects.newprojects}
+          />
         </div>
       </ContainerChildrenProjects>
       <ContainerChildrenTable>

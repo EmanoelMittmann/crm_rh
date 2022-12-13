@@ -1,14 +1,21 @@
-import { Typography } from "@stardust-ds/react";
-import { IconArrowPageRegistration } from "../../atoms/Icons/IconArrowPageRegistration"
-import InputIconPosition from "../../atoms/InputIconPosition"
+import { Input, Typography, Select } from "@stardust-ds/react";
+import { useState } from "react";
+import { string } from "yup";
+import { IconArrowPageRegistration } from "../../atoms/Icons/IconArrowPageRegistration";
+import InputIconPosition from "../../atoms/InputIconPosition";
+// import { Select } from "../../atoms/Select";
 import { Navbar } from "../../molecules/NavBar";
 import { Sidebar } from "../../molecules/SideBar";
-import { ContainerMain } from "../../molecules/SideBar/style"
-import { ContaineNew, ContaineNewRegistration, ContainerBase } from "./style";
-
+import {
+  ContaineNew,
+  ContaineNewposition,
+  ContaineNewRegistration,
+  ContainerBase,
+  ContainerInputs,
+} from "./style";
 
 const NewProject = () => {
-
+    const [option, setOption] = useState({})
   return (
     <>
       <ContaineNewRegistration>
@@ -17,17 +24,32 @@ const NewProject = () => {
       </ContaineNewRegistration>
       <ContainerBase>
         <InputIconPosition Icon={<IconArrowPageRegistration />} />
-        <div style={{ marginTop: "0.5em" }}>
+        <div style={{ marginTop: "0.3em" }}>
           <Typography type="h3">Cadastrar novo projeto</Typography>
         </div>
       </ContainerBase>
-      <ContaineNew>
-        <div style={{margin: "2em"}}>
+      <ContaineNewposition>
+        <div style={{ margin: "2em" }}>
           <Typography type="h3">Dados do projeto</Typography>
         </div>
-      </ContaineNew>
+        <ContainerInputs>
+          <Input isFullWidth 
+          label="Nome do projeto" 
+          value={""}
+          onChange={() => {}}
+          />
+          <div style={{ marginTop: "-0.5em" }}>
+            <Select
+              placeholder="Selecione"
+              options={[]}
+              label="Tipo de Projeto"
+              onSelect={(e: any) => setOption(e || {})}
+            />
+          </div>
+        </ContainerInputs>
+      </ContaineNewposition>
     </>
   );
-}
+};
 
-export default NewProject
+export default NewProject;

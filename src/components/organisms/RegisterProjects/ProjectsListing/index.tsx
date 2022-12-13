@@ -13,19 +13,19 @@ const ProjectsListing = ({ project } : any) => {
 
   return (
     <ContainerShelf>
-      <ContainerProjectColumn width="27.5%">
+      <ContainerProjectColumn width="28%">
         <AlignItensProjects>{project.name}</AlignItensProjects>
       </ContainerProjectColumn>
-      <ContainerProjectColumn width="15%">
+      <ContainerProjectColumn width="25%">
         {project.tipo}
       </ContainerProjectColumn>
-      <ContainerProjectColumn width="18%">
-        {project.Date}
+      <ContainerProjectColumn width="10%">
+        {project.inicio}
       </ContainerProjectColumn>
-      <ContainerProjectColumn width="14.5%">
+      <ContainerProjectColumn width="10%">
         {project.status}
       </ContainerProjectColumn>
-      <ContainerShelfColumn width="19%" justify="center" gap="3em">
+      <ContainerShelfColumn width="20%" justify="center" gap="3em">
         <div className="status">
           <Badge
             label={project.status ? "Ativo" : "Inativo"}

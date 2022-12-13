@@ -50,7 +50,7 @@ export const ContainerProjectColumn = styled.div<IContainerColumnProps>`
   gap: ${(props) => props.gap};
 
   .status {
-    width: 8em;
+    width: 5em;
   }
 `;
 
