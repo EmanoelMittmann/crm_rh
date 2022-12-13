@@ -2,7 +2,7 @@ import { Input } from '@stardust-ds/react';
 import {useState} from 'react'
 import { IconEye } from '../Icons/IconEye';
 import { IconEyeSlash } from '../Icons/IconEyeSlash';
-import InputIcon from "../Input";
+import InputIcon from "../InputIcon";
 
 //Input com icone para vizualizar senha
 

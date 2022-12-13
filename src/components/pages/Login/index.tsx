@@ -11,7 +11,7 @@ import { IconEye } from "../../atoms/Icons/IconEye";
 import { IconEyeSlash } from "../../atoms/Icons/IconEyeSlash";
 import { IconUbistart } from "../../atoms/Icons/IconUbistart";
 import { IconUser } from "../../atoms/Icons/IconUser";
-import InputIcon from "../../atoms/Input";
+import InputIcon from "../../atoms/InputIcon";
 import {
   Containerdatas,
   ContainerIconUbistart,

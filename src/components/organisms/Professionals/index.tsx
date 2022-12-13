@@ -1,5 +1,5 @@
 import { ContainerChildren, ContainerMain } from "./style";
-import { Input } from "@stardust-ds/react";
+import { Input, Typography } from "@stardust-ds/react";
 import { IconGlass } from "../../atoms/Icons/IconGlass";
 import { Select } from "../../atoms/Select";
 import { ButtonGeneric } from "../../atoms/ButtonGeneric";
@@ -25,7 +25,7 @@ const ProfessionalsMain = () => {
     <>
       <ContainerMain>
         <ContainerChildren left="2em">
-          <h3>Profissionais</h3>
+          <Typography type="h3">Profissionais</Typography>
         </ContainerChildren>
         <ContainerChildren left="2em" gap="2em">
           <Input iconLeft={<IconGlass />} placeholder="Buscar..." width={300} />
@@ -43,13 +43,13 @@ const ProfessionalsMain = () => {
         </ContainerChildren>
         <ContainerChildren>
           <div className="table">
-            <Header />
+            <Header/>
             {object.map((data) => (
               <Shelf data={data} />
             ))}
           </div>
         </ContainerChildren>
-        <Footer/>
+        <Footer />
       </ContainerMain>
     </>
   );
