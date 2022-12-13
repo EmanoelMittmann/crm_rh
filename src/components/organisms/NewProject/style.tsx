@@ -4,7 +4,7 @@ export const ContaineNew = styled.div`
   display: flex;
   flex-direction: row;
   width: 65%;
-  height: 900px;
+  height: 100vh;
   border: 1px solid #c0baba;
   border-radius: 14px;
   margin-left: 20.5em;
