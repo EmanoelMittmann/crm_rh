@@ -40,9 +40,17 @@ interface ISelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   value?: Array;
 }
 
-interface IModalProps{
-  optionOne:string,
-  optionTwo?:string,
-  eventOne: MouseEventHandler
-  eventTwo?: MouseEventHandler
+interface IButtonColorProps{
+  color: string,
+  fill: fill,
+  colorActive:string,
+  fillActive:string,
+  bgActive:string,
+  isActive?:boolean
+}
+interface IModalProps {
+  optionOne: string;
+  optionTwo?: string;
+  eventOne: MouseEventHandler;
+  eventTwo?: MouseEventHandler;
 }

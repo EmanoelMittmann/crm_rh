@@ -5,24 +5,30 @@ export const ContainerMain = styled.div`
   height: auto;
 `;
 
-export const ContainerChildren = styled.div<IContainerColumnProps>`
+export const ContainerChildrenProjects = styled.div<IContainerColumnProps>`
   display: flex;
-  width: inherit;
+  width: 96%;
   margin-bottom: 2.5em;
   height: ${(props) => props.height};
   padding-left: ${(props) => props.left};
   padding-right: ${(props) => props.right};
   gap: ${(props) => props.gap};
 
-  .table {
-    width: inherit;
-    display: flex;
-    flex-direction: column;
-  }
 `;
 
-export const ContainerShelf = styled.div`
-  width: 96%;
+export const ContainerChildrenTable = styled.div<IContainerColumnProps>`
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  margin-bottom: 2.5em;
+  height: ${(props) => props.height};
+  padding-left: ${(props) => props.left};
+  padding-right: ${(props) => props.right};
+  gap: ${(props) => props.gap};
+`;
+
+export const ContainerProjects = styled.div`
+  width: 95%;
   height: 4em;
   display: flex;
   align-items: center;
@@ -32,7 +38,7 @@ export const ContainerShelf = styled.div`
   margin: auto;
 `;
 
-export const ContainerShelfColumn = styled.div<IContainerColumnProps>`
+export const ContainerProjectColumn = styled.div<IContainerColumnProps>`
   width: ${(props) => props.width};
   padding-left: ${(props) => props.left};
   overflow: hidden;
@@ -44,27 +50,14 @@ export const ContainerShelfColumn = styled.div<IContainerColumnProps>`
   gap: ${(props) => props.gap};
 
   .status {
-    width: 8em;
+    width: 5em;
   }
 `;
 
-export const AlignItens = styled.div`
+export const AlignItensProjects = styled.div`
   display: flex;
   align-items: center;
   gap: 1em;
   font-family: "Poppins";
   font-weight: 500;
-`;
-
-export const IMG = styled.img`
-  width: 3em;
-`;
-
-export const Footer = styled.footer`
-  margin-top: 25em;
-  width: 100%;
-  height: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
 `;

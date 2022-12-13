@@ -1,11 +1,9 @@
 import { Input } from '@stardust-ds/react'
-import React from 'react'
-import InputIcon from '../Input'
+import InputIcon from '../InputIcon'
 import { IconUser } from '../Icons/IconUser'
 
 
 //input com ione do usuario
-
 
 const InputUser = () => {
 
