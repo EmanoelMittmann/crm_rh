@@ -1,21 +1,25 @@
 import { ThemeProvider } from '@stardust-ds/react';
-import { useState } from 'react'
-import Router from './routes/router'
-import { getTheme, preferredMode, Scheme } from './styles/customTheme';
+import { useState } from 'react';
+import Router from './routes/router';
+import { getTheme, Scheme } from './styles/customTheme';
 import { GlobalStyles } from './styles/globalStyles';
+import { Provider } from 'react-redux';
+import store from './redux/store/store';
 
 const App = () => {
-  const [theme, setTheme] = useState(getTheme("light"));
+  const [theme, setTheme] = useState(getTheme('light'));
 
   function changeTheme(scheme: Scheme) {
     setTheme(getTheme(scheme));
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles theme={theme} />
-      <Router/>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles theme={theme} />
+        <Router />
+      </ThemeProvider>
+    </Provider>
   );
 };
 

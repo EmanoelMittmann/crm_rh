@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ContainerMain = styled.div`
   width: 100%;
@@ -30,7 +30,7 @@ export const ContainerChildren = styled.div<IContainerColumnProps>`
 `;
 
 export const ContainerShelf = styled.div`
-  width: 95%;
+  width: 96%;
   height: 4em;
   display: flex;
   align-items: center;
@@ -60,7 +60,7 @@ export const AlignItens = styled.div`
   display: flex;
   align-items: center;
   gap: 1em;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-weight: 500;
 `;
 

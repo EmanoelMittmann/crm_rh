@@ -13,6 +13,8 @@ export const Navbar = () => {
       ? "Profissionais"
       : pathname === "/Projects"
       ? "Projetos"
+      : pathname === "/NewProject"
+      ? "Projetos"
       : pathname === "/ExtrasHours"
       ? "Horas Extras"
       : pathname === "/Notes"

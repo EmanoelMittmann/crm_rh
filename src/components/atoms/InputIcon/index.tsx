@@ -1,12 +1,13 @@
 
 import { IInputsProps } from '../../../react-app-env';
+import { ContainerPositionIcon } from './style';
 
 const InputIcon = ({ Icon}: IInputsProps) => {
 
  return (
-  <div>
-    {Icon}
-  </div>
+   <ContainerPositionIcon>
+     {Icon}
+   </ContainerPositionIcon>
  );
 }
 

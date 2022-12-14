@@ -8,6 +8,7 @@ export const DEFAULTSELECT = {
     services:false,
     settings:false,
     company:false,
+    newprojects:false,
 } 
 
 export function alterObject(obj:typeof DEFAULTSELECT,defaultValue: string){
