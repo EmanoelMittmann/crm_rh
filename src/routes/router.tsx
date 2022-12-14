@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../components/pages/Home";
 import Login from "../components/pages/Login";
 import Professionals from "../components/pages/Professionals";
+import RegisterProfessional from "../components/pages/RegisterProfessional";
 
 
 const Router = () => {
@@ -12,6 +13,7 @@ const Router = () => {
           <Route path="/" element={<Login/>} />
           <Route path="/Home" element={<Home/>}/>
           <Route path="/Professionals" element={<Professionals/>}/>
+          <Route path="/RegisterProfessionals" element={<RegisterProfessional/>}/>
           <Route path="/Projects" element={<Professionals/>}/>
           <Route path="/ExtrasHours" element={<Professionals/>}/>
           <Route path="/Notes" element={<Professionals/>}/>

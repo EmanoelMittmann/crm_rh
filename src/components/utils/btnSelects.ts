@@ -15,7 +15,7 @@ export function alterObject(obj:typeof DEFAULTSELECT,defaultValue: string){
     for (const [key,value] of Object.entries(obj)) {
         if(key === defaultValue){
             newObj[key] = true
-        }else{
+        }else{  
             newObj[key] = false
         }
     }

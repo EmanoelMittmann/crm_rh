@@ -12,6 +12,18 @@ export const Children = styled.div<{justify?:string,top?:string,w?:string,align:
     align-items: ${(props) => props.align};
     padding: ${(props) => props.top};
     justify-content:${(props) => props.justify};
+
+    @media screen and (max-width: 1650px){
+        width: calc(100% - 1em);
+
+    }
+`
+
+export const User = styled.div`
+    width: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 `
 
 export const Avatar = styled.img`
