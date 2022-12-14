@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface IAction {
-  loginAction: () => void;
-}
-
 const DEFAULT_VALUE = {
   googleData: { decodeJwt: {}, data: {} },
   token: '',
@@ -20,5 +16,5 @@ const login = createSlice({
   },
 });
 
-export const { loginAction: IAction } = login.actions;
+export const { loginAction } = login.actions;
 export default login.reducer;

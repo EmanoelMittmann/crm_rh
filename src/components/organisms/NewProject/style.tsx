@@ -14,7 +14,8 @@ export const ContaineNew = styled.div`
 export const ContainerBase = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: -53em;
+  position:absolute;
+  top: 5em;
   margin-left: 20em;
   
 `;

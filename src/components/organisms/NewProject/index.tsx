@@ -1,9 +1,7 @@
 import { Input, Typography, Select } from "@stardust-ds/react";
 import { useState } from "react";
-import { string } from "yup";
 import { IconArrowPageRegistration } from "../../atoms/Icons/IconArrowPageRegistration";
 import InputIconPosition from "../../atoms/InputIconPosition";
-// import { Select } from "../../atoms/Select";
 import { Navbar } from "../../molecules/NavBar";
 import { Sidebar } from "../../molecules/SideBar";
 import {
@@ -24,7 +22,7 @@ const NewProject = () => {
       </ContaineNewRegistration>
       <ContainerBase>
         <InputIconPosition Icon={<IconArrowPageRegistration />} />
-        <div style={{ marginTop: "0.3em" }}>
+        <div  style={{ margin: "0.3em" }}>
           <Typography type="h3">Cadastrar novo projeto</Typography>
         </div>
       </ContainerBase>
@@ -33,10 +31,11 @@ const NewProject = () => {
           <Typography type="h3">Dados do projeto</Typography>
         </div>
         <ContainerInputs>
-          <Input isFullWidth 
-          label="Nome do projeto" 
-          value={""}
-          onChange={() => {}}
+          <Input
+            isFullWidth
+            label="Nome do projeto"
+            value={""}
+            onChange={() => {}}
           />
           <div style={{ marginTop: "-0.5em" }}>
             <Select
@@ -46,6 +45,9 @@ const NewProject = () => {
               onSelect={(e: any) => setOption(e || {})}
             />
           </div>
+        </ContainerInputs>
+        <ContainerInputs>
+          <Input type="date" label="Dade início" />
         </ContainerInputs>
       </ContaineNewposition>
     </>
