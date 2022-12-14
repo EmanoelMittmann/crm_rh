@@ -1,20 +1,18 @@
-import { Button } from "@stardust-ds/react";
-import { useState } from "react";
-import { IconLua } from "../ComponentsLogin/IconsElements/IconLua";
-import { IconLight } from "../Icons/IconLight";
-import { ContainerButtonLights } from "./style";
-
+import { Button } from '@stardust-ds/react';
+import { useState } from 'react';
+import { IconLua } from '../ComponentsLogin/IconsElements/IconLua';
+import { IconLight } from '../Icons/IconLight';
+import { ContainerButtonLights } from './style';
 
 const ButtonChangeTheme = () => {
-
-const [change, setChange] = useState<boolean>(false);
+  const [change, setChange] = useState<boolean>(false);
 
   return (
     <ContainerButtonLights>
       {change ? (
         <Button
           iconLeft={<IconLight />}
-          typographyProps={{ fontWeight: "light", type: "p2", color: "#fff" }}
+          typographyProps={{ fontWeight: 'light', type: 'p2', color: '#fff' }}
           onClick={() => setChange(false)}
           bWidth={0.3}
           bColor="#ffff"
@@ -28,7 +26,7 @@ const [change, setChange] = useState<boolean>(false);
       ) : (
         <Button
           iconLeft={<IconLua />}
-          typographyProps={{ fontWeight: "light", type: "p2", color: "#000" }}
+          typographyProps={{ fontWeight: 'light', type: 'p2', color: '#000' }}
           onClick={() => setChange(true)}
           bgColor="#ffff"
           bWidth={1}
