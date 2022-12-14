@@ -1,9 +1,10 @@
-import { ContainerSelect, Option } from "./style";
+import { ContainerSelect, Master, Option } from "./style";
 
-export const Select = ({ value, placeholder }: ISelectProps) => {
+export const Select = ({ value, placeholder,label,width }: ISelectProps) => {
   return (
-    <>
-      <ContainerSelect w="22em" h="3.3em" >
+    <Master>
+      <h5>{label}</h5>
+      <ContainerSelect w={width ? width : "22em"} h="3.3em">
         {value ? (
           <Option selected>{placeholder}</Option>
         ) : (
@@ -12,6 +13,6 @@ export const Select = ({ value, placeholder }: ISelectProps) => {
           })
         )}
       </ContainerSelect>
-    </>
+    </Master>
   );
 };

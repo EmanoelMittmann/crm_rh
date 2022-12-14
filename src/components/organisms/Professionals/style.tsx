@@ -3,21 +3,29 @@ import styled from 'styled-components';
 export const ContainerMain = styled.div`
   width: 100%;
   height: auto;
+
 `;
 
 export const ContainerChildren = styled.div<IContainerColumnProps>`
   display: flex;
-  width: inherit;
+  width: ${(props) => props.width && props.width};
   margin-bottom: 2.5em;
   height: ${(props) => props.height};
   padding-left: ${(props) => props.left};
   padding-right: ${(props) => props.right};
-  gap: ${(props) => props.gap};
 
   .table {
-    width: inherit;
+    width: 100%;
     display: flex;
     flex-direction: column;
+  }
+
+  .filters{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    justify-content: safe;
   }
 `;
 

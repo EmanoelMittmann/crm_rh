@@ -28,6 +28,8 @@ import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import api from '../../../api/api';
 import { useNavigate } from 'react-router-dom';
+import { loginAction } from '../../../redux/reducers/login.reducer';
+import { Avatar } from '../../molecules/NavBar/style';
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -46,14 +48,21 @@ const Login = () => {
   };
 
   const accessLogin = async ({ credential }: CredentialResponse) => {
-    const { email, sub }: IJWTDecodeGoogle = jwt_decode(credential as string);
+    const { email, sub,picture}: IJWTDecodeGoogle = jwt_decode(credential as string);
+    // const data: IJWTDecodeGoogle = jwt_decode(credential as string);
+    // console.log("data: ", data);
 
     try {
       const { data } = await api.post('/auth', {
         google_email: email,
         google_id: sub,
         access_token: credential,
-      });
+      })
+        dispatch(loginAction({
+        googleData: { decodeJwt: credential, user: {avatar:picture, user_type_id: data.data[0].user_type_id}},
+        token: credential,
+        responseValidToken: false,
+      }))
       navigate('/home');
     } catch (error: any) {
       console.log(error.message);
@@ -157,7 +166,11 @@ console.log()
               bRadius="md"
               height={50}
               onClick={() => {
-                // dispatch(loginAction());
+                // dispatch(loginAction({
+                //   googleData: { decodeJwt: 'credential', data: {user_email:'email', user_sub:'sub'} },
+                //   token: 'credential',
+                //   responseValidToken: true,
+                // }))
               }}
             >
               Entrar

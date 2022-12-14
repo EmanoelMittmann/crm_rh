@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+interface IAction {
+  loginAction: () => void;
+}
+
 const DEFAULT_VALUE = {
   googleData: { decodeJwt: {}, data: {} },
   token: '',
@@ -8,11 +12,14 @@ const DEFAULT_VALUE = {
 
 const login = createSlice({
   name: 'LOGIN-HANDLER',
-  initialState: DEFAULT_VALUE,
+  initialState: {},
   reducers: {
     loginAction: (state, action: PayloadAction<any>) => {
-      console.log(state);
-    },
+      const token = JSON.stringify(action.payload.token)
+      const user = JSON.stringify(action.payload.googleData.user)
+      localStorage.setItem(LocalStorageKeys.TOKEN, token);
+      localStorage.setItem(LocalStorageKeys.USER, user);
+    }
   },
 });
 

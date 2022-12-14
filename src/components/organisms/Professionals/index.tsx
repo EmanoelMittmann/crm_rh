@@ -1,11 +1,12 @@
-import { ContainerChildren, ContainerMain } from './style';
-import { Input, Typography, Select } from '@stardust-ds/react';
-import { IconGlass } from '../../atoms/Icons/IconGlass';
-// import { Select } from "../../atoms/Select";
-import { ButtonGeneric } from '../../atoms/ButtonGeneric';
-import Header from '../../molecules/Header';
-import { Shelf } from './shelf';
-import { Footer } from '../../molecules/Footer';
+import { ContainerChildren, ContainerMain } from "./style";
+import { Input, Typography } from "@stardust-ds/react";
+import { IconGlass } from "../../atoms/Icons/IconGlass";
+import { Select } from "../../atoms/Select";
+import { ButtonGeneric } from "../../atoms/ButtonGeneric";
+import Header from "../../molecules/Header";
+import { Shelf } from "./shelf";
+import {Footer} from "../../molecules/Footer";
+import { useNavigate } from "react-router-dom";
 
 const object = [
   {
@@ -21,6 +22,7 @@ const object = [
 ];
 
 const ProfessionalsMain = () => {
+  const navigate = useNavigate();
   return (
     <>
       <ContainerMain>
@@ -28,14 +30,18 @@ const ProfessionalsMain = () => {
           <Typography type="h3">Profissionais</Typography>
         </ContainerChildren>
         <ContainerChildren left="2em" gap="2em">
-          <Input
-            iconLeft={<IconGlass />}
-            height={44}
-            placeholder="Buscar..."
-            width={300}
+          <Input iconLeft={<IconGlass />} placeholder="Buscar..." width={300} />
+          <Select placeholder="Cargos" value={[]} />
+          <Select placeholder="Função" value={[]} />
+          <ButtonGeneric
+            Text="Cadastrar Novo"
+            bRadius="500px"
+            bgColor="#1ECB4F"
+            color="white"
+            height="44px"
+            width="15em"
+            left="22em"
           />
-          <Select options={[]} placeholder="Cargos" />
-          <Select options={[]} placeholder="Função" />
         </ContainerChildren>
         <ContainerChildren>
           <div className="table">
@@ -45,7 +51,7 @@ const ProfessionalsMain = () => {
             ))}
           </div>
         </ContainerChildren>
-        <Footer />
+        <Footer/>
       </ContainerMain>
     </>
   );

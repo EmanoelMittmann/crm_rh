@@ -22,8 +22,7 @@ export const Sidebar = () => {
   const [selects, setSelects] = useState(DEFAULTSELECT);
 
   function handleSelect(btnSelect: string) {
-    setSelects(alterObject(selects,btnSelect))
-   
+    setSelects(alterObject(selects, btnSelect));
   }
 
   return (
@@ -42,8 +41,8 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate('/Home')
-              handleSelect('home')
+              navigate("/Home");
+              handleSelect("home");
             }}
             isActive={selects.home}
           />
@@ -56,8 +55,8 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate('/Professionals')
-              handleSelect('professionals')
+              navigate("/Professionals");
+              handleSelect("professionals");
             }}
             isActive={selects.professionals}
           />
@@ -71,8 +70,8 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate('/Projects')
-              handleSelect('projects')
+              navigate("/Projects");
+              handleSelect("projects");
             }}
             isActive={selects.projects}
           />
@@ -85,8 +84,8 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate('/ExtrasHours')
-              handleSelect('extraHours')
+              navigate("/ExtrasHours");
+              handleSelect("extraHours");
             }}
             isActive={selects.extraHours}
           />
@@ -99,8 +98,8 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate('/Notes')
-              handleSelect('notes')
+              navigate("/Notes");
+              handleSelect("notes");
             }}
             isActive={selects.notes}
           />
@@ -113,8 +112,8 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate('/Reports')
-              handleSelect('reports')
+              navigate("/Reports");
+              handleSelect("reports");
             }}
             isActive={selects.reports}
           />
@@ -127,8 +126,8 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate('/Services')
-              handleSelect('services')
+              navigate("/Services");
+              handleSelect("services");
             }}
             isActive={selects.services}
           />
@@ -141,8 +140,8 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate('/Settings')
-              handleSelect('settings')
+              navigate("/Settings");
+              handleSelect("settings");
             }}
             isActive={selects.settings}
           />
@@ -155,8 +154,8 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate('/Company')
-              handleSelect('company')
+              navigate("/Company");
+              handleSelect("company");
             }}
             isActive={selects.company}
           />
@@ -182,7 +181,7 @@ export const Sidebar = () => {
             bgActive=""
             colorActive=""
             fillActive=""
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")}
             isActive={false}
           />
         </ContainerColumn>
