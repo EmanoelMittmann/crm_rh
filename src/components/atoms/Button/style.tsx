@@ -23,11 +23,12 @@ export const ContainerMain = styled.button<IButtonColorProps>`
 
   &:hover {
     color: ${(props) => props.color};
+    animation: cubic-bezier(0.95, 0.05, 0.795, 0.035);
     svg path {
       fill: ${(props) => props.fill};
     }
   }
-
+  
   ${(props) =>
     props.isActive &&
     `

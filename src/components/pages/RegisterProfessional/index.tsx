@@ -1,6 +1,6 @@
 import React from 'react'
 import RegisterProfessionalMain from '../../organisms/RegisterProfessionals'
-import MasterPage from '../Home'
+import MasterPage from '../MasterPage'
 
 const RegisterProfessional = () => {
   return (

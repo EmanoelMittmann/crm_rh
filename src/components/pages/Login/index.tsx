@@ -17,7 +17,7 @@ import {
   ContainerIconUbistart,
   ContainerLogin,
   ConstinerCheccked,
-  ConstinerCheckebox,
+  ContainerCheckbox,
   ContainerGlobalLogin,
   ContainerButton,
   LoginGoogle,
@@ -137,7 +137,7 @@ console.log()
               onBlur={() => {}}
             />
           </Containerdatas>
-          <ConstinerCheckebox>
+          <ContainerCheckbox>
             <ConstinerCheccked>
               <Checkbox
                 checked={isChecked}
@@ -152,7 +152,7 @@ console.log()
             <Typography type="l1" color="#0066FF">
               Esqueci a senha
             </Typography>
-          </ConstinerCheckebox>
+          </ContainerCheckbox>
 
           <LoginGoogle>
             {<div ref={buttonref}></div>}
