@@ -1,21 +1,15 @@
-import { Navbar } from "../../molecules/NavBar";
-import { Sidebar } from "../../molecules/SideBar";
-import { Master } from "./style";
+import React from 'react'
+import { AuthProvider } from '../../../Auth/AuthProvider'
+import MasterPage from '../MasterPage'
 
-type Props = {
-  children?: JSX.Element;
-};
-
-const MasterPage = ({ children }: Props) => {
+const Home = () => {
   return (
-    <Master>
-      <Sidebar />
-      <div className="Main">
-        <Navbar />
-        {children}
-      </div>
-    </Master>
-  );
-};
+    <AuthProvider>
+        <MasterPage>
+            <></>
+        </MasterPage>
+    </AuthProvider>
+  )
+}
 
-export default MasterPage;
+export default Home

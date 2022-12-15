@@ -1,12 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import {useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const AuthProvider = (props:any) => {
-  return (
-    <div>AuthProvider</div>
-  )
+export function AuthProvider({children} : any){
+  const navigate = useNavigate()
+  useEffect(() => {
+    const ExistToken = localStorage.getItem('@UbiRH/TOKEN')
+    const ExistUser = localStorage.getItem('@UbiRH/USER')
+    if(!ExistToken && !ExistUser){
+      navigate('/')
+    }
+  },[])
+  return <>{children}</>
 }
-
-AuthProvider.propTypes = {}
-
-export default AuthProvider
