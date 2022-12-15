@@ -9,7 +9,7 @@ type Props = {
 
 const MasterPage = ({ children }: Props) => {
   return (
-    <>
+    <AuthProvider>
       <Master>
         <Sidebar />
         <div className="Main">
@@ -17,7 +17,7 @@ const MasterPage = ({ children }: Props) => {
           {children}
         </div>
       </Master>
-    </>
+    </AuthProvider>
   );
 };
 
