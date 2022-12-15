@@ -14,6 +14,7 @@ export const ContaineNew = styled.div`
 export const ContainerBase = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   position:absolute;
   top: 5em;
   margin-left: 20em;
@@ -36,7 +37,7 @@ export const ContaineNewposition = styled.div`
   gap: 32px;
   position: absolute;
   width: 65%;
-  height: 1070px;
+  height: 980px;
   left: 272px;
   top: 147px;
   background: #ffffff;
@@ -47,8 +48,22 @@ export const ContainerInputs = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
+  flex-direction: row;
   width: 95%;
   margin: -2em 2em 0 2em;
-  gap:2em;
+  gap: 2em;
   align-items: center;
+`;
+
+export const ContainerInputsSecun = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  flex-direction: row;
+  width: 95%;
+  margin: -2em 2em 0 2em;
+  gap: 2em;
+  align-items: center;
+  padding-bottom: 3em;
+  border-bottom: 1px solid #ccd1d6;
 `;

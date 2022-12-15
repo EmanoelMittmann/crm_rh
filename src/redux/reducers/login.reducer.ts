@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { LocalStorageKeys } from '../../config/LocalStorageKeys';
 
-interface IAction {
-  loginAction: () => void;
-}
 
 const DEFAULT_VALUE = {
   googleData: { decodeJwt: {}, data: {} },

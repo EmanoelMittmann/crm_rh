@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ButtonWithHover from "../../atoms/Button";
 import { IconCompanies } from "../../atoms/Icons/IconCompanies";
 import { IconDark } from "../../atoms/Icons/IconDark";
@@ -18,7 +18,6 @@ import { ContainerColumn, ContainerMain, ContainerRow } from "./style";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [selects, setSelects] = useState(DEFAULTSELECT);
 
   function handleSelect(btnSelect: string) {

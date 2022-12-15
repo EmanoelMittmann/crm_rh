@@ -59,8 +59,8 @@ export const ConstinerCheckebox = styled.div`
 `;
 
 export const LoginGoogle = styled.div`
+  width:95%;
   margin-top: 3em;
-  width: 83%;
   text-align: left;
 `;
 

@@ -1,8 +1,7 @@
 import { ContainerChildren, ContainerMain } from "./style";
-import { Input, Typography } from "@stardust-ds/react";
+import { Button, Input, Typography } from "@stardust-ds/react";
 import { IconGlass } from "../../atoms/Icons/IconGlass";
 import { Select } from "../../atoms/Select";
-import { ButtonGeneric } from "../../atoms/ButtonGeneric";
 import Header from "../../molecules/Header";
 import { Shelf } from "./shelf";
 import {Footer} from "../../molecules/Footer";
@@ -33,15 +32,16 @@ const ProfessionalsMain = () => {
           <Input iconLeft={<IconGlass />} placeholder="Buscar..." width={300} />
           <Select placeholder="Cargos" value={[]} />
           <Select placeholder="Função" value={[]} />
-          <ButtonGeneric
-            Text="Cadastrar Novo"
-            bRadius="500px"
-            bgColor="#1ECB4F"
-            color="white"
-            height="44px"
-            width="15em"
-            left="22em"
-          />
+          <Button
+          typographyProps={{fontWeight: "light",type: "p2",}}
+          style={{marginLeft: "73%",position: "absolute",borderRadius: "25px",color: "#ffffff",}}
+          bgColor="#1ECB4F"
+          bWidth="20px"
+          bStyle="solid"
+          onClick={()=>{}}
+        >
+          Cadastrar novo
+        </Button>
         </ContainerChildren>
         <ContainerChildren>
           <div className="table">

@@ -1,6 +1,7 @@
+
 import { ContainerSelect, Master, Option } from "./style";
 
-export const Select = ({ value, placeholder,label,width }: ISelectProps) => {
+export const Select = ({ value, placeholder, label, width }: ISelectProps) => {
   return (
     <Master>
       <h5>{label}</h5>
