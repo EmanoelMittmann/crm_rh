@@ -75,3 +75,19 @@ interface IModalProps {
   eventOne: MouseEventHandler;
   eventTwo?: MouseEventHandler;
 }
+
+interface FormProjects {
+  name?: string ;
+  date_start?: string;
+  date_end?: string;
+  date_end_performed?: string;
+  project_status_id?: number;
+  project_type_id?: number;
+  team_cost?: string;
+  id?: string;
+  date_start_performed?: string;
+}
+
+interface FormMessage {
+  message?: string;
+}

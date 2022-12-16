@@ -7,7 +7,6 @@ import { IconGlass } from "../../atoms/Icons/IconGlass";
 import { Select } from "../../atoms/Select";
 import { Footer } from "../../molecules/Footer";
 import HeaderProjects from "../../molecules/HeaderProjects";
-import { alterObject, DEFAULTSELECT } from "../../utils/btnSelects";
 import ProjectsListing from "./ProjectsListing";
 import {
   ContainerChildrenProjects,
