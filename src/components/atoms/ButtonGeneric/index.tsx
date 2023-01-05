@@ -3,13 +3,13 @@ import { ContainerButton } from "./style";
 
 interface IButtonGenericProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  Text: string;
-  color: string;
-  bgColor: string;
-  width: string;
-  height: string;
-  bRadius: string;
-  left: string;
+  Text?: string;
+  color?: string;
+  bgColor?: string;
+  width?: string;
+  height?: string;
+  bRadius?: string;
+  left?: string;
 }
 
 export const ButtonGeneric = ({
@@ -20,6 +20,7 @@ export const ButtonGeneric = ({
   bgColor,
   color,
   left,
+  ...props
 }: IButtonGenericProps) => {
   return (
     <>
@@ -30,6 +31,7 @@ export const ButtonGeneric = ({
         height={height}
         bRadius={bRadius}
         left={left}
+        {...props}
       >
         {Text}
       </ContainerButton>

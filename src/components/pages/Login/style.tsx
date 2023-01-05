@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerGlobalLogin = styled.div`
-  display: flex;
-
+  display:flex;
 `;
 
 export const ContainerLogin = styled.div`
@@ -51,7 +50,7 @@ export const ConstinerCheccked = styled.div`
   gap: 0.5em;
 `;
 
-export const ConstinerCheckebox = styled.div`
+export const ContainerCheckbox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

@@ -1,5 +1,5 @@
 import ProfessionalsMain from '../../organisms/Professionals'
-import MasterPage from '../Home/index'
+import MasterPage from '../MasterPage/index'
 
 const Professionals = () => {
   return (

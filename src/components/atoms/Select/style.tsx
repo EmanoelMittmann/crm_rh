@@ -22,3 +22,10 @@ export const Option = styled.option`
   font-family: "Poppins";
   font-weight: 500;
 `;
+
+export const Master = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 4px;
+`
