@@ -1,8 +1,6 @@
 
 import { Button, Input, Typography } from "@stardust-ds/react";
-import { useState } from "react";
 import { useNavigate } from "react-router";
-import { useLocation } from "react-router-dom";
 import { IconGlass } from "../../atoms/Icons/IconGlass";
 import { Select } from "../../atoms/Select";
 import { Footer } from "../../molecules/Footer";
@@ -24,7 +22,7 @@ const objectProject = [
   },
 ];
 
-export const RegisterProjects = () => {
+export const ProjectsAll = () => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -57,7 +55,7 @@ export const RegisterProjects = () => {
         <HeaderProjects />
         <div className="table">
           {objectProject.map((projects) => (
-            <ProjectsListing project={projects} />
+            <ProjectsListing key={projects.id}  project={projects} />
           ))}
         </div>
       </ContainerChildrenTable>

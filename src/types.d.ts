@@ -91,3 +91,7 @@ interface FormProjects {
 interface FormMessage {
   message?: string;
 }
+
+interface MyFormProps{
+   initialValues: string | number | boolean;
+}

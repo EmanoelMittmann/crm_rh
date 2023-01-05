@@ -10,15 +10,19 @@ import {
   ContainerInputs,
   ContainerInputsSecun,
 } from "./style";
+import {FormikProps} from "formik";
 
-const NewProject = ({ DataProjects }: any) => {
-  const { values, errors, handleChange } = DataProjects;
+
+const NewProject = (props: FormMessage & FormikProps<FormProjects>) => {
+  const { touched, errors, isSubmitting, message, handleChange, values } = props
   const [option, setOption] = useState("");
 
   const Options = [
     { id: 1, name: "Ativo" },
     { id: 2, name: "Inativo" },
   ];
+  
+  console.log(props);
 
   return (
     <MasterPage>
@@ -38,8 +42,7 @@ const NewProject = ({ DataProjects }: any) => {
               isFullWidth
               label="Nome do projeto"
               placeholder="Nome do Projeto"
-              value={values.name}
-              onError={values.errors}
+              value={""}
               onChange={handleChange("name")}
             />
             <Input
@@ -47,15 +50,14 @@ const NewProject = ({ DataProjects }: any) => {
               height=""
               label="ID do projeto"
               placeholder="ID do Projeto"
-              value={values.id}
-              onChange={() => {}}
+              value={""}
+              onChange={handleChange("id")}
             />
             <Select
               label="Tipo de projeto"
               width={250}
               options={[]}
-              value={values.project_type_id}
-              hasError={values.errors}
+              // value={values.project_type_id}
               placeholder="Selecione"
               onSelect={() => setOption("")}
             />
@@ -67,7 +69,7 @@ const NewProject = ({ DataProjects }: any) => {
               width={285}
               height=""
               label="Data de Início"
-              placeholder="ID do Projeto"
+              placeholder="Data de Início"
               type="date"
               value={values.date_start}
               onChange={() => {}}
@@ -86,7 +88,7 @@ const NewProject = ({ DataProjects }: any) => {
               label="Status"
               width={250}
               options={[]}
-              value={values.project_status_id}
+              // value={values.project_status_id}
               placeholder="Selecione"
               onSelect={() => setOption("")}
             />

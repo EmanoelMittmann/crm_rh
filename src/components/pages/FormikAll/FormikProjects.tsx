@@ -1,18 +1,18 @@
-import * as Yup from "yup";
-import { Formik, useFormik } from "formik";
+
+import {useFormik, withFormik } from "formik";
 import { useParams } from "react-router-dom";
-import api from "../../../../api/api";
+import api from "../../../api/api";
 import { registerSchemaProjects } from "../schema/SchemaProjects"; 
 import { useState } from "react";
-import NewProject from "../../../organisms/NewProjectData";
+import NewProject from "../../organisms/NewProjectData";
 
 
 
-export const FormikProject = () => {
+export const FormikProject =  (props:any) => {
   const [teamPayload, setTeamPayload] = useState([]);
   const { id } = useParams();
 
-  const formik = useFormik({
+const formik = useFormik({
     initialValues: {
       name: "",
       date_start: "",
@@ -51,7 +51,7 @@ export const FormikProject = () => {
 
   return (
     <form  id="register" onSubmit={formik.handleSubmit}>
-      <NewProject DataProjects={formik} />
+      <NewProject />
     </form>
   );
 
