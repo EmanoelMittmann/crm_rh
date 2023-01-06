@@ -1,5 +1,5 @@
 
-import {useFormik, withFormik } from "formik";
+import {useFormik, withFormik , FormikProps} from "formik";
 import { useParams } from "react-router-dom";
 import api from "../../../api/api";
 import { registerSchemaProjects } from "../schema/SchemaProjects"; 
@@ -7,8 +7,7 @@ import { useState } from "react";
 import NewProject from "../../organisms/NewProjectData";
 
 
-
-export const FormikProject =  (props:any) => {
+ const NewProjectFormik = () => {
   const [teamPayload, setTeamPayload] = useState([]);
   const { id } = useParams();
 
@@ -49,14 +48,15 @@ const formik = useFormik({
     },
   });
 
+
   return (
-    <form  id="register" onSubmit={formik.handleSubmit}>
-      <NewProject />
-    </form>
+    <div>
+      <form id="register" onSubmit={formik.handleSubmit}>
+        <NewProject DataProjects={formik}/>
+      </form>
+    </div>
   );
-
-
 };
 
-
+export default NewProjectFormik;
 

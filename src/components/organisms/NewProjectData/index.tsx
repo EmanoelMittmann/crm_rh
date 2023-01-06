@@ -11,22 +11,19 @@ import {
   ContainerInputsSecun,
 } from "./style";
 import {FormikProps} from "formik";
+import { optionsProjects, optionsStatus } from "../../utils/OptionsAplication";
 
+interface INewProject {
+  DataProjects: OtherProps & FormikProps<FormProjects>;
+}
 
-const NewProject = (props: FormMessage & FormikProps<FormProjects>) => {
-  const { touched, errors, isSubmitting, message, handleChange, values } = props
+const NewProject = ({ DataProjects }: INewProject | any) => {
+  const { errors, isSubmitting, title, handleChange, values } =  DataProjects;
   const [option, setOption] = useState("");
-
-  const Options = [
-    { id: 1, name: "Ativo" },
-    { id: 2, name: "Inativo" },
-  ];
-  
-  console.log(props);
-
+ 
   return (
     <MasterPage>
-      <form>
+      <>
         <ContainerBase>
           <InputIconPosition Icon={<IconArrowPageRegistration />} />
           <div style={{ marginTop: "0.3em" }}>
@@ -42,7 +39,7 @@ const NewProject = (props: FormMessage & FormikProps<FormProjects>) => {
               isFullWidth
               label="Nome do projeto"
               placeholder="Nome do Projeto"
-              value={""}
+              value={values.name}
               onChange={handleChange("name")}
             />
             <Input
@@ -50,16 +47,15 @@ const NewProject = (props: FormMessage & FormikProps<FormProjects>) => {
               height=""
               label="ID do projeto"
               placeholder="ID do Projeto"
-              value={""}
+              value={values.id}
               onChange={handleChange("id")}
             />
             <Select
               label="Tipo de projeto"
               width={250}
-              options={[]}
+              options={optionsProjects}
               // value={values.project_type_id}
               placeholder="Selecione"
-              onSelect={() => setOption("")}
             />
           </ContainerInputs>
 
@@ -72,7 +68,7 @@ const NewProject = (props: FormMessage & FormikProps<FormProjects>) => {
               placeholder="Data de Início"
               type="date"
               value={values.date_start}
-              onChange={() => {}}
+              onChange={handleChange("date_start")}
             />
             <Input
               isFullWidth
@@ -82,13 +78,13 @@ const NewProject = (props: FormMessage & FormikProps<FormProjects>) => {
               placeholder={"Data Estimado"}
               type="date"
               value={values.date_end_performed}
-              onChange={() => {}}
+              onChange={handleChange("date_end_performed")}
             />
             <Select
               label="Status"
               width={250}
-              options={[]}
-              // value={values.project_status_id}
+              options={optionsStatus}
+              value={values.project_status_id}
               placeholder="Selecione"
               onSelect={() => setOption("")}
             />
@@ -102,7 +98,7 @@ const NewProject = (props: FormMessage & FormikProps<FormProjects>) => {
           </ContainerInputsSecun>
           <Button type="submit">Enviar</Button>
         </ContaineNewposition>
-      </form>
+      </>
     </MasterPage>
   );
 };

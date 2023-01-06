@@ -11,6 +11,8 @@ import {
   ContainerChildrenTable,
   ContainerMain,
 } from "./style";
+import { useState, useEffect } from "react";
+import api from "../../../api/api";
 
 const objectProject = [
   {
@@ -23,13 +25,27 @@ const objectProject = [
 ];
 
 export const ProjectsAll = () => {
+  const [projects, setProjects] = useState([]);
   const navigate = useNavigate();
+  const params = {};
+
 
   const handleNavigate = () => {
     navigate("/NewProject");
   };
 
-  console.log();
+//  const getProjects = async () => {
+//    const { data } = await api({
+//      method: "get",
+//      url: `/project/?limit=5`,
+//      params: params,
+//    });
+//    setProjects(data.data);
+//  };
+
+//  useEffect(()=>{
+// getProjects()
+//  },[])
 
   return (
     <ContainerMain>
@@ -41,8 +57,13 @@ export const ProjectsAll = () => {
         <Select placeholder="Tipo" value={[]} />
         <Select placeholder="Status" value={[]} />
         <Button
-          typographyProps={{fontWeight: "light",type: "p2",}}
-          style={{marginLeft: "73%",position: "absolute",borderRadius: "25px",color: "#ffffff",}}
+          typographyProps={{ fontWeight: "light", type: "p2" }}
+          style={{
+            marginLeft: "73%",
+            position: "absolute",
+            borderRadius: "25px",
+            color: "#ffffff",
+          }}
           bgColor="#1ECB4F"
           bWidth="20px"
           bStyle="solid"
@@ -55,7 +76,7 @@ export const ProjectsAll = () => {
         <HeaderProjects />
         <div className="table">
           {objectProject.map((projects) => (
-            <ProjectsListing key={projects.id}  project={projects} />
+            <ProjectsListing key={projects.id} project={projects} />
           ))}
         </div>
       </ContainerChildrenTable>

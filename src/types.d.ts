@@ -77,7 +77,7 @@ interface IModalProps {
 }
 
 interface FormProjects {
-  name?: string ;
+  name?: string;
   date_start?: string;
   date_end?: string;
   date_end_performed?: string;
@@ -88,10 +88,22 @@ interface FormProjects {
   date_start_performed?: string;
 }
 
-interface FormMessage {
-  message?: string;
+interface OtherProps {
+  title?:string
 }
 
 interface MyFormProps{
+   id: string;
+   initialTeam_cost: string;
+   initialType_id: number;
+   initiaStatus_id: number;
+   initiaPerformed: string;
+   initialDate_end: string;
+   initialDate_start: string;
+   initialName: string;
    initialValues: string | number | boolean;
+}
+interface Option {
+  label: string;
+  value: string;
 }
