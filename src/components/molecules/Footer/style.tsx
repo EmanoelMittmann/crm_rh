@@ -7,23 +7,9 @@ export const Container = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-
-  .left {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    cursor: pointer;
-  }
-
-  .right {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    cursor: pointer;
-  }
 `;
 export const Pagination = styled.div`
-  width: 65em;
+  width: 100%;
   display: flex;
   justify-content: center;
   .threepoints {

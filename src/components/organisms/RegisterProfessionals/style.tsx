@@ -7,7 +7,7 @@ export const ContainerMain = styled.div`
 
 export const ContainerChildren = styled.div<IContainerColumnProps>`
   display: flex;
-  width: inherit;
+  width: 100%;
   margin-bottom: 2.5em;
   height: ${(props) => props.height};
   padding-left: ${(props) => props.left};
@@ -19,6 +19,8 @@ export const ContainerChildren = styled.div<IContainerColumnProps>`
 export const ContainerRegisterProfessional = styled.div`
   width: 60em;
   height: 40em;
+  overflow-y: scroll;
+  overflow-x: hidden;
   margin-left: 2em;
   border: 1px solid #ccd1d6;
   border-radius: 8px;

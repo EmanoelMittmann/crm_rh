@@ -1,18 +1,24 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ContainerMain = styled.div`
   width: 100%;
   height: auto;
+  box-sizing: border-box;
 
+  .Main{
+    height: 39em;
+  }
 `;
 
 export const ContainerChildren = styled.div<IContainerColumnProps>`
   display: flex;
   width: ${(props) => props.width && props.width};
   margin-bottom: 2.5em;
+  align-items: center;
   height: ${(props) => props.height};
   padding-left: ${(props) => props.left};
   padding-right: ${(props) => props.right};
+  gap: ${(props) => props.gap};
 
   .table {
     width: 100%;
@@ -20,13 +26,14 @@ export const ContainerChildren = styled.div<IContainerColumnProps>`
     flex-direction: column;
   }
 
-  .filters{
+  .filters {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
     justify-content: safe;
   }
+
 `;
 
 export const ContainerShelf = styled.div`
@@ -60,7 +67,7 @@ export const AlignItens = styled.div`
   display: flex;
   align-items: center;
   gap: 1em;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-weight: 500;
 `;
 

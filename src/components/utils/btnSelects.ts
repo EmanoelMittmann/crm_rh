@@ -2,13 +2,13 @@ export const DEFAULTSELECT = {
     home:true,
     professionals:false,
     projects:false,
-    extraHours:false,
+    extrasHours:false,
     notes:false,
     reports:false,
     services:false,
     settings:false,
     company:false,
-    newprojects:false,
+    newprojects:false
 } 
 
 export function alterObject(obj:typeof DEFAULTSELECT,defaultValue: string){
