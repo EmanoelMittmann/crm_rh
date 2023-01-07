@@ -1,5 +1,5 @@
 
-import {useFormik, withFormik , FormikProps} from "formik";
+import {useFormik} from "formik";
 import { useParams } from "react-router-dom";
 import api from "../../../api/api";
 import { registerSchemaProjects } from "../schema/SchemaProjects"; 

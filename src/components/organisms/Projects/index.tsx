@@ -80,7 +80,6 @@ export const ProjectsAll = () => {
           ))}
         </div>
       </ContainerChildrenTable>
-
       <Footer />
     </ContainerMain>
   );

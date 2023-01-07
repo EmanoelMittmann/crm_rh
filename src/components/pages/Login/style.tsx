@@ -9,7 +9,7 @@ export const ContainerLogin = styled.div`
   flex-direction: column;
   position: absolute;
   width: 500px;
-  height: 700px;
+  height: 750px;
   left: 153px;
   top: 133px;
   padding: 2em;
@@ -59,7 +59,9 @@ export const ContainerCheckbox = styled.div`
 
 export const LoginGoogle = styled.div`
   width:100%;
-  margin-top: 3em;
+  display:flex;
+  justify-content:center;
+  margin-top: 5em;
   text-align: left;
 `;
 
@@ -70,5 +72,5 @@ export const ImgTeam = styled.img`
 
 export const ContainerButton = styled.div`
   display: flex;
-  margin-top: 3em;
+  margin-top: 4em;
 `;

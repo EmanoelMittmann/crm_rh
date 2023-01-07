@@ -15,10 +15,9 @@ export const ContainerBase = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  position:absolute;
+  position: absolute;
   top: 5em;
-  margin-left: 20em;
-  
+  margin-left: 5em;
 `;
 
 export const ContaineNewRegistration = styled.div`
@@ -37,13 +36,20 @@ export const ContaineNewposition = styled.div`
   gap: 32px;
   position: absolute;
   width: 65%;
-  height: 980px;
+  height: 780px;
   left: 272px;
   top: 147px;
   background: #ffffff;
   border: 1px solid #ccd1d6;
   border-radius: 8px;
 `;
+
+export const Container = styled.div`
+  width: 87%;
+  height: 150px;
+
+`;
+
 export const ContainerInputs = styled.div`
   display: flex;
   flex-wrap: nowrap;
@@ -66,4 +72,13 @@ export const ContainerInputsSecun = styled.div`
   align-items: center;
   padding-bottom: 3em;
   border-bottom: 1px solid #ccd1d6;
+`;
+
+export const ContainerButtonsFooter = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  margin-left: 4em;
+  margin-top:53em;
 `;

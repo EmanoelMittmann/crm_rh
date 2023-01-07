@@ -5,7 +5,7 @@ import Professionals from "../components/pages/Professionals";
 import RegisterProfessional from "../components/pages/RegisterProfessional";
 import Projects from "../components/pages/Projects";
 import NewProject from "../components/organisms/NewProjectData";
-import FormikProject from "../components/pages/FormikAll/NewProjectFormik";
+import FormikProject from "../components/pages/RegisterProjects/NewProjectFormik";
 
 
 const Router = () => {
