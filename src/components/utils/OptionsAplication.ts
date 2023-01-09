@@ -32,3 +32,17 @@ export const optionsProjects = [
   },
 ];
 
+export const optionsTime = [
+  {
+    label: "Cicera",
+    value: "Cicera",
+  },
+  {
+    label: "Gustavo",
+    value: "Gustavo",
+  },
+  {
+    label: "Emanoel",
+    value: "Emanoel",
+  },
+];

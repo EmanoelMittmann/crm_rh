@@ -47,13 +47,11 @@ export const ContaineNewposition = styled.div`
 export const Container = styled.div`
   width: 87%;
   height: 150px;
-
 `;
 
 export const ContainerInputs = styled.div`
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: row;
   width: 95%;
   margin: -2em 2em 0 2em;
@@ -63,15 +61,24 @@ export const ContainerInputs = styled.div`
 
 export const ContainerInputsSecun = styled.div`
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: row;
-  width: 95%;
+  width: 96.3%;
   margin: -2em 2em 0 2em;
   gap: 2em;
   align-items: center;
   padding-bottom: 3em;
+  position: relative;
   border-bottom: 1px solid #ccd1d6;
+`;
+export const ContainerTime = styled.div`
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+  align-items: center;
+  width: 60%;
+  margin: -2em 2em 0 2em;
+  gap: 2em;
 `;
 
 export const ContainerButtonsFooter = styled.div`
@@ -80,5 +87,22 @@ export const ContainerButtonsFooter = styled.div`
   justify-content: space-between;
   width: 90%;
   margin-left: 4em;
-  margin-top:53em;
+  margin-top: 53em;
+`;
+
+export const ContainerChildrenTable = styled.div<IContainerColumnProps>`
+  display: flex;
+  flex-direction: column;
+  margin-top:-6em;
+  width: 100%;
+  margin-bottom: 3.5em;
+  height: ${(props) => props.height};
+  padding-left: ${(props) => props.left};
+  padding-right: ${(props) => props.right};
+  gap: ${(props) => props.gap};
+`;
+
+export const ContainerTimeAvatar = styled.div`
+  display: flex;
+  flex-direction: row;
 `;

@@ -1,4 +1,10 @@
-import { Button, Input, Select, Typography, useTheme } from "@stardust-ds/react";
+import {
+  Button,
+  Input,
+  Select,
+  Typography,
+  useTheme,
+} from "@stardust-ds/react";
 import { useState } from "react";
 import { IconArrowPageRegistration } from "../../atoms/Icons/IconArrowPageRegistration";
 import InputIconPosition from "../../atoms/InputIconPosition";
@@ -11,18 +17,35 @@ import {
   ContainerButtonsFooter,
   ContainerInputs,
   ContainerInputsSecun,
+  ContainerTime,
+  ContainerChildrenTable,
 } from "./style";
-import {FormikProps} from "formik";
-import { optionsProjects, optionsStatus } from "../../utils/OptionsAplication";
+import { FormikProps } from "formik";
+import { optionsProjects, optionsStatus, optionsTime } from "../../utils/OptionsAplication";
+import { Avatar } from "../../molecules/NavBar/style";
+import TimeListing from "./TimeListing/TimeListing";
+import HeaderJobsProjects from "../../molecules/HeaderJobsProjects";
 
 interface INewProject {
   DataProjects: OtherProps & FormikProps<FormProjects>;
 }
 
 const NewProject = ({ DataProjects }: INewProject | any) => {
-  const { errors, isSubmitting, title, handleChange, values } =  DataProjects;
+  const { errors, isSubmitting, title, handleChange, values } = DataProjects;
   const [option, setOption] = useState("");
   const { brand } = useTheme();
+
+  const objectTime = [
+    { 
+      id:"01",
+      avatar: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
+      name: "Cicera Ribeiro",
+      job: "Desenvolvedor Frontend",
+      hours: "120",
+      status: true,
+    },
+  ];
+
   return (
     <MasterPage>
       <>
@@ -66,7 +89,6 @@ const NewProject = ({ DataProjects }: INewProject | any) => {
               <Input
                 isFullWidth
                 width={285}
-                height=""
                 label="Data de Início"
                 placeholder="Data de Início"
                 type="date"
@@ -76,7 +98,6 @@ const NewProject = ({ DataProjects }: INewProject | any) => {
               <Input
                 isFullWidth
                 width={285}
-                height=""
                 label="Data Estimado"
                 placeholder={"Data Estimado"}
                 type="date"
@@ -94,13 +115,73 @@ const NewProject = ({ DataProjects }: INewProject | any) => {
               <Input
                 isFullWidth
                 placeholder="R$ 00.00"
+                style={{
+                  marginTop: "0.6em",
+                  marginRight: "1em",
+                  textAlign: "end",
+                  paddingBottom: "4px",
+                }}
                 label="Custo estimado"
+                height={65}
                 value={values.team_cost}
                 onChange={handleChange}
               />
             </ContainerInputsSecun>
-          </ContaineNewposition>
 
+            <div style={{ margin: "2em" }}>
+              <Typography type="h3">Time</Typography>
+            </div>
+
+            <ContainerTime>
+              <Select
+                label="Time"
+                width={280}
+                options={optionsTime}
+                placeholder="Selecione"
+                onSelect={() => setOption("")}
+              />
+              <Input
+                isFullWidth
+                style={{
+                  marginTop: "0.6em",
+                  marginRight: "1em",
+                  textAlign: "end",
+                  paddingBottom: "4px",
+                }}
+                placeholder="Horas"
+                label="Horas mensais"
+                value={""}
+                onChange={handleChange}
+                height={65}
+              />
+              <Button
+                type="submit"
+                bgColor="#0D2551"
+                bStyle="solid"
+                bWidth="hairline"
+                style={{
+                  marginTop: "0.6em",
+                  borderRadius: "25px",
+                  color: "#ffffff",
+                  width: "145px",
+                  font: "unset",
+                  fontSize: "15px",
+                }}
+              >
+                Vincular
+              </Button>
+            </ContainerTime>
+            <HeaderJobsProjects/>
+            <ContainerChildrenTable>
+              <div className="table">
+                {objectTime.map((time) => (
+                  <>
+                    <TimeListing key={time.id} time={time} />
+                  </>
+                ))}
+              </div>
+            </ContainerChildrenTable>
+          </ContaineNewposition>
           <ContainerButtonsFooter>
             <Button
               type="submit"
