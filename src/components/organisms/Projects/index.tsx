@@ -43,9 +43,7 @@ export const ProjectsAll = () => {
 //    setProjects(data.data);
 //  };
 
-//  useEffect(()=>{
-// getProjects()
-//  },[])
+  console.log(navigate);
 
   return (
     <ContainerMain>

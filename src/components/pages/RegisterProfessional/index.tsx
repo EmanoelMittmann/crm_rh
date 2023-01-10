@@ -1,13 +1,13 @@
-import React from 'react'
-import RegisterProfessionalMain from '../../organisms/RegisterProfessionals'
-import MasterPage from '../MasterPage'
+import React from "react";
+import RegisterProfessionalMain from "../../organisms/RegisterProfessionals";
+import MasterPage from "../MasterPage";
 
 const RegisterProfessional = () => {
   return (
     <MasterPage>
-        <RegisterProfessionalMain/>
+        <RegisterProfessionalMain />
     </MasterPage>
-  )
-}
+  );
+};
 
-export default RegisterProfessional
+export default RegisterProfessional;

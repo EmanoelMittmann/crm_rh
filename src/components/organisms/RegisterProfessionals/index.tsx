@@ -22,7 +22,7 @@ const RegisterProfessionalMain = () => {
         <ContainerChildren left="1.5em" top="1em">
           <h3>Dados Pessoais</h3>
         </ContainerChildren>
-          <RegisterInputs />
+        <RegisterInputs />
       </ContainerRegisterProfessional>
     </ContainerMain>
   );

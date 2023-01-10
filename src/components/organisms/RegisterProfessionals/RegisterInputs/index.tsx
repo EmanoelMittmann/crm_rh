@@ -1,7 +1,7 @@
 import { Input } from "@stardust-ds/react";
 import React from "react";
 import { Select } from "../../../atoms/Select";
-import { BorderBottom, ContainerRow } from "../style";
+import { BorderBottom, ContainerChildren, ContainerRow } from "../style";
 
 const RegisterInputs = () => {
   return (
@@ -51,6 +51,12 @@ const RegisterInputs = () => {
         />
       </ContainerRow>
       <BorderBottom />
+      <ContainerRow>
+        <div className="google">
+          <h3>Dados de Login</h3>
+          <Input type={"email"} label="Email do G suit" />
+        </div>
+      </ContainerRow>
     </>
   );
 };

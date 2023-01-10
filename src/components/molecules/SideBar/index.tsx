@@ -22,10 +22,11 @@ export const Sidebar = () => {
 
   function handleSelect(btnSelect: string) {
     setSelects(alterObject(selects, btnSelect));
+    navigate(`/${btnSelect[0].toUpperCase()+btnSelect.substring(1)}`);
   }
 
   return (
-    <div>
+    <>
       <ContainerMain>
         <ContainerRow paddingRight="4em">
           <IconUbistart />
@@ -40,7 +41,6 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate("/Home");
               handleSelect("home");
             }}
             isActive={selects.home}
@@ -54,7 +54,6 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate("/Professionals");
               handleSelect("professionals");
             }}
             isActive={selects.professionals}
@@ -69,7 +68,6 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate("/Projects");
               handleSelect("projects");
             }}
             isActive={selects.projects}
@@ -83,10 +81,9 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate("/ExtrasHours");
-              handleSelect("extraHours");
+              handleSelect("extrasHours");
             }}
-            isActive={selects.extraHours}
+            isActive={selects.extrasHours}
           />
           <ButtonWithHover
             Text="Notas Fiscais"
@@ -97,7 +94,6 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate("/Notes");
               handleSelect("notes");
             }}
             isActive={selects.notes}
@@ -111,7 +107,6 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate("/Reports");
               handleSelect("reports");
             }}
             isActive={selects.reports}
@@ -125,7 +120,6 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate("/Services");
               handleSelect("services");
             }}
             isActive={selects.services}
@@ -139,7 +133,6 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate("/Settings");
               handleSelect("settings");
             }}
             isActive={selects.settings}
@@ -153,7 +146,6 @@ export const Sidebar = () => {
             colorActive="white"
             fillActive="white"
             onClick={() => {
-              navigate("/Company");
               handleSelect("company");
             }}
             isActive={selects.company}
@@ -185,6 +177,6 @@ export const Sidebar = () => {
           />
         </ContainerColumn>
       </ContainerMain>
-    </div>
+    </>
   );
 };

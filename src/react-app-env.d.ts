@@ -51,5 +51,5 @@ export interface IButtonPropsTemplate
   fillActive: string;
   colorActive: string;
   bgActive:string;
-  isActive: boolean;
+  isActive?: boolean;
 }

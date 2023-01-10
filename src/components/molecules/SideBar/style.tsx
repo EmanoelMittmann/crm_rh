@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-
-
 export const ContainerMain = styled.div`
     height:100vh;
     width: 17em;
     background-color: #F2F5F8;
+    position: fixed;
+    z-index: 1;
 `
 
 export const ContainerRow = styled.div<IContainerRowProps>`
