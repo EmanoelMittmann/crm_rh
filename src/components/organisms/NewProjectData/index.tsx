@@ -21,7 +21,7 @@ import {
   ContainerChildrenTable,
 } from "./style";
 import { FormikProps } from "formik";
-import { optionsProjects, optionsStatus, optionsTime } from "../../utils/OptionsAplication";
+import { objectTime, optionsProjects, optionsStatus, optionsTime } from "../../utils/OptionsAplication";
 import { Avatar } from "../../molecules/NavBar/style";
 import TimeListing from "./TimeListing/TimeListing";
 import HeaderJobsProjects from "../../molecules/HeaderJobsProjects";
@@ -35,16 +35,7 @@ const NewProject = ({ DataProjects }: INewProject | any) => {
   const [option, setOption] = useState("");
   const { brand } = useTheme();
 
-  const objectTime = [
-    { 
-      id:"01",
-      avatar: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
-      name: "Cicera Ribeiro",
-      job: "Desenvolvedor Frontend",
-      hours: "120",
-      status: true,
-    },
-  ];
+
 
   return (
     <MasterPage>
@@ -171,7 +162,7 @@ const NewProject = ({ DataProjects }: INewProject | any) => {
                 Vincular
               </Button>
             </ContainerTime>
-            <HeaderJobsProjects/>
+            <HeaderJobsProjects />
             <ContainerChildrenTable>
               <div className="table">
                 {objectTime.map((time) => (
@@ -181,40 +172,40 @@ const NewProject = ({ DataProjects }: INewProject | any) => {
                 ))}
               </div>
             </ContainerChildrenTable>
+            <ContainerButtonsFooter>
+              <Button
+                type="submit"
+                bgColor="#CCD1D6"
+                bStyle="solid"
+                bWidth="hairline"
+                style={{
+                  borderRadius: "25px",
+                  color: "#000",
+                  width: "130px",
+                  margin: "0 2em",
+                  font: "unset",
+                  fontSize: "15px",
+                }}
+              >
+                Cancelar
+              </Button>
+              <Button
+                type="submit"
+                bgColor="#0066FF"
+                bStyle="solid"
+                bWidth="hairline"
+                style={{
+                  borderRadius: "25px",
+                  color: "#ffffff",
+                  width: "145px",
+                  font: "unset",
+                  fontSize: "15px",
+                }}
+              >
+                Salvar Projeto
+              </Button>
+            </ContainerButtonsFooter>
           </ContaineNewposition>
-          <ContainerButtonsFooter>
-            <Button
-              type="submit"
-              bgColor="#CCD1D6"
-              bStyle="solid"
-              bWidth="hairline"
-              style={{
-                borderRadius: "25px",
-                color: "#000",
-                width: "130px",
-                margin: "0 2em",
-                font: "unset",
-                fontSize: "15px",
-              }}
-            >
-              Cancelar
-            </Button>
-            <Button
-              type="submit"
-              bgColor="#0066FF"
-              bStyle="solid"
-              bWidth="hairline"
-              style={{
-                borderRadius: "25px",
-                color: "#ffffff",
-                width: "145px",
-                font: "unset",
-                fontSize: "15px",
-              }}
-            >
-              Salvar Projeto
-            </Button>
-          </ContainerButtonsFooter>
         </Container>
       </>
     </MasterPage>

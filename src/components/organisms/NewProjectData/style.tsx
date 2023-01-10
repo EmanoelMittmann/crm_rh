@@ -36,7 +36,7 @@ export const ContaineNewposition = styled.div`
   gap: 32px;
   position: absolute;
   width: 65%;
-  height: 780px;
+  height: auto;
   left: 272px;
   top: 147px;
   background: #ffffff;
@@ -45,8 +45,8 @@ export const ContaineNewposition = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 87%;
-  height: 150px;
+  width: 90%;
+  height: 100%;
 `;
 
 export const ContainerInputs = styled.div`
@@ -85,17 +85,16 @@ export const ContainerButtonsFooter = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 90%;
-  margin-left: 4em;
-  margin-top: 53em;
+  width: 98%;
+  margin:1em 2em 2em 0;
+
 `;
 
 export const ContainerChildrenTable = styled.div<IContainerColumnProps>`
   display: flex;
   flex-direction: column;
-  margin-top:-6em;
+  margin-top:-2.1em;
   width: 100%;
-  margin-bottom: 3.5em;
   height: ${(props) => props.height};
   padding-left: ${(props) => props.left};
   padding-right: ${(props) => props.right};

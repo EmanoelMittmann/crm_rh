@@ -46,3 +46,55 @@ export const optionsTime = [
     value: "Emanoel",
   },
 ];
+
+
+  export const objectTime = [
+    {
+      id: "01",
+      avatar: "https://cdn-icons-png.flaticon.com/512/147/147144.png",
+      name: "Cicera Ribeiro",
+      job: "Desenvolvedor Frontend",
+      hours: "120",
+      status: true,
+    },
+    {
+      id: "02",
+      avatar: "https://cdn-icons-png.flaticon.com/512/147/147144.png",
+      name: "Gustavo Lima",
+      job: "Desenvolvedor Frontend",
+      hours: "160",
+      status: true,
+    },
+    {
+      id: "03",
+      avatar: "https://cdn-icons-png.flaticon.com/512/147/147144.png",
+      name: "Emanuel",
+      job: "Desenvolvedor Frontend",
+      hours: "160",
+      status: true,
+    },
+    {
+      id: "04",
+      avatar: "https://cdn-icons-png.flaticon.com/512/147/147144.png",
+      name: "Maria Ribeiro",
+      job: "Desenvolvedor Frontend",
+      hours: "120",
+      status: true,
+    },
+    {
+      id: "05",
+      avatar: "https://cdn-icons-png.flaticon.com/512/147/147144.png",
+      name: "Jose Roberto",
+      job: "Desenvolvedor Frontend",
+      hours: "120",
+      status: false,
+    },
+    {
+      id: "06",
+      avatar: "https://cdn-icons-png.flaticon.com/512/147/147144.png",
+      name: "Lucas TechLead",
+      job: "Desenvolvedor Frontend",
+      hours: "120",
+      status: true,
+    },
+  ];
