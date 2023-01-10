@@ -7,6 +7,7 @@ export const Container = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+
 `;
 export const Pagination = styled.div`
   width: 100%;

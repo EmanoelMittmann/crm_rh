@@ -2,12 +2,8 @@ import styled from "styled-components";
 
 export const ContainerMain = styled.div`
   width: 100%;
+  display: flex;
   height: auto;
-  box-sizing: border-box;
-
-  .Main{
-    height: 39em;
-  }
 `;
 
 export const ContainerChildren = styled.div<IContainerColumnProps>`
@@ -33,7 +29,6 @@ export const ContainerChildren = styled.div<IContainerColumnProps>`
     gap: 10px;
     justify-content: safe;
   }
-
 `;
 
 export const ContainerShelf = styled.div`

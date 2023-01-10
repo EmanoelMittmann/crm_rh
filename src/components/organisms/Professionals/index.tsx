@@ -7,6 +7,7 @@ import Header from "../../molecules/Header";
 import { Shelf } from "./shelf";
 import { Footer } from "../../molecules/Footer";
 import { useNavigate } from "react-router-dom";
+import api from "../../../api/api";
 
 const object = [
   {
@@ -23,6 +24,7 @@ const object = [
 
 const ProfessionalsMain = () => {
   const navigate = useNavigate();
+
   return (
     <>
       <ContainerMain>
@@ -46,7 +48,6 @@ const ProfessionalsMain = () => {
               color="white"
               height="44px"
               width="15em"
-              left="22em"
               onClick={() => navigate("/RegisterProfessionals")}
             />
           </ContainerChildren>
@@ -59,7 +60,7 @@ const ProfessionalsMain = () => {
             </div>
           </ContainerChildren>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </ContainerMain>
     </>
   );

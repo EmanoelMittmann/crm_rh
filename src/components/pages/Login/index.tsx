@@ -47,7 +47,7 @@ const Login = () => {
     accessLogin(user);
   };
 
-  const accessLogin = async ({ credential }: CredentialResponse) => {
+    const accessLogin = async ({ credential }: CredentialResponse) => {
     const { email, sub,picture}: IJWTDecodeGoogle = jwt_decode(credential as string);
     // const data: IJWTDecodeGoogle = jwt_decode(credential as string);
     // console.log("data: ", data);
@@ -58,14 +58,15 @@ const Login = () => {
         google_id: sub,
         access_token: credential,
       })
+      
         dispatch(loginAction({
         googleData: { decodeJwt: credential, user: {avatar:picture, user_type_id: data.data[0].user_type_id}},
-        token: credential,
+        token: data.token.token,
         responseValidToken: false,
       }))
       navigate('/home');
     } catch (error: any) {
-      console.log(error.message);
+      console.error(error.message);
     }
   };
 

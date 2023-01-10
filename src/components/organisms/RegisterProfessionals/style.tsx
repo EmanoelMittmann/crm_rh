@@ -18,9 +18,7 @@ export const ContainerChildren = styled.div<IContainerColumnProps>`
 
 export const ContainerRegisterProfessional = styled.div`
   width: 60em;
-  height: 40em;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  height: auto;
   margin-left: 2em;
   border: 1px solid #ccd1d6;
   border-radius: 8px;
@@ -34,6 +32,11 @@ export const ContainerRow = styled.div<IContainerRowProps>`
   gap: ${(props) => props.gap};
   margin-bottom: 2em;
 
+  .google{
+    display: flex;
+    flex-direction: column;
+  }
+
   @media screen and (max-width: 1650px) {
     width: 80%;
   }
@@ -44,3 +47,4 @@ export const BorderBottom = styled.hr`
   width: 96%;
   margin: auto;
 `;
+

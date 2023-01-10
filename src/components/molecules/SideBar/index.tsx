@@ -27,7 +27,7 @@ export const Sidebar = () => {
   }
 
   return (
-    <div>
+    <>
       <ContainerMain>
         <ContainerRow paddingRight="4em">
           <IconUbistart />
@@ -178,6 +178,6 @@ export const Sidebar = () => {
           />
         </ContainerColumn>
       </ContainerMain>
-    </div>
+    </>
   );
 };
