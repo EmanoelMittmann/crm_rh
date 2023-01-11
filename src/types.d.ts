@@ -107,3 +107,15 @@ interface Option {
   label: string;
   value: string;
 }
+
+interface IProjectsListing
+  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  projects?: string | number | boolean | undefined;
+  name?: string | number;
+  date_start?: staring;
+  status?: string | number | undefined;
+  project_type?: string | number | undefined;
+  color: string;
+  button_color: string;
+  text_color:string;
+}

@@ -17,7 +17,7 @@ export const ContainerBase = styled.div`
   align-items: center;
   position: absolute;
   top: 5em;
-  margin-left: 5em;
+  margin-left: 9em;
 `;
 
 export const ContaineNewRegistration = styled.div`
@@ -35,18 +35,19 @@ export const ContaineNewposition = styled.div`
   margin-left: 5em;
   gap: 32px;
   position: absolute;
-  width: 65%;
+  width: 85%;
   height: auto;
-  left: 272px;
-  top: 147px;
+  left: 75px;
+  top: 145px;
   background: #ffffff;
   border: 1px solid #ccd1d6;
   border-radius: 8px;
 `;
 
 export const Container = styled.div`
-  width: 90%;
-  height: 100%;
+  display: flex;
+  height: 1175px;
+  background: #ffffff;
 `;
 
 export const ContainerInputs = styled.div`
@@ -86,14 +87,13 @@ export const ContainerButtonsFooter = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 98%;
-  margin:1em 2em 2em 0;
-
+  margin: 1em 2em 2em 0;
 `;
 
 export const ContainerChildrenTable = styled.div<IContainerColumnProps>`
   display: flex;
   flex-direction: column;
-  margin-top:-2.1em;
+  margin-top: -2.1em;
   width: 100%;
   height: ${(props) => props.height};
   padding-left: ${(props) => props.left};

@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
+  width: 95%;
   height: 5em;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  margin-left:7.3em;
 
 `;
 export const Pagination = styled.div`

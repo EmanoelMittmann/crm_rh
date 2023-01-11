@@ -12,19 +12,25 @@ import MasterPage from "../../pages/MasterPage";
 
 import {
   ContaineNewposition,
-  Container,
+ 
   ContainerBase,
   ContainerButtonsFooter,
   ContainerInputs,
   ContainerInputsSecun,
   ContainerTime,
   ContainerChildrenTable,
+  Container,
 } from "./style";
 import { FormikProps } from "formik";
-import { objectTime, optionsProjects, optionsStatus, optionsTime } from "../../utils/OptionsAplication";
-import { Avatar } from "../../molecules/NavBar/style";
+import {
+  objectTime,
+  optionsProjects,
+  optionsStatus,
+  optionsTime,
+} from "../../utils/OptionsAplication";
 import TimeListing from "./TimeListing/TimeListing";
 import HeaderJobsProjects from "../../molecules/HeaderJobsProjects";
+import { useNavigate } from "react-router-dom";
 
 interface INewProject {
   DataProjects: OtherProps & FormikProps<FormProjects>;
@@ -33,15 +39,20 @@ interface INewProject {
 const NewProject = ({ DataProjects }: INewProject | any) => {
   const { errors, isSubmitting, title, handleChange, values } = DataProjects;
   const [option, setOption] = useState("");
+  const navigate = useNavigate();
   const { brand } = useTheme();
 
-
+  const handleNavigate = () => {
+    navigate("/Projects");
+  };
 
   return (
     <MasterPage>
       <>
         <ContainerBase>
-          <InputIconPosition Icon={<IconArrowPageRegistration />} />
+          <div onClick={handleNavigate}>
+            <InputIconPosition Icon={<IconArrowPageRegistration />} />
+          </div>
           <div style={{ marginTop: "0.3em" }}>
             <Typography type="h3"> Cadastrar novo projeto </Typography>
           </div>

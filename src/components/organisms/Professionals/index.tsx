@@ -34,15 +34,21 @@ const ProfessionalsMain = () => {
           <Input iconLeft={<IconGlass />} placeholder="Buscar..." width={300} />
           <Select placeholder="Cargos" value={[]} />
           <Select placeholder="Função" value={[]} />
-          <ButtonGeneric
-            Text="Cadastrar Novo"
-            bRadius="500px"
+          <Button
+            typographyProps={{ fontWeight: "light", type: "p2" }}
+            style={{
+              marginLeft: "73%",
+              position: "absolute",
+              borderRadius: "25px",
+              color: "#ffffff",
+            }}
             bgColor="#1ECB4F"
-            color="white"
-            height="44px"
-            width="15em"
-            left="22em"
-          />
+            bWidth="20px"
+            bStyle="solid"
+            onClick={()=> {}}
+          >
+            Cadastrar Novo
+          </Button>
         </ContainerChildren>
         <ContainerChildren>
           <div className="table">
@@ -52,7 +58,7 @@ const ProfessionalsMain = () => {
             ))}
           </div>
         </ContainerChildren>
-        <Footer/>
+        <Footer />
       </ContainerMain>
     </>
   );

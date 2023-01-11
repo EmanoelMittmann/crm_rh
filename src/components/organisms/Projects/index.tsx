@@ -34,30 +34,34 @@ export const ProjectsAll = () => {
     navigate("/NewProject");
   };
 
-//  const getProjects = async () => {
-//    const { data } = await api({
-//      method: "get",
-//      url: `/project/?limit=5`,
-//      params: params,
-//    });
-//    setProjects(data.data);
-//  };
+ const getProjects = async () => {
+   const { data } = await api({
+     method: "get",
+     url: `/project/?limit=5`,
+     params: params,
+   });
+   setProjects(data.data);
+ };
 
-  console.log(navigate);
+  console.log(projects);
+
+  useEffect(()=>{
+getProjects()
+  },[])
 
   return (
     <ContainerMain>
-      <ContainerChildrenProjects left="2em">
+      <ContainerChildrenProjects left="9em">
         <Typography type="h3">Projetos</Typography>
       </ContainerChildrenProjects>
-      <ContainerChildrenProjects left="2em" gap="2em">
+      <ContainerChildrenProjects left="9em" gap="2em">
         <Input iconLeft={<IconGlass />} placeholder="Buscar..." width={300} />
         <Select placeholder="Tipo" value={[]} />
         <Select placeholder="Status" value={[]} />
         <Button
           typographyProps={{ fontWeight: "light", type: "p2" }}
           style={{
-            marginLeft: "73%",
+            marginLeft: "77%",
             position: "absolute",
             borderRadius: "25px",
             color: "#ffffff",
@@ -73,12 +77,12 @@ export const ProjectsAll = () => {
       <ContainerChildrenTable>
         <HeaderProjects />
         <div className="table">
-          {objectProject.map((projects) => (
-            <ProjectsListing key={projects.id} project={projects} />
+          {projects.map((project) => (
+            <ProjectsListing key={project} project={project} />
           ))}
         </div>
       </ContainerChildrenTable>
-      <Footer />
+      <Footer/>
     </ContainerMain>
   );
 };

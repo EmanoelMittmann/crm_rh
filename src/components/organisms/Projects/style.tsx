@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerMain = styled.div`
-  width: 100%;
+  width: 95%;
   height: auto;
 `;
 
@@ -21,6 +21,7 @@ export const ContainerChildrenTable = styled.div<IContainerColumnProps>`
   flex-direction: column;
   width: inherit;
   margin-bottom: 2.5em;
+  margin-left:7.3em;
   height: ${(props) => props.height};
   padding-left: ${(props) => props.left};
   padding-right: ${(props) => props.right};
