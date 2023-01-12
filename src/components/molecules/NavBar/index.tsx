@@ -36,7 +36,7 @@ export const Navbar = () => {
       <ContainerMain>
         <Children
           justify="space-between"
-          top="0.5em 1em 1em 1.5em"
+          top="0.5em 1em 1em 9em"
           align="flex-start"
           w="100%"
         >

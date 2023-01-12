@@ -47,10 +47,9 @@ const Login = () => {
     accessLogin(user);
   };
 
-  const accessLogin = async ({ credential }: CredentialResponse) => {
+    const accessLogin = async ({ credential }: CredentialResponse) => {
     const { email, sub,picture}: IJWTDecodeGoogle = jwt_decode(credential as string);
     // const data: IJWTDecodeGoogle = jwt_decode(credential as string);
-    // console.log("data: ", data);
 
     try {
       const { data } = await api.post('/auth', {
@@ -58,14 +57,15 @@ const Login = () => {
         google_id: sub,
         access_token: credential,
       })
+      
         dispatch(loginAction({
         googleData: { decodeJwt: credential, user: {avatar:picture, user_type_id: data.data[0].user_type_id}},
-        token: credential,
+        token: data.token.token,
         responseValidToken: false,
       }))
       navigate('/home');
     } catch (error: any) {
-      console.log(error.message);
+      console.error(error.message);
     }
   };
 
@@ -118,7 +118,6 @@ const Login = () => {
               type="text"
               placeholder="exemplo@ubistart.com"
               iconLeft={<InputIcon Icon={<IconUser />} />}
-              // value={user}
               onChange={(e) => setUser(e.target.value)}
               onBlur={() => {}}
             />
@@ -163,13 +162,6 @@ const Login = () => {
               iconRight={<IconArrow />}
               bRadius="md"
               height={50}
-              onClick={() => {
-                // dispatch(loginAction({
-                //   googleData: { decodeJwt: 'credential', data: {user_email:'email', user_sub:'sub'} },
-                //   token: 'credential',
-                //   responseValidToken: true,
-                // }))
-              }}
             >
               Entrar
             </Button>

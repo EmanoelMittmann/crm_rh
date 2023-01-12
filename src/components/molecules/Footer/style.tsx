@@ -1,29 +1,16 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
+  width: 111%;
   height: 5em;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 
-  .left {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    cursor: pointer;
-  }
-
-  .right {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    cursor: pointer;
-  }
 `;
 export const Pagination = styled.div`
-  width: 65em;
+  width: 100%;
   display: flex;
   justify-content: center;
   .threepoints {

@@ -39,8 +39,6 @@ export const RegisterProjects = () => {
       setSelects(alterObject(selects, btnSelect));
     }
 
-  console.log(navigate);
-
   return (
     <ContainerMain>
       <ContainerChildrenProjects left="2em">

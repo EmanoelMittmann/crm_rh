@@ -45,6 +45,7 @@ interface IButtonColorProps {
   bRadius?: string;
   colorActive?: string;
   color?: string;
+  top?:string;
   fill?: fill;
   left?: string;
   fillActive?: string;
@@ -60,14 +61,6 @@ interface ISelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?:string
 }
 
-interface IButtonColorProps {
-  color: string;
-  fill: fill;
-  colorActive: string;
-  fillActive: string;
-  bgActive: string;
-  isActive?: boolean;
-}
 interface IModalProps {
   optionOne: string;
   optionTwo?: string;
