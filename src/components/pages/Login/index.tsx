@@ -50,7 +50,6 @@ const Login = () => {
     const accessLogin = async ({ credential }: CredentialResponse) => {
     const { email, sub,picture}: IJWTDecodeGoogle = jwt_decode(credential as string);
     // const data: IJWTDecodeGoogle = jwt_decode(credential as string);
-    // console.log("data: ", data);
 
     try {
       const { data } = await api.post('/auth', {
@@ -119,7 +118,6 @@ const Login = () => {
               type="text"
               placeholder="exemplo@ubistart.com"
               iconLeft={<InputIcon Icon={<IconUser />} />}
-              // value={user}
               onChange={(e) => setUser(e.target.value)}
               onBlur={() => {}}
             />
@@ -164,13 +162,6 @@ const Login = () => {
               iconRight={<IconArrow />}
               bRadius="md"
               height={50}
-              onClick={() => {
-                // dispatch(loginAction({
-                //   googleData: { decodeJwt: 'credential', data: {user_email:'email', user_sub:'sub'} },
-                //   token: 'credential',
-                //   responseValidToken: true,
-                // }))
-              }}
             >
               Entrar
             </Button>

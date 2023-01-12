@@ -23,7 +23,7 @@ export const Sidebar = () => {
 
   function handleSelect(btnSelect: string) {
     setSelects(alterObject(selects, btnSelect));
-    navigate(`/${btnSelect[0].toUpperCase()+btnSelect.substring(1)}`);
+    navigate(`/${btnSelect}`);
   }
 
   return (

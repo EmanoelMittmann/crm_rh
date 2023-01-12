@@ -9,6 +9,7 @@ interface IButtonGenericProps
   width?: string;
   height?: string;
   bRadius?: string;
+  top?:string,
   left?: string;
 }
 
@@ -20,6 +21,7 @@ export const ButtonGeneric = ({
   bgColor,
   color,
   left,
+  top,
   ...props
 }: IButtonGenericProps) => {
   return (
@@ -27,6 +29,7 @@ export const ButtonGeneric = ({
       <ContainerButton
         color={color}
         bgColor={bgColor}
+        top={top}
         width={width}
         height={height}
         bRadius={bRadius}

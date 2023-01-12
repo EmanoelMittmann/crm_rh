@@ -3,7 +3,6 @@ import { useState } from "react";
 import { string } from "yup";
 import { IconArrowPageRegistration } from "../../atoms/Icons/IconArrowPageRegistration";
 import InputIconPosition from "../../atoms/InputIconPosition";
-// import { Select } from "../../atoms/Select";
 import { Navbar } from "../../molecules/NavBar";
 import { Sidebar } from "../../molecules/SideBar";
 import {
