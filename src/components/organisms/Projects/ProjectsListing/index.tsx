@@ -26,11 +26,11 @@ import { formatDate } from "../../../utils/formatDate";
       <ContainerShelfColumn width="20%" justify="center" gap="3em">
         <div className="status">
           <Badge
+            style={{ width: "157px" }}
             label={project.status.name}
-            variant="flat"
+            variant="filled"
             bgColor={project.status.color.button_color}
             typographyProps={{
-              textAlign: "center",
               color: project.status.color.text_color,
             }}
           />

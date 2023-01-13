@@ -9,11 +9,11 @@ export const ContainerChildrenProjects = styled.div<IContainerColumnProps>`
   display: flex;
   width: 96%;
   margin-bottom: 2.5em;
+  align-items: center;
   height: ${(props) => props.height};
   padding-left: ${(props) => props.left};
   padding-right: ${(props) => props.right};
   gap: ${(props) => props.gap};
-
 `;
 
 export const ContainerChildrenTable = styled.div<IContainerColumnProps>`

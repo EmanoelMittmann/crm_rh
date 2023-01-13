@@ -15,8 +15,8 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
 export interface IInputsProps {
   Icon: JSX.Element;
 }
-export interface IInputsPropsDate {
-  date?: string |number | undefined;
+export interface IInputsPropsDate{
+  date?: string |number | undefined; 
   Icon?: JSX.Element;
   value?: string | number;
   label?: string;
