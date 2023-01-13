@@ -100,7 +100,7 @@ export const ProjectsAll = () => {
           bgColor="#1ECB4F"
           bWidth="20px"
           bStyle="solid"
-          onClick={() => navigate("/NewProject")}
+          onClick={handleNavigate}
         >
           Cadastrar Novo
         </Button>

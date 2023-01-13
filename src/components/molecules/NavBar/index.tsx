@@ -1,5 +1,4 @@
 import { Typography } from "@stardust-ds/react";
-import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Avatar, Children, ContainerMain, To, User } from "./style";
 
@@ -7,25 +6,25 @@ export const Navbar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const breadCrumber =
-    pathname === "/Home"
+    pathname === "/home"
       ? "Home"
-      : pathname === "/Professionals"
+      : pathname === "/professionals"
       ? "Profissionais"
-      : pathname === "/Projects"
+      : pathname === "/projects"
       ? "Projetos"
       : pathname === "/NewProject"
-      ? "Projetos"
-      : pathname === "/ExtrasHours"
+      ? "Projetos > Cadastrar Novo"
+      : pathname === "/extrasHours"
       ? "Horas Extras"
-      : pathname === "/Notes"
+      : pathname === "/notes"
       ? "Notas Fiscais"
-      : pathname === "/Reports"
+      : pathname === "/reports"
       ? "Relatórios"
-      : pathname === "/Services"
+      : pathname === "/services"
       ? "Ordem de Serviço"
-      : pathname === "/Settings"
+      : pathname === "/settings"
       ? "Configurações"
-      : pathname === "/Company"
+      : pathname === "/company"
       ? "Empresas"
       : pathname === "/RegisterProfessionals"
       ? "Profissionais > Cadastrar Novo"
