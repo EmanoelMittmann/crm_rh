@@ -105,3 +105,14 @@ export const ContainerTimeAvatar = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+export const ContainerShelfTime = styled.div`
+  width: 96%;
+  height: 4em;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px;
+  border: 1px solid #ccd1d6;
+  margin: auto;
+`;

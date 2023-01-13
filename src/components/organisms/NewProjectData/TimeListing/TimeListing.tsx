@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { IconThreePoints } from "../../../atoms/Icons/IconThreePoints";
 import Modal from "../../../molecules/Modal";
 import {
-  ContainerShelf,
   ContainerShelfColumn,
   IMG,
 } from "../../Professionals/style";
 import { AlignItensProjects, ContainerProjectColumn } from "../../Projects/style";
+import { ContainerShelfTime } from "../style";
 
 
 const TimeListing = ({ time }: any) => {
@@ -16,7 +16,7 @@ const TimeListing = ({ time }: any) => {
   const [modal, setModal] = useState<boolean>(false);
 
   return (
-    <ContainerShelf>
+    <ContainerShelfTime>
       <ContainerProjectColumn width="28%">
         <AlignItensProjects>
           <IMG src={time.avatar} />
@@ -47,7 +47,7 @@ const TimeListing = ({ time }: any) => {
           />
         )}
       </ContainerShelfColumn>
-    </ContainerShelf>
+    </ContainerShelfTime>
   );
 };
 export default TimeListing;

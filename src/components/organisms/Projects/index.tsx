@@ -7,6 +7,7 @@ import ProjectsListing from "./ProjectsListing";
 import {
   ContainerChildrenProjects,
   ContainerChildrenTable,
+  ContainerFooter,
   ContainerMain,
 } from "./style";
 import { useState, useEffect } from "react";
@@ -18,7 +19,6 @@ export const ProjectsAll = () => {
   const [statusOptions, setStatusOptions] = useState([]);
   const navigate = useNavigate();
   const params = {};
-
 
   const handleNavigate = () => {
     navigate("/NewProject");
@@ -40,7 +40,7 @@ export const ProjectsAll = () => {
     });
     setTypesOptions(data.data);
   };
-    const allOptions = [...typesOptions,{ label: "Todos", value: "Todos" }];
+  const allOptions = [...typesOptions, { label: "Todos", value: "Todos" }];
 
   const getStatusOptions = async () => {
     const { data } = await api({
@@ -49,7 +49,10 @@ export const ProjectsAll = () => {
     });
     setStatusOptions(data.data);
   };
-  const allOptionsStatus = [...statusOptions, { label: "Todos", value: "Todos" }];
+  const allOptionsStatus = [
+    ...statusOptions,
+    { label: "Todos", value: "Todos" },
+  ];
 
   // console.log("Todos Projetos", projects);
   console.log("Tipo de Projetos", typesOptions);
@@ -63,23 +66,33 @@ export const ProjectsAll = () => {
 
   return (
     <ContainerMain>
-      <ContainerChildrenProjects left="9em">
+      <ContainerChildrenProjects left="11em">
         <Typography type="h3">Projetos</Typography>
       </ContainerChildrenProjects>
 
-      <ContainerChildrenProjects left="9em" gap="2em">
+      <ContainerChildrenProjects left="11em" gap="2em">
         <Input
           iconLeft={<IconGlass />}
           placeholder="Buscar..."
           width={300}
           style={{ marginTop: "4px" }}
         />
-        <Select placeholder="Tipo" options={allOptions} onSelect={() => setTypesOptions} />
-        <Select placeholder="Status" options={allOptionsStatus} onSelect={() => {}} />
+        <Select
+          width={300}
+          placeholder="Tipo"
+          options={allOptions}
+          onSelect={() => setTypesOptions}
+        />
+        <Select
+          width={300}
+          placeholder="Status"
+          options={allOptionsStatus}
+          onSelect={() => {}}
+        />
         <Button
           typographyProps={{ fontWeight: "light", type: "p2" }}
           style={{
-            marginLeft: "77%",
+            marginLeft: "67%",
             position: "absolute",
             borderRadius: "25px",
             color: "#ffffff",
@@ -87,7 +100,7 @@ export const ProjectsAll = () => {
           bgColor="#1ECB4F"
           bWidth="20px"
           bStyle="solid"
-          onClick={handleNavigate}
+          onClick={() => navigate("/NewProject")}
         >
           Cadastrar Novo
         </Button>
@@ -96,11 +109,13 @@ export const ProjectsAll = () => {
         <HeaderProjects />
         <div className="table">
           {projects.map((project) => (
-            <ProjectsListing  project={project} />
+            <ProjectsListing key={project} project={project} />
           ))}
         </div>
       </ContainerChildrenTable>
-      <Footer />
+      <ContainerFooter>
+        <Footer />
+      </ContainerFooter>
     </ContainerMain>
   );
 };

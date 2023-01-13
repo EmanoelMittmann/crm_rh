@@ -47,9 +47,9 @@ export interface IButtonPropsTemplate
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   Text: string;
   color: string;
-  fill: string;
-  fillActive: string;
-  colorActive: string;
-  bgActive:string;
+  fill?: string;
+  fillActive?: string;
+  colorActive?: string;
+  bgActive?:string;
   isActive?: boolean;
 }

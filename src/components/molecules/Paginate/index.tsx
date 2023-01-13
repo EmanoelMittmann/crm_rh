@@ -8,7 +8,7 @@ export const Paginate = () => {
   const totalpage: number = 16;
   const numberPages: number[] = Array.from(
     Array(totalpage).keys(),
-    (x) => x + 1
+    (x) => x+1
   );
 
   const copyTotalpages: number[] = [...numberPages];
@@ -53,25 +53,25 @@ export const Paginate = () => {
         Anterior
       </Container>
       <Row>
-        {firstCurrent.map((pages, index) => (
+        {firstCurrent.map((page, index) => (
           <PagesNumber
             key={index}
-            Active={pages === current_page ? true : false}
+            Active={page === current_page}
             onClick={() => {
-              setCurrent_page(pages)
+              setCurrent_page(page)
             }}
           >
-            {pages}
+            {page}
           </PagesNumber>
         ))}
         ...
-        {lastCurrent.map((pages, index) => (
+        {lastCurrent.map((page,index) => (
           <PagesNumber
             key={index}
-            Active={pages === current_page ? true : false}
-            onClick={() =>  setCurrent_page(pages)}
+            Active={page === current_page}
+            onClick={() =>  setCurrent_page(page)}
           >
-            {pages}
+            {page}
           </PagesNumber>
         ))}
       </Row>

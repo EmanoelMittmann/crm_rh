@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { IconThreePoints } from "../../../atoms/Icons/IconThreePoints";
 import Modal from "../../../molecules/Modal";
 import { ContainerShelf, ContainerShelfColumn } from "../../Professionals/style";
-import { AlignItensProjects, ContainerProjectColumn } from "../style";
+import { AlignItensProjects, ContainerProjectColumn, ContainerShelfProjects } from "../style";
 import { formatDate } from "../../../utils/formatDate";
 
 
@@ -13,7 +13,7 @@ import { formatDate } from "../../../utils/formatDate";
   const [modal, setModal] = useState<boolean>(false);
 
   return (
-    <ContainerShelf>
+    <ContainerShelfProjects>
       <ContainerProjectColumn width="28%">
         <AlignItensProjects>{project.name}</AlignItensProjects>
       </ContainerProjectColumn>
@@ -44,7 +44,7 @@ import { formatDate } from "../../../utils/formatDate";
           />
         )}
       </ContainerShelfColumn>
-    </ContainerShelf>
+    </ContainerShelfProjects>
   );
 };
 

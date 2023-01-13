@@ -12,7 +12,6 @@ import MasterPage from "../../pages/MasterPage";
 
 import {
   ContaineNewposition,
- 
   ContainerBase,
   ContainerButtonsFooter,
   ContainerInputs,

@@ -7,8 +7,7 @@ export const Container = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin-left:7.3em;
-
+  margin-left: 7.3em;
 `;
 export const Pagination = styled.div`
   width: 100%;
@@ -43,7 +42,6 @@ export const Numbers = styled.div<IButtonColorProps>`
   ${(props) =>
     props.isActive
       ? `
-  
     outline: 2px solid #0066ff;
     color: #0066ff;
     font-weight: 600;
