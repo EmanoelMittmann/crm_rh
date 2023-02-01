@@ -8,8 +8,8 @@ export const ContainerLogin = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  width: 444px;
-  height: 700px;
+  width: 500px;
+  height: 750px;
   left: 153px;
   top: 133px;
   padding: 2em;
@@ -58,10 +58,13 @@ export const ContainerCheckbox = styled.div`
 `;
 
 export const LoginGoogle = styled.div`
-  margin-top: 3em;
-  width: 83%;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  margin-top: 5em;
   text-align: left;
 `;
+
 
 export const ImgTeam = styled.img`
   min-width: 85%;
@@ -69,5 +72,5 @@ export const ImgTeam = styled.img`
 
 export const ContainerButton = styled.div`
   display: flex;
-  margin-top: 3em;
+  margin-top: 4em;
 `;

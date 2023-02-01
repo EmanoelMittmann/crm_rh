@@ -69,6 +69,8 @@ const Login = () => {
     }
   };
 
+console.log()
+
   const handlePushCredentialInGoogle = () => {};
 
   useEffect(() => {
@@ -100,6 +102,7 @@ const Login = () => {
     <InputIcon Icon={<IconEye />} />
   );
 
+
   return (
     <>
       <ContainerGlobalLogin>
@@ -124,7 +127,7 @@ const Login = () => {
             <Input
               isFullWidth
               label="Senha"
-              type={show ? 'text' : 'password'}
+              type={show ? "text" : "password"}
               placeholder="senha"
               iconRight={canSeePasswordIcon}
               iconRightAction={handleClick}
@@ -151,8 +154,7 @@ const Login = () => {
           </ContainerCheckbox>
 
           <LoginGoogle>
-            <Typography type="l1">Login Google</Typography>
-            <div ref={buttonref} />
+            {<div ref={buttonref}></div>}
           </LoginGoogle>
 
           <ContainerButton>

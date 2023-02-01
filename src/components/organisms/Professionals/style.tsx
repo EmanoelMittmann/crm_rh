@@ -10,11 +10,17 @@ export const ContainerChildren = styled.div<IContainerColumnProps>`
   display: flex;
   width: ${(props) => props.width && props.width};
   margin-bottom: 2.5em;
-  align-items: start;
+  align-items: center;
   height: ${(props) => props.height};
   padding-left: ${(props) => props.left};
   padding-right: ${(props) => props.right};
   gap: ${(props) => props.gap};
+
+  .table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 
   .filters {
     display: flex;
@@ -24,6 +30,17 @@ export const ContainerChildren = styled.div<IContainerColumnProps>`
     justify-content: safe;
   }
 `;
+export const ContainerChildrenTable = styled.div<IContainerColumnProps>`
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  margin-bottom: 2.5em;
+  margin-left: 2em;
+  height: ${(props) => props.height};
+  padding-left: ${(props) => props.left};
+  padding-right: ${(props) => props.right};
+  gap: ${(props) => props.gap};
+`;
 
 export const Table = styled.div`
   width: 100%;
@@ -32,7 +49,7 @@ export const Table = styled.div`
 `;
 
 export const ContainerShelf = styled.div`
-  width: 96%;
+  width: 111%;
   height: 4em;
   display: flex;
   align-items: center;

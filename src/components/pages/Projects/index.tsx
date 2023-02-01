@@ -1,10 +1,12 @@
-import { RegisterProjects } from "../../organisms/RegisterProjects"
+
+
+import { ProjectsAll } from "../../organisms/Projects";
 import MasterPage from "../MasterPage"
 
 const Projects = () => {
   return (
     <MasterPage>
-      <RegisterProjects />
+      <ProjectsAll/>
     </MasterPage>
   );
 };

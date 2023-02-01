@@ -52,13 +52,14 @@ interface IButtonColorProps {
   height?: string;
   isActive?: boolean;
   width?: string;
+  margin?:string;
 }
 
-interface ISelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  placeholder: string;
-  width?:string
+ interface ISelectProps extends React.SelectHTMLAttributes<HTMLSelectElement>  {
+  placeholder?: string;
   value?: Array;
-  label?:string
+  width?: string;
+  label?: string;
 }
 
 interface IModalProps {
@@ -66,4 +67,48 @@ interface IModalProps {
   optionTwo?: string;
   eventOne: MouseEventHandler;
   eventTwo?: MouseEventHandler;
+}
+
+interface FormProjects {
+  name?: string;
+  date_start?: string;
+  date_end?: string;
+  date_end_performed?: string;
+  project_status_id?: number;
+  project_type_id?: number;
+  team_cost?: string;
+  id?: string;
+  date_start_performed?: string;
+}
+
+interface OtherProps {
+  title?:string
+}
+
+interface MyFormProps{
+   id: string;
+   initialTeam_cost: string;
+   initialType_id: number;
+   initiaStatus_id: number;
+   initiaPerformed: string;
+   initialDate_end: string;
+   initialDate_start: string;
+   initialName: string;
+   initialValues: string | number | boolean;
+}
+interface Option {
+  label: string;
+  value: string;
+}
+
+interface IProjectsListing
+  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  projects?: string | number | boolean | undefined;
+  name?: string | number;
+  date_start?: staring;
+  status?: string | number | undefined;
+  project_type?: string | number | undefined;
+  color: string;
+  button_color: string;
+  text_color:string;
 }

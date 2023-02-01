@@ -1,24 +1,24 @@
 import styled from "styled-components";
 
 export const ContainerMain = styled.button<IButtonColorProps>`
-  align-items: center;
-  border: none;
-  background-color: #f2f5f8;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
+  width: 18em;
+  height: 44px;
   font-family: "Poppins";
   font-weight: 600;
-  gap: 8px;
-  height: 44px;
-  justify-content: flex-start;
+  border: none;
   margin: 5px;
+  border-radius: 8px;
+  display: flex;
   padding-left: 1em;
-  transition: all 300ms ease-in;
-  width: 18em;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  background-color: #f2f5f8;
+  transition: all 300ms ease-in-out;
+  cursor: pointer;
 
   svg path {
-    transition: all 300ms ease-in;
+    transition: all 300ms ease;
   }
 
   &:hover {
@@ -35,6 +35,7 @@ export const ContainerMain = styled.button<IButtonColorProps>`
   background-color: #0066ff;
   color: white;
   box-shadow: 0px 5px 10px #0066ff25;
+  transition:all 300ms ease;
   svg path{
     fill: white;
   }

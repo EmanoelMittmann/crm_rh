@@ -1,3 +1,4 @@
+import { type } from "os";
 import { MouseEvent } from "react";
 
 export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -14,6 +15,23 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
 export interface IInputsProps {
   Icon: JSX.Element;
 }
+export interface IInputsPropsDate{
+  date?: string |number | undefined; 
+  Icon?: JSX.Element;
+  value?: string | number;
+  label?: string;
+  placeholder?: string;
+  margin?: string;
+  disabled?: boolean | undefined;
+  width?: string;
+  padding?: string;
+  displayDate?: string;
+  placeholderColor?: string;
+  placeholderPosition?: string;
+  max?: string | number | undefined;
+  type?: React.HTMLInputTypeAttribute | undefined;
+}
+
 
 export interface IButtonPropsLightUp extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   Text: string;

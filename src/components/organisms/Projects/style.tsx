@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerMain = styled.div`
-  width: 100%;
+  width: 93.5%;
   height: auto;
 `;
 
@@ -9,11 +9,11 @@ export const ContainerChildrenProjects = styled.div<IContainerColumnProps>`
   display: flex;
   width: 96%;
   margin-bottom: 2.5em;
+  align-items: center;
   height: ${(props) => props.height};
   padding-left: ${(props) => props.left};
   padding-right: ${(props) => props.right};
   gap: ${(props) => props.gap};
-
 `;
 
 export const ContainerChildrenTable = styled.div<IContainerColumnProps>`
@@ -21,6 +21,7 @@ export const ContainerChildrenTable = styled.div<IContainerColumnProps>`
   flex-direction: column;
   width: inherit;
   margin-bottom: 2.5em;
+  margin-left: 9.3em;
   height: ${(props) => props.height};
   padding-left: ${(props) => props.left};
   padding-right: ${(props) => props.right};
@@ -60,4 +61,18 @@ export const AlignItensProjects = styled.div`
   gap: 1em;
   font-family: "Poppins";
   font-weight: 500;
+`;
+export const ContainerShelfProjects = styled.div`
+  width: 96%;
+  height: 4em;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px;
+  border: 1px solid #ccd1d6;
+  margin: auto;
+`;
+
+export const ContainerFooter = styled.div`
+  margin-left: 2em;
 `;

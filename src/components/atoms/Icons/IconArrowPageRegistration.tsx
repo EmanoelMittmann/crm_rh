@@ -1,9 +1,9 @@
-export const IconArrowPageRegistration = (
-{    width = "17px",
-    height = "15px",
-    color = "#22272D",
-    ...props
-}) => {
+export const IconArrowPageRegistration = ({
+  width = "17px",
+  height = "15px",
+  color = "#22272D",
+  ...props
+}: React.SVGProps<SVGSVGElement>) => {
   return (
     <div>
       <svg

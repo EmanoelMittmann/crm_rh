@@ -1,5 +1,5 @@
-import { ContainerChildren, ContainerMain, Table } from "./style";
-import { Input, Typography, Button} from "@stardust-ds/react";
+import { ContainerChildren, ContainerChildrenTable, ContainerMain } from "./style";
+import { Button, Input, Typography } from "@stardust-ds/react";
 import { IconGlass } from "../../atoms/Icons/IconGlass";
 import { Select } from "../../atoms/Select";
 import Header from "../../molecules/Header";
@@ -7,7 +7,17 @@ import { Shelf } from "./shelf";
 import { Footer } from "../../molecules/Footer";
 import { useNavigate } from "react-router-dom";
 
-const object = [{}];
+const object = [{
+    id: "6391f2d5b92ad76f6ab2394e",
+    avatar: "https://cdn-icons-png.flaticon.com/512/147/147144.png",
+    name: "Lynne Gilmore",
+    email: "lynnegilmore@accupharm.com",
+    status: true,
+    company: "UBISTART",
+    phone: "(826) 470-3995",
+    address: "311 Stryker Court, Martinez, Tennessee, 3122",
+  },
+];
 
 const ProfessionalsMain = () => {
   const navigate = useNavigate();
@@ -28,20 +38,32 @@ const ProfessionalsMain = () => {
             />
             <Select placeholder="Cargos" value={[]} />
             <Select placeholder="Função" value={[]} />
-            <Button style={{ borderRadius: "500px", width:'17em', justifyContent:'center'}} bgColor="#1ECB4F" onClick={() => navigate('/RegisterProfessionals')}>
+            <Button
+              typographyProps={{ fontWeight: "light", type: "p2" }}
+              style={{
+                marginLeft: "77%",
+                position: "absolute",
+                borderRadius: "25px",
+                color: "#ffffff",
+              }}
+              bgColor="#1ECB4F"
+              bWidth="20px"
+              bStyle="solid"
+              onClick={() => navigate("/RegisterProfessionals")}
+            >
               Cadastrar Novo
             </Button>
           </ContainerChildren>
-          <ContainerChildren height="27.3em" width="95em">
-            <Table>
+          <ContainerChildrenTable>
+            <div className="table">
               <Header />
-              {object?.map((data) => (
+              {object.map((data) => (
                 <Shelf data={data} />
               ))}
-            </Table>
-          </ContainerChildren>
-          <Footer />
+            </div>
+          </ContainerChildrenTable>
         </div>
+        {/* <Footer /> */}
       </ContainerMain>
     </>
   );
