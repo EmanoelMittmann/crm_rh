@@ -1,0 +1,1 @@
+export { BackgroundCover } from './Cover'

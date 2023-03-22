@@ -1,3 +1,5 @@
+import ButtonChangeTheme from '../../ButtonChangeTheme'
+import { Icon } from './icons'
 import {
   ContainerIconGlobal,
   ContainerOffice,
@@ -7,43 +9,36 @@ import {
   StyleLoginTop,
   StyleLoginTopBlue,
   Container,
-} from "./style";
-import IconLoginTop from "./IconsElements/IconLoginTop";
-import IconLoginTopBlue from "./IconsElements/IconLoginTopBlue";
-import IconLoginBottom from "./IconsElements/IconLoginBottom";
-import IconLoginBottomBlue from "./IconsElements/IconLoginBottomBlue";
-import ButtonChangeTheme from "../ButtonChangeTheme";
-import { ImgPageLogin } from "./IconsElements/ImgPageLogin";
+} from './style'
 
-export const ComponentsLogin = () => {
+export const BackgroundCover = () => {
   return (
     <ContainerIconGlobal>
       <ContainerIconTop>
         <StyleLoginTop>
-          <IconLoginTop />
+          <Icon.Top />
         </StyleLoginTop>
       </ContainerIconTop>
 
       <StyleLoginTopBlue>
-        <IconLoginTopBlue />
+        <Icon.TopBlue />
       </StyleLoginTopBlue>
 
-      {/* Botão de Login */}
       <ButtonChangeTheme />
 
       <Container>
         <StyleLoginBottom>
-          <IconLoginBottom />
+          <Icon.Bottom />
         </StyleLoginBottom>
 
         <StyleLoginBottomBlue>
-          <IconLoginBottomBlue />
+          <Icon.BottomBlue />
         </StyleLoginBottomBlue>
 
         <ContainerOffice>
-          <ImgPageLogin />
+          <Icon.ImgPage />
         </ContainerOffice>
       </Container>
     </ContainerIconGlobal>
-  );
-};
+  )
+}
