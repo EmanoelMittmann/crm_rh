@@ -1,7 +1,7 @@
 
 import {useFormik} from "formik";
 import { useParams } from "react-router-dom";
-import api from "../../../api/api";
+import api from 'api'
 import { registerSchemaProjects } from "../schema/SchemaProjects"; 
 import { useState } from "react";
 import NewProject from "../../organisms/NewProjectData";
