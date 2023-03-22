@@ -1,6 +1,6 @@
 import { SVGProps } from 'react'
 
-export default ({ width = '15', height = '16', color = '#000', ...props }: SVGProps<SVGSVGElement>) => {
+export const IconLua = ({ width = '15', height = '16', color = '#000', ...props }: SVGProps<SVGSVGElement>) => {
   return (
     <svg width={width} height={height} viewBox='0 0 15 16' fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
       <path

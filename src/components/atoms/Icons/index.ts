@@ -12,3 +12,6 @@ export { IconHours } from './IconHours'
 export { IconLeftArrow } from './IconLeftArrow'
 export { IconUbistart } from './IconUbistart'
 export { IconUser } from './IconUser'
+export { IconLua } from './IconLua'
+export { IconLight } from './IconLight'
+

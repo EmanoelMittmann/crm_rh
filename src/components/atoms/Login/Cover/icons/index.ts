@@ -1,9 +1,8 @@
-import { default as Bottom } from './IconLoginBottom'
-import { default as BottomBlue } from './IconLoginBottomBlue'
-import { default as Top } from './IconLoginTop'
-import { default as TopBlue } from './IconLoginTopBlue'
-import { default as Lua } from './IconLua'
-import { default as ImgPage } from './ImgPageLogin'
+import Bottom from './Bottom'
+import BottomBlue from './BottomBlue'
+import Top from './Top'
+import TopBlue from './TopBlue'
+import ImgPage from './Image'
 
 export const Icon = Object.assign(
   {},
@@ -12,7 +11,6 @@ export const Icon = Object.assign(
     Bottom,
     BottomBlue,
     ImgPage,
-    Lua,
     Top,
   }
 )
