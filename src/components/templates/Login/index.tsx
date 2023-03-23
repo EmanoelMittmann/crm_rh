@@ -1,4 +1,4 @@
-import { Input, Typography, Checkbox, Button, useTheme } from '@stardust-ds/react'
+import { Input, Typography, Checkbox, Button } from '@stardust-ds/react'
 import { BackgroundCover, IconUbistart, IconUser, IconArrow, Inputs } from 'components/atoms'
 import { colors } from 'styles'
 import {
@@ -10,40 +10,43 @@ import {
   ContainerGlobalLogin,
   ContainerButton,
   LoginGoogle,
+  SpacingLoginText,
 } from './style'
 
 import type { Props } from './types'
 
 export default ({ buttonRef }: Props) => {
-  const { brand } = useTheme()
-
   return (
     <ContainerGlobalLogin>
       <BackgroundCover />
       <ContainerLogin>
         <ContainerIconUbistart>
-          <Inputs.Icon Icon={<IconUbistart />} />
+          <Inputs.Icon Icon={<IconUbistart width={230} height={48} />} />
         </ContainerIconUbistart>
         <ContainerData>
-          <Typography type='h1' color={colors.status.neutral1}>
-            Faça seu Login
-          </Typography>
+          <SpacingLoginText>
+            <Typography type='h2' color={colors.status.neutral1}>
+              Faça seu Login
+            </Typography>
+          </SpacingLoginText>
+
           <Input
+            disabled
             isFullWidth
             label='E-mail'
             type='text'
             placeholder='exemplo@ubistart.com'
             iconLeft={<Inputs.Icon Icon={<IconUser />} />}
           />
-          <Inputs.Password />
+          <Inputs.Password disabled />
         </ContainerData>
         <ContainerCheckbox>
           <ContainerChecked>
             <Checkbox activeColor='#fff' inactiveColor='#000' iconColor='#000' />
 
-            <Typography type='l1'>Lembrar-me</Typography>
+            <Typography type='l2'>Lembrar-me</Typography>
           </ContainerChecked>
-          <Typography type='l1' color={colors.status.neutral1}>
+          <Typography type='l2' color={colors.status.neutral1}>
             Esqueci a senha
           </Typography>
         </ContainerCheckbox>
@@ -53,7 +56,7 @@ export default ({ buttonRef }: Props) => {
         <ContainerButton>
           <Button
             isFullWidth
-            bgColor={brand.color.primary.pure}
+            bgColor={colors.primary.pure}
             iconRight={<IconArrow />}
             bRadius='md'
             height={50}

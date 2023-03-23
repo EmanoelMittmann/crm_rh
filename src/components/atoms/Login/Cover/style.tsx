@@ -2,13 +2,12 @@ import styled from 'styled-components'
 
 export const ContainerIconGlobal = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
 `
 
 export const ContainerIconTop = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 `
 
@@ -34,14 +33,14 @@ export const StyleLoginBottomBlue = styled.div`
 `
 
 export const ContainerOffice = styled.div`
-  width: 800px;
-  height: 700px;
-  margin-top: 10em;
-  margin-left: 10em;
-  background-color: #fff;
+  width: 100%;
+  position: relative;
+  right: 0;
+  top: 1.5rem;
+  height: 64vh;
 `
 
 export const Container = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 `

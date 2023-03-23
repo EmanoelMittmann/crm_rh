@@ -8,11 +8,11 @@ export const ContainerLogin = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  width: 500px;
-  height: 750px;
-  left: 153px;
-  top: 133px;
-  padding: 2em;
+  width: 30%;
+  min-height: calc(100vh - 8rem);
+  left: 8rem;
+  top: 4rem;
+  padding: 2.5rem;
   opacity: 0.8;
   border-radius: 2px solid rgba(255, 255, 255, 1);
   border: 2px solid #ffffff;
@@ -20,6 +20,24 @@ export const ContainerLogin = styled.div`
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%),
     linear-gradient(0deg, #ffffff, #ffffff);
   border-radius: 16px;
+
+  @media (min-height: 920px) {
+    top: 8rem;
+    min-height: calc(100vh - 16rem);
+  }
+
+  @media (min-width: 1624px) {
+    width: 25%;
+  }
+
+  @media (max-width: 1090px) {
+    width: 45%;
+  }
+
+  @media (max-width: 768px) {
+    width: 75%;
+    left: 4rem;
+  }
 `
 
 export const ContainerData = styled.div`
@@ -31,7 +49,7 @@ export const ContainerData = styled.div`
   font-size: 24px;
   line-height: 100%;
   color: #0066ff;
-  gap: 1.5em;
+  gap: 1.25rem;
 `
 
 export const ContainerIconUbistart = styled.div`
@@ -57,15 +75,17 @@ export const LoginGoogle = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 5em;
+  margin-top: 2rem;
   text-align: left;
-`
-
-export const ImgTeam = styled.img`
-  min-width: 85%;
 `
 
 export const ContainerButton = styled.div`
   display: flex;
-  margin-top: 4em;
+  margin-top: 2rem;
+  flex-direction: column-reverse;
+  flex: 1;
+`
+
+export const SpacingLoginText = styled.div`
+  margin-bottom: 1.5rem;
 `
