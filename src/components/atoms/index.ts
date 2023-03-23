@@ -1,3 +1,6 @@
 export * from './Inputs'
 export * from './Login'
 export * from './Icons'
+export * from './Icons'
+export * from './Breadcrumb'
+export * from './Buttons'
