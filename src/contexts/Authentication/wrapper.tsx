@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
-import { AuthContext } from 'contexts'
+import { AuthContext } from '.'
 
-export function AuthProvider({ children }: any) {
+export function AuthWrapper({ children }: { children: JSX.Element }) {
   const { logout } = useContext(AuthContext)
 
   useEffect(() => {
