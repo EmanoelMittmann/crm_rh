@@ -7,7 +7,11 @@ type DynamicSchemeColors = {
   }
 }
 
-const theme = extendTheme({})
+export const theme = extendTheme({
+  color: {
+    lightBlue: '#00AAFF',
+  },
+})
 
 export const colors = theme.brand.color
 
