@@ -1,0 +1,33 @@
+import { IButtonProps } from 'react-app-env'
+import { ContainerMain } from './style'
+
+const ButtonWithHover = ({
+  Text,
+  Icon,
+  color,
+  fill,
+  colorActive,
+  fillActive,
+  bgActive,
+  isActive = false,
+  ...props
+}: IButtonProps) => {
+  return (
+    <>
+      <ContainerMain
+        {...props}
+        color={color}
+        fill={fill}
+        colorActive={colorActive}
+        fillActive={fillActive}
+        bgActive={bgActive}
+        isActive={isActive}
+      >
+        {Icon}
+        {Text}
+      </ContainerMain>
+    </>
+  )
+}
+
+export default ButtonWithHover
