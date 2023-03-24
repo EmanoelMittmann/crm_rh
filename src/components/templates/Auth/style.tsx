@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const MENU_WIDTH = '17rem'
 
 export const Container = styled.div`
-  max-width: 100vw;
+  width: 100vw;
   height: auto;
   display: flex;
 
