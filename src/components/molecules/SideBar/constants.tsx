@@ -1,9 +1,10 @@
+import { ReactElement } from 'react'
 import {
   IconCompanies,
   IconHome,
   IconHours,
   IconNotes,
-  IconProfissional,
+  IconProfessional,
   IconProjects,
   IconReports,
   IconServices,
@@ -11,59 +12,23 @@ import {
 } from 'components/atoms'
 import { theme } from 'styles'
 
+const neutralColor = theme.brand.color.status.neutral1
+
+const createNavOption = (text: string, icon: ReactElement, key: string) => ({
+  text,
+  icon,
+  color: neutralColor,
+  key,
+})
+
 export const OPTIONS = [
-  {
-    text: 'Início',
-    icon: <IconHome />,
-    color: theme.brand.color.status.neutral1,
-    key: 'home',
-  },
-  {
-    text: 'Profissionais',
-    icon: <IconProfissional />,
-    color: theme.brand.color.status.neutral1,
-    key: 'professionals',
-  },
-  {
-    text: 'Projetos',
-    icon: <IconProjects />,
-    color: theme.brand.color.status.neutral1,
-    key: 'projects',
-  },
-  {
-    text: 'Horas Extras',
-    icon: <IconHours />,
-    color: theme.brand.color.status.neutral1,
-    key: 'extrasHours',
-  },
-  {
-    text: 'Notas Fiscais',
-    icon: <IconNotes />,
-    color: theme.brand.color.status.neutral1,
-    key: 'notes',
-  },
-  {
-    text: 'Relatórios',
-    icon: <IconReports />,
-    color: theme.brand.color.status.neutral1,
-    key: 'reports',
-  },
-  {
-    text: 'Ordem de Serviço',
-    icon: <IconServices />,
-    color: theme.brand.color.status.neutral1,
-    key: 'services',
-  },
-  {
-    text: 'Configurações',
-    icon: <IconSetting />,
-    color: theme.brand.color.status.neutral1,
-    key: 'settings',
-  },
-  {
-    text: 'Empresas',
-    icon: <IconCompanies />,
-    color: theme.brand.color.status.neutral1,
-    key: 'company',
-  },
+  createNavOption('Início', <IconHome />, 'home'),
+  createNavOption('Profissionais', <IconProfessional />, 'professionals'),
+  createNavOption('Projetos', <IconProjects />, 'projects'),
+  createNavOption('Horas Extras', <IconHours />, 'extrasHours'),
+  createNavOption('Notas Fiscais', <IconNotes />, 'notes'),
+  createNavOption('Relatórios', <IconReports />, 'reports'),
+  createNavOption('Ordem de Serviço', <IconServices />, 'services'),
+  createNavOption('Configurações', <IconSetting />, 'settings'),
+  createNavOption('Empresas', <IconCompanies />, 'company'),
 ]
