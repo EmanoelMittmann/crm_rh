@@ -13,8 +13,8 @@ interface TemplateProps {
 export const TableHeader = ({ template, titles }: TemplateProps) => {
   return (
     <Container {...{ template }}>
-      {titles.map((title) => (
-        <Column>
+      {titles.map((title, index) => (
+        <Column key={index}>
           <ColumnText>{title}</ColumnText>
         </Column>
       ))}
