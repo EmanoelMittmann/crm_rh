@@ -10,6 +10,15 @@ type DynamicSchemeColors = {
 export const theme = extendTheme({
   color: {
     lightBlue: '#00AAFF',
+    negative: {
+      transparent: '#FF3541',
+    },
+    positive: {
+      transparent: '#1ECB4F26',
+    },
+    black: {
+      transparent: '#00000040',
+    },
   },
 })
 
