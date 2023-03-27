@@ -1,6 +1,7 @@
 export interface AuthProps {
   user: {
     avatar: string
+    name: string
     user_type_id: number
   }
   token: string
