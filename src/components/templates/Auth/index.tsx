@@ -12,7 +12,7 @@ const Wrapper = ({ children }: Props) => {
     <AuthWrapper>
       <Container>
         <Sidebar />
-        <div className='main-route'>
+        <div className='template'>
           <Navbar />
           {children}
         </div>

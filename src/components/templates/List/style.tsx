@@ -2,16 +2,24 @@ import styled from 'styled-components'
 
 export const Main = styled.div`
   width: 100%;
-  height: auto;
-  padding: 2rem;
+  padding: 2rem 2rem 1rem;
   overflow: auto;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 2rem;
+  min-height: calc(100vh - 6rem);
 `
 
-export const Container = styled.div`
+export const Container = styled.div<{
+  gap: string
+}>`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: ${(props) => props.gap};
+`
+
+export const Footer = styled.div`
+  display: flex;
+  height: 100%;
 `

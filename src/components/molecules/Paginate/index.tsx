@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useMemo } from 'react'
 import { IconRightArrow, IconLeftArrow, HideBox } from 'components/atoms'
 import { Button, Main, PagesNumber, Row } from './style'
-
 interface Props {
   last_page: number
   current_page: number
@@ -68,3 +67,6 @@ export const Paginate = ({ current_page, last_page, setCurrent_page }: Props) =>
     </Main>
   )
 }
+
+export type PaginateProps = Props
+
