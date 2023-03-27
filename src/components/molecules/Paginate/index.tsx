@@ -1,88 +1,70 @@
-import { useState } from "react";
-import { Container, Main, PagesNumber, Row } from "./style";
-import { IconLeftArrow } from "../../atoms/Icons/IconLeftArrow";
-import { IconRightArrow } from "../../atoms/Icons/IconRightArrow";
+import { Dispatch, SetStateAction, useMemo } from 'react'
+import { IconRightArrow, IconLeftArrow, HideBox } from 'components/atoms'
+import { Button, Main, PagesNumber, Row } from './style'
 
-export const Paginate = () => {
-  const [current_page, setCurrent_page] = useState<number>(1);
-  const totalpage: number = 16;
-  const numberPages: number[] = Array.from(
-    Array(totalpage).keys(),
-    (x) => x+1
-  );
+interface Props {
+  last_page: number
+  current_page: number
+  setCurrent_page: Dispatch<SetStateAction<number>>
+}
 
-  const copyTotalpages: number[] = [...numberPages];
+export const Paginate = ({ current_page, last_page, setCurrent_page }: Props) => {
+  const pages = useMemo(() => new Array(last_page).fill(null).map((_, index) => index + 1), [last_page])
 
-  const [firstCurrent, setfirstCurrent] = useState<number[]>(
-    numberPages.splice(0, 3)
-  );
-  const [lastCurrent, setLastCurrent] = useState<number[]>(
-    numberPages.splice(numberPages.length - 3, numberPages.length)
-  );
+  const end = useMemo(() => {
+    if (pages.length > 7) return pages.slice(last_page - 3, last_page)
 
-  function nextPage(number: number) {
-    if (firstCurrent[2] !== lastCurrent[0] - 1) {
-      copyTotalpages.shift();
-      setfirstCurrent(copyTotalpages.splice(number - 1, 3));
-      setCurrent_page((prev) => prev + 1);
-    } else if (
-      firstCurrent[2] === lastCurrent[0] - 1 &&
-      lastCurrent[2] > current_page
-    ) {
-      setCurrent_page((prev) => prev + 1);
-    }
+    return pages.slice(3, last_page)
+  }, [current_page, last_page])
+
+  const start = useMemo(() => {
+    if (current_page - 3 < 0) return pages.slice(0, 3)
+
+    if (current_page >= end[0]) return pages.slice(0, 3)
+
+    return pages.slice(current_page - 3, current_page)
+  }, [current_page, last_page])
+
+  const showPrev = current_page > 1
+  const showNext = current_page < last_page
+
+  function nextPage() {
+    setCurrent_page(current_page + 1)
   }
 
-  function prevPage(number: number) {
-    if (firstCurrent[0] !== 1) {
-      setfirstCurrent(copyTotalpages.splice(number - 4, 3));
-    }
-    if (1 < current_page) {
-      setCurrent_page((prev) => prev - 1);
-    }
+  function prevPage() {
+    setCurrent_page(current_page - 1)
   }
 
   return (
     <Main>
-      <Container
-        onClick={() => {
-          prevPage(firstCurrent[2]);
-        }}
-      >
-        <IconLeftArrow />
-        Anterior
-      </Container>
+      <HideBox show={showPrev}>
+        <Button onClick={prevPage} title='Voltar à página anterior'>
+          <IconLeftArrow />
+          Anterior
+        </Button>
+      </HideBox>
+
       <Row>
-        {firstCurrent.map((page, index) => (
-          <PagesNumber
-            key={index}
-            Active={page === current_page}
-            onClick={() => {
-              setCurrent_page(page)
-            }}
-          >
+        {start.map((page, index) => (
+          <PagesNumber key={index} Active={page === current_page} onClick={() => setCurrent_page(page)}>
             {page}
           </PagesNumber>
         ))}
-        ...
-        {lastCurrent.map((page,index) => (
-          <PagesNumber
-            key={index}
-            Active={page === current_page}
-            onClick={() =>  setCurrent_page(page)}
-          >
+        <p>...</p>
+        {end.map((page, index) => (
+          <PagesNumber key={index} Active={page === current_page} onClick={() => setCurrent_page(page)}>
             {page}
           </PagesNumber>
         ))}
       </Row>
-      <Container
-        onClick={() => {
-          nextPage(firstCurrent[0]);
-        }}
-      >
-        Próximo
-        <IconRightArrow />
-      </Container>
+
+      <HideBox show={showNext}>
+        <Button onClick={nextPage} title='Avançar para próxima página'>
+          Próximo
+          <IconRightArrow />
+        </Button>
+      </HideBox>
     </Main>
-  );
-};
+  )
+}
