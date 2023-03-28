@@ -1,3 +1,5 @@
+import { OrderBy } from './OrderBy'
+
 export { IconArrow } from './IconArrow'
 export { IconBottomVerticalArrow } from './IconBottomVerticalArrow'
 export { IconArrowPageRegistration } from './IconArrowPageRegistration'
@@ -24,3 +26,4 @@ export { IconReports } from './IconReports'
 export { IconThreePoints } from './IconThreePoints'
 export { IconRightArrow } from './IconRightArrow'
 
+export const Icon = Object.assign({}, { OrderBy })
