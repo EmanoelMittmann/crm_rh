@@ -21,4 +21,6 @@ export { IconProjects } from './IconProjects'
 export { IconSetting } from './IconSetting'
 export { IconServices } from './IconServices'
 export { IconReports } from './IconReports'
+export { IconThreePoints } from './IconThreePoints'
+export { IconRightArrow } from './IconRightArrow'
 

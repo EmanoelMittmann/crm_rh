@@ -24,7 +24,7 @@ export const Sidebar = () => {
       </ContainerRow>
       <ContainerColumn height='65%' bottom='1rem' left='0'>
         {OPTIONS.map(({ text, color, icon, key }) => (
-          <Button.WithHover
+          <Button.Menu
             key={key}
             Text={text}
             Icon={icon}
@@ -41,13 +41,13 @@ export const Sidebar = () => {
         ))}
       </ContainerColumn>
       <ContainerColumn height='20%' top='2rem' left='0'>
-        <Button.WithHover
+        <Button.Menu
           Text='Apagar as Luzes'
           Icon={<IconDark />}
           color={theme.brand.color.lightBlue}
           fill={theme.brand.color.lightBlue}
         />
-        <Button.WithHover Text='Sair' Icon={<IconLogout />} color='red' fill='red' onClick={logout} />
+        <Button.Menu Text='Sair' Icon={<IconLogout />} color='red' fill='red' onClick={logout} />
       </ContainerColumn>
     </ContainerMain>
   )

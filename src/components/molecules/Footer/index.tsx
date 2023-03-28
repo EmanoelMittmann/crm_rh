@@ -4,14 +4,13 @@ import { IconRightArrow } from "../../atoms/Icons/IconRightArrow";
 import { Paginate } from "../Paginate";
 import { Container, Numbers, Pagination } from "./style";
 
+//  TODO: REVER COMPONENTE 
 export const Footer = () => {
   return (
     <>
       <Container>
-        <Pagination>
-          <Paginate />
-        </Pagination>
+        <Pagination>{/* <Paginate /> */}</Pagination>
       </Container>
     </>
-  );
+  )
 };

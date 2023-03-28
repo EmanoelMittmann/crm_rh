@@ -1,14 +1,15 @@
 import styled from "styled-components";
+import { theme } from 'styles'
 
 export const Row = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: row;
   gap: 2em;
-`;
+`
 
 export const PagesNumber = styled.p<{ Active?: boolean }>`
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-weight: 500;
   color: #737d86;
   display: flex;
@@ -25,13 +26,16 @@ export const PagesNumber = styled.p<{ Active?: boolean }>`
     color: #0066FF;
     outline: 3px solid #0066FF;
   `}
-`;
+`
 
-export const Container = styled.div`
-  font-family: "Poppins";
-  font-weight: 500;
-  color: #737d86;
+export const Button = styled.button`
   display: flex;
+  font-size: 14;
+  border: none;
+  font-family: 'Poppins';
+  font-weight: 500;
+  background-color: transparent;
+  color: ${theme.neutrals.gray6};
   cursor: pointer;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -41,7 +45,15 @@ export const Container = styled.div`
   user-select: none;
   align-items: center;
   gap: 1em;
-`;
+
+  :hover {
+    color: ${theme.neutrals.gray8};
+  }
+
+  :disabled {
+    cursor: not-allowed;
+  }
+`
 
 export const Main = styled.div`
   display: flex;
