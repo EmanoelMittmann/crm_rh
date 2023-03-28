@@ -7,16 +7,18 @@ import { GRID_TEMPLATE, HEADERS } from './constants'
 import { LoadingWrapper, Main } from '../style'
 
 export const Professionals = () => {
-  const { professionals, navigateTo, handleOrder, isLoading } = useContext(List.Professional.Context)
+  const { professionals, navigateTo, handleOrder, isLoading, handleUpdateStatus } = useContext(
+    List.Professional.Context
+  )
 
-  const POPOVER_OPTIONS = (id: number) => [
+  const POPOVER_OPTIONS = (id: number, status: boolean) => [
     {
       label: 'Editar',
       callback: () => navigateTo(`/professionals/${id}`),
     },
     {
-      label: 'Excluir',
-      callback: () => {},
+      label: status ? 'Inativar' : 'Ativar',
+      callback: () => handleUpdateStatus(id),
     },
   ]
 
@@ -29,7 +31,11 @@ export const Professionals = () => {
       )
 
     return professionals.map((props) => (
-      <Shelf key={props.id} config={{ template: GRID_TEMPLATE, options: POPOVER_OPTIONS(props.id) }} {...{ props }} />
+      <Shelf
+        key={props.id}
+        config={{ template: GRID_TEMPLATE, options: POPOVER_OPTIONS(props.id, props.is_active) }}
+        {...{ props }}
+      />
     ))
   }, [isLoading, professionals])
 

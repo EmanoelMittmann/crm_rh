@@ -27,6 +27,7 @@ export interface ContextProps {
   handleSearch(text: string): void
   handleFillJob(id: number | null): void
   handleOrder(field: string): void
+  handleUpdateStatus(id: number): void
 }
 
 export interface ProfessionalProps {

@@ -1,6 +1,7 @@
 import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDebounce } from 'hooks'
+import { routes } from 'routes'
 import api from 'api'
 import DEFAULT from './constants'
 import type { ContextProps, ProfessionalProps, ReactNode } from './types'
@@ -24,11 +25,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleFillJob,
     handleSearch,
     handleOrder,
+    handleUpdateStatus,
   }
 
   async function fetchList() {
     setIsLoading(true)
-    const { data } = await api.get('/professionals', {
+    const { data } = await api.get(routes.professional.list, {
       params: {
         page: meta.paginate.current_page,
         job_id: meta.job_id,
@@ -68,6 +70,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   function handleOrder(_: string) {
     setMeta((old) => ({ ...old, order: old.order === 'ASC' ? 'DESC' : 'ASC' }))
+  }
+
+  async function handleUpdateStatus(id: number) {
+    await api.put(routes.professional.updateStatus(id))
+    fetchList()
   }
 
   useDebounce({
