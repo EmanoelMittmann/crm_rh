@@ -72,7 +72,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   useDebounce({
     fn: fetchList,
-    delay: 500,
     listener: [meta.paginate.current_page, meta.search, meta.job_id, meta.order],
   })
 
