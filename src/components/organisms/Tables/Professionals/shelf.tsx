@@ -24,7 +24,7 @@ export const Shelf = ({ props, config }: ShelfProps) => {
       <ContainerShelfColumn title={city_name}>
         <Text>{city_name}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn justify='center' gap='3em'>
+      <ContainerShelfColumn justify='center' gap='2em'>
         <Badge.Status status={is_active} />
         <Popover options={config.options} />
       </ContainerShelfColumn>
