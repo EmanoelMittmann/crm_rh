@@ -1,5 +1,14 @@
-import { MASKER, PIX_KEY_TYPE } from './constants'
+import { MASKER, PIX_KEY_TYPE, UF_OPTIONS } from './constants'
 import type { SelectOption, getMaskFromTypePIXProps } from './types'
+
+export const validation = {
+  required: 'Campo obrigatório',
+  min: (value: number, min: number, message: string = 'Campo inválido') => {
+    if (value < min) return message
+
+    return true
+  },
+}
 
 export function GenerateOption(data: Object): SelectOption[] {
   return Object.values(data).map((key: string) => ({ label: key, value: key }))
@@ -28,11 +37,6 @@ export function getMaskFromPixKeyType(type: getMaskFromTypePIXProps) {
   return input[type]
 }
 
-export const validation = {
-  required: 'Campo obrigatório',
-  min: (value: number, min: number, message: string = 'Campo inválido') => {
-    if (value < min) return message
-
-    return true
-  },
+export function getUfOption(uf: string) {
+  return UF_OPTIONS.find(({ value }) => value === uf) ?? null
 }
