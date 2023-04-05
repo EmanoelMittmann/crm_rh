@@ -24,3 +24,5 @@ export default () => {
 }
 
 export type { FormProps } from './types'
+
+export { getUfOption } from './logic'
