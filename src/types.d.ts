@@ -5,9 +5,10 @@ declare module '*.svg' {
 }
 
 interface IContainerRowProps {
-  paddingRight?: string;
-  paddingLeft?: string;
-  gap?: string;
+  paddingRight?: string
+  paddingLeft?: string
+  gap?: string
+  align?: string
 }
 
 interface IContainerColumnProps {
