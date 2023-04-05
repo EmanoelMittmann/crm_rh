@@ -45,7 +45,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function fetchFilters() {
-    const { data } = await api.get('/job', { params: { is_active: 1 } })
+    const { data } = await api.get(routes.job.list, { params: { is_active: 1 } })
 
     setFilterOptions({
       job: data.data.map(({ name, id }: { name: string; id: number }) => ({ label: name, value: id })),
