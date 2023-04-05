@@ -1,32 +1,32 @@
 import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
-import { POPOVER_OPTIONS } from './constants'
-import { ContainerShelf, ContainerShelfColumn, Image } from '../style'
+import { ContainerShelf, ContainerShelfColumn, Image, Text } from '../style'
 
 import type { ShelfProps } from './types'
 
-export const Shelf = ({ address, avatar, name, company, email, phone, status, template }: ShelfProps) => {
+export const Shelf = ({ props, config }: ShelfProps) => {
+  const { avatar, name, job, email, telephone_number, city_name, is_active } = props
   return (
-    <ContainerShelf {...{ template }}>
-      <ContainerShelfColumn gap='.5rem'>
+    <ContainerShelf template={config.template}>
+      <ContainerShelfColumn gap='.5rem' title={name}>
         <Image src={avatar} />
-        <p>{name}</p>
+        <Text>{name}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn>
-        <p>{company}</p>
+      <ContainerShelfColumn title={job.name}>
+        <Text>{job.name}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn>
-        <p>{email}</p>
+      <ContainerShelfColumn title={email}>
+        <Text>{email}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn>
-        <p>{phone}</p>
+      <ContainerShelfColumn title={telephone_number}>
+        <Text>{telephone_number}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn>
-        <p>{address}</p>
+      <ContainerShelfColumn title={city_name}>
+        <Text>{city_name}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn justify='center' gap='3em'>
-        <Badge.Status status={status} />
-        <Popover options={POPOVER_OPTIONS} />
+      <ContainerShelfColumn justify='center' gap='2em'>
+        <Badge.Status status={is_active} />
+        <Popover options={config.options} />
       </ContainerShelfColumn>
     </ContainerShelf>
   )

@@ -23,8 +23,8 @@ export const PagesNumber = styled.p<{ Active?: boolean }>`
     props.Active &&
     `
     font-weight: 600;
-    color: #0066FF;
-    outline: 3px solid #0066FF;
+    color: ${theme.brand.color.status.neutral1};
+    outline: 3px solid ${theme.brand.color.status.neutral1};
   `}
 `
 
@@ -58,5 +58,5 @@ export const Button = styled.button`
 export const Main = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 95%;
-`;
+  width: 100%;
+`

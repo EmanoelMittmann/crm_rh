@@ -1,19 +1,17 @@
 import type { ReactNode } from 'react'
 import { Typography } from '@stardust-ds/react'
+import { Paginate } from 'components/molecules'
 import { theme } from 'styles'
 import { Container, Footer, Main } from './style'
-import { Paginate } from 'components/molecules'
-import type { PaginateProps } from 'components/molecules'
 
 interface Props {
   title?: string
   children?: ReactNode
-  pagination: PaginateProps
 }
 
 const FONT_COLOR = theme.neutrals.gray8
 
-export default ({ title, pagination, children }: Props) => {
+export default ({ title, children }: Props) => {
   return (
     <Main>
       <Container gap='2rem'>
@@ -25,7 +23,7 @@ export default ({ title, pagination, children }: Props) => {
         <Container gap='1rem'>{children}</Container>
       </Container>
       <Footer>
-        <Paginate {...{ ...pagination }} />
+        <Paginate />
       </Footer>
     </Main>
   )

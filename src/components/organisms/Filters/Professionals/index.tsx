@@ -1,35 +1,39 @@
-import { useMemo } from 'react'
+import { useMemo, useContext } from 'react'
 import { Input, Select } from '@stardust-ds/react'
 import { IconGlass, Button } from 'components/atoms'
+import { List } from 'contexts'
 import { Container, Main } from '../style'
-
-import type { SelectProps } from '@stardust-ds/react'
-interface Props {
-  options: {
-    job: SelectProps['options']
-  }
-  value: number | null
-  set(value: number | null): void
-}
 
 type ValueProps = Option | null | undefined
 
-export const Professionals = ({ options, set, value }: Props) => {
-  const currentValue = useMemo(() => options.job.find((o) => Number(o.value) === value), [value]) as ValueProps
+export const Professionals = () => {
+  const { meta, filterOptions, handleSearch, handleFillJob, navigateTo } = useContext(List.Professional.Context)
+
+  const { job_id, search } = meta
+
+  const currentValue = useMemo(() => filterOptions.job.find((o) => Number(o.value) === job_id), [job_id]) as ValueProps
 
   return (
     <Main>
       <Container gap='1rem'>
-        <Input iconLeft={<IconGlass />} placeholder='Buscar...' width={300} style={{ marginTop: '4px' }} />
+        <Input
+          value={search}
+          onChange={(e) => handleSearch(e.target?.value)}
+          iconLeft={<IconGlass />}
+          placeholder='Buscar...'
+          width={270}
+          style={{ marginTop: '4px' }}
+        />
         <Select
+          width={270}
           placeholder='Cargo'
-          options={options.job}
+          options={filterOptions.job}
           value={currentValue ?? null}
-          onSelect={(option: any) => set(option.value)}
-          onClear={() => set(null)}
+          onSelect={(option: Option | null) => option && handleFillJob(Number(option?.value))}
+          onClear={() => handleFillJob(null)}
         />
       </Container>
-      <Button.New onClick={() => {}} />
+      <Button.New onClick={() => navigateTo('/RegisterProfessionals')} />
     </Main>
   )
 }
