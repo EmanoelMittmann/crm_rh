@@ -1,23 +1,23 @@
+import { Icon } from 'components/atoms'
 import { Column, ColumnText, Container } from './style'
-
-interface TemplateProps {
-  template: string
-  titles: string[]
-}
+import type { TemplateProps, HeaderProps } from './types'
 
 /**
  *
  * @param template exemplo: '1fr 1fr 1fr'
  * Recebe as mesmas propriedades de grid-template-columns.
  */
-export const TableHeader = ({ template, titles }: TemplateProps) => {
+export const TableHeader = ({ template, headers, handleOrder }: TemplateProps) => {
   return (
     <Container {...{ template }}>
-      {titles.map((title, index) => (
-        <Column key={index}>
-          <ColumnText>{title}</ColumnText>
+      {headers.map(({ field, label, on }) => (
+        <Column disabled={!on} key={field} onClick={() => on && handleOrder(field)}>
+          <ColumnText>{label}</ColumnText>
+          {on && <Icon.OrderBy />}
         </Column>
       ))}
     </Container>
   )
 }
+
+export type { HeaderProps }

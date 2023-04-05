@@ -7,6 +7,12 @@ export const Main = styled.div`
   width: 100%;
 `
 
+export const LoadingWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  margin-top: 4rem;
+`
+
 export const ContainerShelf = styled.div<TemplateProps>`
   width: 100%;
   min-height: 4rem;
@@ -33,9 +39,17 @@ export const ContainerShelfColumn = styled.div<IContainerColumnProps>`
   gap: ${(props) => props.gap};
   font-size: 0.875rem;
 
+  overflow-x: hidden;
+
   .status {
     width: 8em;
   }
+`
+
+export const Text = styled.p`
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 `
 
 export const Image = styled.img`
