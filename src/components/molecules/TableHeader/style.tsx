@@ -17,17 +17,29 @@ export const Container = styled.div<TemplateProps>`
   border-radius: 0.5rem 0.5rem 0 0;
 `
 
-export const Column = styled.div<IContainerColumnProps>`
+export const Column = styled.button<IContainerColumnProps>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   display: flex;
   padding: 0.5rem;
   align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  gap: 1rem;
+  color: ${theme.neutrals.gray6};
+
+  :disabled {
+    cursor: initial;
+  }
+
+  :hover {
+    color: ${theme.neutrals.gray8};
+  }
 `
 
 export const ColumnText = styled.p`
   font-weight: 600;
   font-size: 12px;
-  color: ${theme.neutrals.gray6};
   font-family: 'Poppins';
 `
