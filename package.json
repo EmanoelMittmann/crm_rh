@@ -46,7 +46,7 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "*.{js, jsx, ts, tsx, json}" : [
+    "*.{js, jsx, ts, tsx, json}": [
       "yarn lint:fix"
     ]
   },
@@ -89,6 +89,7 @@
     ]
   },
   "devDependencies": {
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.1",
