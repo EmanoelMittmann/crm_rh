@@ -24,7 +24,9 @@ const Modal = forwardRef<PopoverProps['Imperative'], PopoverProps['Data']>(({ op
     <ContainerModal>
       <div className='options'>
         {options.map(({ label, callback }) => (
-          <Options onClick={callback}>{label}</Options>
+          <Options onClick={callback} key={label}>
+            {label}
+          </Options>
         ))}
       </div>
     </ContainerModal>
