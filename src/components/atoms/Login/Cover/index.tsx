@@ -8,7 +8,7 @@ import {
   StyleLoginBottomBlue,
   StyleLoginTop,
   StyleLoginTopBlue,
-  Container,
+  Container
 } from './style'
 
 export const BackgroundCover = () => {

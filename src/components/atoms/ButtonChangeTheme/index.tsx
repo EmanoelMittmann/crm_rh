@@ -11,7 +11,11 @@ const ButtonChangeTheme = () => {
       {change ? (
         <Button
           iconLeft={<IconLight />}
-          typographyProps={{ fontWeight: 'light', type: 'p2', color: '#fff' }}
+          typographyProps={{
+            fontWeight: 'light',
+            type: 'p2',
+            color: '#fff'
+          }}
           onClick={() => setChange(false)}
           bWidth={0.3}
           bColor='#ffff'
@@ -25,7 +29,11 @@ const ButtonChangeTheme = () => {
       ) : (
         <Button
           iconLeft={<IconLua />}
-          typographyProps={{ fontWeight: 'light', type: 'p2', color: '#000' }}
+          typographyProps={{
+            fontWeight: 'light',
+            type: 'p2',
+            color: '#000'
+          }}
           onClick={() => setChange(true)}
           bgColor='#ffff'
           bWidth={1}

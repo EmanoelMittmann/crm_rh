@@ -14,7 +14,12 @@ type Props = InputProps &
 export default forwardRef(({ error, ...props }: Props, ref) => {
   return (
     <Main w={(props?.width as string) ?? '100%'}>
-      <Input {...props} ref={ref} hasError={!!error} helperText={error ?? props.helperText} />
+      <Input
+        {...props}
+        ref={ref}
+        hasError={!!error}
+        helperText={error ?? props.helperText}
+      />
     </Main>
   )
 })

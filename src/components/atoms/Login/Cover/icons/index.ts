@@ -11,6 +11,6 @@ export const Icon = Object.assign(
     Bottom,
     BottomBlue,
     ImgPage,
-    Top,
+    Top
   }
 )

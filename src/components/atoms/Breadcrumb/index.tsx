@@ -11,9 +11,12 @@ export const Breadcrumb = () => {
   const breadCrumber = handlePathname(pathname as PathnameProps)
 
   return (
-    <Typography fontSize='xxxs' fontWeight='normal' color={theme.neutrals.gray7}>
+    <Typography
+      fontSize='xxxs'
+      fontWeight='normal'
+      color={theme.neutrals.gray7}
+    >
       <To onClick={() => navigate(pathname)}>{breadCrumber}</To>
     </Typography>
   )
 }
-

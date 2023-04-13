@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Master = styled.div`
   width: 100%;
@@ -10,4 +10,4 @@ export const Master = styled.div`
     position: absolute;
     left: 9em;
   }
-`;
+`

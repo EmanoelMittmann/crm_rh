@@ -8,9 +8,11 @@ import type { FormProps } from '../types'
 export const ExtraHours = () => {
   const { register, watch } = useFormContext<FormProps>()
 
-  const disableExtraHours = watch('job_type')?.value === KEYS.CONTRACT_TYPE.HORISTA
+  const disableExtraHours =
+    watch('job_type')?.value === KEYS.CONTRACT_TYPE.HORISTA
   const showLimitSection = Number(watch('extra_hour_activated')) === 1
-  const extraHourValue = Number(watch('variable2')) / Number(watch('variable1')) || 0
+  const extraHourValue =
+    Number(watch('variable2')) / Number(watch('variable1')) || 0
 
   return (
     <>
@@ -22,14 +24,28 @@ export const ExtraHours = () => {
           options={[
             {
               label: 'Permitir horas extras',
-              input: <Radio id='1' {...register('extra_hour_activated')} value={1} disabled={disableExtraHours} />,
-              active: showLimitSection,
+              input: (
+                <Radio
+                  id='1'
+                  {...register('extra_hour_activated')}
+                  value={1}
+                  disabled={disableExtraHours}
+                />
+              ),
+              active: showLimitSection
             },
             {
               label: 'Não permitir horas extras',
-              input: <Radio id='2' {...register('extra_hour_activated')} value={0} defaultChecked />,
-              active: !showLimitSection,
-            },
+              input: (
+                <Radio
+                  id='2'
+                  {...register('extra_hour_activated')}
+                  value={0}
+                  defaultChecked
+                />
+              ),
+              active: !showLimitSection
+            }
           ]}
         />
       </ContainerRow>
@@ -44,7 +60,7 @@ export const ExtraHours = () => {
           />
           <Inputs.Default
             {...register('variable2', {
-              setValueAs: MASKER.CURRENCY,
+              setValueAs: MASKER.CURRENCY
             })}
             value={watch('variable2')}
             type='number'

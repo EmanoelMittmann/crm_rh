@@ -1,4 +1,6 @@
-import Professional, { FormProps as ProfessionalProps } from './Professional'
+import Professional, {
+  FormProps as ProfessionalProps
+} from './Professional'
 
 export const Form = Object.assign({}, { Professional })
 

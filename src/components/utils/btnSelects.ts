@@ -1,24 +1,27 @@
 export const DEFAULTSELECT = {
-    home:true,
-    professionals:false,
-    projects:false,
-    extrasHours:false,
-    notes:false,
-    reports:false,
-    services:false,
-    settings:false,
-    company:false,
-    newprojects:false
-} 
+  home: true,
+  professionals: false,
+  projects: false,
+  extrasHours: false,
+  notes: false,
+  reports: false,
+  services: false,
+  settings: false,
+  company: false,
+  newprojects: false
+}
 
-export function alterObject(obj:typeof DEFAULTSELECT,defaultValue: string){
-    let newObj:any = DEFAULTSELECT; 
-    for (const [key,value] of Object.entries(obj)) {
-        if(key === defaultValue){
-            newObj[key] = true
-        }else{  
-            newObj[key] = false
-        }
+export function alterObject(
+  obj: typeof DEFAULTSELECT,
+  defaultValue: string
+) {
+  let newObj: any = DEFAULTSELECT
+  for (const [key, value] of Object.entries(obj)) {
+    if (key === defaultValue) {
+      newObj[key] = true
+    } else {
+      newObj[key] = false
     }
-    return newObj
+  }
+  return newObj
 }

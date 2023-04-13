@@ -11,10 +11,17 @@ type Props = SelectProps &
     error?: string
   }
 
-export const Default = forwardRef(({ error, onChange, name, ...props }: Props, ref) => {
-  return (
-    <Main>
-      <Select {...props} ref={ref as Ref<SelectRef>} hasError={!!error} helperText={error ?? props.helperText} />
-    </Main>
-  )
-})
+export const Default = forwardRef(
+  ({ error, onChange, name, ...props }: Props, ref) => {
+    return (
+      <Main>
+        <Select
+          {...props}
+          ref={ref as Ref<SelectRef>}
+          hasError={!!error}
+          helperText={error ?? props.helperText}
+        />
+      </Main>
+    )
+  }
+)

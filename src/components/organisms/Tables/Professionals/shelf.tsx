@@ -1,11 +1,24 @@
 import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
-import { ContainerShelf, ContainerShelfColumn, Image, Text } from '../style'
+import {
+  ContainerShelf,
+  ContainerShelfColumn,
+  Image,
+  Text
+} from '../style'
 
 import type { ShelfProps } from './types'
 
 export const Shelf = ({ props, config }: ShelfProps) => {
-  const { avatar, name, job, email, telephone_number, city_name, is_active } = props
+  const {
+    avatar,
+    name,
+    job,
+    email,
+    telephone_number,
+    city_name,
+    is_active
+  } = props
   return (
     <ContainerShelf template={config.template}>
       <ContainerShelfColumn gap='.5rem' title={name}>

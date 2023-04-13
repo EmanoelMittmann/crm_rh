@@ -27,6 +27,9 @@ export const Container = styled.div<{ active: boolean }>`
   display: flex;
 
   label {
-    color: ${({ active }) => (active ? theme.brand.color.status.neutral1 : theme.neutrals.gray6)} !important;
+    color: ${({ active }) =>
+      active
+        ? theme.brand.color.status.neutral1
+        : theme.neutrals.gray6} !important;
   }
 `

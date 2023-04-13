@@ -1,6 +1,11 @@
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, IconDark, IconLogout, IconUbistart } from 'components/atoms'
+import {
+  Button,
+  IconDark,
+  IconLogout,
+  IconUbistart
+} from 'components/atoms'
 import { AuthContext } from 'contexts'
 import { alterObject, DEFAULT_SELECT } from '../../utils'
 import { OPTIONS } from './constants'
@@ -47,7 +52,13 @@ export const Sidebar = () => {
           color={theme.brand.color.lightBlue}
           fill={theme.brand.color.lightBlue}
         />
-        <Button.Menu Text='Sair' Icon={<IconLogout />} color='red' fill='red' onClick={logout} />
+        <Button.Menu
+          Text='Sair'
+          Icon={<IconLogout />}
+          color='red'
+          fill='red'
+          onClick={logout}
+        />
       </ContainerColumn>
     </ContainerMain>
   )

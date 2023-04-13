@@ -1,16 +1,16 @@
-import React from "react";
-import { ContainerButton } from "./style";
+import React from 'react'
+import { ContainerButton } from './style'
 
 interface IButtonGenericProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  Text?: string;
-  color?: string;
-  bgColor?: string;
-  width?: string;
-  height?: string;
-  bRadius?: string;
-  top?:string,
-  left?: string;
+  Text?: string
+  color?: string
+  bgColor?: string
+  width?: string
+  height?: string
+  bRadius?: string
+  top?: string
+  left?: string
 }
 
 export const ButtonGeneric = ({
@@ -39,5 +39,5 @@ export const ButtonGeneric = ({
         {Text}
       </ContainerButton>
     </>
-  );
-};
+  )
+}

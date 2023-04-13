@@ -8,8 +8,10 @@ interface Props {
 export default ({ status }: Props) => {
   const props = {
     label: status ? 'Ativo' : 'Inativo',
-    background: status ? colors.positive.transparent : colors.negative.transparent,
-    color: status ? colors.positive.pure : colors.negative.pure,
+    background: status
+      ? colors.positive.transparent
+      : colors.negative.transparent,
+    color: status ? colors.positive.pure : colors.negative.pure
   }
 
   return (
@@ -20,7 +22,7 @@ export default ({ status }: Props) => {
       bgColor={props.background}
       typographyProps={{
         textAlign: 'center',
-        color: props.color,
+        color: props.color
       }}
     />
   )

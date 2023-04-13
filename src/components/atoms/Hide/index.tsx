@@ -6,5 +6,9 @@ interface Props {
 }
 
 export const HideBox = ({ show, children }: Props) => {
-  return <div style={{ display: 'flex', flex: 0.1 }}>{show && children}</div>
+  return (
+    <div style={{ display: 'flex', flex: 0.1 }}>
+      {show && children}
+    </div>
+  )
 }

@@ -1,22 +1,22 @@
-import styled from "styled-components";
-import { IInputsPropsDate } from "../../../react-app-env";
+import styled from 'styled-components'
+import { IInputsPropsDate } from '../../../react-app-env'
 
 export const Img = styled.img`
   width: 20px;
   margin: 0 auto;
-`;
+`
 
 export const PlaceHolder = styled.span`
   display: flex;
   align-items: center;
   width: 100%;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
   font-size: 1em;
   color: #acb4ba;
   opacity: 0.7;
   padding-left: 0.5em;
-`;
+`
 
 export const InputLine = styled.div<IButtonColorProps>`
   position: relative;
@@ -25,29 +25,30 @@ export const InputLine = styled.div<IButtonColorProps>`
   width: ${(props) => props.width};
   height: 45px;
   border: ${(props) =>
-    `1.8px solid ${props.onError ? "#ff4842" : "rgba(172, 180, 186, 1)"}`};
+    `1.8px solid ${
+      props.onError ? '#ff4842' : 'rgba(172, 180, 186, 1)'
+    }`};
   border-radius: 3px;
   margin: ${(props) => props.margin};
-`;
-
+`
 
 export const StylePlaceholder = styled.span`
   display: flex;
   align-items: center;
   width: 100%;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
   font-size: 1em;
   color: #acb4ba;
   opacity: 0.7;
   padding-left: 0.5em;
-`;
+`
 
 export const InputDefault = styled.input<IInputsPropsDate>`
   font-size: 1rem;
   font-weight: 500;
-  font-family: "Poppins", sans-serif;
-  width: ${(props) => (props.width ? props.width : "100%")};
+  font-family: 'Poppins', sans-serif;
+  width: ${(props) => (props.width ? props.width : '100%')};
   height: 40px;
   padding: ${(props) => props.padding};
   outline: none;
@@ -57,10 +58,10 @@ export const InputDefault = styled.input<IInputsPropsDate>`
 
   &::placeholder {
     color: ${(props) =>
-      props.placeholderColor ? props.placeholderColor : "#ACB4BA"};
+      props.placeholderColor ? props.placeholderColor : '#ACB4BA'};
     opacity: 0.7;
     text-align: ${(props) =>
-      props.placeholderPosition ? props.placeholderPosition : "left"};
+      props.placeholderPosition ? props.placeholderPosition : 'left'};
   }
 
   &:-webkit-autofill,
@@ -96,4 +97,4 @@ export const InputDefault = styled.input<IInputsPropsDate>`
   &::-webkit-search-results-decoration {
     display: none;
   }
-`;
+`

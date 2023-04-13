@@ -15,7 +15,9 @@ export const Project = () => {
       <ContainerRow gap='1rem'>
         <Selects.Default
           {...register('projects.selected.project')}
-          onSelect={(v: any) => setValue('projects.selected.project', v)}
+          onSelect={(v: any) =>
+            setValue('projects.selected.project', v)
+          }
           onClear={() => setValue('uf', null)}
           options={watch('options.projects') ?? []}
           label='Projeto'

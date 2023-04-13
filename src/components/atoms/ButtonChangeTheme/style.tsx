@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContainerMain = styled.button`
   width: 180px;
   height: 35px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-weight: 600;
   border-radius: 25px;
   display: flex;
@@ -20,7 +20,7 @@ export const ContainerMain = styled.button`
   svg:hover {
     color: #0066ff;
   }
-`;
+`
 
 export const ContainerButtonLights = styled.div`
   display: flex;
@@ -28,4 +28,4 @@ export const ContainerButtonLights = styled.div`
   margin-top: -17em;
   margin-right: 3em;
   border-radius: 1px solid #fff;
-`;
+`

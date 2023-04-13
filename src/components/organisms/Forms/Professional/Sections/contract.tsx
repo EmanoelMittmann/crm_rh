@@ -11,7 +11,7 @@ export const Contract = () => {
     register,
     watch,
     formState: { errors },
-    setValue,
+    setValue
   } = useFormContext<FormProps>()
 
   const options = watch('options')
@@ -19,14 +19,27 @@ export const Contract = () => {
   const commissionOptions = [
     {
       label: 'Sim',
-      input: <Radio id='1' {...register('commission', { valueAsNumber: true })} value={1} />,
-      active: !!Number(watch('commission')),
+      input: (
+        <Radio
+          id='1'
+          {...register('commission', { valueAsNumber: true })}
+          value={1}
+        />
+      ),
+      active: !!Number(watch('commission'))
     },
     {
       label: 'Não',
-      input: <Radio id='2' {...register('commission', { valueAsNumber: true })} value={0} defaultChecked />,
-      active: !Number(watch('commission')),
-    },
+      input: (
+        <Radio
+          id='2'
+          {...register('commission', { valueAsNumber: true })}
+          value={0}
+          defaultChecked
+        />
+      ),
+      active: !Number(watch('commission'))
+    }
   ]
 
   return (
@@ -37,7 +50,7 @@ export const Contract = () => {
       <ContainerRow gap='1rem'>
         <Inputs.Default
           {...register('start_date', {
-            required: validation.required,
+            required: validation.required
           })}
           error={errors.start_date?.message}
           type='date'
@@ -46,9 +59,11 @@ export const Contract = () => {
         />
         <Selects.Default
           {...register('job_id', {
-            required: validation.required,
+            required: validation.required
           })}
-          onSelect={(value: any) => setValue('job_id', value, { shouldValidate: true })}
+          onSelect={(value: any) =>
+            setValue('job_id', value, { shouldValidate: true })
+          }
           onClear={() => setValue('job_id', null)}
           error={errors.professional_data?.type_person?.message}
           options={options?.jobs}
@@ -56,14 +71,19 @@ export const Contract = () => {
           placeholder='Selecione'
           width={435}
         />
-        <Selects.WithCheckbox label='Comissão' options={commissionOptions} />
+        <Selects.WithCheckbox
+          label='Comissão'
+          options={commissionOptions}
+        />
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Selects.Default
           {...register('job_type', {
-            required: validation.required,
+            required: validation.required
           })}
-          onSelect={(value: any) => setValue('job_type', value, { shouldValidate: true })}
+          onSelect={(value: any) =>
+            setValue('job_type', value, { shouldValidate: true })
+          }
           onClear={() => setValue('job_type', null)}
           error={errors.job_type?.message}
           options={CONTRACT_TYPE_OPTIONS}
@@ -72,7 +92,7 @@ export const Contract = () => {
         />
         <Inputs.Default
           {...register('weekly_hours', {
-            required: validation.required,
+            required: validation.required
           })}
           error={errors.weekly_hours?.message}
           type='number'
@@ -82,7 +102,7 @@ export const Contract = () => {
         />
         <Inputs.Default
           {...register('mounth_hours', {
-            required: validation.required,
+            required: validation.required
           })}
           error={errors.mounth_hours?.message}
           type='number'
@@ -93,7 +113,7 @@ export const Contract = () => {
         <Inputs.Default
           {...register('fixed_payment_value', {
             setValueAs: MASKER.CURRENCY,
-            required: validation.required,
+            required: validation.required
           })}
           error={errors.fixed_payment_value?.message}
           value={watch('fixed_payment_value') ?? ''}

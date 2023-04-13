@@ -11,7 +11,7 @@ export const Personal = () => {
     register,
     watch,
     setValue,
-    formState: { errors },
+    formState: { errors }
   } = useFormContext<FormProps>()
 
   return (
@@ -38,7 +38,9 @@ export const Personal = () => {
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Inputs.Default
-          {...register('birth_date', { required: validation.required })}
+          {...register('birth_date', {
+            required: validation.required
+          })}
           error={errors.birth_date?.message}
           type='date'
           label='Data de nascimento'
@@ -48,7 +50,8 @@ export const Personal = () => {
           {...register('cpf', {
             required: validation.required,
             setValueAs: (v: string) => mask(v, MASKER.CPF),
-            validate: (v) => validation.min(Number(v), 11, 'CPF inválido'),
+            validate: (v) =>
+              validation.min(Number(v), 11, 'CPF inválido')
           })}
           error={errors.cpf?.message}
           value={watch('cpf') ?? ''}
@@ -68,7 +71,7 @@ export const Personal = () => {
         <Inputs.Default
           {...register('telephone_number', {
             required: validation.required,
-            setValueAs: (v: string) => mask(v, MASKER.TELEPHONE),
+            setValueAs: (v: string) => mask(v, MASKER.TELEPHONE)
           })}
           error={errors.telephone_number?.message}
           value={watch('telephone_number') ?? ''}
@@ -82,7 +85,7 @@ export const Personal = () => {
         <Inputs.Default
           {...register('cep', {
             required: validation.required,
-            setValueAs: (v: string) => mask(v, MASKER.CEP),
+            setValueAs: (v: string) => mask(v, MASKER.CEP)
           })}
           error={errors.cep?.message}
           value={watch('cep') ?? ''}
@@ -91,14 +94,18 @@ export const Personal = () => {
           width={137}
         />
         <Inputs.Default
-          {...register('street_name', { required: validation.required })}
+          {...register('street_name', {
+            required: validation.required
+          })}
           error={errors.street_name?.message}
           label='Rua'
           type='text'
           width={300}
         />
         <Inputs.Default
-          {...register('house_number', { required: validation.required })}
+          {...register('house_number', {
+            required: validation.required
+          })}
           error={errors.house_number?.message}
           label='Número'
           type='number'
@@ -115,13 +122,17 @@ export const Personal = () => {
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Inputs.Default
-          {...register('neighbourhood_name', { required: validation.required })}
+          {...register('neighbourhood_name', {
+            required: validation.required
+          })}
           error={errors.neighbourhood_name?.message}
           label='Bairro'
           width='100%'
         />
         <Inputs.Default
-          {...register('city_name', { required: validation.required })}
+          {...register('city_name', {
+            required: validation.required
+          })}
           error={errors.city_name?.message}
           label='Cidade'
           width='100%'
@@ -129,7 +140,7 @@ export const Personal = () => {
 
         <Selects.Default
           {...register('uf', {
-            required: validation.required,
+            required: validation.required
           })}
           value={watch('uf') as any}
           onSelect={(v: any) => setValue('uf', v)}

@@ -1,7 +1,11 @@
 import { Typography } from '@stardust-ds/react'
 import { useFormContext } from 'react-hook-form'
 import { Inputs } from 'components/atoms'
-import { ColumnContainer, ContainerRow, GridContainer } from '../style'
+import {
+  ColumnContainer,
+  ContainerRow,
+  GridContainer
+} from '../style'
 
 export const Permission = () => {
   const { setValue, watch } = useFormContext()
@@ -43,7 +47,9 @@ export const Permission = () => {
                 <Inputs.Check
                   key={id}
                   checked={watch(field) === true}
-                  onChange={(e) => setValue('field', e.target?.checked)}
+                  onChange={(e) =>
+                    setValue('field', e.target?.checked)
+                  }
                   label={modulo_name}
                 />
               )

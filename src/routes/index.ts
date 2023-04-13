@@ -3,23 +3,23 @@ export const routes = {
     list: '/professionals',
     updateStatus: (id: number) => `/user/updateStatus/${id}`,
     validateCPF: '/user/validateCpf',
-    register: '/user',
+    register: '/user'
   },
   job: {
-    list: '/job',
+    list: '/job'
   },
   userType: {
-    list: '/userType',
+    list: '/userType'
   },
   permission: {
-    list: '/permissions',
+    list: '/permissions'
   },
   project: {
-    list: '/project',
-  },
+    list: '/project'
+  }
 }
 
 export const externRoutes = {
   banks: 'https://brasilapi.com.br/api/banks/v1',
-  cep: (search: string) => ` https://viacep.com.br/ws/${search}/json/`,
-} 
+  cep: (search: string) => ` https://viacep.com.br/ws/${search}/json/`
+}

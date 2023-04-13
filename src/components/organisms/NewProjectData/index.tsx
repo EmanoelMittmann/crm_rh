@@ -3,12 +3,12 @@ import {
   Input,
   Select,
   Typography,
-  useTheme,
-} from "@stardust-ds/react";
-import { useState } from "react";
-import { IconArrowPageRegistration } from "../../atoms/Icons/IconArrowPageRegistration";
-import InputIconPosition from "../../atoms/InputIconPosition";
-import MasterPage from "../../pages/MasterPage";
+  useTheme
+} from '@stardust-ds/react'
+import { useState } from 'react'
+import { IconArrowPageRegistration } from '../../atoms/Icons/IconArrowPageRegistration'
+import InputIconPosition from '../../atoms/InputIconPosition'
+import MasterPage from '../../pages/MasterPage'
 
 import {
   ContaineNewposition,
@@ -18,32 +18,33 @@ import {
   ContainerInputsSecun,
   ContainerTime,
   ContainerChildrenTable,
-  Container,
-} from "./style";
-import { FormikProps } from "formik";
+  Container
+} from './style'
+import { FormikProps } from 'formik'
 import {
   objectTime,
   optionsProjects,
   optionsStatus,
-  optionsTime,
-} from "../../utils/OptionsAplication";
-import TimeListing from "./TimeListing/TimeListing";
-import HeaderJobsProjects from "../../molecules/HeaderJobsProjects";
-import { useNavigate } from "react-router-dom";
+  optionsTime
+} from '../../utils/OptionsAplication'
+import TimeListing from './TimeListing/TimeListing'
+import HeaderJobsProjects from '../../molecules/HeaderJobsProjects'
+import { useNavigate } from 'react-router-dom'
 
 interface INewProject {
-  DataProjects: OtherProps & FormikProps<FormProjects>;
+  DataProjects: OtherProps & FormikProps<FormProjects>
 }
 
 const NewProject = ({ DataProjects }: INewProject | any) => {
-  const { errors, isSubmitting, title, handleChange, values } = DataProjects;
-  const [option, setOption] = useState("");
-  const navigate = useNavigate();
-  const { brand } = useTheme();
+  const { errors, isSubmitting, title, handleChange, values } =
+    DataProjects
+  const [option, setOption] = useState('')
+  const navigate = useNavigate()
+  const { brand } = useTheme()
 
   const handleNavigate = () => {
-    navigate("/projects");
-  };
+    navigate('/projects')
+  }
 
   return (
     <MasterPage>
@@ -52,121 +53,124 @@ const NewProject = ({ DataProjects }: INewProject | any) => {
           <div onClick={handleNavigate}>
             <InputIconPosition Icon={<IconArrowPageRegistration />} />
           </div>
-          <div style={{ marginTop: "0.3em" }}>
-            <Typography type="h3"> Cadastrar novo projeto </Typography>
+          <div style={{ marginTop: '0.3em' }}>
+            <Typography type='h3'>
+              {' '}
+              Cadastrar novo projeto{' '}
+            </Typography>
           </div>
         </ContainerBase>
         <Container>
           <ContaineNewposition>
-            <div style={{ margin: "2em" }}>
-              <Typography type="h3">Dados do projeto</Typography>
+            <div style={{ margin: '2em' }}>
+              <Typography type='h3'>Dados do projeto</Typography>
             </div>
             <ContainerInputs>
               <Input
                 isFullWidth
-                label="Nome do projeto"
-                placeholder="Nome do Projeto"
+                label='Nome do projeto'
+                placeholder='Nome do Projeto'
                 value={values.name}
-                onChange={handleChange("name")}
+                onChange={handleChange('name')}
               />
               <Input
                 width={250}
-                height=""
-                label="ID do projeto"
-                placeholder="ID do Projeto"
+                height=''
+                label='ID do projeto'
+                placeholder='ID do Projeto'
                 value={values.id}
-                onChange={handleChange("id")}
+                onChange={handleChange('id')}
               />
               <Select
-                label="Tipo de projeto"
+                label='Tipo de projeto'
                 width={250}
                 options={optionsProjects}
                 // value={values.project_type_id}
-                placeholder="Selecione"
+                placeholder='Selecione'
               />
             </ContainerInputs>
 
-            <ContainerInputsSecun style={{ marginTop: "0.5em" }}>
+            <ContainerInputsSecun style={{ marginTop: '0.5em' }}>
               <Input
                 isFullWidth
                 width={285}
-                label="Data de Início"
-                placeholder="Data de Início"
-                type="date"
+                label='Data de Início'
+                placeholder='Data de Início'
+                type='date'
                 value={values.date_start}
-                onChange={handleChange("date_start")}
+                onChange={handleChange('date_start')}
               />
               <Input
                 isFullWidth
                 width={285}
-                label="Data Estimado"
-                placeholder={"Data Estimado"}
-                type="date"
+                label='Data Estimado'
+                placeholder={'Data Estimado'}
+                type='date'
                 value={values.date_end_performed}
-                onChange={handleChange("date_end_performed")}
+                onChange={handleChange('date_end_performed')}
               />
               <Select
-                label="Status"
+                label='Status'
                 width={250}
                 options={optionsStatus}
                 // value={values.project_status_id}
-                placeholder="Selecione"
-                onSelect={() => setOption("")}
+                placeholder='Selecione'
+                onSelect={() => setOption('')}
               />
               <Input
                 isFullWidth
-                placeholder="R$ 00.00"
+                placeholder='R$ 00.00'
                 style={{
-                  marginTop: "0.6em",
-                  marginRight: "1em",
-                  textAlign: "end",
-                  paddingBottom: "4px",
+                  marginTop: '0.6em',
+                  marginRight: '1em',
+                  textAlign: 'end',
+                  paddingBottom: '4px'
                 }}
-                label="Custo estimado"
+                label='Custo estimado'
                 height={65}
                 value={values.team_cost}
                 onChange={handleChange}
               />
             </ContainerInputsSecun>
 
-            <div style={{ margin: "2em" }}>
-              <Typography type="h3">Time</Typography>
+            <div style={{ margin: '2em' }}>
+              <Typography type='h3'>Time</Typography>
             </div>
 
             <ContainerTime>
               <Select
-                label="Time"
+                label='Time'
                 width={280}
                 options={optionsTime}
-                placeholder="Selecione"
-                onSelect={() => setOption("")}
+                placeholder='Selecione'
+                onSelect={() => setOption('')}
               />
               <Input
                 isFullWidth
                 style={{
-                  marginTop: "0.6em",
-                  marginRight: "1em",
-                  textAlign: "end",
-                  paddingBottom: "4px",
+                  marginTop: '0.6em',
+                  marginRight: '1em',
+                  textAlign: 'end',
+                  paddingBottom: '4px'
                 }}
-                placeholder="Horas"
-                label="Horas mensais"
-                value={""}
+                placeholder='Horas'
+                label='Horas mensais'
+                value={''}
                 onChange={handleChange}
                 height={65}
               />
               <Button
-                type="submit"
-                bgColor="#0D2551"
-                bStyle="solid"
-                bWidth="hairline"
+                type='submit'
+                bgColor='#0D2551'
+                bStyle='solid'
+                bWidth='hairline'
                 style={{
-                  marginTop: "0.6em",
-                  borderRadius: "25px",
-                  color: "#ffffff",
-                  width: "145px",
-                  font: "unset",
-                  fontSize: "15px",
+                  marginTop: '0.6em',
+                  borderRadius: '25px',
+                  color: '#ffffff',
+                  width: '145px',
+                  font: 'unset',
+                  fontSize: '15px'
                 }}
               >
                 Vincular
@@ -174,7 +178,7 @@ const NewProject = ({ DataProjects }: INewProject | any) => {
             </ContainerTime>
             <HeaderJobsProjects />
             <ContainerChildrenTable>
-              <div className="table">
+              <div className='table'>
                 {objectTime.map((time) => (
                   <>
                     <TimeListing key={time.id} time={time} />
@@ -184,32 +188,32 @@ const NewProject = ({ DataProjects }: INewProject | any) => {
             </ContainerChildrenTable>
             <ContainerButtonsFooter>
               <Button
-                type="submit"
-                bgColor="#CCD1D6"
-                bStyle="solid"
-                bWidth="hairline"
+                type='submit'
+                bgColor='#CCD1D6'
+                bStyle='solid'
+                bWidth='hairline'
                 style={{
-                  borderRadius: "25px",
-                  color: "#000",
-                  width: "130px",
-                  margin: "0 2em",
-                  font: "unset",
-                  fontSize: "15px",
+                  borderRadius: '25px',
+                  color: '#000',
+                  width: '130px',
+                  margin: '0 2em',
+                  font: 'unset',
+                  fontSize: '15px'
                 }}
               >
                 Cancelar
               </Button>
               <Button
-                type="submit"
-                bgColor="#0066FF"
-                bStyle="solid"
-                bWidth="hairline"
+                type='submit'
+                bgColor='#0066FF'
+                bStyle='solid'
+                bWidth='hairline'
                 style={{
-                  borderRadius: "25px",
-                  color: "#ffffff",
-                  width: "145px",
-                  font: "unset",
-                  fontSize: "15px",
+                  borderRadius: '25px',
+                  color: '#ffffff',
+                  width: '145px',
+                  font: 'unset',
+                  fontSize: '15px'
                 }}
               >
                 Salvar Projeto
@@ -219,7 +223,7 @@ const NewProject = ({ DataProjects }: INewProject | any) => {
         </Container>
       </>
     </MasterPage>
-  );
-};
+  )
+}
 
-export default NewProject;
+export default NewProject

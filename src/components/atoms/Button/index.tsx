@@ -1,5 +1,5 @@
-import { IButtonProps } from "../../../react-app-env";
-import { ContainerMain } from "./style";
+import { IButtonProps } from '../../../react-app-env'
+import { ContainerMain } from './style'
 
 const ButtonWithHover = ({
   Text,
@@ -13,7 +13,7 @@ const ButtonWithHover = ({
   ...props
 }: IButtonProps) => {
   return (
-    <>  
+    <>
       <ContainerMain
         {...props}
         color={color}
@@ -27,7 +27,7 @@ const ButtonWithHover = ({
         {Text}
       </ContainerMain>
     </>
-  );
-};
+  )
+}
 
-export default ButtonWithHover;
+export default ButtonWithHover

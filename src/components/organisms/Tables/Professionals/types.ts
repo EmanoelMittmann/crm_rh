@@ -1,6 +1,5 @@
 import type { TemplateProps } from '../types'
 
-
 interface OptionsProps {
   label: string
   callback: () => void
@@ -25,6 +24,3 @@ export type ShelfProps = {
   props: ProfessionalProps
   config: ConfigProps
 }
-
-
-

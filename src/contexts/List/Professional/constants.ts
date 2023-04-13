@@ -7,12 +7,12 @@ const META_PROPS = {
   order: 'ASC',
   paginate: {
     current_page: 1,
-    last_page: 1,
-  },
+    last_page: 1
+  }
 } as DefaultMetaProps
 
 const FILTER_OPTIONS = {
-  job: [],
+  job: []
 }
 
 export default { META_PROPS, FILTER_OPTIONS }

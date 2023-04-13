@@ -1,8 +1,8 @@
-import { createGlobalStyle } from "styled-components";
-import { Theme } from "./customTheme";
+import { createGlobalStyle } from 'styled-components'
+import { Theme } from './customTheme'
 
 interface ITheme {
-  theme: Theme;
+  theme: Theme
 }
 
 export const GlobalStyles = createGlobalStyle<ITheme>`
@@ -16,4 +16,4 @@ export const GlobalStyles = createGlobalStyle<ITheme>`
     body{
         background-color: ${(props) => props.theme.brand.color.bg};
     }
-`;
+`
