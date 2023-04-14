@@ -6,8 +6,14 @@ interface UseDebounceProps {
   delay?: number
 }
 
-export const useDebounce = ({ fn, listener, delay = 500 }: UseDebounceProps) => {
-  const currentListeners = Array.isArray(listener) ? listener : [listener]
+export const useDebounce = ({
+  fn,
+  listener,
+  delay = 500
+}: UseDebounceProps) => {
+  const currentListeners = Array.isArray(listener)
+    ? listener
+    : [listener]
 
   useEffect(() => {
     const handler = setTimeout(() => fn(), delay)

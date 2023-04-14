@@ -1,7 +1,10 @@
 import type { ReactNode } from 'react'
+
 import { Typography } from '@stardust-ds/react'
-import { IconLeftArrow } from 'components/atoms'
 import { theme } from 'styles'
+
+import { IconLeftArrow } from 'components/atoms'
+
 import { Container, Button, Main } from './style'
 
 interface Props {

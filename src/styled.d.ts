@@ -1,6 +1,6 @@
-import { customTheme } from './styles/customTheme';
+import { customTheme } from './styles/customTheme'
 
-type Theme = typeof customTheme;
+type Theme = typeof customTheme
 
 declare module 'styled-components' {
   export interface DefaultTheme extends Theme {}
@@ -8,5 +8,5 @@ declare module 'styled-components' {
 
 declare module '@stardust-ds/react' {
   export interface StardustTheme extends Theme {}
-  export function useTheme(): Theme;
+  export function useTheme(): Theme
 }

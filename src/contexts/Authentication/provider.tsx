@@ -1,16 +1,19 @@
 import { ReactNode, useEffect, useState } from 'react'
-import jwt_decode from 'jwt-decode'
-import api from 'api'
-import { AuthContext } from '.'
+
 import { LocalStorageKeys } from 'config'
+import jwt_decode from 'jwt-decode'
+
+import api from 'api'
+
+import { AuthContext } from '.'
 import type { AuthProps } from './types'
 
 const DEFAULT_VALUE = {
   user: {
     avatar: '',
     name: '',
-    user_type_id: 0,
-  },
+    user_type_id: 0
+  }
 } as AuthProps
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -19,20 +22,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isLogged = !!auth.token
 
   const signIn = async ({ credential }: CredentialResponse) => {
-    const { email, sub, picture }: IJWTDecodeGoogle = jwt_decode(credential as string)
+    const { email, sub, picture }: IJWTDecodeGoogle = jwt_decode(
+      credential as string
+    )
 
     try {
       const { data } = await api.post('/auth', {
         google_email: email,
         google_id: sub,
-        access_token: credential,
+        access_token: credential
       })
 
       const token = data.token.token
-      const user = { avatar: picture, name: data.data[0].name, user_type_id: data.data[0].user_type_id }
+      const user = {
+        avatar: picture,
+        name: data.data[0].name,
+        user_type_id: data.data[0].user_type_id
+      }
 
-      localStorage.setItem(LocalStorageKeys.TOKEN, JSON.stringify(token))
-      localStorage.setItem(LocalStorageKeys.USER, JSON.stringify(user))
+      localStorage.setItem(
+        LocalStorageKeys.TOKEN,
+        JSON.stringify(token)
+      )
+      localStorage.setItem(
+        LocalStorageKeys.USER,
+        JSON.stringify(user)
+      )
 
       setAuth({ user, token })
 
@@ -51,13 +66,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (isLogged) return
 
-    const ExistToken = localStorage.getItem(LocalStorageKeys.TOKEN) as string
-    const ExistUser = localStorage.getItem(LocalStorageKeys.USER) as string
+    const ExistToken = localStorage.getItem(
+      LocalStorageKeys.TOKEN
+    ) as string
+    const ExistUser = localStorage.getItem(
+      LocalStorageKeys.USER
+    ) as string
 
     if (!ExistToken && !ExistUser) return
 
-    setAuth({ user: JSON.parse(ExistUser), token: JSON.parse(ExistToken) })
+    setAuth({
+      user: JSON.parse(ExistUser),
+      token: JSON.parse(ExistToken)
+    })
   }, [])
 
-  return <AuthContext.Provider value={{ ...auth, isLogged, signIn, logout }}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider
+      value={{ ...auth, isLogged, signIn, logout }}
+    >
+      {children}
+    </AuthContext.Provider>
+  )
 }

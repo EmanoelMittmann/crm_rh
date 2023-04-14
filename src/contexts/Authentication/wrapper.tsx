@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react'
+
 import { AuthContext } from '.'
 
 export function AuthWrapper({ children }: { children: JSX.Element }) {

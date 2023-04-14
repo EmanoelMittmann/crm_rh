@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
+
 import { Typography } from '@stardust-ds/react'
+
 import { Container, Main } from './style'
 
 interface Props {

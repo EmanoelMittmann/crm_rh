@@ -1,6 +1,9 @@
 import { useFormContext } from 'react-hook-form'
+
 import { Radio } from '@stardust-ds/react'
+
 import { Selects } from 'components/atoms'
+
 import { ContainerRow } from '../style'
 import type { FormProps } from '../types'
 
@@ -17,8 +20,14 @@ export const Paper = () => {
           options={[
             {
               label: 'Technical Leader',
-              input: <Radio id='Technical Lead and Developer' {...register('function_job')} value='Technical Leader' />,
-              active: watch('function_job') === 'Technical Leader',
+              input: (
+                <Radio
+                  id='Technical Lead and Developer'
+                  {...register('function_job')}
+                  value='Technical Leader'
+                />
+              ),
+              active: watch('function_job') === 'Technical Leader'
             },
             {
               label: 'Technical Lead and Developer',
@@ -29,13 +38,21 @@ export const Paper = () => {
                   value='Technical Lead and Developer'
                 />
               ),
-              active: watch('function_job') === 'Technical Lead and Developer',
+              active:
+                watch('function_job') ===
+                'Technical Lead and Developer'
             },
             {
               label: 'Developer',
-              input: <Radio id='Developer' {...register('function_job')} value='Developer' />,
-              active: watch('function_job') === 'Developer',
-            },
+              input: (
+                <Radio
+                  id='Developer'
+                  {...register('function_job')}
+                  value='Developer'
+                />
+              ),
+              active: watch('function_job') === 'Developer'
+            }
           ]}
         />
       </ContainerRow>

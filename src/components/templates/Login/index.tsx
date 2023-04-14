@@ -1,6 +1,19 @@
-import { Input, Typography, Checkbox, Button } from '@stardust-ds/react'
-import { BackgroundCover, IconUbistart, IconUser, IconArrow, Inputs } from 'components/atoms'
+import {
+  Input,
+  Typography,
+  Checkbox,
+  Button
+} from '@stardust-ds/react'
 import { colors } from 'styles'
+
+import {
+  BackgroundCover,
+  IconUbistart,
+  IconUser,
+  IconArrow,
+  Inputs
+} from 'components/atoms'
+
 import {
   ContainerData,
   ContainerIconUbistart,
@@ -10,9 +23,8 @@ import {
   ContainerGlobalLogin,
   ContainerButton,
   LoginGoogle,
-  SpacingLoginText,
+  SpacingLoginText
 } from './style'
-
 import type { Props } from './types'
 
 export default ({ buttonRef }: Props) => {
@@ -21,7 +33,9 @@ export default ({ buttonRef }: Props) => {
       <BackgroundCover />
       <ContainerLogin>
         <ContainerIconUbistart>
-          <Inputs.Icon Icon={<IconUbistart width={230} height={48} />} />
+          <Inputs.Icon
+            Icon={<IconUbistart width={230} height={48} />}
+          />
         </ContainerIconUbistart>
         <ContainerData>
           <SpacingLoginText>
@@ -42,7 +56,11 @@ export default ({ buttonRef }: Props) => {
         </ContainerData>
         <ContainerCheckbox>
           <ContainerChecked>
-            <Checkbox activeColor='#fff' inactiveColor='#000' iconColor='#000' />
+            <Checkbox
+              activeColor='#fff'
+              inactiveColor='#000'
+              iconColor='#000'
+            />
 
             <Typography type='l2'>Lembrar-me</Typography>
           </ContainerChecked>
@@ -61,7 +79,11 @@ export default ({ buttonRef }: Props) => {
             bRadius='md'
             height={50}
             // FIXME: Login limitado ao google.
-            onClick={() => alert('Desabilitado! Tente efetuar o login usando o Google.')}
+            onClick={() =>
+              alert(
+                'Desabilitado! Tente efetuar o login usando o Google.'
+              )
+            }
           >
             Entrar
           </Button>

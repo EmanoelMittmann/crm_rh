@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { IconLeftArrow } from "../../atoms/Icons/IconLeftArrow";
-import { IconRightArrow } from "../../atoms/Icons/IconRightArrow";
-import { Paginate } from "../Paginate";
-import { Container, Numbers, Pagination } from "./style";
+import React, { useState } from 'react'
 
-//  TODO: REVER COMPONENTE 
+import { IconLeftArrow } from '../../atoms/Icons/IconLeftArrow'
+import { IconRightArrow } from '../../atoms/Icons/IconRightArrow'
+import { Paginate } from '../Paginate'
+import { Container, Numbers, Pagination } from './style'
+
+//  TODO: REVER COMPONENTE
 export const Footer = () => {
   return (
     <>
@@ -13,4 +14,4 @@ export const Footer = () => {
       </Container>
     </>
   )
-};
+}
