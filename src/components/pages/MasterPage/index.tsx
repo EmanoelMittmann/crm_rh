@@ -1,4 +1,5 @@
 import { AuthProvider } from 'contexts'
+
 import { Navbar } from '../../molecules/NavBar'
 import { Sidebar } from '../../molecules/SideBar'
 import { Master } from './style'

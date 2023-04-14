@@ -1,9 +1,19 @@
-import { useState, forwardRef, useImperativeHandle, useRef } from 'react'
+import {
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  useRef
+} from 'react'
+
 import { IconThreePoints } from 'components/atoms'
+
 import { Overlay, ContainerModal, Options } from './style'
 import type { PopoverProps } from './types'
 
-const Modal = forwardRef<PopoverProps['Imperative'], PopoverProps['Data']>(({ options }, ref) => {
+const Modal = forwardRef<
+  PopoverProps['Imperative'],
+  PopoverProps['Data']
+>(({ options }, ref) => {
   const [open, setOpen] = useState(false)
 
   function onOpen() {
@@ -15,7 +25,7 @@ const Modal = forwardRef<PopoverProps['Imperative'], PopoverProps['Data']>(({ op
 
   useImperativeHandle(ref, () => ({
     onOpen,
-    onClose,
+    onClose
   }))
 
   if (!open) return null

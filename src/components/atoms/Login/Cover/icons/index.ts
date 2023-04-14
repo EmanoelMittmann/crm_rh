@@ -1,8 +1,8 @@
 import Bottom from './Bottom'
 import BottomBlue from './BottomBlue'
+import ImgPage from './Image'
 import Top from './Top'
 import TopBlue from './TopBlue'
-import ImgPage from './Image'
 
 export const Icon = Object.assign(
   {},
@@ -11,6 +11,6 @@ export const Icon = Object.assign(
     Bottom,
     BottomBlue,
     ImgPage,
-    Top,
+    Top
   }
 )

@@ -11,7 +11,7 @@ const ROUTES = {
   '/services': 'Ordem de Serviço',
   '/settings': 'Configurações',
   '/company': 'Empresas',
-  '/RegisterProfessionals': 'Profissionais > Cadastrar Novo',
+  '/RegisterProfessionals': 'Profissionais > Cadastrar Novo'
 }
 
 export function handlePathname(pathname: PathnameProps) {

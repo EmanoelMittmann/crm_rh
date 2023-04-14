@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 95%;
@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: space-around;
   align-items: center;
   margin-left: 7.3em;
-`;
+`
 export const Pagination = styled.div`
   width: 100%;
   display: flex;
@@ -20,12 +20,12 @@ export const Pagination = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    font-family: "Poppins";
+    font-family: 'Poppins';
     font-weight: 500;
     cursor: pointer;
     color: #737d86;
   }
-`;
+`
 
 export const Numbers = styled.div<IButtonColorProps>`
   width: 2em;
@@ -34,7 +34,7 @@ export const Numbers = styled.div<IButtonColorProps>`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-weight: 500;
   cursor: pointer;
   color: #737d86;
@@ -46,5 +46,5 @@ export const Numbers = styled.div<IButtonColorProps>`
     color: #0066ff;
     font-weight: 600;
   `
-      : ""}
-`;
+      : ''}
+`

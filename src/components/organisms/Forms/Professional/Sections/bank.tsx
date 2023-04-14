@@ -1,9 +1,12 @@
 import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
+
 import { mask } from 'remask'
+
 import { Inputs, Selects } from 'components/atoms'
-import { getMaskFromPixKeyType, validation } from '../logic'
+
 import { BANK_OPTIONS, MASKER, KEYS } from '../constants'
+import { getMaskFromPixKeyType, validation } from '../logic'
 import { ContainerRow } from '../style'
 import type { FormProps, getMaskFromTypePIXProps } from '../types'
 
@@ -13,20 +16,28 @@ export const Bank = () => {
     watch,
     formState: { errors },
     setValue,
-    clearErrors,
+    clearErrors
   } = useFormContext<FormProps>()
 
-  const isRequiredPixKeyType = watch('professional_data.type_of_transfer')?.value === KEYS.TRANSFER_TYPE.PIX
+  const isRequiredPixKeyType =
+    watch('professional_data.type_of_transfer')?.value ===
+    KEYS.TRANSFER_TYPE.PIX
 
   const validate = useMemo(() => {
-    if (!isRequiredPixKeyType) clearErrors(['professional_data.pix_key', 'professional_data.pix_key_type'])
+    if (!isRequiredPixKeyType)
+      clearErrors([
+        'professional_data.pix_key',
+        'professional_data.pix_key_type'
+      ])
     return {
-      pix_required: isRequiredPixKeyType ? validation.required : false,
+      pix_required: isRequiredPixKeyType ? validation.required : false
     }
   }, [isRequiredPixKeyType])
 
   const pix_key_type = watch('professional_data.pix_key_type')?.value
-  const pix_key_mask = getMaskFromPixKeyType(pix_key_type as getMaskFromTypePIXProps)
+  const pix_key_mask = getMaskFromPixKeyType(
+    pix_key_type as getMaskFromTypePIXProps
+  )
 
   return (
     <>
@@ -36,10 +47,14 @@ export const Bank = () => {
       <ContainerRow gap='1rem'>
         <Selects.Default
           {...register('professional_data.type_person', {
-            required: validation.required,
+            required: validation.required
           })}
-          onSelect={(value: any) => setValue('professional_data.type_person', value)}
-          onClear={() => setValue('professional_data.type_person', null)}
+          onSelect={(value: any) =>
+            setValue('professional_data.type_person', value)
+          }
+          onClear={() =>
+            setValue('professional_data.type_person', null)
+          }
           error={errors.professional_data?.type_person?.message}
           options={BANK_OPTIONS.PERSON_TYPE}
           width={292.5}
@@ -48,9 +63,11 @@ export const Bank = () => {
         />
         <Selects.Default
           {...register('professional_data.bank', {
-            required: validation.required,
+            required: validation.required
           })}
-          onSelect={(value: any) => setValue('professional_data.bank', value)}
+          onSelect={(value: any) =>
+            setValue('professional_data.bank', value)
+          }
           onClear={() => setValue('professional_data.bank', null)}
           error={errors.professional_data?.bank?.message}
           options={watch('options.banks')}
@@ -61,10 +78,14 @@ export const Bank = () => {
         />
         <Selects.Default
           {...register('professional_data.account_type', {
-            required: validation.required,
+            required: validation.required
           })}
-          onSelect={(value: any) => setValue('professional_data.account_type', value)}
-          onClear={() => setValue('professional_data.account_type', null)}
+          onSelect={(value: any) =>
+            setValue('professional_data.account_type', value)
+          }
+          onClear={() =>
+            setValue('professional_data.account_type', null)
+          }
           error={errors.professional_data?.account_type?.message}
           options={BANK_OPTIONS.ACCOUNT_TYPE}
           label='Tipo da conta'
@@ -76,7 +97,7 @@ export const Bank = () => {
         <Inputs.Default
           {...register('professional_data.agency', {
             required: validation.required,
-            setValueAs: (v: string) => mask(v, MASKER.BANK.AGENCY),
+            setValueAs: (v: string) => mask(v, MASKER.BANK.AGENCY)
           })}
           value={watch('professional_data.agency') ?? ''}
           error={errors.professional_data?.agency?.message}
@@ -86,7 +107,8 @@ export const Bank = () => {
         <Inputs.Default
           {...register('professional_data.account_number', {
             required: validation.required,
-            setValueAs: (v: string) => mask(v, MASKER.BANK.ACCOUNT_NUMBER),
+            setValueAs: (v: string) =>
+              mask(v, MASKER.BANK.ACCOUNT_NUMBER)
           })}
           value={watch('professional_data.account_number') ?? ''}
           error={errors.professional_data?.account_number?.message}
@@ -98,10 +120,14 @@ export const Bank = () => {
       <ContainerRow gap='1rem'>
         <Selects.Default
           {...register('professional_data.type_of_transfer', {
-            required: validation.required,
+            required: validation.required
           })}
-          onSelect={(value: any) => setValue('professional_data.type_of_transfer', value)}
-          onClear={() => setValue('professional_data.type_of_transfer', null)}
+          onSelect={(value: any) =>
+            setValue('professional_data.type_of_transfer', value)
+          }
+          onClear={() =>
+            setValue('professional_data.type_of_transfer', null)
+          }
           error={errors.professional_data?.type_of_transfer?.message}
           options={BANK_OPTIONS.TRANSFER_TYPE}
           label='Tipo de transferência'
@@ -110,11 +136,15 @@ export const Bank = () => {
         />
         <Selects.Default
           {...register('professional_data.pix_key_type', {
-            required: validate.pix_required,
+            required: validate.pix_required
           })}
           disabled={!isRequiredPixKeyType}
-          onSelect={(value: any) => setValue('professional_data.pix_key_type', value)}
-          onClear={() => setValue('professional_data.pix_key_type', null)}
+          onSelect={(value: any) =>
+            setValue('professional_data.pix_key_type', value)
+          }
+          onClear={() =>
+            setValue('professional_data.pix_key_type', null)
+          }
           error={errors.professional_data?.pix_key_type?.message}
           options={BANK_OPTIONS.PIX_KEY_TYPE}
           label='Tipo de chave PIX'
@@ -124,7 +154,8 @@ export const Bank = () => {
         <Inputs.Default
           {...register('professional_data.pix_key', {
             required: validate.pix_required,
-            setValueAs: (v: string) => (!!pix_key_mask?.mask ? mask(v, pix_key_mask.mask) : v),
+            setValueAs: (v: string) =>
+              !!pix_key_mask?.mask ? mask(v, pix_key_mask.mask) : v
           })}
           disabled={!isRequiredPixKeyType}
           value={watch('professional_data.pix_key') ?? ''}

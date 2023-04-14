@@ -1,4 +1,5 @@
 import type { Option, SelectOption } from 'components/atoms'
+
 import { PIX_KEY_TYPE } from './constants'
 
 export interface ProfessionalProps {
@@ -35,7 +36,10 @@ export interface ProfessionalProps {
   weekly_hours: number
   neighbourhood_name: string
   tools: string
-  function_job: 'Technical Leader' | 'Technical Lead and Developer' | 'Developer'
+  function_job:
+    | 'Technical Leader'
+    | 'Technical Lead and Developer'
+    | 'Developer'
   professional_data: {
     account_number: string
     type_of_transfer: Option | null
@@ -81,8 +85,11 @@ interface FormConfigProps {
   }
 }
 
-export interface FormProps extends ProfessionalProps, FormConfigProps {}
+export interface FormProps
+  extends ProfessionalProps,
+    FormConfigProps {}
 
-export type getMaskFromTypePIXProps = typeof PIX_KEY_TYPE[keyof typeof PIX_KEY_TYPE]
+export type getMaskFromTypePIXProps =
+  (typeof PIX_KEY_TYPE)[keyof typeof PIX_KEY_TYPE]
 
 export type { SelectOption }

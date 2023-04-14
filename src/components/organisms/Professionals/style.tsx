@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContainerMain = styled.div`
   width: 100%;
   display: flex;
   height: auto;
-`;
+`
 
 export const ContainerChildren = styled.div<IContainerColumnProps>`
   display: flex;
@@ -29,7 +29,7 @@ export const ContainerChildren = styled.div<IContainerColumnProps>`
     gap: 10px;
     justify-content: safe;
   }
-`;
+`
 export const ContainerChildrenTable = styled.div<IContainerColumnProps>`
   display: flex;
   flex-direction: column;
@@ -40,13 +40,13 @@ export const ContainerChildrenTable = styled.div<IContainerColumnProps>`
   padding-left: ${(props) => props.left};
   padding-right: ${(props) => props.right};
   gap: ${(props) => props.gap};
-`;
+`
 
 export const Table = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-`;
+`
 
 export const ContainerShelf = styled.div`
   width: 111%;
@@ -57,7 +57,7 @@ export const ContainerShelf = styled.div`
   padding: 10px;
   border: 1px solid #ccd1d6;
   margin: auto;
-`;
+`
 
 export const ContainerShelfColumn = styled.div<IContainerColumnProps>`
   width: ${(props) => props.width};
@@ -73,19 +73,19 @@ export const ContainerShelfColumn = styled.div<IContainerColumnProps>`
   .status {
     width: 8em;
   }
-`;
+`
 
 export const AlignItens = styled.div`
   display: flex;
   align-items: center;
   gap: 1em;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-weight: 500;
-`;
+`
 
 export const IMG = styled.img`
   width: 3em;
-`;
+`
 
 export const Footer = styled.footer`
   margin-top: 25em;
@@ -94,4 +94,4 @@ export const Footer = styled.footer`
   display: flex;
   align-items: center;
   justify-content: space-around;
-`;
+`

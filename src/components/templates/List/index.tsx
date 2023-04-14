@@ -1,7 +1,10 @@
 import type { ReactNode } from 'react'
+
 import { Typography } from '@stardust-ds/react'
-import { Paginate } from 'components/molecules'
 import { theme } from 'styles'
+
+import { Paginate } from 'components/molecules'
+
 import { Container, Footer, Main } from './style'
 
 interface Props {

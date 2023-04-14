@@ -1,5 +1,7 @@
 import { useState } from 'react'
+
 import { Input, InputProps } from '@stardust-ds/react'
+
 import { IconEyeSlash, IconEye } from 'components/atoms'
 
 interface Props extends Omit<InputProps, 'type'> {}

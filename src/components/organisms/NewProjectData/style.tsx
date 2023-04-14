@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContaineNew = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ export const ContaineNew = styled.div`
   border-radius: 14px;
   margin-left: 20.5em;
   margin-top: 2em;
-`;
+`
 
 export const ContainerBase = styled.div`
   display: flex;
@@ -18,13 +18,13 @@ export const ContainerBase = styled.div`
   position: absolute;
   top: 5em;
   margin-left: 9em;
-`;
+`
 
 export const ContaineNewRegistration = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-`;
+`
 
 export const ContaineNewposition = styled.div`
   box-sizing: border-box;
@@ -42,13 +42,13 @@ export const ContaineNewposition = styled.div`
   background: #ffffff;
   border: 1px solid #ccd1d6;
   border-radius: 8px;
-`;
+`
 
 export const Container = styled.div`
   display: flex;
   height: 1175px;
   background: #ffffff;
-`;
+`
 
 export const ContainerInputs = styled.div`
   display: flex;
@@ -58,7 +58,7 @@ export const ContainerInputs = styled.div`
   margin: -2em 2em 0 2em;
   gap: 2em;
   align-items: center;
-`;
+`
 
 export const ContainerInputsSecun = styled.div`
   display: flex;
@@ -71,7 +71,7 @@ export const ContainerInputsSecun = styled.div`
   padding-bottom: 3em;
   position: relative;
   border-bottom: 1px solid #ccd1d6;
-`;
+`
 export const ContainerTime = styled.div`
   display: flex;
   justify-content: start;
@@ -80,7 +80,7 @@ export const ContainerTime = styled.div`
   width: 60%;
   margin: -2em 2em 0 2em;
   gap: 2em;
-`;
+`
 
 export const ContainerButtonsFooter = styled.div`
   display: flex;
@@ -88,7 +88,7 @@ export const ContainerButtonsFooter = styled.div`
   justify-content: space-between;
   width: 98%;
   margin: 1em 2em 2em 0;
-`;
+`
 
 export const ContainerChildrenTable = styled.div<IContainerColumnProps>`
   display: flex;
@@ -99,12 +99,12 @@ export const ContainerChildrenTable = styled.div<IContainerColumnProps>`
   padding-left: ${(props) => props.left};
   padding-right: ${(props) => props.right};
   gap: ${(props) => props.gap};
-`;
+`
 
 export const ContainerTimeAvatar = styled.div`
   display: flex;
   flex-direction: row;
-`;
+`
 
 export const ContainerShelfTime = styled.div`
   width: 96%;
@@ -115,4 +115,4 @@ export const ContainerShelfTime = styled.div`
   padding: 10px;
   border: 1px solid #ccd1d6;
   margin: auto;
-`;
+`

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import { AuthContext } from 'contexts'
 
 export default () => {
@@ -14,16 +15,21 @@ export default () => {
   }, [isLogged])
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !window?.google || !buttonRef.current) return
+    if (
+      typeof window === 'undefined' ||
+      !window?.google ||
+      !buttonRef.current
+    )
+      return
 
     try {
       window.google.accounts.id.initialize({
         client_id: process.env.REACT_APP_CLIENT_ID as string,
-        callback: handleSign,
+        callback: handleSign
       })
       window.google.accounts.id.renderButton(buttonRef.current, {
         size: 'large',
-        type: 'standard',
+        type: 'standard'
       })
     } catch (error) {
       console.log(error)

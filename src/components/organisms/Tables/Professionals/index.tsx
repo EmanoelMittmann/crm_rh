@@ -1,25 +1,32 @@
 import { useContext, useMemo } from 'react'
+
+import { List } from 'contexts'
+
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
-import { Shelf } from './shelf'
-import { List } from 'contexts'
-import { GRID_TEMPLATE, HEADERS } from './constants'
+
 import { LoadingWrapper, Main } from '../style'
+import { GRID_TEMPLATE, HEADERS } from './constants'
+import { Shelf } from './shelf'
 
 export const Professionals = () => {
-  const { professionals, navigateTo, handleOrder, isLoading, handleUpdateStatus } = useContext(
-    List.Professional.Context
-  )
+  const {
+    professionals,
+    navigateTo,
+    handleOrder,
+    isLoading,
+    handleUpdateStatus
+  } = useContext(List.Professional.Context)
 
   const POPOVER_OPTIONS = (id: number, status: boolean) => [
     {
       label: 'Editar',
-      callback: () => navigateTo(`/professionals/${id}`),
+      callback: () => navigateTo(`/professionals/${id}`)
     },
     {
       label: status ? 'Inativar' : 'Ativar',
-      callback: () => handleUpdateStatus(id),
-    },
+      callback: () => handleUpdateStatus(id)
+    }
   ]
 
   const Table = useMemo(() => {
@@ -33,7 +40,10 @@ export const Professionals = () => {
     return professionals.map((props) => (
       <Shelf
         key={props.id}
-        config={{ template: GRID_TEMPLATE, options: POPOVER_OPTIONS(props.id, props.is_active) }}
+        config={{
+          template: GRID_TEMPLATE,
+          options: POPOVER_OPTIONS(props.id, props.is_active)
+        }}
         {...{ props }}
       />
     ))
@@ -41,7 +51,11 @@ export const Professionals = () => {
 
   return (
     <Main>
-      <TableHeader headers={HEADERS} template={GRID_TEMPLATE} handleOrder={handleOrder} />
+      <TableHeader
+        headers={HEADERS}
+        template={GRID_TEMPLATE}
+        handleOrder={handleOrder}
+      />
       {Table}
     </Main>
   )

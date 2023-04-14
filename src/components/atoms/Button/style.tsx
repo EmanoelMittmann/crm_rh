@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ContainerMain = styled.button<IButtonColorProps>`
   width: 18em;
   height: 44px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-weight: 600;
   border: none;
   margin: 5px;
@@ -28,7 +28,7 @@ export const ContainerMain = styled.button<IButtonColorProps>`
       fill: ${(props) => props.fill};
     }
   }
-  
+
   ${(props) =>
     props.isActive &&
     `
@@ -54,4 +54,4 @@ export const ContainerMain = styled.button<IButtonColorProps>`
     }
   }
   `}
-`;
+`

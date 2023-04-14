@@ -10,7 +10,7 @@ export const MASKER = {
   BANK: { ACCOUNT_NUMBER: '999999999-9', AGENCY: '9999' },
   CURRENCY: (v: string) => {
     return v.length > 3 ? parseFloat(v).toFixed(2) : v
-  },
+  }
 }
 
 export const UF_OPTIONS = [
@@ -40,7 +40,7 @@ export const UF_OPTIONS = [
   { label: 'Mato Grosso do Sul', value: 'MS' },
   { label: 'Mato Grosso', value: 'MT' },
   { label: 'Goiás	', value: 'GO' },
-  { label: 'Distrito Federal', value: 'DF' },
+  { label: 'Distrito Federal', value: 'DF' }
 ]
 
 export const PIX_KEY_TYPE = {
@@ -48,13 +48,13 @@ export const PIX_KEY_TYPE = {
   CNPJ: 'CNPJ',
   EMAIL: 'E-mail',
   TELEPHONE: 'Número do celular',
-  RANDOM_KEY: 'Chave aleatória',
+  RANDOM_KEY: 'Chave aleatória'
 }
 
 export const CONTRACT_TYPE = {
   FULL: 'Full Time',
   PART: 'Part Time',
-  HORISTA: 'Horista',
+  HORISTA: 'Horista'
 }
 
 export const KEYS = {
@@ -63,29 +63,31 @@ export const KEYS = {
   FUNCTION: {
     TECH_LEADER: 'Technical Leader',
     TECH_LEAD_AND_DEV: 'Technical Lead and Developer',
-    DEVELOPER: 'Developer',
+    DEVELOPER: 'Developer'
   },
   ACCOUNT_TYPE: {
     CORRENTE: 'Conta Corrente',
-    Poupança: 'Conta Poupança',
+    Poupança: 'Conta Poupança'
   },
   TRANSFER_TYPE: {
     TED: 'TED',
     DOC: 'DOC',
-    PIX: 'PIX',
-  },
+    PIX: 'PIX'
+  }
 } as const
 
 export const BANK_OPTIONS = {
   PERSON_TYPE: [
     { label: 'Pessoa Física', value: 'PF' },
-    { label: 'Pessoa Jurídica', value: 'PJ' },
+    { label: 'Pessoa Jurídica', value: 'PJ' }
   ],
   ACCOUNT_TYPE: GenerateOption(KEYS.ACCOUNT_TYPE),
   TRANSFER_TYPE: GenerateOption(KEYS.TRANSFER_TYPE),
-  PIX_KEY_TYPE: GenerateOption(KEYS.PIX_KEY_TYPE),
+  PIX_KEY_TYPE: GenerateOption(KEYS.PIX_KEY_TYPE)
 }
 
 export const FUNCTION_OPTIONS = GenerateOption(KEYS.FUNCTION)
 
-export const CONTRACT_TYPE_OPTIONS = GenerateOption(KEYS.CONTRACT_TYPE)
+export const CONTRACT_TYPE_OPTIONS = GenerateOption(
+  KEYS.CONTRACT_TYPE
+)
