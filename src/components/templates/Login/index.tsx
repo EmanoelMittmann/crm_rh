@@ -4,6 +4,8 @@ import {
   Checkbox,
   Button
 } from '@stardust-ds/react'
+import { colors } from 'styles'
+
 import {
   BackgroundCover,
   IconUbistart,
@@ -11,7 +13,7 @@ import {
   IconArrow,
   Inputs
 } from 'components/atoms'
-import { colors } from 'styles'
+
 import {
   ContainerData,
   ContainerIconUbistart,
@@ -23,7 +25,6 @@ import {
   LoginGoogle,
   SpacingLoginText
 } from './style'
-
 import type { Props } from './types'
 
 export default ({ buttonRef }: Props) => {

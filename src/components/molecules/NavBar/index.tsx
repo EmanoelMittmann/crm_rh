@@ -1,8 +1,11 @@
 import { useContext } from 'react'
+
 import { Typography } from '@stardust-ds/react'
-import { Breadcrumb } from 'components/atoms'
 import { AuthContext } from 'contexts'
 import { theme } from 'styles'
+
+import { Breadcrumb } from 'components/atoms'
+
 import { Avatar, Children, ContainerMain, User } from './style'
 
 export const Navbar = () => {

@@ -1,10 +1,11 @@
 import { forwardRef } from 'react'
 import type { InputHTMLAttributes } from 'react'
+
 import { Input } from '@stardust-ds/react'
 import type { InputProps } from '@stardust-ds/react'
+import { theme } from 'styles'
 
 import { Main } from './style'
-import { theme } from 'styles'
 
 type Props = InputProps &
   InputHTMLAttributes<HTMLInputElement> & {

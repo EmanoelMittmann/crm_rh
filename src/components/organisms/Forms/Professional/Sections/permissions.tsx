@@ -1,6 +1,9 @@
-import { Typography } from '@stardust-ds/react'
 import { useFormContext } from 'react-hook-form'
+
+import { Typography } from '@stardust-ds/react'
+
 import { Inputs } from 'components/atoms'
+
 import {
   ColumnContainer,
   ContainerRow,

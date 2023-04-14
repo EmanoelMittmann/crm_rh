@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import { LocalStorageKeys } from '../config/LocalStorageKeys'
 
 const api = axios.create({
@@ -6,7 +7,7 @@ const api = axios.create({
 })
 
 api.interceptors.request.use(
-  (config) => {
+  (config: any) => {
     const token = JSON.parse(
       localStorage.getItem(LocalStorageKeys.TOKEN) as string
     )

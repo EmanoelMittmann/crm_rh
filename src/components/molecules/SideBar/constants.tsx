@@ -1,4 +1,7 @@
 import { ReactElement } from 'react'
+
+import { theme } from 'styles'
+
 import {
   IconCompanies,
   IconHome,
@@ -10,7 +13,6 @@ import {
   IconServices,
   IconSetting
 } from 'components/atoms'
-import { theme } from 'styles'
 
 const neutralColor = theme.brand.color.status.neutral1
 

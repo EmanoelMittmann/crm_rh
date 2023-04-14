@@ -1,15 +1,17 @@
 import React from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { Badge } from '@stardust-ds/react'
+
+import { IconThreePoints } from '../../../atoms/Icons/IconThreePoints'
+import Modal from '../../../molecules/Modal'
 import {
   AlignItens,
   ContainerShelf,
   ContainerShelfColumn,
   IMG
 } from '../style'
-import { Badge } from '@stardust-ds/react'
-import { IconThreePoints } from '../../../atoms/Icons/IconThreePoints'
-import { useState } from 'react'
-import Modal from '../../../molecules/Modal'
-import { useNavigate } from 'react-router-dom'
 
 export const Shelf = ({ data }: any) => {
   const navigate = useNavigate()

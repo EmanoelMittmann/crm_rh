@@ -1,10 +1,12 @@
-import { Select } from '@stardust-ds/react'
-import type { SelectProps } from '@stardust-ds/react'
-import { Main } from './style'
 import { forwardRef, InputHTMLAttributes, Ref } from 'react'
 
-// NOTE: Necessário devido interface de 'ref' esperada para o <Select /> do Stardust.
+import { Select } from '@stardust-ds/react'
+import type { SelectProps } from '@stardust-ds/react'
 import type { SelectRef } from '@stardust-ds/react/lib/esm/components/Select/interfaces'
+
+import { Main } from './style'
+
+// NOTE: Necessário devido interface de 'ref' esperada para o <Select /> do Stardust.
 
 type Props = SelectProps &
   InputHTMLAttributes<HTMLInputElement> & {

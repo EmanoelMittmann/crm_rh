@@ -1,5 +1,7 @@
-import { Input, Select } from '@stardust-ds/react'
 import React from 'react'
+
+import { Input, Select } from '@stardust-ds/react'
+
 import { ButtonGeneric } from '../../atoms/ButtonGeneric'
 import { Column, ContainerRow, Header, Table } from './style'
 

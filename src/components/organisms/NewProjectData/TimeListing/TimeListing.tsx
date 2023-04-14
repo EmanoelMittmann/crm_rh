@@ -1,6 +1,8 @@
-import { Badge } from '@stardust-ds/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import { Badge } from '@stardust-ds/react'
+
 import { IconThreePoints } from '../../../atoms/Icons/IconThreePoints'
 import Modal from '../../../molecules/Modal'
 import { ContainerShelfColumn, IMG } from '../../Professionals/style'

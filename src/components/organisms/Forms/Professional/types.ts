@@ -1,4 +1,5 @@
 import type { Option, SelectOption } from 'components/atoms'
+
 import { PIX_KEY_TYPE } from './constants'
 
 export interface ProfessionalProps {

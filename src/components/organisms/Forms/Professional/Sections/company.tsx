@@ -1,6 +1,9 @@
 import { useFormContext } from 'react-hook-form'
+
 import { mask } from 'remask'
+
 import { Inputs, Selects } from 'components/atoms'
+
 import { MASKER, UF_OPTIONS } from '../constants'
 import { ContainerRow } from '../style'
 import type { FormProps } from '../types'

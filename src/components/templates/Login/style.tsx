@@ -12,7 +12,7 @@ export const ContainerLogin = styled.div`
   min-height: calc(100vh - 8rem);
   left: 8rem;
   top: 4rem;
-  padding: 2.5rem;
+  padding: 1.4rem 2rem;
   opacity: 0.8;
   border-radius: 2px solid rgba(255, 255, 255, 1);
   border: 2px solid #ffffff;
@@ -58,7 +58,7 @@ export const ContainerData = styled.div`
 
 export const ContainerIconUbistart = styled.div`
   display: flex;
-  padding: 1em 0 5em 0;
+  padding: 1em 0 4.3em 0;
 `
 
 export const ContainerChecked = styled.div`
@@ -91,5 +91,5 @@ export const ContainerButton = styled.div`
 `
 
 export const SpacingLoginText = styled.div`
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.8rem;
 `

@@ -1,5 +1,9 @@
-import { Button, Input, Select, Typography } from '@stardust-ds/react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
+
+import { Button, Input, Select, Typography } from '@stardust-ds/react'
+
+import api from '../../../api'
 import { IconGlass } from '../../atoms/Icons/IconGlass'
 import { Footer } from '../../molecules/Footer'
 import HeaderProjects from '../../molecules/HeaderProjects'
@@ -10,8 +14,6 @@ import {
   ContainerFooter,
   ContainerMain
 } from './style'
-import { useState, useEffect } from 'react'
-import api from '../../../api'
 
 export const ProjectsAll = () => {
   const [projects, setProjects] = useState([])

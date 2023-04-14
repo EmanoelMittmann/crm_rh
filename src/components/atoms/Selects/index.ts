@@ -1,5 +1,5 @@
-import { WithCheckbox } from './WithCheckbox'
 import { Default } from './Default'
+import { WithCheckbox } from './WithCheckbox'
 
 export const Selects = Object.assign({}, { Default, WithCheckbox })
 

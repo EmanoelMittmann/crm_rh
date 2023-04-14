@@ -1,7 +1,10 @@
 import { useMemo, useContext } from 'react'
+
 import { Input, Select } from '@stardust-ds/react'
-import { IconGlass, Button } from 'components/atoms'
 import { List } from 'contexts'
+
+import { IconGlass, Button } from 'components/atoms'
+
 import { Container, Main } from '../style'
 
 type ValueProps = Option | null | undefined

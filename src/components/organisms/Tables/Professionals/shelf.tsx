@@ -1,12 +1,12 @@
 import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
+
 import {
   ContainerShelf,
   ContainerShelfColumn,
   Image,
   Text
 } from '../style'
-
 import type { ShelfProps } from './types'
 
 export const Shelf = ({ props, config }: ShelfProps) => {

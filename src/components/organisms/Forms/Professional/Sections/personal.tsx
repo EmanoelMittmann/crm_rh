@@ -1,8 +1,11 @@
 import { useFormContext } from 'react-hook-form'
+
 import { mask } from 'remask'
+
 import { Inputs, Selects } from 'components/atoms'
-import { validation } from '../logic'
+
 import { MASKER, TODAY, UF_OPTIONS } from '../constants'
+import { validation } from '../logic'
 import { ContainerRow } from '../style'
 import type { FormProps } from '../types'
 

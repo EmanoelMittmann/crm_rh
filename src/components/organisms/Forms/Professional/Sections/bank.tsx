@@ -1,9 +1,12 @@
 import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
+
 import { mask } from 'remask'
+
 import { Inputs, Selects } from 'components/atoms'
-import { getMaskFromPixKeyType, validation } from '../logic'
+
 import { BANK_OPTIONS, MASKER, KEYS } from '../constants'
+import { getMaskFromPixKeyType, validation } from '../logic'
 import { ContainerRow } from '../style'
 import type { FormProps, getMaskFromTypePIXProps } from '../types'
 

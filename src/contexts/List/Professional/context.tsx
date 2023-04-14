@@ -1,8 +1,11 @@
 import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDebounce } from 'hooks'
-import { routes } from 'routes'
+
 import api from 'api'
+import { routes } from 'routes'
+
+import { useDebounce } from 'hooks'
+
 import DEFAULT from './constants'
 import type {
   ContextProps,

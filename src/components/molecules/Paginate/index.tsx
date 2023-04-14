@@ -1,10 +1,13 @@
 import { useMemo, useContext } from 'react'
+
+import { List } from 'contexts'
+
 import {
   IconRightArrow,
   IconLeftArrow,
   HideBox
 } from 'components/atoms'
-import { List } from 'contexts'
+
 import { Button, Main, PagesNumber, Row } from './style'
 
 export const Paginate = () => {

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { IInputsPropsDate } from '../../../react-app-env'
 
 export const Img = styled.img`

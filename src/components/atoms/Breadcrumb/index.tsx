@@ -1,6 +1,8 @@
-import { Typography } from '@stardust-ds/react'
 import { useLocation, useNavigate } from 'react-router-dom'
+
+import { Typography } from '@stardust-ds/react'
 import { theme } from 'styles'
+
 import { handlePathname, PathnameProps } from './logic'
 import { To } from './style'
 

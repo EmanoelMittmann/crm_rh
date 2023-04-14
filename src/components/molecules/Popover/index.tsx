@@ -4,7 +4,9 @@ import {
   useImperativeHandle,
   useRef
 } from 'react'
+
 import { IconThreePoints } from 'components/atoms'
+
 import { Overlay, ContainerModal, Options } from './style'
 import type { PopoverProps } from './types'
 

@@ -1,8 +1,11 @@
-import { Radio } from '@stardust-ds/react'
 import { useFormContext } from 'react-hook-form'
+
+import { Radio } from '@stardust-ds/react'
+
 import { Inputs, Selects } from 'components/atoms'
-import { validation } from '../logic'
+
 import { MASKER, CONTRACT_TYPE_OPTIONS } from '../constants'
+import { validation } from '../logic'
 import { ContainerRow } from '../style'
 import type { FormProps } from '../types'
 

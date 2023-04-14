@@ -1,15 +1,18 @@
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import { AuthContext } from 'contexts'
+import { theme } from 'styles'
+
 import {
   Button,
   IconDark,
   IconLogout,
   IconUbistart
 } from 'components/atoms'
-import { AuthContext } from 'contexts'
+
 import { alterObject, DEFAULT_SELECT } from '../../utils'
 import { OPTIONS } from './constants'
-import { theme } from 'styles'
 import { ContainerColumn, ContainerMain, ContainerRow } from './style'
 
 export const Sidebar = () => {

@@ -1,8 +1,9 @@
 import { forwardRef, InputHTMLAttributes } from 'react'
+
 import { Checkbox, Typography } from '@stardust-ds/react'
 import type { CheckboxProps } from '@stardust-ds/react'
-
 import { theme } from 'styles'
+
 import { Main } from './style'
 
 type Props = CheckboxProps &

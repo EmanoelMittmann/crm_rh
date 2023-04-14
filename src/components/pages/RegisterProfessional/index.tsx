@@ -1,10 +1,14 @@
 import { FormProvider, useForm } from 'react-hook-form'
+
 import axios from 'axios'
-import api from 'api'
-import { AuthTemplate, CreateTemplate } from 'components/templates'
+
 import { Form, FormProps, getUfOption } from 'components/organisms'
-import { useDebounce } from 'hooks'
+import { AuthTemplate, CreateTemplate } from 'components/templates'
+
+import api from 'api'
 import { externRoutes, routes } from 'routes'
+
+import { useDebounce } from 'hooks'
 
 const RegisterProfessional = () => {
   const methods = useForm<FormProps['Professional']>({
@@ -55,6 +59,7 @@ const RegisterProfessional = () => {
 
   async function handleCPF() {
     if (!CPF) return
+    if (CPF.length < 14) return
 
     api
       .post(routes.professional.validateCPF, {
@@ -72,7 +77,7 @@ const RegisterProfessional = () => {
 
   async function handleCEP() {
     if (!CEP) return
-
+    if (CEP.length < 9) return
     axios
       .get(externRoutes.cep(CEP))
       .then(({ data }) => {

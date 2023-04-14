@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from '../components/pages/MasterPage'
+
 import Login from '../components/pages/Login'
+import Home from '../components/pages/MasterPage'
 import Professionals from '../components/pages/Professionals'
-import RegisterProfessional from '../components/pages/RegisterProfessional'
 import Projects from '../components/pages/Projects'
+import RegisterProfessional from '../components/pages/RegisterProfessional'
 import {} from 'react-router-dom'
 import NewProjectFormik from '../components/pages/RegisterProjects/NewProjectFormik'
 const Router = () => {

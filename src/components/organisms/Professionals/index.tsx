@@ -1,15 +1,17 @@
+import { useNavigate } from 'react-router-dom'
+
+import { Button, Input, Typography } from '@stardust-ds/react'
+
+import { IconGlass } from '../../atoms/Icons/IconGlass'
+import { Select } from '../../atoms/Select'
+import { Footer } from '../../molecules/Footer'
+import Header from '../../molecules/Header'
+import { Shelf } from './shelf'
 import {
   ContainerChildren,
   ContainerChildrenTable,
   ContainerMain
 } from './style'
-import { Button, Input, Typography } from '@stardust-ds/react'
-import { IconGlass } from '../../atoms/Icons/IconGlass'
-import { Select } from '../../atoms/Select'
-import Header from '../../molecules/Header'
-import { Shelf } from './shelf'
-import { Footer } from '../../molecules/Footer'
-import { useNavigate } from 'react-router-dom'
 
 const object = [
   {

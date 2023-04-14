@@ -1,4 +1,5 @@
 import { Icon } from 'components/atoms'
+
 import { Column, ColumnText, Container } from './style'
 import type { TemplateProps, HeaderProps } from './types'
 

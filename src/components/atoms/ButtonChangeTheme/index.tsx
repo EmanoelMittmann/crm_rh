@@ -1,6 +1,9 @@
 import { useState } from 'react'
+
 import { Button } from '@stardust-ds/react'
+
 import { IconLua, IconLight } from 'components/atoms'
+
 import { ContainerButtonLights } from './style'
 
 const ButtonChangeTheme = () => {

@@ -1,9 +1,12 @@
-import { useFormik } from 'formik'
-import { useParams } from 'react-router-dom'
-import api from 'api'
-import { registerSchemaProjects } from '../schema/SchemaProjects'
 import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+
+import { useFormik } from 'formik'
+
+import api from 'api'
+
 import NewProject from '../../organisms/NewProjectData'
+import { registerSchemaProjects } from '../schema/SchemaProjects'
 
 const NewProjectFormik = () => {
   const [teamPayload, setTeamPayload] = useState([])

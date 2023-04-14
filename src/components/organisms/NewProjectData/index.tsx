@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import {
   Button,
   Input,
@@ -5,11 +8,18 @@ import {
   Typography,
   useTheme
 } from '@stardust-ds/react'
-import { useState } from 'react'
+import { FormikProps } from 'formik'
+
 import { IconArrowPageRegistration } from '../../atoms/Icons/IconArrowPageRegistration'
 import InputIconPosition from '../../atoms/InputIconPosition'
+import HeaderJobsProjects from '../../molecules/HeaderJobsProjects'
 import MasterPage from '../../pages/MasterPage'
-
+import {
+  objectTime,
+  optionsProjects,
+  optionsStatus,
+  optionsTime
+} from '../../utils/OptionsAplication'
 import {
   ContaineNewposition,
   ContainerBase,
@@ -20,16 +30,7 @@ import {
   ContainerChildrenTable,
   Container
 } from './style'
-import { FormikProps } from 'formik'
-import {
-  objectTime,
-  optionsProjects,
-  optionsStatus,
-  optionsTime
-} from '../../utils/OptionsAplication'
 import TimeListing from './TimeListing/TimeListing'
-import HeaderJobsProjects from '../../molecules/HeaderJobsProjects'
-import { useNavigate } from 'react-router-dom'
 
 interface INewProject {
   DataProjects: OtherProps & FormikProps<FormProjects>

@@ -1,10 +1,13 @@
 import { useContext, useMemo } from 'react'
+
+import { List } from 'contexts'
+
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
-import { Shelf } from './shelf'
-import { List } from 'contexts'
-import { GRID_TEMPLATE, HEADERS } from './constants'
+
 import { LoadingWrapper, Main } from '../style'
+import { GRID_TEMPLATE, HEADERS } from './constants'
+import { Shelf } from './shelf'
 
 export const Professionals = () => {
   const {
