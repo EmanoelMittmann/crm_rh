@@ -1,8 +1,12 @@
 import { Professional } from './Professional'
-import type { ContextProps } from './Professional'
+import { Project } from './Project'
 
-export const List = Object.assign({}, { Professional })
+import type { ContextProps } from './Professional'
+import type { ContextProjectProps } from './Project'
+
+export const List = Object.assign({}, { Professional, Project})
 
 export type ListContext = {
   Professional: ContextProps
+  Project: ContextProjectProps
 }

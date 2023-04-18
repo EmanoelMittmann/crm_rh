@@ -7,11 +7,8 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 
 import DEFAULT from './constants'
-import type {
-  ContextProps,
-  ProfessionalProps,
-  ReactNode
-} from './types'
+import type { ContextProps, ProfessionalProps, ReactNode } from './types'
+import { PaginateContext } from 'components/molecules'
 
 export const Context = createContext({} as ContextProps)
 
@@ -128,9 +125,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     listener: []
   })
 
-  return (
-    <Context.Provider value={contextProps}>
+  return <Context.Provider value={contextProps}>
+    <PaginateContext.Provider value={{paginate:contextProps.paginate}}>
       {children}
+    </PaginateContext.Provider>
     </Context.Provider>
-  )
 }
