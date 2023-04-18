@@ -24,7 +24,7 @@ const createNavOption = (text: string, icon: ReactElement, key: string) => ({
 export const OPTIONS = [
   createNavOption('Início', <IconHome />, 'home'),
   createNavOption('Profissionais', <IconProfessional />, 'professionals'),
-  createNavOption('Projetos', <IconProjects />, 'projects'),
+  createNavOption('Projetos', <IconProjects />, 'project'),
   createNavOption('Horas Extras', <IconHours />, 'extrasHours'),
   createNavOption('Notas Fiscais', <IconNotes />, 'notes'),
   createNavOption('Relatórios', <IconReports />, 'reports'),

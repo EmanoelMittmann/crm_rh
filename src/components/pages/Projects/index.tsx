@@ -1,14 +1,23 @@
+import { AuthTemplate, ListTemplate } from 'components/templates'
+import { Table, Filter } from 'components/organisms'
+import { List } from 'contexts'
 
 
-import { ProjectsAll } from "../../organisms/Projects";
-import MasterPage from "../MasterPage"
 
 const Projects = () => {
   return (
-    <MasterPage>
-      <ProjectsAll/>
-    </MasterPage>
+
+    <AuthTemplate>
+      <List.Project.Provider>
+        <ListTemplate title='Projetos'>
+          <Filter.Projects />
+          <Table.Projects />
+        </ListTemplate>
+      </List.Project.Provider>
+    </AuthTemplate>
   );
 };
 
 export default Projects;
+
+

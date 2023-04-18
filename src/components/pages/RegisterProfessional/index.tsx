@@ -26,14 +26,14 @@ const RegisterProfessional = () => {
     const { data: jobs } = await api.get(routes.job.list, { params: { is_active: true } })
     const { data: userTypes } = await api.get(routes.userType.list)
     const { data: banks } = await api.get(externRoutes.banks)
-    const { data: projects } = await api.get(routes.project.list)
+    const { data: linkproject } = await api.get(routes.linkproject.list)
 
     methods.setValue('options', {
       jobs: jobs?.data.map((job: any) => ({ label: job.name, value: job.id })),
       userTypes: userTypes?.map((user: any) => ({ label: user.name, value: user.id })),
       banks: banks?.map((bank: any) => ({ label: `${bank.ispb} ${bank.name}`, value: bank.name })),
       permissions,
-      projects: projects.data.map((project: any) => ({ label: project.name, value: project })),
+      projects: linkproject.data.map((project: any) => ({ label: project.name, value: project })),
     })
   }
 

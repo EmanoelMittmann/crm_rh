@@ -4,8 +4,7 @@ import Login from "../components/pages/Login";
 import Professionals from "../components/pages/Professionals";
 import RegisterProfessional from "../components/pages/RegisterProfessional";
 import Projects from "../components/pages/Projects";
-import {} from "react-router-dom";
-import NewProjectFormik from "../components/pages/RegisterProjects/NewProjectFormik";
+import RegisterProjects from "components/pages/RegisterProjects/RegisterProjects";
 const Router = () => {
   return (
     <>
@@ -18,8 +17,8 @@ const Router = () => {
             path="/RegisterProfessionals"
             element={<RegisterProfessional />}
           />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/NewProject" element={<NewProjectFormik />} />
+          <Route path="/project" element={<Projects/>} />
+          <Route path="/RegisterProjects" element={<RegisterProjects/>} />
           <Route path="/extrasHours" element={<Professionals />} />
           <Route path="/notes" element={<Professionals />} />
           <Route path="/reports" element={<Professionals />} />

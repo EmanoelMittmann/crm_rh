@@ -5,6 +5,7 @@ import { routes } from 'routes'
 import api from 'api'
 import DEFAULT from './constants'
 import type { ContextProps, ProfessionalProps, ReactNode } from './types'
+import { PaginateContext } from 'components/molecules'
 
 export const Context = createContext({} as ContextProps)
 
@@ -88,5 +89,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     listener: [],
   })
 
-  return <Context.Provider value={contextProps}>{children}</Context.Provider>
+  return <Context.Provider value={contextProps}>
+    <PaginateContext.Provider value={{paginate:contextProps.paginate}}>
+      {children}
+    </PaginateContext.Provider>
+    </Context.Provider>
 }
