@@ -7,6 +7,7 @@ import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
 import {} from 'react-router-dom'
 import NewProjectFormik from '../components/pages/RegisterProjects/NewProjectFormik'
+import Settings from '../components/pages/Setting'
 const Router = () => {
   return (
     <>
@@ -25,7 +26,7 @@ const Router = () => {
           <Route path='/notes' element={<Professionals />} />
           <Route path='/reports' element={<Professionals />} />
           <Route path='/services' element={<Professionals />} />
-          <Route path='/settings' element={<Professionals />} />
+          <Route path='/settings' element={<Settings />} />
           <Route path='/company' element={<Professionals />} />
         </Routes>
       </BrowserRouter>

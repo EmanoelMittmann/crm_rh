@@ -13,7 +13,7 @@ import { Button, Main, PagesNumber, Row } from './style'
 export const Paginate = () => {
   const {
     paginate: { current_page, last_page, setCurrent_page }
-  } = useContext(List.Professional.Context)
+  } = useContext(List.Settings.Context)
 
   const pages = useMemo(
     () =>

@@ -6,7 +6,8 @@ export const routes = {
     register: '/user'
   },
   job: {
-    list: '/job'
+    list: '/job',
+    updateJob: (id: number) => `/job/${id}`
   },
   userType: {
     list: '/userType'

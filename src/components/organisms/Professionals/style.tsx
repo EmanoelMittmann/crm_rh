@@ -82,7 +82,6 @@ export const AlignItens = styled.div`
   font-family: 'Poppins';
   font-weight: 500;
 `
-
 export const IMG = styled.img`
   width: 3em;
 `

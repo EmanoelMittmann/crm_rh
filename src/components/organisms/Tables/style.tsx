@@ -54,4 +54,5 @@ export const Text = styled.p`
 
 export const Image = styled.img`
   width: 3em;
+  border-radius: 50%;
 `
