@@ -1,17 +1,9 @@
-import { useState } from 'react'
+
 import { useParams } from 'react-router-dom'
-
 import { useFormik } from 'formik'
-
 import api from 'api'
-import { registerSchemaProjects } from "../schema/SchemaProjects"; 
 import { useState } from "react";
-import { Project } from "contexts/List/Project";
 import { AuthTemplate, CreateTemplate } from "components/templates";
-import { FormProvider } from "react-hook-form";
-import { Form } from "components/organisms";
-
-import NewProject from '../../organisms/NewProjectData'
 import { registerSchemaProjects } from '../schema/SchemaProjects'
 
  const RegisterProjects = () => {
@@ -73,4 +65,3 @@ import { registerSchemaProjects } from '../schema/SchemaProjects'
 
 export default RegisterProjects;
 
-export default NewProjectFormik
