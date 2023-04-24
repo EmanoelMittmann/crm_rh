@@ -28,6 +28,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         handleSearch,
         handleOrder,
         handleFillProject_Type,
+        handleFillProject_Status,
         navigateTo,
         handleUpdateStatus,
     }
@@ -38,8 +39,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
             params: {
                 page: meta.paginate.current_page,
                 search: meta.search && meta.search,
-                project_type: meta.project_type,
-                status: meta.status,
+                project_type_id: meta.project_type_id,
+                project_status_id: meta.project_status_id,
                 order: meta.order,
                 orderField: meta.orderField,
             },
@@ -48,7 +49,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         setMeta((old) => ({ ...old, paginate: { ...old.paginate, last_page: data.meta.last_page } }))
         setIsLoading(false)
     }
-
     async function handleUpdateStatus(id: number) {
         await api.put(routes.project.updateStatus(id))
         fetchListProject()
@@ -72,8 +72,22 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }
 
 
-    function handleFillProject_Type() {}
+    function handleFillProject_Type(project_type_id: number | null) {
+        setMeta((old) => ({
+            ...old,
+            project_type_id,
+            paginate: { ...old.paginate, current_page: 1 }
+        }))
+    }
 
+    function handleFillProject_Status(project_status_id: number | null){
+        setMeta((old) => ({
+            ...old,
+            project_status_id,
+            paginate: { ...old.paginate, current_page: 1 }
+
+        }))
+    }
 
     function navigateTo(url: string) {
         navigate(url)

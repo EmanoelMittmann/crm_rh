@@ -3,8 +3,12 @@ import type { SelectProps } from "@stardust-ds/react";
 export type { ReactNode} from 'react'
 
 export interface DefaultMetaProps{
-    status: null | number 
-    project_type: null | number 
+    id: number | null
+    status: number | null
+    project_type: number | null
+    project_type_id: number | null
+    type_project: number | null
+    project_status_id: number | null
     search: string
     orderField: string | null
     order: 'ASC' | 'DESC'
@@ -15,9 +19,10 @@ export interface DefaultMetaProps{
 }
 
 export interface ContextProjectProps{
+    meta: DefaultMetaProps
     projects: ProjectProps[]
     isLoading: boolean
-    filterOptionsType: { project_type: SelectProps['options'] };
+    filterOptionsType: {project_type: SelectProps['options'] };
     filterOptonsStatus:{status: SelectProps['options']};
     paginate:{
         current_page: number;
@@ -28,6 +33,7 @@ export interface ContextProjectProps{
     handleSearch(text: string): void;
     handleOrder(field: string): void;
     handleFillProject_Type(id:number | null):void;
+    handleFillProject_Status(id: number | null):void
     handleUpdateStatus(id: number): void;
 }
 
