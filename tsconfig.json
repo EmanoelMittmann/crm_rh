@@ -17,5 +17,6 @@
     "jsx": "react-jsx",
     "baseUrl": "src"
   },
+  "files.eol": "\r\n",
   "include": ["src", "src/styled.d.ts", "src/types.d.ts"]
 }

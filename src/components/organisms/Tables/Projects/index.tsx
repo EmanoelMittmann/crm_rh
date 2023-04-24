@@ -11,14 +11,14 @@ export const Projects = () => {
         List.Project.Context
     )
 
-    const POPOVER_OPTIONS = (id: number, status: boolean) => [
+    const POPOVER_OPTIONS = (id: number, status:any) => [
         {
-            label: 'Editar',
+            label: 'Editar Projeto',
             callback: () => navigateTo(`/project/${id}`),
         },
         {
-            label: status ? 'Inativar' : 'Ativar',
-            callback: () => handleUpdateStatus(id),
+            label: 'Editar Status',
+            callback: () => navigateTo(`/projectStatus/${id}`),
         },
     ]
 
@@ -33,7 +33,9 @@ export const Projects = () => {
         return projects.map((props) => (
             <Shelf
                 key={props.id}
-                config={{ template: GRID_TEMPLATE, options: POPOVER_OPTIONS(props.id, props.is_active) }}
+                config={{ template: 
+                    GRID_TEMPLATE, options: POPOVER_OPTIONS(props.id, props.status) 
+                }}
                 {...{ props }}
             />
         ))
@@ -41,7 +43,10 @@ export const Projects = () => {
 
     return (
         <Main>
-            <TableHeader headers={HEADERS} template={GRID_TEMPLATE} handleOrder={handleOrder} />
+            <TableHeader 
+            headers={HEADERS} 
+            template={GRID_TEMPLATE} 
+            handleOrder={handleOrder} />
             {Table}
         </Main>
     )
