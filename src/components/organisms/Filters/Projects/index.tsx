@@ -20,16 +20,13 @@ export const Projects = () => {
     const { search, project_status_id, project_type_id } = meta
 
 
-    const currentValueType = useMemo(
+    const currentValueType: ValueProps = useMemo(
         () => filterOptionsType.project_type.find((item) => Number(item.value) === project_type_id),
-        [project_type_id]
+        [project_type_id])
 
-    ) as ValueProps
-
-    const currentValueStatus = useMemo(
+    const currentValueStatus : ValueProps = useMemo(
         () => filterOptonsStatus.status.find((item) => Number(item.value) === project_status_id),
-        [project_status_id]
-        ) as ValueProps
+        [project_status_id])
 
 
     return (
@@ -48,7 +45,7 @@ export const Projects = () => {
                     placeholder="Tipo"
                     value={currentValueType ?? null}
                     options={filterOptionsType?.project_type}
-                    onSelect={(option: Option | null) => 
+                    onSelect={(option : ValueProps) => 
                         option && handleFillProject_Type(Number(option?.value))
                     }
                     onClear={()=> handleFillProject_Type(null)}
@@ -58,14 +55,13 @@ export const Projects = () => {
                     placeholder="Status"
                     value={currentValueStatus ?? null}
                     options={filterOptonsStatus?.status}
-                    onSelect={(option: Option | null) => 
+                    onSelect={(option: ValueProps) => 
                         option && handleFillProject_Status(Number(option?.value))
                     }
                     onClear={() => handleFillProject_Status(null)}
                 />
             </Container>
             <Button.New onClick={() => navigateTo('/RegisterProjects')} />
-
         </Main>
 
     )

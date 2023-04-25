@@ -1,4 +1,5 @@
 import type { SelectProps } from "@stardust-ds/react";
+import { ProjectProps } from "types";
 
 export type { ReactNode} from 'react'
 
@@ -37,35 +38,3 @@ export interface ContextProjectProps{
     handleUpdateStatus(id: number): void;
 }
 
-
-export interface ProjectProps {
-    id: number;
-    name: string;
-    created_at: string;
-    date_start: string;
-    date_start_performed: string;
-    date_end: string
-    date_end_performed: string
-    project_status_id: number;
-    project_type: {
-        id: string;
-        name: string;
-    }
-    status: {
-        color: {
-            button_color: string;
-            text_color: string
-            id: number;
-            name: string
-        }
-        id: number;
-        is_active: boolean;
-        colors_id: number;
-        created_at: Date;
-        updated_at: Date;
-        name: string;
-    }
-    is_active: boolean
-    team_cost:string
-    
-}
