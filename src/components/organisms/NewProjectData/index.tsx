@@ -44,7 +44,7 @@ const NewProject = ({ DataProjects }: INewProject | any) => {
   const { brand } = useTheme()
 
   const handleNavigate = () => {
-    navigate('/projects')
+    navigate('/project')
   }
 
   return (
