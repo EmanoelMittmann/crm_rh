@@ -2,6 +2,8 @@ import { createContext, useState } from 'react'
 import { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { PaginateContext } from 'components/molecules'
+
 import api from 'api'
 import { routes } from 'routes'
 
@@ -85,7 +87,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   return (
     <Context.Provider value={contextProps}>
-      {children}
+      <PaginateContext.Provider
+        value={{ paginate: contextProps.paginate }}
+      >
+        {children}
+      </PaginateContext.Provider>
     </Context.Provider>
   )
 }

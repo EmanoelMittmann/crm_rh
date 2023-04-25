@@ -38,10 +38,12 @@ export const ContainerShelfColumn = styled.div<IContainerColumnProps>`
   align-items: center;
   gap: ${(props) => props.gap};
   font-size: 0.875rem;
-
   overflow-x: hidden;
 
   .status {
+    width: 8em;
+  }
+  .statusProject {
     width: 8em;
   }
 `
@@ -50,6 +52,8 @@ export const Text = styled.p`
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
+  padding-left: ${(props) => props.title};
+  color: ${(props) => props.color};
 `
 
 export const Image = styled.img`

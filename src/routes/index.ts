@@ -15,8 +15,21 @@ export const routes = {
   permission: {
     list: '/permissions'
   },
-  project: {
+
+  linkproject: {
     list: '/project'
+  },
+
+  project: {
+    list: '/project',
+    updateStatus: (id: number) => `/user/updateStatus/${id}`
+  },
+
+  project_type: {
+    list: '/projectType'
+  },
+  status: {
+    list: '/projectStatus'
   }
 }
 

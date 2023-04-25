@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom'
 
 import { useFormik } from 'formik'
 
+import { AuthTemplate, CreateTemplate } from 'components/templates'
+
 import api from 'api'
 
-import NewProject from '../../organisms/NewProjectData'
 import { registerSchemaProjects } from '../schema/SchemaProjects'
 
-const NewProjectFormik = () => {
+const RegisterProjects = () => {
   const [teamPayload, setTeamPayload] = useState([])
   const { id } = useParams()
 
@@ -50,12 +51,19 @@ const NewProjectFormik = () => {
   })
 
   return (
-    <div>
-      <form id='register' onSubmit={formik.handleSubmit}>
-        <NewProject DataProjects={formik} />
-      </form>
-    </div>
+    <>
+      <AuthTemplate>
+        <CreateTemplate title='Cadastrar novo projeto'>
+          {/* <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <Form.Project />
+            <button>salvar</button>
+          </form>
+        </FormProvider> */}
+        </CreateTemplate>
+      </AuthTemplate>
+    </>
   )
 }
 
-export default NewProjectFormik
+export default RegisterProjects

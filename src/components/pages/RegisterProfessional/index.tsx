@@ -34,7 +34,9 @@ const RegisterProfessional = () => {
     })
     const { data: userTypes } = await api.get(routes.userType.list)
     const { data: banks } = await api.get(externRoutes.banks)
-    const { data: projects } = await api.get(routes.project.list)
+    const { data: linkproject } = await api.get(
+      routes.linkproject.list
+    )
 
     methods.setValue('options', {
       jobs: jobs?.data.map((job: any) => ({
@@ -50,7 +52,7 @@ const RegisterProfessional = () => {
         value: bank.name
       })),
       permissions,
-      projects: projects.data.map((project: any) => ({
+      projects: linkproject.data.map((project: any) => ({
         label: project.name,
         value: project
       }))

@@ -9,50 +9,49 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 
 import DEFAULT from './constants'
-import type {
-  ContextProps,
-  ProfessionalProps,
-  ReactNode
-} from './types'
+import { ContextProjectProps, ProjectProps, ReactNode } from './types'
 
-export const Context = createContext({} as ContextProps)
+export const Context = createContext({} as ContextProjectProps)
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
-  const [professionals, setProfessionals] = useState<
-    ProfessionalProps[]
-  >([])
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
-  const [filterOptions, setFilterOptions] = useState(
+  const [projects, setProjects] = useState<ProjectProps[]>([])
+  const [filterOptionsType, setFilterOptionsType] = useState(
     DEFAULT.FILTER_OPTIONS
   )
+  const [filterOptonsStatus, setFilterOptionsStatus] = useState(
+    DEFAULT.FILTER_OPTIONS_STATUS
+  )
 
-  const contextProps = {
-    professionals,
+  const contextProjectProps = {
+    projects,
     isLoading,
     meta,
-    navigateTo,
     paginate: { ...meta.paginate, setCurrent_page: setPage },
-    filterOptions,
-    handleFillJob,
+    filterOptionsType,
+    filterOptonsStatus,
     handleSearch,
     handleOrder,
+    handleFillProject_Type,
+    navigateTo,
     handleUpdateStatus
   }
 
-  async function fetchList() {
+  async function fetchListProject() {
     setIsLoading(true)
-    const { data } = await api.get(routes.professional.list, {
+    const { data } = await api.get(routes.project.list, {
       params: {
         page: meta.paginate.current_page,
-        job_id: meta.job_id,
         search: meta.search && meta.search,
+        project_type: meta.project_type,
+        status: meta.status,
         order: meta.order,
         orderField: meta.orderField
       }
     })
-    setProfessionals(data?.data)
+    setProjects(data?.data)
     setMeta((old) => ({
       ...old,
       paginate: { ...old.paginate, last_page: data.meta.last_page }
@@ -60,13 +59,18 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setIsLoading(false)
   }
 
-  async function fetchFilters() {
-    const { data } = await api.get(routes.job.list, {
+  async function handleUpdateStatus(id: number) {
+    await api.put(routes.project.updateStatus(id))
+    fetchListProject()
+  }
+
+  async function fetchFilters_Projects() {
+    const { data } = await api.get(routes.project_type.list, {
       params: { is_active: 1 }
     })
 
-    setFilterOptions({
-      job: data.data.map(
+    setFilterOptionsType({
+      project_type: data.data.map(
         ({ name, id }: { name: string; id: number }) => ({
           label: name,
           value: id
@@ -74,6 +78,22 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       )
     })
   }
+
+  async function fetchFilters_Status() {
+    const { data } = await api.get(routes.status.list, {
+      params: { is_active: 1 }
+    })
+    setFilterOptionsStatus({
+      status: data.data.map(
+        ({ name, id }: { name: string; id: number }) => ({
+          label: name,
+          value: id
+        })
+      )
+    })
+  }
+
+  function handleFillProject_Type() {}
 
   function navigateTo(url: string) {
     navigate(url)
@@ -83,14 +103,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setMeta((old) => ({
       ...old,
       paginate: { ...old.paginate, current_page }
-    }))
-  }
-
-  function handleFillJob(job_id: number | null) {
-    setMeta((old) => ({
-      ...old,
-      job_id,
-      paginate: { ...old.paginate, current_page: 1 }
     }))
   }
 
@@ -109,31 +121,32 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  async function handleUpdateStatus(id: number) {
-    await api.put(routes.professional.updateStatus(id))
-    fetchList()
-  }
-
   useDebounce({
-    fn: fetchList,
+    fn: fetchListProject,
     listener: [
       meta.paginate.current_page,
       meta.search,
-      meta.job_id,
+      meta.project_type,
+      meta.status,
       meta.order
     ]
   })
 
   useDebounce({
-    fn: fetchFilters,
+    fn: fetchFilters_Projects,
+    delay: 0,
+    listener: []
+  })
+  useDebounce({
+    fn: fetchFilters_Status,
     delay: 0,
     listener: []
   })
 
   return (
-    <Context.Provider value={contextProps}>
+    <Context.Provider value={contextProjectProps}>
       <PaginateContext.Provider
-        value={{ paginate: contextProps.paginate }}
+        value={{ paginate: contextProjectProps.paginate }}
       >
         {children}
       </PaginateContext.Provider>

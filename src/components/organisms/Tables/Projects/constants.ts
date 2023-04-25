@@ -1,0 +1,11 @@
+import type { HeaderProps } from 'components/molecules'
+
+export const HEADERS = [
+  { field: 'id', label: 'Id', on: true },
+  { field: 'name', label: 'Nome' },
+  { field: 'project_type_id', label: 'Tipo' },
+  { field: 'date_start', label: 'Data inicial' },
+  { field: 'project_status_id', label: 'Status' }
+] as HeaderProps[]
+
+export const GRID_TEMPLATE = '1fr 1fr 1.5fr 1fr 1fr 1fr'

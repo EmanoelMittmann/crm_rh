@@ -1,3 +1,4 @@
 import { Professionals } from './Professionals'
+import { Projects } from './Projects'
 
-export const Filter = Object.assign({}, { Professionals })
+export const Filter = Object.assign({}, { Professionals, Projects })
