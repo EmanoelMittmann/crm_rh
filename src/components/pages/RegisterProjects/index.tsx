@@ -22,12 +22,17 @@ const RegisterProjects = () => {
     } as FormProjectProps['Project']['options'])
 
     const { data: project_type } = await api.get(routes.project_type.list)
+    const { data: status } = await api.get(routes.status.list)
     console.log('project_type: ', project_type);
 
     methods.setValue('options', {
       project_types: project_type.data.map((project_type: ProjectProps) => ({
         label: project_type.name,
         value: project_type.id,
+      })),
+      status_projects: status.data.map((status: ProjectProps) => ({
+        label: status.name,
+        value: status.id,
       })),
     } as FormProjectProps['Project']['options'])
   }
@@ -36,9 +41,15 @@ const RegisterProjects = () => {
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
       ...data,
-      id: data?.id?.value,
-      name: data.name,
+      id: data.id?.value,
+      name: data.name?.value,
+      date_start: data.date_start?.value,
+      date_end: data.date_end?.value,
+      date_start_performed: data.date_start_performed?.value,
+      date_end_performed: data.date_end_performed?.value,
+      team_cost: data.team_cost?.value,
       project_type: data.project_type?.name?.value,
+      status: data.status?.name?.value,
     }
 
     await api.post(routes.project.register, sanitizeData)

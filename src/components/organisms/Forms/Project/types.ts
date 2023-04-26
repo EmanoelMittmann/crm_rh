@@ -1,15 +1,15 @@
 import type { Option, SelectOption } from 'components/atoms'
 
 export interface ProjectProps {
-  name: string;
-  date_start: string;
-  date_end: string;
-  date_end_performed: string;
+  name: Option | null
+  date_start: Option | null
+  date_end: Option | null
+  date_end_performed: Option | null
   project_status_id: number;
   project_type_id: number;
-  team_cost: string;
+  team_cost: Option | null
   id: Option | null;
-  date_start_performed: string;
+  date_start_performed: Option | null;
   project_type: {
     id: Option | null;
     name: Option | null;
@@ -26,7 +26,7 @@ export interface ProjectProps {
     colors_id: number;
     created_at: Date;
     updated_at: Date;
-    name: string;
+    name: Option | null;
   }
   permissions: any
   projects: {
@@ -46,6 +46,7 @@ interface FormConfigProps {
     userTypes: SelectOption[]
     jobs: SelectOption[]
     projects: SelectOption[]
+    status_projects: SelectOption[]
   }
 }
 
