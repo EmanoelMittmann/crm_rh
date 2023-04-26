@@ -1,15 +1,19 @@
-import type {Option, SelectOption} from 'components/atoms'
+import type { Option, SelectOption } from 'components/atoms'
 
 export interface ProjectProps {
-    name: string;
-    date_start: string;
-    date_end: string;
-    date_end_performed: string;
-    project_status_id: number;
-    project_type_id: number;
-    team_cost: string;
+  name: string;
+  date_start: string;
+  date_end: string;
+  date_end_performed: string;
+  project_status_id: number;
+  project_type_id: number;
+  team_cost: string;
+  id: string;
+  date_start_performed: string;
+  project_type: {
     id: string;
-    date_start_performed: string;
+    name: string;
+  }
   status: {
     color: {
       button_color: string;
@@ -36,7 +40,7 @@ interface FormConfigProps {
   }
 }
 
-export interface FormProjectProps extends ProjectProps, FormConfigProps {}
+export interface FormProjectProps extends ProjectProps, FormConfigProps { }
 
 
 export type { SelectOption }

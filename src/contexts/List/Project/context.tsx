@@ -1,11 +1,12 @@
 import { createContext, useState } from "react"
-import { ContextProjectProps, ProjectProps, ReactNode } from "./types"
+import { ContextProjectProps, DefaultMetaProps, ReactNode } from "./types"
 import DEFAULT from './constants'
 import api from "api"
 import { routes } from "routes"
 import { useNavigate } from "react-router-dom"
 import { useDebounce } from "hooks"
 import { PaginateContext } from "components/molecules"
+import { ProjectProps } from "types"
 
 
 export const Context = createContext({} as ContextProjectProps)
@@ -28,26 +29,33 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         handleSearch,
         handleOrder,
         handleFillProject_Type,
+        handleFillProject_Status,
         navigateTo,
         handleUpdateStatus,
     }
 
+    function prepareParams(meta: DefaultMetaProps) {
+        return {
+            page: meta.paginate.current_page,
+            search: meta.search && meta.search,
+            type_id: meta.project_type_id && meta.project_type_id,
+            status_id: meta.project_status_id && meta.project_status_id,
+            order: meta.order,
+            orderField: meta.orderField,
+        }
+    }
     async function fetchListProject() {
         setIsLoading(true)
-        const { data } = await api.get(routes.project.list, {
-            params: {
-                page: meta.paginate.current_page,
-                search: meta.search && meta.search,
-                project_type: meta.project_type,
-                status: meta.status,
-                order: meta.order,
-                orderField: meta.orderField,
-            },
-        })
-        setProjects(data?.data) 
+
+        const params = prepareParams(meta)
+
+        const { data } = await api.get(routes.project.list, { params })
+
+        setProjects(data?.data)
         setMeta((old) => ({ ...old, paginate: { ...old.paginate, last_page: data.meta.last_page } }))
         setIsLoading(false)
     }
+
 
     async function handleUpdateStatus(id: number) {
         await api.put(routes.project.updateStatus(id))
@@ -58,7 +66,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         const { data } = await api.get(routes.project_type.list, { params: { is_active: 1 } })
 
         setFilterOptionsType({
-            project_type: data.data.map(({ name, id }: { name: string; id: number }) => ({ label: name, value: id })),
+            project_type: data.data.map(({ name, id } : { name: string; id: number }) => ({ label: name, value: id })),
         })
     }
 
@@ -71,9 +79,22 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
     }
 
+    function handleFillProject_Type(project_type_id: number | null) {
+        setMeta((old) => ({
+            ...old,
+            project_type_id,
+            paginate: { ...old.paginate, current_page: 1 }
+        }))
+    }
 
-    function handleFillProject_Type() {}
+    function handleFillProject_Status(project_status_id: number | null){
+        setMeta((old) => ({
+            ...old,
+            project_status_id,
+            paginate: { ...old.paginate, current_page: 1 }
 
+        }))
+    }
 
     function navigateTo(url: string) {
         navigate(url)
@@ -93,7 +114,15 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
     useDebounce({
         fn: fetchListProject,
-        listener: [meta.paginate.current_page, meta.search, meta.project_type, meta.status, meta.order],
+        listener: [
+            meta.paginate.current_page, 
+            meta.search, 
+            meta.project_type, 
+            meta.status, 
+            meta.order, 
+            meta.project_status_id, 
+            meta.project_type_id
+        ],
     })
 
     useDebounce({
