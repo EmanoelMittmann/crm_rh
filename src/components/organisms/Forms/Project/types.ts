@@ -28,19 +28,29 @@ export interface ProjectProps {
     updated_at: Date;
     name: string;
   }
+  projects_type:{
+    selected: ProjectTypeProps
+  }
+  
 }
+
+interface ProjectTypeProps{
+  project_type: Option | null
+  input: string
+}
+
 
 interface FormConfigProps {
   options: {
-    banks: SelectOption[]
     permissions: SelectOption[]
     userTypes: SelectOption[]
     jobs: SelectOption[]
     projects: SelectOption[]
+    projects_type:SelectOption[]
   }
 }
 
-export interface FormProjectProps extends ProjectProps, FormConfigProps { }
+export interface FormProps extends ProjectProps, FormConfigProps { }
 
 
 export type { SelectOption }
