@@ -5,7 +5,9 @@ export default () => {
     return (
         <Main>
             <Section.Project/>
-            <Divider/>   
+            <Divider/>
+          <Section.Team/>
+          <Divider/> 
         </Main>
     )
 }

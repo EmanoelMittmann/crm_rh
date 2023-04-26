@@ -1,22 +1,17 @@
 import { Inputs, Selects } from "components/atoms"
 import { useFormContext } from "react-hook-form"
 import { validation } from "../logic"
-
-
 import { ContainerRow } from "../style"
 import { FormProjectProps } from "../types"
 
 export const Project = () => {
     const { register, watch, setValue, formState: { errors } } = useFormContext<FormProjectProps>()
-
     const options = watch('options')
 
 
     return (
         <>
-            <ContainerRow>
-                <h3>Dados do Projeto</h3>
-            </ContainerRow>
+            <ContainerRow><h3>Dados do Projeto</h3></ContainerRow>
             <ContainerRow gap="1rem">
                 <Inputs.Default
                 {...register('name',{required:validation.required})}
@@ -51,37 +46,25 @@ export const Project = () => {
             </ContainerRow>
             <ContainerRow gap="1rem">
                 <Inputs.Default
-                    {...register('date_start', {
-                        required: validation.required
-                    })}
-                    error={errors.date_start?.message}
+                    {...register('date_start', {})}
                     type='date'
                     label='Inicio efetivo'
                     width='100%'
                 />
                 <Inputs.Default
-                    {...register('date_end', {
-                        required: validation.required
-                    })}
-                    error={errors.date_end?.message}
+                    {...register('date_end', {})}
                     type='date'
                     label='Final efetivo'
                     width='100%'
                 />
                 <Inputs.Default
-                    {...register('date_start_performed', {
-                        required: validation.required
-                    })}
-                    error={errors.date_start_performed?.message}
+                    {...register('date_start_performed', {})}
                     type='date'
                     label='Incio do contrato'
                     width='100%'
                 />
                 <Inputs.Default
-                    {...register('date_end_performed', {
-                        required: validation.required
-                    })}
-                    error={errors.date_end_performed?.message}
+                    {...register('date_end_performed', {})}
                     type='date'
                     label='Final do contrato'
                     width='100%'
@@ -103,8 +86,7 @@ export const Project = () => {
                     width={450}
                 />
                 <Inputs.Default
-                    {...register('team_cost', { required: validation.required })}
-                    error={errors.team_cost?.message}
+                    {...register('team_cost', {})}
                     width='100%'
                     type='number'
                     label='Custo estimado'
