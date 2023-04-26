@@ -1,8 +1,9 @@
 import type { DefaultMetaProps } from './types'
 
 const META_PROPS = {
-  isActive: 0,
+  isActive: '',
   search: '',
+  order: 'ASC',
   paginate: {
     current_page: 1,
     last_page: 1

@@ -1,8 +1,9 @@
 import type { SelectProps } from '@stardust-ds/react'
 
 export interface DefaultMetaProps {
-  isActive: number
+  isActive: string
   search: string
+  order: 'ASC' | 'DESC'
   paginate: {
     current_page: number
     last_page: number
@@ -21,6 +22,8 @@ export interface ContextPropsSettings {
   }
   handleSearch(text: string): void
   handleStatus(status: number): void
+  handleUpdateStatus(id: number): void
+  handleOrder(field: string): void
 }
 
 export interface JobsProps {

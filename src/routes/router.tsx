@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import Jobs from 'components/pages/Jobs'
 import RegisterProjects from 'components/pages/RegisterProjects/RegisterProjects'
 import Settings from 'components/pages/Setting'
 
@@ -29,7 +30,7 @@ const Router = () => {
           <Route path='/notes' element={<Professionals />} />
           <Route path='/reports' element={<Professionals />} />
           <Route path='/services' element={<Professionals />} />
-          <Route path='/job' element={<></>} />
+          <Route path='/jobs' element={<Jobs />} />
           <Route path='/typeProject' element={<></>} />
           <Route path='/statusProject' element={<></>} />
           <Route path='/settings' element={<Settings />} />
