@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import RegisterProjects from 'components/pages/RegisterProjects/RegisterProjects'
-import Settings from 'components/pages/Setting'
+import RegisterProjects from 'components/pages/RegisterProjects'
 
 import Login from '../components/pages/Login'
 import Home from '../components/pages/MasterPage'
@@ -29,10 +28,7 @@ const Router = () => {
           <Route path='/notes' element={<Professionals />} />
           <Route path='/reports' element={<Professionals />} />
           <Route path='/services' element={<Professionals />} />
-          <Route path='/job' element={<></>} />
-          <Route path='/typeProject' element={<></>} />
-          <Route path='/statusProject' element={<></>} />
-          <Route path='/settings' element={<Settings />} />
+          <Route path='/settings' element={<Professionals />} />
           <Route path='/company' element={<Professionals />} />
         </Routes>
       </BrowserRouter>

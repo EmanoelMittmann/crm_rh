@@ -1,7 +1,8 @@
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
+import { Option } from 'types'
 
 import { IconGlass, Button } from 'components/atoms'
 
@@ -11,20 +12,38 @@ type ValueProps = Option | null | undefined
 
 export const Projects = () => {
   const {
+    meta,
     filterOptionsType,
     filterOptonsStatus,
     handleFillProject_Type,
-    handleOrder,
+    handleFillProject_Status,
     handleSearch,
-    navigateTo,
-    handleUpdateStatus
+    navigateTo
   } = useContext(List.Project.Context)
+
+  const { search, project_status_id, project_type_id } = meta
+
+  const currentValueType = useMemo(
+    () =>
+      filterOptionsType.project_type.find(
+        (item) => Number(item.value) === project_type_id
+      ),
+    [project_type_id]
+  ) as ValueProps
+
+  const currentValueStatus = useMemo(
+    () =>
+      filterOptonsStatus.status.find(
+        (item) => Number(item.value) === project_status_id
+      ),
+    [project_status_id]
+  ) as ValueProps
 
   return (
     <Main>
       <Container gap='1rem'>
         <Input
-          value={''}
+          value={search}
           iconLeft={<IconGlass />}
           onChange={(e) => handleSearch(e.target?.value)}
           placeholder='Buscar...'
@@ -34,19 +53,25 @@ export const Projects = () => {
         <Select
           width={230}
           placeholder='Tipo'
-          options={filterOptionsType.project_type}
-          onSelect={(option: Option | null) =>
+          value={currentValueType ?? null}
+          options={filterOptionsType?.project_type}
+          onSelect={(option: ValueProps) =>
             option && handleFillProject_Type(Number(option?.value))
           }
+          onClear={() => handleFillProject_Type(null)}
         />
         <Select
           width={230}
           placeholder='Status'
-          options={filterOptonsStatus.status}
-          onSelect={() => {}}
+          value={currentValueStatus ?? null}
+          options={filterOptonsStatus?.status}
+          onSelect={(option: ValueProps) =>
+            option && handleFillProject_Status(Number(option?.value))
+          }
+          onClear={() => handleFillProject_Status(null)}
         />
       </Container>
-      <Button.New onClick={() => navigateTo('/RegisterProject')} />
+      <Button.New onClick={() => navigateTo('/RegisterProjects')} />
     </Main>
   )
 }

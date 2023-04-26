@@ -18,14 +18,14 @@ export const Projects = () => {
     handleUpdateStatus
   } = useContext(List.Project.Context)
 
-  const POPOVER_OPTIONS = (id: number, status: boolean) => [
+  const POPOVER_OPTIONS = (id: number, status: any) => [
     {
-      label: 'Editar',
+      label: 'Editar Projeto',
       callback: () => navigateTo(`/project/${id}`)
     },
     {
-      label: status ? 'Inativar' : 'Ativar',
-      callback: () => handleUpdateStatus(id)
+      label: 'Editar Status',
+      callback: () => navigateTo(`/projectStatus/${id}`)
     }
   ]
 
@@ -42,7 +42,7 @@ export const Projects = () => {
         key={props.id}
         config={{
           template: GRID_TEMPLATE,
-          options: POPOVER_OPTIONS(props.id, props.is_active)
+          options: POPOVER_OPTIONS(props.id, props.status)
         }}
         {...{ props }}
       />
