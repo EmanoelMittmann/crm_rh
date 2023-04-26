@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import RegisterProjects from 'components/pages/RegisterProjects'
+import Settings from 'components/pages/Setting'
 
 import Login from '../components/pages/Login'
 import Home from '../components/pages/MasterPage'
 import Professionals from '../components/pages/Professionals'
 import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
-import Settings from 'components/pages/Setting'
 const Router = () => {
   return (
     <>

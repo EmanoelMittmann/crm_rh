@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { ContainerModal, Options } from './style'
 import { IModalProps } from 'types'
+
+import { ContainerModal, Options } from './style'
 
 const Modal = ({
   eventOne,

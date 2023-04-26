@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { theme } from 'styles'
+import { IContainerColumnProps } from 'types'
 
 import type { TemplateProps } from './types'
-import { IContainerColumnProps } from 'types'
 
 export const Main = styled.div`
   width: 100%;
