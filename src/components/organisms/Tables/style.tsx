@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { theme } from 'styles'
+import { IContainerColumnProps } from 'types'
 
 import type { TemplateProps } from './types'
 
@@ -43,9 +44,8 @@ export const ContainerShelfColumn = styled.div<IContainerColumnProps>`
   .status {
     width: 8em;
   }
-   .statusProject {
+  .statusProject {
     width: 8em;
- 
   }
 `
 
@@ -53,12 +53,11 @@ export const Text = styled.p`
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
-  padding-left: ${(props => props.title)};
-  color: ${(props => props.color)};
-  
+  padding-left: ${(props) => props.title};
+  color: ${(props) => props.color};
 `
 
 export const Image = styled.img`
   width: 3em;
-  border-radius:50%;
+  border-radius: 50%;
 `

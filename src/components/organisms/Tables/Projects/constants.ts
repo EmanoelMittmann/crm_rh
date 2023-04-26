@@ -1,4 +1,4 @@
-import type { HeaderProps } from "components/molecules";
+import type { HeaderProps } from 'components/molecules'
 
 export const HEADERS = [
     {field: 'id', label: 'Id', on: true},

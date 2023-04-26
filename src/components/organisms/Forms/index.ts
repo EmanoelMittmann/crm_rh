@@ -1,7 +1,9 @@
-import Professional, { FormProps as ProfessionalProps } from './Professional'
-import Project, {FormProjectProps as ProjectProps} from './Project'
+import Professional, {
+  FormProps as ProfessionalProps
+} from './Professional'
+import Project, { FormProjectProps as ProjectProps } from './Project'
 
-export const Form = Object.assign({}, { Professional, Project  })
+export const Form = Object.assign({}, { Professional, Project })
 
 export type FormProps = {
   Professional: ProfessionalProps
@@ -10,6 +12,7 @@ export type FormProps = {
 export type FormProjectProps ={
   Project: ProjectProps
 }
+
 
 
 export { getUfOption } from './Professional'

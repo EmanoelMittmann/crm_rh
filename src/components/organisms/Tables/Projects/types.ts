@@ -1,9 +1,10 @@
-import { ProjectProps} from "types";
-import type { TemplateProps } from "../types";
+import { ProjectProps } from 'types'
+
+import type { TemplateProps } from '../types'
 
 interface OptionsProps {
-    label: string
-    callback: () => void
+  label: string
+  callback: () => void
 }
 
 interface ConfigProps extends TemplateProps {
@@ -11,6 +12,6 @@ interface ConfigProps extends TemplateProps {
 }
 
 export type ShelfProjectsProps = {
-    props: ProjectProps
-    config: ConfigProps
+  props: ProjectProps
+  config: ConfigProps
 }

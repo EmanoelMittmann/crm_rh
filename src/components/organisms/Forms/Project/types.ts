@@ -16,9 +16,9 @@ export interface ProjectProps {
   } 
   status: {
     color: {
-      button_color: string;
+      button_color: string
       text_color: string
-      id: number;
+      id: number
       name: string
     }
     id: number;
@@ -50,7 +50,8 @@ interface FormConfigProps {
   }
 }
 
-export interface FormProjectProps extends ProjectProps, FormConfigProps { }
-
+export interface FormProjectProps
+  extends ProjectProps,
+    FormConfigProps {}
 
 export type { SelectOption }

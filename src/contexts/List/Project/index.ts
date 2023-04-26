@@ -1,5 +1,5 @@
 import { Context, Provider } from './context'
 
-export const Project = Object.assign({}, {Context, Provider})
+export const Project = Object.assign({}, { Context, Provider })
 
-export type {ContextProjectProps} from './types'
+export type { ContextProjectProps } from './types'

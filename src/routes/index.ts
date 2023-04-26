@@ -6,7 +6,8 @@ export const routes = {
     register: '/user'
   },
   job: {
-    list: '/job'
+    list: '/job',
+    updateJob: (id: number) => `/job/${id}`
   },
 
   userType: {
@@ -20,17 +21,16 @@ export const routes = {
   project: {
     list: '/project?limit=5',
     updateStatus: (id: number) => `/user/updateStatus/${id}`,
-    register:'/project'
+    register: '/project'
   },
 
-  project_type:{
+  project_type: {
     list: '/projectType'
   },
 
   status:{
     list: '/projectStatus'
   }
-
 }
 
 export const externRoutes = {

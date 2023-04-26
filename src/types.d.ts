@@ -72,35 +72,34 @@ interface IModalProps {
 }
 
 export interface ProjectProps {
-  id: number;
-  name: string;
-  created_at: string;
-  date_start: string;
-  date_start_performed: string;
+  id: number
+  name: string
+  created_at: string
+  date_start: string
+  date_start_performed: string
   date_end: string
   date_end_performed: string
-  project_status_id: number;
+  project_status_id: number
   project_type: {
-    id: string;
-    name: string;
+    id: string
+    name: string
   }
   status: {
     color: {
-      button_color: string;
+      button_color: string
       text_color: string
-      id: number;
+      id: number
       name: string
     }
-    id: number;
-    is_active: boolean;
-    colors_id: number;
-    created_at: Date;
-    updated_at: Date;
-    name: string;
+    id: number
+    is_active: boolean
+    colors_id: number
+    created_at: Date
+    updated_at: Date
+    name: string
   }
   is_active: boolean
   team_cost: string
-
 }
 
 interface OtherProps {

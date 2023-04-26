@@ -9,93 +9,20 @@ export const Project = () => {
     const options = watch('options')
 
 
-    return (
-        <>
-            <ContainerRow><h3>Dados do Projeto</h3></ContainerRow>
-            <ContainerRow gap="1rem">
-                <Inputs.Default
-                {...register('name',{required:validation.required})}
-                error={errors.name?.message}
-                width='100%'
-                type='text'
-                label='Nome do Projeto'
-                placeholder="Informe o nome do Projeto"
-                />
-                <Inputs.Default
-                    {...register('name', { required: validation.required })}
-                    error={errors.id?.message}
-                    width='100%'
-                    type='text'
-                    label='ID do projeto'
-                    placeholder="ID do Projeto"
-                />
-                <Selects.Default
-                    {...register('project_type',{
-                    required:validation.required
-                })}
-                onSelect={(value: any)=>
-                    setValue('project_type', value, {shouldValidate: true})
-               }
-                onClear={() => setValue('project_type.name', null)}
-                options={options?.project_types}
-                error={errors.project_type?.message}
-                label="Tipo de Projeto"
-                placeholder="Selecione"
-                width={235}
-                />
-            </ContainerRow>
-            <ContainerRow gap="1rem">
-                <Inputs.Default
-                    {...register('date_start', {})}
-                    type='date'
-                    label='Inicio efetivo'
-                    width='100%'
-                />
-                <Inputs.Default
-                    {...register('date_end', {})}
-                    type='date'
-                    label='Final efetivo'
-                    width='100%'
-                />
-                <Inputs.Default
-                    {...register('date_start_performed', {})}
-                    type='date'
-                    label='Incio do contrato'
-                    width='100%'
-                />
-                <Inputs.Default
-                    {...register('date_end_performed', {})}
-                    type='date'
-                    label='Final do contrato'
-                    width='100%'
-                />
-            </ContainerRow>
-            <ContainerRow gap="1rem">
-                <Selects.Default
-                    {...register('status', {
-                        required: validation.required
-                    })}
-                    onSelect={(value: any) =>
-                        setValue('status', value, { shouldValidate: true })
-                    }
-                    onClear={() => setValue('status.name', null)}
-                    options={options?.status_projects}
-                    error={errors.status?.message}
-                    label="Status do Projeto"
-                    placeholder="Selecione"
-                    width={450}
-                />
-                <Inputs.Default
-                    {...register('team_cost', {})}
-                    width='100%'
-                    type='number'
-                    label='Custo estimado'
-                    placeholder="R$"
-                />
+  return (
+    <>
+      <ContainerRow>
+        <h3>Dados do Projeto</h3>
+      </ContainerRow>
+    </>
+  )
+>>>>>>> 0bda05cd4d304f01c8027a3a07e9cb0c14b4e782
 
-            </ContainerRow>
-        </>
-    )
-
+  return (
+    <>
+      <ContainerRow>
+        <h3>Dados do Projeto</h3>
+      </ContainerRow>
+    </>
+  )
 }
-

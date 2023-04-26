@@ -1,5 +1,5 @@
 export interface HeaderProps {
-  field: string 
+  field: string
   label: string
   on?: boolean
 }

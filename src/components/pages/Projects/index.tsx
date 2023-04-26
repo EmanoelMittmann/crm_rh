@@ -1,12 +1,10 @@
-import { AuthTemplate, ListTemplate } from 'components/templates'
-import { Table, Filter } from 'components/organisms'
 import { List } from 'contexts'
 
-
+import { Table, Filter } from 'components/organisms'
+import { AuthTemplate, ListTemplate } from 'components/templates'
 
 const Projects = () => {
   return (
-
     <AuthTemplate>
       <List.Project.Provider>
         <ListTemplate title='Projetos'>
@@ -15,9 +13,7 @@ const Projects = () => {
         </ListTemplate>
       </List.Project.Provider>
     </AuthTemplate>
-  );
-};
+  )
+}
 
-export default Projects;
-
-
+export default Projects

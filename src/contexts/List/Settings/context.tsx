@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react'
+import { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { PaginateContext } from 'components/molecules'
@@ -9,50 +10,41 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 
 import DEFAULT from './constants'
-import type {
-  ContextProps,
-  ProfessionalProps,
-  ReactNode
-} from './types'
+import type { ContextPropsSettings, JobsProps } from './types'
 
-export const Context = createContext({} as ContextProps)
+export const Context = createContext({} as ContextPropsSettings)
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(true)
-  const [professionals, setProfessionals] = useState<
-    ProfessionalProps[]
-  >([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [jobs, setJobs] = useState<JobsProps[]>([])
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
   const [filterOptions, setFilterOptions] = useState(
     DEFAULT.FILTER_OPTIONS
   )
 
   const contextProps = {
-    professionals,
+    jobs,
     isLoading,
     meta,
-    navigateTo,
-    paginate: { ...meta.paginate, setCurrent_page: setPage },
     filterOptions,
-    handleFillJob,
+    navigate,
+    paginate: { ...meta.paginate, setCurrent_page: setPage },
     handleSearch,
-    handleOrder,
+    handleStatus,
     handleUpdateStatus
   }
 
   async function fetchList() {
     setIsLoading(true)
-    const { data } = await api.get(routes.professional.list, {
+    const { data } = await api.get(routes.job.list, {
       params: {
         page: meta.paginate.current_page,
-        job_id: meta.job_id,
-        search: meta.search && meta.search,
-        order: meta.order,
-        orderField: meta.orderField
+        search: meta.search,
+        is_active: meta.isActive
       }
     })
-    setProfessionals(data?.data)
+    setJobs(data?.data)
     setMeta((old) => ({
       ...old,
       paginate: { ...old.paginate, last_page: data.meta.last_page }
@@ -60,37 +52,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setIsLoading(false)
   }
 
-  async function fetchFilters() {
-    const { data } = await api.get(routes.job.list, {
-      params: { is_active: 1 }
-    })
-
-    setFilterOptions({
-      job: data.data.map(
-        ({ name, id }: { name: string; id: number }) => ({
-          label: name,
-          value: id
-        })
-      )
-    })
-  }
-
-  function navigateTo(url: string) {
-    navigate(url)
-  }
-
   function setPage(current_page: number) {
     setMeta((old) => ({
       ...old,
       paginate: { ...old.paginate, current_page }
-    }))
-  }
-
-  function handleFillJob(job_id: number | null) {
-    setMeta((old) => ({
-      ...old,
-      job_id,
-      paginate: { ...old.paginate, current_page: 1 }
     }))
   }
 
@@ -102,32 +67,22 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  function handleOrder(_: string) {
+  function handleStatus(status: number) {
     setMeta((old) => ({
       ...old,
-      order: old.order === 'ASC' ? 'DESC' : 'ASC'
+      status,
+      paginate: { ...old.paginate, current_page: 1 }
     }))
   }
 
   async function handleUpdateStatus(id: number) {
-    await api.put(routes.professional.updateStatus(id))
+    await api.put(routes.job.updateJob(id))
     fetchList()
   }
 
   useDebounce({
     fn: fetchList,
-    listener: [
-      meta.paginate.current_page,
-      meta.search,
-      meta.job_id,
-      meta.order
-    ]
-  })
-
-  useDebounce({
-    fn: fetchFilters,
-    delay: 0,
-    listener: []
+    listener: [meta.isActive, meta.search, meta.paginate.current_page]
   })
 
   return (

@@ -1,21 +1,27 @@
 import { useMemo, useContext, createContext } from 'react'
-import { IconRightArrow, IconLeftArrow, HideBox } from 'components/atoms'
+
+import { List } from 'contexts'
+
+import {
+  IconRightArrow,
+  IconLeftArrow,
+  HideBox
+} from 'components/atoms'
+
 import { Button, Main, PagesNumber, Row } from './style'
 
 interface ContextProps {
   paginate: {
-    current_page: number,
-     last_page: number,
+    current_page: number
+    last_page: number
     setCurrent_page: (page: number) => void
   }
-
-
 }
 export const PaginateContext = createContext({} as ContextProps)
 
 export const Paginate = () => {
   const {
-    paginate: { current_page, last_page, setCurrent_page },
+    paginate: { current_page, last_page, setCurrent_page }
   } = useContext(PaginateContext)
 
   const pages = useMemo(
