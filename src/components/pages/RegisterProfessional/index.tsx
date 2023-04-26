@@ -34,8 +34,8 @@ const RegisterProfessional = () => {
     })
     const { data: userTypes } = await api.get(routes.userType.list)
     const { data: banks } = await api.get(externRoutes.banks)
-    const { data: linkproject } = await api.get(routes.linkproject.list)
-
+    const { data: project } = await api.get(routes.project.list)
+    
     methods.setValue('options', {
       jobs: jobs?.data.map((job: any) => ({
         label: job.name,
@@ -50,8 +50,9 @@ const RegisterProfessional = () => {
         value: bank.name
       })),
       permissions,
-      projects: linkproject.data.map((project: any) => ({ label: project.name, value: project })),
+      projects: project.data.map((project: any) => ({ label: project.name, value: project })),
     })
+
   }
 
   async function handleCPF() {

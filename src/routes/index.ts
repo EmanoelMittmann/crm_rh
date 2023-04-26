@@ -8,19 +8,17 @@ export const routes = {
   job: {
     list: '/job'
   },
+
   userType: {
     list: '/userType'
   },
+
   permission: {
     list: '/permissions'
   },
-  
-  linkproject:{
-    list: '/project',
-  },
 
   project: {
-    list: '/project',
+    list: '/project?limit=5',
     updateStatus: (id: number) => `/user/updateStatus/${id}`,
     register:'/project'
   },
@@ -28,6 +26,7 @@ export const routes = {
   project_type:{
     list: '/projectType'
   },
+
   status:{
     list: '/projectStatus'
   }
