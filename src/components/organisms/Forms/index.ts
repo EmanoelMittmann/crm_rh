@@ -5,8 +5,11 @@ export const Form = Object.assign({}, { Professional, Project  })
 
 export type FormProps = {
   Professional: ProfessionalProps
-  Project: ProjectProps
-
 }
+
+export type FormProjectProps ={
+  Project: ProjectProps
+}
+
 
 export { getUfOption } from './Professional'

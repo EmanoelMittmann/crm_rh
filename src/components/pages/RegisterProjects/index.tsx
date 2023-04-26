@@ -1,12 +1,14 @@
 import api from "api";
-import { Form, FormProps } from "components/organisms";
+import { Form, FormProjectProps } from "components/organisms";
 import { AuthTemplate, CreateTemplate } from "components/templates";
+import { useDebounce } from "hooks";
 import { FormProvider, useForm } from "react-hook-form";
 import { routes } from "routes";
+import { ProjectProps } from "types";
 
 
 const RegisterProjects = () => {
-  const methods = useForm<FormProps['Project']>({
+  const methods = useForm<FormProjectProps['Project']>({
     defaultValues: {
 
     }
@@ -17,35 +19,43 @@ const RegisterProjects = () => {
     )
     methods.setValue('options', {
       permissions
-    } as FormProps['Project']['options'])
+    } as FormProjectProps['Project']['options'])
+
     const { data: project_type } = await api.get(routes.project_type.list)
-  
-    methods.setValue('options',{
-      permissions,
-      projects_type: project_type.data.map((project_type: any)=> ({
-        label: project_type.name, 
-        value: project_type.id
+    console.log('project_type: ', project_type);
+
+    methods.setValue('options', {
+      project_types: project_type.data.map((project_type: ProjectProps) => ({
+        label: project_type.name,
+        value: project_type.id,
       })),
-    })
+    } as FormProjectProps['Project']['options'])
   }
 
 
-  //  async function onSubmit(data: FormProps['Project']) {
-  //    const sanitizeData = {
-  //      ...data,
+  async function onSubmit(data: FormProjectProps['Project']) {
+    const sanitizeData = {
+      ...data,
+      id: data?.id?.value,
+      name: data.name,
+      project_type: data.project_type?.name?.value,
+    }
 
-  //      }
-  //    }
+    await api.post(routes.project.register, sanitizeData)
+  }
 
-  //    await api.post(routes.project.register, sanitizeData)
-  //  }
 
+  useDebounce({
+    fn: fetchPropsProject,
+    delay: 0,
+    listener: []
+  })
   return (
     <>
       <AuthTemplate>
         <CreateTemplate title='Cadastrar novo projeto'>
           <FormProvider {...methods}>
-            <form >
+            <form onSubmit={methods.handleSubmit(onSubmit)} >
               <Form.Project />
               <button>salvar</button>
             </form>

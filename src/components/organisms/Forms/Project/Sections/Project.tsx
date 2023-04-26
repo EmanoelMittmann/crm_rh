@@ -7,7 +7,10 @@ import { ContainerRow } from "../style"
 import { FormProjectProps } from "../types"
 
 export const Project = () => {
-    const { register, watch, setValue, formState:{errors} } = useFormContext<FormProjectProps>()
+    const { register, watch, setValue, formState: { errors } } = useFormContext<FormProjectProps>()
+
+    const options = watch('options')
+
 
     return (
         <>
@@ -30,15 +33,18 @@ export const Project = () => {
                     label='ID do projeto'
                 />
                 <Selects.Default
-                {...register('project_type.selected.project_type')}
-                onSelect={(v: any)=>
-                    setValue('project_type.selected.project_type')
+                    {...register('project_type',{
+                    required:validation.required
+                })}
+                onSelect={(value: any)=>
+                    setValue('project_type', value, {shouldValidate: true})
                }
-               onClear={()=> setValue('project_type', null)}
-               options={watch('options.project_type')?? []}
-               label="Tipo de Projeto"
-               placeholder="Selecione"
-               width={275}
+                onClear={() => setValue('project_type.name', null)}
+                options={options?.project_types}
+                error={errors.project_type?.message}
+                label="Tipo de Projeto"
+                placeholder="Selecione"
+                width={235}
                 />
 
             </ContainerRow>
