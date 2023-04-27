@@ -10,4 +10,4 @@ export const HEADERS = [
     { field: '', label: '%' },
 ] as HeaderProps[]
 
-export const GRID_TEMPLATE = '.8fr 0.5fr 0.5fr 0.2fr 0.4fr .5fr 0.3fr'
+export const GRID_TEMPLATE = '.8fr 0.5fr 0.5fr 0.2fr 0.4fr .5fr 0.5fr'
