@@ -34,20 +34,35 @@ const RegisterProjects = () => {
     const { data: project_type } = await api.get(
       routes.project_type.list
     )
-    const { data: status } = await api.get(routes.status.list)
-    console.log('project_type: ', project_type)
+    const { data: status } = await api.get(
+      routes.status.list
+    )
+    const { data: jobs } = await api.get(routes.job.list, {
+      params: { is_active: true }
+    })
+    const {data: user_projects} = await api.get(routes.user_projects.list)
+    const { data: professionals } = await api.get(routes.professional.list)
+ 
+  
 
     methods.setValue('options', {
       project_types: project_type.data.map(
         (project_type: ProjectProps) => ({
           label: project_type.name,
           value: project_type.id
-        })
-      ),
+        })),
       status_projects: status.data.map((status: ProjectProps) => ({
         label: status.name,
         value: status.id
-      }))
+      })),
+      jobs: jobs?.data.map((job: any) => ({
+        label: job.name,
+        value: job.id
+      })),
+      professionals: professionals?.data.map((professional: any) => ({
+        label: professional.name,
+        value: professional.id
+      })),
     } as FormProjectProps['Project']['options'])
   }
 
@@ -62,7 +77,9 @@ const RegisterProjects = () => {
       date_end_performed: data.date_end_performed?.value,
       team_cost: data.team_cost?.value,
       project_type: data.project_type?.name?.value,
-      status: data.status?.name?.value
+      status: data.status?.name?.value,
+      jobs: data.name?.value,
+      professionals: data.name?.value,
     }
 
     await api.post(routes.project.register, sanitizeData)

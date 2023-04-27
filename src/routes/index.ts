@@ -30,6 +30,9 @@ export const routes = {
 
   status: {
     list: '/projectStatus'
+  },
+  user_projects :{
+    list: '/userProjects/project'
   }
 }
 
