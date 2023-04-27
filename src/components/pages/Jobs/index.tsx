@@ -1,7 +1,11 @@
 import { List } from 'contexts'
 
 import { Table } from 'components/organisms'
-import { AuthTemplate, ListTemplate } from 'components/templates'
+import {
+  AuthTemplate,
+  CreateTemplate,
+  ListTemplate
+} from 'components/templates'
 
 const Jobs = () => {
   return (

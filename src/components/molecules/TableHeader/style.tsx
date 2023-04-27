@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { theme } from 'styles'
+import { IContainerColumnProps } from 'types'
 
 interface TemplateProps {
   template: string

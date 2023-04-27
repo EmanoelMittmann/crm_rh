@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { IButtonColorProps } from 'types'
 
 export const ContainerButton = styled.button<IButtonColorProps>`
   background-color: ${(props) => props.bgColor};

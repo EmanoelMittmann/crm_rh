@@ -1,14 +1,14 @@
 export const DEFAULTSELECT = {
   home: true,
   professionals: false,
-  projects: false,
+  project: false,
   extrasHours: false,
   notes: false,
   reports: false,
   services: false,
   settings: false,
   company: false,
-  newprojects: false
+  RegisterProjects: false
 }
 
 export function alterObject(

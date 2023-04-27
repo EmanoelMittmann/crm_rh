@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Jobs from 'components/pages/Jobs'
-import RegisterProjects from 'components/pages/RegisterProjects/RegisterProjects'
+import RegisterProjects from 'components/pages/RegisterProjects'
 import Settings from 'components/pages/Setting'
 
 import Login from '../components/pages/Login'

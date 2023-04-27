@@ -10,6 +10,10 @@ export interface ProjectProps {
   team_cost: string
   id: string
   date_start_performed: string
+  project_type: {
+    id: string
+    name: string
+  }
   status: {
     color: {
       button_color: string

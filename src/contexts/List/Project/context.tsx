@@ -1,6 +1,8 @@
 import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { ProjectProps } from 'types'
+
 import { PaginateContext } from 'components/molecules'
 
 import api from 'api'
@@ -9,7 +11,11 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 
 import DEFAULT from './constants'
-import { ContextProjectProps, ProjectProps, ReactNode } from './types'
+import {
+  ContextProjectProps,
+  DefaultMetaProps,
+  ReactNode
+} from './types'
 
 export const Context = createContext({} as ContextProjectProps)
 
@@ -35,22 +41,28 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleSearch,
     handleOrder,
     handleFillProject_Type,
+    handleFillProject_Status,
     navigateTo,
     handleUpdateStatus
   }
 
+  function prepareParams(meta: DefaultMetaProps) {
+    return {
+      page: meta.paginate.current_page,
+      search: meta.search && meta.search,
+      type_id: meta.project_type_id && meta.project_type_id,
+      status_id: meta.project_status_id && meta.project_status_id,
+      order: meta.order,
+      orderField: meta.orderField
+    }
+  }
   async function fetchListProject() {
     setIsLoading(true)
-    const { data } = await api.get(routes.project.list, {
-      params: {
-        page: meta.paginate.current_page,
-        search: meta.search && meta.search,
-        project_type: meta.project_type,
-        status: meta.status,
-        order: meta.order,
-        orderField: meta.orderField
-      }
-    })
+
+    const params = prepareParams(meta)
+
+    const { data } = await api.get(routes.project.list, { params })
+
     setProjects(data?.data)
     setMeta((old) => ({
       ...old,
@@ -93,7 +105,23 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     })
   }
 
-  function handleFillProject_Type() {}
+  function handleFillProject_Type(project_type_id: number | null) {
+    setMeta((old) => ({
+      ...old,
+      project_type_id,
+      paginate: { ...old.paginate, current_page: 1 }
+    }))
+  }
+
+  function handleFillProject_Status(
+    project_status_id: number | null
+  ) {
+    setMeta((old) => ({
+      ...old,
+      project_status_id,
+      paginate: { ...old.paginate, current_page: 1 }
+    }))
+  }
 
   function navigateTo(url: string) {
     navigate(url)
@@ -128,7 +156,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       meta.search,
       meta.project_type,
       meta.status,
-      meta.order
+      meta.order,
+      meta.project_status_id,
+      meta.project_type_id
     ]
   })
 

@@ -9,17 +9,15 @@ import { ShelfProps } from './types'
 
 const Shelf = ({ props, config }: ShelfProps) => {
   return (
-    <>
-      <ContainerShelf template={config.template}>
-        <ContainerShelfColumn title={props.name}>
-          {props.name}
-        </ContainerShelfColumn>
-        <ContainerShelfColumn gap='1em'>
-          <Badge.Status status={props.is_active} />
-          <Popover options={config.options} />
-        </ContainerShelfColumn>
-      </ContainerShelf>
-    </>
+    <ContainerShelf template={config.template}>
+      <ContainerShelfColumn title={props.name}>
+        {props.name}
+      </ContainerShelfColumn>
+      <ContainerShelfColumn gap='1em'>
+        <Badge.Status status={props.is_active} />
+        <Popover options={config.options} />
+      </ContainerShelfColumn>
+    </ContainerShelf>
   )
 }
 

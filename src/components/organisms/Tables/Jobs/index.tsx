@@ -3,7 +3,8 @@ import {
   useMemo,
   useState,
   useCallback,
-  useEffect
+  useEffect,
+  useRef
 } from 'react'
 
 import { List } from 'contexts'
@@ -19,6 +20,7 @@ import Shelf from './Shelf'
 
 export const Jobs = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const modalRef = useRef(null)
   const { jobs, isLoading, handleUpdateStatus, handleOrder } =
     useContext(List.Settings.Context)
 
@@ -59,6 +61,13 @@ export const Jobs = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
+      />
+      {modalRef.current.isOpen}
+      <Edit
+        ref={modalRef}
+        text='Cadastrar Cargos'
+        EventOne={() => {}}
+        placeholder='Cargos'
       />
       {Table}
     </Main>

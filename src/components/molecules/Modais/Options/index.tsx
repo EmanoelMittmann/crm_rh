@@ -1,3 +1,5 @@
+import { IModalProps } from 'types'
+
 import { ContainerModal, Options } from './style'
 
 const Modal = ({

@@ -39,7 +39,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   async function fetchList() {
     setIsLoading(true)
-    const { data } = await api.get(routes.job.list, {
+    const { data } = await api.get(routes.job.list + '?limit=7', {
       params: {
         page: meta.paginate.current_page,
         order: meta.order,
