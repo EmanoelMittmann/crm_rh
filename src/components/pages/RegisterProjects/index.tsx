@@ -1,17 +1,27 @@
-import api from "api";
-import { Form, FormProjectProps } from "components/organisms";
-import { AuthTemplate, CreateTemplate } from "components/templates";
-import { useDebounce } from "hooks";
-import { FormProvider, useForm } from "react-hook-form";
-import { routes } from "routes";
-import { ProjectProps } from "types";
+import { useContext, useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 
+import { List } from 'contexts'
+import { ProjectProps } from 'types'
+
+import { Button } from 'components/atoms'
+import { Form, FormProjectProps } from 'components/organisms'
+import { AuthTemplate, CreateTemplate } from 'components/templates'
+
+import api from 'api'
+import { routes } from 'routes'
+
+import { useDebounce } from 'hooks'
+import { useNavigate } from 'react-router-dom'
 
 const RegisterProjects = () => {
-  const methods = useForm<FormProjectProps['Project']>({
-    defaultValues: {
+  const [isSaving, setIsSAving] = useState(false)
+  const navigate = useNavigate()
 
-    }
+  const { navigateTo } = useContext(List.Project.Context)
+
+  const methods = useForm<FormProjectProps['Project']>({
+    defaultValues: {}
   })
   async function fetchPropsProject() {
     const { data: permissions } = await api.get(
@@ -21,22 +31,25 @@ const RegisterProjects = () => {
       permissions
     } as FormProjectProps['Project']['options'])
 
-    const { data: project_type } = await api.get(routes.project_type.list)
+    const { data: project_type } = await api.get(
+      routes.project_type.list
+    )
     const { data: status } = await api.get(routes.status.list)
-    console.log('project_type: ', project_type);
+    console.log('project_type: ', project_type)
 
     methods.setValue('options', {
-      project_types: project_type.data.map((project_type: ProjectProps) => ({
-        label: project_type.name,
-        value: project_type.id,
-      })),
+      project_types: project_type.data.map(
+        (project_type: ProjectProps) => ({
+          label: project_type.name,
+          value: project_type.id
+        })
+      ),
       status_projects: status.data.map((status: ProjectProps) => ({
         label: status.name,
-        value: status.id,
-      })),
+        value: status.id
+      }))
     } as FormProjectProps['Project']['options'])
   }
-
 
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
@@ -49,33 +62,50 @@ const RegisterProjects = () => {
       date_end_performed: data.date_end_performed?.value,
       team_cost: data.team_cost?.value,
       project_type: data.project_type?.name?.value,
-      status: data.status?.name?.value,
+      status: data.status?.name?.value
     }
 
     await api.post(routes.project.register, sanitizeData)
   }
-
 
   useDebounce({
     fn: fetchPropsProject,
     delay: 0,
     listener: []
   })
+
+  const handleSave = () => {
+    setIsSAving(true)
+  }
+
+  // function handleCancel() {
+  //    navigateTo('/project')
+  // }
+
+  function handleCancel() {
+    navigate('/project')
+  }
+
   return (
     <>
       <AuthTemplate>
         <CreateTemplate title='Cadastrar novo projeto'>
           <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)} >
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
               <Form.Project />
-              <button>salvar</button>
+              <Button.Updade
+                onSave={handleSave}
+                onCancel={handleCancel}
+                saveButtonName='Salvar Projeto'
+                cancelButtonName='cancelar'
+                disabled={isSaving}
+              />
             </form>
           </FormProvider>
         </CreateTemplate>
       </AuthTemplate>
     </>
-  );
-};
+  )
+}
 
-export default RegisterProjects;
-
+export default RegisterProjects

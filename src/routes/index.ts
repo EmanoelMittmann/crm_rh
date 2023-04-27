@@ -28,7 +28,7 @@ export const routes = {
     list: '/projectType'
   },
 
-  status:{
+  status: {
     list: '/projectStatus'
   }
 }

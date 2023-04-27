@@ -7,6 +7,7 @@ import api from 'api'
 
 import { AuthContext } from '.'
 import type { AuthProps } from './types'
+import { IJWTDecodeGoogle } from 'types'
 
 const DEFAULT_VALUE = {
   user: {

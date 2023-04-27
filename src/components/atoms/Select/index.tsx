@@ -1,3 +1,4 @@
+import { ISelectProps } from 'types'
 import { ContainerSelect, Master, Option } from './style'
 
 export const Select = ({

@@ -1,30 +1,34 @@
-import { Inputs, Selects } from "components/atoms"
-import { useFormContext } from "react-hook-form"
-import { validation } from "../logic"
+import { useFormContext } from 'react-hook-form'
 
+import { Inputs, Selects } from 'components/atoms'
 
-import { ContainerRow } from "../style"
-import { FormProjectProps } from "../types"
+import { validation } from '../logic'
+import { ContainerRow } from '../style'
+import { FormProjectProps } from '../types'
 
 export const Project = () => {
-  const { register, watch, setValue, formState: { errors } } = useFormContext<FormProjectProps>()
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors }
+  } = useFormContext<FormProjectProps>()
 
   const options = watch('options')
-
 
   return (
     <>
       <ContainerRow>
         <h3>Dados do Projeto</h3>
       </ContainerRow>
-      <ContainerRow gap="1rem">
+      <ContainerRow gap='1rem'>
         <Inputs.Default
           {...register('name', { required: validation.required })}
           error={errors.name?.message}
           width='100%'
           type='text'
           label='Nome do Projeto'
-          placeholder="Informe o nome do Projeto"
+          placeholder='Informe o nome do Projeto'
         />
         <Inputs.Default
           {...register('name', { required: validation.required })}
@@ -32,7 +36,7 @@ export const Project = () => {
           width='100%'
           type='text'
           label='ID do projeto'
-          placeholder="ID do Projeto"
+          placeholder='ID do Projeto'
         />
         <Selects.Default
           {...register('project_type', {
@@ -44,12 +48,12 @@ export const Project = () => {
           onClear={() => setValue('project_type.name', null)}
           options={options?.project_types}
           error={errors.project_type?.message}
-          label="Tipo de Projeto"
-          placeholder="Selecione"
+          label='Tipo de Projeto'
+          placeholder='Selecione'
           width={235}
         />
       </ContainerRow>
-      <ContainerRow gap="1rem">
+      <ContainerRow gap='1rem'>
         <Inputs.Default
           {...register('date_start', {
             required: validation.required
@@ -87,7 +91,7 @@ export const Project = () => {
           width='100%'
         />
       </ContainerRow>
-      <ContainerRow gap="1rem">
+      <ContainerRow gap='1rem'>
         <Selects.Default
           {...register('status', {
             required: validation.required
@@ -98,21 +102,21 @@ export const Project = () => {
           onClear={() => setValue('status.name', null)}
           options={options?.status_projects}
           error={errors.status?.message}
-          label="Status do Projeto"
-          placeholder="Selecione"
+          label='Status do Projeto'
+          placeholder='Selecione'
           width={450}
         />
         <Inputs.Default
-          {...register('team_cost', { required: validation.required })}
+          {...register('team_cost', {
+            required: validation.required
+          })}
           error={errors.team_cost?.message}
           width='100%'
           type='number'
           label='Custo estimado'
-          placeholder="R$"
+          placeholder='R$'
         />
-
       </ContainerRow>
     </>
   )
-
 }

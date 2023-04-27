@@ -5,28 +5,28 @@ export interface ProjectProps {
   date_start: Option | null
   date_end: Option | null
   date_end_performed: Option | null
-  project_status_id: number;
-  project_type_id: number;
+  project_status_id: number
+  project_type_id: number
   team_cost: Option | null
-  id: Option | null;
-  date_start_performed: Option | null;
+  id: Option | null
+  date_start_performed: Option | null
   project_type: {
-    id: Option | null;
-    name: Option | null;
+    id: Option | null
+    name: Option | null
   }
   status: {
     color: {
-      button_color: string;
+      button_color: string
       text_color: string
-      id: number;
+      id: number
       name: string
     }
-    id: number;
-    is_active: boolean;
-    colors_id: number;
-    created_at: Date;
-    updated_at: Date;
-    name: Option | null;
+    id: number
+    is_active: boolean
+    colors_id: number
+    created_at: Date
+    updated_at: Date
+    name: Option | null
   }
   permissions: any
   projects: {
@@ -41,7 +41,7 @@ interface ProjectAttachmentProps {
 
 interface FormConfigProps {
   options: {
-    project_types: SelectOption[];
+    project_types: SelectOption[]
     permissions: SelectOption[]
     userTypes: SelectOption[]
     jobs: SelectOption[]
@@ -50,7 +50,8 @@ interface FormConfigProps {
   }
 }
 
-export interface FormProjectProps extends ProjectProps, FormConfigProps { }
-
+export interface FormProjectProps
+  extends ProjectProps,
+    FormConfigProps {}
 
 export type { SelectOption }

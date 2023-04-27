@@ -9,10 +9,8 @@ export type FormProps = {
   Professional: ProfessionalProps
 }
 
-export type FormProjectProps ={
+export type FormProjectProps = {
   Project: ProjectProps
 }
-
-
 
 export { getUfOption } from './Professional'
