@@ -10,6 +10,7 @@ const ROUTES = {
   '/reports': 'Relatórios',
   '/services': 'Ordem de Serviço',
   '/settings': 'Configurações',
+  '/jobs': 'Configurações > Cargos',
   '/company': 'Empresas',
   '/RegisterProfessionals': 'Profissionais > Cadastrar Novo'
 }

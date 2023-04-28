@@ -7,7 +7,7 @@ const Settings = () => {
   return (
     <AuthTemplate>
       <List.Settings.Provider>
-        <ListTemplate title='Configurações'>
+        <ListTemplate title='Configurações' arrow={true}>
           <HeaderSettings />
         </ListTemplate>
       </List.Settings.Provider>

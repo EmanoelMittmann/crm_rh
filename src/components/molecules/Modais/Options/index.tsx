@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { IModalProps } from 'types'
 
 import { ContainerModal, Options } from './style'

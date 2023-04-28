@@ -17,7 +17,7 @@ export const HeaderSettings = () => (
       </Typography>
     </Column>
     <Column>
-      <Outline text='Cargos' path='job' />
+      <Outline text='Cargos' path='jobs' />
       <Outline text='Status de Projetos' path='typeProject' />
       <Outline text='Tipos de Projetos' path='statusProject' />
     </Column>

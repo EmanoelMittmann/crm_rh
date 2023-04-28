@@ -23,3 +23,16 @@ export const Footer = styled.div`
   display: flex;
   height: 100%;
 `
+
+export const Button = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: fit-content;
+`
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+`
