@@ -21,8 +21,9 @@ export interface ContextPropsSettings {
     setCurrent_page(page: number): void
   }
   handleSearch(text: string): void
-  handleStatus(status: number): void
   handleUpdateStatus(id: number): void
+  handleUpdateJob(id: number, name: string): void
+  handleStatus(status: number): void
   handleOrder(field: string): void
 }
 

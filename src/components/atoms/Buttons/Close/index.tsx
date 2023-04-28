@@ -6,7 +6,7 @@ import { Button } from './style'
 
 const Close = ({ ...props }: ButtonProps) => {
   return (
-    <Button {...{ props }}>
+    <Button {...props}>
       <IconClose />
     </Button>
   )

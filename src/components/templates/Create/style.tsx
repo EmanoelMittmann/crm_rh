@@ -5,7 +5,6 @@ export const Main = styled.div`
   padding: 2rem 2rem 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 2rem;
   min-height: calc(100vh - 6rem);
 `
