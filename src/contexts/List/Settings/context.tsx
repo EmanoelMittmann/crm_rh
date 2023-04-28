@@ -34,6 +34,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleSearch,
     handleStatus,
     handleUpdateStatus,
+    handleUpdateJob,
     handleOrder
   }
 
@@ -85,8 +86,13 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
+  async function handleUpdateJob(id: number, name: string) {
+    await api.put(routes.job.updateJob(id), { name: name })
+    fetchList()
+  }
+
   async function handleUpdateStatus(id: number) {
-    await api.put(routes.job.updateJob, { id: id })
+    await api.put(routes.job.updateStatus, { id: id })
     fetchList()
   }
 
