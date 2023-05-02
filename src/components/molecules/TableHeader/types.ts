@@ -1,7 +1,7 @@
 export interface HeaderProps {
   field: string
-  label: string 
-  on?: boolean 
+  label: string
+  on?: boolean
 }
 
 export interface TemplateProps {

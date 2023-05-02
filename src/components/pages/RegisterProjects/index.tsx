@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { List } from 'contexts'
 import { ProjectProps } from 'types'
@@ -12,13 +13,10 @@ import api from 'api'
 import { routes } from 'routes'
 
 import { useDebounce } from 'hooks'
-import { useNavigate } from 'react-router-dom'
 
 const RegisterProjects = () => {
   const [isSaving, setIsSAving] = useState(false)
   const navigate = useNavigate()
-
-  const { navigateTo } = useContext(List.Project.Context)
 
   const methods = useForm<FormProjectProps['Project']>({
     defaultValues: {}
@@ -27,30 +25,30 @@ const RegisterProjects = () => {
     const { data: permissions } = await api.get(
       routes.permission.list
     )
-    methods.setValue('options', {
-      permissions
-    } as FormProjectProps['Project']['options'])
 
     const { data: project_type } = await api.get(
       routes.project_type.list
     )
-    const { data: status } = await api.get(
-      routes.status.list
-    )
+    const { data: status } = await api.get(routes.status.list)
+
     const { data: jobs } = await api.get(routes.job.list, {
       params: { is_active: true }
     })
-    const {data: user_projects} = await api.get(routes.user_projects.list)
-    const { data: professionals } = await api.get(routes.professional.list)
- 
-  
+    const { data: user_projects } = await api.get(
+      routes.user_projects.list
+    )
+    const { data: professionals } = await api.get(
+      routes.professional.list
+    )
 
     methods.setValue('options', {
+      permissions,
       project_types: project_type.data.map(
         (project_type: ProjectProps) => ({
           label: project_type.name,
           value: project_type.id
-        })),
+        })
+      ),
       status_projects: status.data.map((status: ProjectProps) => ({
         label: status.name,
         value: status.id
@@ -63,6 +61,10 @@ const RegisterProjects = () => {
         label: professional.name,
         value: professional.id
       })),
+      user_projects: user_projects.map((user_project: any) => ({
+        label: user_project.name,
+        value: user_project.id
+      }))
     } as FormProjectProps['Project']['options'])
   }
 
@@ -80,9 +82,16 @@ const RegisterProjects = () => {
       status: data.status?.name?.value,
       jobs: data.name?.value,
       professionals: data.name?.value,
+      user_projects: data.user_projects?.name?.value,
+      avatar: data.user_projects.avatar?.value,
+      extra_hours_estimated:
+        data.user_projects?.extra_hours_estimated?.value,
+      hours_mounths_estimated:
+        data.user_projects.hours_mounths_estimated?.value
     }
 
     await api.post(routes.project.register, sanitizeData)
+
   }
 
   useDebounce({
@@ -94,10 +103,6 @@ const RegisterProjects = () => {
   const handleSave = () => {
     setIsSAving(true)
   }
-
-  // function handleCancel() {
-  //    navigateTo('/project')
-  // }
 
   function handleCancel() {
     navigate('/project')

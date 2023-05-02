@@ -1,6 +1,4 @@
-import { ButtonProps } from '@stardust-ds/react'
-
-import { Props } from 'components/templates/Login/types'
+import { UserProjectsProps } from "types"
 
 export const validation = {
   required: 'Campo obrigatório',
@@ -14,3 +12,4 @@ export const validation = {
     return true
   }
 }
+
