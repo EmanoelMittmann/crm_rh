@@ -7,6 +7,7 @@ export const routes = {
   },
   job: {
     list: '/job',
+    updateStatus: `/updateJobStatus`,
     updateJob: (id: number) => `/job/${id}`
   },
 

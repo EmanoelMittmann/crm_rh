@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { PaginateContext } from 'components/molecules'
+import Edit from 'components/molecules/Modais/Edit'
 
 import api from 'api'
 import { routes } from 'routes'
@@ -32,14 +33,17 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     paginate: { ...meta.paginate, setCurrent_page: setPage },
     handleSearch,
     handleStatus,
-    handleUpdateStatus
+    handleUpdateStatus,
+    handleUpdateJob,
+    handleOrder
   }
 
   async function fetchList() {
     setIsLoading(true)
-    const { data } = await api.get(routes.job.list, {
+    const { data } = await api.get(routes.job.list + '?limit=7', {
       params: {
         page: meta.paginate.current_page,
+        order: meta.order,
         search: meta.search,
         is_active: meta.isActive
       }
@@ -75,14 +79,31 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
+  function handleOrder(_: string) {
+    setMeta((old) => ({
+      ...old,
+      order: old.order === 'ASC' ? 'DESC' : 'ASC'
+    }))
+  }
+
+  async function handleUpdateJob(id: number, name: string) {
+    await api.put(routes.job.updateJob(id), { name: name })
+    fetchList()
+  }
+
   async function handleUpdateStatus(id: number) {
-    await api.put(routes.job.updateJob(id))
+    await api.put(routes.job.updateStatus, { id: id })
     fetchList()
   }
 
   useDebounce({
     fn: fetchList,
-    listener: [meta.isActive, meta.search, meta.paginate.current_page]
+    listener: [
+      meta.isActive,
+      meta.search,
+      meta.paginate.current_page,
+      meta.order
+    ]
   })
 
   return (

@@ -1,16 +1,14 @@
 import { List } from 'contexts'
 
 import { HeaderSettings } from 'components/molecules'
-import { AuthTemplate, ListTemplate } from 'components/templates'
+import { AuthTemplate, CreateTemplate } from 'components/templates'
 
 const Settings = () => {
   return (
     <AuthTemplate>
-      <List.Settings.Provider>
-        <ListTemplate title='Configurações'>
-          <HeaderSettings />
-        </ListTemplate>
-      </List.Settings.Provider>
+      <CreateTemplate title='Configurações'>
+        <HeaderSettings />
+      </CreateTemplate>
     </AuthTemplate>
   )
 }
