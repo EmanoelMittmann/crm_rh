@@ -1,17 +1,14 @@
 import { List } from 'contexts'
 
-import { Table } from 'components/organisms'
-import {
-  AuthTemplate,
-  CreateTemplate,
-  ListTemplate
-} from 'components/templates'
+import { Filter, Table } from 'components/organisms'
+import { AuthTemplate, ListTemplate } from 'components/templates'
 
 const Jobs = () => {
   return (
     <AuthTemplate>
       <List.Settings.Provider>
         <ListTemplate title='Cadastro de Cargos'>
+          <Filter.Jobs />
           <Table.Jobs />
         </ListTemplate>
       </List.Settings.Provider>

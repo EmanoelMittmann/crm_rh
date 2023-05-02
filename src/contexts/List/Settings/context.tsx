@@ -35,7 +35,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleStatus,
     handleUpdateStatus,
     handleUpdateJob,
-    handleOrder
+    handleOrder,
+    handleJob
   }
 
   async function fetchList() {
@@ -71,10 +72,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  function handleStatus(status: number) {
+  function handleStatus(status: number | null) {
     setMeta((old) => ({
       ...old,
-      status,
+      isActive: status,
       paginate: { ...old.paginate, current_page: 1 }
     }))
   }
@@ -93,6 +94,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   async function handleUpdateStatus(id: number) {
     await api.put(routes.job.updateStatus, { id: id })
+    fetchList()
+  }
+
+  async function handleJob(name: string) {
+    await api.post(routes.job.list, { name: name })
     fetchList()
   }
 

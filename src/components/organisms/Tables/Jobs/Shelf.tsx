@@ -1,8 +1,6 @@
-import React from 'react'
-
 import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
-import Edit from 'components/molecules/Modais/Edit'
+import { Modal } from 'components/molecules/Modais'
 
 import { ContainerShelf, ContainerShelfColumn } from '../style'
 import { ShelfProps } from './types'
