@@ -16,47 +16,38 @@ export const Team = () => {
   } = useFormContext<FormProjectProps>()
 
   const options = watch('options')
-  const team = watch('team')
- 
-
+  
+  
   const handleTeam = () => {
     const professional = watch('professional');
-    const job = watch('jobs');
+    const jobs = watch('jobs');
     const hours_mounths_estimated = watch('user_projects.hours_mounths_estimated');
     const extra_hours_estimated = watch('user_projects.extra_hours_estimated');
 
-    if (professional && job) {
+    if (professional && jobs) {
       const teamMember = {
-        professionals: {
-          id: professional.id,
-          name: professional.name
-        },
-        jobs: {
-          id: job.id,
-          name: job.name
-        },
+        professional,
+        jobs,
         hours_mounths_estimated,
         extra_hours_estimated,
-      } as TeamMemberProps;
+      } as unknown as TeamMemberProps;
 
-      setValue('team', [...team, teamMember]);
-
-      console.log('teamMember: ', teamMember.name);
+      setValue('team', [teamMember]);
     }
   };
 
 
   return (
     <>
-    <form >
+
       <ContainerRow>
         <h3>Time</h3>
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Selects.Default
-          {...register('professional', {})}
+          {...register('professional.name', {})}
           onSelect={(value: any) =>
-            setValue('professional', value, { shouldValidate: true })
+            setValue('professional.name', value, { shouldValidate: true })
           }
           onClear={() => setValue('professional.name', null)}
           options={options?.professionals}
@@ -65,9 +56,9 @@ export const Team = () => {
           width={190}
         />
         <Selects.Default
-          {...register('jobs', {})}
+          {...register('jobs.name', {})}
           onSelect={(value: any) =>
-            setValue('jobs', value, { shouldValidate: true })
+            setValue('jobs.name', value, { shouldValidate: true })
           }
           onClear={() => setValue('jobs.name', null)}
           options={options?.jobs}
@@ -99,11 +90,9 @@ export const Team = () => {
           onClick={handleTeam}
         />
       </ContainerRow>
-      <ContainerRow>
+      <ContainerRow gap="1rem">
         <ProjectTeam />
-      </ContainerRow>
-    </form>
-      
+      </ContainerRow>    
     </>
   )
 }

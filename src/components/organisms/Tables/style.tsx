@@ -56,15 +56,6 @@ export const Text = styled.p`
   padding-left: ${(props) => props.title};
   color: ${(props) => props.color};
 `
-export const TextJob = styled.p`
-  white-space: nowrap;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  font-weight: 500;
-  padding-left: ${(props) => props.title};
-  color: ${(props) => props.color};
-`
-
 export const Image = styled.img`
   width: 3em;
   border-radius: 50%;

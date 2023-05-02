@@ -2,34 +2,18 @@ import type { Option, SelectOption } from 'components/atoms'
 import { TemplateProps } from 'components/organisms/Tables/types'
 
 export interface TeamMemberProps {
-  id: number
-  name: string
-  role: string;
-  date_start: string
-  date_end: Date
-  date_end_performed: Date
-  project_status_id: number
-  project_type_id: number
-  team_cost: number
-  date_start_performed: Date
-  project_type: {
-    id: number
-    name: string
-  }
-  professionals: {
-    name: Option | null
+  id: number;
+  professional: {
     id: Option | null
+    name: Option | null
   }
   jobs: {
     id: Option | null
     name: Option | null
   }
-    extra_hours_estimated: Option | null
-    extra_hours_performed: Option | null
-    hours_mounths_estimated: Option | null
-    hours_mounths_performed: Option | null
-    avatar: Option | null
-
+  extra_hours_estimated: string
+  hours_mounths_estimated: string
+  status: string
 }
 
 export interface ProjectProps {
@@ -140,7 +124,7 @@ export type ShelfProjectsProps = {
   config: ConfigProps
 }
 export type ShelfUserProject = {
-  props: UserProjectsProps
+  props: TeamMemberProps
   config: ConfigProps
 }
 
