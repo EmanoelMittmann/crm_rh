@@ -33,6 +33,7 @@ export const routes = {
     list: '/projectStatus',
     update: (id: number) => `/projectStatus/${id}`
   },
+
   user_projects: {
     list: '/userProjects/project',
     register: '/userProjects/project'
