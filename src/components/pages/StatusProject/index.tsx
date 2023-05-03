@@ -1,6 +1,6 @@
 import { List } from 'contexts'
 
-import { Table } from 'components/organisms'
+import { Filter, Table } from 'components/organisms'
 import { AuthTemplate, ListTemplate } from 'components/templates'
 
 const StatusProject = () => {
@@ -8,6 +8,7 @@ const StatusProject = () => {
     <AuthTemplate>
       <List.Status.Provider>
         <ListTemplate title='Cadastro de Status de Projetos'>
+          <Filter.StatusProject />
           <Table.StatusProject />
         </ListTemplate>
       </List.Status.Provider>

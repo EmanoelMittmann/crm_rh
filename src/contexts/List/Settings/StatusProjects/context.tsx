@@ -52,6 +52,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     const { data } = await api.get(routes.status.list, {
       params: {
         search: meta.search,
+        orderField: meta.orderField,
         page: meta.paginate.current_page,
         order: meta.order,
         is_active: meta.isActive

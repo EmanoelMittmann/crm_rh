@@ -4,7 +4,7 @@ const META_PROPS: DefaultMetaProps = {
   isActive: null,
   search: '',
   order: 'ASC',
-  orderField: '',
+  orderField: 'id',
   paginate: {
     current_page: 1,
     last_page: 1
