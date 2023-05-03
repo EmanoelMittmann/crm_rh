@@ -71,6 +71,24 @@ interface IModalProps {
   eventTwo?: MouseEventHandler
 }
 
+export interface UserProjectsProps {
+  id: number
+  user_id: string
+  extra_hours_estimated: string
+  extra_hours_performed: string
+  hours_mounths_estimated: string
+  hours_mounths_performed: string
+  avatar: string
+  name: string
+  status: string
+  job_: string
+  job_id: string
+  job: {
+    id: number
+    name: string
+  }
+}
+
 export interface ProjectProps {
   id: number
   name: string
@@ -120,16 +138,4 @@ interface MyFormProps {
 interface Option {
   label: string
   value: string
-}
-
-interface IProjectsListing
-  extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  projects?: string | number | boolean | undefined
-  name?: string | number
-  date_start?: staring
-  status?: string | number | undefined
-  project_type?: string | number | undefined
-  color: string
-  button_color: string
-  text_color: string
 }

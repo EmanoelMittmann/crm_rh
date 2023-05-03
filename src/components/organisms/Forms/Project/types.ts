@@ -1,18 +1,51 @@
 import type { Option, SelectOption } from 'components/atoms'
+import { TemplateProps } from 'components/organisms/Tables/types'
 
-export interface ProjectProps {
+export interface TeamMemberProps {
+  id: number
   name: string
+  role: string;
   date_start: string
-  date_end: string
-  date_end_performed: string
+  date_end: Date
+  date_end_performed: Date
   project_status_id: number
   project_type_id: number
-  team_cost: string
-  id: string
-  date_start_performed: string
+  team_cost: number
+  date_start_performed: Date
   project_type: {
-    id: string
+    id: number
     name: string
+  }
+  professionals: {
+    name: Option | null
+    id: Option | null
+  }
+  jobs: {
+    id: Option | null
+    name: Option | null
+  }
+    extra_hours_estimated: Option | null
+    extra_hours_performed: Option | null
+    hours_mounths_estimated: Option | null
+    hours_mounths_performed: Option | null
+    avatar: Option | null
+
+}
+
+export interface ProjectProps {
+  team: TeamMemberProps[]
+  name: Option | null
+  date_start: Option | null
+  date_end: Option | null
+  date_end_performed: Option | null
+  project_status_id: number
+  project_type_id: number
+  team_cost: Option | null
+  id: Option | null
+  date_start_performed: Option | null
+  project_type: {
+    id: Option | null
+    name: Option | null
   }
   status: {
     color: {
@@ -26,22 +59,93 @@ export interface ProjectProps {
     colors_id: number
     created_at: Date
     updated_at: Date
-    name: string
+    name: Option | null
+  }
+  permissions: any
+  projects: {
+    selected: ProjectAttachmentProps
+    attachment: []
+  }
+  jobs: {
+    id: Option | null
+    name: Option | null
+  }
+
+  professional: {
+    name: Option | null
+    id: Option | null
+  }
+  user_projects: {
+    id: Option | null
+    extra_hours_estimated: Option | null
+    extra_hours_performed: Option | null
+    hours_mounths_estimated: Option | null
+    hours_mounths_performed: Option | null
+    avatar: Option | null
+    name: Option | null
+    status: Option | null
+    job_: Option | null
+    job_id: Option | null
+    job: {
+      id: Option | null
+      name: Option | null
+    }
+
   }
 }
+interface ProjectAttachmentProps {
+  project: Option | null
+  input: string
+}
+export interface UserProjectsProps {
+  id: number
+  extra_hours_estimated: string
+  extra_hours_performed: string
+  hours_mounths_estimated: string
+  hours_mounths_performed: string
+  avatar: string
+  name: string
+  status: string
+  job_: string
+  job_id: string
+  job: {
+    id: number
+    name: string
+  }
 
+}
 interface FormConfigProps {
   options: {
-    banks: SelectOption[]
+    project_types: SelectOption[]
     permissions: SelectOption[]
     userTypes: SelectOption[]
     jobs: SelectOption[]
     projects: SelectOption[]
+    status_projects: SelectOption[]
+    user_projects: SelectOption[]
+    professionals: SelectOption[]
   }
+}
+interface OptionsProps {
+  label: string
+  callback: () => void
+}
+
+interface ConfigProps extends TemplateProps {
+  options: OptionsProps[]
+}
+
+export type ShelfProjectsProps = {
+  props: ProjectProps
+  config: ConfigProps
+}
+export type ShelfUserProject = {
+  props: UserProjectsProps
+  config: ConfigProps
 }
 
 export interface FormProjectProps
   extends ProjectProps,
-    FormConfigProps {}
+  FormConfigProps { }
 
 export type { SelectOption }

@@ -10,19 +10,17 @@ export const routes = {
     updateStatus: `/updateJobStatus`,
     updateJob: (id: number) => `/job/${id}`
   },
+
   userType: {
     list: '/userType'
   },
+
   permission: {
     list: '/permissions'
   },
 
-  linkproject: {
-    list: '/project'
-  },
-
   project: {
-    list: '/project',
+    list: '/project?limit=5',
     updateStatus: (id: number) => `/user/updateStatus/${id}`,
     register: '/project'
   },
@@ -30,9 +28,16 @@ export const routes = {
   project_type: {
     list: '/projectType'
   },
+
   status: {
     list: '/projectStatus',
     update: (id: number) => `/projectStatus/${id}`
+  },
+  
+  user_projects: {
+    list: '/userProjects/project',
+    register: '/userProjects/project'
+
   }
 }
 
