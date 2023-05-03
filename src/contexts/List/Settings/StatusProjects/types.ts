@@ -15,6 +15,7 @@ export interface ContextPropsStatusProject {
   statusProjects: StatusProps[]
   meta: DefaultMetaProps
   filterOptions: { status: SelectProps['options'] }
+  isLoading: boolean
   paginate: {
     current_page: number
     last_page: number
@@ -24,8 +25,13 @@ export interface ContextPropsStatusProject {
   handleOrderField(field: string): void
   handleStatus(status: number | null): void
   handleSearch(text: string): void
-  handleCreateStatus(name: string, color: number): void
-  handleUpdateStatus(id: number, name: string, color: string): void
+  handleUpdateStatus(id: number): void
+  handleCreateStatusProject(name: string, color: number): void
+  handleUpdateStatusProject(
+    id: number,
+    name: string,
+    color: string
+  ): void
 }
 
 export interface StatusProps {

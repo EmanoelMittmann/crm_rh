@@ -11,14 +11,18 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 
 import DEFAULT from './constants'
-import { ContextPropsStatusProject, StatusProps } from './types'
+import {
+  ContextPropsStatusProject,
+  DefaultMetaProps,
+  StatusProps
+} from './types'
 import { ReactNode } from './types'
 
 export const Context = createContext({} as ContextPropsStatusProject)
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
-  const [isloading, setIsLoading] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [statusProjects, setStatusProjects] = useState<StatusProps[]>(
     []
   )
@@ -29,7 +33,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   const contextProps = {
     statusProjects,
-    isloading,
+    isLoading,
     meta,
     filterOptions,
     paginate: { ...meta.paginate, setCurrent_page: setPage },
@@ -38,8 +42,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleOrderField,
     handleStatus,
     handleSearch,
-    handleCreateStatus,
-    handleUpdateStatus
+    handleUpdateStatus,
+    handleCreateStatusProject,
+    handleUpdateStatusProject
   }
 
   async function fetchList() {
@@ -47,7 +52,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     const { data } = await api.get(routes.status.list, {
       params: {
         search: meta.search,
-        orderField: meta.orderField,
         page: meta.paginate.current_page,
         order: meta.order,
         is_active: meta.isActive
@@ -99,7 +103,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  async function handleCreateStatus(name: string, color: number) {
+  async function handleCreateStatusProject(
+    name: string,
+    color: number
+  ) {
     try {
       await api.post(routes.status.list, {
         name: name,
@@ -110,6 +117,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         title: 'Status cadastrado',
         position: 'bottom-right'
       })
+      fetchList()
     } catch (error) {
       toast({
         type: 'error',
@@ -119,7 +127,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  async function handleUpdateStatus(
+  async function handleUpdateStatusProject(
     id: number,
     name: string,
     color: string
@@ -134,12 +142,22 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         title: 'Status Atualizado',
         position: 'bottom-right'
       })
+      fetchList()
     } catch (error) {
       toast({
         type: 'error',
         title: 'Status Existente',
         position: 'bottom-right'
       })
+    }
+  }
+
+  async function handleUpdateStatus(id: number) {
+    try {
+      await api.put(routes.status.updateStatus, { id: id })
+      fetchList()
+    } catch (error) {
+      console.error(error)
     }
   }
 
