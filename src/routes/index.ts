@@ -31,7 +31,8 @@ export const routes = {
     list: '/projectType'
   },
   status: {
-    list: '/projectStatus'
+    list: '/projectStatus',
+    update: (id: number) => `/projectStatus/${id}`
   }
 }
 

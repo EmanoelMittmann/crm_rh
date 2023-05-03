@@ -2,8 +2,8 @@ import { Professional } from './Professional'
 import type { ContextProps } from './Professional'
 import type { ContextProjectProps } from './Project'
 import { Project } from './Project'
-import type { ContextPropsSettings } from './Settings'
-import { Settings } from './Settings'
+import { Settings } from './Settings/Jobs'
+import type { ContextPropsSettings } from './Settings/Jobs'
 
 export const List = Object.assign(
   {},
