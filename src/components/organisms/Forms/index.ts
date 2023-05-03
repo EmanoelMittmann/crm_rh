@@ -7,6 +7,9 @@ export const Form = Object.assign({}, { Professional, Project })
 
 export type FormProps = {
   Professional: ProfessionalProps
+}
+
+export type FormProjectProps = {
   Project: ProjectProps
 }
 

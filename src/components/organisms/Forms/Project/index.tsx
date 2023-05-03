@@ -6,6 +6,8 @@ export default () => {
     <Main>
       <Section.Project />
       <Divider />
+      <Section.Team />
+      <Divider />
     </Main>
   )
 }

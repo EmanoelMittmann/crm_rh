@@ -4,7 +4,7 @@ const META_PROPS = {
   project_type: null,
   status: null,
   search: '',
-  orderField: 'name',
+  orderField: 'id',
   order: 'ASC',
   paginate: {
     current_page: 1,
