@@ -1,4 +1,3 @@
-
 import { List } from 'contexts'
 
 import { AuthTemplate, ListTemplate } from 'components/templates'
