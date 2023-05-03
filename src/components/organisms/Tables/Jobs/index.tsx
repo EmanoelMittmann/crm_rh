@@ -3,10 +3,8 @@ import { useContext, useMemo, useRef } from 'react'
 import { List } from 'contexts'
 
 import { Loading } from 'components/atoms'
-import { TableHeader } from 'components/molecules'
-import Edit, {
-  IHandleModalProps
-} from 'components/molecules/Modais/Edit'
+import { IHandleModalProps, TableHeader } from 'components/molecules'
+import { Modal } from 'components/molecules/Modais'
 
 import { LoadingWrapper } from '../style'
 import { Main } from '../style'
@@ -23,16 +21,21 @@ export const Jobs = () => {
     handleUpdateJob
   } = useContext(List.Settings.Context)
 
-  const POPOVER_OPTIONS = (id: number, status: boolean) => [
+  const POPOVER_OPTIONS = (
+    id: number,
+    name: string,
+    status: boolean
+  ) => [
     {
       label: 'Editar',
-      callback: () => modalRef.current?.open(id)
+      callback: () => modalRef.current?.open(id, name)
     },
     {
       label: status ? 'Inativar' : 'Ativar',
       callback: () => handleUpdateStatus(id)
     }
   ]
+  // modalRef.current?.open(id, name)
 
   const Table = useMemo(() => {
     if (isLoading)
@@ -47,7 +50,11 @@ export const Jobs = () => {
         key={props.id}
         config={{
           template: GRID_TEMPLATE,
-          options: POPOVER_OPTIONS(props.id, props.is_active)
+          options: POPOVER_OPTIONS(
+            props.id,
+            props.name,
+            props.is_active
+          )
         }}
         {...{ props }}
       />
@@ -61,10 +68,10 @@ export const Jobs = () => {
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
       />
-      <Edit
+      <Modal.Edit
         ref={modalRef}
         placeholder='Cargos'
-        text='Cadastrar Cargos'
+        text='Editar Cargos'
         EventOne={handleUpdateJob}
       />
       {Table}
