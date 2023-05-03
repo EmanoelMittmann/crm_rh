@@ -2,7 +2,6 @@ import {
   forwardRef,
   useImperativeHandle,
   useState,
-  useEffect,
   useCallback
 } from 'react'
 
@@ -12,44 +11,39 @@ import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
 
-import { Columns, ContainerModal, Overlay, Row } from './style'
+import { Columns, Row } from '../Edit/style'
+import { ContainerModal, Overlay } from './style'
 
 interface IModalProps {
   text: string
   placeholder: string
-  EventOne: (_: number, name: string) => void
-  defaultOpened?: boolean
+  EventOne: (name: string) => void
 }
 
 export interface IHandleModalProps {
-  open(id: number, name: string): void
+  open(_: boolean): void
   close(): void
 }
 
-const Edit = forwardRef<IHandleModalProps, IModalProps>(
+const New = forwardRef<IHandleModalProps, IModalProps>(
   (props, ref) => {
     const { text, placeholder, EventOne } = props
-    const [isOpen, setIsOpen] = useState({ id: 0, name: '' })
+    const [isOpen, setIsOpen] = useState(false)
     const [name, setName] = useState<string>('')
 
     const close = useCallback(() => {
-      setIsOpen({ id: 0, name: '' })
+      setIsOpen(false)
     }, [])
 
     useImperativeHandle(
       ref,
       () => ({
-        open: (id, name) => setIsOpen({ id: id, name: name }),
+        open: () => setIsOpen(true),
         close
       }),
       []
     )
-
-    useEffect(() => {
-      setName(isOpen.name)
-    }, [isOpen.name])
-
-    if (isOpen.id === 0) return null
+    if (!isOpen) return null
     return (
       <>
         <ContainerModal>
@@ -60,7 +54,6 @@ const Edit = forwardRef<IHandleModalProps, IModalProps>(
             </Row>
             <Row>
               <Input
-                value={name}
                 width={385}
                 onChange={(e) => setName(e.target.value)}
                 label='Cargo'
@@ -84,7 +77,7 @@ const Edit = forwardRef<IHandleModalProps, IModalProps>(
                 }}
                 bgColor='#0066FF'
                 onClick={() => {
-                  EventOne(isOpen.id, name)
+                  EventOne(name)
                   close()
                 }}
               >
@@ -99,4 +92,4 @@ const Edit = forwardRef<IHandleModalProps, IModalProps>(
   }
 )
 
-export default Edit
+export default New
