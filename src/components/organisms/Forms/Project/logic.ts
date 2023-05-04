@@ -1,4 +1,4 @@
-import { UserProjectsProps } from "types"
+import { UserProjectsProps } from 'types'
 
 export const validation = {
   required: 'Campo obrigatório',
@@ -12,4 +12,3 @@ export const validation = {
     return true
   }
 }
-

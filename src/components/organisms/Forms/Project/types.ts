@@ -4,7 +4,7 @@ import { TemplateProps } from 'components/organisms/Tables/types'
 export interface TeamMemberProps {
   id: number
   name: string
-  role: string;
+  role: string
   date_start: string
   date_end: Date
   date_end_performed: Date
@@ -24,12 +24,11 @@ export interface TeamMemberProps {
     id: Option | null
     name: Option | null
   }
-    extra_hours_estimated: Option | null
-    extra_hours_performed: Option | null
-    hours_mounths_estimated: Option | null
-    hours_mounths_performed: Option | null
-    avatar: Option | null
-
+  extra_hours_estimated: Option | null
+  extra_hours_performed: Option | null
+  hours_mounths_estimated: Option | null
+  hours_mounths_performed: Option | null
+  avatar: Option | null
 }
 
 export interface ProjectProps {
@@ -90,7 +89,6 @@ export interface ProjectProps {
       id: Option | null
       name: Option | null
     }
-
   }
 }
 interface ProjectAttachmentProps {
@@ -112,7 +110,6 @@ export interface UserProjectsProps {
     id: number
     name: string
   }
-
 }
 interface FormConfigProps {
   options: {
@@ -146,6 +143,6 @@ export type ShelfUserProject = {
 
 export interface FormProjectProps
   extends ProjectProps,
-  FormConfigProps { }
+    FormConfigProps {}
 
 export type { SelectOption }

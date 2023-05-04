@@ -91,7 +91,6 @@ const RegisterProjects = () => {
     }
 
     await api.post(routes.project.register, sanitizeData)
-
   }
 
   useDebounce({
