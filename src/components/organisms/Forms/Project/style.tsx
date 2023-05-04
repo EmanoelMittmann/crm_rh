@@ -67,7 +67,12 @@ export const TextJob = styled.p`
 
 export const TeamJobName = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: end;
+  align-items: start;
+  justify-content: start;
   flex-direction: column;
+`
+
+export const Image = styled.img`
+  width: 2em;
+  border-radius: 50%;
 `

@@ -13,7 +13,8 @@ export interface TeamMemberProps {
   }
   extra_hours_estimated: string
   hours_mounths_estimated: string
-  status: string
+  is_active: boolean;
+  avatar: string
 }
 
 export interface ProjectProps {

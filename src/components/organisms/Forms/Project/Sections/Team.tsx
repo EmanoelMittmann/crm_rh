@@ -12,27 +12,32 @@ export const Team = () => {
     register,
     watch,
     setValue,
+    getValues,
     formState: { errors }
   } = useFormContext<FormProjectProps>()
 
   const options = watch('options')
   
-  
   const handleTeam = () => {
     const professional = watch('professional');
+    const id = watch('professional.id');
     const jobs = watch('jobs');
     const hours_mounths_estimated = watch('user_projects.hours_mounths_estimated');
     const extra_hours_estimated = watch('user_projects.extra_hours_estimated');
 
     if (professional && jobs) {
-      const teamMember = {
+      const newTeamMember = {
+        id:id,
         professional,
         jobs,
         hours_mounths_estimated,
         extra_hours_estimated,
       } as unknown as TeamMemberProps;
 
-      setValue('team', [teamMember]);
+      const currentTeam = getValues('team') || [];
+      const newTeam = [...currentTeam, newTeamMember];
+
+      setValue('team', newTeam);
     }
   };
 

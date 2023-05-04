@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { List } from 'contexts'
 import { Loading } from 'components/atoms'
@@ -15,9 +15,12 @@ import { FormProjectProps } from './types'
 
 
 export const ProjectTeam = () => {
-  const { watch } = useFormContext<FormProjectProps>()
+  const { watch, setValue } = useFormContext<FormProjectProps>()
   const Team = watch('team', [])
-  const {isLoading, handleOrder } = useContext(
+
+  console.log('Team: ', Team);
+
+  const {projects, isLoading, handleOrder } = useContext(
     List.Project.Context
   )
   const navigate = useNavigate()
@@ -25,11 +28,22 @@ export const ProjectTeam = () => {
 
 
   const POPOVER_OPTIONS = (id: number, status: any) => [
-    {
-      label: 'Editar',
-      callback: () => navigate(`/project/${id}`)
-    }
+    id ? (
+      {
+        label: 'Editar',
+        callback: () => navigate(`/project/${id}`)
+      }
+    ) : (
+      {
+        label: 'Remover',
+        callback: () => {
+          const newTeam = Team.filter((item) => item.id !== id)
+          setValue('team', newTeam)
+        }
+      }
+    )
   ]
+
 
   const Table = useMemo(() => {
     if (isLoading)
@@ -44,12 +58,12 @@ export const ProjectTeam = () => {
         key={props.id}
         config={{
           template: GRID_TEMPLATE,
-          options: POPOVER_OPTIONS(props.id, props.status)
+          options: POPOVER_OPTIONS(props.id, props.is_active)
         }}
         {...{ props }}
       />
     ))
-  }, [isLoading, Team])
+  }, [isLoading, Team, projects])
 
   return (
     <Main>
@@ -62,3 +76,5 @@ export const ProjectTeam = () => {
     </Main>
   )
 }
+
+
