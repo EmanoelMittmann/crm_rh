@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { ThemeProvider } from '@stardust-ds/react'
+import { ThemeProvider, ToastContainer } from '@stardust-ds/react'
 import { AuthProvider } from 'contexts'
 
 import Router from './routes/router'
@@ -20,6 +20,7 @@ const App = () => {
       <AuthProvider>
         <Router />
       </AuthProvider>
+      <ToastContainer />
     </ThemeProvider>
   )
 }

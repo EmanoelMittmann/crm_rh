@@ -16,7 +16,11 @@ export default ({ status }: Props) => {
 
   return (
     <Badge
-      style={{ width: '7rem', padding: '0.8rem 2rem' }}
+      style={{
+        width: '7rem',
+        padding: '0.8rem 2rem',
+        border: 'none'
+      }}
       label={props.label}
       variant='flat'
       bgColor={props.background}

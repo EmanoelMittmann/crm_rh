@@ -1,6 +1,7 @@
 import {
   forwardRef,
   useImperativeHandle,
+  useMemo,
   useState,
   useCallback
 } from 'react'
@@ -34,6 +35,13 @@ const New = forwardRef<IHandleModalProps, IModalProps>(
     const close = useCallback(() => {
       setIsOpen(false)
     }, [])
+
+    const handleBlock = useMemo(() => {
+      if (name.trim() === '') {
+        return true
+      }
+      return false
+    }, [name])
 
     useImperativeHandle(
       ref,
@@ -76,6 +84,7 @@ const New = forwardRef<IHandleModalProps, IModalProps>(
                   boxShadow: '0px 5px 10px 0px #0066FF40'
                 }}
                 bgColor='#0066FF'
+                disabled={handleBlock}
                 onClick={() => {
                   EventOne(name)
                   close()
