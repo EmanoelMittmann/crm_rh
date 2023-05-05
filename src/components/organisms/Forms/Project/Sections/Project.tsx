@@ -25,7 +25,7 @@ export const Project = () => {
       <ContainerRow gap='1rem'>
         <Inputs.Default
           {
-            ...register('name', {
+            ...register('name.value', {
               required: validation.required
             })
           }
@@ -36,7 +36,7 @@ export const Project = () => {
           placeholder='Informe o nome do Projeto'
           />
         <Inputs.Default
-          {...register('id', { required: validation.required })}
+          {...register('id.value', { required: validation.required })}
           error={errors.id?.message}
           width='100%'
           type='number'
@@ -44,13 +44,13 @@ export const Project = () => {
           placeholder='ID do Projeto'
         />
         <Selects.Default
-          {...register('project_type', {
+          {...register('project_type_id', {
             required: validation.required
           })}
           onSelect={(value: any) =>
-            setValue('project_type', value, { shouldValidate: true })
+            setValue('project_type_id', value, { shouldValidate: true })
           }
-          onClear={() => setValue('project_type.name', null)}
+          onClear={() => setValue('project_type_id', null)}
           options={options?.project_types}
           error={errors.project_type?.message}
           label='Tipo de Projeto'
@@ -98,15 +98,15 @@ export const Project = () => {
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Selects.Default
-          {...register('status', {
+          {...register('project_status_id', {
             required: validation.required
           })}
           onSelect={(value: any) =>
-            setValue('status', value, { shouldValidate: true })
+            setValue('project_status_id', value, { shouldValidate: true })
           }
-          onClear={() => setValue('status.name', null)}
+          onClear={() => setValue('project_status_id', null)}
           options={options?.status_projects}
-          error={errors.status?.message}
+          error={errors.project_status_id?.message}
           label='Status do Projeto'
           placeholder='Selecione'
           width={450}

@@ -19,7 +19,6 @@ export const Shelf = ({ props, config,}: ShelfUserProject) => {
     avatar,
     status,
   } = props
-  console.log('props: ', props)
   return (
     <ContainerShelf template={config.template}>
       <ContainerShelfColumn gap='.5rem' width='210px'>

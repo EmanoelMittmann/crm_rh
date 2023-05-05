@@ -17,6 +17,7 @@ const RegisterProjects = () => {
   const methods = useForm<FormProjectProps['Project']>({
     defaultValues: {}
   })
+  
   async function fetchPropsProject() {
     const { data: permissions } = await api.get(
       routes.permission.list
@@ -70,8 +71,8 @@ const RegisterProjects = () => {
       ...data,
       id: data.id?.value,
       name: data.name?.value,
-      project_status_id:data.project_status_id,
-      project_type_id:data.project_type_id,
+      project_status_id:data.project_status_id?.value,
+      project_type_id:data.project_type_id?.value,
       date_start: data.date_start?.value,
       date_end: data.date_end?.value,
       date_start_performed: data.date_start_performed?.value,
@@ -96,9 +97,7 @@ const RegisterProjects = () => {
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      await methods.handleSubmit(onSubmit)(
-        
-      );
+      await methods.handleSubmit(onSubmit)();
       navigate('/project');
     } catch (error) {
       console.error(error);

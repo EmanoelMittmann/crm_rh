@@ -7,7 +7,7 @@ import { ContainerShelf, ContainerShelfColumn, Text } from '../style'
 import { ShelfProjectsProps } from './types'
 
 export const Shelf = ({ props, config }: ShelfProjectsProps) => {
-  const { id, name, project_type, status, date_start } = props
+  const { id, name, project_type, status, date_start, project_status_id, project_type_id } = props
 
   return (
     <ContainerShelf template={config.template}>
