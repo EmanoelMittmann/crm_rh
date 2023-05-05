@@ -77,7 +77,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function fetchFilters_Projects() {
-    const { data } = await api.get(routes.project_type.list, {
+    const { data } = await api.get(routes.project_type.list + '?limit=120',{
       params: { is_active: 1 }
     })
 
@@ -92,7 +92,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function fetchFilters_Status() {
-    const { data } = await api.get(routes.status.list, {
+    const { data } = await api.get(routes.status.list + '?limit=120',{
       params: { is_active: 1 }
     })
     setFilterOptionsStatus({

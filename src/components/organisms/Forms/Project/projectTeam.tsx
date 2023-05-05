@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react'
+import { useContext, useMemo} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { List } from 'contexts'
 import { Loading } from 'components/atoms'
@@ -17,10 +17,7 @@ import { FormProjectProps } from './types'
 export const ProjectTeam = () => {
   const { watch, setValue } = useFormContext<FormProjectProps>()
   const Team = watch('team', [])
-
-  console.log('Team: ', Team);
-
-  const {projects, isLoading, handleOrder } = useContext(
+  const { isLoading, handleOrder } = useContext(
     List.Project.Context
   )
   const navigate = useNavigate()
@@ -30,17 +27,19 @@ export const ProjectTeam = () => {
   const POPOVER_OPTIONS = (id: number, status: any) => [
     id ? (
       {
-        label: 'Editar',
-        callback: () => navigate(`/project/${id}`)
-      }
-    ) : (
-      {
         label: 'Remover',
         callback: () => {
           const newTeam = Team.filter((item) => item.id !== id)
           setValue('team', newTeam)
         }
       }
+     
+    ) : (
+        {
+          label: 'Editar',
+          callback: () => navigate(`/project/${id}`)
+        }
+      
     )
   ]
 
@@ -63,7 +62,7 @@ export const ProjectTeam = () => {
         {...{ props }}
       />
     ))
-  }, [isLoading, Team, projects])
+  }, [isLoading, Team])
 
   return (
     <Main>

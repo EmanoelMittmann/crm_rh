@@ -1,21 +1,17 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-
-import { List } from 'contexts'
 import { ProjectProps } from 'types'
-
 import { Button } from 'components/atoms'
 import { Form, FormProjectProps } from 'components/organisms'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
-
 import api from 'api'
 import { routes } from 'routes'
-
 import { useDebounce } from 'hooks'
 
+
 const RegisterProjects = () => {
-  const [isSaving, setIsSAving] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
   const navigate = useNavigate()
 
   const methods = useForm<FormProjectProps['Project']>({
@@ -27,18 +23,18 @@ const RegisterProjects = () => {
     )
 
     const { data: project_type } = await api.get(
-      routes.project_type.list
+      routes.project_type.list + '?limit=120'
     )
-    const { data: status } = await api.get(routes.status.list)
+    const { data: status } = await api.get(routes.status.list + '?limit=120')
 
-    const { data: jobs } = await api.get(routes.job.list, {
+    const { data: jobs } = await api.get(routes.job.list + '?limit=120',{
       params: { is_active: true }
     })
     const { data: user_projects } = await api.get(
-      routes.user_projects.list
+      routes.user_projects.list + '?limit=120'
     )
     const { data: professionals } = await api.get(
-      routes.professional.list
+      routes.professional.list + '?limit=120'
     )
 
     methods.setValue('options', {
@@ -68,11 +64,14 @@ const RegisterProjects = () => {
     } as FormProjectProps['Project']['options'])
   }
 
+
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
       ...data,
       id: data.id?.value,
       name: data.name?.value,
+      project_status_id:data.project_status_id,
+      project_type_id:data.project_type_id,
       date_start: data.date_start?.value,
       date_end: data.date_end?.value,
       date_start_performed: data.date_start_performed?.value,
@@ -91,7 +90,25 @@ const RegisterProjects = () => {
     }
 
     await api.post(routes.project.register, sanitizeData)
+  }
 
+ 
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      await methods.handleSubmit(onSubmit)(
+        
+      );
+      navigate('/project');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  function handleCancel() {
+    navigate('/project')
   }
 
   useDebounce({
@@ -100,13 +117,6 @@ const RegisterProjects = () => {
     listener: []
   })
 
-  const handleSave = () => {
-    setIsSAving(true)
-  }
-
-  function handleCancel() {
-    navigate('/project')
-  }
 
   return (
     <>

@@ -18,8 +18,8 @@ export const HeaderSettings = () => (
     </Column>
     <Column>
       <Outline text='Cargos' path='jobs' />
-      <Outline text='Status de Projetos' path='typeProject' />
-      <Outline text='Tipos de Projetos' path='statusProject' />
+      <Outline text='Status de Projetos' path='statusProject' />
+      <Outline text='Tipos de Projetos' path='typeProject' />
     </Column>
   </Container>
 )

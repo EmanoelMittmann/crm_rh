@@ -2,8 +2,9 @@ import { createContext, useState } from 'react'
 import { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { toast } from '@stardust-ds/react'
+
 import { PaginateContext } from 'components/molecules'
-import Edit from 'components/molecules/Modais/Edit'
 
 import api from 'api'
 import { routes } from 'routes'
@@ -98,8 +99,23 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function handleJob(name: string) {
-    await api.post(routes.job.list, { name: name })
-    fetchList()
+    try {
+      await api.post(routes.job.list, { name: name })
+      toast({
+        type: 'success',
+        title: ' ',
+        description: 'Cargo cadastrado',
+        position: 'bottom-right'
+      })
+      fetchList()
+    } catch (error) {
+      toast({
+        type: 'error',
+        title: ' ',
+        description: 'O cargo ja existe',
+        position: 'bottom-right'
+      })
+    }
   }
 
   useDebounce({

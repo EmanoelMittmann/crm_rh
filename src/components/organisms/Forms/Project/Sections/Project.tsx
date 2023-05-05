@@ -1,7 +1,5 @@
 import { useFormContext } from 'react-hook-form'
-
 import { Inputs, Selects } from 'components/atoms'
-
 import { validation } from '../logic'
 import { ContainerRow } from '../style'
 import { FormProjectProps } from '../types'
@@ -14,6 +12,9 @@ export const Project = () => {
     formState: { errors }
   } = useFormContext<FormProjectProps>()
 
+  const values = watch()
+  console.log('values: ', values);
+  
   const options = watch('options')
 
   return (
@@ -23,18 +24,22 @@ export const Project = () => {
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Inputs.Default
-          {...register('name', { required: validation.required })}
+          {
+            ...register('name', {
+              required: validation.required
+            })
+          }
           error={errors.name?.message}
-          width='100%'
           type='text'
           label='Nome do Projeto'
+          width='100%'
           placeholder='Informe o nome do Projeto'
-        />
+          />
         <Inputs.Default
-          {...register('name', { required: validation.required })}
+          {...register('id', { required: validation.required })}
           error={errors.id?.message}
           width='100%'
-          type='text'
+          type='number'
           label='ID do projeto'
           placeholder='ID do Projeto'
         />

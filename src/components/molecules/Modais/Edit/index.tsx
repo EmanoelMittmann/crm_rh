@@ -2,12 +2,13 @@ import {
   forwardRef,
   useImperativeHandle,
   useState,
+  useMemo,
   useEffect,
   useCallback
 } from 'react'
 
-import { Input } from '@stardust-ds/react'
-import { Button } from '@stardust-ds/react'
+import { Input, Button } from '@stardust-ds/react'
+import { Typography } from '@stardust-ds/react'
 import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
@@ -45,6 +46,13 @@ const Edit = forwardRef<IHandleModalProps, IModalProps>(
       []
     )
 
+    const handleBlock = useMemo(() => {
+      if (isOpen.name === name || name.trim() === '') {
+        return true
+      }
+      return false
+    }, [name])
+
     useEffect(() => {
       setName(isOpen.name)
     }, [isOpen.name])
@@ -59,14 +67,16 @@ const Edit = forwardRef<IHandleModalProps, IModalProps>(
               <Close onClick={() => close()} />
             </Row>
             <Row>
-              <Input
-                value={name}
-                width={385}
-                onChange={(e) => setName(e.target.value)}
-                label='Cargo'
-                color={theme.neutrals.gray8}
-                placeholder={placeholder}
-              />
+              <Columns>
+                <Input
+                  value={name}
+                  width={385}
+                  onChange={(e) => setName(e.target.value)}
+                  label='Cargo'
+                  color={theme.neutrals.gray8}
+                  placeholder={placeholder}
+                />
+              </Columns>
             </Row>
             <Row>
               <Button
@@ -82,6 +92,7 @@ const Edit = forwardRef<IHandleModalProps, IModalProps>(
                   borderRadius: '500px',
                   boxShadow: '0px 5px 10px 0px #0066FF40'
                 }}
+                disabled={handleBlock}
                 bgColor='#0066FF'
                 onClick={() => {
                   EventOne(isOpen.id, name)

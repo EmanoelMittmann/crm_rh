@@ -11,6 +11,7 @@ const ROUTES = {
   '/services': 'Ordem de Serviço',
   '/settings': 'Configurações',
   '/jobs': 'Configurações > Cargos',
+  '/statusProject': 'Configurações > Status de Projeto',
   '/company': 'Empresas',
   '/RegisterProfessionals': 'Profissionais > Cadastrar Novo'
 }

@@ -24,7 +24,7 @@ export const Columns = styled.div`
 
 export const Row = styled.div`
   display: flex;
-  height: 2em;
+  height: 3em;
   align-items: center;
   flex-direction: row;
   margin: auto;

@@ -3,8 +3,7 @@ import { Selects, Inputs } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { ProjectTeam } from '../projectTeam'
 import { ContainerRow } from '../style'
-import { FormProjectProps, TeamMemberProps} from '../types'
-
+import { FormProjectProps, TeamMemberProps } from '../types'
 
 
 export const Team = () => {
@@ -17,21 +16,29 @@ export const Team = () => {
   } = useFormContext<FormProjectProps>()
 
   const options = watch('options')
-  
+
   const handleTeam = () => {
     const professional = watch('professional');
-    const id = watch('professional.id');
+    const id = watch('options.professionals');
+    const avatar = watch('professional.avatar.label');
     const jobs = watch('jobs');
     const hours_mounths_estimated = watch('user_projects.hours_mounths_estimated');
     const extra_hours_estimated = watch('user_projects.extra_hours_estimated');
+    const hours_mounths_performed = watch('user_projects.hours_mounths_performed');
+    const extra_hours_performed = watch('user_projects.extra_hours_performed');
+    const status = watch(professional.status)
 
     if (professional && jobs) {
       const newTeamMember = {
-        id:id,
+        id: id ? id : 0,
         professional,
         jobs,
         hours_mounths_estimated,
         extra_hours_estimated,
+        hours_mounths_performed: hours_mounths_performed ? hours_mounths_performed : 0,
+        extra_hours_performed: extra_hours_performed ? extra_hours_performed : 0,
+        status,
+        avatar: avatar ? avatar : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
       } as unknown as TeamMemberProps;
 
       const currentTeam = getValues('team') || [];
@@ -39,8 +46,7 @@ export const Team = () => {
 
       setValue('team', newTeam);
     }
-  };
-
+  }
 
   return (
     <>
@@ -97,7 +103,7 @@ export const Team = () => {
       </ContainerRow>
       <ContainerRow gap="1rem">
         <ProjectTeam />
-      </ContainerRow>    
+      </ContainerRow>
     </>
   )
 }

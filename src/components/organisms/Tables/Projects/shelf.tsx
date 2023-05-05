@@ -23,9 +23,9 @@ export const Shelf = ({ props, config }: ShelfProjectsProps) => {
       <ContainerShelfColumn title={date_start}>
         <Text>{formatDate(date_start)}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn width='170px' title={status.name}>
+      <ContainerShelfColumn width='170px'>
         <Badge
-          style={{ width: '170px' }}
+          style={{ width: '170px', border:"none"}}
           label={status.name}
           variant='flat'
           bgColor={status.color.text_color}
