@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { toast } from '@stardust-ds/react'
+import { SelectProps, toast } from '@stardust-ds/react'
 
 import { PaginateContext } from 'components/molecules'
 
@@ -12,6 +12,7 @@ import { useDebounce } from 'hooks'
 
 import DEFAULT from './constants'
 import {
+  ColorProps,
   ContextPropsStatusProject,
   DefaultMetaProps,
   StatusProps
@@ -109,8 +110,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     color: number
   ) {
     try {
-      await api.post(routes.status.list, {
+      await api.post(routes.status.create, {
         name: name,
+        is_active: true,
         colors_id: color
       })
       toast({
@@ -162,6 +164,22 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }
   }
 
+  async function fetchColors() {
+    const { data } = await api.get(routes.color.list)
+    setFilterOptions({
+      colors: data.map(
+        ({ id, name }: { id: number; name: string }) => ({
+          label: name,
+          value: String(id)
+        })
+      ),
+      status: [
+        { label: 'Inativo', value: '0' },
+        { label: 'Ativo', value: '1' }
+      ] as never
+    })
+  }
+
   useDebounce({
     fn: fetchList,
     listener: [
@@ -170,6 +188,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       meta.paginate.current_page,
       meta.order
     ]
+  })
+
+  useDebounce({
+    fn: fetchColors,
+    listener: [meta.isActive]
   })
 
   return (

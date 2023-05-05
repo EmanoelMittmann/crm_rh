@@ -1,14 +1,19 @@
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 import { Option } from 'types'
 
 import { Button, IconGlass } from 'components/atoms'
+import {
+  IHandleModalColorsPropsNew,
+  Modal
+} from 'components/molecules/Modais'
 
 import { Container, Main } from '../style'
 
 export const StatusProject = () => {
+  const modalRef = useRef<IHandleModalColorsPropsNew>(null)
   const {
     meta,
     filterOptions,
@@ -36,7 +41,13 @@ export const StatusProject = () => {
           onClear={() => handleStatus(null)}
         />
       </Container>
-      <Button.New />
+      <Button.New onClick={() => modalRef.current?.open()} />
+      <Modal.Colors.New
+        ref={modalRef}
+        Event={handleCreateStatusProject}
+        placeholder='Status'
+        text='Cadastrar status'
+      />
     </Main>
   )
 }

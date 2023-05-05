@@ -12,10 +12,8 @@ const META_PROPS: DefaultMetaProps = {
 }
 
 const FILTER_OPTIONS = {
-  status: [
-    { label: 'Inativo', value: '0' },
-    { label: 'Ativo', value: '1' }
-  ]
+  status: [],
+  colors: []
 }
 
 export default { META_PROPS, FILTER_OPTIONS }

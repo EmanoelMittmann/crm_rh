@@ -1,9 +1,14 @@
-import { useContext, useMemo } from 'react'
+import { useContext, useMemo, useRef } from 'react'
 
 import { List } from 'contexts'
+import { ColorProps } from 'contexts/List/Settings/StatusProjects/types'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
+import {
+  IHandleModalColorsPropsEdit,
+  Modal
+} from 'components/molecules/Modais'
 
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
@@ -16,15 +21,21 @@ export const StatusProject = () => {
     handleOrder,
     handleUpdateStatusProject,
     handleCreateStatusProject,
-    handleUpdateStatus
+    handleUpdateStatus,
+    filterOptions
   } = useContext(List.Status.Context)
+  const modalRef = useRef<IHandleModalColorsPropsEdit>(null)
 
   const POPOVER_OPTIONS = (
     id: number,
     name: string,
-    status: boolean
+    status: boolean,
+    color: ColorProps
   ) => [
-    { label: 'Editar', callback: () => {} },
+    {
+      label: 'Editar',
+      callback: () => modalRef.current?.open(id, name, color)
+    },
     {
       label: status ? 'Inativar' : 'Ativar',
       callback: () => handleUpdateStatus(id)
@@ -47,7 +58,8 @@ export const StatusProject = () => {
           options: POPOVER_OPTIONS(
             props.id,
             props.name,
-            props.is_active
+            props.is_active,
+            props.color
           )
         }}
         {...{ props }}
@@ -61,6 +73,12 @@ export const StatusProject = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
+      />
+      <Modal.Colors.Edit
+        ref={modalRef}
+        Event={handleUpdateStatusProject}
+        placeholder='Status de Projeto'
+        text='Editar Status'
       />
       {Table}
     </Main>
