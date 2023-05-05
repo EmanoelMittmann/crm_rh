@@ -43,8 +43,6 @@ export const Team = () => {
       } as TeamMemberProps
 
       setValue('team', [...team, teamMember])
-
-      console.log('teamMember: ', teamMember.name)
     }
   }
 

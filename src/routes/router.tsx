@@ -10,6 +10,7 @@ import Home from '../components/pages/MasterPage'
 import Professionals from '../components/pages/Professionals'
 import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
+import TypesProject from 'components/pages/TypesProject'
 const Router = () => {
   return (
     <>
@@ -32,7 +33,7 @@ const Router = () => {
           <Route path='/reports' element={<Professionals />} />
           <Route path='/services' element={<Professionals />} />
           <Route path='/jobs' element={<Jobs />} />
-          <Route path='/typeProject' element={<></>} />
+          <Route path='/typeProject' element={<TypesProject />} />
           <Route path='/statusProject' element={<StatusProject />} />
           <Route path='/settings' element={<Settings />} />
           <Route path='/company' element={<Professionals />} />

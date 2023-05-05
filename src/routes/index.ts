@@ -26,7 +26,9 @@ export const routes = {
   },
 
   project_type: {
-    list: '/projectType'
+    list: '/projectType',
+    update: (id: number) => `/projectType/${id}`,
+    updateStatus: `/updateProjectType`
   },
 
   status: {
