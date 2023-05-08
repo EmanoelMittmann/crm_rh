@@ -8,6 +8,7 @@ import { AuthTemplate, CreateTemplate } from 'components/templates'
 import api from 'api'
 import { routes } from 'routes'
 import { useDebounce } from 'hooks'
+import { validation } from 'components/organisms/Forms/Project/logic'
 
 
 const RegisterProjects = () => {
@@ -17,18 +18,16 @@ const RegisterProjects = () => {
   const methods = useForm<FormProjectProps['Project']>({
     defaultValues: {}
   })
-  
-  async function fetchPropsProject() {
-    const { data: permissions } = await api.get(
-      routes.permission.list
-    )
 
+
+
+  async function fetchPropsProject() {
     const { data: project_type } = await api.get(
       routes.project_type.list + '?limit=120'
     )
     const { data: status } = await api.get(routes.status.list + '?limit=120')
 
-    const { data: jobs } = await api.get(routes.job.list + '?limit=120',{
+    const { data: jobs } = await api.get(routes.job.list + '?limit=120', {
       params: { is_active: true }
     })
     const { data: user_projects } = await api.get(
@@ -39,7 +38,6 @@ const RegisterProjects = () => {
     )
 
     methods.setValue('options', {
-      permissions,
       project_types: project_type.data.map(
         (project_type: ProjectProps) => ({
           label: project_type.name,
@@ -69,42 +67,35 @@ const RegisterProjects = () => {
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
       ...data,
-      id: data.id?.value,
-      name: data.name?.value,
-      project_status_id:data.project_status_id?.value,
-      project_type_id:data.project_type_id?.value,
+      team_cost: data.team_cost?.value,
+      project_status_id: data.project_status_id?.value,
+      project_type_id: data.project_type_id?.value,
       date_start: data.date_start?.value,
       date_end: data.date_end?.value,
       date_start_performed: data.date_start_performed?.value,
       date_end_performed: data.date_end_performed?.value,
-      team_cost: data.team_cost?.value,
-      project_type: data.project_type?.name?.value,
-      status: data.status?.name?.value,
-      jobs: data.name?.value,
-      professionals: data.name?.value,
-      user_projects: data.user_projects?.name?.value,
-      avatar: data.user_projects.avatar?.value,
-      extra_hours_estimated:
-        data.user_projects?.extra_hours_estimated?.value,
-      hours_mounths_estimated:
-        data.user_projects.hours_mounths_estimated?.value
+      users: []
     }
 
     await api.post(routes.project.register, sanitizeData)
   }
 
- 
+
   const handleSave = async () => {
-    setIsSaving(true);
-    try {
-      await methods.handleSubmit(onSubmit)();
-      navigate('/project');
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsSaving(false);
+    if (!validation) {
+      setIsSaving(true);
+      try {
+        await methods.handleSubmit(onSubmit)();
+        navigate('/project');
+
+      } catch (error) {
+        console.error(error);
+      }
     }
-  };
+    setIsSaving(false);
+
+  }
+
 
   function handleCancel() {
     navigate('/project')

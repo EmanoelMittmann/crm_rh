@@ -51,6 +51,7 @@ export const Text = styled.p`
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
+  width: 10em;
   font-size: 11px;
   padding-left: ${(props) => props.title};
   color: ${(props) => props.color};

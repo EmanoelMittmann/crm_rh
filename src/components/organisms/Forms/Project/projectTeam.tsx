@@ -37,7 +37,7 @@ export const ProjectTeam = () => {
     ) : (
         {
           label: 'Editar',
-          callback: () => navigate(`/project/${id}`)
+          callback: () => navigate(`/userProjects/project/${id}`)
         }
       
     )

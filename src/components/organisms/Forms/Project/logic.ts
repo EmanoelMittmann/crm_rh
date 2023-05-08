@@ -1,4 +1,5 @@
-import { UserProjectsProps } from 'types'
+import { SelectOption } from "./types"
+
 
 export const validation = {
   required: 'Campo obrigatório',
@@ -11,4 +12,11 @@ export const validation = {
 
     return true
   }
+}
+
+export function GenerateOption(data: Object): SelectOption[] {
+  return Object.values(data).map((key: string) => ({
+    label: key,
+    value: key
+  }))
 }

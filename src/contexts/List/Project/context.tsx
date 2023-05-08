@@ -27,7 +27,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [filterOptionsType, setFilterOptionsType] = useState(
     DEFAULT.FILTER_OPTIONS
   )
-  const [filterOptonsStatus, setFilterOptionsStatus] = useState(
+  const [filterOptionsStatus, setFilterOptionsStatus] = useState(
     DEFAULT.FILTER_OPTIONS_STATUS
   )
 
@@ -37,13 +37,15 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     meta,
     paginate: { ...meta.paginate, setCurrent_page: setPage },
     filterOptionsType,
-    filterOptonsStatus,
+    filterOptionsStatus,
     handleSearch,
     handleOrder,
     handleFillProject_Type,
     handleFillProject_Status,
     navigateTo,
-    handleUpdateStatus
+    handleUpdateStatus,
+    handleUpdateProject,
+
   }
 
   function prepareParams(meta: DefaultMetaProps) {
@@ -71,8 +73,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setIsLoading(false)
   }
 
-  async function handleUpdateStatus(id: number) {
-    await api.put(routes.project.updateStatus(id))
+  async function handleUpdateStatus(id: number, name: string ) {
+    await api.put(routes.project.updateStatusproject(id),{ name: name})
+    fetchListProject()
+  }
+  async function handleUpdateProject(id: number, name: string) {
+    await api.put(routes.project.updateProject(id), { name: name })
     fetchListProject()
   }
 

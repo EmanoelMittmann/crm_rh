@@ -16,13 +16,14 @@ export const Shelf = ({ props, config,}: ShelfUserProject) => {
     hours_mounths_performed,
     extra_hours_performed,
     is_active,
-    avatar,
-    status,
+    // avatar,
+    // status,
   } = props
+
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn gap='.5rem' width='210px'>
-        <Image src={avatar} />
+      <ContainerShelfColumn gap='.5rem' width='210'>
+        <Image src={professional.avatar?.label} />
         <TeamJobName>
           <Text >{professional.name?.label}</Text>
           <TextJob >{jobs.name?.label}</TextJob>
@@ -32,7 +33,7 @@ export const Shelf = ({ props, config,}: ShelfUserProject) => {
         <Text>{hours_mounths_estimated}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='130px'>
+      <ContainerShelfColumn width='120px'>
         <Text>{extra_hours_estimated}</Text>
       </ContainerShelfColumn>
 
@@ -40,17 +41,15 @@ export const Shelf = ({ props, config,}: ShelfUserProject) => {
         <Text>{hours_mounths_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='110px'>
+      <ContainerShelfColumn width='100px'>
         <Text>{extra_hours_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='100px'>
-        <Badge.Status status={status} />
-      </ContainerShelfColumn>
-
-      <ContainerShelfColumn width='5px'>
+      <ContainerShelfColumn width='150px' justify='center' gap='2em'>
+        <Badge.Status status={is_active} />
         <Popover options={config.options} />
       </ContainerShelfColumn>
+
     </ContainerShelf>
   )
 }

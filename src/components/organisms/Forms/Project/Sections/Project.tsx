@@ -11,11 +11,12 @@ export const Project = () => {
     setValue,
     formState: { errors }
   } = useFormContext<FormProjectProps>()
+  // const options = watch('options')
 
   const values = watch()
   console.log('values: ', values);
   
-  const options = watch('options')
+
 
   return (
     <>
@@ -24,11 +25,7 @@ export const Project = () => {
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Inputs.Default
-          {
-            ...register('name.value', {
-              required: validation.required
-            })
-          }
+          {...register('name', {required: validation.required})}
           error={errors.name?.message}
           type='text'
           label='Nome do Projeto'
@@ -36,7 +33,7 @@ export const Project = () => {
           placeholder='Informe o nome do Projeto'
           />
         <Inputs.Default
-          {...register('id.value', { required: validation.required })}
+          {...register('id', { required: validation.required })}
           error={errors.id?.message}
           width='100%'
           type='number'
@@ -44,15 +41,14 @@ export const Project = () => {
           placeholder='ID do Projeto'
         />
         <Selects.Default
-          {...register('project_type_id', {
-            required: validation.required
-          })}
+          {...register('project_type_id', {required: validation.required})}
           onSelect={(value: any) =>
             setValue('project_type_id', value, { shouldValidate: true })
           }
           onClear={() => setValue('project_type_id', null)}
-          options={options?.project_types}
-          error={errors.project_type?.message}
+          // options={options?.project_types}
+          options={watch('options.project_types')}
+          error={errors.project_type_id?.message}
           label='Tipo de Projeto'
           placeholder='Selecione'
           width={235}
@@ -60,36 +56,28 @@ export const Project = () => {
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Inputs.Default
-          {...register('date_start', {
-            required: validation.required
-          })}
+          {...register('date_start', {})}
           error={errors.date_start?.message}
           type='date'
           label='Inicio efetivo'
           width='100%'
         />
         <Inputs.Default
-          {...register('date_end', {
-            required: validation.required
-          })}
+          {...register('date_end', {})}
           error={errors.date_end?.message}
           type='date'
           label='Final efetivo'
           width='100%'
         />
         <Inputs.Default
-          {...register('date_start_performed', {
-            required: validation.required
-          })}
+          {...register('date_start_performed', {})}
           error={errors.date_start_performed?.message}
           type='date'
           label='Incio do contrato'
           width='100%'
         />
         <Inputs.Default
-          {...register('date_end_performed', {
-            required: validation.required
-          })}
+          {...register('date_end_performed', {})}
           error={errors.date_end_performed?.message}
           type='date'
           label='Final do contrato'
@@ -105,16 +93,15 @@ export const Project = () => {
             setValue('project_status_id', value, { shouldValidate: true })
           }
           onClear={() => setValue('project_status_id', null)}
-          options={options?.status_projects}
+          // options={options?.status_projects}
+          options={watch('options.status_projects')}
           error={errors.project_status_id?.message}
           label='Status do Projeto'
           placeholder='Selecione'
           width={450}
         />
         <Inputs.Default
-          {...register('team_cost', {
-            required: validation.required
-          })}
+          {...register('team_cost', {})}
           error={errors.team_cost?.message}
           width='100%'
           type='number'
