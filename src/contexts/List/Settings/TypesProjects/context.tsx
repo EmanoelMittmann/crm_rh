@@ -45,7 +45,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setIsLoading(true)
     const { data } = await api.get(routes.project_type.list, {
       params: {
-        search: meta.search,
+        search: meta.search && meta.search,
         orderField: meta.orderField,
         page: meta.paginate.current_page,
         order: meta.order,
@@ -140,14 +140,16 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error(error)
     }
+    fetchList()
   }
 
   useDebounce({
     fn: fetchList,
+    delay: 500,
     listener: [
+      meta.paginate.current_page,
       meta.isActive,
       meta.search,
-      meta.paginate,
       meta.order,
       meta.orderField
     ]

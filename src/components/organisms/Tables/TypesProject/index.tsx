@@ -1,38 +1,33 @@
-import { useContext, useMemo, useRef } from 'react'
+import { useContext, useRef, useMemo } from 'react'
 
 import { List } from 'contexts'
-import { ColorProps } from 'contexts/List/Settings/StatusProjects/types'
 
 import { Loading } from 'components/atoms'
-import { TableHeader } from 'components/molecules'
-import {
-  IHandleModalColorsPropsEdit,
-  Modal
-} from 'components/molecules/Modais'
+import { IHandleModalProps, TableHeader } from 'components/molecules'
 
 import { LoadingWrapper, Main } from '../style'
-import { GRID_TEMPLATE, HEADERS } from './constants'
+import { GRID_TEMPLATE } from './contants'
+import { HEADERS } from './contants'
 import Shelf from './shelf'
 
-export const StatusProject = () => {
+export const TypesProject = () => {
   const {
-    statusProjects,
     isLoading,
+    typesProjects,
     handleOrder,
-    handleUpdateStatusProject,
+    handleUpdateType,
     handleUpdateStatus
-  } = useContext(List.Status.Context)
-  const modalRef = useRef<IHandleModalColorsPropsEdit>(null)
+  } = useContext(List.Types.Context)
+  const modalRef = useRef<IHandleModalProps>(null)
 
   const POPOVER_OPTIONS = (
     id: number,
     name: string,
-    status: boolean,
-    color: ColorProps
+    status: boolean
   ) => [
     {
       label: 'Editar',
-      callback: () => modalRef.current?.open(id, name, color)
+      callback: () => modalRef.current?.open(id, name)
     },
     {
       label: status ? 'Inativar' : 'Ativar',
@@ -48,7 +43,7 @@ export const StatusProject = () => {
         </LoadingWrapper>
       )
 
-    return statusProjects.map((props) => (
+    return typesProjects.map((props) => (
       <Shelf
         key={props.id}
         config={{
@@ -56,8 +51,7 @@ export const StatusProject = () => {
           options: POPOVER_OPTIONS(
             props.id,
             props.name,
-            props.is_active,
-            props.color
+            props.is_active
           )
         }}
         {...{ props }}
@@ -68,15 +62,9 @@ export const StatusProject = () => {
   return (
     <Main>
       <TableHeader
-        headers={HEADERS}
-        template={GRID_TEMPLATE}
         handleOrder={handleOrder}
-      />
-      <Modal.Colors.Edit
-        ref={modalRef}
-        Event={handleUpdateStatusProject}
-        placeholder='Status de Projeto'
-        text='Editar Status'
+        template={GRID_TEMPLATE}
+        headers={HEADERS}
       />
       {Table}
     </Main>
