@@ -21,12 +21,12 @@ interface IModalProps {
   EventOne: (name: string) => void
 }
 
-export interface IHandleModalProps {
+export interface IHandleModalPropsNew {
   open(_: boolean): void
   close(): void
 }
 
-const New = forwardRef<IHandleModalProps, IModalProps>(
+const New = forwardRef<IHandleModalPropsNew, IModalProps>(
   (props, ref) => {
     const { text, placeholder, EventOne } = props
     const [isOpen, setIsOpen] = useState(false)

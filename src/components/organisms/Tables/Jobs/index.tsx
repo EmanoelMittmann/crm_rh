@@ -3,7 +3,10 @@ import { useContext, useMemo, useRef } from 'react'
 import { List } from 'contexts'
 
 import { Loading } from 'components/atoms'
-import { IHandleModalProps, TableHeader } from 'components/molecules'
+import {
+  IHandleModalPropsEdit,
+  TableHeader
+} from 'components/molecules'
 import { Modal } from 'components/molecules/Modais'
 
 import { LoadingWrapper } from '../style'
@@ -12,7 +15,7 @@ import { GRID_TEMPLATE, HEADERS } from './constants'
 import Shelf from './Shelf'
 
 export const Jobs = () => {
-  const modalRef = useRef<IHandleModalProps>(null)
+  const modalRef = useRef<IHandleModalPropsEdit>(null)
   const {
     jobs,
     isLoading,

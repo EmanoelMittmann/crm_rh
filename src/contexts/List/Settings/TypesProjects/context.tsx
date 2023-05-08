@@ -118,7 +118,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   async function handleUpdateType(id: number, name: string) {
     try {
-      await api.post(routes.project_type.update(id), { name: name })
+      await api.put(routes.project_type.update(id), { name: name })
       toast({
         type: 'success',
         title: 'Tipo de projeto atualizado',
@@ -128,7 +128,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       toast({
         type: 'error',
-        title: 'Tipos de projeto Existente',
+        title: 'Tipo de projeto Existente',
         position: 'bottom-right'
       })
     }

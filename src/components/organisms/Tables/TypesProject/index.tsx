@@ -3,7 +3,11 @@ import { useContext, useRef, useMemo } from 'react'
 import { List } from 'contexts'
 
 import { Loading } from 'components/atoms'
-import { IHandleModalProps, TableHeader } from 'components/molecules'
+import {
+  IHandleModalPropsEdit,
+  TableHeader
+} from 'components/molecules'
+import { Modal } from 'components/molecules/Modais'
 
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE } from './contants'
@@ -18,7 +22,7 @@ export const TypesProject = () => {
     handleUpdateType,
     handleUpdateStatus
   } = useContext(List.Types.Context)
-  const modalRef = useRef<IHandleModalProps>(null)
+  const modalRef = useRef<IHandleModalPropsEdit>(null)
 
   const POPOVER_OPTIONS = (
     id: number,
@@ -65,6 +69,12 @@ export const TypesProject = () => {
         handleOrder={handleOrder}
         template={GRID_TEMPLATE}
         headers={HEADERS}
+      />
+      <Modal.Edit
+        text='Edição de Tipo de Projeto'
+        placeholder='tipo de projeto'
+        EventOne={handleUpdateType}
+        ref={modalRef}
       />
       {Table}
     </Main>
