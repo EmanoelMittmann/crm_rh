@@ -14,7 +14,7 @@ export const Project = () => {
   // const options = watch('options')
 
   const values = watch()
-  console.log('values: ', values);
+  // console.log('values: ', values);
   
 
 
@@ -25,16 +25,16 @@ export const Project = () => {
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Inputs.Default
-          {...register('name', {required: validation.required})}
-          error={errors.name?.message}
+          {...register('name.label', {required: validation.required})}
+          error={errors.name?.label?.message}
           type='text'
           label='Nome do Projeto'
           width='100%'
           placeholder='Informe o nome do Projeto'
           />
         <Inputs.Default
-          {...register('id', { required: validation.required })}
-          error={errors.id?.message}
+          {...register('id.label', { required: validation.required })}
+          error={errors.id?.label?.message}
           width='100%'
           type='number'
           label='ID do projeto'
@@ -46,7 +46,6 @@ export const Project = () => {
             setValue('project_type_id', value, { shouldValidate: true })
           }
           onClear={() => setValue('project_type_id', null)}
-          // options={options?.project_types}
           options={watch('options.project_types')}
           error={errors.project_type_id?.message}
           label='Tipo de Projeto'
@@ -93,7 +92,6 @@ export const Project = () => {
             setValue('project_status_id', value, { shouldValidate: true })
           }
           onClear={() => setValue('project_status_id', null)}
-          // options={options?.status_projects}
           options={watch('options.status_projects')}
           error={errors.project_status_id?.message}
           label='Status do Projeto'

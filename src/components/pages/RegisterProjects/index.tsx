@@ -66,7 +66,6 @@ const RegisterProjects = () => {
 
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
-      ...data,
       team_cost: data.team_cost?.value,
       project_status_id: data.project_status_id?.value,
       project_type_id: data.project_type_id?.value,
@@ -83,10 +82,12 @@ const RegisterProjects = () => {
 
   const handleSave = async () => {
     if (!validation) {
+      console.log('validation: ', validation);
       setIsSaving(true);
       try {
         await methods.handleSubmit(onSubmit)();
         navigate('/project');
+        console.log('navigate: ', navigate);
 
       } catch (error) {
         console.error(error);

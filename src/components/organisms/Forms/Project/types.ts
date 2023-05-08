@@ -26,6 +26,7 @@ export interface TeamMemberProps {
 
 export interface ProjectProps {
   team: TeamMemberProps[]
+  id: Option | null
   name: Option | null
   date_start: Option | null
   date_end: Option | null
@@ -33,7 +34,6 @@ export interface ProjectProps {
   project_status_id: Option | null
   project_type_id: Option | null
   team_cost: Option | null
-  id: Option | null
   date_start_performed: Option | null
   project_type: {
     id: Option | null
