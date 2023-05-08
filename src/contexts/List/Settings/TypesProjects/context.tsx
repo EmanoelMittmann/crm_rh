@@ -1,7 +1,8 @@
 import { createContext, useState } from 'react'
+import { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { SelectProps, toast } from '@stardust-ds/react'
+import { toast } from '@stardust-ds/react'
 
 import { PaginateContext } from 'components/molecules'
 
@@ -10,56 +11,48 @@ import { routes } from 'routes'
 
 import { useDebounce } from 'hooks'
 
-import DEFAULT from './constants'
-import {
-  ColorProps,
-  ContextPropsStatusProject,
-  DefaultMetaProps,
-  StatusProps
-} from './types'
-import { ReactNode } from './types'
+import DEFAULT from './constanst'
+import { ContextPropsTypeProject, TypesProps } from './types'
 
-export const Context = createContext({} as ContextPropsStatusProject)
+export const Context = createContext({} as ContextPropsTypeProject)
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [statusProjects, setStatusProjects] = useState<StatusProps[]>(
-    []
-  )
+  const [typesProjects, setTypesProjects] = useState<TypesProps[]>([])
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
   const [filterOptions, setFilterOptions] = useState(
     DEFAULT.FILTER_OPTIONS
   )
 
   const contextProps = {
-    statusProjects,
+    typesProjects,
     isLoading,
     meta,
     filterOptions,
     paginate: { ...meta.paginate, setCurrent_page: setPage },
     navigate,
-    handleOrder,
-    handleOrderField,
-    handleStatus,
     handleSearch,
-    handleUpdateStatus,
-    handleCreateStatusProject,
-    handleUpdateStatusProject
+    handleOrder,
+    handleStatus,
+    handleOrderField,
+    handleCreateType,
+    handleUpdateType,
+    handleUpdateStatus
   }
 
   async function fetchList() {
     setIsLoading(true)
-    const { data } = await api.get(routes.status.list, {
+    const { data } = await api.get(routes.project_type.list, {
       params: {
-        search: meta.search,
+        search: meta.search && meta.search,
         orderField: meta.orderField,
         page: meta.paginate.current_page,
         order: meta.order,
         is_active: meta.isActive
       }
     })
-    setStatusProjects(data?.data)
+    setTypesProjects(data?.data)
     setMeta((old) => ({
       ...old,
       paginate: { ...old.paginate, last_page: data.meta.last_page }
@@ -82,7 +75,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  function handleOrder(field: string) {
+  function handleOrder() {
     setMeta((old) => ({
       ...old,
       order: old.order === 'ASC' ? 'DESC' : 'ASC'
@@ -105,51 +98,37 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  async function handleCreateStatusProject(
-    name: string,
-    color: number
-  ) {
+  async function handleCreateType(name: string) {
     try {
-      await api.post(routes.status.create, {
-        name: name,
-        is_active: true,
-        colors_id: color
-      })
+      await api.post(routes.project_type.list, { name: name })
       toast({
         type: 'success',
-        title: 'Status cadastrado',
+        title: 'Tipo de projeto cadastrado',
         position: 'bottom-right'
       })
       fetchList()
     } catch (error) {
       toast({
         type: 'error',
-        title: 'Status Existente',
+        title: 'Tipo de projeto Existente',
         position: 'bottom-right'
       })
     }
   }
 
-  async function handleUpdateStatusProject(
-    id: number,
-    name: string,
-    color: string
-  ) {
+  async function handleUpdateType(id: number, name: string) {
     try {
-      await api.put(routes.status.update(id), {
-        name: name,
-        colors_id: color
-      })
+      await api.put(routes.project_type.update(id), { name: name })
       toast({
         type: 'success',
-        title: 'Status Atualizado',
+        title: 'Tipo de projeto atualizado',
         position: 'bottom-right'
       })
       fetchList()
     } catch (error) {
       toast({
         type: 'error',
-        title: 'Status Existente',
+        title: 'Tipo de projeto Existente',
         position: 'bottom-right'
       })
     }
@@ -157,42 +136,23 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   async function handleUpdateStatus(id: number) {
     try {
-      await api.put(routes.status.updateStatus, { id: id })
-      fetchList()
+      await api.put(routes.project_type.updateStatus, { id: id })
     } catch (error) {
       console.error(error)
     }
-  }
-
-  async function fetchColors() {
-    const { data } = await api.get(routes.color.list)
-    setFilterOptions({
-      colors: data.map(
-        ({ id, name }: { id: number; name: string }) => ({
-          label: name,
-          value: String(id)
-        })
-      ),
-      status: [
-        { label: 'Inativo', value: '0' },
-        { label: 'Ativo', value: '1' }
-      ] as never
-    })
+    fetchList()
   }
 
   useDebounce({
     fn: fetchList,
+    delay: 500,
     listener: [
+      meta.paginate.current_page,
       meta.isActive,
       meta.search,
-      meta.paginate.current_page,
-      meta.order
+      meta.order,
+      meta.orderField
     ]
-  })
-
-  useDebounce({
-    fn: fetchColors,
-    listener: [meta.isActive]
   })
 
   return (

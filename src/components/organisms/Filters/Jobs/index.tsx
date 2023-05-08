@@ -6,13 +6,13 @@ import { Option } from 'types'
 
 import { Button, IconGlass } from 'components/atoms'
 import { Modal } from 'components/molecules/Modais'
-import { IHandleModalProps } from 'components/molecules/Modais/New'
+import { IHandleModalPropsNew } from 'components/molecules/Modais'
 
 import { Main } from '../style'
 import { Container } from '../style'
 
 export const Jobs = () => {
-  const modalRef = useRef<IHandleModalProps>(null)
+  const modalRef = useRef<IHandleModalPropsNew>(null)
   const {
     meta,
     filterOptions,

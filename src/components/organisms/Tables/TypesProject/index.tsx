@@ -1,4 +1,4 @@
-import { useContext, useMemo, useRef } from 'react'
+import { useContext, useRef, useMemo } from 'react'
 
 import { List } from 'contexts'
 
@@ -9,20 +9,20 @@ import {
 } from 'components/molecules'
 import { Modal } from 'components/molecules/Modais'
 
-import { LoadingWrapper } from '../style'
-import { Main } from '../style'
-import { GRID_TEMPLATE, HEADERS } from './constants'
-import Shelf from './Shelf'
+import { LoadingWrapper, Main } from '../style'
+import { GRID_TEMPLATE } from './contants'
+import { HEADERS } from './contants'
+import Shelf from './shelf'
 
-export const Jobs = () => {
-  const modalRef = useRef<IHandleModalPropsEdit>(null)
+export const TypesProject = () => {
   const {
-    jobs,
     isLoading,
-    handleUpdateStatus,
+    typesProjects,
     handleOrder,
-    handleUpdateJob
-  } = useContext(List.Settings.Context)
+    handleUpdateType,
+    handleUpdateStatus
+  } = useContext(List.Types.Context)
+  const modalRef = useRef<IHandleModalPropsEdit>(null)
 
   const POPOVER_OPTIONS = (
     id: number,
@@ -47,7 +47,7 @@ export const Jobs = () => {
         </LoadingWrapper>
       )
 
-    return jobs.map((props) => (
+    return typesProjects.map((props) => (
       <Shelf
         key={props.id}
         config={{
@@ -66,15 +66,15 @@ export const Jobs = () => {
   return (
     <Main>
       <TableHeader
-        headers={HEADERS}
-        template={GRID_TEMPLATE}
         handleOrder={handleOrder}
+        template={GRID_TEMPLATE}
+        headers={HEADERS}
       />
       <Modal.Edit
+        text='Edição de Tipo de Projeto'
+        placeholder='tipo de projeto'
+        EventOne={handleUpdateType}
         ref={modalRef}
-        placeholder='Cargos'
-        text='Editar Cargos'
-        EventOne={handleUpdateJob}
       />
       {Table}
     </Main>

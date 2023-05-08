@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
@@ -6,21 +6,22 @@ import { Option } from 'types'
 
 import { Button, IconGlass } from 'components/atoms'
 import {
-  IHandleModalColorsPropsNew,
+  IHandleModalPropsNew,
   Modal
 } from 'components/molecules/Modais'
 
-import { Container, Main } from '../style'
+import { Main } from '../style'
+import { Container } from '../style'
 
-export const StatusProject = () => {
-  const modalRef = useRef<IHandleModalColorsPropsNew>(null)
+export const TypeProject = () => {
+  const modalRef = useRef<IHandleModalPropsNew>(null)
   const {
     meta,
     filterOptions,
-    handleSearch,
     handleStatus,
-    handleCreateStatusProject
-  } = useContext(List.Status.Context)
+    handleSearch,
+    handleCreateType
+  } = useContext(List.Types.Context)
 
   return (
     <Main>
@@ -28,25 +29,25 @@ export const StatusProject = () => {
         <Input
           value={meta.search}
           iconLeft={<IconGlass />}
-          placeholder='Buscar'
-          onChange={(e) => handleSearch(e.target.value)}
+          placeholder='Buscar...'
           width={272}
+          onChange={(e) => handleSearch(e.target.value)}
         />
         <Select
           options={filterOptions.status}
           placeholder='Status'
           onSelect={(option: Option | null) =>
-            option && handleStatus(Number(option?.value))
+            option && handleStatus(Number(option.value))
           }
           onClear={() => handleStatus(null)}
         />
       </Container>
-      <Button.New onClick={() => modalRef.current?.open()} />
-      <Modal.Colors.New
+      <Button.New onClick={() => modalRef.current?.open(true)} />
+      <Modal.New
+        placeholder='Tipo de projeto'
+        text='Cadastro de tipo de projeto'
+        EventOne={handleCreateType}
         ref={modalRef}
-        Event={handleCreateStatusProject}
-        placeholder='Status'
-        text='Cadastrar status'
       />
     </Main>
   )

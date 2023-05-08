@@ -22,12 +22,12 @@ interface IModalProps {
   defaultOpened?: boolean
 }
 
-export interface IHandleModalProps {
+export interface IHandleModalPropsEdit {
   open(id: number, name: string): void
   close(): void
 }
 
-const Edit = forwardRef<IHandleModalProps, IModalProps>(
+const Edit = forwardRef<IHandleModalPropsEdit, IModalProps>(
   (props, ref) => {
     const { text, placeholder, EventOne } = props
     const [isOpen, setIsOpen] = useState({ id: 0, name: '' })

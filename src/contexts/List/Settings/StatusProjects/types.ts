@@ -14,7 +14,10 @@ export interface DefaultMetaProps {
 export interface ContextPropsStatusProject {
   statusProjects: StatusProps[]
   meta: DefaultMetaProps
-  filterOptions: { status: SelectProps['options'] }
+  filterOptions: {
+    status: SelectProps['options']
+    colors: SelectProps['options']
+  }
   isLoading: boolean
   paginate: {
     current_page: number
