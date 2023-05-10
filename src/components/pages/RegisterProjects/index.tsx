@@ -93,7 +93,6 @@ const RegisterProjects = () => {
     } catch (error) {
       console.error(error);
       OnError(error);
-      console.log('erros',methods)
     }
   }
 
@@ -113,7 +112,6 @@ const RegisterProjects = () => {
   }
 
   function OnError(error: any) {
-    console.log('error: ', error);
     if (error.inner && error.inner.length > 0 && error.inner[0].message) {
       toast(error.inner[0].message);
     } else {

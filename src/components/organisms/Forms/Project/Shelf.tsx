@@ -17,7 +17,6 @@ export const Shelf = ({ props, config, }: ShelfUserProject) => {
     professional,
     status
   } = props
-  console.log('props: ', props);
 
   return (
     <ContainerShelf template={config.template}>
