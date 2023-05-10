@@ -1,8 +1,7 @@
-import {useFormContext, UseFormReturn} from 'react-hook-form'
+import { useFormContext, UseFormReturn} from 'react-hook-form'
 import { Inputs, Selects } from 'components/atoms'
 import {ContainerRow } from '../style'
 import { FormProjectProps } from '../types'
-
 
 
 export const Project = () => {
@@ -21,7 +20,7 @@ export const Project = () => {
       <ContainerRow gap='1rem'>
           <Inputs.Default
             {...register('name', { required: true })}
-            error={errors.name?.message}
+            error={errors?.name?.message}
             type='text'
             label='Nome do Projeto *'
             width='100%'

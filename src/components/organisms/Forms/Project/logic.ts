@@ -2,10 +2,17 @@ import {SelectOption } from "./types"
 import * as yup from 'yup'
 
 
+
 export const validationSchema = yup.object().shape({
   name: yup.string().required('Campo obrigatório'),
   id: yup.string().required('Campo obrigatório'),
-  project_type_id: yup.number().required('Campo obrigatório'),
+  project_type_id: yup.mixed().test({
+    name: 'required',
+    message: 'Campo obrigatório',
+    test: function (value) {
+      return value && value.value !== "" && value.label !== "";
+    },
+  }).required('Campo obrigatório'),
   date_start: yup.string(),
   date_end: yup.string().when('date_start', (date_start, schema) =>
     date_start
@@ -15,7 +22,7 @@ export const validationSchema = yup.object().shape({
           'date_range',
           'A data final deve ser maior que a data inicial',
           function (date_end: string) {
-            return new Date(date_end) > new Date(date_start);
+            return new Date(date_end) >= new Date(date_start);
           }
         )
       : schema
@@ -29,13 +36,18 @@ export const validationSchema = yup.object().shape({
           'date_range',
           'A data final deve ser maior que a data inicial',
           function (date_end_performed: string) {
-            return new Date(date_end_performed) > new Date(date_start_performed);
+            return new Date(date_end_performed) >= new Date(date_start_performed);
           }
         )
       : schema
   ),
-  project_status_id: yup.number().required('Campo obrigatório'),
-  team_cost: yup.number(),
+  project_status_id: yup.mixed().test({
+    name: 'required',
+    message: 'Campo obrigatório',
+    test: function (value) {
+      return value && value.value !== "" && value.label !== "";
+    },
+  }).required('Campo obrigatório'),
 });
 
 

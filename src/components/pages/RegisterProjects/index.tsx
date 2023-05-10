@@ -69,8 +69,7 @@ const RegisterProjects = () => {
 
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
-      id: data.id?.value,
-      name: data.name?.value,
+      ...data,
       team_cost: data.team_cost?.value,
       project_status_id: data.project_status_id?.value,
       project_type_id: data.project_type_id?.value,
@@ -114,6 +113,7 @@ const RegisterProjects = () => {
   }
 
   function OnError(error: any) {
+    console.log('error: ', error);
     if (error.inner && error.inner.length > 0 && error.inner[0].message) {
       toast(error.inner[0].message);
     } else {
