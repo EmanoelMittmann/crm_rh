@@ -8,6 +8,7 @@
     }
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.1.0",
     "@stardust-ds/react": "^0.8.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

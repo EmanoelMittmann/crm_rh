@@ -1,22 +1,17 @@
-import { useFormContext } from 'react-hook-form'
+import {useFormContext, UseFormReturn} from 'react-hook-form'
 import { Inputs, Selects } from 'components/atoms'
-import { validation } from '../logic'
-import { ContainerRow } from '../style'
+import {ContainerRow } from '../style'
 import { FormProjectProps } from '../types'
 
+
+
 export const Project = () => {
-  const {
-    register,
-    watch,
-    setValue,
-    formState: { errors }
-  } = useFormContext<FormProjectProps>()
-  // const options = watch('options')
-
-  const values = watch()
-  // console.log('values: ', values);
-  
-
+  const { 
+    register, 
+    watch, 
+    setValue, 
+    formState: { errors } }: 
+    UseFormReturn<FormProjectProps> = useFormContext();
 
   return (
     <>
@@ -24,30 +19,31 @@ export const Project = () => {
         <h3>Dados do Projeto</h3>
       </ContainerRow>
       <ContainerRow gap='1rem'>
-        <Inputs.Default
-          {...register('name.label', {required: validation.required})}
-          error={errors.name?.label?.message}
-          type='text'
-          label='Nome do Projeto'
-          width='100%'
-          placeholder='Informe o nome do Projeto'
+          <Inputs.Default
+            {...register('name', { required: true })}
+            error={errors.name?.message}
+            type='text'
+            label='Nome do Projeto *'
+            width='100%'
+            placeholder='Informe o nome do Projeto'
           />
         <Inputs.Default
-          {...register('id.label', { required: validation.required })}
-          error={errors.id?.label?.message}
+          {...register('id',{ required: true })}
+          error={errors.id?.message}
           width='100%'
           type='number'
-          label='ID do projeto'
+          label={'ID do projeto *'}
           placeholder='ID do Projeto'
         />
         <Selects.Default
-          {...register('project_type_id', {required: validation.required})}
+          {...register('project_type_id', { required: true })}
           onSelect={(value: any) =>
             setValue('project_type_id', value, { shouldValidate: true })
           }
+          error={errors.project_type_id?.message}
           onClear={() => setValue('project_type_id', null)}
           options={watch('options.project_types')}
-          error={errors.project_type_id?.message}
+       
           label='Tipo de Projeto'
           placeholder='Selecione'
           width={235}
@@ -55,28 +51,28 @@ export const Project = () => {
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Inputs.Default
-          {...register('date_start', {})}
+          {...register('date_start', { required: true })}
           error={errors.date_start?.message}
           type='date'
           label='Inicio efetivo'
           width='100%'
         />
         <Inputs.Default
-          {...register('date_end', {})}
+          {...register('date_end', { required: true })}
           error={errors.date_end?.message}
           type='date'
           label='Final efetivo'
           width='100%'
         />
         <Inputs.Default
-          {...register('date_start_performed', {})}
+          {...register('date_start_performed', { required: true })}
           error={errors.date_start_performed?.message}
           type='date'
           label='Incio do contrato'
           width='100%'
         />
         <Inputs.Default
-          {...register('date_end_performed', {})}
+          {...register('date_end_performed')}
           error={errors.date_end_performed?.message}
           type='date'
           label='Final do contrato'
@@ -85,9 +81,7 @@ export const Project = () => {
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Selects.Default
-          {...register('project_status_id', {
-            required: validation.required
-          })}
+          {...register('project_status_id', { required: true })}
           onSelect={(value: any) =>
             setValue('project_status_id', value, { shouldValidate: true })
           }
@@ -99,8 +93,7 @@ export const Project = () => {
           width={450}
         />
         <Inputs.Default
-          {...register('team_cost', {})}
-          error={errors.team_cost?.message}
+          {...register('team_cost')}
           width='100%'
           type='number'
           label='Custo estimado'
@@ -110,3 +103,4 @@ export const Project = () => {
     </>
   )
 }
+

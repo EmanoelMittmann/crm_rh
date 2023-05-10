@@ -3,17 +3,10 @@ import { TemplateProps } from 'components/organisms/Tables/types'
 
 
 export interface TeamMemberProps {
-  id: number;
-  professional: {
-    id: Option | null
-    name: Option | null
-    avatar: Option | null
-    status: boolean
-  }
-  jobs: {
-    id: Option | null
-    name: Option | null
-  }
+  user_id: number
+  id: number
+  job_: number
+  name: string
   extra_hours_estimated: number
   hours_mounths_estimated: number
   hours_mounths_performed: number
@@ -21,7 +14,19 @@ export interface TeamMemberProps {
   is_active: boolean;
   avatar: string
   status: boolean
+  jobs: {
+    id: number
+    name: Option | null
+  }
+  professional: {
+    id: number
+    name: Option | null
+    status: boolean
+    avatar: Option | null
+  }
+
 }
+
 
 
 export interface ProjectProps {
@@ -69,8 +74,8 @@ export interface ProjectProps {
     name: Option | null
     id: Option | null
   }
-  user_projects: {
-    id: Option | null
+  usersProjects: {
+    user_id: Option | null
     extra_hours_estimated: Option | null
     extra_hours_performed: Option | null
     hours_mounths_estimated: Option | null
@@ -91,7 +96,7 @@ interface ProjectAttachmentProps {
   input: string
 }
 export interface UserProjectsProps {
-  id: number
+  user_id: number
   extra_hours_estimated: string
   extra_hours_performed: string
   hours_mounths_estimated: string
@@ -114,7 +119,7 @@ interface FormConfigProps {
     jobs: SelectOption[]
     projects: SelectOption[]
     status_projects: SelectOption[]
-    user_projects: SelectOption[]
+    usersProjects: SelectOption[]
     professionals: SelectOption[]
   }
 }
@@ -138,6 +143,6 @@ export type ShelfUserProject = {
 
 export interface FormProjectProps
   extends ProjectProps,
-    FormConfigProps {}
+  FormConfigProps { }
 
 export type { SelectOption }

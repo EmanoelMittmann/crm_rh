@@ -7,18 +7,17 @@ import {
 import { Image, TeamJobName, Text, TextJob } from './style'
 import { ShelfUserProject } from './types'
 
-export const Shelf = ({ props, config,}: ShelfUserProject) => {
+export const Shelf = ({ props, config, }: ShelfUserProject) => {
   const {
-    jobs,
-    professional,
     extra_hours_estimated,
     hours_mounths_estimated,
     hours_mounths_performed,
     extra_hours_performed,
-    is_active,
-    // avatar,
-    // status,
+    jobs,
+    professional,
+    status
   } = props
+  console.log('props: ', props);
 
   return (
     <ContainerShelf template={config.template}>
@@ -46,7 +45,7 @@ export const Shelf = ({ props, config,}: ShelfUserProject) => {
       </ContainerShelfColumn>
 
       <ContainerShelfColumn width='150px' justify='center' gap='2em'>
-        <Badge.Status status={is_active} />
+        <Badge.Status status={status} />
         <Popover options={config.options} />
       </ContainerShelfColumn>
 

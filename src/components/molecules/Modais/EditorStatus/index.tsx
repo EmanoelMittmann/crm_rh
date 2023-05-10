@@ -57,8 +57,6 @@ const EditorStatus = forwardRef<IHandleModalStatusProps, IModalStatusProps>(
             }
             return false
         }, [isOpen.name, name])
-        
-        // console.log('selectedStatus: ', selectedStatus);
 
 
         useEffect(() => {

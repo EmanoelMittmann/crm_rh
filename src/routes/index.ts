@@ -36,7 +36,7 @@ export const routes = {
     updateStatus: `updateProjectStatus`
   },
 
-  user_projects: {
+  usersProjects: {
     list: '/userProjects/project',
     register: '/userProjects/project'
   }

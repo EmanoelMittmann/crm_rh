@@ -22,22 +22,22 @@ export const Team = () => {
     const id = watch('options.professionals');
     const avatar = watch('professional.avatar.label');
     const jobs = watch('jobs');
-    const hours_mounths_estimated = watch('user_projects.hours_mounths_estimated');
-    const extra_hours_estimated = watch('user_projects.extra_hours_estimated');
-    const hours_mounths_performed = watch('user_projects.hours_mounths_performed');
-    const extra_hours_performed = watch('user_projects.extra_hours_performed');
-    const status = watch(professional.status)
+    const hours_mounths_estimated = watch('usersProjects.hours_mounths_estimated');
+    const extra_hours_estimated = watch('usersProjects.extra_hours_estimated');
+    const hours_mounths_performed = watch('usersProjects.hours_mounths_performed');
+    const extra_hours_performed = watch('usersProjects.extra_hours_performed');
+    const status = watch('professional.status')
 
     if (professional && jobs) {
       const newTeamMember = {
-        id: id ? id : 0,
+        id,
         professional,
         jobs,
         hours_mounths_estimated,
         extra_hours_estimated,
         hours_mounths_performed: hours_mounths_performed ? hours_mounths_performed : 0,
         extra_hours_performed: extra_hours_performed ? extra_hours_performed : 0,
-        status,
+        status:{label: status ? status : 'Ativo'},
         avatar: avatar ? avatar : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
       } as unknown as TeamMemberProps;
 
@@ -78,16 +78,17 @@ export const Team = () => {
           width={190}
         />
         <Inputs.Default
-          {...register('user_projects.hours_mounths_estimated')}
+          {...register('usersProjects.hours_mounths_estimated')}
           label='Horas/mês estimadas'
           placeholder='Horas/mês'
           width={175}
         />
         <Inputs.Default
-          {...register('user_projects.extra_hours_estimated')}
+          {...register('usersProjects.extra_hours_estimated')}
           label='Horas extras estimadas'
           placeholder='Horas extras'
           width={175}
+          required
         />
         <ButtonGeneric
           top='1em'

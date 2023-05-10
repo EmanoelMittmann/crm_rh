@@ -89,7 +89,7 @@ export interface UserProjectsProps {
   }
 }
 
-export interface ProjectProps {
+export interface ProjectProps {zz
   id: number
   name: string
   created_at: string

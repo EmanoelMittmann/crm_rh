@@ -1,11 +1,12 @@
-import { forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import type { InputHTMLAttributes } from 'react'
 
 import { Input } from '@stardust-ds/react'
 import type { InputProps } from '@stardust-ds/react'
 import { theme } from 'styles'
+import ReactDOMServer from 'react-dom/server';
 
-import { Main } from './style'
+import { Main, RequiredLabel } from './style'
 
 type Props = InputProps &
   InputHTMLAttributes<HTMLInputElement> & {
