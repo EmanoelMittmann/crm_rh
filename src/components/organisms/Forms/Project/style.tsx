@@ -46,3 +46,34 @@ export const Divider = styled.hr`
   width: 100%;
   margin: 2rem 0rem;
 `
+
+export const Text = styled.p`
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  width: 10em;
+  font-size: 11px;
+  padding-left: ${(props) => props.title};
+  color: ${(props) => props.color};
+`
+export const TextJob = styled.p`
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  font-size: 9px;
+  padding-left: ${(props) => props.title};
+  color: ${(props) => props.color};
+`
+
+export const TeamJobName = styled.div`
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-direction: column;
+`
+
+export const Image = styled.img`
+  width: 2em;
+  border-radius: 50%;
+`

@@ -24,7 +24,7 @@ export interface ContextProjectProps {
   projects: ProjectProps[]
   isLoading: boolean
   filterOptionsType: { project_type: SelectProps['options'] }
-  filterOptonsStatus: { status: SelectProps['options'] }
+  filterOptionsStatus: { status: SelectProps['options'] }
   paginate: {
     current_page: number
     last_page: number
@@ -35,5 +35,7 @@ export interface ContextProjectProps {
   handleOrder(field: string): void
   handleFillProject_Type(id: number | null): void
   handleFillProject_Status(id: number | null): void
-  handleUpdateStatus(id: number): void
+  handleUpdateStatus(id: number, name: string): void
+  handleUpdateProject(id: number, name: string): void
+
 }

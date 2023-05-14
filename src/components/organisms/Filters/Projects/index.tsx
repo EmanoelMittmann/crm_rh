@@ -14,7 +14,7 @@ export const Projects = () => {
   const {
     meta,
     filterOptionsType,
-    filterOptonsStatus,
+    filterOptionsStatus,
     handleFillProject_Type,
     handleFillProject_Status,
     handleSearch,
@@ -33,7 +33,7 @@ export const Projects = () => {
 
   const currentValueStatus = useMemo(
     () =>
-      filterOptonsStatus.status.find(
+      filterOptionsStatus.status.find(
         (item) => Number(item.value) === project_status_id
       ),
     [project_status_id]
@@ -64,7 +64,7 @@ export const Projects = () => {
           width={230}
           placeholder='Status'
           value={currentValueStatus ?? null}
-          options={filterOptonsStatus?.status}
+          options={filterOptionsStatus?.status}
           onSelect={(option: ValueProps) =>
             option && handleFillProject_Status(Number(option?.value))
           }

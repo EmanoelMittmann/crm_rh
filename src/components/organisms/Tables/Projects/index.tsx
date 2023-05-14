@@ -1,31 +1,36 @@
-import { useContext, useMemo } from 'react'
-
+import { useContext, useMemo, useRef } from 'react'
 import { List } from 'contexts'
-
 import { Loading } from 'components/atoms'
-import { TableHeader } from 'components/molecules'
-
+import { TableHeader, IHandleModalStatusProps } from 'components/molecules'
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './shelf'
+import { Modal } from 'components/molecules/Modais'
 
 export const Projects = () => {
+  const modalRef = useRef<IHandleModalStatusProps>(null)
   const {
     projects,
     navigateTo,
     handleOrder,
     isLoading,
-    handleUpdateStatus
+    handleUpdateStatus,
+    handleUpdateProject
   } = useContext(List.Project.Context)
 
-  const POPOVER_OPTIONS = (id: number, status: any) => [
+  const POPOVER_OPTIONS = (
+    id: number, 
+    status: any, 
+    name: string
+    ) => [
     {
       label: 'Editar Projeto',
-      callback: () => navigateTo(`/project/${id}`)
+      callback: () => handleUpdateProject(id, name)
     },
     {
-      label: 'Editar Status',
-      callback: () => navigateTo(`/projectStatus/${id}`)
+      label:'Editar Status',
+      callback: () => modalRef.current?.open(id, name)
+   
     }
   ]
 
@@ -39,15 +44,16 @@ export const Projects = () => {
 
     return projects.map((props) => (
       <Shelf
-        key={props.id}
-        config={{
-          template: GRID_TEMPLATE,
-          options: POPOVER_OPTIONS(props.id, props.status)
-        }}
-        {...{ props }}
+      key={props.id}
+      config={{
+        template: GRID_TEMPLATE,
+        options: POPOVER_OPTIONS(props.id, props.status, props.name)
+      }}
+      {...{ props }}
       />
-    ))
-  }, [isLoading, projects])
+      ))
+    }, [isLoading, projects])
+    
 
   return (
     <Main>
@@ -55,6 +61,12 @@ export const Projects = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
+      />
+      <Modal.EditorStatus
+      ref={modalRef}
+      placeholder="Editar Status"
+      text='Editar Status'
+      EventOne={handleUpdateStatus}
       />
       {Table}
     </Main>

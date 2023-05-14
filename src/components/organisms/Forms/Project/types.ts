@@ -1,46 +1,44 @@
 import type { Option, SelectOption } from 'components/atoms'
 import { TemplateProps } from 'components/organisms/Tables/types'
 
+
 export interface TeamMemberProps {
+  user_id: number
   id: number
+  job_: number
   name: string
-  role: string
-  date_start: string
-  date_end: Date
-  date_end_performed: Date
-  project_status_id: number
-  project_type_id: number
-  team_cost: number
-  date_start_performed: Date
-  project_type: {
-    id: number
-    name: string
-  }
-  professionals: {
-    name: Option | null
-    id: Option | null
-  }
+  extra_hours_estimated: number
+  hours_mounths_estimated: number
+  hours_mounths_performed: number
+  extra_hours_performed: number
+  is_active: boolean;
+  avatar: string
+  status: boolean
   jobs: {
-    id: Option | null
+    id: number
     name: Option | null
   }
-  extra_hours_estimated: Option | null
-  extra_hours_performed: Option | null
-  hours_mounths_estimated: Option | null
-  hours_mounths_performed: Option | null
-  avatar: Option | null
+  professional: {
+    id: number
+    name: Option | null
+    status: boolean
+    avatar: Option | null
+  }
+
 }
+
+
 
 export interface ProjectProps {
   team: TeamMemberProps[]
+  id: Option | null
   name: Option | null
   date_start: Option | null
   date_end: Option | null
   date_end_performed: Option | null
-  project_status_id: number
-  project_type_id: number
+  project_status_id: Option | null
+  project_type_id: Option | null
   team_cost: Option | null
-  id: Option | null
   date_start_performed: Option | null
   project_type: {
     id: Option | null
@@ -71,11 +69,13 @@ export interface ProjectProps {
   }
 
   professional: {
+    status: []
+    avatar: Option | null
     name: Option | null
     id: Option | null
   }
-  user_projects: {
-    id: Option | null
+  usersProjects: {
+    user_id: Option | null
     extra_hours_estimated: Option | null
     extra_hours_performed: Option | null
     hours_mounths_estimated: Option | null
@@ -96,7 +96,7 @@ interface ProjectAttachmentProps {
   input: string
 }
 export interface UserProjectsProps {
-  id: number
+  user_id: number
   extra_hours_estimated: string
   extra_hours_performed: string
   hours_mounths_estimated: string
@@ -119,7 +119,7 @@ interface FormConfigProps {
     jobs: SelectOption[]
     projects: SelectOption[]
     status_projects: SelectOption[]
-    user_projects: SelectOption[]
+    usersProjects: SelectOption[]
     professionals: SelectOption[]
   }
 }
@@ -137,12 +137,12 @@ export type ShelfProjectsProps = {
   config: ConfigProps
 }
 export type ShelfUserProject = {
-  props: UserProjectsProps
+  props: TeamMemberProps
   config: ConfigProps
 }
 
 export interface FormProjectProps
   extends ProjectProps,
-    FormConfigProps {}
+  FormConfigProps { }
 
 export type { SelectOption }
