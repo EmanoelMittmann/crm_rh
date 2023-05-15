@@ -1,4 +1,3 @@
-
 import { UserProjectsProps } from 'types'
 
 export type { ReactNode } from 'react'
@@ -10,5 +9,4 @@ export interface ContextUserProps {
   navigateTo(url: string): void
   // handleFillUser(id: number | null): void
   // handleUpdateUser(user_id: number): void
-
 }

@@ -1,29 +1,28 @@
 import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { UserProjectsProps } from 'types'
+
 import api from 'api'
 import { routes } from 'routes'
 
 import { useDebounce } from 'hooks'
 
-import {
-  ContextUserProps,
-  ReactNode
-} from './types'
+import { ContextUserProps, ReactNode } from './types'
+import { UserProjectsProps } from 'types'
 
 export const Context = createContext({} as ContextUserProps)
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
-  const [usersProjects, setUsersProjects] = useState<UserProjectsProps[]>([])
-
+  const [usersProjects, setUsersProjects] = useState<
+    UserProjectsProps[]
+  >([])
 
   const ContextUserProps = {
     usersProjects,
     isLoading,
     navigateTo,
-    handleOrder,
+    handleOrder
   }
 
   let params = {}
@@ -46,7 +45,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     delay: 0,
     listener: []
   })
-
 
   return (
     <Context.Provider value={ContextUserProps}>

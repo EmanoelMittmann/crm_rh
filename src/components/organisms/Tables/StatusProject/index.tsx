@@ -6,15 +6,13 @@ import { ColorProps } from 'contexts/List/Settings/StatusProjects/types'
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 import {
-  
-  IHandleModalColorsPropsEdit, Modal,
-
+  IHandleModalColorsPropsEdit,
+  Modal
 } from 'components/molecules/Modais'
 
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import Shelf from './shelf'
-
 
 export const StatusProject = () => {
   const {

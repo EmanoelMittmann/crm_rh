@@ -45,7 +45,11 @@ export const Shelf = ({ props, config }: ShelfUserProject) => {
         <Text>{extra_hours_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='140px' justify='center' gap='1.5em'>
+      <ContainerShelfColumn
+        width='140px'
+        justify='center'
+        gap='1.5em'
+      >
         <Badge.Status status={status} />
         <Popover options={config.options} />
       </ContainerShelfColumn>

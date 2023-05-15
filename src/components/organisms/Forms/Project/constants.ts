@@ -13,4 +13,3 @@ export const HEADERS = [
 
 export const GRID_TEMPLATE =
   '.7fr 0.5fr 0.5fr 0.2fr 0.3fr .5fr 0.2fr 0.5fr'
-

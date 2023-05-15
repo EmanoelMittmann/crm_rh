@@ -1,16 +1,17 @@
-import { useFormContext, UseFormReturn} from 'react-hook-form'
+import { useFormContext, UseFormReturn } from 'react-hook-form'
+
 import { Inputs, Selects } from 'components/atoms'
-import {ContainerRow } from '../style'
+
+import { ContainerRow } from '../style'
 import { FormProjectProps } from '../types'
 
-
 export const Project = () => {
-  const { 
-    register, 
-    watch, 
-    setValue, 
-    formState: { errors } }: 
-    UseFormReturn<FormProjectProps> = useFormContext();
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors }
+  }: UseFormReturn<FormProjectProps> = useFormContext()
 
   return (
     <>
@@ -18,14 +19,14 @@ export const Project = () => {
         <h3>Dados do Projeto</h3>
       </ContainerRow>
       <ContainerRow gap='1rem'>
-          <Inputs.Default
-            {...register('name', { required: true })}
-            error={errors?.name?.message}
-            type='text'
-            label='Nome do Projeto *'
-            width='100%'
-            placeholder='Informe o nome do Projeto'
-          />
+        <Inputs.Default
+          {...register('name', { required: true })}
+          error={errors?.name?.message}
+          type='text'
+          label='Nome do Projeto *'
+          width='100%'
+          placeholder='Informe o nome do Projeto'
+        />
         <Inputs.Default
           {...register('id', { required: true })}
           error={errors.id?.message}
@@ -44,7 +45,6 @@ export const Project = () => {
           error={errors.project_type_id?.message}
           onClear={() => setValue('project_type_id', null)}
           options={watch('options.project_types')}
-       
           label='Tipo de Projeto'
           placeholder='Selecione'
           width={235}
@@ -64,7 +64,6 @@ export const Project = () => {
           type='date'
           label='Final efetivo'
           width='100%'
-
         />
         <Inputs.Default
           {...register('date_start_performed', { required: true })}

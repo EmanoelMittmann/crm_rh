@@ -7,8 +7,6 @@ import { ProjectTeam } from '../projectTeam'
 import { ContainerRow } from '../style'
 import { FormProjectProps, TeamMemberProps } from '../types'
 
-
-
 export const Team = () => {
   const {
     register,
@@ -20,16 +18,23 @@ export const Team = () => {
 
   const options = watch('options')
 
-
   const handleTeam = () => {
-    const professional = watch('professional');
-    const id = watch('options.professionals');
-    const avatar = watch('professional.avatar');
-    const jobs = watch('jobs');
-    const hours_mounths_estimated = watch('usersProjects.hours_mounths_estimated');
-    const extra_hours_estimated = watch('usersProjects.extra_hours_estimated');
-    const hours_mounths_performed = watch('usersProjects.hours_mounths_performed');
-    const extra_hours_performed = watch('usersProjects.extra_hours_performed');
+    const professional = watch('professional')
+    const id = watch('options.professionals')
+    const avatar = watch('professional.avatar')
+    const jobs = watch('jobs')
+    const hours_mounths_estimated = watch(
+      'usersProjects.hours_mounths_estimated'
+    )
+    const extra_hours_estimated = watch(
+      'usersProjects.extra_hours_estimated'
+    )
+    const hours_mounths_performed = watch(
+      'usersProjects.hours_mounths_performed'
+    )
+    const extra_hours_performed = watch(
+      'usersProjects.extra_hours_performed'
+    )
     const status = watch('professional.status')
 
     if (professional && jobs) {
@@ -39,15 +44,17 @@ export const Team = () => {
         jobs,
         hours_mounths_estimated,
         extra_hours_estimated,
-        hours_mounths_performed: null,
-        extra_hours_performed: null,
-        status:{label: status ? status : 'Ativo'},
-        avatar: avatar ? avatar : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png',
-      } as unknown as TeamMemberProps;
+        hours_mounths_performed: undefined,
+        extra_hours_performed: undefined,
+        status: { label: status ? status : 'Ativo' },
+        avatar: avatar
+          ? avatar
+          : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
+      } as unknown as TeamMemberProps
 
-      const currentTeam = getValues('team') || [];
-      const newTeam = [...currentTeam, newTeamMember];
-      console.log('newTeamMember: ', newTeamMember);
+      const currentTeam = getValues('team') || []
+      const newTeam = [...currentTeam, newTeamMember]
+      console.log('newTeamMember: ', newTeamMember)
 
       setValue('team', newTeam)
     }

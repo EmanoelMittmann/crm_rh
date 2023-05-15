@@ -103,7 +103,7 @@ const RegisterProjects = () => {
       console.error(error)
       OnError(error)
     }
-    console.log('methods: ', methods);
+    console.log('methods: ', methods)
   }
 
   const handleSave = async () => {
@@ -133,7 +133,7 @@ const RegisterProjects = () => {
         position: 'bottom-right'
       })
     }
-    console.log('error: ', error);
+    console.log('error: ', error)
   }
 
   useDebounce({

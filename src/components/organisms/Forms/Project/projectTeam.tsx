@@ -21,20 +21,18 @@ export const ProjectTeam = () => {
   const { isLoading, handleOrder } = useContext(List.Project.Context)
   const navigate = useNavigate()
 
-
-
   const POPOVER_OPTIONS = (user_id: number, status: any) => [
-    user_id ? (
-      {
-        label: 'Remover',
-        callback: () => {
-          const newTeam = Team.filter((item) => item.user_id !== user_id)
-          setValue('team', newTeam)
+    user_id
+      ? {
+          label: 'Remover',
+          callback: () => {
+            const newTeam = Team.filter(
+              (item) => item.user_id !== user_id
+            )
+            setValue('team', newTeam)
+          }
         }
-      }
-     
-    ) : (
-        {
+      : {
           label: 'Editar',
           callback: () => navigate(`/userProjects/project/${user_id}`)
         }
@@ -71,5 +69,3 @@ export const ProjectTeam = () => {
     </Main>
   )
 }
-
-
