@@ -5,7 +5,6 @@ import Home from '../components/pages/MasterPage'
 import Professionals from '../components/pages/Professionals'
 import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
-import {} from 'react-router-dom'
 import NewProjectFormik from '../components/pages/RegisterProjects/NewProjectFormik'
 const Router = () => {
   return (
@@ -15,10 +14,14 @@ const Router = () => {
           <Route path='/' element={<Login />} />
           <Route path='/home' element={<Home />} />
           <Route path='/professionals' element={<Professionals />} />
-          <Route
+          <Route path='/RegisterProfessionals'>
+            <Route path='' element={<RegisterProfessional />} />
+            <Route path=':id' element={<RegisterProfessional />} />
+          </Route>
+          {/* <Route
             path='/RegisterProfessionals'
             element={<RegisterProfessional />}
-          />
+          /> */}
           <Route path='/projects' element={<Projects />} />
           <Route path='/NewProject' element={<NewProjectFormik />} />
           <Route path='/extrasHours' element={<Professionals />} />
