@@ -7,7 +7,7 @@ interface TemplateProps {
 
 export const Container = styled.div<TemplateProps>`
   width: 100%;
-  height: 2.5rem;
+  height: 3.3rem;
   padding: 0 1rem;
   background-color: ${theme.neutrals.gray1};
   margin: auto;
