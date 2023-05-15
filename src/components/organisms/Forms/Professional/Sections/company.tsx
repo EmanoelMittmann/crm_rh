@@ -1,15 +1,27 @@
+import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { mask } from 'remask'
 
-import { Inputs, Selects } from 'components/atoms'
+import {
+  Inputs,
+  Option,
+  SelectOption,
+  Selects
+} from 'components/atoms'
+import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 
 import { MASKER, UF_OPTIONS } from '../constants'
 import { ContainerRow } from '../style'
 import type { FormProps } from '../types'
 
 export const Company = () => {
-  const { register, watch, setValue } = useFormContext<FormProps>()
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors }
+  } = useFormContext<FormProps>()
 
   return (
     <>
@@ -24,19 +36,22 @@ export const Company = () => {
           value={watch('professional_data.cnpj') ?? ''}
           width={295}
           label='CNPJ'
+          error={errors.professional_data?.cnpj?.message}
           placeholder='00.000.00/0000.00'
         />
         <Inputs.Default
           {...register('professional_data.razao_social')}
           width='100%'
+          value={watch('professional_data.razao_social') as any}
           label='Razão social'
         />
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Inputs.Default
           {...register('professional_data.fantasy_name')}
-          type='email'
+          type='text'
           label='Nome fantasia'
+          value={watch('professional_data.fantasy_name') as any}
           width='100%'
         />
         <Inputs.Default
@@ -111,8 +126,22 @@ export const Company = () => {
           placeholder='Selecione'
           options={UF_OPTIONS}
           label='Estados'
+          value={watch('professional_data.uf_company') as any}
           searchable
           width={295}
+        />
+      </ContainerRow>
+      <ContainerRow gap='1rem'>
+        <Selects.Default
+          label='Empresa Ubistart'
+          options={watch('options.companies') as any}
+          searchable
+          multiSelect
+          onSelect={(e) => {
+            const payload = e as SelectOption[]
+            setValue('options.payingCompanies', payload)
+          }}
+          placeholder='Selecione'
         />
       </ContainerRow>
     </>

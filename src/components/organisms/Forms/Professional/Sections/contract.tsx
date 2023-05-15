@@ -19,6 +19,9 @@ export const Contract = () => {
 
   const options = watch('options')
 
+  /*   const payingCompaniesIsRequired =
+    watch('options.paying_companies').length > 0 */
+
   const commissionOptions = [
     {
       label: 'Sim',
@@ -125,6 +128,15 @@ export const Contract = () => {
           iconLeft='R$'
           placeholder='00,00'
           label='Pagamento fixo'
+        />
+      </ContainerRow>
+      <ContainerRow>
+        <Selects.Default
+          options={watch('options')?.payingCompanies}
+          label='Empresa Pagadora'
+          disabled={watch('options.payingCompanies', []).length === 0}
+          {...register('company_id')}
+          onSelect={(e: any) => setValue('company_id', e.value)}
         />
       </ContainerRow>
     </>
