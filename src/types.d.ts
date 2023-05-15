@@ -114,3 +114,18 @@ interface IProjectsListing
   button_color: string
   text_color: string
 }
+
+interface CNPJValidatorResponse {
+  cnpj: string
+  razao_social: string
+  nome_fantasia: string
+  ddd_telefone_1: string
+  cep: number
+  descricao_tipo_de_logradouro: string
+  logradouro: string
+  numero: string
+  complemento: string
+  bairro: string
+  municipio: string
+  uf: string
+}
