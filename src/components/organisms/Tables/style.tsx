@@ -18,10 +18,10 @@ export const ContainerShelf = styled.div<TemplateProps>`
   min-height: 4rem;
   display: grid;
   align-items: center;
-  padding: 10px;
+  padding: 0px 22px;
   border: 1px solid #ccd1d6;
   grid-template-columns: ${({ template }) => template};
-  gap: 1rem;
+  //gap: 1rem;
   color: ${theme.neutrals.gray7};
   overflow-x: auto;
 
