@@ -7,9 +7,13 @@ import {
   Image,
   Text
 } from '../style'
-import type { ShelfProps } from './types'
+import type { ShelfProps } from '../types'
+import type { ProfessionalProps } from './types'
 
-export const Shelf = ({ props, config }: ShelfProps) => {
+export const Shelf = ({
+  props,
+  config
+}: ShelfProps<ProfessionalProps>) => {
   const {
     avatar,
     name,
