@@ -1,6 +1,10 @@
 import { useMemo } from 'react'
+import { useContext, useMemo, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 
+import { List } from 'contexts'
+
+import { Loading } from 'components/atoms'
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 import { FormProps } from 'components/organisms/Forms/Professional/types'
@@ -9,6 +13,18 @@ import { percentCalculate } from 'components/utils/percentCalculate'
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './shelf'
+
+
+import {
+  TableHeader,
+  IHandleModalStatusProps
+} from 'components/molecules'
+
+import { LoadingWrapper, Main } from '../style'
+import { GRID_TEMPLATE, HEADERS } from './constants'
+import { Shelf } from './shelf'
+
+import { Modal } from 'components/molecules/Modais'
 
 export const Projects = () => {
   const { watch, setValue } = useFormContext<FormProps>()
@@ -106,6 +122,66 @@ export const Projects = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={() => {}}
+      />
+      {Table}
+    </Main>
+  )
+}
+
+export const Projects = () => {
+  const modalRef = useRef<IHandleModalStatusProps>(null)
+  const {
+    projects,
+    navigateTo,
+    handleOrder,
+    isLoading,
+    handleUpdateStatus,
+    handleUpdateProject
+  } = useContext(List.Project.Context)
+
+  const POPOVER_OPTIONS = (id: number, status: any, name: string) => [
+    {
+      label: 'Editar Projeto',
+      callback: () => handleUpdateProject(id, name)
+    },
+    {
+      label: 'Editar Status',
+      callback: () => modalRef.current?.open(id, name)
+    }
+  ]
+
+  const Table = useMemo(() => {
+    if (isLoading)
+      return (
+        <LoadingWrapper>
+          <Loading />
+        </LoadingWrapper>
+      )
+
+    return projects.map((props) => (
+      <Shelf
+        key={props.id}
+        config={{
+          template: GRID_TEMPLATE,
+          options: POPOVER_OPTIONS(props.id, props.status, props.name)
+        }}
+        {...{ props }}
+      />
+    ))
+  }, [isLoading, projects])
+
+  return (
+    <Main>
+      <TableHeader
+        headers={HEADERS}
+        template={GRID_TEMPLATE}
+        handleOrder={handleOrder}
+      />
+      <Modal.EditorStatus
+        ref={modalRef}
+        placeholder='Editar Status'
+        text='Editar Status'
+        EventOne={handleUpdateStatus}
       />
       {Table}
     </Main>

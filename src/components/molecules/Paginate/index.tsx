@@ -1,4 +1,4 @@
-import { useMemo, useContext } from 'react'
+import { useMemo, useContext, createContext } from 'react'
 
 import { List } from 'contexts'
 
@@ -10,10 +10,19 @@ import {
 
 import { Button, Main, PagesNumber, Row } from './style'
 
+interface ContextProps {
+  paginate: {
+    current_page: number
+    last_page: number
+    setCurrent_page: (page: number) => void
+  }
+}
+export const PaginateContext = createContext({} as ContextProps)
+
 export const Paginate = () => {
   const {
     paginate: { current_page, last_page, setCurrent_page }
-  } = useContext(List.Professional.Context)
+  } = useContext(PaginateContext)
 
   const pages = useMemo(
     () =>

@@ -71,16 +71,57 @@ interface IModalProps {
   eventTwo?: MouseEventHandler
 }
 
-interface FormProjects {
-  name?: string
-  date_start?: string
-  date_end?: string
-  date_end_performed?: string
-  project_status_id?: number
-  project_type_id?: number
-  team_cost?: string
-  id?: string
-  date_start_performed?: string
+export interface UserProjectsProps {
+  id: number
+  user_id: string
+  extra_hours_estimated: string
+  extra_hours_performed: string
+  hours_mounths_estimated: string
+  hours_mounths_performed: string
+  avatar: string
+  name: string
+  status: string
+  job_: string
+  job_id: string
+  job: {
+    id: number
+    name: string
+  }
+}
+
+export interface ProjectProps {
+  zz
+  id: number
+  name: string
+  created_at: string
+  date_start: string
+  date_start_performed: string
+  date_end: string
+  date_end_performed: string
+  project_status_id: number
+  project_type_id: number
+  project_type: {
+    map: any
+    id: string
+    name: string
+  }
+  status: {
+    map(arg0: (status: any) => { label: any; value: any })
+    color: {
+      button_color: string
+      text_color: string
+      id: number
+      name: string
+    }
+    id: number
+    is_active: boolean
+    colors_id: number
+    created_at: Date
+    updated_at: Date
+    name: string
+  }
+  is_active: boolean
+  team_cost: string
 }
 
 interface OtherProps {

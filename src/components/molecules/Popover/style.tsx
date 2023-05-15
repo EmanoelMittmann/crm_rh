@@ -9,7 +9,7 @@ export const Overlay = styled.div`
 export const ContainerModal = styled.div`
   box-shadow: 0px 10px 20px 0px ${theme.brand.color.black.transparent};
   background-color: ${theme.neutrals.pureWhite};
-  width: 7rem;
+  width: 8rem;
   border-radius: 8px;
   transform: translate(1.5rem, -2.5rem);
   position: absolute;

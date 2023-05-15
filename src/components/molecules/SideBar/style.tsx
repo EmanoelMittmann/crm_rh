@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { theme } from 'styles'
+import { IContainerRowProps, IContainerColumnProps } from 'types'
 
 export const ContainerMain = styled.div`
   height: 100vh;

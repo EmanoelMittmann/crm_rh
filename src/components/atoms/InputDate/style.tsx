@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { IButtonColorProps } from 'types'
 
 import { IInputsPropsDate } from '../../../react-app-env'
 

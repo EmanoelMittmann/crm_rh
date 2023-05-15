@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { IContainerColumnProps } from 'types'
 
 export const ContainerMain = styled.div`
   width: 100%;
@@ -82,7 +83,6 @@ export const AlignItens = styled.div`
   font-family: 'Poppins';
   font-weight: 500;
 `
-
 export const IMG = styled.img`
   width: 3em;
 `
