@@ -1,30 +1,20 @@
-import { useMemo } from 'react'
 import { useContext, useMemo, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { List } from 'contexts'
 
 import { Loading } from 'components/atoms'
-import { Loading } from 'components/atoms'
-import { TableHeader } from 'components/molecules'
+import {
+  TableHeader,
+  IHandleModalStatusProps
+} from 'components/molecules'
+import { Modal } from 'components/molecules/Modais'
 import { FormProps } from 'components/organisms/Forms/Professional/types'
 import { percentCalculate } from 'components/utils/percentCalculate'
 
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './shelf'
-
-
-import {
-  TableHeader,
-  IHandleModalStatusProps
-} from 'components/molecules'
-
-import { LoadingWrapper, Main } from '../style'
-import { GRID_TEMPLATE, HEADERS } from './constants'
-import { Shelf } from './shelf'
-
-import { Modal } from 'components/molecules/Modais'
 
 export const Projects = () => {
   const { watch, setValue } = useFormContext<FormProps>()
@@ -128,7 +118,7 @@ export const Projects = () => {
   )
 }
 
-export const Projects = () => {
+/* export const Projects = () => {
   const modalRef = useRef<IHandleModalStatusProps>(null)
   const {
     projects,
@@ -187,3 +177,4 @@ export const Projects = () => {
     </Main>
   )
 }
+ */

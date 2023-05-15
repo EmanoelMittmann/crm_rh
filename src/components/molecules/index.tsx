@@ -4,5 +4,5 @@ export { HeaderSettings } from './HeaderSettings'
 export * from './Paginate'
 
 export type { HeaderProps } from './TableHeader'
-export type { IHandleModalProps } from './Modais/Edit'
+export type { IHandleModalPropsEdit } from './Modais/Edit'
 export type { IHandleModalStatusProps } from './Modais/EditorStatus'

@@ -1,17 +1,21 @@
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { ProjectProps } from 'types'
-import { Button } from 'components/atoms'
-import { Form, FormProjectProps } from 'components/organisms'
-import { AuthTemplate, CreateTemplate } from 'components/templates'
-import api from 'api'
-import { routes } from 'routes'
-import { useDebounce } from 'hooks'
-import {validationSchema } from 'components/organisms/Forms/Project/logic'
+
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from '@stardust-ds/react'
 
+import { Button } from 'components/atoms'
+import { Form, FormProjectProps } from 'components/organisms'
+import { validationSchema } from 'components/organisms/Forms/Project/logic'
+import { AuthTemplate, CreateTemplate } from 'components/templates'
+
+import api from 'api'
+import { routes } from 'routes'
+
+import { useDebounce } from 'hooks'
+
+import { ProjectProps } from 'types'
 
 const RegisterProjects = () => {
   const [isSaving, setIsSaving] = useState(false)
@@ -20,19 +24,23 @@ const RegisterProjects = () => {
   const methods = useForm<FormProjectProps['Project']>({
     defaultValues: {},
     resolver: yupResolver(validationSchema),
-    shouldFocusError: true,
-  });
-
+    shouldFocusError: true
+  })
 
   async function fetchPropsProject() {
     const { data: project_type } = await api.get(
       routes.project_type.list + '?limit=120'
     )
-    const { data: status } = await api.get(routes.status.list + '?limit=120')
+    const { data: status } = await api.get(
+      routes.status.list + '?limit=120'
+    )
 
-    const { data: jobs } = await api.get(routes.job.list + '?limit=120', {
-      params: { is_active: true }
-    })
+    const { data: jobs } = await api.get(
+      routes.job.list + '?limit=120',
+      {
+        params: { is_active: true }
+      }
+    )
     const { data: users } = await api.get(
       routes.usersProjects.list + '?limit=120'
     )
@@ -66,7 +74,6 @@ const RegisterProjects = () => {
     } as FormProjectProps['Project']['options'])
   }
 
-
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
       ...data,
@@ -77,34 +84,33 @@ const RegisterProjects = () => {
       date_end: data.date_end?.value,
       date_start_performed: data.date_start_performed?.value,
       date_end_performed: data.date_end_performed?.value,
-      usersProjects:{
+      usersProjects: {
         user_id: data.usersProjects?.user_id?.value,
-        extra_hours_estimated: data.usersProjects?.extra_hours_estimated?.value,
-        hours_mounths_estimated: data.usersProjects?.hours_mounths_estimated?.value,
+        extra_hours_estimated:
+          data.usersProjects?.extra_hours_estimated?.value,
+        hours_mounths_estimated:
+          data.usersProjects?.hours_mounths_estimated?.value,
         avatar: data.usersProjects?.avatar?.value,
         name: data.usersProjects?.name?.value,
-        job_: data.usersProjects?.job_?.value,
-        }
-      
+        job_: data.usersProjects?.job_?.value
+      }
     }
     try {
-      await api.post(routes.project.register, sanitizeData);
-      navigate('/project');
+      await api.post(routes.project.register, sanitizeData)
+      navigate('/project')
     } catch (error) {
-      console.error(error);
-      OnError(error);
+      console.error(error)
+      OnError(error)
     }
   }
 
-
   const handleSave = async () => {
     if (!validationSchema) {
-      setIsSaving(true);
+      setIsSaving(true)
 
-      methods.handleSubmit(onSubmit, OnError)();
-      setIsSaving(false);
+      methods.handleSubmit(onSubmit, OnError)()
+      setIsSaving(false)
     }
-
   }
 
   function handleCancel() {
@@ -112,8 +118,12 @@ const RegisterProjects = () => {
   }
 
   function OnError(error: any) {
-    if (error.inner && error.inner.length > 0 && error.inner[0].message) {
-      toast(error.inner[0].message);
+    if (
+      error.inner &&
+      error.inner.length > 0 &&
+      error.inner[0].message
+    ) {
+      toast(error.inner[0].message)
     } else {
       toast({
         type: 'error',
@@ -123,13 +133,11 @@ const RegisterProjects = () => {
     }
   }
 
-
   useDebounce({
     fn: fetchPropsProject,
     delay: 0,
     listener: []
   })
-
 
   return (
     <>

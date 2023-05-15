@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { IButtonColorProps } from 'types'
 
 import { IInputsPropsDate } from '../../../react-app-env'
+import { IButtonColorProps } from 'types'
 
 export const Img = styled.img`
   width: 20px;

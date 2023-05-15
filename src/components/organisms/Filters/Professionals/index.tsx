@@ -2,11 +2,11 @@ import { useMemo, useContext } from 'react'
 
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
-import { Option } from 'types'
 
 import { IconGlass, Button } from 'components/atoms'
 
 import { Container, Main } from '../style'
+import { Option } from 'types'
 
 type ValueProps = Option | null | undefined
 

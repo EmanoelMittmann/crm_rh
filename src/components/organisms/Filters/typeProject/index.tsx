@@ -2,7 +2,6 @@ import React, { useContext, useRef } from 'react'
 
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
-import { Option } from 'types'
 
 import { Button, IconGlass } from 'components/atoms'
 import {
@@ -12,6 +11,7 @@ import {
 
 import { Main } from '../style'
 import { Container } from '../style'
+import { Option } from 'types'
 
 export const TypeProject = () => {
   const modalRef = useRef<IHandleModalPropsNew>(null)

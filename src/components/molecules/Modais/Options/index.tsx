@@ -1,6 +1,5 @@
-import { IModalProps } from 'types'
-
 import { ContainerModal, Options } from './style'
+import { IModalProps } from 'types'
 
 const Modal = ({
   eventOne,

@@ -4,10 +4,11 @@ import { SelectOption } from '@stardust-ds/react/lib/esm/components/Select/inter
 import axios from 'axios'
 
 import { FormProps, getUfOption } from 'components/organisms'
-import { UF_OPTIONS } from 'components/organisms/Forms/Professional/constants'
 
 import api from 'api'
 import { externRoutes, routes } from 'routes'
+
+import { CNPJValidatorResponse } from 'types'
 
 export function getPermissionsId(data: any[]) {
   return (

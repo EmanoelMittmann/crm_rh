@@ -1,6 +1,9 @@
-import { useContext, useMemo} from 'react'
+import { useContext, useMemo } from 'react'
+import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+
 import { List } from 'contexts'
+
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 import {
@@ -10,39 +13,28 @@ import {
 
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './Shelf'
-import { useFormContext } from 'react-hook-form'
 import { FormProjectProps } from './types'
-
 
 export const ProjectTeam = () => {
   const { watch, setValue } = useFormContext<FormProjectProps>()
   const Team = watch('team', [])
-  const { isLoading, handleOrder } = useContext(
-    List.Project.Context
-  )
+  const { isLoading, handleOrder } = useContext(List.Project.Context)
   const navigate = useNavigate()
 
-
-
   const POPOVER_OPTIONS = (id: number, status: any) => [
-    id ? (
-      {
-        label: 'Remover',
-        callback: () => {
-          const newTeam = Team.filter((item) => item.id !== id)
-          setValue('team', newTeam)
+    id
+      ? {
+          label: 'Remover',
+          callback: () => {
+            const newTeam = Team.filter((item) => item.id !== id)
+            setValue('team', newTeam)
+          }
         }
-      }
-     
-    ) : (
-        {
+      : {
           label: 'Editar',
           callback: () => navigate(`/userProjects/project/${id}`)
         }
-      
-    )
   ]
-
 
   const Table = useMemo(() => {
     if (isLoading)
@@ -75,5 +67,3 @@ export const ProjectTeam = () => {
     </Main>
   )
 }
-
-

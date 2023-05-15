@@ -1,10 +1,11 @@
 import { useFormContext } from 'react-hook-form'
+
 import { Selects, Inputs } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
+
 import { ProjectTeam } from '../projectTeam'
 import { ContainerRow } from '../style'
 import { FormProjectProps, TeamMemberProps } from '../types'
-
 
 export const Team = () => {
   const {
@@ -18,14 +19,22 @@ export const Team = () => {
   const options = watch('options')
 
   const handleTeam = () => {
-    const professional = watch('professional');
-    const id = watch('options.professionals');
-    const avatar = watch('professional.avatar.label');
-    const jobs = watch('jobs');
-    const hours_mounths_estimated = watch('usersProjects.hours_mounths_estimated');
-    const extra_hours_estimated = watch('usersProjects.extra_hours_estimated');
-    const hours_mounths_performed = watch('usersProjects.hours_mounths_performed');
-    const extra_hours_performed = watch('usersProjects.extra_hours_performed');
+    const professional = watch('professional')
+    const id = watch('options.professionals')
+    const avatar = watch('professional.avatar.label')
+    const jobs = watch('jobs')
+    const hours_mounths_estimated = watch(
+      'usersProjects.hours_mounths_estimated'
+    )
+    const extra_hours_estimated = watch(
+      'usersProjects.extra_hours_estimated'
+    )
+    const hours_mounths_performed = watch(
+      'usersProjects.hours_mounths_performed'
+    )
+    const extra_hours_performed = watch(
+      'usersProjects.extra_hours_performed'
+    )
     const status = watch('professional.status')
 
     if (professional && jobs) {
@@ -35,22 +44,27 @@ export const Team = () => {
         jobs,
         hours_mounths_estimated,
         extra_hours_estimated,
-        hours_mounths_performed: hours_mounths_performed ? hours_mounths_performed : 0,
-        extra_hours_performed: extra_hours_performed ? extra_hours_performed : 0,
-        status:{label: status ? status : 'Ativo'},
-        avatar: avatar ? avatar : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
-      } as unknown as TeamMemberProps;
+        hours_mounths_performed: hours_mounths_performed
+          ? hours_mounths_performed
+          : 0,
+        extra_hours_performed: extra_hours_performed
+          ? extra_hours_performed
+          : 0,
+        status: { label: status ? status : 'Ativo' },
+        avatar: avatar
+          ? avatar
+          : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
+      } as unknown as TeamMemberProps
 
-      const currentTeam = getValues('team') || [];
-      const newTeam = [...currentTeam, newTeamMember];
+      const currentTeam = getValues('team') || []
+      const newTeam = [...currentTeam, newTeamMember]
 
-      setValue('team', newTeam);
+      setValue('team', newTeam)
     }
   }
 
   return (
     <>
-
       <ContainerRow>
         <h3>Time</h3>
       </ContainerRow>
@@ -58,7 +72,9 @@ export const Team = () => {
         <Selects.Default
           {...register('professional.name', {})}
           onSelect={(value: any) =>
-            setValue('professional.name', value, { shouldValidate: true })
+            setValue('professional.name', value, {
+              shouldValidate: true
+            })
           }
           onClear={() => setValue('professional.name', null)}
           options={options?.professionals}
@@ -102,7 +118,7 @@ export const Team = () => {
           onClick={handleTeam}
         />
       </ContainerRow>
-      <ContainerRow gap="1rem">
+      <ContainerRow gap='1rem'>
         <ProjectTeam />
       </ContainerRow>
     </>

@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react'
 import type { InputHTMLAttributes } from 'react'
+import ReactDOMServer from 'react-dom/server'
 
 import { Input } from '@stardust-ds/react'
 import type { InputProps } from '@stardust-ds/react'
 import { theme } from 'styles'
-import ReactDOMServer from 'react-dom/server';
 
 import { Main, RequiredLabel } from './style'
 

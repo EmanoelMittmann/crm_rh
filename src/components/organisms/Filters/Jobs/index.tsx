@@ -2,7 +2,6 @@ import { useContext, useMemo, useRef } from 'react'
 
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
-import { Option } from 'types'
 
 import { Button, IconGlass } from 'components/atoms'
 import { Modal } from 'components/molecules/Modais'
@@ -10,6 +9,7 @@ import { IHandleModalPropsNew } from 'components/molecules/Modais'
 
 import { Main } from '../style'
 import { Container } from '../style'
+import { Option } from 'types'
 
 export const Jobs = () => {
   const modalRef = useRef<IHandleModalPropsNew>(null)

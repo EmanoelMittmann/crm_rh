@@ -11,7 +11,8 @@ import Home from '../components/pages/MasterPage'
 import Professionals from '../components/pages/Professionals'
 import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
-import NewProjectFormik from '../components/pages/RegisterProjects/NewProjectFormik'
+import NewProjectFormik from '../components/pages/RegisterProjects/'
+
 const Router = () => {
   return (
     <>

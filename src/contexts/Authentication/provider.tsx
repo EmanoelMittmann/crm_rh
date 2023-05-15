@@ -2,12 +2,12 @@ import { ReactNode, useEffect, useState } from 'react'
 
 import { LocalStorageKeys } from 'config'
 import jwt_decode from 'jwt-decode'
-import { IJWTDecodeGoogle } from 'types'
 
 import api from 'api'
 
 import { AuthContext } from '.'
 import type { AuthProps } from './types'
+import { IJWTDecodeGoogle } from 'types'
 
 const DEFAULT_VALUE = {
   user: {
