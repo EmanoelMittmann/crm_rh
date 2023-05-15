@@ -1,3 +1,5 @@
+import { TeamMemberProps } from "components/organisms/Forms/Project/types"
+
 declare module '*.svg' {
   import { ReactElement, SVGProps } from 'react'
   const content: (props: SVGProps<SVGElement>) => ReactElement
@@ -72,8 +74,7 @@ interface IModalProps {
 }
 
 export interface UserProjectsProps {
-  id: number
-  user_id: string
+  user_id: number
   extra_hours_estimated: string
   extra_hours_performed: string
   hours_mounths_estimated: string
@@ -90,7 +91,6 @@ export interface UserProjectsProps {
 }
 
 export interface ProjectProps {
-  zz
   id: number
   name: string
   created_at: string

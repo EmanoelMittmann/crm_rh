@@ -76,8 +76,9 @@ const RegisterProjects = () => {
 
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
-      ...data,
-      team_cost: data.team_cost?.value,
+      name: data.name,
+      id: data.id,
+      team_cost: data.team_cost,
       project_status_id: data.project_status_id?.value,
       project_type_id: data.project_type_id?.value,
       date_start: data.date_start?.value,
@@ -102,6 +103,7 @@ const RegisterProjects = () => {
       console.error(error)
       OnError(error)
     }
+    console.log('methods: ', methods)
   }
 
   const handleSave = async () => {
@@ -131,6 +133,7 @@ const RegisterProjects = () => {
         position: 'bottom-right'
       })
     }
+    console.log('error: ', error)
   }
 
   useDebounce({

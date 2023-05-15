@@ -21,7 +21,7 @@ export const Team = () => {
   const handleTeam = () => {
     const professional = watch('professional')
     const id = watch('options.professionals')
-    const avatar = watch('professional.avatar.label')
+    const avatar = watch('professional.avatar')
     const jobs = watch('jobs')
     const hours_mounths_estimated = watch(
       'usersProjects.hours_mounths_estimated'
@@ -39,17 +39,13 @@ export const Team = () => {
 
     if (professional && jobs) {
       const newTeamMember = {
-        id,
+        user_id: id,
         professional,
         jobs,
         hours_mounths_estimated,
         extra_hours_estimated,
-        hours_mounths_performed: hours_mounths_performed
-          ? hours_mounths_performed
-          : 0,
-        extra_hours_performed: extra_hours_performed
-          ? extra_hours_performed
-          : 0,
+        hours_mounths_performed: undefined,
+        extra_hours_performed: undefined,
         status: { label: status ? status : 'Ativo' },
         avatar: avatar
           ? avatar
@@ -58,6 +54,7 @@ export const Team = () => {
 
       const currentTeam = getValues('team') || []
       const newTeam = [...currentTeam, newTeamMember]
+      console.log('newTeamMember: ', newTeamMember)
 
       setValue('team', newTeam)
     }

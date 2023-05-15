@@ -109,6 +109,7 @@ export interface UserProjectsProps {
 }
 interface FormConfigProps {
   options: {
+    filter(arg0: (option: any) => boolean): SelectOption[]
     project_types: SelectOption[]
     permissions: SelectOption[]
     userTypes: SelectOption[]

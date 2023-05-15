@@ -8,9 +8,12 @@ import { ContextPropsStatusProject } from './Settings/StatusProjects'
 import { Status } from './Settings/StatusProjects'
 import { Types } from './Settings/TypesProjects'
 import { ContextPropsTypeProject } from './Settings/TypesProjects'
+import { UserProjects } from './User'
+import { ContextUserProps } from './User/types'
+
 export const List = Object.assign(
   {},
-  { Professional, Project, Settings, Status, Types }
+  { Professional, Project, Settings, Status, Types, UserProjects }
 )
 
 export type ListContext = {
@@ -19,4 +22,5 @@ export type ListContext = {
   Project: ContextProjectProps
   Status: ContextPropsStatusProject
   Types: ContextPropsTypeProject
+  UserProjects: ContextUserProps
 }

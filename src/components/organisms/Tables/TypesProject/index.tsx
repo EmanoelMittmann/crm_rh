@@ -3,11 +3,11 @@ import { useContext, useRef, useMemo } from 'react'
 import { List } from 'contexts'
 
 import { Loading } from 'components/atoms'
+import { TableHeader } from 'components/molecules'
 import {
   IHandleModalPropsEdit,
-  TableHeader
-} from 'components/molecules'
-import { Modal } from 'components/molecules/Modais'
+  Modal
+} from 'components/molecules/Modais'
 
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE } from './contants'
