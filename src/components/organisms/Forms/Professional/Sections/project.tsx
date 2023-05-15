@@ -6,7 +6,7 @@ import { Inputs, Selects } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import InputTag from 'components/molecules/InputTag'
 import { Table } from 'components/organisms/Tables'
-import { ProjectProps } from 'components/organisms/Tables/Projects/types'
+import { ProjectPropsHours } from 'components/organisms/Tables/Projects/types'
 
 import { ContainerRow } from '../style'
 import type { FormProps } from '../types'
@@ -18,7 +18,7 @@ export const Project = () => {
     const project = watch('projects.selected.project') as any
 
     const { id, name } = project?.value
-    const payload: ProjectProps = {
+    const payload: ProjectPropsHours = {
       id,
       name,
       date_start: new Date().toLocaleDateString('pt-BR'),

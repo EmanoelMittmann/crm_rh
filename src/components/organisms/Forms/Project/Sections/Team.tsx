@@ -20,7 +20,7 @@ export const Team = () => {
 
   const handleTeam = () => {
     const professional = watch('professional')
-    const id = watch('options.professionals')
+    const id = watch('usersProjects.user_id')
     const avatar = watch('professional.avatar')
     const jobs = watch('jobs')
     const hours_mounths_estimated = watch(
@@ -44,8 +44,8 @@ export const Team = () => {
         jobs,
         hours_mounths_estimated,
         extra_hours_estimated,
-        hours_mounths_performed: undefined,
-        extra_hours_performed: undefined,
+        hours_mounths_performed: null,
+        extra_hours_performed: null,
         status: { label: status ? status : 'Ativo' },
         avatar: avatar
           ? avatar

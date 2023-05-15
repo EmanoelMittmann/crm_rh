@@ -4,8 +4,8 @@ import { Loading } from 'components/atoms'
 import {TableHeader} from 'components/molecules'
 import { FormProps } from 'components/organisms/Forms/Professional/types'
 import { percentCalculate } from 'components/utils/percentCalculate'
-import { LoadingWrapper, Main } from '../../style'
-import { GRID_TEMPLATE, HEADERS } from '../constants'
+import { LoadingWrapper, Main } from '../style'
+import { GRID_TEMPLATE, HEADERS } from '../Projects/constants'
 import { Shelf } from './shelf'
 
 

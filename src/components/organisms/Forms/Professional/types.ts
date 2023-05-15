@@ -1,5 +1,5 @@
 import type { Option, SelectOption } from 'components/atoms'
-import { ProjectProps } from 'components/organisms/Tables/Projects/types'
+import { ProjectPropsHours } from 'components/organisms/Tables/Projects/types'
 
 import { PIX_KEY_TYPE } from './constants'
 
@@ -66,7 +66,7 @@ export interface ProfessionalProps {
   permissions: any
   projects: {
     selected: ProjectAttachmentProps
-    attachment: ProjectProps[]
+    attachment: ProjectPropsHours[]
   }
 }
 

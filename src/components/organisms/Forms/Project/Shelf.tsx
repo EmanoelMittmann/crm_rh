@@ -14,11 +14,12 @@ export const Shelf = ({ props, config }: ShelfUserProject) => {
     hours_mounths_estimated,
     hours_mounths_performed,
     extra_hours_performed,
-    jobs,
-    professional,
+   jobs,
+   professional,
     status,
     avatar
   } = props
+  console.log('props: ', props);
 
   return (
     <ContainerShelf template={config.template}>

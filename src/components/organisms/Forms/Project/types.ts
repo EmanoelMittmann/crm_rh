@@ -3,7 +3,6 @@ import { TemplateProps } from 'components/organisms/Tables/types'
 
 export interface TeamMemberProps {
   user_id: number
-  id: number
   job_: number
   name: string
   extra_hours_estimated: number
@@ -15,11 +14,11 @@ export interface TeamMemberProps {
   status: boolean
   jobs: {
     id: number
-    name: string
+    name: Option | null
   }
   professional: {
     id: number
-    name: string
+    name: Option | null
     status: boolean
     avatar: string
   }

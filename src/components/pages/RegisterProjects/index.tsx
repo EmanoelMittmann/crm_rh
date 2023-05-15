@@ -79,22 +79,19 @@ const RegisterProjects = () => {
       name: data.name,
       id: data.id,
       team_cost: data.team_cost,
-      project_status_id: data.project_status_id,
-      project_type_id: data.project_type_id,
+      project_status_id: data.project_status_id?.value,
+      project_type_id: data.project_type_id?.value,
       date_start: data.date_start,
       date_end: data.date_end,
       date_start_performed: data.date_start_performed,
       date_end_performed: data.date_end_performed,
-      usersProjects: {
-        user_id: data.usersProjects?.user_id?.value,
-        extra_hours_estimated:
-          data.usersProjects?.extra_hours_estimated?.value,
-        hours_mounths_estimated:
-          data.usersProjects?.hours_mounths_estimated?.value,
-        avatar: data.usersProjects?.avatar?.value,
-        name: data.usersProjects?.name?.value,
-        job_: data.usersProjects?.job_?.value
-      }
+      user_id: data.usersProjects?.user_id?.value,
+      extra_hours_estimated: data.usersProjects?.extra_hours_estimated?.value,
+      hours_mounths_estimated:data.usersProjects?.hours_mounths_estimated?.value,
+      avatar: data.usersProjects?.avatar?.value,
+      nameUser: data.usersProjects?.name?.value,
+      job_: data.usersProjects?.job_?.value,
+      
     }
     try {
       await api.post(routes.project.register, sanitizeData)

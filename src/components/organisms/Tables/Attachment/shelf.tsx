@@ -1,14 +1,14 @@
 import { Popover } from 'components/molecules'
 import { percentCalculate } from 'components/utils/percentCalculate'
 
-import { ContainerShelf, ContainerShelfColumn, Text } from '../../style'
-import type { ShelfProps } from '../../types'
-import type { ProjectProps } from '../types'
+import { ContainerShelf, ContainerShelfColumn, Text } from '../style'
+import type { ShelfProps } from '../types'
+
 
 export const Shelf = ({
   props,
   config
-}: ShelfProps<ProjectProps>) => {
+}: ShelfProps<any>) => {
   const {
     date_start,
     extra_hours_estimated,
