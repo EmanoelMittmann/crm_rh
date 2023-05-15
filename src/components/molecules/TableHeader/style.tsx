@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { theme } from 'styles'
+
 import { IContainerColumnProps } from 'types'
 
 interface TemplateProps {
@@ -8,7 +9,7 @@ interface TemplateProps {
 
 export const Container = styled.div<TemplateProps>`
   width: 100%;
-  height: 3rem;
+  height: 3.3rem;
   padding: 0 1rem;
   background-color: ${theme.neutrals.gray1};
   margin: auto;

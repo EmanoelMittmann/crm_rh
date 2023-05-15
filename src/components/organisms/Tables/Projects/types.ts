@@ -1,22 +1,11 @@
-import { ProjectProps, UserProjectsProps } from 'types'
-
-import type { TemplateProps } from '../types'
-
-interface OptionsProps {
-  label: string
-  callback: () => void
-}
-
-interface ConfigProps extends TemplateProps {
-  options: OptionsProps[]
-}
-
-export type ShelfProjectsProps = {
-  props: ProjectProps
-  config: ConfigProps
-}
-
-export type ShelfUserProject = {
-  props: UserProjectsProps
-  config: ConfigProps
+export type ProjectProps = {
+  id: number
+  name: string
+  date_start: string //date
+  extra_hours_estimated: number
+  extra_hours_performed: number
+  extra_hours_percent?: number
+  hours_mounths_estimated: number
+  hours_mounths_performed: number
+  hours_mounths_percent?: number
 }

@@ -1,6 +1,9 @@
-import { useContext, useMemo} from 'react'
+import { useContext, useMemo } from 'react'
+import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+
 import { List } from 'contexts'
+
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 import {
@@ -10,16 +13,12 @@ import {
 
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './Shelf'
-import { useFormContext } from 'react-hook-form'
 import { FormProjectProps } from './types'
-
 
 export const ProjectTeam = () => {
   const { watch, setValue } = useFormContext<FormProjectProps>()
   const Team = watch('team', [])
-  const { isLoading, handleOrder } = useContext(
-    List.Project.Context
-  )
+  const { isLoading, handleOrder } = useContext(List.Project.Context)
   const navigate = useNavigate()
 
 
@@ -39,10 +38,7 @@ export const ProjectTeam = () => {
           label: 'Editar',
           callback: () => navigate(`/userProjects/project/${user_id}`)
         }
-      
-    )
   ]
-
 
   const Table = useMemo(() => {
     if (isLoading)

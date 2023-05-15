@@ -1,8 +1,6 @@
 import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { ProjectProps } from 'types'
-
 import { PaginateContext } from 'components/molecules'
 
 import api from 'api'
@@ -16,6 +14,7 @@ import {
   DefaultMetaProps,
   ReactNode
 } from './types'
+import { ProjectProps } from 'types'
 
 export const Context = createContext({} as ContextProjectProps)
 
@@ -44,8 +43,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleFillProject_Status,
     navigateTo,
     handleUpdateStatus,
-    handleUpdateProject,
-
+    handleUpdateProject
   }
 
   function prepareParams(meta: DefaultMetaProps) {
@@ -73,8 +71,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setIsLoading(false)
   }
 
-  async function handleUpdateStatus(id: number, name: string ) {
-    await api.put(routes.project.updateStatusproject(id),{ name: name})
+  async function handleUpdateStatus(id: number, name: string) {
+    await api.put(routes.project.updateStatusproject(id), {
+      name: name
+    })
     fetchListProject()
   }
   async function handleUpdateProject(id: number, name: string) {
@@ -83,9 +83,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function fetchFilters_Projects() {
-    const { data } = await api.get(routes.project_type.list + '?limit=120',{
-      params: { is_active: 1 }
-    })
+    const { data } = await api.get(
+      routes.project_type.list + '?limit=120',
+      {
+        params: { is_active: 1 }
+      }
+    )
 
     setFilterOptionsType({
       project_type: data.data.map(
@@ -98,9 +101,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function fetchFilters_Status() {
-    const { data } = await api.get(routes.status.list + '?limit=120',{
-      params: { is_active: 1 }
-    })
+    const { data } = await api.get(
+      routes.status.list + '?limit=120',
+      {
+        params: { is_active: 1 }
+      }
+    )
     setFilterOptionsStatus({
       status: data.data.map(
         ({ name, id }: { name: string; id: number }) => ({

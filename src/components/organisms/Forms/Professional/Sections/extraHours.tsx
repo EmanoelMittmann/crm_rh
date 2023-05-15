@@ -12,7 +12,7 @@ export const ExtraHours = () => {
   const { register, watch } = useFormContext<FormProps>()
 
   const disableExtraHours =
-    watch('job_type')?.value === KEYS.CONTRACT_TYPE.HORISTA
+    watch('job_type')?.value === KEYS.CONTRACT_TYPE.FREELANCER
   const showLimitSection = Number(watch('extra_hour_activated')) === 1
   const extraHourValue =
     Number(watch('variable2')) / Number(watch('variable1')) || 0

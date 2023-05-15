@@ -1,6 +1,8 @@
 import { useFormContext } from 'react-hook-form'
+
 import { Selects, Inputs } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
+
 import { ProjectTeam } from '../projectTeam'
 import { ContainerRow } from '../style'
 import { FormProjectProps, TeamMemberProps } from '../types'
@@ -47,13 +49,12 @@ export const Team = () => {
       const newTeam = [...currentTeam, newTeamMember];
       console.log('newTeamMember: ', newTeamMember);
 
-      setValue('team', newTeam);
+      setValue('team', newTeam)
     }
   }
 
   return (
     <>
-
       <ContainerRow>
         <h3>Time</h3>
       </ContainerRow>
@@ -61,7 +62,9 @@ export const Team = () => {
         <Selects.Default
           {...register('professional.name', {})}
           onSelect={(value: any) =>
-            setValue('professional.name', value, { shouldValidate: true })
+            setValue('professional.name', value, {
+              shouldValidate: true
+            })
           }
           onClear={() => setValue('professional.name', null)}
           options={options?.professionals}
@@ -105,7 +108,7 @@ export const Team = () => {
           onClick={handleTeam}
         />
       </ContainerRow>
-      <ContainerRow gap="1rem">
+      <ContainerRow gap='1rem'>
         <ProjectTeam />
       </ContainerRow>
     </>

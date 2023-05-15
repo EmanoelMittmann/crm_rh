@@ -1,5 +1,6 @@
 import {Colors} from './Colors'
 import Edit from './Edit'
+import EditorStatus from './EditorStatus'
 import New from './New'
 import Options from './Options'
 import EditorStatus from './EditorStatus'

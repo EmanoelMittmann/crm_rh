@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { theme } from 'styles'
+
 import { IContainerRowProps } from 'types'
 
 export const Main = styled.div`

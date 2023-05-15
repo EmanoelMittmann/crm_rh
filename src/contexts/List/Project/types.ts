@@ -1,4 +1,5 @@
 import type { SelectProps } from '@stardust-ds/react'
+
 import { ProjectProps } from 'types'
 
 export type { ReactNode } from 'react'
@@ -37,5 +38,4 @@ export interface ContextProjectProps {
   handleFillProject_Status(id: number | null): void
   handleUpdateStatus(id: number, name: string): void
   handleUpdateProject(id: number, name: string): void
-
 }

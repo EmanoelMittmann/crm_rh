@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { theme } from 'styles'
-import { IContainerColumnProps } from 'types'
 
 import type { TemplateProps } from './types'
+import { IContainerColumnProps } from 'types'
 
 export const Main = styled.div`
   width: 100%;
@@ -19,10 +19,10 @@ export const ContainerShelf = styled.div<TemplateProps>`
   min-height: 4rem;
   display: grid;
   align-items: center;
-  padding: 10px;
+  padding: 0px 22px;
   border: 1px solid #ccd1d6;
   grid-template-columns: ${({ template }) => template};
-  gap: 1rem;
+  //gap: 1rem;
   color: ${theme.neutrals.gray7};
   overflow-x: auto;
 

@@ -1,41 +1,107 @@
-import { Badge } from '@stardust-ds/react'
 import { Popover } from 'components/molecules'
-import { formatDate } from 'components/utils/formatDate'
+import { percentCalculate } from 'components/utils/percentCalculate'
+
 import { ContainerShelf, ContainerShelfColumn, Text } from '../style'
-import { ShelfProjectsProps } from './types'
+import type { ShelfProps } from '../types'
+import type { ProjectProps } from './types'
 
-export const Shelf = ({ props, config }: ShelfProjectsProps) => {
-  const { id, name, project_type, status, date_start} = props
-
+export const Shelf = ({
+  props,
+  config
+}: ShelfProps<ProjectProps>) => {
+  const {
+    date_start,
+    extra_hours_estimated,
+    extra_hours_performed,
+    extra_hours_percent = undefined,
+    hours_mounths_estimated,
+    hours_mounths_performed,
+    hours_mounths_percent = undefined,
+    name
+  } = props
 
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn>
-        <Text title='1.5em'>{id}</Text>
+      <ContainerShelfColumn justify='start' title={name}>
+        <Text>{name}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn >
-        <Text title='0.5em'>{name}</Text>
+      <ContainerShelfColumn justify='start' title={date_start}>
+        <Text>{date_start}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn >
-        <Text title='0.5em'>{project_type.name}</Text>
+      <ContainerShelfColumn
+        justify='center'
+        title={String(hours_mounths_estimated)}
+      >
+        <Text>{hours_mounths_estimated}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn>
-         <Text>{formatDate(date_start)}</Text>
+      <ContainerShelfColumn
+        justify='center'
+        title={String(hours_mounths_performed)}
+      >
+        <Text>{hours_mounths_performed}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn width='170px'>
-        <Badge
-          style={{ width: '170px', border:"none"}}
-          label={status.name}
-          variant='flat'
-          bgColor={status.color.text_color}
-          typographyProps={{
-            textAlign: 'center',
-            color: status.color.text_color
-          }}
-        />
+      <ContainerShelfColumn
+        justify='center'
+        title={
+          hours_mounths_percent
+            ? String(hours_mounths_percent.toFixed())
+            : String(
+                percentCalculate(
+                  hours_mounths_performed,
+                  hours_mounths_estimated
+                ).toFixed()
+              )
+        }
+      >
+        <Text>
+          {hours_mounths_percent === undefined
+            ? percentCalculate(
+                hours_mounths_performed,
+                hours_mounths_estimated
+              ).toFixed()
+            : hours_mounths_percent.toFixed()}
+          %
+        </Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn justify='center'>
-        <Popover options={config.options} />
+      <ContainerShelfColumn
+        justify='center'
+        title={String(extra_hours_estimated)}
+      >
+        <Text>{extra_hours_estimated}</Text>
+      </ContainerShelfColumn>
+      <ContainerShelfColumn
+        justify='center'
+        title={String(extra_hours_performed)}
+      >
+        <Text>{extra_hours_performed}</Text>
+      </ContainerShelfColumn>
+      <ContainerShelfColumn
+        justify='center'
+        title={
+          extra_hours_percent
+            ? String(extra_hours_percent.toFixed())
+            : String(
+                percentCalculate(
+                  extra_hours_performed,
+                  extra_hours_estimated
+                ).toFixed()
+              )
+        }
+      >
+        <Text>
+          {extra_hours_percent === undefined
+            ? percentCalculate(
+                extra_hours_performed,
+                extra_hours_estimated
+              ).toFixed()
+            : extra_hours_percent.toFixed()}
+          %
+        </Text>
+      </ContainerShelfColumn>
+      <ContainerShelfColumn justify='center' gap='2em'>
+        {config.options.length > 0 && (
+          <Popover options={config.options} />
+        )}
       </ContainerShelfColumn>
     </ContainerShelf>
   )

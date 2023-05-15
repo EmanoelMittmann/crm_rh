@@ -11,11 +11,11 @@ import { Input, Select } from '@stardust-ds/react'
 import { Button } from '@stardust-ds/react'
 import { List } from 'contexts'
 import { theme } from 'styles'
-import { Option } from 'types'
 
 import Close from 'components/atoms/Buttons/Close'
 
 import { ContainerModal, Overlay, Columns, Row } from '../style'
+import { Option } from 'types'
 
 interface IModalColorsProps {
   text?: string

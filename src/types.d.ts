@@ -88,7 +88,8 @@ export interface UserProjectsProps {
   }
 }
 
-export interface ProjectProps {zz
+export interface ProjectProps {
+  zz
   id: number
   name: string
   created_at: string
@@ -140,4 +141,31 @@ interface MyFormProps {
 interface Option {
   label: string
   value: string
+}
+
+interface IProjectsListing
+  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  projects?: string | number | boolean | undefined
+  name?: string | number
+  date_start?: staring
+  status?: string | number | undefined
+  project_type?: string | number | undefined
+  color: string
+  button_color: string
+  text_color: string
+}
+
+interface CNPJValidatorResponse {
+  cnpj: string
+  razao_social: string
+  nome_fantasia: string
+  ddd_telefone_1: string
+  cep: number
+  descricao_tipo_de_logradouro: string
+  logradouro: string
+  numero: string
+  complemento: string
+  bairro: string
+  municipio: string
+  uf: string
 }

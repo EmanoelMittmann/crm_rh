@@ -1,6 +1,5 @@
-import { ISelectProps } from 'types'
-
 import { ContainerSelect, Master, Option } from './style'
+import { ISelectProps } from 'types'
 
 export const Select = ({
   value,

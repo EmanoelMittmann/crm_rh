@@ -38,7 +38,7 @@ export const Bank = () => {
   const pix_key_mask = getMaskFromPixKeyType(
     pix_key_type as getMaskFromTypePIXProps
   )
-
+  const bank_options = watch('options.banks', [])
   return (
     <>
       <ContainerRow>
@@ -70,7 +70,7 @@ export const Bank = () => {
           }
           onClear={() => setValue('professional_data.bank', null)}
           error={errors.professional_data?.bank?.message}
-          options={watch('options.banks')}
+          options={bank_options}
           width={292.5}
           label='Banco'
           placeholder='Selecione'

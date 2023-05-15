@@ -2,12 +2,13 @@ import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
 import {
   ContainerShelf,
-  ContainerShelfColumn,
+  ContainerShelfColumn
 } from 'components/organisms/Tables/style'
+
 import { Image, TeamJobName, Text, TextJob } from './style'
 import { ShelfUserProject } from './types'
 
-export const Shelf = ({ props, config, }: ShelfUserProject) => {
+export const Shelf = ({ props, config }: ShelfUserProject) => {
   const {
     extra_hours_estimated,
     hours_mounths_estimated,
@@ -24,8 +25,8 @@ export const Shelf = ({ props, config, }: ShelfUserProject) => {
       <ContainerShelfColumn gap='.5rem' width='205px'>
         <Image src={avatar} />
         <TeamJobName>
-          <Text >{professional.name?.label}</Text>
-          <TextJob >{jobs.name?.label}</TextJob>
+          <Text>{professional.name?.label}</Text>
+          <TextJob>{jobs.name?.label}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
       <ContainerShelfColumn width='105px'>
@@ -48,7 +49,6 @@ export const Shelf = ({ props, config, }: ShelfUserProject) => {
         <Badge.Status status={status} />
         <Popover options={config.options} />
       </ContainerShelfColumn>
-
     </ContainerShelf>
   )
 }
