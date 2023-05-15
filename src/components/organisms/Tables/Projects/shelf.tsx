@@ -1,9 +1,10 @@
 import { Badge } from '@stardust-ds/react'
 import { Popover } from 'components/molecules'
+import { ShelfProjectsProps } from 'components/organisms/Forms/Project/types'
 
 import { formatDate } from 'components/utils/formatDate'
 import { ContainerShelf, ContainerShelfColumn, Text } from '../style'
-import { ShelfProjectsProps } from './types'
+
 
 export const Shelf = ({ props, config }: ShelfProjectsProps) => {
   const { id, name, project_type, status, date_start } = props

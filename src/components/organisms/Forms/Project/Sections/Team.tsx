@@ -101,7 +101,6 @@ export const Team = () => {
           label='Horas extras estimadas'
           placeholder='Horas extras'
           width={175}
-          required
         />
         <ButtonGeneric
           top='1em'

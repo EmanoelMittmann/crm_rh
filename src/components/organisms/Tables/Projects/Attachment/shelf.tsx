@@ -3,12 +3,12 @@ import { percentCalculate } from 'components/utils/percentCalculate'
 
 import { ContainerShelf, ContainerShelfColumn, Text } from '../../style'
 import type { ShelfProps } from '../../types'
-import type { ProjectPropsHours } from '../types'
+import type { ProjectProps } from '../types'
 
 export const Shelf = ({
   props,
   config
-}: ShelfProps<ProjectPropsHours>) => {
+}: ShelfProps<ProjectProps>) => {
   const {
     date_start,
     extra_hours_estimated,

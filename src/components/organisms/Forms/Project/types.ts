@@ -15,30 +15,30 @@ export interface TeamMemberProps {
   status: boolean
   jobs: {
     id: number
-    name: Option | null
+    name: string
   }
   professional: {
     id: number
-    name: Option | null
+    name: string
     status: boolean
-    avatar: Option | null
+    avatar: string
   }
 }
 
 export interface ProjectProps {
   team: TeamMemberProps[]
-  id: Option | null
-  name: Option | null
-  date_start: Option | null
-  date_end: Option | null
-  date_end_performed: Option | null
+  id: number
+  name: string
+  date_start: string
+  date_end: string
+  date_end_performed: string
   project_status_id: Option | null
   project_type_id: Option | null
-  team_cost: Option | null
-  date_start_performed: Option | null
+  team_cost: string
+  date_start_performed: string
   project_type: {
-    id: Option | null
-    name: Option | null
+    id:number
+    name: string
   }
   status: {
     color: {
@@ -52,7 +52,7 @@ export interface ProjectProps {
     colors_id: number
     created_at: Date
     updated_at: Date
-    name: Option | null
+    name: string
   }
   permissions: any
   projects: {

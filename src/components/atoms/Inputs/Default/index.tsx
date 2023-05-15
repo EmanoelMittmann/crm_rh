@@ -1,21 +1,22 @@
-import React, { forwardRef } from 'react'
-import type { InputHTMLAttributes } from 'react'
-import ReactDOMServer from 'react-dom/server'
-
-import { Input } from '@stardust-ds/react'
-import type { InputProps } from '@stardust-ds/react'
-import { theme } from 'styles'
-
-import { Main, RequiredLabel } from './style'
+import { forwardRef } from 'react';
+import type { InputHTMLAttributes } from 'react';
+import { Input } from '@stardust-ds/react';
+import type { InputProps } from '@stardust-ds/react';
+import { Main, RequiredLabel, Label } from './style';
 
 type Props = InputProps &
   InputHTMLAttributes<HTMLInputElement> & {
-    error?: string
-  }
+    error?: string;
+    required?: boolean;
+  };
 
-export default forwardRef(({ error, ...props }: Props, ref) => {
+export default forwardRef(({ error, label, required, ...props }: Props, ref) => {
   return (
     <Main w={(props?.width as string) ?? '100%'}>
+      <Label>
+        {label}
+        {required && <RequiredLabel>*</RequiredLabel>}
+      </Label>
       <Input
         {...props}
         ref={ref}
@@ -23,5 +24,5 @@ export default forwardRef(({ error, ...props }: Props, ref) => {
         helperText={error ?? props.helperText}
       />
     </Main>
-  )
-})
+  );
+});
