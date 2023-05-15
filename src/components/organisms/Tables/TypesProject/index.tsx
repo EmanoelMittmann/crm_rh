@@ -4,10 +4,9 @@ import { List } from 'contexts'
 
 import { Loading } from 'components/atoms'
 import {
-  IHandleModalPropsEdit,
   TableHeader
 } from 'components/molecules'
-import { Modal } from 'components/molecules/Modais'
+import { IHandleModalPropsEdit, Modal } from 'components/molecules/Modais'
 
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE } from './contants'

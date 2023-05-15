@@ -21,6 +21,7 @@ const RegisterProjects = () => {
     defaultValues: {},
     resolver: yupResolver(validationSchema),
     shouldFocusError: true,
+
   });
 
 
@@ -69,18 +70,19 @@ const RegisterProjects = () => {
 
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
-      ...data,
-      team_cost: data.team_cost?.value,
+      name: data.name,
+      id: data.id,
+      team_cost: data.team_cost,
       project_status_id: data.project_status_id?.value,
       project_type_id: data.project_type_id?.value,
-      date_start: data.date_start?.value,
-      date_end: data.date_end?.value,
-      date_start_performed: data.date_start_performed?.value,
-      date_end_performed: data.date_end_performed?.value,
+      date_start: data.date_start,
+      date_end: data.date_end,
+      date_start_performed: data.date_start_performed,
+      date_end_performed: data.date_end_performed,
       usersProjects:{
         user_id: data.usersProjects?.user_id?.value,
-        extra_hours_estimated: data.usersProjects?.extra_hours_estimated?.value,
-        hours_mounths_estimated: data.usersProjects?.hours_mounths_estimated?.value,
+        extra_hours_estimated: data.usersProjects?.extra_hours_estimated,
+        hours_mounths_estimated: data.usersProjects?.hours_mounths_estimated,
         avatar: data.usersProjects?.avatar?.value,
         name: data.usersProjects?.name?.value,
         job_: data.usersProjects?.job_?.value,
@@ -90,10 +92,12 @@ const RegisterProjects = () => {
     try {
       await api.post(routes.project.register, sanitizeData);
       navigate('/project');
+      toast({ type: 'success', title: 'Projeto cadastrado com sucesso!' });
     } catch (error) {
       console.error(error);
-      OnError(error);
+      OnError(error)
     }
+    console.log('methods: ', methods);
   }
 
 
@@ -101,10 +105,9 @@ const RegisterProjects = () => {
     if (!validationSchema) {
       setIsSaving(true);
 
-      methods.handleSubmit(onSubmit, OnError)();
-      setIsSaving(false);
+     await methods.handleSubmit(onSubmit, OnError)();
+     setIsSaving(false);
     }
-
   }
 
   function handleCancel() {
@@ -121,6 +124,7 @@ const RegisterProjects = () => {
         position: 'bottom-right'
       })
     }
+    console.log('error: ', error);
   }
 
 

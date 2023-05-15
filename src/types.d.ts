@@ -72,8 +72,7 @@ interface IModalProps {
 }
 
 export interface UserProjectsProps {
-  id: number
-  user_id: string
+  user_id: number
   extra_hours_estimated: string
   extra_hours_performed: string
   hours_mounths_estimated: string

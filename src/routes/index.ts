@@ -41,6 +41,7 @@ export const routes = {
 
   usersProjects: {
     list: '/userProjects/project',
+    updateUserProject: (id: number) => `/userProjects/project${id}`,
     register: '/userProjects/project'
   },
 

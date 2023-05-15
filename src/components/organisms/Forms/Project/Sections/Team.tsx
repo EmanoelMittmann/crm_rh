@@ -6,6 +6,7 @@ import { ContainerRow } from '../style'
 import { FormProjectProps, TeamMemberProps } from '../types'
 
 
+
 export const Team = () => {
   const {
     register,
@@ -17,10 +18,11 @@ export const Team = () => {
 
   const options = watch('options')
 
+
   const handleTeam = () => {
     const professional = watch('professional');
     const id = watch('options.professionals');
-    const avatar = watch('professional.avatar.label');
+    const avatar = watch('professional.avatar');
     const jobs = watch('jobs');
     const hours_mounths_estimated = watch('usersProjects.hours_mounths_estimated');
     const extra_hours_estimated = watch('usersProjects.extra_hours_estimated');
@@ -30,19 +32,20 @@ export const Team = () => {
 
     if (professional && jobs) {
       const newTeamMember = {
-        id,
+        user_id: id,
         professional,
         jobs,
         hours_mounths_estimated,
         extra_hours_estimated,
-        hours_mounths_performed: hours_mounths_performed ? hours_mounths_performed : 0,
-        extra_hours_performed: extra_hours_performed ? extra_hours_performed : 0,
+        hours_mounths_performed: null,
+        extra_hours_performed: null,
         status:{label: status ? status : 'Ativo'},
-        avatar: avatar ? avatar : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
+        avatar: avatar ? avatar : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png',
       } as unknown as TeamMemberProps;
 
       const currentTeam = getValues('team') || [];
       const newTeam = [...currentTeam, newTeamMember];
+      console.log('newTeamMember: ', newTeamMember);
 
       setValue('team', newTeam);
     }

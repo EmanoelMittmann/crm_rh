@@ -20,7 +20,7 @@ export const Shelf = ({ props, config }: ShelfProjectsProps) => {
         <Text title='0.5em'>{project_type.name}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn>
-        <Text>{formatDate(date_start)}</Text>
+         <Text>{formatDate(date_start)}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn width='170px'>
         <Badge

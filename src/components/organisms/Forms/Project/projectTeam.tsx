@@ -24,12 +24,12 @@ export const ProjectTeam = () => {
 
 
 
-  const POPOVER_OPTIONS = (id: number, status: any) => [
-    id ? (
+  const POPOVER_OPTIONS = (user_id: number, status: any) => [
+    user_id ? (
       {
         label: 'Remover',
         callback: () => {
-          const newTeam = Team.filter((item) => item.id !== id)
+          const newTeam = Team.filter((item) => item.user_id !== user_id)
           setValue('team', newTeam)
         }
       }
@@ -37,7 +37,7 @@ export const ProjectTeam = () => {
     ) : (
         {
           label: 'Editar',
-          callback: () => navigate(`/userProjects/project/${id}`)
+          callback: () => navigate(`/userProjects/project/${user_id}`)
         }
       
     )
@@ -54,10 +54,10 @@ export const ProjectTeam = () => {
 
     return Team.map((props) => (
       <Shelf
-        key={props.id}
+        key={props.user_id}
         config={{
           template: GRID_TEMPLATE,
-          options: POPOVER_OPTIONS(props.id, props.is_active)
+          options: POPOVER_OPTIONS(props.user_id, props.is_active)
         }}
         {...{ props }}
       />
