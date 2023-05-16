@@ -48,9 +48,7 @@ export const Professionals = () => {
           onClear={() => handleFillJob(null)}
         />
       </Container>
-      <Button.New
-        onClick={() => navigateTo('/RegisterProfessionals')}
-      />
+      <Button.New onClick={() => navigateTo('/professional/new')} />
     </Main>
   )
 }
