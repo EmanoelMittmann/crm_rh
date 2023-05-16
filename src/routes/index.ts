@@ -21,7 +21,8 @@ export const routes = {
 
   project: {
     list: '/project?limit=5',
-    updateStatus: (id: number) => `/user/updateStatus/${id}`,
+    updateStatusproject: (id: number) => `/updateStatusProject/${id}`,
+    updateProject: (id: number) => `/project/${id}`,
     register: '/project'
   },
 
@@ -38,7 +39,7 @@ export const routes = {
     updateStatus: `updateProjectStatus`
   },
 
-  user_projects: {
+  usersProjects: {
     list: '/userProjects/project',
     register: '/userProjects/project'
   },

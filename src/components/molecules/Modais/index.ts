@@ -2,7 +2,8 @@ import { Colors } from './Colors'
 import Edit from './Edit'
 import New from './New'
 import Options from './Options'
-export const Modal = Object.assign({}, { Options, Edit, New, Colors })
+import EditorStatus from './EditorStatus'
+export const Modal = Object.assign({}, { Options, Edit, New, EditorStatus })
 
 export type { IHandleModalPropsEdit } from './Edit'
 export type { IHandleModalPropsNew } from './New'

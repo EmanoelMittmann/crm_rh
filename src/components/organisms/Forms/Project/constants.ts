@@ -12,4 +12,4 @@ export const HEADERS = [
 ] as HeaderProps[]
 
 export const GRID_TEMPLATE =
-  '.7fr 0.5fr 0.5fr 0.2fr 0.4fr .5fr 0.3fr 0.4fr'
+  '.7fr 0.5fr 0.5fr 0.2fr 0.3fr .5fr 0.2fr 0.5fr'

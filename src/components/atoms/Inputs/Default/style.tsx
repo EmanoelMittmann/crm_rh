@@ -12,3 +12,6 @@ export const Main = styled.div<{ w: string }>`
     color: ${theme.neutrals.gray6} !important;
   } */
 `
+export const RequiredLabel = styled.span`
+    color: red;
+`

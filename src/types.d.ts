@@ -89,7 +89,7 @@ export interface UserProjectsProps {
   }
 }
 
-export interface ProjectProps {
+export interface ProjectProps {zz
   id: number
   name: string
   created_at: string
@@ -98,11 +98,14 @@ export interface ProjectProps {
   date_end: string
   date_end_performed: string
   project_status_id: number
+  project_type_id: number
   project_type: {
+    map: any
     id: string
     name: string
   }
   status: {
+    map(arg0: (status: any) => { label: any; value: any })
     color: {
       button_color: string
       text_color: string
