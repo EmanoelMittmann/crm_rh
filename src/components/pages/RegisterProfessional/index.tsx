@@ -7,7 +7,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 
 import { useParams } from 'react-router-dom'
 
-import { Loading } from 'components/atoms'
+import { Button, Loading } from 'components/atoms'
 import { Form, FormProps } from 'components/organisms'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
 
@@ -18,25 +18,20 @@ import { useDebounce } from 'hooks'
 
 import {
   fetchProps,
-  getCompanies,
-  getPermissionsId,
   handleCEP,
   handleCNPJ,
   handleCPF,
   handlePopulateFields,
-  handleRemoveSpecialCharacters,
-  setLimitedExtraHoursToBoolean
+  handleRemoveSpecialCharacters
 } from './logic'
-//import { payload } from './payload'
 import { Container } from './style'
 
 const RegisterProfessional = () => {
-  const [payload, setPayload] = useState({} as any)
+  //const [payload, setPayload] = useState({} as any)
   const [isLoading, setIsLoading] = useState(true)
 
   const methods = useForm<FormProps['Professional']>({
     defaultValues: {
-      ...(payload as any),
       commission: false,
       extra_hour_activated: false
     }
@@ -45,8 +40,9 @@ const RegisterProfessional = () => {
   const CPF = methods.watch('cpf')
   const CEP = methods.watch('cep')
   const CNPJ = methods.watch('professional_data.cnpj')
+  const { id } = useParams()
 
-  // TODO: [] Limpar campos com máscara;
+  // TODO: [x] Limpar campos com máscara;
   //       [] Tratar retorno de error e passa - los para: methods.setErrors();
 
   async function onSubmit(data: FormProps['Professional']) {
@@ -125,9 +121,13 @@ const RegisterProfessional = () => {
       projects: data.projects.attachment
     }
     console.log(payload)
-    await api.post(routes.professional.register, payload)
+    id
+      ? await api.put(
+          routes.professional.getUser(Number(id)),
+          payload
+        )
+      : await api.post(routes.professional.register, payload)
   }
-  const { id } = useParams()
 
   useDebounce({
     fn: () => {
@@ -203,7 +203,11 @@ const RegisterProfessional = () => {
             ) : (
               <Form.Professional />
             )}
-            <button type='submit'>salvar</button>
+            <Button.Updade
+              type='submit'
+              saveButtonName='Salvar Profissional'
+              cancelButtonName='cancelar'
+            />
           </form>
         </FormProvider>
       </CreateTemplate>
