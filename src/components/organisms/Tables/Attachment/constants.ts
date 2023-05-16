@@ -1,4 +1,3 @@
-
 export const GRID_TEMPLATE =
   '1fr 1fr .8fr .8fr .3fr .8fr .8fr .3fr .2fr ' //'repeat(9, 1fr)'
 export const HEADERS = [
