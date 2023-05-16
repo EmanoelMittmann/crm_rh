@@ -19,7 +19,6 @@ export const Projects = () => {
     handleOrder,
     isLoading,
     handleUpdateStatus,
-
   } = useContext(List.Project.Context)
 
   const POPOVER_OPTIONS = (id: number, status: any, name: string) => [
@@ -72,7 +71,4 @@ export const Projects = () => {
   )
 }
 
-function UpdateProject(id: number, name: string) {
-  throw new Error('Function not implemented.')
-}
 
