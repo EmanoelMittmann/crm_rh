@@ -8,10 +8,10 @@ import {
   Main
 } from 'components/organisms/Tables/style'
 
-import { GRID_TEMPLATE, HEADERS } from './constants'
+import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
 import { Shelf } from './Shelf'
 import { useFormContext } from 'react-hook-form'
-import { FormProjectProps } from './types'
+import { FormProjectProps } from '../../Forms/Project/types'
 
 
 export const ProjectTeam = () => {

@@ -43,7 +43,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleFillProject_Status,
     navigateTo,
     handleUpdateStatus,
-    handleUpdateProject
   }
 
   function prepareParams(meta: DefaultMetaProps) {
@@ -75,10 +74,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     await api.put(routes.project.updateStatusproject(id), {
       name: name
     })
-    fetchListProject()
-  }
-  async function handleUpdateProject(id: number, name: string) {
-    await api.put(routes.project.updateProject(id), { name: name })
     fetchListProject()
   }
 

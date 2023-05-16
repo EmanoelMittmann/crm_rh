@@ -19,13 +19,14 @@ export const Projects = () => {
     handleOrder,
     isLoading,
     handleUpdateStatus,
-    handleUpdateProject
+
   } = useContext(List.Project.Context)
 
   const POPOVER_OPTIONS = (id: number, status: any, name: string) => [
     {
       label: 'Editar Projeto',
-      callback: () => handleUpdateProject(id, name)
+      callback: () => navigateTo(`/project/${id}`)
+
     },
     {
       label: 'Editar Status',
@@ -69,5 +70,9 @@ export const Projects = () => {
       {Table}
     </Main>
   )
+}
+
+function UpdateProject(id: number, name: string) {
+  throw new Error('Function not implemented.')
 }
 

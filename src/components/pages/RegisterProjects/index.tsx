@@ -1,13 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from '@stardust-ds/react'
 
-import { Button } from 'components/atoms'
+import { Button, Loading } from 'components/atoms'
 import { Form, FormProjectProps } from 'components/organisms'
-import { validationSchema } from 'components/organisms/Forms/Project/logic'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
 
 import api from 'api'
@@ -16,9 +15,13 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 
 import { ProjectProps } from 'types'
+import { Container } from './style'
+import { validationSchema } from 'components/organisms/Forms/Project/logic'
+import { handlePopulateFields } from './logic'
 
 const RegisterProjects = () => {
   const [isSaving, setIsSaving] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate()
 
   const methods = useForm<FormProjectProps['Project']>({
@@ -102,7 +105,7 @@ const RegisterProjects = () => {
     }
     console.log('methods: ', methods)
   }
-
+  const { id } = useParams()
   const handleSave = async () => {
     if (!validationSchema) {
       setIsSaving(true)
@@ -139,21 +142,58 @@ const RegisterProjects = () => {
     listener: []
   })
 
+  useEffect(() => {
+    let isMounted = true;
+
+    if (id) {
+      setIsLoading(true); 
+
+      api
+        .get(routes.project.updateProject(+id))
+        .then(({ data }) => {
+          if (isMounted && data) { 
+            handlePopulateFields(data, methods);
+          }
+        })
+        .catch((error) => {
+          console.error('Erro ao buscar projeto:', error);
+        })
+        .finally(() => {
+          if (isMounted) {
+            setIsLoading(false);
+          }
+        });
+    } else {
+      setIsLoading(false);
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
+
+
   return (
     <>
       <AuthTemplate>
-        <CreateTemplate title='Cadastrar novo projeto'>
-          <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit, OnError)}>
-              <Form.Project />
-              <Button.Updade
-                onSave={handleSave}
-                onCancel={handleCancel}
-                saveButtonName='Salvar Projeto'
-                cancelButtonName='cancelar'
-                disabled={isSaving}
-              />
-            </form>
+        <CreateTemplate title={!!id ? 'Editar Projeto ' : 'Cadastrar novo projeto'}>
+            <FormProvider {...methods}>
+              <form onSubmit={methods.handleSubmit(onSubmit, OnError)}>
+                {isLoading ? (
+                  <Container>
+                    <Loading />
+                  </Container>
+                ) : (
+                    <Form.Project />
+                )}
+                <Button.Updade
+                  onSave={handleSave}
+                  onCancel={handleCancel}
+                  saveButtonName='Salvar Projeto'
+                  cancelButtonName='cancelar'
+                  disabled={isSaving}
+                />
+              </form>
           </FormProvider>
         </CreateTemplate>
       </AuthTemplate>

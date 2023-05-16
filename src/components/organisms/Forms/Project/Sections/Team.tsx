@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form'
 import { Selects, Inputs } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 
-import { ProjectTeam } from '../projectTeam'
+import { ProjectTeam } from '../../../Tables/Team/constants'
 import { ContainerRow } from '../style'
 import { FormProjectProps, TeamMemberProps } from '../types'
 
