@@ -45,10 +45,18 @@ export const routes = {
 
   color: {
     list: '/color'
+  },
+
+  company: {
+    list: '/companies',
+    filter: '/findCompanies',
+    updateStatus: (id: number) => `companie/updateStatus/${id}`
   }
 }
 
 export const externRoutes = {
   banks: 'https://brasilapi.com.br/api/banks/v1',
-  cep: (search: string) => ` https://viacep.com.br/ws/${search}/json/`
+  cep: (search: string) =>
+    ` https://viacep.com.br/ws/${search}/json/`,
+  uf: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
 }

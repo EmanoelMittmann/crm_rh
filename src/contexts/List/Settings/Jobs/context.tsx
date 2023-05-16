@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { toast } from '@stardust-ds/react'
+import { title } from 'process'
 
 import { PaginateContext } from 'components/molecules'
 
@@ -89,8 +90,21 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function handleUpdateJob(id: number, name: string) {
-    await api.put(routes.job.updateJob(id), { name: name })
-    fetchList()
+    try {
+      await api.put(routes.job.updateJob(id), { name: name })
+      toast({
+        type: 'success',
+        title: 'Cargo atualizado',
+        position: 'bottom-right'
+      })
+      fetchList()
+    } catch (error) {
+      toast({
+        type: 'error',
+        title: 'Cargo ja existente',
+        position: 'bottom-right'
+      })
+    }
   }
 
   async function handleUpdateStatus(id: number) {
@@ -103,16 +117,14 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       await api.post(routes.job.list, { name: name })
       toast({
         type: 'success',
-        title: ' ',
-        description: 'Cargo cadastrado',
+        title: 'Cargo cadastrado',
         position: 'bottom-right'
       })
       fetchList()
     } catch (error) {
       toast({
         type: 'error',
-        title: ' ',
-        description: 'O cargo ja existe',
+        title: 'O Cargo ja existe',
         position: 'bottom-right'
       })
     }
