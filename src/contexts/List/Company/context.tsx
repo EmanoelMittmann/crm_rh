@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { toast } from '@stardust-ds/react'
@@ -39,23 +39,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleRegistration,
     handleTypeCompany
   }
-
-  async function fetchList() {
-    setIsLoading(true)
-    try {
-      const { data } = await api.get(routes.company.list)
-      setCompanys(data?.data)
-      setMeta((old) => ({
-        ...old,
-        paginate: { ...old.paginate, last_page: data.meta.last_page }
-      }))
-    } catch (error) {
-      console.error(error)
-    }
-    setIsLoading(false)
-  }
-
-  async function listFilterFetch() {
+  const listFilterFetch = useCallback(async () => {
     setIsLoading(true)
     try {
       const { data } = await api.get(routes.company.filter, {
@@ -80,7 +64,19 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error(error)
     }
-  }
+    setIsLoading(false)
+  }, [
+    meta.search,
+    meta.cityName,
+    meta.cnpj,
+    meta.order,
+    meta.razaoSocial,
+    meta.paginate.current_page,
+    meta.referencesDate,
+    meta.registrationStatus,
+    meta.typeCompany,
+    meta.uf
+  ])
 
   async function fetchFilters() {
     const { data: states } = await api.get(externRoutes.uf)
@@ -168,10 +164,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  // useDebounce({
-  //   fn: fetchFilters,
-  //   listener: []
-  // })
+  useDebounce({
+    fn: listFilterFetch,
+    listener: [listFilterFetch]
+  })
 
   return (
     <Context.Provider value={contextProps}>
