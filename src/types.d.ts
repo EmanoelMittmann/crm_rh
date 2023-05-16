@@ -1,7 +1,8 @@
-import { TeamMemberProps } from "components/organisms/Forms/Project/types"
+import { ReactElement, SVGProps } from 'react'
+
+import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
 
 declare module '*.svg' {
-  import { ReactElement, SVGProps } from 'react'
   const content: (props: SVGProps<SVGElement>) => ReactElement
   export default content
 }

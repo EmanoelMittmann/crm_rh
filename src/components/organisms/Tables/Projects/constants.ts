@@ -6,8 +6,6 @@ export const HEADERS = [
   { field: 'project_type_id', label: 'Tipo' },
   { field: 'date_start', label: 'Data inicial', on: true },
   { field: 'project_status_id', label: 'Status' }
-
 ] as HeaderProps[]
-
 
 export const GRID_TEMPLATE = '1fr 1fr 1.5fr 1fr 1fr 1fr'

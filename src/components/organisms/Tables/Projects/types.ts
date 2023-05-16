@@ -1,7 +1,6 @@
 import type { Option, SelectOption } from 'components/atoms'
 import { TemplateProps } from 'components/organisms/Tables/types'
 
-
 export interface TeamMemberProps {
   user_id: number
   id: number
@@ -11,7 +10,7 @@ export interface TeamMemberProps {
   hours_mounths_estimated: number
   hours_mounths_performed: number
   extra_hours_performed: number
-  is_active: boolean;
+  is_active: boolean
   avatar: string
   status: boolean
   jobs: {
@@ -24,7 +23,6 @@ export interface TeamMemberProps {
     status: boolean
     avatar: string
   }
-
 }
 
 export interface ProjectProps {
@@ -143,19 +141,6 @@ export type ShelfUserProject = {
 
 export interface FormProjectProps
   extends ProjectProps,
-  FormConfigProps { }
+    FormConfigProps {}
 
 export type { SelectOption }
-
-
-export type ProjectPropsHours = {
-  id: number
-  name: string
-  date_start: string //date
-  extra_hours_estimated: number
-  extra_hours_performed: number
-  extra_hours_percent?: number
-  hours_mounths_estimated: number
-  hours_mounths_performed: number
-  hours_mounths_percent?: number
-}

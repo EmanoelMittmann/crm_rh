@@ -1,15 +1,17 @@
 import { useContext, useMemo, useRef } from 'react'
+
 import { List } from 'contexts'
+
 import { Loading } from 'components/atoms'
 import {
   TableHeader,
   IHandleModalStatusProps
 } from 'components/molecules'
 import { Modal } from 'components/molecules/Modais'
-import { LoadingWrapper, Main } from '../style'
-import { Shelf } from './shelf'
-import { GRID_TEMPLATE, HEADERS } from './constants'
 
+import { LoadingWrapper, Main } from '../style'
+import { GRID_TEMPLATE, HEADERS } from './constants'
+import { Shelf } from './shelf'
 
 export const Projects = () => {
   const modalRef = useRef<IHandleModalStatusProps>(null)
@@ -70,4 +72,3 @@ export const Projects = () => {
     </Main>
   )
 }
-
