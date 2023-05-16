@@ -6,7 +6,7 @@ import { Inputs, Selects } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import InputTag from 'components/molecules/InputTag'
 import { Table } from 'components/organisms/Tables'
-import { ProjectPropsHours } from 'components/organisms/Tables/Projects/types'
+import { ProjectPropsHours } from 'components/organisms/Tables/Attachment/types'
 
 import { ContainerRow } from '../style'
 import type { FormProps } from '../types'
@@ -23,7 +23,7 @@ export const Project = () => {
       name,
       date_start: new Date().toLocaleDateString('pt-BR'),
       extra_hours_estimated:
-        Number(watch('projects.selected.input2')) || 0,
+        Number(watch('projects.selected.input1')) || 0,
       hours_mounths_estimated:
         Number(watch('projects.selected.input1')) || 0,
       extra_hours_performed: 0,
@@ -75,7 +75,7 @@ export const Project = () => {
         />
       </ContainerRow>
       <ContainerRow>
-        <Table.Projects />
+        <Table.Attachment />
       </ContainerRow>
       <ContainerRow
         style={{ display: 'flex', flexDirection: 'column' }}

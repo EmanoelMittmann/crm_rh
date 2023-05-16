@@ -14,35 +14,34 @@ export const Shelf = ({ props, config }: ShelfUserProject) => {
     hours_mounths_estimated,
     hours_mounths_performed,
     extra_hours_performed,
-   jobs,
-   professional,
+    jobs,
+    professional,
     status,
     avatar
   } = props
-  console.log('props: ', props);
 
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn gap='.5rem' width='205px'>
+      <ContainerShelfColumn gap='.5rem' width='210px'>
         <Image src={avatar} />
         <TeamJobName>
           <Text>{professional.name?.label}</Text>
           <TextJob>{jobs.name?.label}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
-      <ContainerShelfColumn width='105px'>
+      <ContainerShelfColumn width='130px'>
         <Text>{hours_mounths_estimated}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='110px'>
+      <ContainerShelfColumn width='120px'>
         <Text>{extra_hours_estimated}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='100px'>
+      <ContainerShelfColumn width='140px'>
         <Text>{hours_mounths_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='110px'>
+      <ContainerShelfColumn width='120px'>
         <Text>{extra_hours_performed}</Text>
       </ContainerShelfColumn>
 

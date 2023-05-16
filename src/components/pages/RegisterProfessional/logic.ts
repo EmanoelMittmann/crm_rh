@@ -197,7 +197,7 @@ export function handlePopulateFields(
   data: any,
   methods: UseFormReturn<FormProps['Professional'], any>
 ) {
-  console.log(data)
+
   methods.reset({
     name: data.name,
     cpf: data.cpf,

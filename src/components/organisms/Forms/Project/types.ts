@@ -71,8 +71,8 @@ export interface ProjectProps {
   }
   usersProjects: {
     user_id: Option | null
-    extra_hours_estimated: Option | null
-    extra_hours_performed: Option | null
+    extra_hours_estimated: number
+    extra_hours_performed: number
     hours_mounths_estimated: Option | null
     hours_mounths_performed: Option | null
     avatar: Option | null

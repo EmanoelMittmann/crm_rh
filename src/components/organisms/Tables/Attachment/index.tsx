@@ -1,16 +1,16 @@
-import { useMemo} from 'react'
+import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
+
 import { Loading } from 'components/atoms'
-import {TableHeader} from 'components/molecules'
+import { TableHeader } from 'components/molecules'
 import { FormProps } from 'components/organisms/Forms/Professional/types'
 import { percentCalculate } from 'components/utils/percentCalculate'
-import { LoadingWrapper, Main } from '../style'
-import { GRID_TEMPLATE, HEADERS } from '../Projects/constants'
+
+import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './shelf'
+import { LoadingWrapper, Main } from '../style'
 
-
-
-export const Projects = () => {
+export const Attachment = () => {
   const { watch, setValue } = useFormContext<FormProps>()
 
   const attachment = watch('projects.attachment', [])

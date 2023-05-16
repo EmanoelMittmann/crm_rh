@@ -34,7 +34,7 @@ export const OPTIONS = [
     <IconProfessional />,
     'professionals'
   ),
-  createNavOption('Projetos', <IconProjects />, 'project'),
+  createNavOption('Projetos', <IconProjects />, 'projects'),
   createNavOption('Horas Extras', <IconHours />, 'extrasHours'),
   createNavOption('Notas Fiscais', <IconNotes />, 'notes'),
   createNavOption('Relatórios', <IconReports />, 'reports'),

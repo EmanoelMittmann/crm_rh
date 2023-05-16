@@ -1,5 +1,5 @@
 import type { Option, SelectOption } from 'components/atoms'
-import { ProjectPropsHours } from 'components/organisms/Tables/Projects/types'
+import { ProjectPropsHours } from 'components/organisms/Tables/Attachment/types'
 
 import { PIX_KEY_TYPE } from './constants'
 
