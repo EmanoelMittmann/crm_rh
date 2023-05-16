@@ -51,6 +51,7 @@ export async function fetchPropsProject(
       label: user_project.name,
       value: user_project.id
     }))
+  
   } as FormProjectProps['Project']['options'])
 }
 
@@ -65,11 +66,20 @@ export function handlePopulateFields(
     name: data.name,
     project_status_id: data.project_status_id.value,
     project_type_id: data.project_type_id.value,
-    date_start: data.date_start,
-    date_end: data.date_end,
-    date_start_performed: data.date_start_performed,
-    date_end_performed: data.date_end_performed,
+    date_start: data.date_start.value,
+    date_end: data.date_end.value,
+    date_start_performed: data.date_start_performed.value,
+    date_end_performed: data.date_end_performed.value,
     team_cost: data.team_cost,
-    usersProjects: data.team,
+  
+    usersProjects: {
+      user_id: data.user_id,
+      name: data.name,
+      job_id: data.job_id,
+      job_: data.job_,
+      extra_hours_estimated: data.extra_hours_estimated,
+      extra_hours_performed: data.extra_hours_performed,
+      status: data.status, 
+    },
   })
 }

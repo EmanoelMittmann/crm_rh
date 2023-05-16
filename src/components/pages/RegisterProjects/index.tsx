@@ -31,12 +31,13 @@ const RegisterProjects = () => {
       name: data.name,
       id: data.id,
       team_cost: Number(data.team_cost),
-      project_status_id: data.project_status_id?.value,
-      project_type_id: data.project_type_id?.value,
-      date_start: data.date_start,
-      date_end: data.date_end,
-      date_start_performed: data.date_start_performed,
-      date_end_performed: data.date_end_performed,
+      project_status_id: Number(data.project_status_id?.value),
+      project_type_id: Number(data.project_type_id?.value),
+      date_start: new Date(data.date_start),
+      date_end: new Date(data.date_end),
+      date_start_performed: new Date(data.date_start_performed),
+      date_end_performed: new Date(data.date_end_performed),
+     
       usersProjects: data.team,
 
     }

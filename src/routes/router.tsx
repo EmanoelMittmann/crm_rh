@@ -28,7 +28,7 @@ const Router = () => {
             <Route path=':id' element={<RegisterProfessional />} />
           </Route>
 
-          <Route path='/projects' element={<Projects />} />
+          <Route path='/project' element={<Projects />} />
           <Route path='/project'>
             <Route path='new' element={<RegisterProjects />} />
             <Route path=':id' element={<RegisterProjects />} />
