@@ -56,7 +56,6 @@ const RegisterProjects = () => {
       console.error(error)
       OnError(error)
     }
-    console.log('methods: ', methods)
   }
 
   const { id } = useParams()
@@ -88,7 +87,6 @@ const RegisterProjects = () => {
         position: 'bottom-right'
       })
     }
-    console.log('error: ', error)
   }
 
   useDebounce({

@@ -48,11 +48,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           order: meta.order,
           page: meta.paginate.current_page,
           razao_social: meta.razaoSocial,
+          orderField: meta.orderField,
           cnpj: meta.cnpj,
           city_name: meta.cityName,
           referencesDate: meta.referencesDate,
           uf: meta.uf,
-          registration_status: meta.registrationStatus,
+          status: meta.registrationStatus,
           type_company: meta.typeCompany
         }
       })
@@ -70,6 +71,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     meta.cityName,
     meta.cnpj,
     meta.order,
+    meta.orderField,
     meta.razaoSocial,
     meta.paginate.current_page,
     meta.referencesDate,
@@ -120,6 +122,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   function handleOrder(field: string) {
     setMeta((old) => ({
       ...old,
+      orderField: field,
       order: old.order === 'ASC' ? 'DESC' : 'ASC'
     }))
   }
@@ -135,7 +138,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   function handleSearch(text: string) {
     setMeta((old) => ({
       ...old,
-      text,
+      cityName: text,
+      cnpj: text,
+      razaoSocial: text,
+      search: text,
       paginate: { ...old.paginate, current_page: 1 }
     }))
   }
@@ -163,6 +169,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       paginate: { ...old.paginate, current_page: 1 }
     }))
   }
+  useDebounce({
+    fn: fetchFilters,
+    listener: []
+  })
 
   useDebounce({
     fn: listFilterFetch,

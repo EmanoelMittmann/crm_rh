@@ -58,7 +58,6 @@ export const Team = () => {
 
       const currentTeam = getValues('team') || []
       const newTeam = [...currentTeam, newTeamMember]
-      console.log('newTeamMember: ', newTeamMember)
 
       setValue('team', newTeam)
     }

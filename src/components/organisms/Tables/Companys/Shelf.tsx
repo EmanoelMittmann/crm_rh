@@ -9,22 +9,22 @@ import { ShelfProps } from './types'
 export const Shelf = ({ config, props }: ShelfProps) => {
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn title={props.razao_social} left='1em'>
+      <ContainerShelfColumn title={props.razao_social}>
         {props.razao_social}
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={props.cnpj} left='0.5em'>
+      <ContainerShelfColumn title={props.cnpj} left='0.2em'>
         {props.cnpj}
       </ContainerShelfColumn>
       <ContainerShelfColumn title={props.opening_date} left='0.5em'>
         {formatDate(props.opening_date)}
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={props.city_name}>
+      <ContainerShelfColumn title={props.city_name} left='0.5em'>
         {props.city_name}
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={props.type_company}>
+      <ContainerShelfColumn title={props.type_company} left='0.5em'>
         {TypesCompanys(props.type_company)}
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={props.uf}>
+      <ContainerShelfColumn title={props.uf} left='0.7em'>
         {props.uf}
       </ContainerShelfColumn>
       <ContainerShelfColumn

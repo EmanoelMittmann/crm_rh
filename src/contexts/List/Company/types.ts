@@ -35,9 +35,9 @@ export interface ContextCompanyProps {
   handleOrder(field: string): void
   handleUpdateStatus(id: number): void
   handleDateReference(date: string): void
-  handleUf(uf: string): void
-  handleRegistration(status: string): void
-  handleTypeCompany(type: string): void
+  handleUf(uf: string | null): void
+  handleRegistration(status: string | null): void
+  handleTypeCompany(type: string | null): void
 }
 
 export interface CompanyProps {
