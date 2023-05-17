@@ -4,19 +4,26 @@ import { Select } from '@stardust-ds/react'
 import type { SelectProps } from '@stardust-ds/react'
 import type { SelectRef } from '@stardust-ds/react/lib/esm/components/Select/interfaces'
 
+import {
+  Label,
+  RequiredLabel
+} from 'components/atoms/Inputs/Default/style'
+
 import { Main } from './style'
-import { Label, RequiredLabel } from 'components/atoms/Inputs/Default/style'
 
 // NOTE: Necessário devido interface de 'ref' esperada para o <Select /> do Stardust.
 
 type Props = SelectProps &
   InputHTMLAttributes<HTMLInputElement> & {
-  error?: string;
-  required?: boolean;
+    error?: string
+    required?: boolean
   }
 
 export const Default = forwardRef(
-  ({ error,label, required, onChange, name, ...props }: Props, ref) => {
+  (
+    { error, label, required, onChange, name, ...props }: Props,
+    ref
+  ) => {
     return (
       <Main>
         <Label>

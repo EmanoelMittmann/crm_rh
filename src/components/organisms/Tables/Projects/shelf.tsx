@@ -7,8 +7,10 @@ import { ContainerShelf, ContainerShelfColumn, Text } from '../style'
 import { ShelfProps } from '../types'
 import { ProjectIProps } from './types'
 
-
-export const Shelf = ({ props, config }: ShelfProps<ProjectIProps>) => {
+export const Shelf = ({
+  props,
+  config
+}: ShelfProps<ProjectIProps>) => {
   const { id, name, project_type, status, date_start } = props
 
   return (

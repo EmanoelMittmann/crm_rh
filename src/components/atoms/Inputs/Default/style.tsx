@@ -17,11 +17,10 @@ export const RequiredLabel = styled.span`
 `
 
 export const Label = styled.label`
-    font-size: 14px;
-    line-height: 21px;
-    font-weight: 700;
-    color: rgb(34, 39, 45);
-    text-align: left;
-    font-family: Poppins, sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 700;
+  color: rgb(34, 39, 45);
+  text-align: left;
+  font-family: Poppins, sans-serif;
 `
-

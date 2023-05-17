@@ -5,7 +5,12 @@ import {
   ContainerShelfColumn
 } from 'components/organisms/Tables/style'
 
-import { Image, TeamJobName, Text, TextJob } from '../../Forms/Project/style'
+import {
+  Image,
+  TeamJobName,
+  Text,
+  TextJob
+} from '../../Forms/Project/style'
 import { ShelfUserProject } from '../../Forms/Project/types'
 
 export const Shelf = ({ props, config }: ShelfUserProject) => {

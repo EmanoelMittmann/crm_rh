@@ -1,18 +1,22 @@
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
+
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from '@stardust-ds/react'
+
 import { Button, Loading } from 'components/atoms'
 import { Form, FormProjectProps } from 'components/organisms'
+import { validationSchema } from 'components/organisms/Forms/Project/logic'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
+
 import api from 'api'
 import { routes } from 'routes'
-import { useDebounce } from 'hooks'
-import { Container } from './style'
-import { validationSchema } from 'components/organisms/Forms/Project/logic'
-import { fetchPropsProject, handlePopulateFields } from './logic'
 
+import { useDebounce } from 'hooks'
+
+import { fetchPropsProject, handlePopulateFields } from './logic'
+import { Container } from './style'
 
 const RegisterProjects = () => {
   const [isSaving, setIsSaving] = useState(false)
@@ -25,7 +29,6 @@ const RegisterProjects = () => {
     shouldFocusError: true
   })
 
-
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
       name: data.name,
@@ -37,16 +40,16 @@ const RegisterProjects = () => {
       date_end: new Date(data.date_end),
       date_start_performed: new Date(data.date_start_performed),
       date_end_performed: new Date(data.date_end_performed),
-     
-      usersProjects: data.team,
 
+      usersProjects: data.team
     }
 
     try {
       id
-        ? await api.put(routes.project.updateProject(Number(id)),
-          sanitizeData
-        )
+        ? await api.put(
+            routes.project.updateProject(Number(id)),
+            sanitizeData
+          )
         : await api.post(routes.project.register, sanitizeData)
       navigate('/projects')
     } catch (error) {
@@ -113,11 +116,12 @@ const RegisterProjects = () => {
     }
   }, [id])
 
-
   return (
     <>
       <AuthTemplate>
-        <CreateTemplate title={!!id ? 'Editar Projeto ' : 'Cadastrar novo projeto'}>
+        <CreateTemplate
+          title={!!id ? 'Editar Projeto ' : 'Cadastrar novo projeto'}
+        >
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit, OnError)}>
               {isLoading ? (

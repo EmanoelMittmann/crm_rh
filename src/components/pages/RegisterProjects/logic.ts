@@ -1,13 +1,15 @@
-import api from "api"
-import { FormProjectProps } from "components/organisms"
-import { UseFormReturn } from "react-hook-form"
-import { routes } from "routes"
+import { UseFormReturn } from 'react-hook-form'
+
+import { FormProjectProps } from 'components/organisms'
+
+import api from 'api'
+import { routes } from 'routes'
+
 import { ProjectProps } from 'types'
 
 export async function fetchPropsProject(
   methods: UseFormReturn<FormProjectProps['Project'], any>
 ) {
- 
   const { data: project_type } = await api.get(
     routes.project_type.list + '?limit=120'
   )
@@ -51,16 +53,13 @@ export async function fetchPropsProject(
       label: user_project.name,
       value: user_project.id
     }))
-  
   } as FormProjectProps['Project']['options'])
 }
-
-
 
 export function handlePopulateFields(
   data: any,
   methods: UseFormReturn<FormProjectProps['Project'], any>
-){
+) {
   methods.reset({
     id: data.id,
     name: data.name,
@@ -71,7 +70,7 @@ export function handlePopulateFields(
     date_start_performed: data.date_start_performed.value,
     date_end_performed: data.date_end_performed.value,
     team_cost: data.team_cost,
-  
+
     usersProjects: {
       user_id: data.user_id,
       name: data.name,
@@ -79,7 +78,7 @@ export function handlePopulateFields(
       job_: data.job_,
       extra_hours_estimated: data.extra_hours_estimated,
       extra_hours_performed: data.extra_hours_performed,
-      status: data.status, 
-    },
+      status: data.status
+    }
   })
 }

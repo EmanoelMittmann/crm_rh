@@ -36,7 +36,7 @@ export interface ProjectProps {
   team_cost: string
   date_start_performed: string
   project_type: {
-    id:number
+    id: number
     name: string
   }
   status: {
