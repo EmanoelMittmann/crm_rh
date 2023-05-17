@@ -1,4 +1,5 @@
 import { Attachment } from './Attachment'
+import { Companys } from './Companys'
 import { Jobs } from './Jobs'
 import { Professionals } from './Professionals'
 import { Projects } from './Projects'
@@ -15,6 +16,7 @@ export const Table = Object.assign(
     StatusProject,
     TypesProject,
     Attachment,
-    ProjectTeam
+    ProjectTeam,
+    Companys
   }
 )

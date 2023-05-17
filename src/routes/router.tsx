@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import Companys from 'components/pages/Companys'
 import Jobs from 'components/pages/Jobs'
 import RegisterProjects from 'components/pages/RegisterProjects'
 import Settings from 'components/pages/Setting'
@@ -40,7 +41,7 @@ const Router = () => {
           <Route path='/typeProject' element={<TypesProject />} />
           <Route path='/statusProject' element={<StatusProject />} />
           <Route path='/settings' element={<Settings />} />
-          <Route path='/company' element={<Professionals />} />
+          <Route path='/company' element={<Companys />} />
         </Routes>
       </BrowserRouter>
     </>
