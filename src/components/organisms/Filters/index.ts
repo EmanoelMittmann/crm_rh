@@ -1,3 +1,4 @@
+import { Companys } from './Companys'
 import { Jobs } from './Jobs'
 import { Professionals } from './Professionals'
 import { Projects } from './Projects'
@@ -6,5 +7,12 @@ import { TypeProject } from './typeProject'
 
 export const Filter = Object.assign(
   {},
-  { Professionals, Projects, Jobs, StatusProject, TypeProject }
+  {
+    Professionals,
+    Projects,
+    Jobs,
+    StatusProject,
+    TypeProject,
+    Companys
+  }
 )

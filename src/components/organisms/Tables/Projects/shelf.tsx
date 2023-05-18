@@ -5,11 +5,12 @@ import { formatDate } from 'components/utils/formatDate'
 
 import { ContainerShelf, ContainerShelfColumn, Text } from '../style'
 import { ShelfProps } from '../types'
+import { ProjectIProps } from './types'
 
-/* TODO:
-  [] - Trocar o any do ShelfProps por uma interface adequada
-*/
-export const Shelf = ({ props, config }: ShelfProps<any>) => {
+export const Shelf = ({
+  props,
+  config
+}: ShelfProps<ProjectIProps>) => {
   const { id, name, project_type, status, date_start } = props
 
   return (

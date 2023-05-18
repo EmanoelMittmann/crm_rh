@@ -156,7 +156,7 @@ export async function fetchProps(
     api.get(routes.userType.list),
     api.get(externRoutes.banks),
     api.get(routes.project.list),
-    api.get(routes.companies.list),
+    api.get(routes.company.list),
     await api.get(routes.job.list, {
       params: { is_active: true }
     })
@@ -197,7 +197,6 @@ export function handlePopulateFields(
   data: any,
   methods: UseFormReturn<FormProps['Professional'], any>
 ) {
-  console.log(data)
   methods.reset({
     name: data.name,
     cpf: data.cpf,

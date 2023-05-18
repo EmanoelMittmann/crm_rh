@@ -22,17 +22,19 @@ export const Project = () => {
         <Inputs.Default
           {...register('name', { required: true })}
           error={errors?.name?.message}
+          required
           type='text'
-          label='Nome do Projeto *'
+          label='Nome do Projeto'
           width='100%'
           placeholder='Informe o nome do Projeto'
         />
         <Inputs.Default
           {...register('id', { required: true })}
           error={errors.id?.message}
+          required
           width='100%'
           type='number'
-          label={'ID do projeto *'}
+          label='ID do projeto'
           placeholder='ID do Projeto'
         />
         <Selects.Default
@@ -43,6 +45,7 @@ export const Project = () => {
             })
           }
           error={errors.project_type_id?.message}
+          required
           onClear={() => setValue('project_type_id', null)}
           options={watch('options.project_types')}
           label='Tipo de Projeto'
@@ -91,6 +94,7 @@ export const Project = () => {
           onClear={() => setValue('project_status_id', null)}
           options={watch('options.status_projects')}
           error={errors.project_status_id?.message}
+          required
           label='Status do Projeto'
           placeholder='Selecione'
           width={450}

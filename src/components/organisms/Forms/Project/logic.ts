@@ -54,7 +54,23 @@ export const validationSchema = yup.object().shape({
         return value && value.value !== '' && value.label !== ''
       }
     })
-    .required('Campo obrigatório')
+    .required('Campo obrigatório'),
+
+  userProject: yup.object().shape({
+    user_id: yup.number(),
+    name: yup.string(),
+    job_: yup.number(),
+    hours_mounths_estimated: yup.number().nullable(),
+    // .required('Campo obrigatório')
+    // .test('valid-hours', 'Campo horas/mês deve ser maior que zero(0)', function (value) {
+    //   return value !== null && value !== undefined && value > 0;
+    // }),
+    extra_hours_estimated: yup.number().nullable()
+    // .required('Campo obrigatório')
+    // .test('valid-hours', 'Campo horas/mês deve ser maior que zero(0)', function (value) {
+    //   return value !== null && value !== undefined && value > 0;
+    // }),
+  })
 })
 
 export function GenerateOption(data: Object): SelectOption[] {

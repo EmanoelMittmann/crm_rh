@@ -3,7 +3,6 @@ import { TemplateProps } from 'components/organisms/Tables/types'
 
 export interface TeamMemberProps {
   user_id: number
-  id: number
   job_: number
   name: string
   extra_hours_estimated: number
@@ -21,24 +20,24 @@ export interface TeamMemberProps {
     id: number
     name: Option | null
     status: boolean
-    avatar: Option | null
+    avatar: string
   }
 }
 
 export interface ProjectProps {
   team: TeamMemberProps[]
-  id: Option | null
-  name: Option | null
-  date_start: Option | null
-  date_end: Option | null
-  date_end_performed: Option | null
+  id: number
+  name: string
+  date_start: string
+  date_end: string
+  date_end_performed: string
   project_status_id: Option | null
   project_type_id: Option | null
-  team_cost: Option | null
-  date_start_performed: Option | null
+  team_cost: string
+  date_start_performed: string
   project_type: {
-    id: Option | null
-    name: Option | null
+    id: number
+    name: string
   }
   status: {
     color: {
@@ -52,7 +51,7 @@ export interface ProjectProps {
     colors_id: number
     created_at: Date
     updated_at: Date
-    name: Option | null
+    name: string
   }
   permissions: any
   projects: {
@@ -72,7 +71,7 @@ export interface ProjectProps {
   }
   usersProjects: {
     user_id: Option | null
-    extra_hours_estimated: Option | null
+    extra_hours_estimated: number
     extra_hours_performed: Option | null
     hours_mounths_estimated: Option | null
     hours_mounths_performed: Option | null
