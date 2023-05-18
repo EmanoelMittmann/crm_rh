@@ -1,4 +1,5 @@
 import type { Option, SelectOption } from 'components/atoms'
+import { ProjectPropsHours } from 'components/organisms/Tables/Attachment/types'
 
 import { PIX_KEY_TYPE } from './constants'
 
@@ -35,7 +36,7 @@ export interface ProfessionalProps {
   variable2: string
   weekly_hours: number
   neighbourhood_name: string
-  tools: string
+  tools: string[]
   function_job:
     | 'Technical Leader'
     | 'Technical Lead and Developer'
@@ -65,7 +66,7 @@ export interface ProfessionalProps {
   permissions: any
   projects: {
     selected: ProjectAttachmentProps
-    attachment: []
+    attachment: ProjectPropsHours[]
   }
 }
 
@@ -82,6 +83,8 @@ interface FormConfigProps {
     userTypes: SelectOption[]
     jobs: SelectOption[]
     projects: SelectOption[]
+    companies: SelectOption[]
+    payingCompanies: SelectOption[]
   }
 }
 

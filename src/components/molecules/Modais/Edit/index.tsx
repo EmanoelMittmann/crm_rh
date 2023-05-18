@@ -8,7 +8,6 @@ import {
 } from 'react'
 
 import { Input, Button } from '@stardust-ds/react'
-import { Typography } from '@stardust-ds/react'
 import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'

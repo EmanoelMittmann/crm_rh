@@ -21,7 +21,7 @@ export const Professionals = () => {
   const POPOVER_OPTIONS = (id: number, status: boolean) => [
     {
       label: 'Editar',
-      callback: () => navigateTo(`/professionals/${id}`)
+      callback: () => navigateTo(`/professional/${id}`)
     },
     {
       label: status ? 'Inativar' : 'Ativar',

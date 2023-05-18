@@ -11,6 +11,8 @@ import Home from '../components/pages/MasterPage'
 import Professionals from '../components/pages/Professionals'
 import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
+import NewProjectFormik from '../components/pages/RegisterProjects/'
+
 const Router = () => {
   return (
     <>
@@ -19,10 +21,12 @@ const Router = () => {
           <Route path='/' element={<Login />} />
           <Route path='/home' element={<Home />} />
           <Route path='/professionals' element={<Professionals />} />
-          <Route
-            path='/RegisterProfessionals'
-            element={<RegisterProfessional />}
-          />
+          <Route path='/professional'>
+            <Route path='new' element={<RegisterProfessional />} />
+            <Route path=':id' element={<RegisterProfessional />} />
+          </Route>
+          <Route path='/projects' element={<Projects />} />
+          <Route path='/NewProject' element={<NewProjectFormik />} />
           <Route path='/project' element={<Projects />} />
           <Route
             path='/RegisterProjects'

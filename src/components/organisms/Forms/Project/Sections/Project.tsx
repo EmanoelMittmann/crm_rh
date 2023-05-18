@@ -1,16 +1,17 @@
-import { useFormContext, UseFormReturn} from 'react-hook-form'
+import { useFormContext, UseFormReturn } from 'react-hook-form'
+
 import { Inputs, Selects } from 'components/atoms'
-import {ContainerRow } from '../style'
+
+import { ContainerRow } from '../style'
 import { FormProjectProps } from '../types'
 
-
 export const Project = () => {
-  const { 
-    register, 
-    watch, 
-    setValue, 
-    formState: { errors } }: 
-    UseFormReturn<FormProjectProps> = useFormContext();
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors }
+  }: UseFormReturn<FormProjectProps> = useFormContext()
 
   return (
     <>
@@ -18,16 +19,16 @@ export const Project = () => {
         <h3>Dados do Projeto</h3>
       </ContainerRow>
       <ContainerRow gap='1rem'>
-          <Inputs.Default
-            {...register('name', { required: true })}
-            error={errors?.name?.message}
-            type='text'
-            label='Nome do Projeto *'
-            width='100%'
-            placeholder='Informe o nome do Projeto'
-          />
         <Inputs.Default
-          {...register('id',{ required: true })}
+          {...register('name', { required: true })}
+          error={errors?.name?.message}
+          type='text'
+          label='Nome do Projeto *'
+          width='100%'
+          placeholder='Informe o nome do Projeto'
+        />
+        <Inputs.Default
+          {...register('id', { required: true })}
           error={errors.id?.message}
           width='100%'
           type='number'
@@ -37,12 +38,13 @@ export const Project = () => {
         <Selects.Default
           {...register('project_type_id', { required: true })}
           onSelect={(value: any) =>
-            setValue('project_type_id', value, { shouldValidate: true })
+            setValue('project_type_id', value, {
+              shouldValidate: true
+            })
           }
           error={errors.project_type_id?.message}
           onClear={() => setValue('project_type_id', null)}
           options={watch('options.project_types')}
-       
           label='Tipo de Projeto'
           placeholder='Selecione'
           width={235}
@@ -82,7 +84,9 @@ export const Project = () => {
         <Selects.Default
           {...register('project_status_id', { required: true })}
           onSelect={(value: any) =>
-            setValue('project_status_id', value, { shouldValidate: true })
+            setValue('project_status_id', value, {
+              shouldValidate: true
+            })
           }
           onClear={() => setValue('project_status_id', null)}
           options={watch('options.status_projects')}
@@ -102,4 +106,3 @@ export const Project = () => {
     </>
   )
 }
-

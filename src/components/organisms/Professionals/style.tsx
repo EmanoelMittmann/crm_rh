@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { IContainerColumnProps } from 'types'
 
 export const ContainerMain = styled.div`

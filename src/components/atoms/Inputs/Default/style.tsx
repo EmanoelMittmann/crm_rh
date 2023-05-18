@@ -13,5 +13,5 @@ export const Main = styled.div<{ w: string }>`
   } */
 `
 export const RequiredLabel = styled.span`
-    color: red;
+  color: red;
 `

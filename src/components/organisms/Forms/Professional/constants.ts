@@ -52,9 +52,9 @@ export const PIX_KEY_TYPE = {
 }
 
 export const CONTRACT_TYPE = {
-  FULL: 'Full Time',
-  PART: 'Part Time',
-  HORISTA: 'Horista'
+  FULLTIME: 'FULLTIME',
+  PART: 'PARTTIME',
+  FREELANCER: 'HORISTA'
 }
 
 export const KEYS = {

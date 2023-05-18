@@ -12,12 +12,12 @@ import { Button } from '@stardust-ds/react'
 import { List } from 'contexts'
 import { ColorProps } from 'contexts/List/Settings/StatusProjects/types' // corrigir a origem desse import
 import { theme } from 'styles'
-import { Option } from 'types'
 
 import Close from 'components/atoms/Buttons/Close'
 
 import { ContainerModal, Overlay, Columns, Row } from '../style'
 import { DEFAULT } from './constants'
+import { Option } from 'types'
 
 interface IModalColorsProps {
   text?: string

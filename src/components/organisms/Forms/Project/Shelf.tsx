@@ -2,12 +2,13 @@ import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
 import {
   ContainerShelf,
-  ContainerShelfColumn,
+  ContainerShelfColumn
 } from 'components/organisms/Tables/style'
+
 import { Image, TeamJobName, Text, TextJob } from './style'
 import { ShelfUserProject } from './types'
 
-export const Shelf = ({ props, config, }: ShelfUserProject) => {
+export const Shelf = ({ props, config }: ShelfUserProject) => {
   const {
     extra_hours_estimated,
     hours_mounths_estimated,
@@ -15,39 +16,43 @@ export const Shelf = ({ props, config, }: ShelfUserProject) => {
     extra_hours_performed,
     jobs,
     professional,
-    status
+    status,
+    avatar
   } = props
 
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn gap='.5rem' width='210'>
-        <Image src={professional.avatar?.label} />
+      <ContainerShelfColumn gap='.5rem' width='205px'>
+        <Image src={avatar} />
         <TeamJobName>
-          <Text >{professional.name?.label}</Text>
-          <TextJob >{jobs.name?.label}</TextJob>
+          <Text>{professional.name?.label}</Text>
+          <TextJob>{jobs.name?.label}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
-      <ContainerShelfColumn width='100px'>
+      <ContainerShelfColumn width='105px'>
         <Text>{hours_mounths_estimated}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='120px'>
+      <ContainerShelfColumn width='110px'>
         <Text>{extra_hours_estimated}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='110px'>
+      <ContainerShelfColumn width='100px'>
         <Text>{hours_mounths_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='100px'>
+      <ContainerShelfColumn width='110px'>
         <Text>{extra_hours_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='150px' justify='center' gap='2em'>
+      <ContainerShelfColumn
+        width='140px'
+        justify='center'
+        gap='1.5em'
+      >
         <Badge.Status status={status} />
         <Popover options={config.options} />
       </ContainerShelfColumn>
-
     </ContainerShelf>
   )
 }

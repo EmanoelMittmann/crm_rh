@@ -1,5 +1,8 @@
+import { ReactElement, SVGProps } from 'react'
+
+import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
+
 declare module '*.svg' {
-  import { ReactElement, SVGProps } from 'react'
   const content: (props: SVGProps<SVGElement>) => ReactElement
   export default content
 }
@@ -72,8 +75,7 @@ interface IModalProps {
 }
 
 export interface UserProjectsProps {
-  id: number
-  user_id: string
+  user_id: number
   extra_hours_estimated: string
   extra_hours_performed: string
   hours_mounths_estimated: string
@@ -89,7 +91,7 @@ export interface UserProjectsProps {
   }
 }
 
-export interface ProjectProps {zz
+export interface ProjectProps {
   id: number
   name: string
   created_at: string
@@ -141,4 +143,31 @@ interface MyFormProps {
 interface Option {
   label: string
   value: string
+}
+
+interface IProjectsListing
+  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  projects?: string | number | boolean | undefined
+  name?: string | number
+  date_start?: staring
+  status?: string | number | undefined
+  project_type?: string | number | undefined
+  color: string
+  button_color: string
+  text_color: string
+}
+
+interface CNPJValidatorResponse {
+  cnpj: string
+  razao_social: string
+  nome_fantasia: string
+  ddd_telefone_1: string
+  cep: number
+  descricao_tipo_de_logradouro: string
+  logradouro: string
+  numero: string
+  complemento: string
+  bairro: string
+  municipio: string
+  uf: string
 }

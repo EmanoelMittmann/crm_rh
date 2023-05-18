@@ -15,7 +15,7 @@ export const TableHeader = ({
 }: TemplateProps) => {
   return (
     <Container {...{ template }}>
-      {headers.map(({ field, label, on }) => (
+      {headers.map(({ field, label, on = false }) => (
         <Column
           disabled={!on}
           key={field}

@@ -1,11 +1,17 @@
 import { useContext, useMemo, useRef } from 'react'
+
 import { List } from 'contexts'
+
 import { Loading } from 'components/atoms'
-import { TableHeader, IHandleModalStatusProps } from 'components/molecules'
+import {
+  TableHeader,
+  IHandleModalStatusProps
+} from 'components/molecules'
+import { Modal } from 'components/molecules/Modais'
+
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './shelf'
-import { Modal } from 'components/molecules/Modais'
 
 export const Projects = () => {
   const modalRef = useRef<IHandleModalStatusProps>(null)
@@ -18,19 +24,14 @@ export const Projects = () => {
     handleUpdateProject
   } = useContext(List.Project.Context)
 
-  const POPOVER_OPTIONS = (
-    id: number, 
-    status: any, 
-    name: string
-    ) => [
+  const POPOVER_OPTIONS = (id: number, status: any, name: string) => [
     {
       label: 'Editar Projeto',
       callback: () => handleUpdateProject(id, name)
     },
     {
-      label:'Editar Status',
+      label: 'Editar Status',
       callback: () => modalRef.current?.open(id, name)
-   
     }
   ]
 
@@ -44,16 +45,15 @@ export const Projects = () => {
 
     return projects.map((props) => (
       <Shelf
-      key={props.id}
-      config={{
-        template: GRID_TEMPLATE,
-        options: POPOVER_OPTIONS(props.id, props.status, props.name)
-      }}
-      {...{ props }}
+        key={props.id}
+        config={{
+          template: GRID_TEMPLATE,
+          options: POPOVER_OPTIONS(props.id, props.status, props.name)
+        }}
+        {...{ props }}
       />
-      ))
-    }, [isLoading, projects])
-    
+    ))
+  }, [isLoading, projects])
 
   return (
     <Main>
@@ -63,10 +63,10 @@ export const Projects = () => {
         handleOrder={handleOrder}
       />
       <Modal.EditorStatus
-      ref={modalRef}
-      placeholder="Editar Status"
-      text='Editar Status'
-      EventOne={handleUpdateStatus}
+        ref={modalRef}
+        placeholder='Editar Status'
+        text='Editar Status'
+        EventOne={handleUpdateStatus}
       />
       {Table}
     </Main>

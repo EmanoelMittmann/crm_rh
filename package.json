@@ -74,7 +74,8 @@
           "useTabs": false,
           "jsxSingleQuote": true,
           "printWidth": 70,
-          "arrowParens": "always"
+          "arrowParens": "always",
+          "endOfLine": "auto"
         }
       ],
       "import-helpers/order-imports": [
@@ -97,7 +98,8 @@
               "absolute",
               "parent",
               "sibling",
-              "index"
+              "index",
+              "/^types/"
             ]
           ],
           "alphabetize": {
