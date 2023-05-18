@@ -25,43 +25,64 @@ interface IModalStatusProps {
 }
 
 export interface IHandleModalStatusProps {
-  open(id: number, name: string): boolean
+  open(id: number, name: string): void
   close(): void
 }
 
-export const EditorStatus = () => {
-  const [isOpen, setIsOpen] = useState(false)
+const EditorStatus = forwardRef<
+  IHandleModalStatusProps,
+  IModalStatusProps
+>((props, ref) => {
+  const { text, EventOne, placeholder } = props
+  const [isOpen, setIsOpen] = useState({ id: 0, name: '' })
   const [name, setName] = useState<string>('')
   const [selectedStatus, setSelectedStatus] = useState('')
-  const { projects } = useContext(List.Project.Context)
- 
-const handleclick = () => {
-  setIsOpen((prev) => !prev)
-}
+  const { filterOptionsStatus } = useContext(List.Project.Context)
 
+  const close = useCallback(() => {
+    setIsOpen({ id: 0, name: '' })
+  }, [])
 
-  const project = projects.find((project) => project.project_status_id === project.project_status_id)
-  const projectStatus = project?.project_status_id
+  useImperativeHandle(
+    ref,
+    () => ({
+      open: (projectid, name) => setIsOpen({ id: projectid, name: name }),
+      close
+    }),
+    []
+  )
 
+  const handleBlock = useMemo(() => {
+    if (
+      isOpen.name === name ||
+      typeof name !== 'string' ||
+      name.trim() === ''
+    ) {
+      return true
+    }
+    return false
+  }, [isOpen.name, name])
 
+  useEffect(() => {
+    setName(selectedStatus)
+  }, [selectedStatus])
 
-
-
-  
+  if (isOpen.id === 0) return null
 
   return (
     <>
       <ContainerModal>
         <Columns>
           <Row>
-            <h2>{}</h2>
+            <h2>{text}</h2>
             <Close onClick={() => close()} />
           </Row>
           <Row>
             <Columns>
               <Selects.Default
-                options={[]}
-                onChange={(e:any) => setSelectedStatus(e.target.value)}
+                onSelect={(e: any) => setSelectedStatus(e.value)}
+                options={filterOptionsStatus.status}
+                placeholder={placeholder}
                 width={380}
               />
             </Columns>
@@ -71,7 +92,7 @@ const handleclick = () => {
               style={{ borderRadius: '500px' }}
               bgColor='#E9EBEE'
               labelColor={theme.neutrals.gray7}
-              onClick={handleclick}
+              onClick={close}
             >
               Cancelar
             </Button>
@@ -80,9 +101,12 @@ const handleclick = () => {
                 borderRadius: '500px',
                 boxShadow: '0px'
               }}
-             onClick={()=>{}}
+              disabled={handleBlock}
               bgColor='#0066FF'
-             
+              onClick={() => {
+                EventOne(isOpen.id, selectedStatus)
+                close()
+              }}
             >
               Cadastrar
             </Button>
@@ -92,8 +116,6 @@ const handleclick = () => {
       <Overlay />
     </>
   )
-}
+})
 
-
-
-
+export default EditorStatus

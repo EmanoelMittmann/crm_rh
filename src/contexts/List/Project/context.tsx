@@ -70,8 +70,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setIsLoading(false)
   }
 
-  async function handleUpdateStatus(projectid: number, name: string) {
-    await api.put(routes.project.updateStatusproject(projectid), {
+  async function handleUpdateStatus(id: number, name: string) {
+    await api.put(routes.project.updateStatusproject(id), {
       name: name
     })
     fetchListProject()

@@ -1,6 +1,6 @@
 import { Colors } from './Colors'
 import Edit from './Edit'
-import {EditorStatus} from './EditorStatus'
+import EditorStatus from './EditorStatus'
 import New from './New'
 import Options from './Options'
 export const Modal = Object.assign(
