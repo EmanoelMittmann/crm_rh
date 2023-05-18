@@ -1,13 +1,13 @@
 import { useFormContext } from 'react-hook-form'
+
 import { Selects, Inputs } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
-import { ContainerRow } from '../style'
-import { FormProjectProps, TeamMemberProps } from '../types'
 import { Table } from 'components/organisms/Tables'
 
+import { ContainerRow } from '../style'
+import { FormProjectProps, TeamMemberProps } from '../types'
 
 export const Team = () => {
-
   const {
     register,
     watch,
@@ -17,8 +17,6 @@ export const Team = () => {
   } = useFormContext<FormProjectProps>()
 
   const options = watch('options')
-
-
 
   const handleTeam = () => {
     const professional = watch('professional')
@@ -44,8 +42,12 @@ export const Team = () => {
         user_id: id,
         professional,
         jobs,
-        extra_hours_estimated: Number(watch('usersProjects.extra_hours_estimated')),
-        hours_mounths_estimated: Number(watch('usersProjects.hours_mounths_estimated')),
+        extra_hours_estimated: Number(
+          watch('usersProjects.extra_hours_estimated')
+        ),
+        hours_mounths_estimated: Number(
+          watch('usersProjects.hours_mounths_estimated')
+        ),
         extra_hours_performed: null,
         hours_mounths_performed: null,
         status: { label: status ? status : 'Ativo' },
@@ -56,8 +58,6 @@ export const Team = () => {
 
       const currentTeam = getValues('team') || []
       const newTeam = [...currentTeam, newTeamMember]
-      console.log('newTeamMember: ', newTeamMember)
-
 
       setValue('team', newTeam)
     }
@@ -93,16 +93,24 @@ export const Team = () => {
           placeholder='Selecione'
           width={190}
         />
-        <Inputs.Default  
-          {...register('usersProjects.hours_mounths_estimated', {required: true})}
-          error={errors?.usersProjects?.hours_mounths_estimated?.message}
+        <Inputs.Default
+          {...register('usersProjects.hours_mounths_estimated', {
+            required: true
+          })}
+          error={
+            errors?.usersProjects?.hours_mounths_estimated?.message
+          }
           label='Horas/mês estimadas'
           placeholder='Horas'
           width={175}
         />
         <Inputs.Default
-          {...register('usersProjects.extra_hours_estimated', { required: true })}
-          error={errors?.usersProjects?.extra_hours_estimated?.message}
+          {...register('usersProjects.extra_hours_estimated', {
+            required: true
+          })}
+          error={
+            errors?.usersProjects?.extra_hours_estimated?.message
+          }
           label='Horas extras estimadas'
           placeholder='Horas'
           width={175}

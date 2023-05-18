@@ -42,7 +42,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleFillProject_Type,
     handleFillProject_Status,
     navigateTo,
-    handleUpdateStatus,
+    handleUpdateStatus
   }
 
   function prepareParams(meta: DefaultMetaProps) {

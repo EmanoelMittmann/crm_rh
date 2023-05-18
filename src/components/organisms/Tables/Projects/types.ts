@@ -10,7 +10,6 @@ export type ProjectPropsHours = {
   hours_mounths_percent?: number
 }
 
-
 export interface ProjectIProps {
   id: number
   name: string

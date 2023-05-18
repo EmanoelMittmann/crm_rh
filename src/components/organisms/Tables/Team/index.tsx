@@ -1,6 +1,9 @@
 import { useContext, useMemo } from 'react'
+import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+
 import { List } from 'contexts'
+
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 import {
@@ -9,41 +12,31 @@ import {
 } from 'components/organisms/Tables/style'
 
 import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
-import { Shelf } from './Shelf'
-import { useFormContext } from 'react-hook-form'
 import { FormProjectProps } from '../../Forms/Project/types'
-
+import { Shelf } from './Shelf'
 
 export const ProjectTeam = () => {
   const { watch, setValue } = useFormContext<FormProjectProps>()
   const Team = watch('team', [])
-  const { isLoading, handleOrder } = useContext(
-    List.Project.Context
-  )
+  const { isLoading, handleOrder } = useContext(List.Project.Context)
   const navigate = useNavigate()
 
-
-
   const POPOVER_OPTIONS = (user_id: number, status: boolean) => [
-    user_id ? (
-      {
-        label: 'Editar',
-        callback: () => navigate(`/userProjects/project/${user_id}`)
-      }
-
-    ) : (
-
-      {
-        label: 'Remover',
-        callback: () => {
-          const newTeam = Team.filter((item) => item.user_id !== user_id)
-          setValue('team', newTeam)
+    user_id
+      ? {
+          label: 'Editar',
+          callback: () => navigate(`/userProjects/project/${user_id}`)
         }
-      }
-
-    )
+      : {
+          label: 'Remover',
+          callback: () => {
+            const newTeam = Team.filter(
+              (item) => item.user_id !== user_id
+            )
+            setValue('team', newTeam)
+          }
+        }
   ]
-
 
   const Table = useMemo(() => {
     if (isLoading)

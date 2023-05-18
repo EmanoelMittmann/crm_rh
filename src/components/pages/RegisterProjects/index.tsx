@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
+
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from '@stardust-ds/react'
+
 import { Button, Loading } from 'components/atoms'
 import { Form, FormProjectProps } from 'components/organisms'
+import { validationSchema } from 'components/organisms/Forms/Project/logic'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
+
 import api from 'api'
 import { routes } from 'routes'
+
 import { useDebounce } from 'hooks'
 import { Container } from './style'
 import { validationSchema } from 'components/organisms/Forms/Project/logic'
@@ -27,7 +32,6 @@ const RegisterProjects = () => {
     resolver: yupResolver(validationSchema),
     shouldFocusError: true
   })
-
 
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
@@ -89,7 +93,6 @@ const RegisterProjects = () => {
         position: 'bottom-right'
       })
     }
-    console.log('error: ', error)
   }
 
   useDebounce({
@@ -109,11 +112,12 @@ const RegisterProjects = () => {
     }
   }, [id])
 
-
   return (
     <>
       <AuthTemplate>
-        <CreateTemplate title={!!id ? 'Editar Projeto ' : 'Cadastrar novo projeto'}>
+        <CreateTemplate
+          title={!!id ? 'Editar Projeto ' : 'Cadastrar novo projeto'}
+        >
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit, OnError)}>
               {isLoading ? (

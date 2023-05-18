@@ -1,18 +1,17 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+import Companys from 'components/pages/Companys'
 import Jobs from 'components/pages/Jobs'
+import RegisterProjects from 'components/pages/RegisterProjects'
 import Settings from 'components/pages/Setting'
 import StatusProject from 'components/pages/StatusProject'
 import TypesProject from 'components/pages/TypesProject'
 
 import Login from '../components/pages/Login'
 import Home from '../components/pages/MasterPage'
-import Projects from '../components/pages/Projects'
-
 import Professionals from '../components/pages/Professionals'
+import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
-import RegisterProjects from 'components/pages/RegisterProjects'
-
-
 
 const Router = () => {
   return (
@@ -42,7 +41,7 @@ const Router = () => {
           <Route path='/typeProject' element={<TypesProject />} />
           <Route path='/statusProject' element={<StatusProject />} />
           <Route path='/settings' element={<Settings />} />
-          <Route path='/company' element={<Professionals />} />
+          <Route path='/company' element={<Companys />} />
         </Routes>
       </BrowserRouter>
     </>

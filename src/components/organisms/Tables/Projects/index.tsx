@@ -20,14 +20,13 @@ export const Projects = () => {
     navigateTo,
     handleOrder,
     isLoading,
-    handleUpdateStatus,
+    handleUpdateStatus
   } = useContext(List.Project.Context)
 
   const POPOVER_OPTIONS = (id: number, status: any, name: string) => [
     {
       label: 'Editar Projeto',
       callback: () => navigateTo(`/project/${id}`)
-
     },
     {
       label: 'Editar Status',
@@ -72,6 +71,3 @@ export const Projects = () => {
     </Main>
   )
 }
-
-
-

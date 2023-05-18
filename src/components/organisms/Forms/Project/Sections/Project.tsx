@@ -27,7 +27,6 @@ export const Project = () => {
           label='Nome do Projeto'
           width='100%'
           placeholder='Informe o nome do Projeto'
-          
         />
         <Inputs.Default
           {...register('id', { required: true })}
@@ -35,7 +34,7 @@ export const Project = () => {
           required
           width='100%'
           type='number'
-          label='ID do projeto' 
+          label='ID do projeto'
           placeholder='ID do Projeto'
         />
         <Selects.Default
