@@ -65,7 +65,7 @@ export const Projects = () => {
         ref={modalRef}
         placeholder='Editar Status'
         text='Editar Status'
-        EventOne={(id, name) => handleUpdateStatus(id, name)}
+        EventOne={handleUpdateStatus}
       />
       {Table}
     </Main>
