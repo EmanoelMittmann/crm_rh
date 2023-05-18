@@ -14,11 +14,15 @@ const ROUTES = {
   '/statusProject': 'Configurações > Status de Projeto',
   '/typeProject': 'Configurações > Tipos de Projeto',
   '/company': 'Empresas',
-  '/RegisterProfessionals': 'Profissionais > Cadastrar Novo'
+  '/professional/new': 'Profissionais > Cadastrar Novo',
+  '/professional/:id': 'Profissionais > Editar'
 }
 
 export function handlePathname(pathname: PathnameProps) {
-  return ROUTES[pathname]
+  const splitedPathname = pathname.split('/')
+  return isNaN(Number(splitedPathname[2]))
+    ? ROUTES[pathname]
+    : `${splitedPathname[1]} > Editar`
 }
 
 export type { PathnameProps }
