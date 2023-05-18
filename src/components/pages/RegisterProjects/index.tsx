@@ -11,13 +11,16 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 import { Container } from './style'
 import { validationSchema } from 'components/organisms/Forms/Project/logic'
-import { fetchPropsProject, handlePopulateFields } from './logic'
+import { fetchAndPopulateFields, fetchPropsProject, handlePopulateFields } from './logic'
+
 
 
 const RegisterProjects = () => {
   const [isSaving, setIsSaving] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate()
+  const { id } = useParams()
+
 
   const methods = useForm<FormProjectProps['Project']>({
     defaultValues: {},
@@ -30,45 +33,46 @@ const RegisterProjects = () => {
     const sanitizeData = {
       name: data.name,
       id: data.id,
-      team_cost: Number(data.team_cost),
-      project_status_id: Number(data.project_status_id?.value),
-      project_type_id: Number(data.project_type_id?.value),
-      date_start: new Date(data.date_start),
-      date_end: new Date(data.date_end),
-      date_start_performed: new Date(data.date_start_performed),
-      date_end_performed: new Date(data.date_end_performed),
-     
-      usersProjects: data.team,
+      team_cost: data.team_cost,
+      project_status_id: data.project_status_id?.value,
+      project_type_id: data.project_type_id?.value,
+      date_start: data.date_start,
+      date_end: data.date_end,
+      date_start_performed: data.date_start_performed,
+      date_end_performed: data.date_end_performed,
+
+      team: data.team,
 
     }
+    id
+      ? await api.put(routes.project.updateProject(Number(id)),
+        sanitizeData
+      )
+      : await api.post(routes.project.register, sanitizeData
+      )
+    toast({
+      type: 'success',
+      title: 'Projeto cadastrado com sucesso.',
+      position: 'bottom-right'
+    })
+    navigate('/project')
 
-    try {
-      id
-        ? await api.put(routes.project.updateProject(Number(id)),
-          sanitizeData
-        )
-        : await api.post(routes.project.register, sanitizeData)
-      navigate('/projects')
-    } catch (error) {
-      console.error(error)
-      OnError(error)
-    }
-    console.log('methods: ', methods)
   }
 
-  const { id } = useParams()
 
-  const handleSave = async () => {
+
+  const handleSave = () => {
     if (!validationSchema) {
       setIsSaving(true)
 
       methods.handleSubmit(onSubmit, OnError)()
       setIsSaving(false)
     }
+
   }
 
   function handleCancel() {
-    navigate('/projects')
+    navigate('/project')
   }
 
   function OnError(error: any) {
@@ -96,18 +100,10 @@ const RegisterProjects = () => {
 
   useEffect(() => {
     if (id) {
-      api
-        .get(routes.project.updateProject(+id))
-        .then(({ data }) => data)
-        .then((data) => {
-          if (data.length === 0)
-            throw new Error('Projeto não encontrado.')
-          return data[0]
-        })
-        .then((data) => handlePopulateFields(data, methods))
-        .finally(() => {
-          setIsLoading(false)
-        })
+      fetchAndPopulateFields(id, methods)
+        .catch((error) => console.log(error.message))
+        .finally(() => setIsLoading(false))
+
     } else {
       setIsLoading(false)
     }

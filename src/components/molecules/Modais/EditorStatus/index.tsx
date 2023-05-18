@@ -16,6 +16,7 @@ import Close from 'components/atoms/Buttons/Close'
 
 import { Columns, ContainerModal, Overlay, Row } from './style'
 
+
 interface IModalStatusProps {
   text: string
   placeholder: string
@@ -24,63 +25,43 @@ interface IModalStatusProps {
 }
 
 export interface IHandleModalStatusProps {
-  open(id: number, name: string): void
+  open(id: number, name: string): boolean
   close(): void
 }
 
-const EditorStatus = forwardRef<
-  IHandleModalStatusProps,
-  IModalStatusProps
->((props, ref) => {
-  const { text, EventOne, placeholder } = props
-  const [isOpen, setIsOpen] = useState({ id: 0, name: '' })
+export const EditorStatus = () => {
+  const [isOpen, setIsOpen] = useState(false)
   const [name, setName] = useState<string>('')
   const [selectedStatus, setSelectedStatus] = useState('')
-  const { filterOptionsStatus } = useContext(List.Project.Context)
+  const { projects } = useContext(List.Project.Context)
+ 
+const handleclick = () => {
+  setIsOpen((prev) => !prev)
+}
 
-  const close = useCallback(() => {
-    setIsOpen({ id: 0, name: '' })
-  }, [])
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      open: (id, name) => setIsOpen({ id: id, name: name }),
-      close
-    }),
-    []
-  )
+  const project = projects.find((project) => project.project_status_id === project.project_status_id)
+  const projectStatus = project?.project_status_id
 
-  const handleBlock = useMemo(() => {
-    if (
-      isOpen.name === name ||
-      typeof name !== 'string' ||
-      name.trim() === ''
-    ) {
-      return true
-    }
-    return false
-  }, [isOpen.name, name])
 
-  useEffect(() => {
-    setName(selectedStatus)
-  }, [selectedStatus])
 
-  if (isOpen.id === 0) return null
+
+
+  
+
   return (
     <>
       <ContainerModal>
         <Columns>
           <Row>
-            <h2>{text}</h2>
+            <h2>{}</h2>
             <Close onClick={() => close()} />
           </Row>
           <Row>
             <Columns>
               <Selects.Default
-                onSelect={(e: any) => setSelectedStatus(e.value)}
-                options={filterOptionsStatus.status}
-                placeholder={placeholder}
+                options={[]}
+                onChange={(e:any) => setSelectedStatus(e.target.value)}
                 width={380}
               />
             </Columns>
@@ -90,7 +71,7 @@ const EditorStatus = forwardRef<
               style={{ borderRadius: '500px' }}
               bgColor='#E9EBEE'
               labelColor={theme.neutrals.gray7}
-              onClick={close}
+              onClick={handleclick}
             >
               Cancelar
             </Button>
@@ -99,12 +80,9 @@ const EditorStatus = forwardRef<
                 borderRadius: '500px',
                 boxShadow: '0px'
               }}
-              disabled={handleBlock}
+             onClick={()=>{}}
               bgColor='#0066FF'
-              onClick={() => {
-                EventOne(isOpen.id, selectedStatus)
-                close()
-              }}
+             
             >
               Cadastrar
             </Button>
@@ -114,6 +92,8 @@ const EditorStatus = forwardRef<
       <Overlay />
     </>
   )
-})
+}
 
-export default EditorStatus
+
+
+

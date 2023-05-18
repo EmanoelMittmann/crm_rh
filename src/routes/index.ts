@@ -23,7 +23,7 @@ export const routes = {
 
   project: {
     list: '/project?limit=5',
-    updateStatusproject: (id: number) => `/updateStatusProject/${id}`,
+    updateStatusproject: (projectid: number) => `/updateStatusProject/${projectid}`,
     updateProject: (id: number) => `/project/${id}`,
     register: '/project'
   },

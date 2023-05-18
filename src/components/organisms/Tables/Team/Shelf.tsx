@@ -6,9 +6,10 @@ import {
 } from 'components/organisms/Tables/style'
 
 import { Image, TeamJobName, Text, TextJob } from '../../Forms/Project/style'
-import { ShelfUserProject } from '../../Forms/Project/types'
+import { TeamMemberProps } from '../../Forms/Project/types'
+import { ShelfProps } from '../types'
 
-export const Shelf = ({ props, config }: ShelfUserProject) => {
+export const Shelf = ({ props, config }: ShelfProps<TeamMemberProps>) => {
   const {
     extra_hours_estimated,
     hours_mounths_estimated,
@@ -19,14 +20,15 @@ export const Shelf = ({ props, config }: ShelfUserProject) => {
     status,
     avatar
   } = props
+  console.log('props: ', props);
 
   return (
     <ContainerShelf template={config.template}>
       <ContainerShelfColumn gap='.5rem' width='210px'>
         <Image src={avatar} />
         <TeamJobName>
-          <Text>{professional.name?.label}</Text>
-          <TextJob>{jobs.name?.label}</TextJob>
+          <Text>{professional?.name?.label}</Text>
+          <TextJob>{jobs?.name?.label}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
       <ContainerShelfColumn width='130px'>

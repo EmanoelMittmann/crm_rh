@@ -49,6 +49,7 @@ export const Project = () => {
           required
           onClear={() => setValue('project_type_id', null)}
           options={watch('options.project_types')}
+          value={watch('project_type_id') as any}
           label='Tipo de Projeto'
           placeholder='Selecione'
           width={235}
@@ -58,6 +59,7 @@ export const Project = () => {
         <Inputs.Default
           {...register('date_start', { required: true })}
           error={errors.date_start?.message}
+          value={watch('date_start')}
           type='date'
           label='Inicio efetivo'
           width='100%'
@@ -94,6 +96,7 @@ export const Project = () => {
           }
           onClear={() => setValue('project_status_id', null)}
           options={watch('options.status_projects')}
+          value={watch('project_status_id') as  any}
           error={errors.project_status_id?.message}
           required
           label='Status do Projeto'

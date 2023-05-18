@@ -1,3 +1,4 @@
+import { Option } from 'types'
 import * as yup from 'yup'
 import { SelectOption } from './types'
 
@@ -84,3 +85,7 @@ export function GenerateOption(data: Object): SelectOption[] {
     value: key
   }))
 }
+
+
+
+
