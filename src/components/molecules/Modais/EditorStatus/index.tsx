@@ -7,15 +7,14 @@ import {
   useCallback,
   useContext
 } from 'react'
-
 import { Button } from '@stardust-ds/react'
 import { List } from 'contexts'
 import { theme } from 'styles'
-
 import { Selects } from 'components/atoms'
 import Close from 'components/atoms/Buttons/Close'
-
 import { Columns, ContainerModal, Overlay, Row } from './style'
+import { IHandleModalColorsPropsEdit } from '../Colors/Edit'
+import { Option } from 'types'
 
 
 interface IModalStatusProps {
@@ -25,20 +24,35 @@ interface IModalStatusProps {
   defaultOpened?: boolean
 }
 
-export interface IHandleModalStatusProps {
+type ValueProps = Option | null | undefined
+
+export interface IHandleModalColorsPropsNew {
   open(id: number, name: string): void
   close(): void
 }
 
 const EditorStatus = forwardRef<
-  IHandleModalStatusProps,
+  IHandleModalColorsPropsEdit,
   IModalStatusProps
 >((props, ref) => {
   const { text, EventOne, placeholder } = props
   const [isOpen, setIsOpen] = useState({ id: 0, name: '' })
   const [name, setName] = useState<string>('')
-  const [selectedStatus, setSelectedStatus] = useState('')
-  const { filterOptionsStatus } = useContext(List.Project.Context)
+  const [selectedStatus, setSelectedStatus] = useState<string>('')
+  const {meta,filterOptionsStatus} = useContext(List.Project.Context)
+  const { project_status_id } = meta
+  
+  console.log('isOpen: ', isOpen);
+  console.log('name: ', name);
+  console.log('selectedStatus: ', selectedStatus);
+  
+  const currentValueStatus = useMemo(
+    () =>
+      filterOptionsStatus.status.find(
+        (item) => Number(item.value) === project_status_id
+      ),
+    [project_status_id]
+  ) as ValueProps
 
   const close = useCallback(() => {
     setIsOpen({ id: 0, name: '' })
@@ -47,7 +61,7 @@ const EditorStatus = forwardRef<
   useImperativeHandle(
     ref,
     () => ({
-      open: (projectid, name) => setIsOpen({ id: projectid, name: name }),
+      open: (id, name) => setIsOpen({ id: id, name: name }),
       close
     }),
     []
@@ -59,16 +73,18 @@ const EditorStatus = forwardRef<
       typeof name !== 'string' ||
       name.trim() === ''
     ) {
-      return true
+      return true;
     }
-    return false
-  }, [isOpen.name, name])
+    return false;
+  }, [isOpen.name, name]);
+
 
   useEffect(() => {
-    setName(selectedStatus)
-  }, [selectedStatus])
+    setName(selectedStatus);
+  }, [selectedStatus]);
 
-  if (isOpen.id === 0) return null
+  if (isOpen.id === 0) return null 
+
 
   return (
     <>
@@ -82,10 +98,13 @@ const EditorStatus = forwardRef<
             <Columns>
               <Selects.Default
                 onSelect={(e: any) => setSelectedStatus(e.value)}
+                onClear={() => setSelectedStatus('')}
                 options={filterOptionsStatus.status}
+                value={currentValueStatus ?? undefined}
                 placeholder={placeholder}
                 width={380}
               />
+
             </Columns>
           </Row>
           <Row>

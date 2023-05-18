@@ -50,7 +50,7 @@ export const Team = () => {
         ),
         extra_hours_performed: null,
         hours_mounths_performed: null,
-        status: { label: status ? status : 'Ativo' },
+        status: status,
         avatar: avatar
           ? avatar
           : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'

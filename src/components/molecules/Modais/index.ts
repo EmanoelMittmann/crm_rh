@@ -1,4 +1,4 @@
-import { Colors } from './Colors'
+import  {Colors}  from './Colors'
 import Edit from './Edit'
 import EditorStatus from './EditorStatus'
 import New from './New'

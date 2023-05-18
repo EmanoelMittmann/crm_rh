@@ -20,7 +20,7 @@ export const Shelf = ({ props, config }: ShelfProps<TeamMemberProps>) => {
     status,
     avatar
   } = props
-  console.log('props: ', props);
+  // console.log('props: ', props);
 
   return (
     <ContainerShelf template={config.template}>

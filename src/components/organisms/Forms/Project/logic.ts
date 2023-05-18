@@ -1,4 +1,3 @@
-import { Option } from 'types'
 import * as yup from 'yup'
 
 import { SelectOption } from './types'

@@ -1,22 +1,17 @@
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
-
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from '@stardust-ds/react'
-
 import { Button, Loading } from 'components/atoms'
 import { Form, FormProjectProps } from 'components/organisms'
 import { validationSchema } from 'components/organisms/Forms/Project/logic'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
-
 import api from 'api'
 import { routes } from 'routes'
-
 import { useDebounce } from 'hooks'
 import { Container } from './style'
-import { validationSchema } from 'components/organisms/Forms/Project/logic'
-import { fetchAndPopulateFields, fetchPropsProject, handlePopulateFields } from './logic'
+import { fetchAndPopulateFields, fetchPropsProject } from './logic'
 
 
 
