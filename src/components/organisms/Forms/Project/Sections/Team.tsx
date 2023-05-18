@@ -2,8 +2,8 @@ import { useFormContext } from 'react-hook-form'
 
 import { Selects, Inputs } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
+import { Table } from 'components/organisms/Tables'
 
-import { ProjectTeam } from '../projectTeam'
 import { ContainerRow } from '../style'
 import { FormProjectProps, TeamMemberProps } from '../types'
 
@@ -20,7 +20,7 @@ export const Team = () => {
 
   const handleTeam = () => {
     const professional = watch('professional')
-    const id = watch('options.professionals')
+    const id = watch('usersProjects.user_id')
     const avatar = watch('professional.avatar')
     const jobs = watch('jobs')
     const hours_mounths_estimated = watch(
@@ -42,10 +42,14 @@ export const Team = () => {
         user_id: id,
         professional,
         jobs,
-        hours_mounths_estimated,
-        extra_hours_estimated,
-        hours_mounths_performed: undefined,
-        extra_hours_performed: undefined,
+        extra_hours_estimated: Number(
+          watch('usersProjects.extra_hours_estimated')
+        ),
+        hours_mounths_estimated: Number(
+          watch('usersProjects.hours_mounths_estimated')
+        ),
+        extra_hours_performed: null,
+        hours_mounths_performed: null,
         status: { label: status ? status : 'Ativo' },
         avatar: avatar
           ? avatar
@@ -54,7 +58,6 @@ export const Team = () => {
 
       const currentTeam = getValues('team') || []
       const newTeam = [...currentTeam, newTeamMember]
-      console.log('newTeamMember: ', newTeamMember)
 
       setValue('team', newTeam)
     }
@@ -91,17 +94,26 @@ export const Team = () => {
           width={190}
         />
         <Inputs.Default
-          {...register('usersProjects.hours_mounths_estimated')}
+          {...register('usersProjects.hours_mounths_estimated', {
+            required: true
+          })}
+          error={
+            errors?.usersProjects?.hours_mounths_estimated?.message
+          }
           label='Horas/mês estimadas'
-          placeholder='Horas/mês'
+          placeholder='Horas'
           width={175}
         />
         <Inputs.Default
-          {...register('usersProjects.extra_hours_estimated')}
+          {...register('usersProjects.extra_hours_estimated', {
+            required: true
+          })}
+          error={
+            errors?.usersProjects?.extra_hours_estimated?.message
+          }
           label='Horas extras estimadas'
-          placeholder='Horas extras'
+          placeholder='Horas'
           width={175}
-          required
         />
         <ButtonGeneric
           top='1em'
@@ -115,8 +127,8 @@ export const Team = () => {
           onClick={handleTeam}
         />
       </ContainerRow>
-      <ContainerRow gap='1rem'>
-        <ProjectTeam />
+      <ContainerRow>
+        <Table.ProjectTeam />
       </ContainerRow>
     </>
   )

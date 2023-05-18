@@ -5,10 +5,7 @@ import { ContainerShelf, ContainerShelfColumn, Text } from '../style'
 import { ShelfProps } from '../types'
 import { ProjectPropsHours } from './types'
 
-export const Shelf = ({
-  props,
-  config
-}: ShelfProps<ProjectPropsHours>) => {
+export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const {
     date_start,
     extra_hours_estimated,

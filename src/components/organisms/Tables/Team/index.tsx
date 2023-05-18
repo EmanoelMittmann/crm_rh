@@ -11,9 +11,9 @@ import {
   Main
 } from 'components/organisms/Tables/style'
 
-import { GRID_TEMPLATE, HEADERS } from './constants'
+import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
+import { FormProjectProps } from '../../Forms/Project/types'
 import { Shelf } from './Shelf'
-import { FormProjectProps } from './types'
 
 export const ProjectTeam = () => {
   const { watch, setValue } = useFormContext<FormProjectProps>()
@@ -21,9 +21,13 @@ export const ProjectTeam = () => {
   const { isLoading, handleOrder } = useContext(List.Project.Context)
   const navigate = useNavigate()
 
-  const POPOVER_OPTIONS = (user_id: number, status: any) => [
+  const POPOVER_OPTIONS = (user_id: number, status: boolean) => [
     user_id
       ? {
+          label: 'Editar',
+          callback: () => navigate(`/userProjects/project/${user_id}`)
+        }
+      : {
           label: 'Remover',
           callback: () => {
             const newTeam = Team.filter(
@@ -31,10 +35,6 @@ export const ProjectTeam = () => {
             )
             setValue('team', newTeam)
           }
-        }
-      : {
-          label: 'Editar',
-          callback: () => navigate(`/userProjects/project/${user_id}`)
         }
   ]
 

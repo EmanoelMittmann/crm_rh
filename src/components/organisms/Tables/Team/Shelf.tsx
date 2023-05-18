@@ -5,8 +5,13 @@ import {
   ContainerShelfColumn
 } from 'components/organisms/Tables/style'
 
-import { Image, TeamJobName, Text, TextJob } from './style'
-import { ShelfUserProject } from './types'
+import {
+  Image,
+  TeamJobName,
+  Text,
+  TextJob
+} from '../../Forms/Project/style'
+import { ShelfUserProject } from '../../Forms/Project/types'
 
 export const Shelf = ({ props, config }: ShelfUserProject) => {
   const {
@@ -22,26 +27,26 @@ export const Shelf = ({ props, config }: ShelfUserProject) => {
 
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn gap='.5rem' width='205px'>
+      <ContainerShelfColumn gap='.5rem' width='210px'>
         <Image src={avatar} />
         <TeamJobName>
           <Text>{professional.name?.label}</Text>
           <TextJob>{jobs.name?.label}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
-      <ContainerShelfColumn width='105px'>
+      <ContainerShelfColumn width='130px'>
         <Text>{hours_mounths_estimated}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='110px'>
+      <ContainerShelfColumn width='120px'>
         <Text>{extra_hours_estimated}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='100px'>
+      <ContainerShelfColumn width='140px'>
         <Text>{hours_mounths_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='110px'>
+      <ContainerShelfColumn width='120px'>
         <Text>{extra_hours_performed}</Text>
       </ContainerShelfColumn>
 

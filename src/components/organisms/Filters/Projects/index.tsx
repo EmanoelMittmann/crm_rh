@@ -71,7 +71,7 @@ export const Projects = () => {
           onClear={() => handleFillProject_Status(null)}
         />
       </Container>
-      <Button.New onClick={() => navigateTo('/RegisterProjects')} />
+      <Button.New onClick={() => navigateTo('/project/new')} />
     </Main>
   )
 }

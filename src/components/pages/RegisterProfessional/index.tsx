@@ -116,7 +116,7 @@ const RegisterProfessional = () => {
       },
       projects: data.projects.attachment
     }
-    console.log(payload)
+
     id
       ? await api.put(
           routes.professional.getUser(Number(id)),

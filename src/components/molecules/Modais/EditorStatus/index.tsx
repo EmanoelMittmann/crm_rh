@@ -14,7 +14,6 @@ import { theme } from 'styles'
 
 import { Selects } from 'components/atoms'
 import Close from 'components/atoms/Buttons/Close'
-import { FormProjectProps } from 'components/organisms/Forms/Project/types'
 
 import { Columns, ContainerModal, Overlay, Row } from './style'
 

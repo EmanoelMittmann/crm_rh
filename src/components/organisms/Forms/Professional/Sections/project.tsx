@@ -23,7 +23,7 @@ export const Project = () => {
       name,
       date_start: new Date().toLocaleDateString('pt-BR'),
       extra_hours_estimated:
-        Number(watch('projects.selected.input2')) || 0,
+        Number(watch('projects.selected.input1')) || 0,
       hours_mounths_estimated:
         Number(watch('projects.selected.input1')) || 0,
       extra_hours_performed: 0,
