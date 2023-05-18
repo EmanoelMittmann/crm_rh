@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-
-//import { SelectOption } from '@stardust-ds/react/lib/esm/components/Select/interfaces'
-//import axios from 'axios'
-//import { AuthContext } from 'contexts'
-
+import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
 import { Button, Loading } from 'components/atoms'
@@ -17,17 +13,17 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 
 import {
+  fetchAndPopulateUser,
   fetchProps,
   handleCEP,
   handleCNPJ,
   handleCPF,
-  handlePopulateFields,
   handleRemoveSpecialCharacters
 } from './logic'
 import { Container } from './style'
 
 const RegisterProfessional = () => {
-  //const [payload, setPayload] = useState({} as any)
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
 
   const methods = useForm<FormProps['Professional']>({
@@ -154,7 +150,7 @@ const RegisterProfessional = () => {
   useDebounce({
     fn: () => fetchProps(methods),
     delay: 0,
-    listener: []
+    listener: [id]
   })
 
   useDebounce({
@@ -170,18 +166,11 @@ const RegisterProfessional = () => {
 
   useEffect(() => {
     if (id) {
-      api
-        .get(routes.professional.getUser(+id))
-        .then(({ data }) => data)
-        .then((data) => {
-          if (data.length === 0)
-            throw new Error('Usuário não encontrado')
-          return data[0]
+      fetchAndPopulateUser(id, methods)
+        .catch((error) => {
+          console.log(error.message)
         })
-        .then((data) => handlePopulateFields(data, methods))
-        .finally(() => {
-          setIsLoading(false)
-        })
+        .finally(() => setIsLoading(false))
     } else {
       setIsLoading(false)
     }

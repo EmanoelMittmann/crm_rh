@@ -47,6 +47,7 @@ export const Personal = () => {
           error={errors.birth_date?.message}
           type='date'
           label='Data de nascimento'
+          value={watch('birth_date') as any}
           max={TODAY}
         />
         <Inputs.Default
