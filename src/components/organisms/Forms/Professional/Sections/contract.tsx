@@ -74,6 +74,7 @@ export const Contract = () => {
           error={errors.professional_data?.type_person?.message}
           options={options?.jobs}
           label='Cargo'
+          value={watch('job_id') as any}
           placeholder='Selecione'
           width={435}
         />
@@ -93,6 +94,7 @@ export const Contract = () => {
           onClear={() => setValue('job_type', null)}
           error={errors.job_type?.message}
           options={CONTRACT_TYPE_OPTIONS}
+          value={watch('job_type') as any}
           label='Tipo de contrato'
           width={220}
         />

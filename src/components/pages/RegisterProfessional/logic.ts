@@ -4,6 +4,12 @@ import { SelectOption } from '@stardust-ds/react/lib/esm/components/Select/inter
 import axios from 'axios'
 
 import { FormProps, getUfOption } from 'components/organisms'
+import {
+  BANK_OPTIONS,
+  CONTRACT_TYPE_OPTIONS
+} from 'components/organisms/Forms/Professional/constants'
+import { getDateInput } from 'components/utils/formatDate'
+import { generateOpitionsFromBackend } from 'components/utils/OptionsAplication'
 
 import api from 'api'
 import { externRoutes, routes } from 'routes'
@@ -193,20 +199,37 @@ export async function fetchProps(
   })
 }
 
+export async function fetchAndPopulateUser(
+  id: string,
+  methods: UseFormReturn<FormProps['Professional'], any>
+) {
+  const { data: userData } = await api.get<any[]>(
+    routes.professional.getUser(+id)
+  )
+
+  if (userData.length === 0) throw new Error('Usuário não encontrado')
+
+  await fetchProps(methods)
+  handlePopulateFields(userData[0], methods)
+}
 export function handlePopulateFields(
   data: any,
   methods: UseFormReturn<FormProps['Professional'], any>
 ) {
+  console.log('data: ', data)
+  const BANKS = methods.watch('options.banks')
+  const JOBS = methods.watch('options.jobs')
+
   methods.reset({
     name: data.name,
     cpf: data.cpf,
-    birth_date: data.birth_date,
+    birth_date: getDateInput(data.birth_date),
     rg: data.rg,
     email: data.email,
     telephone_number: data.telephone_number,
     cep: data.cep,
     city_name: data.city_name,
-    uf: data.uf,
+    uf: getUfOption(data.uf),
     country: data.country,
     neighbourhood_name: data.neighbourhood_name,
     street_name: data.street_name,
@@ -227,15 +250,30 @@ export function handlePopulateFields(
       company_city_name: data.professional_data.company_city_name,
       company_neighborhood_name:
         data.professional_data.company_neighborhood_name,
-      uf_company: data.professional_data.uf_company,
-      account_type: data.professional_data.account_type,
+      uf_company: getUfOption(data.professional_data.uf_company),
+      account_type: generateOpitionsFromBackend(
+        data.professional_data.account_type,
+        BANK_OPTIONS.ACCOUNT_TYPE
+      ),
       account_number: data.professional_data.account_number,
       agency: data.professional_data.agency,
-      bank: data.professional_data.bank,
+      bank: generateOpitionsFromBackend(
+        data.professional_data.bank,
+        BANKS
+      ),
       pix_key: data.professional_data.pix_key,
-      pix_key_type: data.professional_data.pix_key_type,
-      type_of_transfer: data.professional_data.type_of_transfer,
-      type_person: data.professional_data.type_person
+      pix_key_type: generateOpitionsFromBackend(
+        data.professional_data.pix_key_type,
+        BANK_OPTIONS.PIX_KEY_TYPE
+      ),
+      type_of_transfer: generateOpitionsFromBackend(
+        data.professional_data.type_of_transfer,
+        BANK_OPTIONS.TRANSFER_TYPE
+      ),
+      type_person: generateOpitionsFromBackend(
+        data.professional_data.type_person,
+        BANK_OPTIONS.PERSON_TYPE
+      )
     },
     commission: data.commission,
     company_id: data.company_id,
@@ -243,19 +281,25 @@ export function handlePopulateFields(
     extra_hour_limit: data.extra_hour_limit,
     extra_hour_value: data.extra_hour_value,
     function_job: data.function_job,
-    job_id: data.job_id,
-    job_type: data.job_type,
+    job_id: generateOpitionsFromBackend(data.job_id, JOBS),
+    job_type: generateOpitionsFromBackend(
+      data.job_type,
+      CONTRACT_TYPE_OPTIONS
+    ),
     fixed_payment_value: data.fixed_payment_value,
     variable1: data.variable1,
     variable2: data.variable2,
     permissions: data.permissions,
-    start_date: data.start_date,
+    start_date: getDateInput(data.start_date),
     limited_extra_hours: data.limited_extra_hours,
     avatar: data.avatar,
     is_active: data.is_active,
     user_type_id: data.user_type_id,
     weekly_hours: data.weekly_hours,
-    mounth_hours: data.mounth_hours
+    mounth_hours: data.mounth_hours,
+    projects: {
+      attachment: data.projects
+    }
   })
 }
 
