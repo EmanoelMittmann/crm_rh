@@ -80,32 +80,25 @@ const RegisterProjects = () => {
   }
   const handleCreateProject = async (sanitizeData: any) => {
     try {
-      console.log('sanitizeData: ', sanitizeData);
-
-      // Cadastro do projeto
       const projectResponse = await api.post(routes.project.register, sanitizeData);
-      const projectId = projectResponse.data.id; // Obter o ID do projeto criado
+      const projectId = projectResponse.data.id;
 
       if (projectId) {
-        // Cadastro dos usuários apenas se houver usuários para cadastrar
+        
         if (sanitizeData.users && sanitizeData.users.length > 0) {
           const usersResponse = await api.post(routes.project.userProjects(projectId), sanitizeData.users);
           console.log('Users cadastrados:', usersResponse.data);
         }
       } else {
-        throw new Error('Erro ao cadastrar o projeto.'); // Lançar um erro se o ID do projeto estiver faltando
+        throw new Error('Erro ao cadastrar o projeto.');
       }
-
       toast.success({
         title: 'Projeto cadastrado com sucesso.',
         position: 'bottom-right'
-      }); // Exibir o toast de sucesso
-
-      navigate('/project'); // Redirecionar para a listagem de projetos
+      });
+      navigate('/project');
     } catch (error) {
       console.log('error: ', error);
-      // Lida com erros de forma adequada, se necessário
-     
     }
   };
 
