@@ -64,5 +64,6 @@ export const externRoutes = {
     `https://brasilapi.com.br/api/cnpj/v1/${cnpj}`,
   cep: (search: string) =>
     ` https://viacep.com.br/ws/${search}/json/`,
-  uf: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
+  uf: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados',
+  cnae: `https://servicodados.ibge.gov.br/api/v2/cnae/classes`
 }

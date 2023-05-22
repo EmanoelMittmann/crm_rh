@@ -4,6 +4,7 @@ import { ProjectPropsHours } from 'components/organisms/Tables/Attachment/types'
 import { PIX_KEY_TYPE } from './constants'
 
 export interface ProfessionalProps {
+  id: number
   email: string
   name: string
   avatar: string

@@ -9,6 +9,8 @@ export interface CompanyProps {
   fantasy_name: string
   cnpj: string
   is_matriz: boolean
+  director: number | null
+  witnesses: number[]
   opening_date: string
   state_registration: string
   municipal_registration: string
@@ -30,6 +32,7 @@ export interface CompanyProps {
   registration_status: string
   type_company: string
   date_of_registration_status: string
+  date_of_special_situation: string
   reason_for_registration_status: string
   special_situation: string
   account_number: number
@@ -42,12 +45,11 @@ interface FormConfigProps {
   options: IOptions
 }
 
-interface IOptions {
+export interface IOptions {
   owners: SelectProps[]
   banks: SelectProps[]
-  typeAccount: SelectProps[]
   uf: SelectProps[]
-  registrationStatus: SelectProps[]
+  cnae: SelectProps[]
 }
 
 export interface FormProps extends CompanyProps, FormConfigProps {}
