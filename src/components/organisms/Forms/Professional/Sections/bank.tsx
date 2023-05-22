@@ -59,6 +59,7 @@ export const Bank = () => {
           options={BANK_OPTIONS.PERSON_TYPE}
           width={292.5}
           label='Pessoa Física/Jurídica'
+          value={watch('professional_data.type_person') as any}
           placeholder='Selecione'
         />
         <Selects.Default
@@ -73,6 +74,7 @@ export const Bank = () => {
           options={bank_options}
           width={292.5}
           label='Banco'
+          value={watch('professional_data.bank') as any}
           placeholder='Selecione'
           searchable
         />
@@ -89,6 +91,7 @@ export const Bank = () => {
           error={errors.professional_data?.account_type?.message}
           options={BANK_OPTIONS.ACCOUNT_TYPE}
           label='Tipo da conta'
+          value={watch('professional_data.account_type') as any}
           width={292.5}
           placeholder='Selecione'
         />
@@ -131,6 +134,7 @@ export const Bank = () => {
           error={errors.professional_data?.type_of_transfer?.message}
           options={BANK_OPTIONS.TRANSFER_TYPE}
           label='Tipo de transferência'
+          value={watch('professional_data.type_of_transfer') as any}
           width={292.5}
           placeholder='Selecione'
         />
@@ -149,6 +153,7 @@ export const Bank = () => {
           options={BANK_OPTIONS.PIX_KEY_TYPE}
           label='Tipo de chave PIX'
           width={292.5}
+          value={watch('professional_data.pix_key_type') as any}
           placeholder='Selecione'
         />
         <Inputs.Default
