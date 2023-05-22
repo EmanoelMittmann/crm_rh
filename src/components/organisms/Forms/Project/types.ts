@@ -2,6 +2,7 @@ import type { Option, SelectOption } from 'components/atoms'
 import { TemplateProps } from 'components/organisms/Tables/types'
 
 export interface TeamMemberProps {
+  isTechLead: boolean
   user_id: number
   job_: string
   job: string,
@@ -36,6 +37,7 @@ export interface ProjectProps {
   project_type_id: Option | null
   team_cost: string
   date_start_performed: string
+  isTechLead: boolean
   project_type: {
     id: number
     name: string
@@ -71,19 +73,28 @@ export interface ProjectProps {
     id: Option | null
   }
   usersProjects: {
-    user_id: Option | null
+    isTechLead: boolean
+    user_id: number
+    job_: string
+    job: string,
+    job_id: number
+    name: string
     extra_hours_estimated: number
-    extra_hours_performed: Option | null
-    hours_mounths_estimated: Option | null
-    hours_mounths_performed: Option | null
-    avatar: Option | null
-    name: Option | null
-    status: Option | null
-    job_: Option | null
-    job_id: Option | null
-    job: {
-      id: Option | null
+    hours_mounths_estimated: number
+    hours_mounths_performed: number
+    extra_hours_performed: number
+    is_active: boolean
+    avatar: string
+    status: boolean
+    jobs: {
+      id: number
       name: Option | null
+    }
+    professional: {
+      id: number
+      name: Option | null
+      status: boolean
+      avatar: string
     }
   }
 }
@@ -91,22 +102,7 @@ interface ProjectAttachmentProps {
   project: Option | null
   input: string
 }
-export interface UserProjectsProps {
-  user_id: number
-  extra_hours_estimated: string
-  extra_hours_performed: string
-  hours_mounths_estimated: string
-  hours_mounths_performed: string
-  avatar: string
-  name: string
-  status: string
-  job_: string
-  job_id: string
-  job: {
-    id: number
-    name: string
-  }
-}
+
 interface FormConfigProps {
   options: {
     filter(arg0: (option: any) => boolean): SelectOption[]

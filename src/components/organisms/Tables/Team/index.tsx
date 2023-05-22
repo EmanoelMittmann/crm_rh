@@ -17,10 +17,11 @@ import { Shelf } from './Shelf'
 
 export const ProjectTeam = () => {
   const { watch, setValue } = useFormContext<FormProjectProps>()
-  const Team = watch('team', [])
   const { isLoading, handleOrder } = useContext(List.Project.Context)
   const navigate = useNavigate()
 
+  const Team = watch('team', [])
+  
   const POPOVER_OPTIONS = (user_id: number, status: boolean) => [
     user_id
       ? {
@@ -56,7 +57,7 @@ export const ProjectTeam = () => {
         {...{ props }}
       />
     ))
-  }, [isLoading, Team])
+  },[isLoading, Team])
 
   return (
     <Main>

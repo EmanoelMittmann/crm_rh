@@ -18,9 +18,11 @@ export const Shelf = ({ props, config }: ShelfProps<TeamMemberProps>) => {
     jobs,
     professional,
     status,
-    avatar
+    avatar,
+    is_active,
   } = props
   // console.log('props: ', props);
+
 
   return (
     <ContainerShelf template={config.template}>
@@ -36,11 +38,11 @@ export const Shelf = ({ props, config }: ShelfProps<TeamMemberProps>) => {
       </ContainerShelfColumn>
 
       <ContainerShelfColumn width='120px'>
-        <Text>{extra_hours_estimated}</Text>
+        <Text>{hours_mounths_performed}</Text>
       </ContainerShelfColumn>
 
       <ContainerShelfColumn width='140px'>
-        <Text>{hours_mounths_performed}</Text>
+        <Text>{extra_hours_estimated}</Text>
       </ContainerShelfColumn>
 
       <ContainerShelfColumn width='120px'>
@@ -52,7 +54,7 @@ export const Shelf = ({ props, config }: ShelfProps<TeamMemberProps>) => {
         justify='center'
         gap='1.5em'
       >
-        <Badge.Status status={status} />
+        <Badge.Status status={is_active} />
         <Popover options={config.options} />
       </ContainerShelfColumn>
     </ContainerShelf>

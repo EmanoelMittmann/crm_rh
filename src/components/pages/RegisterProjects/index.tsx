@@ -12,6 +12,10 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 import { Container } from './style'
 import { fetchAndPopulateFields, fetchPropsProject } from './logic'
+import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
+import { Team } from 'components/organisms/Forms/Project/Sections/Team'
+import { UserProjects } from 'contexts/List/User'
+import { title } from 'process'
 
 
 
@@ -40,25 +44,77 @@ const RegisterProjects = () => {
       date_start_performed: data.date_start_performed,
       date_end_performed: data.date_end_performed,
 
-      team: data.team,
+      users: data.team.map(user=> {
+        return {
+          user_id: user.professional.name?.value,
+          extra_hours_estimated: user.extra_hours_estimated,
+          extra_hours_performed: user.extra_hours_performed,
+          hours_mounths_estimated: user.hours_mounths_estimated,
+          hours_mounths_performed: user.hours_mounths_performed,
+          status: user.status,
+          job_: user.jobs.name?.label,
+
+        }
+      } )
 
     }
-    id
-      ? await api.put(routes.project.updateProject(Number(id)),
-        sanitizeData
-      )
-      : await api.post(routes.project.register, sanitizeData
-      )
-    toast({
-      type: 'success',
-      title: 'Projeto cadastrado com sucesso.',
-      position: 'bottom-right'
-    })
-    navigate('/project')
+
+    try {
+      if (id) {
+        await api.put(routes.project.updateProject(Number(id)), sanitizeData);
+      } else {
+        await handleCreateProject(sanitizeData);
+      }
+      const successMessage = id ? 'Projeto atualizado com sucesso.' : 'Projeto cadastrado com sucesso.';
+      toast({
+        type: 'success',
+        title: successMessage,
+        position: 'bottom-right'  
+      })
+      navigate('/project');
+    } catch (error) {
+      console.log('error: ', error);
+    
+    }
 
   }
+  const handleCreateProject = async (sanitizeData: any) => {
+    try {
+      console.log('sanitizeData: ', sanitizeData);
+
+      // Cadastro do projeto
+      const projectResponse = await api.post(routes.project.register, sanitizeData);
+      const projectId = projectResponse.data.id; // Obter o ID do projeto criado
+
+      if (projectId) {
+        // Cadastro dos usuários apenas se houver usuários para cadastrar
+        if (sanitizeData.users && sanitizeData.users.length > 0) {
+          const usersResponse = await api.post(routes.project.userProjects(projectId), sanitizeData.users);
+          console.log('Users cadastrados:', usersResponse.data);
+        }
+      } else {
+        throw new Error('Erro ao cadastrar o projeto.'); // Lançar um erro se o ID do projeto estiver faltando
+      }
+
+      toast.success({
+        title: 'Projeto cadastrado com sucesso.',
+        position: 'bottom-right'
+      }); // Exibir o toast de sucesso
+
+      navigate('/project'); // Redirecionar para a listagem de projetos
+    } catch (error) {
+      console.log('error: ', error);
+      // Lida com erros de forma adequada, se necessário
+     
+    }
+  };
 
 
+  //const handleCreateProject = async (sanitizeData: any)=>{
+    //console.log('sanitizeData: ', sanitizeData);
+   // await api.post(routes.project.register, sanitizeData)
+    //await  api.post(routes.project.userProjects( sanitizeData.id), sanitizeData.users)
+//}
 
   const handleSave = () => {
     if (!validationSchema) {

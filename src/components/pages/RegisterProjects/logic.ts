@@ -19,13 +19,13 @@ export async function fetchPropsProject(
     { data: users },
     { data: professionals }
   ] = await Promise.all([
-    await api.get(routes.project_type.list),
-    api.get(routes.status.list),
-    api.get(routes.job.list, {
+    await api.get(routes.project_type.list + '?limit=100'),
+    api.get(routes.status.list + '?limit=100'),
+    api.get(routes.job.list + '?limit=100',  {
       params: { is_active: true }
     }),
     api.get(routes.usersProjects.list),
-    api.get(routes.professional.list)
+    api.get(routes.professional.list + '?limit=100', )
   ])
   methods.setValue('options', {
     project_types: project_type.data.map(
@@ -74,7 +74,6 @@ export function handlePopulateFields(
   const TYPE_PROJECT = methods.watch('options.project_types')
 
   methods.reset({
-    
     id: data.id,
     name: data.name,
     project_status_id: generateOpitionsFromBackend(data.project_status_id, STATUS),

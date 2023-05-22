@@ -1,11 +1,11 @@
 import { useFormContext } from 'react-hook-form'
-
 import { Selects, Inputs } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { Table } from 'components/organisms/Tables'
-
 import { ContainerRow } from '../style'
 import { FormProjectProps, TeamMemberProps } from '../types'
+
+
 
 export const Team = () => {
   const {
@@ -20,37 +20,26 @@ export const Team = () => {
 
   const handleTeam = () => {
     const professional = watch('professional')
-    const id = watch('usersProjects.user_id')
-    const avatar = watch('professional.avatar')
+    const id = watch('professional.name.value')
+    const avatar = watch('professional.avatar.label')
     const jobs = watch('jobs')
-    const hours_mounths_estimated = watch(
-      'usersProjects.hours_mounths_estimated'
-    )
-    const extra_hours_estimated = watch(
-      'usersProjects.extra_hours_estimated'
-    )
-    const hours_mounths_performed = watch(
-      'usersProjects.hours_mounths_performed'
-    )
-    const extra_hours_performed = watch(
-      'usersProjects.extra_hours_performed'
-    )
-    const status = watch('professional.status')
-
+    const status = watch('usersProjects.status')
+    const hoursMonth = Number(watch('usersProjects.hours_mounths_estimated') ?? 0)
+    const extraHour = Number(watch('usersProjects.extra_hours_estimated') ?? 0)
+    const hours_mounths_performed = Number(watch('usersProjects.hours_mounths_performed') ?? 0)
+    const extra_hours_performed = Number(watch('usersProjects.extra_hours_performed') ?? 0)
+    const techLead = watch('usersProjects.isTechLead')
     if (professional && jobs) {
       const newTeamMember = {
         user_id: id,
         professional,
         jobs,
-        extra_hours_estimated: Number(
-          watch('usersProjects.extra_hours_estimated')
-        ),
-        hours_mounths_estimated: Number(
-          watch('usersProjects.hours_mounths_estimated')
-        ),
-        extra_hours_performed: null,
-        hours_mounths_performed: null,
-        status: status,
+        hours_mounths_estimated: hoursMonth,
+        extra_hours_estimated: extraHour,
+        extra_hours_performed: extra_hours_performed,
+        hours_mounths_performed: hours_mounths_performed,
+        isTechLead: techLead,
+        status: status? 0 : 1,
         avatar: avatar
           ? avatar
           : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
@@ -60,7 +49,9 @@ export const Team = () => {
       const newTeam = [...currentTeam, newTeamMember]
 
       setValue('team', newTeam)
+
     }
+  
   }
 
   return (
@@ -77,7 +68,7 @@ export const Team = () => {
             })
           }
           onClear={() => setValue('professional.name', null)}
-          options={options?.professionals}
+          options={watch('options')?.professionals ?? []}
           label='Time'
           placeholder='Selecione'
           width={190}
@@ -88,7 +79,7 @@ export const Team = () => {
             setValue('jobs.name', value, { shouldValidate: true })
           }
           onClear={() => setValue('jobs.name', null)}
-          options={options?.jobs}
+          options={watch('options')?.jobs ?? []}
           label='Cargo'
           placeholder='Selecione'
           width={190}
@@ -97,9 +88,7 @@ export const Team = () => {
           {...register('usersProjects.hours_mounths_estimated', {
             required: true
           })}
-          error={
-            errors?.usersProjects?.hours_mounths_estimated?.message
-          }
+          error={errors.usersProjects?.hours_mounths_performed?.message}
           label='Horas/mês estimadas'
           placeholder='Horas'
           width={175}
@@ -108,9 +97,7 @@ export const Team = () => {
           {...register('usersProjects.extra_hours_estimated', {
             required: true
           })}
-          error={
-            errors?.usersProjects?.extra_hours_estimated?.message
-          }
+          error={errors.usersProjects?.extra_hours_performed?.message}
           label='Horas extras estimadas'
           placeholder='Horas'
           width={175}
