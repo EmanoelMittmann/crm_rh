@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Companys from 'components/pages/Companys'
 import Jobs from 'components/pages/Jobs'
+import { RegisterCompany } from 'components/pages/RegisterCompany'
 import RegisterProjects from 'components/pages/RegisterProjects'
 import Settings from 'components/pages/Setting'
 import StatusProject from 'components/pages/StatusProject'
@@ -42,6 +43,10 @@ const Router = () => {
           <Route path='/statusProject' element={<StatusProject />} />
           <Route path='/settings' element={<Settings />} />
           <Route path='/company' element={<Companys />} />
+          <Route path='/company'>
+            <Route path='new' element={<RegisterCompany />} />
+            <Route path=':id' element={<RegisterCompany />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
