@@ -12,17 +12,13 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 import { Container } from './style'
 import { fetchAndPopulateFields, fetchPropsProject } from './logic'
-import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
-import { Team } from 'components/organisms/Forms/Project/Sections/Team'
-import { UserProjects } from 'contexts/List/User'
-import { title } from 'process'
-
 
 
 const RegisterProjects = () => {
   const [isSaving, setIsSaving] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate()
+
   const { id } = useParams()
 
 
@@ -44,7 +40,7 @@ const RegisterProjects = () => {
       date_start_performed: data.date_start_performed,
       date_end_performed: data.date_end_performed,
 
-      users: data.team.map(user=> {
+      users: data.team.map(user => {
         return {
           user_id: user.professional.name?.value,
           extra_hours_estimated: user.extra_hours_estimated,
@@ -55,59 +51,47 @@ const RegisterProjects = () => {
           job_: user.jobs.name?.label,
 
         }
-      } )
+      })
+
+
 
     }
 
     try {
       if (id) {
+        console.log('Project_id: ', id);
         await api.put(routes.project.updateProject(Number(id)), sanitizeData);
       } else {
-        await handleCreateProject(sanitizeData);
+        await api.post(routes.project.register, sanitizeData);
       }
       const successMessage = id ? 'Projeto atualizado com sucesso.' : 'Projeto cadastrado com sucesso.';
       toast({
         type: 'success',
         title: successMessage,
-        position: 'bottom-right'  
+        position: 'bottom-right'
       })
       navigate('/project');
     } catch (error) {
       console.log('error: ', error);
-    
+
     }
 
   }
-  const handleCreateProject = async (sanitizeData: any) => {
-    try {
-      const projectResponse = await api.post(routes.project.register, sanitizeData);
-      const projectId = projectResponse.data.id;
 
-      if (projectId) {
-        
-        if (sanitizeData.users && sanitizeData.users.length > 0) {
-          const usersResponse = await api.post(routes.project.userProjects(projectId), sanitizeData.users);
-          console.log('Users cadastrados:', usersResponse.data);
-        }
-      } else {
-        throw new Error('Erro ao cadastrar o projeto.');
+  const handleCreateProject = async (sanitizeData: any) => {
+    if (sanitizeData.id) {
+      if (Array.isArray(sanitizeData.users)) {
+        await api.post(routes.project.userProjects(sanitizeData.id), sanitizeData.users);
       }
-      toast.success({
-        title: 'Projeto cadastrado com sucesso.',
-        position: 'bottom-right'
-      });
-      navigate('/project');
-    } catch (error) {
-      console.log('error: ', error);
     }
   };
 
-
-  //const handleCreateProject = async (sanitizeData: any)=>{
-    //console.log('sanitizeData: ', sanitizeData);
-   // await api.post(routes.project.register, sanitizeData)
-    //await  api.post(routes.project.userProjects( sanitizeData.id), sanitizeData.users)
-//}
+  useEffect(() => {
+    if (id) {
+      console.log('id: ', id);
+      handleCreateProject(methods.getValues());
+    }
+  }, [id]);
 
   const handleSave = () => {
     if (!validationSchema) {

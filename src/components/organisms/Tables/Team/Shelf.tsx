@@ -19,7 +19,6 @@ export const Shelf = ({ props, config }: ShelfProps<TeamMemberProps>) => {
     professional,
     status,
     avatar,
-    is_active,
   } = props
   // console.log('props: ', props);
 
@@ -54,7 +53,7 @@ export const Shelf = ({ props, config }: ShelfProps<TeamMemberProps>) => {
         justify='center'
         gap='1.5em'
       >
-        <Badge.Status status={is_active} />
+        <Badge.Status status={status} />
         <Popover options={config.options} />
       </ContainerShelfColumn>
     </ContainerShelf>

@@ -5,7 +5,7 @@ import {
   useCallback,
   useContext
 } from 'react'
-import { Button, Select } from '@stardust-ds/react'
+import { Button, Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 import { theme } from 'styles'
 import Close from 'components/atoms/Buttons/Close'
@@ -13,41 +13,38 @@ import { Columns, ContainerModal, Overlay, Row } from './style'
 import { Option } from 'types'
 
 
-interface IModalStatusProps {
+interface IModalUserProps {
   text: string
   placeholder: string
   EventOne: (_: number, name: string) => void
   defaultOpened?: boolean
 }
 
-export interface IHandleModalColorsPropsNew {
-  open(id: number, name: string, status:any): void
+export interface IHandleModalPropsUserNew {
+  open(user_id: number, name: string): void
   close(): void
 }
 
-const EditorStatus = forwardRef<
-  IHandleModalColorsPropsNew,
-  IModalStatusProps
+const UsersEditor = forwardRef<
+  IHandleModalPropsUserNew,
+  IModalUserProps
 >((props, ref) => {
   const { text, EventOne, placeholder } = props
-  const [isOpen, setIsOpen] = useState({ id: 0, name: '' })
+  const [isOpen, setIsOpen] = useState({ id: 0})
   const [selectedStatus, setSelectedStatus] = useState<Option>()
   const {filterOptionsStatus} = useContext(List.Project.Context)
   
 
   const close = useCallback(() => {
-    setIsOpen({ id: 0, name: ''})
+    setIsOpen({ id: 0})
   }, [])
 
   useImperativeHandle(
     ref,
     () => ({
-      open: (id, name, status) => {
-        setIsOpen({ id: id, name: name })
-        setSelectedStatus({
-          label: status.name,
-          value: String(status.id)
-        })
+      open: (user_id) => {
+        setIsOpen({ id: user_id,})
+       
       },
       close
     }),
@@ -67,15 +64,42 @@ const EditorStatus = forwardRef<
           </Row>
           <Row>
             <Columns>
+            <h5>Profissional</h5>
+            </Columns>
+          </Row>
+            <Row>
+              <Columns>
+                <Input
+                  label='Horas mensais'
+                  width={180}
+                />
+              
               <Select
                 onSelect={(e: any) => setSelectedStatus(e.value)}
                 onClear={() => setSelectedStatus({ label: '', value: '' })}
-                options={filterOptionsStatus.status}
+                options={[]}
+                label='Cargo'
                 defaultValue={selectedStatus}
                 placeholder={placeholder}
-                width={380}
+                width={180}
               />
-
+              </Columns>
+     
+            <Columns>
+              <Input
+                label='Horas extras'
+                width={180}
+              />
+            
+              <Select
+                onSelect={(e: any) => setSelectedStatus(e.value)}
+                onClear={() => setSelectedStatus({ label: '', value: '' })}
+                options={[]}
+                label='Status'
+                defaultValue={selectedStatus}
+                placeholder={placeholder}
+                width={180}
+              />
             </Columns>
           </Row>
           <Row>
@@ -94,7 +118,7 @@ const EditorStatus = forwardRef<
               }}
               bgColor='#0066FF'
               onClick={() => {
-                EventOne(isOpen.id, selectedStatus?.value as string)
+                // EventOne(isOpen.id, selectedStatus?.value as string)
                 close()
               }}
             >
@@ -108,4 +132,4 @@ const EditorStatus = forwardRef<
   )
 })
 
-export default EditorStatus
+export default UsersEditor

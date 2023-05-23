@@ -68,9 +68,10 @@ export const Team = () => {
             })
           }
           onClear={() => setValue('professional.name', null)}
-          options={watch('options')?.professionals ?? []}
+          options={watch('options.professionals')??[]}
           label='Time'
           placeholder='Selecione'
+          value={watch('professional.name') as any}
           width={190}
         />
         <Selects.Default
@@ -79,9 +80,10 @@ export const Team = () => {
             setValue('jobs.name', value, { shouldValidate: true })
           }
           onClear={() => setValue('jobs.name', null)}
-          options={watch('options')?.jobs ?? []}
+          options={watch('options.jobs')??[]}
           label='Cargo'
           placeholder='Selecione'
+          value={watch('jobs.name') as any}
           width={190}
         />
         <Inputs.Default

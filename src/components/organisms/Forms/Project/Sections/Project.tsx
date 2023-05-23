@@ -47,7 +47,7 @@ export const Project = () => {
           error={errors.project_type_id?.message}
           required
           onClear={() => setValue('project_type_id', null)}
-          options={watch('options.project_types')}
+          options={watch('options.project_types')??[]}
           value={watch('project_type_id') as any}
           label='Tipo de Projeto'
           placeholder='Selecione'
@@ -94,7 +94,7 @@ export const Project = () => {
             })
           }
           onClear={() => setValue('project_status_id', null)}
-          options={watch('options.status_projects')}
+          options={watch('options.status_projects')??[]}
           value={watch('project_status_id') as  any}
           error={errors.project_status_id?.message}
           required
