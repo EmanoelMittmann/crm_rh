@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
@@ -9,13 +10,13 @@ import { Container, Main } from '../style'
 import { Option } from 'types'
 
 export const Companys = () => {
+  const nagivate = useNavigate()
   const {
     meta,
     filterOptions,
     handleTypeCompany,
     handleSearch,
     handleRegistration,
-    handleUpdateStatus,
     handleUf
   } = useContext(List.Company.Context)
 
@@ -56,7 +57,7 @@ export const Companys = () => {
           onClear={() => handleTypeCompany(null)}
         />
       </Container>
-      <Button.New onClick={() => {}} />
+      <Button.New onClick={() => nagivate('/company/new')} />
     </Main>
   )
 }

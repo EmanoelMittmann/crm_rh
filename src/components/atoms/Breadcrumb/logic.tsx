@@ -14,6 +14,7 @@ const ROUTES = {
   '/statusProject': 'Configurações > Status de Projeto',
   '/typeProject': 'Configurações > Tipos de Projeto',
   '/company': 'Empresas',
+  '/company/new': 'Empresas > Cadastrar Novo',
   '/professional/new': 'Profissionais > Cadastrar Novo',
   '/professional/:id': 'Profissionais > Editar'
 }

@@ -23,6 +23,7 @@ export default forwardRef(
         <Input
           {...props}
           ref={ref}
+          width={'100%'}
           hasError={!!error}
           helperText={error ?? props.helperText}
         />
