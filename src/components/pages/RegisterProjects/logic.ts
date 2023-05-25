@@ -3,14 +3,16 @@ import api from "api"
 import { FormProjectProps } from "components/organisms"
 import { getDateInput } from "components/utils/formatDate"
 import { generateOpitionsFromBackend } from "components/utils/OptionsAplication"
+import { ProfessionalProps } from "contexts/List/Professional/types"
+import { JobsProps } from "contexts/List/Settings/Jobs/types"
 
 import { UseFormReturn } from "react-hook-form"
 import { routes } from "routes"
-import { ProjectProps } from 'types'
+import { ProjectProps, UserProjectsProps } from 'types'
 
 
 export async function fetchPropsProject(
-  methods: UseFormReturn<FormProjectProps['Project'], any>
+  methods: UseFormReturn<FormProjectProps['Project']>
 ) {
   const [
     { data: project_type },
@@ -21,11 +23,11 @@ export async function fetchPropsProject(
   ] = await Promise.all([
     await api.get(routes.project_type.list + '?limit=100'),
     api.get(routes.status.list + '?limit=100'),
-    api.get(routes.job.list + '?limit=100',  {
+    api.get(routes.job.list + '?limit=100', {
       params: { is_active: true }
     }),
     api.get(routes.usersProjects.list),
-    api.get(routes.professional.list + '?limit=100', )
+    api.get(routes.professional.list + '?limit=100',)
   ])
   methods.setValue('options', {
     project_types: project_type.data.map(
@@ -38,15 +40,15 @@ export async function fetchPropsProject(
       label: status.name,
       value: status.id
     })),
-    jobs: jobs?.data.map((job: any) => ({
+    jobs: jobs?.data.map((job: JobsProps) => ({
       label: job.name,
       value: job.id
     })),
-    professionals: professionals?.data.map((professional: any) => ({
+    professionals: professionals?.data.map((professional: ProfessionalProps) => ({
       label: professional.name,
       value: professional.id
     })),
-    usersProjects: users.map((user_project: any) => ({
+    usersProjects: users.map((user_project: ProjectProps) => ({
       label: user_project.name,
       value: user_project.id
     }))
@@ -55,23 +57,24 @@ export async function fetchPropsProject(
 
 export async function fetchAndPopulateFields(
   id: string,
-   methods: UseFormReturn<FormProjectProps['Project'], any>)
-{
-  const {data: projectData } = await api.get(routes.project.updateProject(Number(id)))
+  methods: UseFormReturn<FormProjectProps['Project']>) {
+  const { data: projectData } = await api.get(routes.project.updateProject(Number(id)))
   if (projectData.length === 0) throw new Error('Projeto não encontrado.')
   await fetchPropsProject(methods)
-  handlePopulateFields(projectData[0], methods) 
+  handlePopulateFields(projectData[0], methods)
 
 }
 
 
 export function handlePopulateFields(
   data: any,
-  methods: UseFormReturn<FormProjectProps['Project'], any>
+  methods: UseFormReturn<FormProjectProps['Project']>
 
-){
+) {
   const STATUS = methods.watch('options.status_projects')
   const TYPE_PROJECT = methods.watch('options.project_types')
+  const OPTIONS = methods.watch('options')
+
 
   methods.reset({
     id: data.id,
@@ -100,10 +103,8 @@ export function handlePopulateFields(
         status: statusObj,
         ...rest
       };
-    })
-
-
+    }),
+    options: OPTIONS,
   })
-  
 }
 

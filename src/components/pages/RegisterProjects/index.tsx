@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm, UseFormReturn } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from '@stardust-ds/react'
 import { Button, Loading } from 'components/atoms'
 import { Form, FormProjectProps } from 'components/organisms'
-import { validationSchema } from 'components/organisms/Forms/Project/logic'
+import { schemaUser, validationSchema } from 'components/organisms/Forms/Project/logic'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
 import api from 'api'
 import { routes } from 'routes'
@@ -14,13 +14,12 @@ import { Container } from './style'
 import { fetchAndPopulateFields, fetchPropsProject } from './logic'
 
 
+
 const RegisterProjects = () => {
   const [isSaving, setIsSaving] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate()
-
   const { id } = useParams()
-
 
   const methods = useForm<FormProjectProps['Project']>({
     defaultValues: {},
@@ -51,16 +50,15 @@ const RegisterProjects = () => {
           job_: user.jobs.name?.label,
 
         }
+
       })
-
-
-
     }
 
     try {
       if (id) {
-        console.log('Project_id: ', id);
         await api.put(routes.project.updateProject(Number(id)), sanitizeData);
+        // await api.post(routes.project.userProjects(Number(id)), sanitizeData.users);
+        console.log('sanitizeData: ', sanitizeData);
       } else {
         await api.post(routes.project.register, sanitizeData);
       }
@@ -78,23 +76,25 @@ const RegisterProjects = () => {
 
   }
 
-  const handleCreateProject = async (sanitizeData: any) => {
-    if (sanitizeData.id) {
-      if (Array.isArray(sanitizeData.users)) {
-        await api.post(routes.project.userProjects(sanitizeData.id), sanitizeData.users);
+  const linkTeamToProject = async (methods: UseFormReturn<FormProjectProps['Project']>) => {
+    const users = methods.watch('team')
+    const id = methods.watch('id')
+
+    if (id) {
+      if (Array.isArray(users)) {
+        await api.post(routes.project.userProjects(id), { users: users });
       }
     }
   };
 
   useEffect(() => {
     if (id) {
-      console.log('id: ', id);
-      handleCreateProject(methods.getValues());
+      linkTeamToProject(methods)
     }
-  }, [id]);
+  }, [id, methods])
 
   const handleSave = () => {
-    if (!validationSchema) {
+    if (!validationSchema && !schemaUser) {
       setIsSaving(true)
 
       methods.handleSubmit(onSubmit, OnError)()
@@ -129,16 +129,19 @@ const RegisterProjects = () => {
     listener: []
   })
 
+
   useEffect(() => {
     if (id) {
       fetchAndPopulateFields(id, methods)
+      //  .then(() => linkTeamToProject(methods))
         .catch((error) => console.log(error.message))
         .finally(() => setIsLoading(false))
 
     } else {
       setIsLoading(false)
     }
-  }, [id])
+  }, [id, methods])
+
 
   return (
     <>

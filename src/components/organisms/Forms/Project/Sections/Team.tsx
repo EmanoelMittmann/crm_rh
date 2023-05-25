@@ -1,58 +1,52 @@
-import { useFormContext } from 'react-hook-form'
-import { Selects, Inputs } from 'components/atoms'
+import { useFormContext} from 'react-hook-form'
+import { Selects, Inputs, SelectOption } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { Table } from 'components/organisms/Tables'
 import { ContainerRow } from '../style'
 import { FormProjectProps, TeamMemberProps } from '../types'
 
-
-
 export const Team = () => {
-  const {
-    register,
-    watch,
-    setValue,
-    getValues,
-    formState: { errors }
-  } = useFormContext<FormProjectProps>()
-
+  const {register,watch,setValue,getValues,formState: { errors }} = useFormContext<FormProjectProps>()
   const options = watch('options')
+ 
 
-  const handleTeam = () => {
+  const handleTeam = async () => {
     const professional = watch('professional')
     const id = watch('professional.name.value')
     const avatar = watch('professional.avatar.label')
     const jobs = watch('jobs')
-    const status = watch('usersProjects.status')
-    const hoursMonth = Number(watch('usersProjects.hours_mounths_estimated') ?? 0)
-    const extraHour = Number(watch('usersProjects.extra_hours_estimated') ?? 0)
-    const hours_mounths_performed = Number(watch('usersProjects.hours_mounths_performed') ?? 0)
-    const extra_hours_performed = Number(watch('usersProjects.extra_hours_performed') ?? 0)
-    const techLead = watch('usersProjects.isTechLead')
+    const status = watch('users.status')
+    const hoursMonth = Number(watch('users.hours_mounths_estimated') ?? 0)
+    const extraHour = Number(watch('users.extra_hours_estimated') ?? 0)
+    const hours_mounths_performed = Number(watch('users.hours_mounths_performed') ?? 0)
+    const extra_hours_performed = Number(watch('users.extra_hours_performed') ?? 0)
+    const techLead = watch('users.isTechLead')
+   
+
     if (professional && jobs) {
-      const newTeamMember = {
-        user_id: id,
-        professional,
-        jobs,
-        hours_mounths_estimated: hoursMonth,
-        extra_hours_estimated: extraHour,
-        extra_hours_performed: extra_hours_performed,
-        hours_mounths_performed: hours_mounths_performed,
-        isTechLead: techLead,
-        status: status? 0 : 1,
-        avatar: avatar
-          ? avatar
-          : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
-      } as unknown as TeamMemberProps
+      if (extraHour && hoursMonth) {
+        const newTeamMember = {
+          user_id: id,
+          professional,
+          jobs,
+          hours_mounths_estimated: hoursMonth,
+          extra_hours_estimated: extraHour,
+          extra_hours_performed: extra_hours_performed,
+          hours_mounths_performed: hours_mounths_performed,
+          isTechLead: techLead,
+          status: status ? 0 : 1,
+          avatar: avatar
+            ? avatar
+            : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
+        } as unknown as TeamMemberProps
 
-      const currentTeam = getValues('team') || []
-      const newTeam = [...currentTeam, newTeamMember]
+        const currentTeam = getValues('team') || []
+        const newTeam = [...currentTeam, newTeamMember]
+        setValue('team', newTeam);
+      } 
+    }}
 
-      setValue('team', newTeam)
 
-    }
-  
-  }
 
   return (
     <>
@@ -68,11 +62,10 @@ export const Team = () => {
             })
           }
           onClear={() => setValue('professional.name', null)}
-          options={watch('options.professionals')??[]}
+          options={options?.professionals as SelectOption[]}
           label='Time'
           placeholder='Selecione'
-          value={watch('professional.name') as any}
-          width={190}
+          width={180}
         />
         <Selects.Default
           {...register('jobs.name', {})}
@@ -80,26 +73,25 @@ export const Team = () => {
             setValue('jobs.name', value, { shouldValidate: true })
           }
           onClear={() => setValue('jobs.name', null)}
-          options={watch('options.jobs')??[]}
+          options={options?.jobs as SelectOption[]}
           label='Cargo'
           placeholder='Selecione'
-          value={watch('jobs.name') as any}
-          width={190}
+          width={180}
         />
         <Inputs.Default
-          {...register('usersProjects.hours_mounths_estimated', {
+          {...register('users.hours_mounths_estimated', {
             required: true
           })}
-          error={errors.usersProjects?.hours_mounths_performed?.message}
+          error={errors.users?.hours_mounths_performed?.message}
           label='Horas/mês estimadas'
           placeholder='Horas'
           width={175}
         />
         <Inputs.Default
-          {...register('usersProjects.extra_hours_estimated', {
+          {...register('users.extra_hours_estimated', {
             required: true
           })}
-          error={errors.usersProjects?.extra_hours_performed?.message}
+          error={errors.users?.extra_hours_performed?.message}
           label='Horas extras estimadas'
           placeholder='Horas'
           width={175}

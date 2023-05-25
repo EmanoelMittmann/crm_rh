@@ -4,13 +4,13 @@ import { theme } from 'styles'
 export const ContainerModal = styled.div`
   width: 30em;
   height: 254px;
-  border-radius: 16px;
+ border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
-  position: absolute;
   display: flex;
   top: 50%;
   left: 50%;
-  transform: translate(-24%, -50%);
+  position: fixed;
+  transform: translate(-25%, -50%);
   padding-top: 1em;
   z-index: 10;
   box-shadow: 0px 5px 10px 10px ${theme.neutrals.gray3};

@@ -13,6 +13,7 @@ export const Filter = Object.assign(
     Jobs,
     StatusProject,
     TypeProject,
-    Companys
+    Companys,
+    
   }
 )

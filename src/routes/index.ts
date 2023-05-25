@@ -7,6 +7,7 @@ export const routes = {
     userProjects: (id: number) => `/userProjects/user/${id}`,
     getUser: (id: number) => `/user/${id}`
   },
+  
   job: {
     list: '/job',
     updateStatus: `/updateJobStatus`,

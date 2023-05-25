@@ -72,7 +72,7 @@ export interface ProjectProps {
     name: Option | null
     id: Option | null
   }
-  usersProjects: {
+  users: {
     user_id: number
     job_: string
     job: string,
@@ -116,6 +116,8 @@ interface FormConfigProps {
     professionals: SelectOption[]
   }
 }
+
+
 interface OptionsProps {
   label: string
   callback: () => void

@@ -1,9 +1,9 @@
 import { useFormContext, UseFormReturn } from 'react-hook-form'
-
-import { Inputs, Selects } from 'components/atoms'
-
+import { Inputs, Selects, SelectOption, Option } from 'components/atoms'
 import { ContainerRow } from '../style'
 import { FormProjectProps } from '../types'
+
+
 
 export const Project = () => {
   const {
@@ -12,6 +12,8 @@ export const Project = () => {
     setValue,
     formState: { errors }
   }: UseFormReturn<FormProjectProps> = useFormContext()
+
+  const options = watch('options')
 
   return (
     <>
@@ -47,7 +49,7 @@ export const Project = () => {
           error={errors.project_type_id?.message}
           required
           onClear={() => setValue('project_type_id', null)}
-          options={watch('options.project_types')??[]}
+          options={options?.project_types as SelectOption[]}
           value={watch('project_type_id') as any}
           label='Tipo de Projeto'
           placeholder='Selecione'
@@ -94,7 +96,7 @@ export const Project = () => {
             })
           }
           onClear={() => setValue('project_status_id', null)}
-          options={watch('options.status_projects')??[]}
+          options={options?.status_projects as SelectOption[]}
           value={watch('project_status_id') as  any}
           error={errors.project_status_id?.message}
           required

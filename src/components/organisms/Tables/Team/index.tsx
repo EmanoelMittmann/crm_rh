@@ -24,30 +24,34 @@ export const ProjectTeam = () => {
   const navigate = useNavigate()
   const modalRef = useRef<IHandleModalPropsUserNew>(null)
   const Team = watch('team', [])
-  
-  const POPOVER_OPTIONS = (user_id: number, status: boolean, name:string) => [
-    user_id
-      ? {
-          label: 'Editar',
-        callback: () => modalRef.current?.open(user_id, name)
-        }
-      : {
-          label: 'Remover',
-          callback: () => {
-            const newTeam = Team.filter(
-              (item) => item.user_id !== user_id
-            )
-            setValue('team', newTeam)
-          }
-        }
+  const project_id = watch('id', 0)
+
+  const POPOVER_OPTIONS = (user_id: number, status: boolean, name: string) => [
+    project_id ?
+    {
+      label: 'Editar',
+      callback: () => modalRef.current?.open(user_id, name)
+    }
+    :
+    {
+      label: 'Remover',
+      callback: () => {
+        const newTeam = Team.filter(
+          (item) => item.user_id !== user_id
+        )
+        setValue('team', newTeam)
+      }
+    }
   ]
 
   function handleUpdateUser(user_id: number) {
     const newTeam = Team.map((item) =>
-      item.user_id === user_id ? { ...item,  } : item
+    item.user_id === user_id ? { ...item, } : item
     )
     setValue('team', newTeam)
+    
   }
+
 
   const Table = useMemo(() => {
     if (isLoading)
@@ -67,7 +71,7 @@ export const ProjectTeam = () => {
         {...{ props }}
       />
     ))
-  },[isLoading, Team])
+  }, [isLoading, Team])
 
   return (
     <Main>
@@ -78,8 +82,8 @@ export const ProjectTeam = () => {
       />
       <Modal.UserEditor
         ref={modalRef}
-        placeholder ="Editar"
-        text= "Editar Dados do Profissional"
+        placeholder="Editar"
+        text="Editar Dados do Profissional"
         EventOne={handleUpdateUser}
       />
       {Table}
