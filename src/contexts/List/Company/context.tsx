@@ -169,6 +169,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       paginate: { ...old.paginate, current_page: 1 }
     }))
   }
+
   useDebounce({
     fn: fetchFilters,
     listener: []

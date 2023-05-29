@@ -8,6 +8,7 @@ declare module '*.svg' {
 }
 
 interface IContainerRowProps {
+  width?: string
   paddingRight?: string
   paddingLeft?: string
   gap?: string
