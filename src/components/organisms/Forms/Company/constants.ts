@@ -4,11 +4,11 @@ import { IOptions } from './types'
 export const TODAY = new Date().toISOString().split('T')[0]
 
 export const MASKER = {
-  CEP: '00000-0000',
-  CPF: '000.000.000-00',
-  CPNJ: '00.000.000/0000-00',
-  TELEPHONE: '(00) 00000-0000',
-  BANK: { ACCOUNT_NUMBER: '000000000-0', AGENCY: '0000-0' },
+  CEP: '99999-9999',
+  CPF: '999.999.999-99',
+  CPNJ: '99.999.999/9999-99',
+  TELEPHONE: '(99) 99999-9999',
+  BANK: { ACCOUNT_NUMBER: '9999999999-9', AGENCY: '9999-9' },
   CURRENCY: (v: string) => {
     return v.length > 3 ? parseFloat(v).toFixed(2) : v
   }

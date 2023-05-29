@@ -216,7 +216,6 @@ export function handlePopulateFields(
   data: any,
   methods: UseFormReturn<FormProps['Professional'], any>
 ) {
-  console.log('data: ', data)
   const BANKS = methods.watch('options.banks')
   const JOBS = methods.watch('options.jobs')
 

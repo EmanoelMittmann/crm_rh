@@ -53,6 +53,7 @@ export const routes = {
 
   company: {
     list: '/companies',
+    getCompany: (id: number) => `/companies/${id}`,
     filter: '/findCompanies',
     updateStatus: (id: number) => `companie/updateStatus/${id}`
   }
