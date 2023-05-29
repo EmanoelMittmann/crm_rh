@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { FormProvider, useForm, UseFormReturn } from 'react-hook-form'
-import { Await, useNavigate, useParams } from 'react-router-dom'
+import { FormProvider, useForm } from 'react-hook-form'
+import {useNavigate, useParams } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from '@stardust-ds/react'
 import { Button, Loading } from 'components/atoms'
@@ -12,7 +12,6 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 import { Container } from './style'
 import { fetchAndPopulateFields, fetchPropsProject } from './logic'
-import { FormTeamProps } from 'components/organisms/Forms/Project'
 
 
 
@@ -43,6 +42,7 @@ const RegisterProjects = () => {
   
       users: data.team.map(user => {
         return {
+          ...user,
           user_id: user.professional.name?.value,
           extra_hours_estimated: user.extra_hours_estimated,
           extra_hours_performed: user.extra_hours_performed,
@@ -59,8 +59,9 @@ const RegisterProjects = () => {
 
     try {
       if (id) {
-        await api.put(routes.project.updateProject(Number(id)), sanitizeData);
-        console.log('sanitizeData: ', sanitizeData);
+     await api.put(routes.project.updateProject(Number(id)), sanitizeData);
+        console.log('dados do projeto: ', sanitizeData);
+
       } else {
         await api.post(routes.project.register, sanitizeData);
       }

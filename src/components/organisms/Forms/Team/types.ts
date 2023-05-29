@@ -1,10 +1,8 @@
 import type { Option, SelectOption } from 'components/atoms'
 import { TemplateProps } from 'components/organisms/Tables/types'
-import { UserProjectsProps } from 'types'
 
 
 export interface TeamMemberProps {
-  users: TeamMemberProps
   user_id: number
   job_: Option | null
   job: Option | null,

@@ -11,7 +11,7 @@ import { Image, TeamJobName, Text, TextJob } from '../../Forms/Project/style'
 
 import { ShelfProps } from '../types'
 
-export const Shelf = ({ props, config }: ShelfProps<any>) => {
+export const Shelf = ({ props, config }: ShelfProps<TeamMemberProps>) => {
   const {
     extra_hours_estimated,
     hours_mounths_estimated,
@@ -22,7 +22,6 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     status,
     avatar,
   } = props
-  console.log('Time: ', props);
 
 
   return (

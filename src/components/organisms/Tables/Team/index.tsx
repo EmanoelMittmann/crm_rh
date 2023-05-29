@@ -1,46 +1,36 @@
 import { useContext, useMemo, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-
 import { List } from 'contexts'
-
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 import {
   LoadingWrapper,
   Main
 } from 'components/organisms/Tables/style'
-
 import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
 import { Shelf } from './Shelf'
 import { Modal } from 'components/molecules/Modais'
 import { IHandleModalPropsUserNew } from 'components/molecules/Modais/UserEditor'
 import { FormTeamProps } from 'components/organisms/Forms/Project'
+import api from 'api'
+import { routes } from 'routes'
 
 
 export const Team = () => {
   const { watch, setValue } = useFormContext<FormTeamProps>()
   const { isLoading, handleOrder } = useContext(List.Project.Context)
-  const navigate = useNavigate()
   const modalRef = useRef<IHandleModalPropsUserNew>(null)
   const Team = watch('team', [])
-  const project_id = watch('id', 0)
+  const project_id = watch('id')
 
   const POPOVER_OPTIONS = (user_id: number, status: boolean, name: string) => [
-    project_id ?
     {
       label: 'Editar',
       callback: () => modalRef.current?.open(user_id, name)
-    }
-    :
+    },
     {
       label: 'Remover',
-      callback: () => {
-        const newTeam = Team.filter(
-          (item) => item.user_id !== user_id
-        )
-        setValue('team', newTeam)
-      }
+      callback: () => removeUser(user_id)
     }
   ]
 
@@ -48,10 +38,23 @@ export const Team = () => {
     const newTeam = Team.map((item) =>
     item.user_id === user_id ? { ...item, } : item
     )
+    api.put(routes.project.userProjects(Number(user_id)), newTeam)
+  
     setValue('team', newTeam)
+ 
     
   }
 
+  function removeUser(user_id: number){
+    if(project_id){
+      api.delete(routes.project.userProjects(Number(project_id)) ,{data:{user_id}})
+     
+    }
+    const newTeam = Team.filter(
+      (item) => item.user_id !== user_id
+    )
+    setValue('team', newTeam)
+  }
 
   const Table = useMemo(() => {
     if (isLoading)

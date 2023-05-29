@@ -21,7 +21,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [filterOptionsTeam, setFilterOptionsTeam] = useState(
     DEFAULT.FILTER_OPTIONS_USERS
   )
-    console.log('meu time: ', team);
 
   const contextProjectProps = {
     team,

@@ -77,7 +77,6 @@ const UsersEditor = forwardRef<
   const allUsers = selectUsers.flatMap((selectUser: any) => selectUser.users);
   const user = allUsers.find((user: any) => user.id === isOpen.id);
 
-
  
   useEffect(() => {
     fetchUsers()
@@ -140,7 +139,7 @@ const UsersEditor = forwardRef<
                 onClear={() => setValue('jobs.name', null)}
                 options={watch('options.jobs')}
                 label='Cargo'
-                defaultValue={user.job_.name}
+                defaultValue={user.job_}
                 placeholder={placeholder}
                 width={200}
               />

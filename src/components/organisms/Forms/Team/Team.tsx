@@ -4,6 +4,8 @@ import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { Table } from 'components/organisms/Tables'
 import { FormTeamProps, TeamMemberProps } from './types'
 import { ContainerRow } from 'components/organisms/Forms/Project/style'
+import api from 'api'
+import { routes } from 'routes'
 
 
 
@@ -17,18 +19,19 @@ export const Team = () => {
   } = useFormContext<FormTeamProps>();
 
   const options = watch('options');
+  const projectId = watch('id');
 
 
-  const handleTeam = () => {
+  const handleTeam = async () => {
     const professional = watch('professional')
     const id = Number(watch('professional.name.value'))
     const avatar = watch('professional.avatar.label')
     const jobs = watch('jobs')
     const status = watch('users.status')
-    const hoursMonth = Number(watch('users.hours_mounths_estimated') ?? 0)
-    const extraHour = Number(watch('users.extra_hours_estimated') ?? 0)
-    const hours_mounths_performed = Number(watch('users.hours_mounths_performed') ?? 0)
-    const extra_hours_performed = Number(watch('users.extra_hours_performed') ?? 0)
+    const hoursMonth = Number(watch('users.hours_mounths_estimated')) || 0
+    const extraHour = Number(watch('users.extra_hours_estimated')) || 0
+    const hours_mounths_performed = Number(watch('users.hours_mounths_performed')) || 0
+    const extra_hours_performed = Number(watch('users.extra_hours_performed')) || 0
     const techLead = watch('users.isTechLead')
 
     if (professional && jobs) {
@@ -49,6 +52,13 @@ export const Team = () => {
 
         const currentTeam = getValues('team') || [];
         const newTeam = [...currentTeam, newTeamMember];
+
+        if (projectId) {
+          await api.post(routes.project.userProjects(Number(projectId)), newTeamMember);
+          setValue('team', newTeam);
+
+          return; 
+        }
 
         setValue('team', newTeam);
       }
@@ -90,10 +100,7 @@ export const Team = () => {
         />
         <Inputs.Default
           {...register('users.hours_mounths_estimated', {
-            required: 'Campo obrigatório',
-            validate: (value) => {
-              return Number(value) > 0 || 'O Campo Horas/mês estimadas deve ser maior que zero.';
-            }
+            required: true,
           })}
           error={errors.users?.hours_mounths_performed?.message}
           label='Horas/mês estimadas'
@@ -103,10 +110,7 @@ export const Team = () => {
         />
         <Inputs.Default
           {...register('users.extra_hours_estimated', {
-            required: 'Campo obrigatório',
-            validate: (value) => {
-              return Number(value) > 0 || 'O Campo Horas extras estimadas deve ser maior que zero.';
-            }
+            required: true,
           })}
           error={errors.users?.extra_hours_performed?.message}
           label='Horas extras estimadas'

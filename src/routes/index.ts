@@ -26,7 +26,6 @@ export const routes = {
     list: '/project?limit=5',
     updateStatusproject: (id: number) => `/updateStatusProject/${id}`,
     updateProject: (id: number) => `/project/${id}`,
-    single: (id: number) => `/project/${id}`,
     register: '/project',
     userProjects: (id: number) => `/userProjects/project/${id}`,
   },
