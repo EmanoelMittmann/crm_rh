@@ -133,14 +133,15 @@ export const Company = () => {
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Selects.Default
+          {...register('options.payingCompanies')}
           label='Empresa Ubistart'
-          options={watch('options.companies') as any}
+          options={watch('options.companies', []) as SelectOption[]}
+          value={watch('options.payingCompanies') as any}
+          onSelect={(v: any) => {
+            setValue('options.payingCompanies', v)
+          }}
           searchable
           multiSelect
-          onSelect={(e) => {
-            const payload = e as SelectOption[]
-            setValue('options.payingCompanies', payload)
-          }}
           placeholder='Selecione'
         />
       </ContainerRow>

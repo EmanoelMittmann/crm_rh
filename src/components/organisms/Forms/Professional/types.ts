@@ -85,6 +85,7 @@ interface FormConfigProps {
     projects: SelectOption[]
     companies: SelectOption[]
     payingCompanies: SelectOption[]
+    payingCompany: SelectOption
   }
 }
 
