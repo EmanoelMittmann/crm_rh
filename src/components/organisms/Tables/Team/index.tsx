@@ -12,14 +12,14 @@ import {
 } from 'components/organisms/Tables/style'
 
 import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
-import { FormProjectProps } from '../../Forms/Project/types'
 import { Shelf } from './Shelf'
 import { Modal } from 'components/molecules/Modais'
 import { IHandleModalPropsUserNew } from 'components/molecules/Modais/UserEditor'
+import { FormTeamProps } from 'components/organisms/Forms/Project'
 
 
-export const ProjectTeam = () => {
-  const { watch, setValue } = useFormContext<FormProjectProps>()
+export const Team = () => {
+  const { watch, setValue } = useFormContext<FormTeamProps>()
   const { isLoading, handleOrder } = useContext(List.Project.Context)
   const navigate = useNavigate()
   const modalRef = useRef<IHandleModalPropsUserNew>(null)

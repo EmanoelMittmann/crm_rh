@@ -1,15 +1,17 @@
 import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
+import { TeamMemberProps } from 'components/organisms/Forms/Team/types'
+
 import {
   ContainerShelf,
   ContainerShelfColumn
 } from 'components/organisms/Tables/style'
 
 import { Image, TeamJobName, Text, TextJob } from '../../Forms/Project/style'
-import { TeamMemberProps } from '../../Forms/Project/types'
+
 import { ShelfProps } from '../types'
 
-export const Shelf = ({ props, config }: ShelfProps<TeamMemberProps>) => {
+export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const {
     extra_hours_estimated,
     hours_mounths_estimated,
@@ -20,7 +22,7 @@ export const Shelf = ({ props, config }: ShelfProps<TeamMemberProps>) => {
     status,
     avatar,
   } = props
-  // console.log('props: ', props);
+  console.log('Time: ', props);
 
 
   return (

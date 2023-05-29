@@ -9,6 +9,8 @@ import { ContextPropsStatusProject } from './Settings/StatusProjects'
 import { Status } from './Settings/StatusProjects'
 import { Types } from './Settings/TypesProjects'
 import { ContextPropsTypeProject } from './Settings/TypesProjects'
+import { ContextTeamProps} from './Team'
+import { Team } from './Team'
 
 export const List = Object.assign(
   {},
@@ -19,6 +21,7 @@ export const List = Object.assign(
     Status,
     Types,
     Company,
+    Team
   }
 )
 
@@ -29,4 +32,5 @@ export type ListContext = {
   Status: ContextPropsStatusProject
   Types: ContextPropsTypeProject
   Companys: ContextCompanyProps
+  Team: ContextTeamProps
 }

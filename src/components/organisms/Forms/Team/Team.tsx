@@ -1,18 +1,28 @@
-import { useFormContext} from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import { Selects, Inputs, SelectOption } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { Table } from 'components/organisms/Tables'
-import { ContainerRow } from '../style'
-import { FormProjectProps, TeamMemberProps } from '../types'
+import { FormTeamProps, TeamMemberProps } from './types'
+import { ContainerRow } from 'components/organisms/Forms/Project/style'
+
+
 
 export const Team = () => {
-  const {register,watch,setValue,getValues,formState: { errors }} = useFormContext<FormProjectProps>()
-  const options = watch('options')
- 
+  const { 
+    register, 
+    watch, 
+    setValue, 
+    handleSubmit, 
+    getValues, 
+    formState: { errors } 
+  } = useFormContext<FormTeamProps>();
 
-  const handleTeam = async () => {
+  const options = watch('options');
+
+
+  const handleTeam = () => {
     const professional = watch('professional')
-    const id = watch('professional.name.value')
+    const id = Number(watch('professional.name.value'))
     const avatar = watch('professional.avatar.label')
     const jobs = watch('jobs')
     const status = watch('users.status')
@@ -21,7 +31,6 @@ export const Team = () => {
     const hours_mounths_performed = Number(watch('users.hours_mounths_performed') ?? 0)
     const extra_hours_performed = Number(watch('users.extra_hours_performed') ?? 0)
     const techLead = watch('users.isTechLead')
-   
 
     if (professional && jobs) {
       if (extraHour && hoursMonth) {
@@ -29,23 +38,24 @@ export const Team = () => {
           user_id: id,
           professional,
           jobs,
-          hours_mounths_estimated: hoursMonth,
-          extra_hours_estimated: extraHour,
-          extra_hours_performed: extra_hours_performed,
-          hours_mounths_performed: hours_mounths_performed,
           isTechLead: techLead,
-          status: status ? 0 : 1,
-          avatar: avatar
-            ? avatar
-            : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
-        } as unknown as TeamMemberProps
+          extra_hours_estimated: extraHour,
+          hours_mounths_estimated: hoursMonth,
+          hours_mounths_performed: hours_mounths_performed,
+          extra_hours_performed: extra_hours_performed,
+          is_active: true,
+          avatar: avatar ? avatar : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png',
+          status: status ? false : true,
+        } as unknown as TeamMemberProps;
 
-        const currentTeam = getValues('team') || []
-        const newTeam = [...currentTeam, newTeamMember]
+        const currentTeam = getValues('team') || [];
+        const newTeam = [...currentTeam, newTeamMember];
+
         setValue('team', newTeam);
-      } 
-    }}
+      }
+    }
 
+  }
 
 
   return (
@@ -53,6 +63,7 @@ export const Team = () => {
       <ContainerRow>
         <h3>Time</h3>
       </ContainerRow>
+
       <ContainerRow gap='1rem'>
         <Selects.Default
           {...register('professional.name', {})}
@@ -80,24 +91,34 @@ export const Team = () => {
         />
         <Inputs.Default
           {...register('users.hours_mounths_estimated', {
-            required: true
+            required: 'Campo obrigatório',
+            validate: (value) => {
+              return Number(value) > 0 || 'O Campo Horas/mês estimadas deve ser maior que zero.';
+            }
           })}
           error={errors.users?.hours_mounths_performed?.message}
           label='Horas/mês estimadas'
           placeholder='Horas'
-          width={175}
+          width={160}
+          height={40}
         />
         <Inputs.Default
           {...register('users.extra_hours_estimated', {
-            required: true
+            required: 'Campo obrigatório',
+            validate: (value) => {
+              return Number(value) > 0 || 'O Campo Horas extras estimadas deve ser maior que zero.';
+            }
           })}
           error={errors.users?.extra_hours_performed?.message}
           label='Horas extras estimadas'
           placeholder='Horas'
-          width={175}
+          width={160}
+          height={40}
         />
+
+
         <ButtonGeneric
-          top='1em'
+          top='1.5em'
           Text='Vincular'
           bgColor='#0D2551'
           color='white'
@@ -105,12 +126,13 @@ export const Team = () => {
           bRadius='500px'
           height='3.5em'
           type='button'
-          onClick={handleTeam}
+          onClick={handleSubmit(handleTeam)}
         />
       </ContainerRow>
       <ContainerRow>
-        <Table.ProjectTeam />
+        <Table.Team />
       </ContainerRow>
+
     </>
   )
 }
