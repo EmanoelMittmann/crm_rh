@@ -11,8 +11,7 @@ export const Team = () => {
   const { 
     register, 
     watch, 
-    setValue, 
-    handleSubmit, 
+    setValue,
     getValues, 
     formState: { errors } 
   } = useFormContext<FormTeamProps>();
@@ -126,7 +125,7 @@ export const Team = () => {
           bRadius='500px'
           height='3.5em'
           type='button'
-          onClick={handleSubmit(handleTeam)}
+          onClick={handleTeam}
         />
       </ContainerRow>
       <ContainerRow>
