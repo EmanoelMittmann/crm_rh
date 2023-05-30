@@ -1,8 +1,7 @@
-import { SelectOption } from "@stardust-ds/react/lib/esm/components/Select/interfaces"
 import api from "api"
 import { FormProjectProps } from "components/organisms"
 import { getDateInput } from "components/utils/formatDate"
-import { generateOpitionsFromBackend } from "components/utils/OptionsAplication"
+import { generateOpitionsFromBackend, GenerateValue } from "components/utils/OptionsAplication"
 import { ProfessionalProps } from "contexts/List/Professional/types"
 import { JobsProps } from "contexts/List/Settings/Jobs/types"
 
@@ -75,7 +74,7 @@ export function handlePopulateFields(
   const TYPE_PROJECT = methods.watch('options.project_types')
   const OPTIONS = methods.watch('options')
 
-
+ 
   methods.reset({
     id: data.id,
     name: data.name,
@@ -85,7 +84,7 @@ export function handlePopulateFields(
     date_end: getDateInput(data.date_end),
     date_start_performed: getDateInput(data.date_start_performed),
     date_end_performed: getDateInput(data.date_end_performed),
-    team_cost: data.team_cost,
+    team_cost: GenerateValue(String(data.team_cost)),
 
     team: data.users.map((user: any) => {
       const { name, job, job_, status, ...rest } = user;

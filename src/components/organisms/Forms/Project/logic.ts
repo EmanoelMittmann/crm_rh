@@ -1,9 +1,5 @@
 import * as yup from 'yup'
 
-
-
-
-
 export const validationSchema = yup.object().shape({
   name: yup.string().required('Campo obrigatório'),
   id: yup.string().required('Campo obrigatório'),
@@ -60,38 +56,8 @@ export const validationSchema = yup.object().shape({
 
 })
 
-export const schemaUser = yup.object().shape({
-  user_id: yup.number(),
-  name: yup.string(),
-  job_: yup.string(),
-  hours_mounths_estimated: yup
-    .number()
-    .nullable()
-    .test(
-      'horas validas',
-      'O Campo Hora/mês deve ser maior que 0',
-      function (value) {
-        const hoursMounthsEstimated = this.resolve(yup.ref('hours_mounths_estimated'));
-        if (hoursMounthsEstimated) {
-          return Number(value) > 0;
-        }
-        return true;
-      }).required('Campo obrigatório'),
 
-  extra_hours_estimated: yup
-    .number()
-    .nullable()
-    .test(
-      'horas validas',
-      'Campo vazio, inclua zero caso não exista uma estimativa de horas/extra',
-      function (value) {
-        const extraHoursEstimated = this.resolve(yup.ref('extra_hours_estimated'));
-        if (extraHoursEstimated) {
-          return Number(value) > 0;
-        }
-        return true;
-      }).required('Campo obrigatório'),
-})
+
 
 
 

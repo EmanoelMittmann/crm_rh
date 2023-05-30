@@ -2,7 +2,7 @@ import { useFormContext, UseFormReturn } from 'react-hook-form'
 import { Inputs, Selects, SelectOption, Option } from 'components/atoms'
 import { ContainerRow } from '../style'
 import { FormProjectProps } from '../types'
-
+import { GenerateValue } from 'components/utils/OptionsAplication'
 
 
 export const Project = () => {
@@ -12,8 +12,12 @@ export const Project = () => {
     setValue,
     formState: { errors }
   }: UseFormReturn<FormProjectProps> = useFormContext()
-
+  
   const options = watch('options')
+  const estimatedCost = watch('team_cost');
+  const formattedEstimatedCost = GenerateValue(estimatedCost || '');
+
+
 
   return (
     <>
@@ -105,11 +109,17 @@ export const Project = () => {
           width={450}
         />
         <Inputs.Default
-          {...register('team_cost')}
+          {...register('team_cost', {
+            setValueAs: (value) => {
+              return value ? value.replace(/[^\d]/g, '') : '';
+            },
+          })}
           width='100%'
-          type='number'
+          type='text'
+          value={formattedEstimatedCost}
+          iconLeft='R$'
+          placeholder='00,00'
           label='Custo estimado'
-          placeholder='R$'
         />
       </ContainerRow>
     </>

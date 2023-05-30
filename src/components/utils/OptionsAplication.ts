@@ -27,3 +27,22 @@ export const GenerateOptionsForm = (
   })
 
 }
+
+
+export const GenerateValue = (value: string): string => {
+  const numericValue = value.replace(/[^\d]/g, '');
+
+  let formattedValue = numericValue;
+
+  if (numericValue.length > 2) {
+    const lastTwoDigits = numericValue.slice(-2);
+    const remainingDigits = numericValue.slice(0, -2);
+    formattedValue = remainingDigits.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + lastTwoDigits;
+  }
+
+  if (formattedValue.length > 3 && !formattedValue.includes(',')) {
+    formattedValue = formattedValue.slice(0, -2) + ',' + formattedValue.slice(-2);
+  }
+
+  return formattedValue;
+}

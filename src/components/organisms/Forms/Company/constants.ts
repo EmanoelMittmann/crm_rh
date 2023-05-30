@@ -14,6 +14,7 @@ export const MASKER = {
   }
 }
 
+
 export const PIX_KEY_TYPE = {
   CPF: 'CPF',
   CNPJ: 'CNPJ',

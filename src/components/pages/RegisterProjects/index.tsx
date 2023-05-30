@@ -27,11 +27,12 @@ const RegisterProjects = () => {
     shouldFocusError: true
   })
 
+
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
       name: data.name,
       id: data.id,
-      team_cost: data.team_cost,
+      team_cost: data.team_cost.replace(/\D/g, '') || '0',
       project_status_id: data.project_status_id?.value,
       project_type_id: data.project_type_id?.value,
       date_start: data.date_start,
