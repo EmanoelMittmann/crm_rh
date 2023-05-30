@@ -1,7 +1,6 @@
 import type { SelectProps } from '@stardust-ds/react'
-
+import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
 import { ProjectProps } from 'types'
-
 export type { ReactNode } from 'react'
 
 export interface DefaultMetaProps {

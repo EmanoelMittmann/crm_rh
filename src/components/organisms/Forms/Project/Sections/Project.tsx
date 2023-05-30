@@ -1,9 +1,9 @@
 import { useFormContext, UseFormReturn } from 'react-hook-form'
-
-import { Inputs, Selects } from 'components/atoms'
-
+import { Inputs, Selects, SelectOption, Option } from 'components/atoms'
 import { ContainerRow } from '../style'
 import { FormProjectProps } from '../types'
+import { GenerateValue } from 'components/utils/OptionsAplication'
+
 
 export const Project = () => {
   const {
@@ -12,6 +12,12 @@ export const Project = () => {
     setValue,
     formState: { errors }
   }: UseFormReturn<FormProjectProps> = useFormContext()
+  
+  const options = watch('options')
+  const estimatedCost = watch('team_cost');
+  const formattedEstimatedCost = GenerateValue(estimatedCost || '');
+
+
 
   return (
     <>
@@ -47,7 +53,8 @@ export const Project = () => {
           error={errors.project_type_id?.message}
           required
           onClear={() => setValue('project_type_id', null)}
-          options={watch('options.project_types')}
+          options={options?.project_types as SelectOption[]}
+          value={watch('project_type_id') as any}
           label='Tipo de Projeto'
           placeholder='Selecione'
           width={235}
@@ -57,6 +64,7 @@ export const Project = () => {
         <Inputs.Default
           {...register('date_start', { required: true })}
           error={errors.date_start?.message}
+          value={watch('date_start')}
           type='date'
           label='Inicio efetivo'
           width='100%'
@@ -92,7 +100,8 @@ export const Project = () => {
             })
           }
           onClear={() => setValue('project_status_id', null)}
-          options={watch('options.status_projects')}
+          options={options?.status_projects as SelectOption[]}
+          value={watch('project_status_id') as  any}
           error={errors.project_status_id?.message}
           required
           label='Status do Projeto'
@@ -100,11 +109,17 @@ export const Project = () => {
           width={450}
         />
         <Inputs.Default
-          {...register('team_cost')}
+          {...register('team_cost', {
+            setValueAs: (value) => {
+              return value ? value.replace(/[^\d]/g, '') : '';
+            },
+          })}
           width='100%'
-          type='number'
+          type='text'
+          value={formattedEstimatedCost}
+          iconLeft='R$'
+          placeholder='00,00'
           label='Custo estimado'
-          placeholder='R$'
         />
       </ContainerRow>
     </>

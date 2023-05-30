@@ -84,12 +84,14 @@ export interface UserProjectsProps {
   avatar: string
   name: string
   status: string
+  is_active: boolean
   job_: string
   job_id: string
   job: {
     id: number
     name: string
   }
+  
 }
 
 export interface ProjectProps {

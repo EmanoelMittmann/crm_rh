@@ -2,20 +2,16 @@ import {
   forwardRef,
   useImperativeHandle,
   useState,
-  useMemo,
-  useEffect,
   useCallback,
   useContext
 } from 'react'
-
-import { Button } from '@stardust-ds/react'
+import { Button, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 import { theme } from 'styles'
-
-import { Selects } from 'components/atoms'
 import Close from 'components/atoms/Buttons/Close'
-
 import { Columns, ContainerModal, Overlay, Row } from './style'
+import { Option } from 'types'
+
 
 interface IModalStatusProps {
   text: string
@@ -24,50 +20,43 @@ interface IModalStatusProps {
   defaultOpened?: boolean
 }
 
-export interface IHandleModalStatusProps {
-  open(id: number, name: string): void
+export interface IHandleModalColorsPropsNew {
+  open(id: number, name: string, status:any): void
   close(): void
 }
 
 const EditorStatus = forwardRef<
-  IHandleModalStatusProps,
+  IHandleModalColorsPropsNew,
   IModalStatusProps
 >((props, ref) => {
   const { text, EventOne, placeholder } = props
   const [isOpen, setIsOpen] = useState({ id: 0, name: '' })
-  const [name, setName] = useState<string>('')
-  const [selectedStatus, setSelectedStatus] = useState('')
-  const { filterOptionsStatus } = useContext(List.Project.Context)
+  const [selectedStatus, setSelectedStatus] = useState<Option>()
+  const {filterOptionsStatus} = useContext(List.Project.Context)
+  
 
   const close = useCallback(() => {
-    setIsOpen({ id: 0, name: '' })
+    setIsOpen({ id: 0, name: ''})
   }, [])
 
   useImperativeHandle(
     ref,
     () => ({
-      open: (id, name) => setIsOpen({ id: id, name: name }),
+      open: (id, name, status) => {
+        setIsOpen({ id: id, name: name })
+        setSelectedStatus({
+          label: status.name,
+          value: String(status.id)
+        })
+      },
       close
     }),
     []
   )
 
-  const handleBlock = useMemo(() => {
-    if (
-      isOpen.name === name ||
-      typeof name !== 'string' ||
-      name.trim() === ''
-    ) {
-      return true
-    }
-    return false
-  }, [isOpen.name, name])
+  if (isOpen.id === 0) return null 
 
-  useEffect(() => {
-    setName(selectedStatus)
-  }, [selectedStatus])
 
-  if (isOpen.id === 0) return null
   return (
     <>
       <ContainerModal>
@@ -78,12 +67,15 @@ const EditorStatus = forwardRef<
           </Row>
           <Row>
             <Columns>
-              <Selects.Default
+              <Select
                 onSelect={(e: any) => setSelectedStatus(e.value)}
+                onClear={() => setSelectedStatus({ label: '', value: '' })}
                 options={filterOptionsStatus.status}
+                defaultValue={selectedStatus}
                 placeholder={placeholder}
                 width={380}
               />
+
             </Columns>
           </Row>
           <Row>
@@ -100,10 +92,9 @@ const EditorStatus = forwardRef<
                 borderRadius: '500px',
                 boxShadow: '0px'
               }}
-              disabled={handleBlock}
               bgColor='#0066FF'
               onClick={() => {
-                EventOne(isOpen.id, selectedStatus)
+                EventOne(isOpen.id, selectedStatus?.value as string)
                 close()
               }}
             >
