@@ -3,18 +3,16 @@ import { useContext, useMemo, useRef } from 'react'
 import { List } from 'contexts'
 
 import { Loading } from 'components/atoms'
-import {
-  TableHeader,
-  IHandleModalStatusProps
-} from 'components/molecules'
+import { TableHeader } from 'components/molecules'
 import { Modal } from 'components/molecules/Modais'
+import { IHandleModalColorsPropsNew } from 'components/molecules/Modais/EditorStatus'
 
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './shelf'
 
 export const Projects = () => {
-  const modalRef = useRef<IHandleModalStatusProps>(null)
+  const modalRef = useRef<IHandleModalColorsPropsNew>(null)
   const {
     projects,
     navigateTo,
@@ -30,7 +28,7 @@ export const Projects = () => {
     },
     {
       label: 'Editar Status',
-      callback: () => modalRef.current?.open(id, name)
+      callback: () => modalRef.current?.open(id, name, status)
     }
   ]
 

@@ -1,42 +1,64 @@
-import { useContext, useMemo } from 'react'
+import { useContext, useMemo, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 
 import { List } from 'contexts'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
+import { Modal } from 'components/molecules/Modais'
+import { IHandleModalPropsUserNew } from 'components/molecules/Modais/UserEditor'
+import { FormTeamProps } from 'components/organisms/Forms/Project'
 import {
   LoadingWrapper,
   Main
 } from 'components/organisms/Tables/style'
 
+import api from 'api'
+import { routes } from 'routes'
+
 import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
-import { FormProjectProps } from '../../Forms/Project/types'
 import { Shelf } from './Shelf'
 
-export const ProjectTeam = () => {
-  const { watch, setValue } = useFormContext<FormProjectProps>()
-  const Team = watch('team', [])
+export const Team = () => {
+  const { watch, setValue } = useFormContext<FormTeamProps>()
   const { isLoading, handleOrder } = useContext(List.Project.Context)
-  const navigate = useNavigate()
+  const modalRef = useRef<IHandleModalPropsUserNew>(null)
+  const Team = watch('team', [])
+  const project_id = watch('id')
 
-  const POPOVER_OPTIONS = (user_id: number, status: boolean) => [
-    user_id
-      ? {
-          label: 'Editar',
-          callback: () => navigate(`/userProjects/project/${user_id}`)
-        }
-      : {
-          label: 'Remover',
-          callback: () => {
-            const newTeam = Team.filter(
-              (item) => item.user_id !== user_id
-            )
-            setValue('team', newTeam)
-          }
-        }
+  const POPOVER_OPTIONS = (
+    user_id: number,
+    status: boolean,
+    name: string
+  ) => [
+    {
+      label: 'Editar',
+      callback: () => modalRef.current?.open(user_id, name)
+    },
+    {
+      label: 'Remover',
+      callback: () => removeUser(user_id)
+    }
   ]
+
+  function handleUpdateUser(user_id: number) {
+    const newTeam = Team.map((item) =>
+      item.user_id === user_id ? { ...item } : item
+    )
+    api.put(routes.project.userProjects(Number(user_id)), newTeam)
+
+    setValue('team', newTeam)
+  }
+
+  function removeUser(user_id: number) {
+    if (project_id) {
+      api.delete(routes.project.userProjects(Number(project_id)), {
+        data: { user_id }
+      })
+    }
+    const newTeam = Team.filter((item) => item.user_id !== user_id)
+    setValue('team', newTeam)
+  }
 
   const Table = useMemo(() => {
     if (isLoading)
@@ -51,7 +73,11 @@ export const ProjectTeam = () => {
         key={props.user_id}
         config={{
           template: GRID_TEMPLATE,
-          options: POPOVER_OPTIONS(props.user_id, props.is_active)
+          options: POPOVER_OPTIONS(
+            props.user_id,
+            props.is_active,
+            props.name
+          )
         }}
         {...{ props }}
       />
@@ -64,6 +90,12 @@ export const ProjectTeam = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
+      />
+      <Modal.UserEditor
+        ref={modalRef}
+        placeholder='Editar'
+        text='Editar Dados do Profissional'
+        EventOne={handleUpdateUser}
       />
       {Table}
     </Main>

@@ -9,7 +9,8 @@ export const Overlay = styled.div`
 export const ContainerModal = styled.div`
   box-shadow: 0px 10px 20px 0px ${theme.brand.color.black.transparent};
   background-color: ${theme.neutrals.pureWhite};
-  width: 8rem;
+  width: 7rem;
+  margin-top: 1rem;
   border-radius: 8px;
   transform: translate(1.5rem, -2.5rem);
   position: absolute;
@@ -17,9 +18,9 @@ export const ContainerModal = styled.div`
   .options {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-self: stretch;
-    padding: 1rem;
+    padding: 0.5rem;
     gap: 5px;
   }
 `

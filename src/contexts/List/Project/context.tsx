@@ -9,11 +9,7 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 
 import DEFAULT from './constants'
-import {
-  ContextProjectProps,
-  DefaultMetaProps,
-  ReactNode
-} from './types'
+import { ContextProjectProps, ReactNode } from './types'
 import { ProjectProps } from 'types'
 
 export const Context = createContext({} as ContextProjectProps)
@@ -29,7 +25,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [filterOptionsStatus, setFilterOptionsStatus] = useState(
     DEFAULT.FILTER_OPTIONS_STATUS
   )
-
   const contextProjectProps = {
     projects,
     isLoading,
@@ -45,23 +40,18 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleUpdateStatus
   }
 
-  function prepareParams(meta: DefaultMetaProps) {
-    return {
-      page: meta.paginate.current_page,
-      search: meta.search && meta.search,
-      type_id: meta.project_type_id && meta.project_type_id,
-      status_id: meta.project_status_id && meta.project_status_id,
-      order: meta.order,
-      orderField: meta.orderField
-    }
-  }
   async function fetchListProject() {
     setIsLoading(true)
-
-    const params = prepareParams(meta)
-
-    const { data } = await api.get(routes.project.list, { params })
-
+    const { data } = await api.get(routes.project.list, {
+      params: {
+        page: meta.paginate.current_page,
+        search: meta.search && meta.search,
+        type_id: meta.project_type_id && meta.project_type_id,
+        status_id: meta.project_status_id && meta.project_status_id,
+        order: meta.order,
+        orderField: meta.orderField
+      }
+    })
     setProjects(data?.data)
     setMeta((old) => ({
       ...old,
@@ -71,8 +61,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function handleUpdateStatus(id: number, name: string) {
-    await api.put(routes.project.updateStatusproject(id), {
-      name: name
+    await api.patch(routes.project.updateStatusproject(id), {
+      project_status_id: id
     })
     fetchListProject()
   }

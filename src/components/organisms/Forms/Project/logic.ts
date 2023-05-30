@@ -1,7 +1,5 @@
 import * as yup from 'yup'
 
-import { SelectOption } from './types'
-
 export const validationSchema = yup.object().shape({
   name: yup.string().required('Campo obrigatório'),
   id: yup.string().required('Campo obrigatório'),
@@ -54,28 +52,5 @@ export const validationSchema = yup.object().shape({
         return value && value.value !== '' && value.label !== ''
       }
     })
-    .required('Campo obrigatório'),
-
-  userProject: yup.object().shape({
-    user_id: yup.number(),
-    name: yup.string(),
-    job_: yup.number(),
-    hours_mounths_estimated: yup.number().nullable(),
-    // .required('Campo obrigatório')
-    // .test('valid-hours', 'Campo horas/mês deve ser maior que zero(0)', function (value) {
-    //   return value !== null && value !== undefined && value > 0;
-    // }),
-    extra_hours_estimated: yup.number().nullable()
-    // .required('Campo obrigatório')
-    // .test('valid-hours', 'Campo horas/mês deve ser maior que zero(0)', function (value) {
-    //   return value !== null && value !== undefined && value > 0;
-    // }),
-  })
+    .required('Campo obrigatório')
 })
-
-export function GenerateOption(data: Object): SelectOption[] {
-  return Object.values(data).map((key: string) => ({
-    label: key,
-    value: key
-  }))
-}

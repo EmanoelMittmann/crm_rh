@@ -23,6 +23,7 @@ export const formatAgeValidation = (
 }
 
 export const getDateInput = (data: any) => {
+  if (!data) return ''
   const date = new Date(data).toLocaleDateString()
   const convertedDate = date.replace(
     /(\d{2})\/(\d{2})\/(\d{4})/,

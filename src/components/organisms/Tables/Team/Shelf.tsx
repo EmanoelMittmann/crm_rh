@@ -1,5 +1,6 @@
 import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
+import { TeamMemberProps } from 'components/organisms/Forms/Team/types'
 import {
   ContainerShelf,
   ContainerShelfColumn
@@ -11,9 +12,12 @@ import {
   Text,
   TextJob
 } from '../../Forms/Project/style'
-import { ShelfUserProject } from '../../Forms/Project/types'
+import { ShelfProps } from '../types'
 
-export const Shelf = ({ props, config }: ShelfUserProject) => {
+export const Shelf = ({
+  props,
+  config
+}: ShelfProps<TeamMemberProps>) => {
   const {
     extra_hours_estimated,
     hours_mounths_estimated,
@@ -30,8 +34,8 @@ export const Shelf = ({ props, config }: ShelfUserProject) => {
       <ContainerShelfColumn gap='.5rem' width='210px'>
         <Image src={avatar} />
         <TeamJobName>
-          <Text>{professional.name?.label}</Text>
-          <TextJob>{jobs.name?.label}</TextJob>
+          <Text>{professional?.name?.label}</Text>
+          <TextJob>{jobs?.name?.label}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
       <ContainerShelfColumn width='130px'>
@@ -39,11 +43,11 @@ export const Shelf = ({ props, config }: ShelfUserProject) => {
       </ContainerShelfColumn>
 
       <ContainerShelfColumn width='120px'>
-        <Text>{extra_hours_estimated}</Text>
+        <Text>{hours_mounths_performed}</Text>
       </ContainerShelfColumn>
 
       <ContainerShelfColumn width='140px'>
-        <Text>{hours_mounths_performed}</Text>
+        <Text>{extra_hours_estimated}</Text>
       </ContainerShelfColumn>
 
       <ContainerShelfColumn width='120px'>
