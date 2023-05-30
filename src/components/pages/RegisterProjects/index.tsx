@@ -61,7 +61,7 @@ const RegisterProjects = () => {
     try {
       if (id) {
      await api.put(routes.project.updateProject(Number(id)), sanitizeData);
-        console.log('dados do projeto: ', sanitizeData);
+
 
       } else {
         await api.post(routes.project.register, sanitizeData);

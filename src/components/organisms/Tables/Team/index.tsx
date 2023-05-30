@@ -14,6 +14,7 @@ import { IHandleModalPropsUserNew } from 'components/molecules/Modais/UserEditor
 import { FormTeamProps } from 'components/organisms/Forms/Project'
 import api from 'api'
 import { routes } from 'routes'
+import { percentCalculate } from 'components/utils/percentCalculate'
 
 
 export const Team = () => {
@@ -36,19 +37,19 @@ export const Team = () => {
 
   function handleUpdateUser(user_id: number) {
     const newTeam = Team.map((item) =>
-    item.user_id === user_id ? { ...item, } : item
+      item.user_id === user_id ? { ...item, } : item
     )
     api.put(routes.project.userProjects(Number(user_id)), newTeam)
-  
+
     setValue('team', newTeam)
- 
-    
+
+
   }
 
-  function removeUser(user_id: number){
-    if(project_id){
-      api.delete(routes.project.userProjects(Number(project_id)) ,{data:{user_id}})
-     
+  function removeUser(user_id: number) {
+    if (project_id) {
+      api.delete(routes.project.userProjects(Number(project_id)), { data: { user_id } })
+
     }
     const newTeam = Team.filter(
       (item) => item.user_id !== user_id
@@ -64,17 +65,72 @@ export const Team = () => {
         </LoadingWrapper>
       )
 
-    return Team.map((props) => (
-      <Shelf
-        key={props.user_id}
-        config={{
-          template: GRID_TEMPLATE,
-          options: POPOVER_OPTIONS(props.user_id, props.is_active, props.name)
-        }}
-        {...{ props }}
-      />
-    ))
+    return (
+      <>
+        {Team.map((props) => (
+          < Shelf
+            key={props.user_id}
+            config={{
+              template: GRID_TEMPLATE,
+              options: POPOVER_OPTIONS(props.user_id, props.is_active, props.name)
+            }
+            }
+            {...{ props }}
+          />
+        ))}
+        {Team.length > 0 && (
+          <Shelf
+            config={{
+              template: GRID_TEMPLATE,
+              options: []
+            }}
+            {...{
+              props: {
+
+                hours_mounths_estimated: Team.reduce(
+                  (acc, cur) => acc + cur.hours_mounths_estimated,
+                  0
+                ),
+                hours_mounths_performed: Team.reduce(
+                  (acc, cur) => acc + cur.hours_mounths_performed,
+                  0
+                ),
+                extra_hours_estimated: Team.reduce(
+                  (acc, cur) => acc + cur.extra_hours_estimated,
+                  0
+                ),
+                extra_hours_performed: Team.reduce(
+                  (acc, cur) => acc + cur.extra_hours_performed,
+                  0
+                ),
+                hours_mounths_percent: +Team
+                  .map((item) =>
+                    percentCalculate(
+                      item.hours_mounths_performed,
+                      item.hours_mounths_estimated
+                    )
+                  )
+                  .reduce((acc, cur) => acc + cur, 0)
+                  .toFixed(),
+                extra_hours_percent: Team
+                  .map((item) =>
+                    percentCalculate(
+                      item.extra_hours_performed,
+                      item.extra_hours_estimated
+                    )
+                  )
+                  .reduce((acc, cur) => acc + cur, 0),
+                id: 0,
+              }
+            }}
+          />
+        )
+        }
+      </>
+    )
   }, [isLoading, Team])
+
+
 
   return (
     <Main>
