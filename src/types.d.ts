@@ -91,7 +91,6 @@ export interface UserProjectsProps {
     id: number
     name: string
   }
-  
 }
 
 export interface ProjectProps {

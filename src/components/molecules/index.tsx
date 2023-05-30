@@ -6,4 +6,3 @@ export * from './Paginate'
 export type { HeaderProps } from './TableHeader'
 export type { IHandleModalPropsEdit } from './Modais/Edit'
 export type { IHandleModalColorsPropsNew } from './Modais/EditorStatus'
-

@@ -5,13 +5,15 @@ import {
   useCallback,
   useContext
 } from 'react'
+
 import { Button, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 import { theme } from 'styles'
+
 import Close from 'components/atoms/Buttons/Close'
+
 import { Columns, ContainerModal, Overlay, Row } from './style'
 import { Option } from 'types'
-
 
 interface IModalStatusProps {
   text: string
@@ -21,7 +23,7 @@ interface IModalStatusProps {
 }
 
 export interface IHandleModalColorsPropsNew {
-  open(id: number, name: string, status:any): void
+  open(id: number, name: string, status: any): void
   close(): void
 }
 
@@ -32,11 +34,10 @@ const EditorStatus = forwardRef<
   const { text, EventOne, placeholder } = props
   const [isOpen, setIsOpen] = useState({ id: 0, name: '' })
   const [selectedStatus, setSelectedStatus] = useState<Option>()
-  const {filterOptionsStatus} = useContext(List.Project.Context)
-  
+  const { filterOptionsStatus } = useContext(List.Project.Context)
 
   const close = useCallback(() => {
-    setIsOpen({ id: 0, name: ''})
+    setIsOpen({ id: 0, name: '' })
   }, [])
 
   useImperativeHandle(
@@ -54,8 +55,7 @@ const EditorStatus = forwardRef<
     []
   )
 
-  if (isOpen.id === 0) return null 
-
+  if (isOpen.id === 0) return null
 
   return (
     <>
@@ -69,13 +69,14 @@ const EditorStatus = forwardRef<
             <Columns>
               <Select
                 onSelect={(e: any) => setSelectedStatus(e.value)}
-                onClear={() => setSelectedStatus({ label: '', value: '' })}
+                onClear={() =>
+                  setSelectedStatus({ label: '', value: '' })
+                }
                 options={filterOptionsStatus.status}
                 defaultValue={selectedStatus}
                 placeholder={placeholder}
                 width={380}
               />
-
             </Columns>
           </Row>
           <Row>

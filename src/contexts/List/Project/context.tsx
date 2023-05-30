@@ -1,14 +1,15 @@
 import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import { PaginateContext } from 'components/molecules'
+
 import api from 'api'
 import { routes } from 'routes'
+
 import { useDebounce } from 'hooks'
+
 import DEFAULT from './constants'
-import {
-  ContextProjectProps,
-  ReactNode
-} from './types'
+import { ContextProjectProps, ReactNode } from './types'
 import { ProjectProps } from 'types'
 
 export const Context = createContext({} as ContextProjectProps)
@@ -36,7 +37,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleFillProject_Type,
     handleFillProject_Status,
     navigateTo,
-    handleUpdateStatus,
+    handleUpdateStatus
   }
 
   async function fetchListProject() {
@@ -48,11 +49,14 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         type_id: meta.project_type_id && meta.project_type_id,
         status_id: meta.project_status_id && meta.project_status_id,
         order: meta.order,
-        orderField: meta.orderField,
+        orderField: meta.orderField
       }
     })
     setProjects(data?.data)
-    setMeta((old) => ({ ...old, paginate: { ...old.paginate, last_page: data.meta.last_page } }))
+    setMeta((old) => ({
+      ...old,
+      paginate: { ...old.paginate, last_page: data.meta.last_page }
+    }))
     setIsLoading(false)
   }
 
@@ -63,119 +67,116 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     fetchListProject()
   }
 
-
-    async function fetchFilters_Projects() {
-      const { data } = await api.get(
-        routes.project_type.list + '?limit=120',
-        {
-          params: { is_active: 1 }
-        }
-      )
-
-      setFilterOptionsType({
-        project_type: data.data.map(
-          ({ name, id }: { name: string; id: number }) => ({
-            label: name,
-            value: id
-          })
-        )
-      })
-    }
-
-    async function fetchFilters_Status() {
-      const { data } = await api.get(
-        routes.status.list + '?limit=120',
-        {
-          params: { is_active: 1 }
-        }
-      )
-      setFilterOptionsStatus({
-        status: data.data.map(
-          ({ name, id }: { name: string; id: number }) => ({
-            label: name,
-            value: id
-          })
-        )
-      })
-    }
-
-    function handleFillProject_Type(project_type_id: number | null) {
-      setMeta((old) => ({
-        ...old,
-        project_type_id,
-        paginate: { ...old.paginate, current_page: 1 }
-      }))
-    }
-
-    function handleFillProject_Status(
-      project_status_id: number | null
-    ) {
-      setMeta((old) => ({
-        ...old,
-        project_status_id,
-        paginate: { ...old.paginate, current_page: 1 }
-      }))
-    }
-
-    function navigateTo(url: string) {
-      navigate(url)
-    }
-
-    function setPage(current_page: number) {
-      setMeta((old) => ({
-        ...old,
-        paginate: { ...old.paginate, current_page }
-      }))
-    }
-
-    function handleSearch(search: string) {
-      setMeta((old) => ({
-        ...old,
-        search,
-        paginate: { ...old.paginate, current_page: 1 }
-      }))
-    }
-
-    function handleOrder(_: string) {
-      setMeta((old) => ({
-        ...old,
-        order: old.order === 'ASC' ? 'DESC' : 'ASC'
-      }))
-    }
-
-    useDebounce({
-      fn: fetchListProject,
-      listener: [
-        meta.paginate.current_page,
-        meta.search,
-        meta.project_type,
-        meta.status,
-        meta.order,
-        meta.project_status_id,
-        meta.project_type_id,
-      ]
-    })
-
-    useDebounce({
-      fn: fetchFilters_Projects,
-      delay: 0,
-      listener: []
-    })
-    useDebounce({
-      fn: fetchFilters_Status,
-      delay: 0,
-      listener: []
-    })
-
-
-
-    return (
-      <Context.Provider value={contextProjectProps}>
-        <PaginateContext.Provider
-          value={{ paginate: contextProjectProps.paginate }}
-        >
-          {children}
-        </PaginateContext.Provider>
-      </Context.Provider>
+  async function fetchFilters_Projects() {
+    const { data } = await api.get(
+      routes.project_type.list + '?limit=120',
+      {
+        params: { is_active: 1 }
+      }
     )
+
+    setFilterOptionsType({
+      project_type: data.data.map(
+        ({ name, id }: { name: string; id: number }) => ({
+          label: name,
+          value: id
+        })
+      )
+    })
   }
+
+  async function fetchFilters_Status() {
+    const { data } = await api.get(
+      routes.status.list + '?limit=120',
+      {
+        params: { is_active: 1 }
+      }
+    )
+    setFilterOptionsStatus({
+      status: data.data.map(
+        ({ name, id }: { name: string; id: number }) => ({
+          label: name,
+          value: id
+        })
+      )
+    })
+  }
+
+  function handleFillProject_Type(project_type_id: number | null) {
+    setMeta((old) => ({
+      ...old,
+      project_type_id,
+      paginate: { ...old.paginate, current_page: 1 }
+    }))
+  }
+
+  function handleFillProject_Status(
+    project_status_id: number | null
+  ) {
+    setMeta((old) => ({
+      ...old,
+      project_status_id,
+      paginate: { ...old.paginate, current_page: 1 }
+    }))
+  }
+
+  function navigateTo(url: string) {
+    navigate(url)
+  }
+
+  function setPage(current_page: number) {
+    setMeta((old) => ({
+      ...old,
+      paginate: { ...old.paginate, current_page }
+    }))
+  }
+
+  function handleSearch(search: string) {
+    setMeta((old) => ({
+      ...old,
+      search,
+      paginate: { ...old.paginate, current_page: 1 }
+    }))
+  }
+
+  function handleOrder(_: string) {
+    setMeta((old) => ({
+      ...old,
+      order: old.order === 'ASC' ? 'DESC' : 'ASC'
+    }))
+  }
+
+  useDebounce({
+    fn: fetchListProject,
+    listener: [
+      meta.paginate.current_page,
+      meta.search,
+      meta.project_type,
+      meta.status,
+      meta.order,
+      meta.project_status_id,
+      meta.project_type_id
+    ]
+  })
+
+  useDebounce({
+    fn: fetchFilters_Projects,
+    delay: 0,
+    listener: []
+  })
+  useDebounce({
+    fn: fetchFilters_Status,
+    delay: 0,
+    listener: []
+  })
+
+  return (
+    <Context.Provider value={contextProjectProps}>
+      <PaginateContext.Provider
+        value={{ paginate: contextProjectProps.paginate }}
+      >
+        {children}
+      </PaginateContext.Provider>
+    </Context.Provider>
+  )
+}

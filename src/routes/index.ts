@@ -7,7 +7,7 @@ export const routes = {
     userProjects: (id: number) => `/userProjects/user/${id}`,
     getUser: (id: number) => `/user/${id}`
   },
-  
+
   job: {
     list: '/job',
     updateStatus: `/updateJobStatus`,
@@ -27,7 +27,7 @@ export const routes = {
     updateStatusproject: (id: number) => `/updateStatusProject/${id}`,
     updateProject: (id: number) => `/project/${id}`,
     register: '/project',
-    userProjects: (id: number) => `/userProjects/project/${id}`,
+    userProjects: (id: number) => `/userProjects/project/${id}`
   },
 
   project_type: {
@@ -56,6 +56,7 @@ export const routes = {
 
   company: {
     list: '/companies',
+    getCompany: (id: number) => `/companies/${id}`,
     filter: '/findCompanies',
     updateStatus: (id: number) => `companie/updateStatus/${id}`
   }

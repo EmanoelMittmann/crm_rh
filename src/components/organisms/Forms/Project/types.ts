@@ -4,7 +4,7 @@ import { TemplateProps } from 'components/organisms/Tables/types'
 export interface TeamMemberProps {
   user_id: number
   job_: string
-  job: string,
+  job: string
   name: string
   isTechLead: boolean
   extra_hours_estimated: number
@@ -75,7 +75,7 @@ export interface ProjectProps {
   users: {
     user_id: number
     job_: string
-    job: string,
+    job: string
     job_id: number
     name: string
     isTechLead: boolean
@@ -116,7 +116,6 @@ interface FormConfigProps {
     professionals: SelectOption[]
   }
 }
-
 
 interface OptionsProps {
   label: string

@@ -5,29 +5,31 @@ import {
   useCallback,
   useEffect
 } from 'react'
+import { useFormContext } from 'react-hook-form'
+
 import { Button, Input, Select } from '@stardust-ds/react'
 import { theme } from 'styles'
+
 import Close from 'components/atoms/Buttons/Close'
-import { 
-  Columns, 
-  ContainerModal, 
-  ContainerShelfColumn, 
-  Image, 
-  Overlay, 
-  Row, 
-  RowUser, 
-  TeamJobName, 
-  Text, 
-  TextHours, 
-  TextJob 
-} from './style'
-import { Option } from 'types'
-import api from 'api'
-import { routes } from 'routes'
-import { useFormContext } from 'react-hook-form'
 import { FormProjectProps } from 'components/organisms/Forms/Project'
 
+import api from 'api'
+import { routes } from 'routes'
 
+import {
+  Columns,
+  ContainerModal,
+  ContainerShelfColumn,
+  Image,
+  Overlay,
+  Row,
+  RowUser,
+  TeamJobName,
+  Text,
+  TextHours,
+  TextJob
+} from './style'
+import { Option } from 'types'
 
 interface IModalUserProps {
   text: string
@@ -56,32 +58,29 @@ const UsersEditor = forwardRef<
   const [isOpen, setIsOpen] = useState({ id: 0 })
   const [selectUsers, setSelectUsers] = useState([])
   const [selectedStatus, setSelectedStatus] = useState<Option>()
-  const {
-    register,
-    watch,
-    setValue,
-  } = useFormContext<FormProjectProps>()
-  
+  const { register, watch, setValue } =
+    useFormContext<FormProjectProps>()
+
   const fetchUsers = async () => {
     try {
       try {
-        const response = await api.get(routes.usersProjects.list);
-        setSelectUsers(response.data);
+        const response = await api.get(routes.usersProjects.list)
+        setSelectUsers(response.data)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
-  const allUsers = selectUsers.flatMap((selectUser: any) => selectUser.users);
-  const user = allUsers.find((user: any) => user.id === isOpen.id);
+  const allUsers = selectUsers.flatMap(
+    (selectUser: any) => selectUser.users
+  )
+  const user = allUsers.find((user: any) => user.id === isOpen.id)
 
- 
   useEffect(() => {
     fetchUsers()
   }, [])
-
 
   const close = useCallback(() => {
     setIsOpen({ id: 0 })
@@ -91,8 +90,7 @@ const UsersEditor = forwardRef<
     ref,
     () => ({
       open: (user_id) => {
-        setIsOpen({ id: user_id, })
-
+        setIsOpen({ id: user_id })
       },
       close
     }),
@@ -100,9 +98,6 @@ const UsersEditor = forwardRef<
   )
 
   if (isOpen.id === 0) return null
-
-
-
 
   return (
     <>
@@ -134,7 +129,9 @@ const UsersEditor = forwardRef<
               <Select
                 {...register('jobs.name', {})}
                 onSelect={(value: any) =>
-                  setValue('jobs.name', value, { shouldValidate: true })
+                  setValue('jobs.name', value, {
+                    shouldValidate: true
+                  })
                 }
                 onClear={() => setValue('jobs.name', null)}
                 options={watch('options.jobs')}
@@ -154,7 +151,9 @@ const UsersEditor = forwardRef<
 
               <Select
                 onSelect={(e: any) => setSelectedStatus(e.value)}
-                onClear={() => setSelectedStatus({ label: '', value: '' })}
+                onClear={() =>
+                  setSelectedStatus({ label: '', value: '' })
+                }
                 options={Options.status}
                 label='Status'
                 defaultValue={selectedStatus}

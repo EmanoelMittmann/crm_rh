@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { theme } from 'styles'
+
 import { IContainerColumnProps } from 'types'
 
 export const ContainerModal = styled.div`
@@ -20,7 +21,7 @@ export const Columns = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap:1rem;
+  gap: 1rem;
 `
 
 export const Row = styled.div`
@@ -46,8 +47,6 @@ export const RowUser = styled.div`
   top: 0;
   margin-top: -1em;
   margin-left: 1.5rem;
-
-
 
   h2 {
     color: ${theme.neutrals.gray8};
@@ -84,7 +83,6 @@ export const ContainerShelfColumn = styled.div<IContainerColumnProps>`
     width: 8em;
   }
 `
-
 
 export const Text = styled.p`
   white-space: nowrap;

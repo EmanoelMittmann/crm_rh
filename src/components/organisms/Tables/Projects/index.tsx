@@ -3,10 +3,7 @@ import { useContext, useMemo, useRef } from 'react'
 import { List } from 'contexts'
 
 import { Loading } from 'components/atoms'
-import {
-  TableHeader,
-  
-} from 'components/molecules'
+import { TableHeader } from 'components/molecules'
 import { Modal } from 'components/molecules/Modais'
 import { IHandleModalColorsPropsNew } from 'components/molecules/Modais/EditorStatus'
 
