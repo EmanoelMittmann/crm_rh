@@ -80,25 +80,28 @@ export function handleCEP(
     })
 }
 
-export async function fetchCompany(
-  id: string,
-  methods: UseFormReturn<FormProps['Company'], any>
-) {
-  const { data: props } = await api.get(
-    routes.company.getCompany(+id)
+export async function fetchCompany(id: string) {
+  const [{ data: props }, { data: BANKS }] = await Promise.all([
+    await api.get(routes.company.getCompany(+id)),
+    await api.get(externRoutes.banks)
+  ])
+
+  const banks = BANKS.filter((bank: any) => bank.ispb !== '').map(
+    (bank: any) => ({
+      label: `${bank.ispb} ${bank.name}`,
+      value: bank.name
+    })
   )
+
   if (props.length === 0) throw new Error('Empresa não encontrada')
 
-  await fetchProps(methods)
-  return HandlePopulateFields(props, methods)
+  return HandlePopulateFields(props, banks)
 }
 
 export function HandlePopulateFields(
   props: any,
-  methods: UseFormReturn<FormProps['Company'], any>
+  banks: SelectOption[]
 ) {
-  const BANK = methods.watch('options.banks')
-
   const director = props.userCompanies.find(
     (prop: any) => prop.type_of_subscribes === 'DIRECTOR'
   )
@@ -111,11 +114,14 @@ export function HandlePopulateFields(
     .filter((prop: any) => prop.type_of_subscribes === 'WITNESSES')
     .map((v: any) => ({ label: v.name, value: v.id }))
 
-  methods.reset({
+  return {
     id: props.id,
     razao_social: props.razao_social,
     fantasy_name: props.fantasy_name,
-    director: { label: director.name, value: String(director.id) },
+    director: {
+      label: String(director.name),
+      value: String(director.id)
+    },
     witnesses: witnesses,
     opening_date: getDateInput(props.opening_date),
     state_registration: props.state_registration,
@@ -156,23 +162,38 @@ export function HandlePopulateFields(
     cnpj: props.cnpj,
     phone_number: props.phone_number,
     type_company: props.type_company,
-    bank: generateOpitionsFromBackend(
-      props.bank,
-      BANK as SelectOption[]
-    ),
+    bank: generateOpitionsFromBackend(props.bank, banks),
     account_type: generateOpitionsFromBackend(
       props.account_type,
       BANK_OPTIONS.TYPE_ACCOUNT
     ),
     agency: props.agency,
     account_number: props.account_number
-  })
+  }
 }
 
 export async function OnSubmit(
   data: FormProps['Company'],
   id: string | undefined
 ) {
+  if (
+    (data.witnesses &&
+      Number(data.witnesses[0].value) ===
+        Number(data.witnesses[1].value)) ||
+    (data.director &&
+      data.witnesses?.find(
+        (user) => Number(user.value) === Number(data.director?.value)
+      ))
+  ) {
+    return toast({
+      type: 'warning',
+      title: 'Aviso ',
+      description:
+        'Testemunhas e Diretores devem ser todos diferentes',
+      position: 'bottom-right'
+    })
+  }
+
   const payload = {
     id: data.id,
     razao_social: data.razao_social,
@@ -219,7 +240,7 @@ export async function OnSubmit(
     type_company: data.type_company,
     bank: data.bank?.value,
     account_type: data.account_type?.value,
-    agency: data.agency,
+    agency: data.agency.replace('-', ''),
     account_number: data.account_number
   }
 

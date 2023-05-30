@@ -1,98 +1,47 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-import { yupResolver } from '@hookform/resolvers/yup'
-
-import { Button, Loading } from 'components/atoms'
-import { Form, FormProps } from 'components/organisms'
-import { validationSchema } from 'components/organisms/Forms/Company/logic'
+import { Loading } from 'components/atoms'
+import { PartialForm } from 'components/organisms'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
 
-import { useDebounce } from 'hooks'
-
-import {
-  fetchCompany,
-  fetchProps,
-  handleCEP,
-  OnSubmit
-} from './logic'
+import { FormCompany } from './form'
+import { fetchCompany } from './logic'
 import { Container } from './style'
 
 export const RegisterCompany = () => {
-  const navigate = useNavigate()
-
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-
   const { id } = useParams()
-  const methods = useForm<FormProps['Company']>({
-    defaultValues: {
-      main_cnae: null,
-      secondary_cnae: null
-    },
-    resolver: yupResolver(validationSchema)
-  })
-  const CEP = methods.watch('cep')
+  const [DefaultValue, setDefaultValue] = useState<
+    PartialForm['Company'] | null
+  >(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  const test = useCallback(async () => {
-    setIsLoading(true)
+  useEffect(() => {
     if (id) {
-      try {
-        await fetchCompany(id, methods)
+      fetchCompany(id).then((data) => {
+        setDefaultValue(data as PartialForm['Company'])
         setIsLoading(false)
-      } catch (error) {
-        console.error(error)
-      }
+      })
+    } else {
       setIsLoading(false)
     }
   }, [id])
 
-  useDebounce({
-    fn: async () => {
-      setIsLoading(true)
-      await fetchProps(methods)
-      setIsLoading(false)
-    },
-    listener: []
-  })
-
-  useDebounce({
-    fn: () => {
-      if (id) return
-      handleCEP(methods, CEP)
-    },
-    delay: 500,
-    listener: [CEP]
-  })
-  useEffect(() => {
-    test()
-  }, [test])
-
   return (
     <AuthTemplate>
-      <CreateTemplate title='Cadastro de Empresas'>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={methods.handleSubmit(async (data) => {
-              await OnSubmit(data, id)
-              navigate('/company')
-            })}
-          >
-            {isLoading ? (
-              <Container>
-                <Loading />
-              </Container>
-            ) : (
-              <Form.Company />
-            )}
-            <Button.Updade
-              type='submit'
-              onCancel={() => navigate('/company')}
-              saveButtonName='Salvar Empresa'
-              cancelButtonName='Cancelar'
-            />
-          </form>
-        </FormProvider>
+      <CreateTemplate
+        title={!!id ? 'Editar Empresa' : 'Cadastrar nova Empresa'}
+      >
+        {isLoading ? (
+          <Container>
+            <Loading />
+          </Container>
+        ) : (
+          <FormCompany
+            defaultValue={DefaultValue}
+            isLoading={isLoading}
+          />
+        )}
       </CreateTemplate>
     </AuthTemplate>
   )

@@ -1,5 +1,4 @@
 import { GenerateOption } from './logic'
-import { IOptions } from './types'
 
 export const TODAY = new Date().toISOString().split('T')[0]
 
