@@ -15,6 +15,7 @@ import { FormTeamProps } from 'components/organisms/Forms/Project'
 import api from 'api'
 import { routes } from 'routes'
 import { percentCalculate } from 'components/utils/percentCalculate'
+import { toast } from '@stardust-ds/react'
 
 
 export const Team = () => {
@@ -42,6 +43,7 @@ export const Team = () => {
     api.put(routes.project.userProjects(Number(user_id)), newTeam)
 
     setValue('team', newTeam)
+    return newTeam
 
 
   }
@@ -54,7 +56,13 @@ export const Team = () => {
     const newTeam = Team.filter(
       (item) => item.user_id !== user_id
     )
+
     setValue('team', newTeam)
+    toast({
+      title: 'Profissional removido com sucesso',
+      type: 'success',
+    })
+    
   }
 
   const Table = useMemo(() => {

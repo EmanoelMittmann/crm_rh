@@ -6,6 +6,7 @@ import { FormTeamProps, TeamMemberProps } from './types'
 import { ContainerRow } from 'components/organisms/Forms/Project/style'
 import api from 'api'
 import { routes } from 'routes'
+import { toast } from '@stardust-ds/react'
 
 
 
@@ -56,11 +57,19 @@ export const Team = () => {
         if (projectId) {
           await api.post(routes.project.userProjects(Number(projectId)), newTeamMember);
           setValue('team', newTeam);
+          toast({
+            title: "Profissional adicionado com sucesso!",
+            type: 'success',
+          })
 
           return; 
         }
 
         setValue('team', newTeam);
+        toast({
+          title:"Profissional adicionado com sucesso!",
+          type: 'success',   
+        })
       }
     }
 
