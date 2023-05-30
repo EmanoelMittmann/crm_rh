@@ -176,24 +176,6 @@ export async function OnSubmit(
   data: FormProps['Company'],
   id: string | undefined
 ) {
-  if (
-    (data.witnesses &&
-      Number(data.witnesses[0].value) ===
-        Number(data.witnesses[1].value)) ||
-    (data.director &&
-      data.witnesses?.find(
-        (user) => Number(user.value) === Number(data.director?.value)
-      ))
-  ) {
-    return toast({
-      type: 'warning',
-      title: 'Aviso ',
-      description:
-        'Testemunhas e Diretores devem ser todos diferentes',
-      position: 'bottom-right'
-    })
-  }
-
   const payload = {
     id: data.id,
     razao_social: data.razao_social,

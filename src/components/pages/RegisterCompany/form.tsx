@@ -2,6 +2,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { yupResolver } from '@hookform/resolvers/yup'
+import { toast } from '@stardust-ds/react'
 
 import { Button, Loading } from 'components/atoms'
 import { Form, FormProps, SchemaCompany } from 'components/organisms'
@@ -27,6 +28,29 @@ export const FormCompany = ({
   })
   const CEP = methods.watch('cep')
 
+  const handleSave = async (data: any, id: string | undefined) => {
+    if (
+      (data.witnesses &&
+        Number(data.witnesses[0]?.value) ===
+          Number(data.witnesses[1]?.value)) ||
+      (data.director &&
+        data.witnesses?.find(
+          (user: any) =>
+            Number(user?.value) === Number(data.director?.value)
+        ))
+    ) {
+      return toast({
+        type: 'warning',
+        title: 'Aviso ',
+        description:
+          'Testemunhas e Diretores devem ser todos diferentes',
+        position: 'bottom-right'
+      })
+    }
+    await OnSubmit(data, id)
+    navigate('/company')
+  }
+
   useDebounce({
     fn: () => fetchProps(methods),
     listener: []
@@ -44,10 +68,9 @@ export const FormCompany = ({
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={methods.handleSubmit(async (data) => {
-          await OnSubmit(data, id)
-          navigate('/company')
-        })}
+        onSubmit={methods.handleSubmit((data) =>
+          handleSave(data, id)
+        )}
       >
         <Form.Company />
         <Button.Updade
