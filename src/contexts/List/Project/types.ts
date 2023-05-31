@@ -35,5 +35,5 @@ export interface ContextProjectProps {
   handleOrder(field: string): void
   handleFillProject_Type(id: number | null): void
   handleFillProject_Status(id: number | null): void
-  handleUpdateStatus(id: number, name: string): void
+  handleUpdateStatus(projectId: number, statusId: string): void
 }
