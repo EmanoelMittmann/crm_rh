@@ -11,12 +11,12 @@ import { toast } from '@stardust-ds/react'
 
 
 export const Team = () => {
-  const { 
-    register, 
-    watch, 
+  const {
+    register,
+    watch,
     setValue,
-    getValues, 
-    formState: { errors } 
+    getValues,
+    formState: { errors }
   } = useFormContext<FormTeamProps>();
 
   const options = watch('options');
@@ -62,18 +62,26 @@ export const Team = () => {
             type: 'success',
           })
 
-          return; 
+          return;
         }
 
         setValue('team', newTeam);
         toast({
-          title:"Profissional adicionado com sucesso!",
-          type: 'success',   
+          title: "Profissional adicionado com sucesso!",
+          type: 'success',
         })
       }
     }
 
   }
+  const teamUser = watch('team', [])
+  const listUsers = watch('options.professionals', [])
+  const currentTeamOptions = listUsers.filter((professional) => {
+    if (teamUser.find((user => user.user_id === Number(professional.value)))) {
+      return false
+    }
+    return true
+  })
 
 
   return (
@@ -91,7 +99,7 @@ export const Team = () => {
             })
           }
           onClear={() => setValue('professional.name', null)}
-          options={options?.professionals as SelectOption[]}
+          options={currentTeamOptions as SelectOption[]}
           label='Time'
           placeholder='Selecione'
           width={180}

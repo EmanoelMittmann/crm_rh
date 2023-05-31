@@ -86,54 +86,7 @@ export const Team = () => {
             {...{ props }}
           />
         ))}
-        {Team.length > 0 && (
-          <Shelf
-            config={{
-              template: GRID_TEMPLATE,
-              options: []
-            }}
-            {...{
-              props: {
 
-                hours_mounths_estimated: Team.reduce(
-                  (acc, cur) => acc + cur.hours_mounths_estimated,
-                  0
-                ),
-                hours_mounths_performed: Team.reduce(
-                  (acc, cur) => acc + cur.hours_mounths_performed,
-                  0
-                ),
-                extra_hours_estimated: Team.reduce(
-                  (acc, cur) => acc + cur.extra_hours_estimated,
-                  0
-                ),
-                extra_hours_performed: Team.reduce(
-                  (acc, cur) => acc + cur.extra_hours_performed,
-                  0
-                ),
-                hours_mounths_percent: +Team
-                  .map((item) =>
-                    percentCalculate(
-                      item.hours_mounths_performed,
-                      item.hours_mounths_estimated
-                    )
-                  )
-                  .reduce((acc, cur) => acc + cur, 0)
-                  .toFixed(),
-                extra_hours_percent: Team
-                  .map((item) =>
-                    percentCalculate(
-                      item.extra_hours_performed,
-                      item.extra_hours_estimated
-                    )
-                  )
-                  .reduce((acc, cur) => acc + cur, 0),
-                id: 0,
-              }
-            }}
-          />
-        )
-        }
       </>
     )
   }, [isLoading, Team])

@@ -25,7 +25,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     avatar,
  
   } = props
-  console.log('props: ', props);
+  // console.log('props: ', props);
 
 
   return (
