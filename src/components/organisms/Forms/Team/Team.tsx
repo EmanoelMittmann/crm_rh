@@ -28,12 +28,15 @@ export const Team = () => {
     const id = Number(watch('professional.name.value'))
     const avatar = watch('professional.avatar.label')
     const jobs = watch('jobs')
+    const job_ = watch('jobs.name.label')
     const status = watch('users.status')
     const hoursMonth = Number(watch('users.hours_mounths_estimated')) || 0
     const extraHour = Number(watch('users.extra_hours_estimated')) || 0
     const hours_mounths_performed = Number(watch('users.hours_mounths_performed')) || 0
     const extra_hours_performed = Number(watch('users.extra_hours_performed')) || 0
     const techLead = watch('users.isTechLead')
+    const is_active = watch('users.is_active')
+  
 
 
     if (professional && jobs) {
@@ -64,16 +67,20 @@ export const Team = () => {
         user_id: id,
         professional,
         jobs,
+        job_: job_,
         isTechLead: techLead,
         extra_hours_estimated: extraHour,
         hours_mounths_estimated: hoursMonth,
         hours_mounths_performed: hours_mounths_performed,
         extra_hours_performed: extra_hours_performed,
-        is_active: true,
+        is_active: is_active,
         avatar: avatar
           ? avatar
           : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png',
-        status: status ? false : true
+        status:{
+          label: professional?.status ? 'Ativo' : 'Inativo',
+          value: professional?.status ? '1' : '0'
+        }
       } as unknown as TeamMemberProps
 
       const currentTeam = getValues('team') || []

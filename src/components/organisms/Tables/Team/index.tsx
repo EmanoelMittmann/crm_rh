@@ -33,23 +33,27 @@ export const Team = () => {
     status: boolean,
     name: string
   ) => [
-    project_id ?
+    // project_id ?
     {
       label: 'Editar',
       callback: () => modalRef.current?.open(user_id, name)
-    }
-    :
+    },
+    // :
     {
       label: 'Remover',
       callback: () => removeUser(user_id)
     }
   ]
 
-  function handleUpdateUser(user_id: number) {
+  function handleUpdateUser(
+    user_id: number,
+  ) {
     const newTeam = Team.map((item) =>
       item.user_id === user_id ? { ...item, } : item
     )
-    api.put(routes.project.userProjects(Number(user_id)), newTeam)
+    api.put(routes.project.userProjects(Number(project_id)), newTeam)
+
+    console.log('newTeam: ', newTeam);
 
     setValue('team', newTeam)
     return newTeam

@@ -47,7 +47,9 @@ const RegisterProjects = () => {
           hours_mounths_estimated: user.hours_mounths_estimated,
           hours_mounths_performed: user.hours_mounths_performed,
           status: user.status,
-          job_: user.jobs.name?.label
+          isTechLead: user.isTechLead,
+          is_active: user.is_active,
+          job_: user.job_
         }
       })
     }

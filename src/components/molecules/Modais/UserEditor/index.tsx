@@ -30,11 +30,22 @@ import {
   TextJob
 } from './style'
 import { Option } from 'types'
+import { TeamMemberProps } from 'components/organisms/Forms/Team/types'
 
 interface IModalUserProps {
   text: string
   placeholder: string
-  EventOne: (_: number, name: string) => void
+  EventOne: (_: number,
+    user_id: number | undefined,
+    extra_hours_estimated: number | undefined,
+    extra_hours_performed: number | undefined,
+    hours_mounths_estimated: number | undefined,
+    hours_mounths_performed: number | undefined,
+    isTechLead: boolean | undefined,
+    status: boolean | undefined,
+    job_: string | undefined,
+
+  ) => void
   defaultOpened?: boolean
 }
 
@@ -58,29 +69,19 @@ const UsersEditor = forwardRef<
   const [isOpen, setIsOpen] = useState({ id: 0 })
   const [selectUsers, setSelectUsers] = useState([])
   const [selectedStatus, setSelectedStatus] = useState<Option>()
-  const { register, watch, setValue } =
-    useFormContext<FormProjectProps>()
+  const {
+    register,
+    watch,
+    setValue
+  } = useFormContext<FormProjectProps>()
 
-  const fetchUsers = async () => {
-    try {
-      try {
-        const response = await api.get(routes.usersProjects.list)
-        setSelectUsers(response.data)
-      } catch (error) {
-        console.log(error)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  const allUsers = selectUsers.flatMap(
-    (selectUser: any) => selectUser.users
-  )
-  const user = allUsers.find((user: any) => user.id === isOpen.id)
 
-  useEffect(() => {
-    fetchUsers()
-  }, [])
+  const {team} = watch()
+  const professional = team.find((item: any) => item.user_id === isOpen.id)
+
+  console.log('profissional: ', professional?.professional.name?.label);
+  console.log('Equipe : ', team);
+
 
   const close = useCallback(() => {
     setIsOpen({ id: 0 })
@@ -91,6 +92,10 @@ const UsersEditor = forwardRef<
     () => ({
       open: (user_id) => {
         setIsOpen({ id: user_id })
+        setSelectedStatus({
+          label: professional?.status ? 'Ativo' : 'Inativo',
+          value: String(professional?.status)
+        });
       },
       close
     }),
@@ -109,21 +114,22 @@ const UsersEditor = forwardRef<
           </Row>
           <RowUser>
             <ContainerShelfColumn gap='.5rem' width='210px'>
-              <Image src={user.avatar} />
+              <Image src={professional?.avatar} />
               <TeamJobName>
-                <Text>{user.name}</Text>
-                <TextJob>{user.job_}</TextJob>
+                <Text>{professional?.professional.name?.label}</Text>
+                <TextJob>{professional?.jobs.name?.label}</TextJob>
               </TeamJobName>
-              <TextHours>{user.hours_mounths_estimated}</TextHours>
+              <TextHours>{professional?.hours_mounths_estimated}</TextHours>
             </ContainerShelfColumn>
           </RowUser>
 
           <Row>
             <Columns>
               <Input
+                {...register('users.hours_mounths_estimated', {})}
                 label='Horas mensais'
+                value={professional?.hours_mounths_estimated}
                 width={200}
-                value={user.hours_mounths_estimated}
               />
 
               <Select
@@ -135,8 +141,8 @@ const UsersEditor = forwardRef<
                 }
                 onClear={() => setValue('jobs.name', null)}
                 options={watch('options.jobs')}
+                value={professional?.jobs.name}
                 label='Cargo'
-                defaultValue={user.job_}
                 placeholder={placeholder}
                 width={200}
               />
@@ -144,13 +150,14 @@ const UsersEditor = forwardRef<
 
             <Columns>
               <Input
+                {...register('users.extra_hours_estimated', {})}
                 label='Horas extras'
                 width={200}
-                value={user.extra_hours_estimated}
+                value={professional?.extra_hours_estimated}
               />
 
               <Select
-                onSelect={(e: any) => setSelectedStatus(e.value)}
+                onSelect={(e: any) => setSelectedStatus(e)}
                 onClear={() =>
                   setSelectedStatus({ label: '', value: '' })
                 }
@@ -178,7 +185,17 @@ const UsersEditor = forwardRef<
               }}
               bgColor='#0066FF'
               onClick={() => {
-                // EventOne(isOpen.id, selectedStatus?.value as string)
+                EventOne(
+                  isOpen.id,
+                  professional?.user_id,
+                  professional?.extra_hours_estimated,
+                  professional?.extra_hours_performed,
+                  professional?.hours_mounths_estimated,
+                  professional?.hours_mounths_performed,
+                  professional?.isTechLead,
+                  selectedStatus?.value === '1' ? true : false,
+                  professional?.job_
+                  )
                 close()
               }}
             >
