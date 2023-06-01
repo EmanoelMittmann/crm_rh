@@ -17,10 +17,8 @@ export const Team = () => {
     watch,
     setValue,
     getValues,
-    handleSubmit,
     formState: { errors }
   } = useFormContext<FormTeamProps>();
-  console.log('errors: ', errors);
 
   const options = watch('options')
   const projectId = watch('id')
@@ -31,16 +29,11 @@ export const Team = () => {
     const avatar = watch('professional.avatar.label')
     const jobs = watch('jobs')
     const status = watch('users.status')
-    const hoursMonth =
-      Number(watch('users.hours_mounths_estimated')) || 0
-    const extraHour =
-      Number(watch('users.extra_hours_estimated')) || 0
-    const hours_mounths_performed =
-      Number(watch('users.hours_mounths_performed')) || 0
-    const extra_hours_performed =
-      Number(watch('users.extra_hours_performed')) || 0
+    const hoursMonth = Number(watch('users.hours_mounths_estimated')) || 0
+    const extraHour = Number(watch('users.extra_hours_estimated')) || 0
+    const hours_mounths_performed = Number(watch('users.hours_mounths_performed')) || 0
+    const extra_hours_performed = Number(watch('users.extra_hours_performed')) || 0
     const techLead = watch('users.isTechLead')
-
 
 
     if (professional && jobs) {
@@ -77,7 +70,7 @@ export const Team = () => {
 
         setValue('team', newTeam);
         toast({
-          title: "Profissional adicionado com sucesso!",
+          title: "Profissional cadastrado com sucesso!",
           type: 'success',
         })
 
@@ -154,7 +147,7 @@ export const Team = () => {
           bRadius='500px'
           height='3.5em'
           type='button'
-          onClick={handleSubmit(handleTeam)}
+          onClick={handleTeam}
         />
       </ContainerRow>
       <ContainerRow>

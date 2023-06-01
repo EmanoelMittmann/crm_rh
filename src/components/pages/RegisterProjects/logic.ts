@@ -102,6 +102,7 @@ export function handlePopulateFields(
     team_cost: GenerateValue(String(data.team_cost)),
 
     team: data.users.map((user: any) => {
+
       const allUsers = OPTIONS.users.flatMap((selectUser: any) => selectUser.users);
       const userData = allUsers.find((userData: any) => userData.id === user.user_id);
       
