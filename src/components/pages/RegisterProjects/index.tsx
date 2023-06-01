@@ -1,22 +1,18 @@
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
-
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from '@stardust-ds/react'
-
 import { Button, Loading } from 'components/atoms'
 import { Form, FormProjectProps } from 'components/organisms'
 import { validationSchema } from 'components/organisms/Forms/Project/logic'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
-
 import api from 'api'
 import { routes } from 'routes'
-
 import { useDebounce } from 'hooks'
-
 import { fetchAndPopulateFields, fetchPropsProject } from './logic'
 import { Container } from './style'
+
 
 const RegisterProjects = () => {
   const [isSaving, setIsSaving] = useState(false)
@@ -58,11 +54,8 @@ const RegisterProjects = () => {
 
     try {
       if (id) {
-        await api.put(
-          routes.project.updateProject(Number(id)),
-          sanitizeData
-        )
-        console.log('dados do projeto: ', sanitizeData)
+     await api.put(routes.project.updateProject(Number(id)), sanitizeData);
+
       } else {
         await api.post(routes.project.register, sanitizeData)
       }

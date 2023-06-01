@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
 import { Button, Loading } from 'components/atoms'
@@ -77,7 +76,6 @@ const RegisterProfessional = () => {
   })
 
   useEffect(() => {
-    console.log(!!id)
     if (!!id) {
       fetchAndPopulateUser(id, methods)
         .catch((error) => {
