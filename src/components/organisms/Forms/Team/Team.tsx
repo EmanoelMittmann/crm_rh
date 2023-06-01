@@ -16,8 +16,10 @@ export const Team = () => {
     watch,
     setValue,
     getValues,
+    handleSubmit,
     formState: { errors }
   } = useFormContext<FormTeamProps>();
+  console.log('errors: ', errors);
 
   const options = watch('options');
   const projectId = watch('id');
@@ -34,6 +36,8 @@ export const Team = () => {
     const hours_mounths_performed = Number(watch('users.hours_mounths_performed')) || 0
     const extra_hours_performed = Number(watch('users.extra_hours_performed')) || 0
     const techLead = watch('users.isTechLead')
+
+
 
     if (professional && jobs) {
       if (extraHour && hoursMonth) {
@@ -70,6 +74,7 @@ export const Team = () => {
           title: "Profissional adicionado com sucesso!",
           type: 'success',
         })
+
       }
     }
 
@@ -119,7 +124,7 @@ export const Team = () => {
           {...register('users.hours_mounths_estimated', {
             required: true,
           })}
-          error={errors.users?.hours_mounths_performed?.message}
+          error={errors.users?.hours_mounths_estimated?.message}
           label='Horas/mês estimadas'
           placeholder='Horas'
           width={160}
@@ -127,15 +132,14 @@ export const Team = () => {
         />
         <Inputs.Default
           {...register('users.extra_hours_estimated', {
-            required: true,
+            required: true
           })}
-          error={errors.users?.extra_hours_performed?.message}
+          error={errors.users?.extra_hours_estimated?.message}
           label='Horas extras estimadas'
           placeholder='Horas'
           width={160}
           height={40}
         />
-
 
         <ButtonGeneric
           top='1.5em'
@@ -146,7 +150,7 @@ export const Team = () => {
           bRadius='500px'
           height='3.5em'
           type='button'
-          onClick={handleTeam}
+          onClick={handleSubmit(handleTeam)}
         />
       </ContainerRow>
       <ContainerRow>

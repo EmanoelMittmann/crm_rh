@@ -12,6 +12,7 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 import { Container } from './style'
 import { fetchAndPopulateFields, fetchPropsProject } from './logic'
+import { schemaUser } from 'components/organisms/Forms/Team/logic'
 
 
 

@@ -1,6 +1,5 @@
 import * as yup from 'yup'
 
-
 export const schemaUser = yup.object().shape({
   user_id: yup.number(),
   name: yup.string(),
@@ -33,21 +32,19 @@ export const schemaUser = yup.object().shape({
         return true;
       }).required('Campo obrigatório'),
 
-  extra_hours_performed: yup
-    .number()
-    .nullable()
-    .test(
-      'horas validas',
-      'Campo vazio, inclua zero caso não exista horas extras realizadas',
-      function (value) {
-        const extraHoursPerformed = this.resolve(yup.ref('extra_hours_performed'));
-        if (extraHoursPerformed) {
-          return Number(value) > 0;
-        }
-        return true;
-      }).required('Campo obrigatório'),
 });
 
 
+export const validation = {
+  required: 'Campo obrigatório',
+  min: (
+    value: number,
+    min: number,
+    message: string = 'Campo inválido'
+  ) => {
+    if (value < min) return message
 
+    return true
+  }
+}
 

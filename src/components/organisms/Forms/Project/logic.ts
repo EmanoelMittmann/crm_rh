@@ -54,11 +54,48 @@ export const validationSchema = yup.object().shape({
     })
     .required('Campo obrigatório'),
 
+  // users: yup.object().shape({
+  //   user_id: yup.number(),
+  //   name: yup.string(),
+  //   job_: yup.string(),
+
+
+  //   hours_mounths_estimated: yup
+  //     .number()
+  //     .transform((value, originalValue) =>
+  //       isNaN(originalValue) ? undefined : value
+  //     )
+  //     .nullable()
+  //     .typeError('O Campo Hora/mês deve ser maior que 0'),
+
+
+  //   extra_hours_estimated: yup
+  //     .number()
+  //     .transform((value, originalValue) =>
+  //       isNaN(originalValue) ? undefined : value
+  //     )
+  //     .nullable()  
+  //     .typeError('Campo vazio, inclua zero caso não exista uma estimativa de horas/extra'),
+  // }),
+
 })
 
 
 
 
 
-
+    // hours_mounths_estimated: yup
+      //   .number()
+      //   .transform((value, originalValue) =>
+      //     isNaN(originalValue) ? undefined : value
+      //   )
+      //   .required('O Campo Hora/mês deve ser maior que 0')
+      //   .typeError('Valor inválido'),
+      // extra_hours_estimated: yup
+      //   .number()
+      //   .transform((value, originalValue) =>
+      //     isNaN(originalValue) ? undefined : value
+      //   )
+      //   .required('Campo vazio, inclua zero caso não exista uma estimativa de horas/extra')
+      //   .typeError('Valor inválido'),
 
