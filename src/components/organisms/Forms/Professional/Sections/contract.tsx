@@ -2,7 +2,8 @@ import { useFormContext } from 'react-hook-form'
 
 import { Radio } from '@stardust-ds/react'
 
-import { Inputs, Selects } from 'components/atoms'
+import { Inputs, SelectOption, Selects } from 'components/atoms'
+import { generateOpitionsFromBackend } from 'components/utils/OptionsAplication'
 
 import { MASKER, CONTRACT_TYPE_OPTIONS } from '../constants'
 import { validation } from '../logic'
@@ -134,11 +135,18 @@ export const Contract = () => {
       </ContainerRow>
       <ContainerRow>
         <Selects.Default
-          options={watch('options')?.payingCompanies}
           label='Empresa Pagadora'
           disabled={watch('options.payingCompanies', []).length === 0}
-          {...register('company_id')}
+          {...register('options.payingCompany')}
+          options={watch('options.payingCompanies')}
           onSelect={(e: any) => setValue('company_id', e.value)}
+          value={
+            generateOpitionsFromBackend(
+              watch('company_id'),
+              watch('options.payingCompanies', [])
+            ) as any
+            /* watch('options.payingCompany') as any */
+          }
         />
       </ContainerRow>
     </>

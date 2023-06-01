@@ -9,7 +9,7 @@ import { ContextPropsStatusProject } from './Settings/StatusProjects'
 import { Status } from './Settings/StatusProjects'
 import { Types } from './Settings/TypesProjects'
 import { ContextPropsTypeProject } from './Settings/TypesProjects'
-import { ContextTeamProps} from './Team'
+import { ContextTeamProps } from './Team'
 import { Team } from './Team'
 
 export const List = Object.assign(

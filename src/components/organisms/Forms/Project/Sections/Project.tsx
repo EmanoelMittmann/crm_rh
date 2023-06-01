@@ -1,9 +1,15 @@
 import { useFormContext, UseFormReturn } from 'react-hook-form'
-import { Inputs, Selects, SelectOption, Option } from 'components/atoms'
-import { ContainerRow } from '../style'
-import { FormProjectProps } from '../types'
+
+import {
+  Inputs,
+  Selects,
+  SelectOption,
+  Option
+} from 'components/atoms'
 import { GenerateValue } from 'components/utils/OptionsAplication'
 
+import { ContainerRow } from '../style'
+import { FormProjectProps } from '../types'
 
 export const Project = () => {
   const {
@@ -12,12 +18,10 @@ export const Project = () => {
     setValue,
     formState: { errors }
   }: UseFormReturn<FormProjectProps> = useFormContext()
-  
+
   const options = watch('options')
-  const estimatedCost = watch('team_cost');
-  const formattedEstimatedCost = GenerateValue(estimatedCost || '');
-
-
+  const estimatedCost = watch('team_cost')
+  const formattedEstimatedCost = GenerateValue(estimatedCost || '')
 
   return (
     <>
@@ -101,7 +105,7 @@ export const Project = () => {
           }
           onClear={() => setValue('project_status_id', null)}
           options={options?.status_projects as SelectOption[]}
-          value={watch('project_status_id') as  any}
+          value={watch('project_status_id') as any}
           error={errors.project_status_id?.message}
           required
           label='Status do Projeto'
@@ -111,8 +115,8 @@ export const Project = () => {
         <Inputs.Default
           {...register('team_cost', {
             setValueAs: (value) => {
-              return value ? value.replace(/[^\d]/g, '') : '';
-            },
+              return value ? value.replace(/[^\d]/g, '') : ''
+            }
           })}
           width='100%'
           type='text'

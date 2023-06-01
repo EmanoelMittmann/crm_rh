@@ -21,7 +21,7 @@ interface IModalStatusProps {
 }
 
 export interface IHandleModalColorsPropsNew {
-  open(id: number, name: string, status:any): void
+  open(id: number, name: string, status: any): void
   close(): void
 }
 
@@ -52,7 +52,6 @@ const EditorStatus = forwardRef<IHandleModalColorsPropsNew, IModalStatusProps>((
   );
 
   if (isOpen.id === 0) return null;
-
 
   return (
     <>

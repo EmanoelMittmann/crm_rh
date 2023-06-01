@@ -1,14 +1,15 @@
 import { useFormContext } from 'react-hook-form'
+
 import { Selects, Inputs, SelectOption } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
-import { Table } from 'components/organisms/Tables'
-import { FormTeamProps, TeamMemberProps } from './types'
 import { ContainerRow } from 'components/organisms/Forms/Project/style'
+import { Table } from 'components/organisms/Tables'
+
 import api from 'api'
 import { routes } from 'routes'
 import { toast } from '@stardust-ds/react'
 
-
+import { FormTeamProps, TeamMemberProps } from './types'
 
 export const Team = () => {
   const {
@@ -21,9 +22,8 @@ export const Team = () => {
   } = useFormContext<FormTeamProps>();
   console.log('errors: ', errors);
 
-  const options = watch('options');
-  const projectId = watch('id');
-
+  const options = watch('options')
+  const projectId = watch('id')
 
   const handleTeam = async () => {
     const professional = watch('professional')
@@ -31,10 +31,14 @@ export const Team = () => {
     const avatar = watch('professional.avatar.label')
     const jobs = watch('jobs')
     const status = watch('users.status')
-    const hoursMonth = Number(watch('users.hours_mounths_estimated')) || 0
-    const extraHour = Number(watch('users.extra_hours_estimated')) || 0
-    const hours_mounths_performed = Number(watch('users.hours_mounths_performed')) || 0
-    const extra_hours_performed = Number(watch('users.extra_hours_performed')) || 0
+    const hoursMonth =
+      Number(watch('users.hours_mounths_estimated')) || 0
+    const extraHour =
+      Number(watch('users.extra_hours_estimated')) || 0
+    const hours_mounths_performed =
+      Number(watch('users.hours_mounths_performed')) || 0
+    const extra_hours_performed =
+      Number(watch('users.extra_hours_performed')) || 0
     const techLead = watch('users.isTechLead')
 
 
@@ -51,12 +55,14 @@ export const Team = () => {
           hours_mounths_performed: hours_mounths_performed,
           extra_hours_performed: extra_hours_performed,
           is_active: true,
-          avatar: avatar ? avatar : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png',
-          status: status ? false : true,
-        } as unknown as TeamMemberProps;
+          avatar: avatar
+            ? avatar
+            : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png',
+          status: status ? false : true
+        } as unknown as TeamMemberProps
 
-        const currentTeam = getValues('team') || [];
-        const newTeam = [...currentTeam, newTeamMember];
+        const currentTeam = getValues('team') || []
+        const newTeam = [...currentTeam, newTeamMember]
 
         if (projectId) {
           await api.post(routes.project.userProjects(Number(projectId)), newTeamMember);
@@ -77,7 +83,6 @@ export const Team = () => {
 
       }
     }
-
   }
   const teamUser = watch('team', [])
   const listUsers = watch('options.professionals', [])
@@ -87,7 +92,6 @@ export const Team = () => {
     }
     return true
   })
-
 
   return (
     <>
@@ -122,7 +126,7 @@ export const Team = () => {
         />
         <Inputs.Default
           {...register('users.hours_mounths_estimated', {
-            required: true,
+            required: true
           })}
           error={errors.users?.hours_mounths_estimated?.message}
           label='Horas/mês estimadas'
@@ -156,7 +160,6 @@ export const Team = () => {
       <ContainerRow>
         <Table.Team />
       </ContainerRow>
-
     </>
   )
 }

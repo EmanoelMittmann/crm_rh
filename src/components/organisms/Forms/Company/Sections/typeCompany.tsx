@@ -11,8 +11,7 @@ export const TypeCompany = () => {
     register,
     watch,
     formState: { errors },
-    setValue,
-    clearErrors
+    setValue
   } = useFormContext<FormProps>()
 
   const Checked = {
@@ -77,6 +76,7 @@ export const TypeCompany = () => {
             }
             value='SUPPLIER'
             checked={Checked.radio('SUPPLIER')}
+            required
           />
           <Typography
             type='p1'

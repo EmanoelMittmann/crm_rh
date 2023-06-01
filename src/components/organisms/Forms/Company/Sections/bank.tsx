@@ -28,7 +28,6 @@ export const Bank = () => {
       <ContainerRow gap='1em'>
         <Inputs.Default
           {...register('agency', {
-            required: validation.required,
             setValueAs: (v: string) => mask(v, MASKER.BANK.AGENCY)
           })}
           onChange={({ target }: any) =>
@@ -38,10 +37,10 @@ export const Bank = () => {
           error={errors.agency?.message}
           width='50%'
           label='Agencia'
+          placeholder='0000-0'
         />
         <Inputs.Default
           {...register('account_number', {
-            required: validation.required,
             setValueAs: (v: string) =>
               mask(v, MASKER.BANK.ACCOUNT_NUMBER)
           })}
@@ -52,26 +51,27 @@ export const Bank = () => {
           error={errors.agency?.message}
           width='100%'
           label='Número de conta'
+          placeholder='0000000000-0'
         />
       </ContainerRow>
       <ContainerRow gap='1em'>
         <Selects.Default
-          {...register('bank', {
-            required: validation.required
-          })}
-          onSelect={(v: any) => setValue('bank', v.value)}
+          onSelect={(v: any) => setValue('bank', v)}
+          onClear={() => setValue('bank', null)}
           options={watch('options.banks') as SelectOption[]}
+          value={watch('bank') as any}
           label='Banco'
+          error={errors.bank?.message}
           placeholder='Selecione'
           width={500}
           searchable
         />
         <Selects.Default
-          {...register('account_type', {
-            required: validation.required
-          })}
-          onSelect={(v: any) => setValue('account_type', v.value)}
+          onSelect={(v: any) => setValue('account_type', v)}
+          onClear={() => setValue('account_type', null)}
           options={BANK_OPTIONS.TYPE_ACCOUNT}
+          value={watch('account_type') as any}
+          error={errors.account_type?.message}
           label='Tipo de Conta'
           placeholder='Selecione'
           width={393}

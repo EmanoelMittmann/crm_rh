@@ -7,8 +7,12 @@ import {
 } from 'components/organisms/Tables/style'
 import { percentCalculate } from 'components/utils/percentCalculate'
 
-import { Image, TeamJobName, Text, TextJob } from '../../Forms/Project/style'
-
+import {
+  Image,
+  TeamJobName,
+  Text,
+  TextJob
+} from '../../Forms/Project/style'
 import { ShelfProps } from '../types'
 
 export const Shelf = ({ props, config }: ShelfProps<any>) => {
@@ -25,8 +29,6 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     avatar,
  
   } = props
-  // console.log('props: ', props);
-
 
   return (
     <ContainerShelf template={config.template}>

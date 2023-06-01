@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import {useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from '@stardust-ds/react'
+
 import { Button, Loading } from 'components/atoms'
 import { Form, FormProjectProps } from 'components/organisms'
-import {validationSchema } from 'components/organisms/Forms/Project/logic'
+import { validationSchema } from 'components/organisms/Forms/Project/logic'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
+
 import api from 'api'
 import { routes } from 'routes'
+
 import { useDebounce } from 'hooks'
-import { Container } from './style'
+
 import { fetchAndPopulateFields, fetchPropsProject } from './logic'
 import { schemaUser } from 'components/organisms/Forms/Team/logic'
 
@@ -28,7 +32,6 @@ const RegisterProjects = () => {
     shouldFocusError: true
   })
 
-
   async function onSubmit(data: FormProjectProps['Project']) {
     const sanitizeData = {
       name: data.name,
@@ -41,8 +44,7 @@ const RegisterProjects = () => {
       date_start_performed: data.date_start_performed,
       date_end_performed: data.date_end_performed,
 
-  
-      users: data.team.map(user => {
+      users: data.team.map((user) => {
         return {
           ...user,
           user_id: user.professional.name?.value,
@@ -51,12 +53,9 @@ const RegisterProjects = () => {
           hours_mounths_estimated: user.hours_mounths_estimated,
           hours_mounths_performed: user.hours_mounths_performed,
           status: user.status,
-          job_: user.jobs.name?.label,
-
+          job_: user.jobs.name?.label
         }
-
       })
-
     }
 
     try {
@@ -65,22 +64,21 @@ const RegisterProjects = () => {
 
 
       } else {
-        await api.post(routes.project.register, sanitizeData);
+        await api.post(routes.project.register, sanitizeData)
       }
-      const successMessage = id ? 'Projeto atualizado com sucesso.' : 'Projeto cadastrado com sucesso.';
+      const successMessage = id
+        ? 'Projeto atualizado com sucesso.'
+        : 'Projeto cadastrado com sucesso.'
       toast({
         type: 'success',
         title: successMessage,
         position: 'bottom-right'
       })
-      navigate('/project');
+      navigate('/project')
     } catch (error) {
-      console.log('error: ', error);
-
+      console.log('error: ', error)
     }
-
   }
-
 
   const handleSave = () => {
     if (!validationSchema) {
@@ -89,7 +87,6 @@ const RegisterProjects = () => {
       methods.handleSubmit(onSubmit, OnError)()
       setIsSaving(false)
     }
-
   }
 
   function handleCancel() {
@@ -118,18 +115,15 @@ const RegisterProjects = () => {
     listener: []
   })
 
-
   useEffect(() => {
     if (id) {
       fetchAndPopulateFields(id, methods)
         .catch((error) => console.log(error.message))
         .finally(() => setIsLoading(false))
-
     } else {
       setIsLoading(false)
     }
   }, [id, methods])
-
 
   return (
     <>

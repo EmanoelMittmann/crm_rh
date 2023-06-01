@@ -4,7 +4,7 @@ import { theme } from 'styles'
 export const ContainerModal = styled.div`
   width: 30em;
   height: 254px;
- border-radius: 16px;
+  border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
   display: flex;
   top: 50%;

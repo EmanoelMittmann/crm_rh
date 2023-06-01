@@ -1,11 +1,10 @@
+import { Team } from '../Forms/Team/Team'
 import { Companys } from './Companys'
 import { Jobs } from './Jobs'
 import { Professionals } from './Professionals'
 import { Projects } from './Projects'
 import { StatusProject } from './statusProject'
 import { TypeProject } from './typeProject'
-import { Team } from '../Forms/Team/Team'
-
 
 export const Filter = Object.assign(
   {},
@@ -17,6 +16,5 @@ export const Filter = Object.assign(
     TypeProject,
     Companys,
     Team
-    
   }
 )

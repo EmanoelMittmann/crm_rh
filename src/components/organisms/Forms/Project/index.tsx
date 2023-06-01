@@ -13,4 +13,4 @@ export default () => {
 }
 
 export type { FormProjectProps } from './types'
-export type {FormTeamProps} from '../../Forms/Team/types'
+export type { FormTeamProps } from '../../Forms/Team/types'

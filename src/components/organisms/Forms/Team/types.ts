@@ -1,11 +1,10 @@
 import type { Option, SelectOption } from 'components/atoms'
 import { TemplateProps } from 'components/organisms/Tables/types'
 
-
 export interface TeamMemberProps {
   user_id: number
   job_: Option | null
-  job: Option | null,
+  job: Option | null
   name: string
   isTechLead: boolean
   extra_hours_estimated: number
@@ -77,7 +76,7 @@ export interface TeamProps {
     team: TeamMemberProps[]
     user_id: number
     job_: string
-    job: string,
+    job: string
     job_id: number
     name: string
     isTechLead: boolean
@@ -119,7 +118,6 @@ interface FormConfigProps {
   }
 }
 
-
 interface OptionsProps {
   label: string
   callback: () => void
@@ -129,14 +127,11 @@ interface ConfigProps extends TemplateProps {
   options: OptionsProps[]
 }
 
-
 export type ShelfUserProject = {
   props: TeamMemberProps
   config: ConfigProps
 }
 
-export interface FormTeamProps
-  extends TeamProps,
-    FormConfigProps {}
+export interface FormTeamProps extends TeamProps, FormConfigProps {}
 
 export type { SelectOption }

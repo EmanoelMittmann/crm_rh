@@ -1,42 +1,47 @@
-import { useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-import { Button } from 'components/atoms'
-import { Form, FormProps } from 'components/organisms'
+import { Loading } from 'components/atoms'
+import { PartialForm } from 'components/organisms'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
 
-import { useDebounce } from 'hooks'
-
-import { fetchProps } from './logic'
+import { FormCompany } from './form'
+import { fetchCompany } from './logic'
+import { Container } from './style'
 
 export const RegisterCompany = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const navigate = useNavigate()
-  const methods = useForm<FormProps['Company']>({
-    defaultValues: {},
-    shouldFocusError: true
-  })
+  const { id } = useParams()
+  const [DefaultValue, setDefaultValue] = useState<
+    PartialForm['Company'] | null
+  >(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  useDebounce({
-    fn: () => fetchProps(methods),
-    listener: []
-  })
+  useEffect(() => {
+    if (id) {
+      fetchCompany(id).then((data) => {
+        setDefaultValue(data as PartialForm['Company'])
+        setIsLoading(false)
+      })
+    } else {
+      setIsLoading(false)
+    }
+  }, [id])
 
   return (
     <AuthTemplate>
-      <CreateTemplate title='Cadastro de Empresas'>
-        <FormProvider {...methods}>
-          <form>
-            {isLoading ? <></> : <Form.Company />}
-            <Button.Updade
-              onSave={() => {}}
-              onCancel={() => navigate('/company')}
-              saveButtonName='Salvar Empresa'
-              cancelButtonName='Cancelar'
-            />
-          </form>
-        </FormProvider>
+      <CreateTemplate
+        title={!!id ? 'Editar Empresa' : 'Cadastrar nova Empresa'}
+      >
+        {isLoading ? (
+          <Container>
+            <Loading />
+          </Container>
+        ) : (
+          <FormCompany
+            defaultValue={DefaultValue}
+            isLoading={isLoading}
+          />
+        )}
       </CreateTemplate>
     </AuthTemplate>
   )

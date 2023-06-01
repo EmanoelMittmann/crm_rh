@@ -1,15 +1,14 @@
 import { createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import api from 'api'
 import { routes } from 'routes'
-import { useDebounce } from 'hooks'
-import DEFAULT from './constants'
-import {
-  ContextTeamProps,
-  ReactNode
-} from './types'
-import { UserProjectsProps } from 'types'
 
+import { useDebounce } from 'hooks'
+
+import DEFAULT from './constants'
+import { ContextTeamProps, ReactNode } from './types'
+import { UserProjectsProps } from 'types'
 
 export const Context = createContext({} as ContextTeamProps)
 
@@ -28,8 +27,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     meta,
     filterOptionsTeam,
     navigateTo,
-    handleUpdateUser,
-    
+    handleUpdateUser
   }
 
   async function fetchListUsers() {
@@ -38,7 +36,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       params: {
         search: meta.search && meta.search,
         user_id: meta.user_id && meta.user_id,
-        team: meta.team && meta.team,
+        team: meta.team && meta.team
       }
     })
     setTeam(data)
@@ -48,13 +46,13 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const fetchUsers = async () => {
     try {
       try {
-        const response = await api.get(routes.usersProjects.list);
-        setTeam(response.data);
+        const response = await api.get(routes.usersProjects.list)
+        setTeam(response.data)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
   const allUsers = team.flatMap((selectUser: any) => selectUser.users)
@@ -65,7 +63,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     })
     fetchListUsers()
   }
-
 
   async function fetchFiltersUsers() {
     const { data } = await api.get(
@@ -82,39 +79,27 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           value: id
         })
       )
-    }) 
+    })
   }
 
-
-
-    function navigateTo(url: string) {
-      navigate(url)
-    }
-
-
-
-    useDebounce({
-      fn: fetchListUsers,
-      listener: [
-        meta.search,
-        meta.team,
-        meta.user_id
-      ]
-    })
-
-
-    useDebounce({
-      fn: fetchFiltersUsers,
-      delay: 0,
-      listener: []
-    })
-   
-
-
-
-    return (
-      <Context.Provider value={contextProjectProps}>     
-          {children}
-      </Context.Provider>
-    )
+  function navigateTo(url: string) {
+    navigate(url)
   }
+
+  useDebounce({
+    fn: fetchListUsers,
+    listener: [meta.search, meta.team, meta.user_id]
+  })
+
+  useDebounce({
+    fn: fetchFiltersUsers,
+    delay: 0,
+    listener: []
+  })
+
+  return (
+    <Context.Provider value={contextProjectProps}>
+      {children}
+    </Context.Provider>
+  )
+}
