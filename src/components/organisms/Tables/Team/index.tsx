@@ -33,10 +33,12 @@ export const Team = () => {
     status: boolean,
     name: string
   ) => [
+    project_id ?
     {
       label: 'Editar',
       callback: () => modalRef.current?.open(user_id, name)
-    },
+    }
+    :
     {
       label: 'Remover',
       callback: () => removeUser(user_id)
