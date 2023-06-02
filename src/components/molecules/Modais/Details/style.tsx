@@ -34,6 +34,19 @@ export const Row = styled.div`
     color: ${theme.neutrals.gray8};
   }
 `
+
+export const ContainerRow = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: auto;
+  width: 90%;
+  justify-content: space-between;
+
+  h2 {
+    color: ${theme.neutrals.gray8};
+  }
+`
 export const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -45,3 +58,25 @@ export const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
   z-index: 5;
 `
+export const Text = styled.p`
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  padding-left: ${(props) => props.title};
+  color: ${(props) => props.color};
+`
+export const Title = styled.h4`
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  padding-left: ${(props) => props.title};
+  color: ${(props) => props.color};
+`
+export const Container = styled.div`
+  width:492px;
+  align-items: start;
+  `
+export const ContainerOne = styled.div`
+  width:450px;
+  align-items: start;
+  `
