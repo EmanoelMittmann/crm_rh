@@ -15,7 +15,7 @@ import {
 
 import api from 'api'
 import { routes } from 'routes'
-import { percentCalculate } from 'components/utils/percentCalculate'
+
 import { toast } from '@stardust-ds/react'
 
 import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
@@ -36,7 +36,7 @@ export const Team = () => {
     // project_id ?
     {
       label: 'Editar',
-      callback: () => modalRef.current?.open(user_id, name)
+      callback: () => modalRef.current?.open(user_id, name, status,)
     },
     // :
     {
@@ -45,20 +45,30 @@ export const Team = () => {
     }
   ]
 
-  function handleUpdateUser(
-    user_id: number,
-  ) {
-    const newTeam = Team.map((item) =>
-      item.user_id === user_id ? { ...item, } : item
-    )
-    api.put(routes.project.userProjects(Number(project_id)), newTeam)
+  async function handleUpdateUser(user_id: number) {
+    const updatedTeam = Team.map((item) =>
+    item.user_id === user_id ? { ...item } : item
+    );
 
-    console.log('newTeam: ', newTeam);
+    try {
+      await api.put(routes.project.userProjects(Number(project_id)), updatedTeam)
+      toast({
+        title: 'Profissional atualizado com sucesso',
+        type: 'success',
+      });
+    }
+   
+    catch (error) {
+      console.log('error: ', error);
+      toast({
+        title: 'Erro ao atualizar profissional',
+        type: 'error',
+      });
+    }
+    console.log('updatedTeam: ', updatedTeam);
 
-    setValue('team', newTeam)
-    return newTeam
-
-
+    setValue('team', updatedTeam);
+ 
   }
 
   function removeUser(user_id: number) {

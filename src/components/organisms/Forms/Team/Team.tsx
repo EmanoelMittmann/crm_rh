@@ -41,28 +41,27 @@ export const Team = () => {
 
     if (professional && jobs) {
       
+      const createError = (errorMessage: string) => ({
+        type: 'manual',
+        message: errorMessage
+      });
+
       if (!professional.name) {
-        setError('professional.name', {
-          type: 'manual',
-          message: 'Campo vazio, selecione um profissional!'
-        });
+        setError('professional.name', 
+        createError('Campo vazio, selecione um profissional!'));
         return;
       }
       if (!jobs.name) {
-        setError('jobs.name', {
-          type: 'manual',
-          message: 'O Campo vazio selecione um cargo!'
-        });
+        setError('jobs.name', 
+        createError('O Campo vazio selecione um cargo!'));
         return;
       }
       if (!hoursMonth || hoursMonth <= 0) {
-        setError('users.hours_mounths_estimated', {
-          type: 'manual',
-          message: 'O Campo Hora/ mês deve ser maior que 0!'
-        });
+        setError('users.hours_mounths_estimated', 
+        createError('O Campo Hora/ mês deve ser maior que 0!'));
         return;
       }
-    
+
       const newTeamMember = {
         user_id: id,
         professional,
@@ -108,12 +107,9 @@ export const Team = () => {
 
   const teamUser = watch('team', [])
   const listUsers = watch('options.professionals', [])
-  const currentTeamOptions = listUsers.filter((professional) => {
-    if (teamUser.find((user => user.user_id === Number(professional.value)))) {
-      return false
-    }
-    return true
-  })
+  const currentTeamOptions = listUsers.filter((professional) => 
+  !teamUser.find((user => user.user_id === Number(professional.value))));
+
 
   return (
     <>
