@@ -108,7 +108,7 @@ const UsersEditor = forwardRef<
 
   return (
     <>
-      <ContainerModal>
+      {/* <ContainerModal>
         <Columns>
           <Row>
             <h2>{text}</h2>
@@ -201,7 +201,7 @@ const UsersEditor = forwardRef<
             </Button>
           </Row>
         </Columns>
-      </ContainerModal>
+      </ContainerModal> */}
       <Overlay />
     </>
   )

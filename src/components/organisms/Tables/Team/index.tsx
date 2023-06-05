@@ -28,22 +28,24 @@ export const Team = () => {
   const Team = watch('team', [])
   const project_id = watch('id')
 
-  const POPOVER_OPTIONS = (
-    user_id: number,
-    status: boolean,
-    name: string
-  ) => [
-    // project_id ?
-    {
-      label: 'Editar',
-      callback: () => modalRef.current?.open(user_id, name, status,)
-    },
-    // :
-    {
+  const POPOVER_OPTIONS = (user_id: number, status: boolean, name: string) => {
+    const options = [];
+
+    if (project_id) {
+      options.push({
+        label: 'Editar',
+        callback: () => modalRef.current?.open(user_id, name)
+      });
+    }
+
+    options.push({
       label: 'Remover',
       callback: () => removeUser(user_id)
-    }
-  ]
+    });
+
+    return options;
+  };
+
 
   async function handleUpdateUser(user_id: number) {
     const updatedTeam = Team.map((item) =>

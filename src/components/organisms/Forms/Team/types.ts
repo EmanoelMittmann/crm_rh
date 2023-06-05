@@ -13,7 +13,10 @@ export interface TeamMemberProps {
   extra_hours_performed: number
   is_active: boolean
   avatar: string
-  status: boolean
+  status: {
+    id: Option | null
+    name: Option | null
+  }
   jobs: {
     id: Option | null
     name: Option | null
@@ -21,7 +24,10 @@ export interface TeamMemberProps {
   professional: {
     id: Option | null
     name: Option | null
-    status: boolean
+    status: {
+      id: Option | null
+      name: Option | null
+    }
     avatar: Option | null
   }
 }
@@ -95,6 +101,7 @@ export interface TeamProps {
       id: number
       name: Option | null
       status: boolean
+      is_active: boolean
       avatar: string
     }
   }
