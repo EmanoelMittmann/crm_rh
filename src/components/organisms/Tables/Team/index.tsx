@@ -28,22 +28,24 @@ export const Team = () => {
   const Team = watch('team', [])
   const project_id = watch('id')
 
-  const POPOVER_OPTIONS = (
-    user_id: number,
-    status: boolean,
-    name: string
-  ) => [
-    // project_id ?
-    {
-      label: 'Editar',
-      callback: () => modalRef.current?.open(user_id, name)
-    },
-    // :
-    {
+  const POPOVER_OPTIONS = (user_id: number, status: boolean, name: string) => {
+    const options = [];
+
+    if (project_id) {
+      options.push({
+        label: 'Editar',
+        callback: () => modalRef.current?.open(user_id, name)
+      });
+    }
+
+    options.push({
       label: 'Remover',
       callback: () => removeUser(user_id)
-    }
-  ]
+    });
+
+    return options;
+  };
+
 
   function handleUpdateUser(
     user_id: number,
@@ -52,13 +54,8 @@ export const Team = () => {
       item.user_id === user_id ? { ...item, } : item
     )
     api.put(routes.project.userProjects(Number(project_id)), newTeam)
-
-    console.log('newTeam: ', newTeam);
-
     setValue('team', newTeam)
     return newTeam
-
-
   }
 
   function removeUser(user_id: number) {

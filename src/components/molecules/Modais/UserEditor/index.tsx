@@ -76,11 +76,10 @@ const UsersEditor = forwardRef<
   } = useFormContext<FormProjectProps>()
 
 
-  const {team} = watch()
-  const professional = team.find((item: any) => item.user_id === isOpen.id)
+  // const {team} = watch()
+  // const professional = team.find((item: any) => item.user_id === isOpen.id)
 
-  console.log('profissional: ', professional?.professional.name?.label);
-  console.log('Equipe : ', team);
+
 
 
   const close = useCallback(() => {
@@ -92,10 +91,10 @@ const UsersEditor = forwardRef<
     () => ({
       open: (user_id) => {
         setIsOpen({ id: user_id })
-        setSelectedStatus({
-          label: professional?.status ? 'Ativo' : 'Inativo',
-          value: String(professional?.status)
-        });
+        // setSelectedStatus({
+        //   label: professional?.status ? 'Ativo' : 'Inativo',
+        //   value: String(professional?.status)
+        // });
       },
       close
     }),
@@ -106,7 +105,7 @@ const UsersEditor = forwardRef<
 
   return (
     <>
-      <ContainerModal>
+      {/* <ContainerModal>
         <Columns>
           <Row>
             <h2>{text}</h2>
@@ -203,7 +202,7 @@ const UsersEditor = forwardRef<
             </Button>
           </Row>
         </Columns>
-      </ContainerModal>
+      </ContainerModal> */}
       <Overlay />
     </>
   )

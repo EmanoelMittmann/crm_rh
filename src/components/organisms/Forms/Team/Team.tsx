@@ -7,6 +7,8 @@ import api from 'api'
 import { routes } from 'routes'
 import { toast } from '@stardust-ds/react'
 import { FormTeamProps, TeamMemberProps } from './types'
+import { useParams } from 'react-router-dom'
+
 
 
 export const Team = () => {
@@ -18,9 +20,9 @@ export const Team = () => {
     setError,
     formState: { errors }
   } = useFormContext<FormTeamProps>();
-
+  const { id } = useParams()
   const options = watch('options')
-  const projectId = watch('id')
+  const projectId = id
 
 
   const handleTeam = async () => {
@@ -29,40 +31,44 @@ export const Team = () => {
     const avatar = watch('professional.avatar.label')
     const jobs = watch('jobs')
     const job_ = watch('jobs.name.label')
-    const status = watch('users.status')
+    const status = watch('users.professional.status')
     const hoursMonth = Number(watch('users.hours_mounths_estimated')) || 0
     const extraHour = Number(watch('users.extra_hours_estimated')) || 0
     const hours_mounths_performed = Number(watch('users.hours_mounths_performed')) || 0
     const extra_hours_performed = Number(watch('users.extra_hours_performed')) || 0
     const techLead = watch('users.isTechLead')
-    const is_active = watch('users.is_active')
-  
-
+    const team = watch('team') || []
 
     if (professional && jobs) {
-      
+      const validationToIncludeTeam = (errorMessage: string) => ({
+        type: 'manual',
+        message: errorMessage
+      });
+
       if (!professional.name) {
-        setError('professional.name', {
-          type: 'manual',
-          message: 'Campo vazio, selecione um profissional!'
-        });
+        setError('professional.name',
+          validationToIncludeTeam('Campo vazio, selecione um profissional!'));
         return;
       }
       if (!jobs.name) {
-        setError('jobs.name', {
-          type: 'manual',
-          message: 'O Campo vazio selecione um cargo!'
-        });
+        setError('jobs.name',
+          validationToIncludeTeam('Campo vazio selecione um cargo!'));
         return;
       }
       if (!hoursMonth || hoursMonth <= 0) {
-        setError('users.hours_mounths_estimated', {
-          type: 'manual',
-          message: 'O Campo Hora/ mês deve ser maior que 0!'
-        });
+        setError('users.hours_mounths_estimated',
+          validationToIncludeTeam('O Campo Hora/ mês deve ser maior que 0!'));
         return;
       }
-    
+
+      const TechLead = team.filter((obj: any) => obj.job_ === "Tech Lead" || obj.job_ === "Tech Lead e Desenvolvedor");
+      let updatedTeam = team;
+      if ((TechLead[0] && jobs.name.label === "Tech Lead") || (TechLead[0] && jobs.name.label === "Tech Lead e Desenvolvedor")) {
+        1
+        updatedTeam = team.filter((obj: any) => obj.job_ !== "Tech Lead" && obj.job_ !== "Tech Lead e Desenvolvedor");
+      }
+
+
       const newTeamMember = {
         user_id: id,
         professional,
@@ -73,27 +79,25 @@ export const Team = () => {
         hours_mounths_estimated: hoursMonth,
         hours_mounths_performed: hours_mounths_performed,
         extra_hours_performed: extra_hours_performed,
-        is_active: is_active,
+        status: {
+          label: status ? 'Ativo' : 'Inativo',
+          value: status ? '0' : '1',
+        },
         avatar: avatar
           ? avatar
           : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png',
-        status:{
-          label: professional?.status ? 'Ativo' : 'Inativo',
-          value: professional?.status ? '1' : '0'
-        }
       } as unknown as TeamMemberProps
 
       const currentTeam = getValues('team') || []
       const newTeam = [...currentTeam, newTeamMember]
 
-      if (projectId) {
+      if (projectId !== undefined) {
         await api.post(routes.project.userProjects(Number(projectId)), newTeamMember);
         setValue('team', newTeam);
         toast({
           title: "Profissional adicionado com sucesso!",
           type: 'success',
         })
-
         return;
       }
 
@@ -106,14 +110,12 @@ export const Team = () => {
 
   }
 
-  const teamUser = watch('team', [])
-  const listUsers = watch('options.professionals', [])
-  const currentTeamOptions = listUsers.filter((professional) => {
-    if (teamUser.find((user => user.user_id === Number(professional.value)))) {
-      return false
-    }
-    return true
-  })
+  const teamUser = watch('team', []);
+  const listUsers = watch('options.professionals', []);
+  const currentTeamOptions = listUsers.filter((professional) =>
+    !teamUser.find((user) => user.user_id === Number(professional.value))
+  );
+
 
   return (
     <>
@@ -152,7 +154,7 @@ export const Team = () => {
         />
         <Inputs.Default
           {...register('users.hours_mounths_estimated', {
-           })}
+          })}
           error={errors?.users?.hours_mounths_estimated?.message}
           label='Horas/mês estimadas'
           placeholder='Horas'
