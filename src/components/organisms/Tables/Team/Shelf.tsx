@@ -1,6 +1,5 @@
 import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
-
 import {
   ContainerShelf,
   ContainerShelfColumn
@@ -26,8 +25,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     jobs,
     professional,
     status,
-    avatar,
- 
+    avatar
   } = props
 
   return (
@@ -51,9 +49,9 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
         <Text>
           {hours_mounths_percent === undefined
             ? percentCalculate(
-              hours_mounths_performed,
-              hours_mounths_estimated
-            ).toFixed()
+                hours_mounths_performed,
+                hours_mounths_estimated
+              ).toFixed()
             : hours_mounths_percent.toFixed()}
           %
         </Text>
@@ -71,22 +69,18 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
         <Text>
           {extra_hours_percent === undefined
             ? percentCalculate(
-              extra_hours_performed,
-              extra_hours_estimated
-            ).toFixed()
+                extra_hours_performed,
+                extra_hours_estimated
+              ).toFixed()
             : extra_hours_percent.toFixed()}
           %
         </Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn
-        width='140px'
-        justify='center'
-        gap='1em'
-      >
+      <ContainerShelfColumn width='140px' justify='center' gap='1em'>
         <Badge.Status status={status} />
         <Popover options={config.options} />
-        </ContainerShelfColumn>
+      </ContainerShelfColumn>
     </ContainerShelf>
   )
 }

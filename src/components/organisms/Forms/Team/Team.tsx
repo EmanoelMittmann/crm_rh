@@ -1,5 +1,7 @@
 import { useFormContext } from 'react-hook-form'
 
+import { toast } from '@stardust-ds/react'
+
 import { Selects, Inputs, SelectOption } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { ContainerRow } from 'components/organisms/Forms/Project/style'
@@ -7,7 +9,6 @@ import { Table } from 'components/organisms/Tables'
 
 import api from 'api'
 import { routes } from 'routes'
-import { toast } from '@stardust-ds/react'
 
 import { FormTeamProps, TeamMemberProps } from './types'
 
@@ -18,7 +19,7 @@ export const Team = () => {
     setValue,
     getValues,
     formState: { errors }
-  } = useFormContext<FormTeamProps>();
+  } = useFormContext<FormTeamProps>()
 
   const options = watch('options')
   const projectId = watch('id')
@@ -29,12 +30,15 @@ export const Team = () => {
     const avatar = watch('professional.avatar.label')
     const jobs = watch('jobs')
     const status = watch('users.status')
-    const hoursMonth = Number(watch('users.hours_mounths_estimated')) || 0
-    const extraHour = Number(watch('users.extra_hours_estimated')) || 0
-    const hours_mounths_performed = Number(watch('users.hours_mounths_performed')) || 0
-    const extra_hours_performed = Number(watch('users.extra_hours_performed')) || 0
+    const hoursMonth =
+      Number(watch('users.hours_mounths_estimated')) || 0
+    const extraHour =
+      Number(watch('users.extra_hours_estimated')) || 0
+    const hours_mounths_performed =
+      Number(watch('users.hours_mounths_performed')) || 0
+    const extra_hours_performed =
+      Number(watch('users.extra_hours_performed')) || 0
     const techLead = watch('users.isTechLead')
-
 
     if (professional && jobs) {
       if (extraHour && hoursMonth) {
@@ -58,29 +62,35 @@ export const Team = () => {
         const newTeam = [...currentTeam, newTeamMember]
 
         if (projectId) {
-          await api.post(routes.project.userProjects(Number(projectId)), newTeamMember);
-          setValue('team', newTeam);
+          await api.post(
+            routes.project.userProjects(Number(projectId)),
+            newTeamMember
+          )
+          setValue('team', newTeam)
           toast({
-            title: "Profissional adicionado com sucesso!",
-            type: 'success',
+            title: 'Profissional adicionado com sucesso!',
+            type: 'success'
           })
 
-          return;
+          return
         }
 
-        setValue('team', newTeam);
+        setValue('team', newTeam)
         toast({
-          title: "Profissional cadastrado com sucesso!",
-          type: 'success',
+          title: 'Profissional cadastrado com sucesso!',
+          type: 'success'
         })
-
       }
     }
   }
   const teamUser = watch('team', [])
   const listUsers = watch('options.professionals', [])
   const currentTeamOptions = listUsers.filter((professional) => {
-    if (teamUser.find((user => user.user_id === Number(professional.value)))) {
+    if (
+      teamUser.find(
+        (user) => user.user_id === Number(professional.value)
+      )
+    ) {
       return false
     }
     return true

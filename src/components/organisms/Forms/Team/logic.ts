@@ -38,10 +38,8 @@ export const schemaUser = yup.object().shape({
         return true
       }
     )
-    .required('Campo obrigatório'),
-
-});
-
+    .required('Campo obrigatório')
+})
 
 export const validation = {
   required: 'Campo obrigatório',
@@ -55,4 +53,3 @@ export const validation = {
     return true
   }
 }
-
