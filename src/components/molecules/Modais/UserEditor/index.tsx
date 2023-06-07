@@ -27,24 +27,16 @@ import {
 import { Option } from 'types'
 import { FormProjectProps} from 'components/organisms/Forms/Project/types'
 import { FormTeamProps } from 'components/organisms/Forms/Project'
+import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
 
 
 interface IModalUserProps {
   text: string
   placeholder: string
-  EventOne: (_: number,
-    parsial: {
-      hours_mounths_estimated: number 
-      extra_hours_estimated: number
-      hours_mounths_performed: number
-      extra_hours_performed: number
-      isTechLead: boolean
-      job_:string
-      status: string 
-      user_id: number
-    }
-
-    ) => void
+  EventOne: (
+    user_id: number,
+    data: UpdateProfessionalProps
+  ) => void
   defaultOpened?: boolean
 }
 
@@ -210,7 +202,7 @@ const UsersEditor = forwardRef<
                   extra_hours_performed: Number(watch('users.extra_hours_performed')) || 0,
                   isTechLead: Boolean(professional?.isTechLead),
                   job_: String(selectedJob?.label),
-                  status: selectedStatus?.label || 'Ativo',
+                  status: Number(selectedStatus?.value),
                   user_id: Number(isOpen.id),
                 })
 

@@ -139,6 +139,18 @@ export type ShelfUserProject = {
   config: ConfigProps
 }
 
+export interface UpdateProfessionalProps {
+  hours_mounths_estimated: number
+  extra_hours_estimated: number
+  hours_mounths_performed: number
+  extra_hours_performed: number
+  isTechLead: boolean
+  job_: string
+  status: number
+  user_id: number
+
+}
+
 export interface FormTeamProps extends TeamProps, FormConfigProps {}
 
 export type { SelectOption }

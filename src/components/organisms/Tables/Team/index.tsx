@@ -63,6 +63,7 @@ export const Team = () => {
         if (index !== -1) {
           const updatedUser = {
             ...updatedTeam[index],
+            user_id: user_id,
             hours_mounths_estimated: data.hours_mounths_estimated,
             extra_hours_estimated: data.extra_hours_estimated,
             extra_hours_performed: data.extra_hours_performed,
@@ -74,18 +75,27 @@ export const Team = () => {
 
           updatedTeam[index] = updatedUser;
           setValue('team', updatedTeam);
+          console.log('atualizado: ', updatedTeam);
 
           const editTeam = routes.project.userProjects(Number(project_id));
-          await api.put(editTeam, {users: updatedTeam});
-          console.log('updatedTeam: ', updatedTeam);
+      
+          const update = {
+            user_id: user_id,
+            hours_mounths_estimated: data.hours_mounths_estimated,
+            extra_hours_estimated: data.extra_hours_estimated,
+            extra_hours_performed: data.extra_hours_performed,
+            hours_mounths_performed: data.hours_mounths_performed,
+            status: data.status,
+            job_: data.job_,
+            isTechLead: data.isTechLead,
+          }
+          await api.put(editTeam, update);
+          console.log('dado api: ', update);
 
 
           const updatedData = await api.get(editTeam);
           console.log('updatedData: ', updatedData);
    
-          // const updatedNewTeam = updatedData.data;
-          // setValue('team', updatedNewTeam);
-          // console.log('updatedNewTeam: ', updatedNewTeam);
         }
       }
 
