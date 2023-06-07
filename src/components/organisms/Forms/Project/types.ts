@@ -18,11 +18,11 @@ export interface TeamMemberProps {
   avatar: string
   status: boolean
   jobs: {
-    id: number
+    id: Option | null
     name: Option | null
   }
   professional: {
-    id: number
+    id: Option | null
     name: Option | null
     status: boolean
     avatar: string

@@ -25,7 +25,8 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     jobs,
     professional,
     status,
-    avatar
+    is_active,
+    avatar,
   } = props
 
   return (

@@ -30,7 +30,12 @@ export const ContainerShelf = styled.div<TemplateProps>`
     border-radius: 0 0 0.5rem 0.5rem;
   }
 `
-
+export const ShelfHover = styled.div`
+ :hover{
+  background-color: ${theme.neutrals.gray2};
+  cursor: pointer;
+ }
+`
 export const ContainerShelfColumn = styled.div<IContainerColumnProps>`
   width: ${(props) => props.width};
   padding-left: ${(props) => props.left};
