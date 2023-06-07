@@ -48,7 +48,12 @@ export const Popover = (props: PopoverProps['Data']) => {
 
   return (
     <Overlay onMouseLeave={() => modalRef.current?.onClose()}>
-      <IconThreePoints onClick={() => modalRef.current?.onOpen()} />
+      <div
+        className='children'
+        onClick={() => modalRef.current?.onOpen()}
+      >
+        <IconThreePoints />
+      </div>
       <Modal ref={modalRef} {...props} />
     </Overlay>
   )

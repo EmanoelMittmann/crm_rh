@@ -58,7 +58,7 @@ export async function fetchPropsProject(
       label: user_project.name,
       value: user_project.id
     })),
-    users:users
+    users: users
   } as FormProjectProps['Project']['options'])
 }
 
@@ -83,7 +83,6 @@ export function handlePopulateFields(
   const TYPE_PROJECT = methods.watch('options.project_types')
   const OPTIONS = methods.watch('options')
 
-
   methods.reset({
     id: data.id,
     name: data.name,
@@ -102,12 +101,15 @@ export function handlePopulateFields(
     team_cost: GenerateValue(String(data.team_cost)),
 
     team: data.users.map((user: any) => {
+      const allUsers = OPTIONS.users.flatMap(
+        (selectUser: any) => selectUser.users
+      )
+      const userData = allUsers.find(
+        (userData: any) => userData.id === user.user_id
+      )
 
-      const allUsers = OPTIONS.users.flatMap((selectUser: any) => selectUser.users);
-      const userData = allUsers.find((userData: any) => userData.id === user.user_id);
-      
-      const { name, job, job_, status, ...rest } = user;
-      const professional = { name: { label: name } };
+      const { name, job, job_, status, ...rest } = user
+      const professional = { name: { label: name } }
       const jobs = {
         name: { label: job_ !== null ? job_ : job }
       }

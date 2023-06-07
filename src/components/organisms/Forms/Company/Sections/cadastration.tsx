@@ -21,7 +21,7 @@ export const Cadastration = () => {
           {...register('registration_status', {
             required: validation.required
           })}
-          onChange={(v: any) => setValue('registration_status', v)}
+          onSelect={(v: any) => setValue('registration_status', v)}
           onClear={() => setValue('registration_status', null)}
           value={watch('registration_status') as any}
           error={errors.registration_status?.message}
@@ -74,7 +74,7 @@ export const Cadastration = () => {
         />
         <Inputs.Default
           {...register('date_of_special_situation')}
-          value={watch('date_of_special_situation') ?? ''}
+          value={watch('date_of_special_situation')}
           onChange={({ target }: any) =>
             setValue('date_of_special_situation', target.value)
           }
