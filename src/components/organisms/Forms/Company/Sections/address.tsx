@@ -65,14 +65,11 @@ export const Address = () => {
           width={500}
         />
         <Inputs.Default
-          {...register('complement', {
-            required: validation.required
-          })}
+          {...register('complement')}
           onChange={({ target }: any) =>
             setValue('complement', target.value)
           }
           value={watch('complement') ?? ''}
-          error={errors.street_name?.message}
           label='Complemento'
           width={'30%'}
         />

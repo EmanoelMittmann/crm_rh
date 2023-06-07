@@ -8,7 +8,9 @@ export const DEFAULTSELECT = {
   services: false,
   settings: false,
   company: false,
-  RegisterProjects: false
+  RegisterProjects: false,
+  releaseHours: false,
+  releaseNotes: false
 }
 
 export function alterObject(

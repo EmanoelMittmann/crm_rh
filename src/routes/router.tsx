@@ -47,6 +47,8 @@ const Router = () => {
             <Route path='new' element={<RegisterCompany />} />
             <Route path=':id' element={<RegisterCompany />} />
           </Route>
+          <Route path='/releaseHours' element={<Professionals />} />
+          <Route path='/releaseNotes' element={<Professionals />} />
         </Routes>
       </BrowserRouter>
     </>
