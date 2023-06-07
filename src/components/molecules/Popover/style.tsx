@@ -4,6 +4,15 @@ import { theme } from 'styles'
 export const Overlay = styled.div`
   display: flex;
   flex-direction: row-reverse;
+
+  .children {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3em;
+    width: 3em;
+    cursor: pointer;
+  }
 `
 
 export const ContainerModal = styled.div`
@@ -12,7 +21,7 @@ export const ContainerModal = styled.div`
   width: 7rem;
   margin-top: 1rem;
   border-radius: 8px;
-  transform: translate(1.5rem, -2.5rem);
+  transform: translate(-0.5rem, -1.5rem);
   position: absolute;
 
   .options {

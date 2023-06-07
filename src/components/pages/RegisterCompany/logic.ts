@@ -147,7 +147,9 @@ export function HandlePopulateFields(
     reason_for_registration_status:
       props.reason_for_registration_status,
     special_situation: props.special_situation,
-    date_of_special_situation: props.date_of_special_situation,
+    date_of_special_situation: getDateInput(
+      props.date_of_special_situation
+    ),
     main_cnae: props.main_cnae.map((item: any) => ({
       label: item.description,
       value: item.id

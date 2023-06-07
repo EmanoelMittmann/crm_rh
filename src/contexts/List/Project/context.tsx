@@ -60,9 +60,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setIsLoading(false)
   }
 
-  async function handleUpdateStatus(projectId: number, statusId: string ) {
+  async function handleUpdateStatus(
+    projectId: number,
+    statusId: string
+  ) {
     await api.patch(routes.project.updateStatusproject(projectId), {
-     project_status_id: statusId,  
+      project_status_id: statusId
     })
     fetchListProject()
   }
