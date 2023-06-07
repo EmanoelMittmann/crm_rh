@@ -63,7 +63,6 @@ export const validationSchema = yup.object().shape({
   cep: yup.string().required(validation.required),
   street_name: yup.string().required(validation.required),
   house_number: yup.number(),
-  complement: yup.string(),
   neighborhood_name: yup.string().required(validation.required),
   city_name: yup.string().required(validation.required),
   uf: yup.mixed().test({

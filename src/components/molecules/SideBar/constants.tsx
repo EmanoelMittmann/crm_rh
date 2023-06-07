@@ -28,17 +28,38 @@ const createNavOption = (
 })
 
 export const OPTIONS = [
-  createNavOption('Início', <IconHome />, 'home'),
-  createNavOption(
-    'Profissionais',
-    <IconProfessional />,
-    'professionals'
-  ),
-  createNavOption('Projetos', <IconProjects />, 'project'),
-  createNavOption('Horas Extras', <IconHours />, 'extrasHours'),
-  createNavOption('Notas Fiscais', <IconNotes />, 'notes'),
-  createNavOption('Relatórios', <IconReports />, 'reports'),
-  createNavOption('Ordem de Serviço', <IconServices />, 'services'),
-  createNavOption('Configurações', <IconSetting />, 'settings'),
-  createNavOption('Empresas', <IconCompanies />, 'company')
+  {
+    1: createNavOption(
+      'Profissionais',
+      <IconProfessional />,
+      'professionals'
+    ),
+
+    2: createNavOption('Projetos', <IconProjects />, 'project'),
+
+    3: createNavOption('Horas Extras', <IconHours />, 'extrasHours'),
+
+    4: createNavOption('Notas Fiscais', <IconNotes />, 'notes'),
+
+    5: createNavOption('Relatórios', <IconReports />, 'reports'),
+
+    6: createNavOption(
+      'Ordem de Serviço',
+      <IconServices />,
+      'services'
+    ),
+
+    7: createNavOption('Configurações', <IconSetting />, 'settings'),
+
+    8: createNavOption('Empresas', <IconCompanies />, 'company'),
+
+    9: createNavOption('Horas Extras', <IconHours />, 'releaseHours'),
+
+    10: createNavOption(
+      'Lançamentos de Notas',
+      <IconNotes />,
+      'releaseNotes'
+    )
+  }
 ]
+export const Home = createNavOption('Início', <IconHome />, 'home')
