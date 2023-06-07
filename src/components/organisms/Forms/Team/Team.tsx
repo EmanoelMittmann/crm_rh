@@ -60,15 +60,7 @@ export const Team = () => {
           validationToIncludeTeam('O Campo Hora/ mês deve ser maior que 0!'));
         return;
       }
-
-      const TechLead = team.filter((obj: any) => obj.job_ === "Tech Lead" || obj.job_ === "Tech Lead e Desenvolvedor");
-      let updatedTeam = team;
-      if ((TechLead[0] && jobs.name.label === "Tech Lead") || (TechLead[0] && jobs.name.label === "Tech Lead e Desenvolvedor")) {
-        1
-        updatedTeam = team.filter((obj: any) => obj.job_ !== "Tech Lead" && obj.job_ !== "Tech Lead e Desenvolvedor");
-      }
-
-
+    
       const newTeamMember = {
         user_id: id,
         professional,

@@ -3,12 +3,12 @@ import {
   useImperativeHandle,
   useState,
   useCallback,
+  useEffect,
 } from 'react'
-import { useFormContext } from 'react-hook-form'
+import {useFormContext } from 'react-hook-form'
 import { Button, Input, Select } from '@stardust-ds/react'
 import { theme } from 'styles'
 import Close from 'components/atoms/Buttons/Close'
-import { FormProjectProps } from 'components/organisms/Forms/Project'
 
 
 import {
@@ -25,27 +25,32 @@ import {
   TextJob
 } from './style'
 import { Option } from 'types'
+import { FormProjectProps} from 'components/organisms/Forms/Project/types'
+import { FormTeamProps } from 'components/organisms/Forms/Project'
 
 
 interface IModalUserProps {
   text: string
   placeholder: string
-  EventOne: (_: number, 
-    user_id: number | undefined,
-    extra_hours_estimated: number | undefined,
-    extra_hours_performed: number | undefined,
-    hours_mounths_estimated: number | undefined,
-    hours_mounths_performed: number | undefined,
-    isTechLead: boolean | undefined,
-    status:  boolean | undefined,
-    job_: string | undefined,
+  EventOne: (_: number,
+    parsial: {
+      hours_mounths_estimated: number 
+      extra_hours_estimated: number
+      hours_mounths_performed: number
+      extra_hours_performed: number
+      isTechLead: boolean
+      job_:string
+      status: string 
+      user_id: number
+    }
+
     ) => void
   defaultOpened?: boolean
 }
 
 export interface IHandleModalPropsUserNew {
-  open(user_id: number, name: string, status: boolean,
-   ): void
+  open(user_id: number, 
+    ): void
   close(): void
 }
 
@@ -64,22 +69,16 @@ const UsersEditor = forwardRef<
   const [isOpen, setIsOpen] = useState({ id: 0 })
   const [selectedStatus, setSelectedStatus] = useState<Option>()
   const [selectedJob, setSelectedJob] = useState<Option>()
+
   const {
     register,
     watch,
     setValue
   } = useFormContext<FormProjectProps>()
-  
-  
-  const {team} = watch()
-  const professional = team.find((item: any) => item.user_id === isOpen.id)
-  
-  // console.log('Equipe : ', team);
-  // console.log('profissional: ', professional);
-  // console.log('selectedStatus: ', selectedStatus);
-  // console.log('selectedJob: ', selectedJob);
-  // console.log('horas mes: ', professional?.hours_mounths_estimated);
-  // console.log('horas extra: ', professional?.extra_hours_estimated);
+
+  const { team } = useFormContext<FormTeamProps>().watch();
+  const professional = team.find((item) => item.user_id === isOpen.id)
+
 
 
   const close = useCallback(() => {
@@ -91,24 +90,43 @@ const UsersEditor = forwardRef<
     () => ({
       open: (user_id) => {
         setIsOpen({ id: user_id })
-        setSelectedStatus({
-          label: professional?.status ? 'Ativo' : 'Inativo',
-          value: String(professional?.status)
-        })
-        setSelectedJob({label: String(professional?.jobs.name?.label),
-          value: String(professional?.jobs.name?.value)
-        });
+        
       },
       close
     }),
     []
   )
 
+
+  useEffect(() => {
+    if (professional) {
+      const selectedStatus = {
+        label: professional.status ? 'Ativo' : 'Inativo',
+        value: professional.status ? '1' : '0',
+      };
+      const selectedJob = {
+        label: professional.jobs?.name?.label || '',
+        value: String(professional.jobs?.name || '0'),
+      };
+
+      setSelectedStatus(selectedStatus);
+      setSelectedJob(selectedJob);
+
+      setTimeout(() => {
+        setValue('jobs.name', selectedJob || null);
+        setValue('users.hours_mounths_estimated', Number(professional.hours_mounths_estimated) || 0);
+        setValue('users.extra_hours_estimated', Number(professional.extra_hours_estimated) || 0);
+      }, 0);
+    }
+  }, [professional, setValue]);
+
+
+
   if (isOpen.id === 0) return null
 
   return (
     <>
-      {/* <ContainerModal>
+      <ContainerModal>
         <Columns>
           <Row>
             <h2>{text}</h2>
@@ -130,7 +148,8 @@ const UsersEditor = forwardRef<
               <Input
                 {...register('users.hours_mounths_estimated', {})}
                 label='Horas mensais'
-                defaultValue={professional?.hours_mounths_estimated}
+                value={watch('users.hours_mounths_estimated')}
+                placeholder={placeholder}
                 width={200}
               />
 
@@ -139,7 +158,7 @@ const UsersEditor = forwardRef<
                 onSelect={(e: any) => setSelectedJob(e)}
                 onClear={() => setSelectedJob({ label: '', value: '' })}
                 options={watch('options.jobs')}
-                value={professional?.jobs.name}
+                value={selectedJob}
                 label='Cargo'
                 placeholder={placeholder}
                 width={200}
@@ -151,7 +170,8 @@ const UsersEditor = forwardRef<
                 {...register('users.extra_hours_estimated', {})}
                 label='Horas extras'
                 width={200}
-                defaultValue={professional?.extra_hours_estimated}
+               value={watch('users.extra_hours_estimated')}
+                placeholder={placeholder}
               />
 
               <Select
@@ -161,7 +181,7 @@ const UsersEditor = forwardRef<
                 }
                 options={Options.status}
                 label='Status'
-                defaultValue={selectedStatus}
+                value={selectedStatus}
                 placeholder={placeholder}
                 width={200}
               />
@@ -183,17 +203,17 @@ const UsersEditor = forwardRef<
               }}
               bgColor='#0066FF'
               onClick={() => {
-                EventOne(
-                  isOpen.id,
-                  professional?.user_id,
-                  professional?.extra_hours_estimated,
-                  professional?.extra_hours_performed,
-                  professional?.hours_mounths_estimated,
-                  professional?.hours_mounths_performed,
-                  professional?.isTechLead,
-                  selectedStatus?.value === '1' ? true : false,
-                  professional?.job_
-                  )
+                EventOne(isOpen.id, {
+                  hours_mounths_estimated: Number(watch('users.hours_mounths_estimated')),
+                  extra_hours_estimated: Number(watch('users.extra_hours_estimated')),
+                  hours_mounths_performed: Number(watch('users.hours_mounths_performed')) || 0,
+                  extra_hours_performed: Number(watch('users.extra_hours_performed')) || 0,
+                  isTechLead: Boolean(professional?.isTechLead),
+                  job_: String(selectedJob?.label),
+                  status: selectedStatus?.label || 'Ativo',
+                  user_id: Number(isOpen.id),
+                })
+
                 close()
               }}
             >
@@ -201,7 +221,7 @@ const UsersEditor = forwardRef<
             </Button>
           </Row>
         </Columns>
-      </ContainerModal> */}
+      </ContainerModal>
       <Overlay />
     </>
   )

@@ -20,13 +20,17 @@ import { toast } from '@stardust-ds/react'
 
 import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
 import { Shelf } from './Shelf'
+import { useParams } from 'react-router-dom'
+import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
+
 
 export const Team = () => {
   const { watch, setValue } = useFormContext<FormTeamProps>()
   const { isLoading, handleOrder } = useContext(List.Project.Context)
   const modalRef = useRef<IHandleModalPropsUserNew>(null)
   const Team = watch('team', [])
-  const project_id = watch('id')
+  const { id } = useParams()
+  const project_id = id
 
   const POPOVER_OPTIONS = (user_id: number, status: boolean, name: string) => {
     const options = [];
@@ -34,7 +38,7 @@ export const Team = () => {
     if (project_id) {
       options.push({
         label: 'Editar',
-        callback: () => modalRef.current?.open(user_id, name)
+        callback: () => modalRef.current?.open(user_id)
       });
     }
 
@@ -46,32 +50,58 @@ export const Team = () => {
     return options;
   };
 
-
-  async function handleUpdateUser(user_id: number) {
-    const updatedTeam = Team.map((item) =>
-    item.user_id === user_id ? { ...item } : item
-    );
-
+  async function handleUpdateUser(
+    user_id: number, 
+    data: any
+    ) {
     try {
-      await api.put(routes.project.userProjects(Number(project_id)), updatedTeam)
-      toast({
-        title: 'Profissional atualizado com sucesso',
-        type: 'success',
-      });
-    }
-   
-    catch (error) {
-      console.log('error: ', error);
-      toast({
-        title: 'Erro ao atualizar profissional',
-        type: 'error',
-      });
-    }
-    console.log('updatedTeam: ', updatedTeam);
+      if (project_id) {
+        const updatedTeam = [...Team];
+        const index = updatedTeam.findIndex(item => item.user_id === user_id);
+        console.log('profissional: ', updatedTeam);
 
-    setValue('team', updatedTeam);
- 
+        if (index !== -1) {
+          const updatedUser = {
+            ...updatedTeam[index],
+            hours_mounths_estimated: data.hours_mounths_estimated,
+            extra_hours_estimated: data.extra_hours_estimated,
+            extra_hours_performed: data.extra_hours_performed,
+            hours_mounths_performed: data.hours_mounths_performed,
+            status: data.status,
+            job_: data.job_,
+            isTechLead: data.isTechLead,
+          };
+
+          updatedTeam[index] = updatedUser;
+          setValue('team', updatedTeam);
+
+          const editTeam = routes.project.userProjects(Number(project_id));
+          await api.put(editTeam, {users: updatedTeam});
+          console.log('updatedTeam: ', updatedTeam);
+
+
+          const updatedData = await api.get(editTeam);
+          console.log('updatedData: ', updatedData);
+   
+          // const updatedNewTeam = updatedData.data;
+          // setValue('team', updatedNewTeam);
+          // console.log('updatedNewTeam: ', updatedNewTeam);
+        }
+      }
+
+      toast.success({
+        title: 'Profissional atualizado com sucesso',
+      })
+    } catch (err) {
+      toast.error({
+        title: 'Erro ao atualizar profissional',
+      });
+    }
   }
+
+
+
+
 
   function removeUser(user_id: number) {
     if (project_id) {
@@ -87,7 +117,7 @@ export const Team = () => {
       title: 'Profissional removido com sucesso',
       type: 'success',
     })
-    
+
   }
 
   const Table = useMemo(() => {
