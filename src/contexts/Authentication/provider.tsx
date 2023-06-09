@@ -33,9 +33,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         google_id: sub,
         access_token: credential
       })
-
       const token = data.token.token
       const user = {
+        permissions: data.permissions[0],
         avatar: picture,
         name: data.data[0].name,
         user_type_id: data.data[0].user_type_id
@@ -59,9 +59,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const logout = () => {
+    window.location.href = '/'
     localStorage.clear()
     setAuth(DEFAULT_VALUE)
-    window.location.href = '/'
   }
 
   useEffect(() => {

@@ -11,15 +11,17 @@ import {
   IconUbistart
 } from 'components/atoms'
 
+import { usePermission } from 'hooks'
+
 import { alterObject, DEFAULT_SELECT } from '../../utils'
-import { OPTIONS } from './constants'
+import { Home } from './constants'
 import { ContainerColumn, ContainerMain, ContainerRow } from './style'
 
 export const Sidebar = () => {
   const navigate = useNavigate()
   const { logout } = useContext(AuthContext)
   const [selects, setSelects] = useState(DEFAULT_SELECT)
-
+  const { Licence } = usePermission()
   function handleSelect(btnSelect: string) {
     setSelects(alterObject(selects, btnSelect))
     navigate(`/${btnSelect}`)
@@ -31,7 +33,21 @@ export const Sidebar = () => {
         <IconUbistart />
       </ContainerRow>
       <ContainerColumn height='65%' bottom='1rem' left='0'>
-        {OPTIONS.map(({ text, color, icon, key }) => (
+        <Button.Menu
+          key={Home.key}
+          Text={Home.text}
+          Icon={Home.icon}
+          color={Home.color}
+          fill={Home.color}
+          bgActive={Home.color}
+          colorActive='white'
+          fillActive='white'
+          onClick={() => {
+            handleSelect(Home.key)
+          }}
+          isActive={selects[Home.key as keyof typeof DEFAULT_SELECT]}
+        />
+        {Licence.map(({ text, color, icon, key }) => (
           <Button.Menu
             key={key}
             Text={text}
