@@ -31,17 +31,18 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function fetchList() {
+    setIsLoading(true)
     const { data } = await api.get(routes.notes.list, {
       params: {
-        page: meta.pagination.current_page,
-        order: meta.order,
-        orderField: meta.orderField,
-        search: meta.search,
-        date_start: meta.date_start,
-        date_end: meta.date_end
+        // page: meta.pagination.current_page
+        // order: meta.order,
+        // orderField: meta.orderField,
+        // search: meta.search,
+        // date_start: meta.date_start,
+        // date_end: meta.date_end
       }
     })
-    setNotes(data)
+    setNotes(data.data)
     setMeta((old) => ({
       ...old,
       pagination: {
