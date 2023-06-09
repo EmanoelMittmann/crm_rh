@@ -1,10 +1,10 @@
 import { Colors } from './Colors'
+import Details from './Details'
 import Edit from './Edit'
 import EditorStatus from './EditorStatus'
 import New from './New'
 import Options from './Options'
 import UserEditor from './UserEditor'
-import Details from './Details'
 
 export const Modal = Object.assign(
   {},
@@ -13,6 +13,6 @@ export const Modal = Object.assign(
 
 export type { IHandleModalPropsEdit } from './Edit'
 export type { IHandleModalPropsNew } from './New'
-export type { IHandleModalPropsDetails } from './Details'
+export type { IHandleModalPropsDetails } from './Details/type'
 export type { IHandleModalColorsPropsNew } from './Colors/New'
 export type { IHandleModalColorsPropsEdit } from './Colors/Edit'

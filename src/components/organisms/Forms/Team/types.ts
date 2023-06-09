@@ -113,7 +113,6 @@ interface ProjectAttachmentProps {
 
 interface FormConfigProps {
   options: {
-    filter(arg0: (option: any) => boolean): SelectOption[]
     project_types: SelectOption[]
     permissions: SelectOption[]
     userTypes: SelectOption[]
@@ -148,10 +147,8 @@ export interface UpdateProfessionalProps {
   job_: string
   status: number
   user_id: number
-
 }
 
 export interface FormTeamProps extends TeamProps, FormConfigProps {}
 
 export type { SelectOption }
-

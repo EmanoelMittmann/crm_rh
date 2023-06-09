@@ -113,14 +113,15 @@ export function handlePopulateFields(
       const jobs = {
         name: { label: job_ !== null ? job_ : job }
       }
-      const statusObj = {
-        name: { label: status  ? 'Ativo' : 'Inativo' }
+      const status_Professional = {
+        status: status ? true : false
       }
+      console.log('status_Professional: ', status_Professional.status)
 
       return {
         professional: professional,
         jobs: jobs,
-        status: statusObj,
+        status: status_Professional.status,
         extra_hours_estimated: userData.extra_hours_estimated,
         hours_mounths_estimated: userData.hours_mounths_estimated,
         hours_mounths_performed: userData.hours_mounths_performed,

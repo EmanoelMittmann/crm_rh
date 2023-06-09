@@ -50,18 +50,23 @@ const RegisterProjects = () => {
           extra_hours_performed: user.extra_hours_performed,
           hours_mounths_estimated: user.hours_mounths_estimated,
           hours_mounths_performed: user.hours_mounths_performed,
-          status: user.status,
+          status: user.professional.status,
           isTechLead: user.isTechLead,
           is_active: user.is_active,
-          job_: user.job_
+          job_: user.job_,
+          job: user.job,
+          job_id: user.job_id?.value
         }
       })
     }
 
     try {
       if (id) {
-        await api.put(routes.project.updateProject(Number(id)), sanitizeData);
-        console.log('sanitizeData: ', sanitizeData);
+        await api.put(
+          routes.project.updateProject(Number(id)),
+          sanitizeData
+        )
+        console.log('sanitizeData: ', sanitizeData)
         toast({
           type: 'success',
           title: 'Projeto atualizado com sucesso.',
@@ -69,8 +74,7 @@ const RegisterProjects = () => {
         })
         navigate('/project')
         return
-
-      } 
+      }
       await api.post(routes.project.register, sanitizeData)
 
       toast({

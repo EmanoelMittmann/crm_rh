@@ -1,3 +1,5 @@
+import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
+
 export type ProjectPropsHours = {
   id: number
   name: string

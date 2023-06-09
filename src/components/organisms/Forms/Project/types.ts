@@ -1,13 +1,15 @@
+import { JobsProps } from 'contexts/List/Settings/Jobs/types'
 
 import type { Option, SelectOption } from 'components/atoms'
 import { TemplateProps } from 'components/organisms/Tables/types'
-import { JobsProps } from 'contexts/List/Settings/Jobs/types'
+
 import { ProfessionalProps } from '../Professional/types'
 
 export interface TeamMemberProps {
   user_id: number
   job_: string
   job: string
+  job_id: Option | null
   name: string
   isTechLead: boolean
   extra_hours_estimated: number

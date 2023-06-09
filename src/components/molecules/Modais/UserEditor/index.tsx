@@ -3,13 +3,17 @@ import {
   useImperativeHandle,
   useState,
   useCallback,
-  useEffect,
+  useEffect
 } from 'react'
-import {useFormContext } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
+
 import { Button, Input, Select } from '@stardust-ds/react'
 import { theme } from 'styles'
-import Close from 'components/atoms/Buttons/Close'
 
+import Close from 'components/atoms/Buttons/Close'
+import { FormTeamProps } from 'components/organisms/Forms/Project'
+import { FormProjectProps } from 'components/organisms/Forms/Project/types'
+import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
 
 import {
   Columns,
@@ -25,24 +29,16 @@ import {
   TextJob
 } from './style'
 import { Option } from 'types'
-import { FormProjectProps} from 'components/organisms/Forms/Project/types'
-import { FormTeamProps } from 'components/organisms/Forms/Project'
-import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
-
 
 interface IModalUserProps {
   text: string
   placeholder: string
-  EventOne: (
-    user_id: number,
-    data: UpdateProfessionalProps
-  ) => void
+  EventOne: (user_id: number, data: UpdateProfessionalProps) => void
   defaultOpened?: boolean
 }
 
 export interface IHandleModalPropsUserNew {
-  open(user_id: number, 
-    ): void
+  open(user_id: number): void
   close(): void
 }
 
@@ -62,16 +58,11 @@ const UsersEditor = forwardRef<
   const [selectedStatus, setSelectedStatus] = useState<Option>()
   const [selectedJob, setSelectedJob] = useState<Option>()
 
-  const {
-    register,
-    watch,
-    setValue
-  } = useFormContext<FormProjectProps>()
+  const { register, watch, setValue } =
+    useFormContext<FormProjectProps>()
 
-  const { team } = useFormContext<FormTeamProps>().watch();
+  const { team } = useFormContext<FormTeamProps>().watch()
   const professional = team.find((item) => item.user_id === isOpen.id)
-
-
 
   const close = useCallback(() => {
     setIsOpen({ id: 0 })
@@ -82,37 +73,39 @@ const UsersEditor = forwardRef<
     () => ({
       open: (user_id) => {
         setIsOpen({ id: user_id })
-        
       },
       close
     }),
     []
   )
 
-
   useEffect(() => {
     if (professional) {
       const selectedStatus = {
         label: professional.status ? 'Ativo' : 'Inativo',
-        value: professional.status ? '1' : '0',
-      };
+        value: professional.status ? '1' : '0'
+      }
       const selectedJob = {
         label: professional.jobs?.name?.label || '',
-        value: String(professional.jobs?.name || '0'),
-      };
+        value: String(professional.jobs?.name || '0')
+      }
 
-      setSelectedStatus(selectedStatus);
-      setSelectedJob(selectedJob);
+      setSelectedStatus(selectedStatus)
+      setSelectedJob(selectedJob)
 
       setTimeout(() => {
-        setValue('jobs.name', selectedJob || null);
-        setValue('users.hours_mounths_estimated', Number(professional.hours_mounths_estimated) || 0);
-        setValue('users.extra_hours_estimated', Number(professional.extra_hours_estimated) || 0);
-      }, 0);
+        setValue('jobs.name', selectedJob || null)
+        setValue(
+          'users.hours_mounths_estimated',
+          Number(professional.hours_mounths_estimated) || 0
+        )
+        setValue(
+          'users.extra_hours_estimated',
+          Number(professional.extra_hours_estimated) || 0
+        )
+      }, 0)
     }
-  }, [professional, setValue]);
-
-
+  }, [professional, setValue])
 
   if (isOpen.id === 0) return null
 
@@ -131,7 +124,9 @@ const UsersEditor = forwardRef<
                 <Text>{professional?.professional.name?.label}</Text>
                 <TextJob>{professional?.jobs.name?.label}</TextJob>
               </TeamJobName>
-              <TextHours>{professional?.hours_mounths_estimated}</TextHours>
+              <TextHours>
+                {professional?.hours_mounths_estimated}
+              </TextHours>
             </ContainerShelfColumn>
           </RowUser>
 
@@ -148,7 +143,9 @@ const UsersEditor = forwardRef<
               <Select
                 {...register('jobs.name', {})}
                 onSelect={(e: any) => setSelectedJob(e)}
-                onClear={() => setSelectedJob({ label: '', value: '' })}
+                onClear={() =>
+                  setSelectedJob({ label: '', value: '' })
+                }
                 options={watch('options.jobs')}
                 value={selectedJob}
                 label='Cargo'
@@ -162,7 +159,7 @@ const UsersEditor = forwardRef<
                 {...register('users.extra_hours_estimated', {})}
                 label='Horas extras'
                 width={200}
-               value={watch('users.extra_hours_estimated')}
+                value={watch('users.extra_hours_estimated')}
                 placeholder={placeholder}
               />
 
@@ -196,14 +193,21 @@ const UsersEditor = forwardRef<
               bgColor='#0066FF'
               onClick={() => {
                 EventOne(isOpen.id, {
-                  hours_mounths_estimated: Number(watch('users.hours_mounths_estimated')),
-                  extra_hours_estimated: Number(watch('users.extra_hours_estimated')),
-                  hours_mounths_performed: Number(watch('users.hours_mounths_performed')) || 0,
-                  extra_hours_performed: Number(watch('users.extra_hours_performed')) || 0,
+                  hours_mounths_estimated: Number(
+                    watch('users.hours_mounths_estimated')
+                  ),
+                  extra_hours_estimated: Number(
+                    watch('users.extra_hours_estimated')
+                  ),
+                  hours_mounths_performed:
+                    Number(watch('users.hours_mounths_performed')) ||
+                    0,
+                  extra_hours_performed:
+                    Number(watch('users.extra_hours_performed')) || 0,
                   isTechLead: Boolean(professional?.isTechLead),
                   job_: String(selectedJob?.label),
                   status: Number(selectedStatus?.value),
-                  user_id: Number(isOpen.id),
+                  user_id: Number(isOpen.id)
                 })
 
                 close()

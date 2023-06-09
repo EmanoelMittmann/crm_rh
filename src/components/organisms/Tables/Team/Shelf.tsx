@@ -25,8 +25,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     jobs,
     professional,
     status,
-    is_active,
-    avatar,
+    avatar
   } = props
 
   return (
@@ -66,7 +65,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
         <Text>{extra_hours_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='30px'>
+      <ContainerShelfColumn width='27px'>
         <Text>
           {extra_hours_percent === undefined
             ? percentCalculate(
@@ -78,7 +77,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
         </Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='140px' justify='center' gap='1em'>
+      <ContainerShelfColumn width='147px' justify='center'>
         <Badge.Status status={status} />
         <Popover options={config.options} />
       </ContainerShelfColumn>

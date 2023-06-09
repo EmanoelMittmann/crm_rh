@@ -2,54 +2,50 @@ import {
   forwardRef,
   useImperativeHandle,
   useState,
-  useMemo,
-  useEffect,
-  useCallback
+  useCallback,
+  useEffect
 } from 'react'
+import { useParams } from 'react-router-dom'
 
 import Close from 'components/atoms/Buttons/Close'
-
-import { Columns, Container, ContainerModal, ContainerOne, ContainerRow, Overlay, Row, Text, Title } from './style'
+import { Image } from 'components/organisms/Tables/style'
 import { formatDate } from 'components/utils/formatDate'
 import { GenerateValue } from 'components/utils/OptionsAplication'
 
+import api from 'api'
+import { routes } from 'routes'
 
-
-interface IModalProps {
-  text: string
-  placeholder: string
-  EventOne: (_: number, name: string, status: string,
-    project_type: string,
-    date_start: string,
-    date_end: string,
-    date_end_performed: string,
-    date_start_performed: string,
-    team_cost: string) => void
-  defaultOpened?: boolean
-}
-
-export interface IHandleModalPropsDetails {
-  open(
-    id: number,
-    name: string,
-    status:string,
-    project_type: string,
-    date_start: string,
-    date_end: string,
-    date_end_performed: string,
-    date_start_performed: string,
-    team_cost: string
-  ): void
-  close(): void
-}
+import {
+  Columns,
+  ContaineDetails,
+  Container,
+  ContainerAbsolute,
+  ContainerDataUser,
+  ContainerModal,
+  ContainerOne,
+  ContainerRow,
+  Overlay,
+  ProfessionalJob,
+  ProfessionalName,
+  Row,
+  TableLine,
+  Title
+} from './style'
+import {
+  IHandleModalPropsDetails,
+  IModalProps,
+  TeamUserProps
+} from './type'
+import { ProjectProps } from 'types'
 
 const Detais = forwardRef<IHandleModalPropsDetails, IModalProps>(
   (props, ref) => {
-    const { text, placeholder, EventOne } = props
-    const [isOpen, setIsOpen] = useState({ 
-      id: 0, 
-      name: '', 
-      status:'',
+    const { text } = props
+    const [projectUser, setProjectUser] = useState<any[]>([])
+    const [isOpen, setIsOpen] = useState({
+      id: 0,
+      name: '',
+      status: '',
       project_type: '',
       date_start: '',
       date_end: '',
@@ -57,46 +53,68 @@ const Detais = forwardRef<IHandleModalPropsDetails, IModalProps>(
       date_start_performed: '',
       team_cost: ''
     })
-  
-
-
 
     const close = useCallback(() => {
-      setIsOpen({ 
-        id: 0, 
-        name: '' , 
-        status:'', 
-        project_type: '', 
-        date_start: '', 
-        date_end: '', 
+      setIsOpen({
+        id: 0,
+        name: '',
+        status: '',
+        project_type: '',
+        date_start: '',
+        date_end: '',
         date_end_performed: '',
-        date_start_performed: '', 
-        team_cost: ''})
+        date_start_performed: '',
+        team_cost: ''
+      })
     }, [])
 
     useImperativeHandle(
       ref,
       () => ({
-        open: (id, name, status, project_type, date_start, date_end, date_end_performed, date_start_performed, team_cost) => 
-        setIsOpen({ 
-          id: id, 
-          name: name, 
-          status: status, 
-          project_type: project_type,
-          date_start: date_start,
-          date_end: date_end,
-          date_end_performed: date_end_performed,
-          date_start_performed: date_start_performed,
-          team_cost: team_cost 
+        open: (
+          id,
+          name,
+          status,
+          project_type,
+          date_start,
+          date_end,
+          date_end_performed,
+          date_start_performed,
+          team_cost
+        ) =>
+          setIsOpen({
+            id: id,
+            name: name,
+            status: status,
+            project_type: project_type,
+            date_start: date_start,
+            date_end: date_end,
+            date_end_performed: date_end_performed,
+            date_start_performed: date_start_performed,
+            team_cost: team_cost
           }),
         close
       }),
       []
     )
 
-   
+    function getUsers() {
+      api.get(routes.usersProjects.list).then((response) => {
+        setProjectUser(response.data)
+      })
+    }
+
+    useEffect(() => {
+      getUsers()
+    }, [])
+
+    const professional = projectUser.filter(
+      (project) => project.id === isOpen.id
+    )
+    const users = professional[0]?.users || []
 
     if (isOpen.id === 0) return null
+
     return (
       <>
         <ContainerModal>
@@ -105,58 +123,76 @@ const Detais = forwardRef<IHandleModalPropsDetails, IModalProps>(
               <h2>{text}</h2>
               <Close onClick={() => close()} />
             </Row>
+
             <ContainerRow>
-              <Text>
-                <Title>
-                  Projeto
-                </Title>
+              <ContaineDetails>
+                <Title>Projeto</Title>
                 {isOpen.name}
-              </Text>
-              <Text>
-                <Title>
-                  Contrato
-                </Title>
+              </ContaineDetails>
+              <ContaineDetails>
+                <Title>Contrato</Title>
                 {isOpen.id}
-              </Text>
-              <Text>
+              </ContaineDetails>
+              <ContaineDetails>
                 <Title>Tipo do Projeto</Title>
                 {isOpen.project_type}
-              </Text>
-              <Text>
+              </ContaineDetails>
+              <ContaineDetails>
                 <Title>Status do Projeto</Title>
                 {isOpen.status}
-              </Text>  
+              </ContaineDetails>
             </ContainerRow>
+
             <ContainerOne>
-            <ContainerRow>
-              <Text>
-                <Title>Data Início efetivo</Title>
-                {formatDate(isOpen.date_start)}
-              </Text>
-              <Text>
-                <Title>Data final efetivo</Title>
-                {formatDate(isOpen.date_end)}
-              </Text>
-            </ContainerRow>
+              <ContainerRow>
+                <ContaineDetails>
+                  <Title>Data Início efetivo</Title>
+                  {formatDate(isOpen.date_start)}
+                </ContaineDetails>
+                <ContaineDetails>
+                  <Title>Data final efetivo</Title>
+                  {formatDate(isOpen.date_end)}
+                </ContaineDetails>
+              </ContainerRow>
             </ContainerOne>
+
             <Container>
-            <ContainerRow>
-              <Text>
-                <Title>Data Início do contrato</Title>
-                {formatDate(isOpen.date_start_performed)}
-              </Text>
-              <Text>
-                <Title>Data final do contrato</Title>
-                {formatDate(isOpen.date_end_performed)}
-              </Text>
-            </ContainerRow>
+              <ContainerRow>
+                <ContaineDetails>
+                  <Title>Data Início do contrato</Title>
+                  {formatDate(isOpen.date_start_performed)}
+                </ContaineDetails>
+                <ContaineDetails>
+                  <Title>Data final do contrato</Title>
+                  {formatDate(isOpen.date_end_performed)}
+                </ContaineDetails>
+              </ContainerRow>
             </Container>
+
             <ContainerRow>
-              <Text>
+              <ContaineDetails>
                 <Title>Custo do Projeto</Title>
-                {Number(isOpen.team_cost)}
-                </Text>
+                {GenerateValue(String(isOpen.team_cost))}
+              </ContaineDetails>
             </ContainerRow>
+
+            <ContainerAbsolute>
+              <ContainerRow>
+                <Title>Time</Title>
+              </ContainerRow>
+              <TableLine>
+                {
+                  users.map((user: TeamUserProps) => (
+                    <ContainerDataUser>
+                        <Image src={user.avatar} />
+                      <div className='professional'>
+                        <ProfessionalName> {user.name} </ProfessionalName>
+                        <ProfessionalJob> {user.job_} </ProfessionalJob>
+                      </div>
+                    </ContainerDataUser>
+                  ))}
+              </TableLine>
+            </ContainerAbsolute>
           </Columns>
         </ContainerModal>
         <Overlay />
