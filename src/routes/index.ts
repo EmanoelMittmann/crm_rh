@@ -22,6 +22,10 @@ export const routes = {
     list: '/permissions'
   },
 
+  notes: {
+    list: `/fiscalNotesProfissionals`
+  },
+
   project: {
     list: '/project?limit=5',
     updateStatusproject: (projectId: number) =>
