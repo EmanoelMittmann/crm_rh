@@ -22,7 +22,7 @@ export const Notes = () => {
           type='text'
           label='q'
           labelColor='white'
-          width={'15%'}
+          width={'20%'}
         />
         <Inputs.Default
           value={dateInitial}

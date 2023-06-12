@@ -7,6 +7,7 @@ const ROUTES = {
   '/RegisterProjects': 'Projetos > Cadastrar Novo',
   '/extrasHours': 'Horas Extras',
   '/notes': 'Notas Fiscais',
+  '/releaseNotes': 'Notas Fiscais > Enviar NF',
   '/reports': 'Relatórios',
   '/services': 'Ordem de Serviço',
   '/settings': 'Configurações',
