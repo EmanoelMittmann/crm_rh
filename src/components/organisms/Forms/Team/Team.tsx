@@ -12,6 +12,7 @@ import api from 'api'
 import { routes } from 'routes'
 
 import { FormTeamProps, TeamMemberProps } from './types'
+import { useState } from 'react'
 
 export const Team = () => {
   const {
@@ -22,7 +23,9 @@ export const Team = () => {
     setError,
     formState: { errors }
   } = useFormContext<FormTeamProps>()
+  const [isTechLead, setIsTechLead] = useState(false)
   const { id } = useParams()
+  const jobName = watch('jobs.name.label')
   const options = watch('options')
   const projectId = id
 
@@ -32,7 +35,6 @@ export const Team = () => {
     const avatar = watch('professional.avatar.label')
     const jobs = watch('jobs')
     const job_ = watch('jobs.name.label')
-    const status = Number(watch('users.professional.status'))
     const hoursMonth =
       Number(watch('users.hours_mounths_estimated')) || 0
     const extraHour =
@@ -79,16 +81,13 @@ export const Team = () => {
         user_id: id,
         professional,
         jobs,
-        job_: job_,
+        job_: isTechLead ? 'Tech Lead' : job_,
         isTechLead: techLead,
         extra_hours_estimated: extraHour,
         hours_mounths_estimated: hoursMonth,
         hours_mounths_performed: hours_mounths_performed,
         extra_hours_performed: extra_hours_performed,
-        status: {
-          label: status ? 'Ativo' : 'Inativo',
-          value: status ? '0' : '1'
-        },
+        status: status ? 'Ativo' : 'Inativo',
         avatar: avatar
           ? avatar
           : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
@@ -120,12 +119,13 @@ export const Team = () => {
 
   const teamUser = watch('team', [])
   const listUsers = watch('options.professionals', [])
-  const currentTeamOptions = listUsers.filter(
-    (professional) =>
-      !teamUser.find(
-        (user) => user.user_id === Number(professional.value)
-      )
-  )
+  const currentTeamOptions = listUsers.filter((professional) =>!teamUser.find((user) => user.user_id === Number(professional.value)))
+
+  const TechLead = teamUser.filter((obj) => obj.job_ === "Tech Lead" || obj.job_ === "Tech Lead e Desenvolvedor")
+  let newTime = teamUser
+  if (TechLead[0] && jobName === "Tech Lead" || TechLead[0] && jobName === "Tech Lead e Desenvolvedor") {
+    newTime = teamUser.filter((obj) => obj.job_ !== "Tech Lead" && obj.job_ !== "Tech Lead e Desenvolvedor")
+  }
 
   return (
     <>

@@ -44,8 +44,8 @@ export interface IHandleModalPropsUserNew {
 
 const Options = {
   status: [
-    { label: 'Ativo', value: '1' },
-    { label: 'Inativo', value: '0' }
+    { label: 'Ativo', value: true },
+    { label: 'Inativo', value: false }
   ]
 }
 
@@ -62,7 +62,8 @@ const UsersEditor = forwardRef<
     useFormContext<FormProjectProps>()
 
   const { team } = useFormContext<FormTeamProps>().watch()
-  const professional = team.find((item) => item.user_id === isOpen.id)
+  const professional = team && team.find(item => item.user_id === isOpen.id);
+
 
   const close = useCallback(() => {
     setIsOpen({ id: 0 })
@@ -83,18 +84,19 @@ const UsersEditor = forwardRef<
     if (professional) {
       const selectedStatus = {
         label: professional.status ? 'Ativo' : 'Inativo',
-        value: professional.status ? '1' : '0'
+        value: professional.status 
       }
       const selectedJob = {
         label: professional.jobs?.name?.label || '',
-        value: String(professional.jobs?.name || '0')
-      }
+        value: String(professional.jobs?.name || '0'),
+      };
 
-      setSelectedStatus(selectedStatus)
+      setSelectedStatus(selectedStatus as unknown as Option)
       setSelectedJob(selectedJob)
 
       setTimeout(() => {
-        setValue('jobs.name', selectedJob || null)
+        setValue('users.professional.status', selectedStatus?.value)
+        setValue('jobs.name', selectedJob || null);
         setValue(
           'users.hours_mounths_estimated',
           Number(professional.hours_mounths_estimated) || 0
@@ -103,7 +105,7 @@ const UsersEditor = forwardRef<
           'users.extra_hours_estimated',
           Number(professional.extra_hours_estimated) || 0
         )
-      }, 0)
+      }, 0);
     }
   }, [professional, setValue])
 
@@ -168,7 +170,7 @@ const UsersEditor = forwardRef<
                 onClear={() =>
                   setSelectedStatus({ label: '', value: '' })
                 }
-                options={Options.status}
+                options={Options.status as unknown as Option[]}
                 label='Status'
                 value={selectedStatus}
                 placeholder={placeholder}
@@ -205,8 +207,8 @@ const UsersEditor = forwardRef<
                   extra_hours_performed:
                     Number(watch('users.extra_hours_performed')) || 0,
                   isTechLead: Boolean(professional?.isTechLead),
-                  job_: String(selectedJob?.label),
-                  status: Number(selectedStatus?.value),
+                  job_: String(selectedJob?.label || ''),
+                  status: Boolean(selectedStatus?.value),
                   user_id: Number(isOpen.id)
                 })
 

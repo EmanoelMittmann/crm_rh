@@ -4,13 +4,15 @@ export interface TeamUserProps {
   id: number
   job_: string
   job: string
-  job_id: Option | null
+  job_id: number
   name: string
   isTechLead: boolean
   extra_hours_estimated: number
   hours_mounths_estimated: number
   hours_mounths_performed: number
   extra_hours_performed: number
+  extra_hours_percent: number
+  hours_mounths_percent: number
   is_active: boolean
   avatar: string
   status: boolean

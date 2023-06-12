@@ -181,16 +181,18 @@ const Detais = forwardRef<IHandleModalPropsDetails, IModalProps>(
                 <Title>Time</Title>
               </ContainerRow>
               <TableLine>
-                {
-                  users.map((user: TeamUserProps) => (
-                    <ContainerDataUser>
-                        <Image src={user.avatar} />
-                      <div className='professional'>
-                        <ProfessionalName> {user.name} </ProfessionalName>
-                        <ProfessionalJob> {user.job_} </ProfessionalJob>
-                      </div>
-                    </ContainerDataUser>
-                  ))}
+                {users.map((user: TeamUserProps) => (
+                  <ContainerDataUser>
+                    <Image src={user.avatar} />
+                    <div className='professional'>
+                      <ProfessionalName>
+                        {' '}
+                        {user.name}{' '}
+                      </ProfessionalName>
+                      <ProfessionalJob> {user.job_} </ProfessionalJob>
+                    </div>
+                  </ContainerDataUser>
+                ))}
               </TableLine>
             </ContainerAbsolute>
           </Columns>

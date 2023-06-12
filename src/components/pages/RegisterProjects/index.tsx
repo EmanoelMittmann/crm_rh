@@ -50,15 +50,16 @@ const RegisterProjects = () => {
           extra_hours_performed: user.extra_hours_performed,
           hours_mounths_estimated: user.hours_mounths_estimated,
           hours_mounths_performed: user.hours_mounths_performed,
-          status: user.professional.status,
+          status: user.status,
           isTechLead: user.isTechLead,
           is_active: user.is_active,
           job_: user.job_,
           job: user.job,
-          job_id: user.job_id?.value
+          job_id: user.job_id
         }
       })
     }
+    console.log('sanitizeData: ', sanitizeData);
 
     try {
       if (id) {
@@ -66,7 +67,6 @@ const RegisterProjects = () => {
           routes.project.updateProject(Number(id)),
           sanitizeData
         )
-        console.log('sanitizeData: ', sanitizeData)
         toast({
           type: 'success',
           title: 'Projeto atualizado com sucesso.',
