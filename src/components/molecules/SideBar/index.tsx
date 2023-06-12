@@ -32,7 +32,7 @@ export const Sidebar = () => {
       <ContainerRow paddingRight='4em'>
         <IconUbistart />
       </ContainerRow>
-      <ContainerColumn height='65%' bottom='1rem' left='0'>
+      <ContainerColumn height='69%' left='0'>
         <Button.Menu
           key={Home.key}
           Text={Home.text}

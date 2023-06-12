@@ -37,7 +37,7 @@ export interface CompanyProps {
   date_of_special_situation: string
   reason_for_registration_status: string
   special_situation: string
-  account_number: number
+  account_number: string
   account_type: Option | null
   agency: string
   bank: Option | null

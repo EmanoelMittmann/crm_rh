@@ -225,7 +225,7 @@ export async function OnSubmit(
     bank: data.bank?.value,
     account_type: data.account_type?.value,
     agency: data.agency.replace('-', ''),
-    account_number: data.account_number
+    account_number: data.account_number.replace('-', '')
   }
 
   id
