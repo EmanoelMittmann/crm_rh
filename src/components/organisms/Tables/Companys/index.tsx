@@ -1,4 +1,5 @@
 import { useContext, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { List } from 'contexts'
 
@@ -10,12 +11,13 @@ import { HEADERS, GRID_TEMPLATE } from './constants'
 import { Shelf } from './Shelf'
 
 export const Companys = () => {
+  const navigate = useNavigate()
   const { companys, isLoading, handleOrder } = useContext(
     List.Company.Context
   )
 
-  const POPOVER_OPTIONS = () => [
-    { label: 'Editar', callback: () => {} }
+  const POPOVER_OPTIONS = (id: number) => [
+    { label: 'Editar', callback: () => navigate(`/company/${id}`) }
   ]
 
   const Table = useMemo(() => {
@@ -30,7 +32,7 @@ export const Companys = () => {
       <Shelf
         config={{
           template: GRID_TEMPLATE,
-          options: POPOVER_OPTIONS()
+          options: POPOVER_OPTIONS(props.id)
         }}
         key={props.id}
         {...{ props }}

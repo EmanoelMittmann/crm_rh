@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, WatchObserver } from 'react-hook-form'
 
 import { Typography } from '@stardust-ds/react'
 import { Radio } from '@stardust-ds/react'
@@ -30,6 +30,7 @@ export const Company = () => {
           id='1'
           {...register('is_matriz', { valueAsNumber: true })}
           value={1}
+          checked={watch('is_matriz')}
         />
       ),
       active: !!Number(watch('is_matriz'))
@@ -41,15 +42,14 @@ export const Company = () => {
           id='2'
           {...register('is_matriz', { valueAsNumber: true })}
           value={0}
+          checked={!watch('is_matriz')}
           defaultChecked
         />
       ),
       active: !Number(watch('is_matriz'))
     }
   ]
-
   useEffect(() => {}, [watch('options')])
-
   return (
     <>
       <ContainerRow>
@@ -67,7 +67,9 @@ export const Company = () => {
             setValue('cnpj', target.value)
           }
           value={watch('cnpj') ?? ''}
+          placeholder='000.000.000/0000-00'
           error={errors.cnpj?.message}
+          type=''
           label='CNPJ'
           width='100%'
         />
@@ -80,7 +82,9 @@ export const Company = () => {
           }
           value={watch('opening_date') ?? ''}
           label='Data de abertura'
+          error={errors.opening_date?.message}
           width='100%'
+          type='date'
         />
         <Selects.WithCheckbox
           label='Empresa Matriz'
@@ -89,9 +93,7 @@ export const Company = () => {
       </ContainerRow>
       <ContainerRow gap='1em'>
         <Inputs.Default
-          {...register('state_registration', {
-            required: validation.required
-          })}
+          {...register('state_registration')}
           onChange={({ target }: any) =>
             setValue('state_registration', target.value)
           }
@@ -100,9 +102,7 @@ export const Company = () => {
           width='100%'
         />
         <Inputs.Default
-          {...register('municipal_registration', {
-            required: validation.required
-          })}
+          {...register('municipal_registration')}
           onChange={({ target }: any) =>
             setValue('municipal_registration', target.value)
           }
@@ -114,10 +114,14 @@ export const Company = () => {
           {...register('size', {
             required: validation.required
           })}
+          error={errors.size?.message}
           onSelect={(v: any) => setValue('size', v)}
+          onClear={() => setValue('size', null)}
+          value={watch('size') as any}
           options={COMPANY.SIZE}
           label='Porte'
           placeholder='Selecione'
+          width={300}
         />
       </ContainerRow>
       <ContainerRow gap='1em'>
@@ -128,6 +132,7 @@ export const Company = () => {
           onChange={({ target }: any) =>
             setValue('razao_social', target.value)
           }
+          error={errors.razao_social?.message}
           value={watch('razao_social') ?? ''}
           label='Razão Social'
           width='100%'
@@ -139,6 +144,7 @@ export const Company = () => {
           onChange={({ target }: any) =>
             setValue('fantasy_name', target.value)
           }
+          error={errors.fantasy_name?.message}
           value={watch('fantasy_name') ?? ''}
           label='Nome Fantasia'
           width='60%'
@@ -146,11 +152,14 @@ export const Company = () => {
       </ContainerRow>
       <ContainerRow gap='1em'>
         <Selects.Default
-          {...register('director')}
+          {...register('director', {
+            required: validation.required
+          })}
           onSelect={(v: any) => setValue('director', v)}
           onClear={() => setValue('director', null)}
           options={watch('options.owners') as SelectOption[]}
           placeholder='Selecione'
+          error={errors.director?.message}
           value={watch('director') as any}
           label='Assinatura'
           searchable
@@ -160,32 +169,38 @@ export const Company = () => {
           {...register('witnesses', {
             required: validation.required
           })}
-          onSelect={(v: any) => setValue('witnesses', v)}
-          onClear={() => setValue('witnesses', [])}
+          onSelect={(v: any) => setValue('witnesses.0', v)}
+          onClear={() => setValue('witnesses', null)}
           options={watch('options.owners') as SelectOption[]}
           placeholder='Selecione'
-          value={watch('witnesses') as any}
+          error={errors.witnesses?.message}
+          value={watch('witnesses.0') as any}
           label='Testemunha 1'
           searchable
           width={290}
         />
         <Selects.Default
           {...register('witnesses')}
-          onSelect={(v: any) => setValue('witnesses', v)}
+          onSelect={(v: any) => setValue('witnesses.1', v)}
           onClear={() => setValue('witnesses', [])}
           options={watch('options.owners') as SelectOption[]}
           placeholder='Selecione'
-          value={watch('witnesses') as any}
+          error={errors.witnesses?.message}
+          value={watch('witnesses.1') as any}
           label='Testemunha 2'
           searchable
           width={290}
         />
       </ContainerRow>
       <ContainerRow>
-        <Select
-          {...register('main_cnae')}
+        <Selects.Default
+          {...register('main_cnae', {
+            required: validation.required
+          })}
           onSelect={(v: any) => setValue('main_cnae', v)}
           options={watch('options.cnae') as SelectOption[]}
+          error={errors.main_cnae?.message}
+          value={watch('main_cnae') as any}
           label='Codigo e Descrição de Atividade Econimica Principal'
           width={915}
           multiSelect
@@ -193,10 +208,14 @@ export const Company = () => {
         />
       </ContainerRow>
       <ContainerRow>
-        <Select
-          {...register('secondary_cnae')}
+        <Selects.Default
+          {...register('secondary_cnae', {
+            required: validation.required
+          })}
           onSelect={(v: any) => setValue('secondary_cnae', v)}
           options={watch('options.cnae') as SelectOption[]}
+          value={watch('secondary_cnae') as any}
+          error={errors.secondary_cnae?.message}
           label='Codigo e Descrição de Atividade Economica Secundária '
           width={915}
           multiSelect
@@ -204,10 +223,21 @@ export const Company = () => {
         />
       </ContainerRow>
       <ContainerRow>
-        <Select
-          {...register('code_and_description_of_the_legal_status')}
+        <Selects.Default
+          {...register('code_and_description_of_the_legal_status', {
+            required: validation.required
+          })}
           onSelect={(v: any) =>
             setValue('code_and_description_of_the_legal_status', v)
+          }
+          onClear={() =>
+            setValue('code_and_description_of_the_legal_status', null)
+          }
+          error={
+            errors.code_and_description_of_the_legal_status?.message
+          }
+          value={
+            watch('code_and_description_of_the_legal_status') as any
           }
           options={LegalNature}
           label='Codigo e Descrição de Natureza Juridica'

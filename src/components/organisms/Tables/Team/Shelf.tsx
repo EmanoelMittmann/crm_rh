@@ -4,6 +4,7 @@ import {
   ContainerShelf,
   ContainerShelfColumn
 } from 'components/organisms/Tables/style'
+import { percentCalculate } from 'components/utils/percentCalculate'
 
 import {
   Image,
@@ -11,50 +12,73 @@ import {
   Text,
   TextJob
 } from '../../Forms/Project/style'
-import { ShelfUserProject } from '../../Forms/Project/types'
+import { ShelfProps } from '../types'
 
-export const Shelf = ({ props, config }: ShelfUserProject) => {
+export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const {
-    extra_hours_estimated,
-    hours_mounths_estimated,
-    hours_mounths_performed,
-    extra_hours_performed,
+    extra_hours_estimated = 0,
+    hours_mounths_estimated = 0,
+    hours_mounths_performed = 0,
+    extra_hours_performed = 0,
+    extra_hours_percent = 0,
+    hours_mounths_percent = 0,
     jobs,
     professional,
     status,
-    avatar
+    is_active,
+    avatar,
   } = props
 
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn gap='.5rem' width='210px'>
+      <ContainerShelfColumn gap='.5rem' width='205px'>
         <Image src={avatar} />
         <TeamJobName>
-          <Text>{professional.name?.label}</Text>
-          <TextJob>{jobs.name?.label}</TextJob>
+          <Text>{professional?.name?.label}</Text>
+          <TextJob>{jobs?.name?.label}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
-      <ContainerShelfColumn width='130px'>
+      <ContainerShelfColumn width='120px'>
         <Text>{hours_mounths_estimated}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='120px'>
-        <Text>{extra_hours_estimated}</Text>
-      </ContainerShelfColumn>
-
-      <ContainerShelfColumn width='140px'>
+      <ContainerShelfColumn width='105px'>
         <Text>{hours_mounths_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='120px'>
+      <ContainerShelfColumn width='60px'>
+        <Text>
+          {hours_mounths_percent === undefined
+            ? percentCalculate(
+                hours_mounths_performed,
+                hours_mounths_estimated
+              ).toFixed()
+            : hours_mounths_percent.toFixed()}
+          %
+        </Text>
+      </ContainerShelfColumn>
+
+      <ContainerShelfColumn width='100px'>
+        <Text>{extra_hours_estimated}</Text>
+      </ContainerShelfColumn>
+
+      <ContainerShelfColumn width='100px'>
         <Text>{extra_hours_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn
-        width='140px'
-        justify='center'
-        gap='1.5em'
-      >
+      <ContainerShelfColumn width='30px'>
+        <Text>
+          {extra_hours_percent === undefined
+            ? percentCalculate(
+                extra_hours_performed,
+                extra_hours_estimated
+              ).toFixed()
+            : extra_hours_percent.toFixed()}
+          %
+        </Text>
+      </ContainerShelfColumn>
+
+      <ContainerShelfColumn width='140px' justify='center' gap='1em'>
         <Badge.Status status={status} />
         <Popover options={config.options} />
       </ContainerShelfColumn>

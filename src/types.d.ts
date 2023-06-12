@@ -84,6 +84,7 @@ export interface UserProjectsProps {
   avatar: string
   name: string
   status: string
+  is_active: boolean
   job_: string
   job_id: string
   job: {
@@ -93,6 +94,7 @@ export interface UserProjectsProps {
 }
 
 export interface ProjectProps {
+  users: teamMemberProps[]
   id: number
   name: string
   created_at: string

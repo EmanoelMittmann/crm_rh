@@ -1,7 +1,8 @@
 import type { SelectProps } from '@stardust-ds/react'
 
-import { ProjectProps } from 'types'
+import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
 
+import { ProjectProps } from 'types'
 export type { ReactNode } from 'react'
 
 export interface DefaultMetaProps {
@@ -36,5 +37,5 @@ export interface ContextProjectProps {
   handleOrder(field: string): void
   handleFillProject_Type(id: number | null): void
   handleFillProject_Status(id: number | null): void
-  handleUpdateStatus(id: number, name: string): void
+  handleUpdateStatus(projectId: number, statusId: string): void
 }

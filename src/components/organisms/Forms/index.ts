@@ -3,10 +3,11 @@ import Professional, {
   FormProps as ProfessionalProps
 } from './Professional'
 import Project, { FormProjectProps as ProjectProps } from './Project'
+import Team, { FormTeamProps as TeamProps } from './Project'
 
 export const Form = Object.assign(
   {},
-  { Professional, Project, Company }
+  { Professional, Project, Company, Team }
 )
 
 export type FormProps = {
@@ -17,5 +18,13 @@ export type FormProps = {
 export type FormProjectProps = {
   Project: ProjectProps
 }
+export type FormTeamProps = {
+  Team: TeamProps
+}
+
+export type PartialForm = {
+  Company: CompanyProps
+}
 
 export { getUfOption } from './Professional'
+export { validationSchema as SchemaCompany } from './Company/logic'

@@ -38,6 +38,7 @@ export const Address = () => {
           error={errors.cep?.message}
           label='CEP'
           width={290}
+          placeholder='00000-0000'
         />
         <Inputs.Default
           {...register('street_name', {
@@ -64,14 +65,11 @@ export const Address = () => {
           width={500}
         />
         <Inputs.Default
-          {...register('complement', {
-            required: validation.required
-          })}
+          {...register('complement')}
           onChange={({ target }: any) =>
             setValue('complement', target.value)
           }
           value={watch('complement') ?? ''}
-          error={errors.street_name?.message}
           label='Complemento'
           width={'30%'}
         />
@@ -103,9 +101,12 @@ export const Address = () => {
           {...register('uf', {
             required: validation.required
           })}
-          onChange={(v: any) => setValue('uf', v.value)}
+          value={watch('uf') as any}
+          onChange={(v: any) => setValue('uf', v)}
+          onClear={() => setValue('uf', null)}
           options={watch('options.uf') as SelectOption[]}
           label='Estado'
+          error={errors.uf?.message}
           searchable
           width={300}
           placeholder='Selecione'
@@ -135,9 +136,7 @@ export const Address = () => {
           placeholder={'email@email.com'}
         />
         <Inputs.Default
-          {...register('secondary_email', {
-            required: validation.required
-          })}
+          {...register('secondary_email')}
           onChange={({ target }: any) =>
             setValue('secondary_email', target.value)
           }
