@@ -51,26 +51,31 @@ const RegisterProjects = () => {
           hours_mounths_estimated: user.hours_mounths_estimated,
           hours_mounths_performed: user.hours_mounths_performed,
           status: user.status,
-          job_: user.jobs.name?.label
+          isTechLead: user.isTechLead,
+          is_active: user.is_active,
+          job_: user.job_
         }
       })
     }
 
     try {
       if (id) {
-        await api.put(
-          routes.project.updateProject(Number(id)),
-          sanitizeData
-        )
-      } else {
-        await api.post(routes.project.register, sanitizeData)
-      }
-      const successMessage = id
-        ? 'Projeto atualizado com sucesso.'
-        : 'Projeto cadastrado com sucesso.'
+        await api.put(routes.project.updateProject(Number(id)), sanitizeData);
+        console.log('sanitizeData: ', sanitizeData);
+        toast({
+          type: 'success',
+          title: 'Projeto atualizado com sucesso.',
+          position: 'bottom-right'
+        })
+        navigate('/project')
+        return
+
+      } 
+      await api.post(routes.project.register, sanitizeData)
+
       toast({
         type: 'success',
-        title: successMessage,
+        title: 'Projeto cadastrado com sucesso.',
         position: 'bottom-right'
       })
       navigate('/project')

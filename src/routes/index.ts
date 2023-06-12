@@ -52,7 +52,7 @@ export const routes = {
   usersProjects: {
     list: '/userProjects/project',
     userProjects: (id: number) => `/userProjects/project/${id}`,
-    updateTeam: (id: number) => `/userProjects/project${id}`,
+    updateTeam: (id: number) => `/userProjects/project/${id}`,
     register: '/userProjects/project'
   },
 

@@ -1,9 +1,7 @@
 import { useContext, useMemo, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
-
 import { toast } from '@stardust-ds/react'
 import { List } from 'contexts'
-
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 import { Modal } from 'components/molecules/Modais'
@@ -13,44 +11,87 @@ import {
   LoadingWrapper,
   Main
 } from 'components/organisms/Tables/style'
-import { percentCalculate } from 'components/utils/percentCalculate'
-
 import api from 'api'
 import { routes } from 'routes'
-
 import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
 import { Shelf } from './Shelf'
+import { useParams } from 'react-router-dom'
+
 
 export const Team = () => {
   const { watch, setValue } = useFormContext<FormTeamProps>()
   const { isLoading, handleOrder } = useContext(List.Project.Context)
   const modalRef = useRef<IHandleModalPropsUserNew>(null)
   const Team = watch('team', [])
-  const project_id = watch('id')
+  const { id } = useParams()
+  const project_id = id
 
-  const POPOVER_OPTIONS = (
-    user_id: number,
-    status: boolean,
-    name: string
-  ) => [
-    {
-      label: 'Editar',
-      callback: () => modalRef.current?.open(user_id, name)
-    },
-    {
+  const POPOVER_OPTIONS = (user_id: number, status: boolean, name: string) => {
+    const options = [];
+
+    if (project_id) {
+      options.push({
+        label: 'Editar',
+        callback: () => modalRef.current?.open(user_id)
+      });
+    }
+
+    options.push({
       label: 'Remover',
       callback: () => removeUser(user_id)
+    });
+
+    return options;
+  };
+
+  async function handleUpdateUser(
+    user_id: number, 
+    data: any
+    ) {
+    try {
+      if (project_id) {
+        const updatedTeam = [...Team];
+        const index = updatedTeam.findIndex(item => item.user_id === user_id);
+
+        if (index !== -1) {
+          const updatedUser = {
+            ...updatedTeam[index],
+            user_id: user_id,
+            hours_mounths_estimated: data.hours_mounths_estimated,
+            extra_hours_estimated: data.extra_hours_estimated,
+            extra_hours_performed: data.extra_hours_performed,
+            hours_mounths_performed: data.hours_mounths_performed,
+            status: data.status,
+            job_: data.job_,
+            isTechLead: data.isTechLead,
+          };
+
+          updatedTeam[index] = updatedUser;
+          setValue('team', updatedTeam);
+
+          const editTeam = routes.project.userProjects(Number(project_id));
+          const update = {
+            user_id: user_id,
+            hours_mounths_estimated: data.hours_mounths_estimated,
+            extra_hours_estimated: data.extra_hours_estimated,
+            extra_hours_performed: data.extra_hours_performed,
+            hours_mounths_performed: data.hours_mounths_performed,
+            status: data.status,
+            job_: data.job_,
+            isTechLead: data.isTechLead,
+          }
+          await api.put(editTeam, update);
+        }
+      }
+
+      toast.success({
+        title: 'Profissional atualizado com sucesso',
+      })
+    } catch (err) {
+      toast.error({
+        title: 'Erro ao atualizar profissional',
+      });
     }
-  ]
-
-  function handleUpdateUser(user_id: number) {
-    const newTeam = Team.map((item) =>
-      item.user_id === user_id ? { ...item } : item
-    )
-    api.put(routes.project.userProjects(Number(user_id)), newTeam)
-
-    setValue('team', newTeam)
-    return newTeam
   }
 
   function removeUser(user_id: number) {
@@ -66,6 +107,7 @@ export const Team = () => {
       title: 'Profissional removido com sucesso',
       type: 'success'
     })
+
   }
 
   const Table = useMemo(() => {
