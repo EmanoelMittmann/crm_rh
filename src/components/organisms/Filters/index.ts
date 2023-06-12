@@ -1,6 +1,7 @@
 import { Team } from '../Forms/Team/Team'
 import { Companys } from './Companys'
 import { Jobs } from './Jobs'
+import { Notes } from './Notes'
 import { Professionals } from './Professionals'
 import { Projects } from './Projects'
 import { StatusProject } from './statusProject'
@@ -15,6 +16,7 @@ export const Filter = Object.assign(
     StatusProject,
     TypeProject,
     Companys,
-    Team
+    Team,
+    Notes
   }
 )
