@@ -120,7 +120,7 @@ export function handlePopulateFields(
       jobs: jobs,
       status: userData.status,
       is_active: userData.is_active,
-      job_: user.job_,
+      job_: userData.job_,
       job: userData.job,
       job_id: userData.job_id,
       isTechLead: userData.isTechLead,
