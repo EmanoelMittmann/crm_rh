@@ -35,6 +35,7 @@ export const Team = () => {
     const avatar = watch('professional.avatar.label')
     const jobs = watch('jobs')
     const job_ = watch('jobs.name.label')
+    const status = watch('users.status')
     const hoursMonth =
       Number(watch('users.hours_mounths_estimated')) || 0
     const extraHour =
@@ -174,7 +175,6 @@ export const Team = () => {
           label='Horas extras estimadas'
           placeholder='Horas'
         />
-
         <ButtonGeneric
           top='1.5em'
           Text='Vincular'

@@ -88,15 +88,15 @@ const UsersEditor = forwardRef<
       }
       const selectedJob = {
         label: professional.jobs?.name?.label || '',
-        value: String(professional.jobs?.name || '0'),
+        value: String(professional.jobs?.name?.value || '0'),
       };
 
       setSelectedStatus(selectedStatus as unknown as Option)
       setSelectedJob(selectedJob)
 
       setTimeout(() => {
-        setValue('users.professional.status', selectedStatus?.value)
-        setValue('jobs.name', selectedJob || null);
+        setValue('users.status', selectedStatus?.value)
+        setValue('users.jobs.name.label', selectedJob?.value);
         setValue(
           'users.hours_mounths_estimated',
           Number(professional.hours_mounths_estimated) || 0
@@ -143,7 +143,7 @@ const UsersEditor = forwardRef<
               />
 
               <Select
-                {...register('jobs.name', {})}
+                {...register('users.jobs.name.label', {})}
                 onSelect={(e: any) => setSelectedJob(e)}
                 onClear={() =>
                   setSelectedJob({ label: '', value: '' })
@@ -207,7 +207,7 @@ const UsersEditor = forwardRef<
                   extra_hours_performed:
                     Number(watch('users.extra_hours_performed')) || 0,
                   isTechLead: Boolean(professional?.isTechLead),
-                  job_: String(selectedJob?.label || ''),
+                  job_: String(selectedJob?.label),
                   status: Boolean(selectedStatus?.value),
                   user_id: Number(isOpen.id)
                 })
