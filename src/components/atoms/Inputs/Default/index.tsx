@@ -10,15 +10,15 @@ type Props = InputProps &
   InputHTMLAttributes<HTMLInputElement> & {
     error?: string
     required?: boolean
+    labelColor?: string
   }
 
 export default forwardRef(
-  ({ error, label, required , ...props }: Props, ref) => {
+
+  ({ error, label, required, labelColor, ...props }: Props, ref) => {
     return (
-      <Main
-    
-       w={(props?.width as string) ?? '100%'}>
-        <Label>
+      <Main w={(props?.width as string) ?? '100%'}>
+        <Label color={labelColor}>
           {label}
           {required && <RequiredLabel>*</RequiredLabel>}
         </Label>

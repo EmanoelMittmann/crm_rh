@@ -5,6 +5,7 @@ import Jobs from 'components/pages/Jobs'
 import Notes from 'components/pages/Notes'
 import { RegisterCompany } from 'components/pages/RegisterCompany'
 import RegisterProjects from 'components/pages/RegisterProjects'
+import ReleaseNotes from 'components/pages/ReleaseNotes'
 import Settings from 'components/pages/Setting'
 import StatusProject from 'components/pages/StatusProject'
 import TypesProject from 'components/pages/TypesProject'
@@ -49,7 +50,7 @@ const Router = () => {
             <Route path=':id' element={<RegisterCompany />} />
           </Route>
           <Route path='/releaseHours' element={<Professionals />} />
-          <Route path='/releaseNotes' element={<Professionals />} />
+          <Route path='/releaseNotes' element={<ReleaseNotes />} />
         </Routes>
       </BrowserRouter>
     </>

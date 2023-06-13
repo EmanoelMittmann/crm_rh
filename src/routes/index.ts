@@ -23,7 +23,8 @@ export const routes = {
   },
 
   notes: {
-    list: `/fiscalNotes`
+    list: `/fiscalNotes`,
+    user: `/fiscalNotesProfissionals`
   },
 
   project: {

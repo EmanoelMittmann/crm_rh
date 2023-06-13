@@ -1,5 +1,10 @@
 import { Company, ContextCompanyProps } from './Company'
-import { Notes, ContextNotesProps } from './Notes'
+import {
+  Notes,
+  ContextNotesProps,
+  ContextUserNotesProps,
+  UserNotes
+} from './Notes'
 import { Professional } from './Professional'
 import type { ContextProps as ProfessionalContextProps } from './Professional'
 import type { ContextProjectProps } from './Project'
@@ -23,7 +28,8 @@ export const List = Object.assign(
     Types,
     Company,
     Team,
-    Notes
+    Notes,
+    UserNotes
   }
 )
 
@@ -36,4 +42,5 @@ export type ListContext = {
   Companys: ContextCompanyProps
   Team: ContextTeamProps
   Notes: ContextNotesProps
+  UserNotes: ContextUserNotesProps
 }
