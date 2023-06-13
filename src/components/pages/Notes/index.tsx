@@ -1,6 +1,6 @@
 import { List } from 'contexts'
 
-import { Table } from 'components/organisms'
+import { Filter, Table } from 'components/organisms'
 import { AuthTemplate, ListTemplate } from 'components/templates'
 
 const Notes = () => {
@@ -8,6 +8,7 @@ const Notes = () => {
     <AuthTemplate>
       <List.Notes.Provider>
         <ListTemplate title='Notas Fiscais' arrow={true}>
+          <Filter.Notes />
           <Table.Notes />
         </ListTemplate>
       </List.Notes.Provider>

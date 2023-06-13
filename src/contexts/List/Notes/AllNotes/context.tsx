@@ -34,12 +34,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setIsLoading(true)
     const { data } = await api.get(routes.notes.list, {
       params: {
-        // page: meta.pagination.current_page
-        // order: meta.order,
-        // orderField: meta.orderField,
-        // search: meta.search,
-        // date_start: meta.date_start,
-        // date_end: meta.date_end
+        page: meta.pagination.current_page,
+        order: meta.order,
+        orderField: meta.orderField,
+        search: meta.search,
+        date_start: meta.date_start,
+        date_end: meta.date_end
       }
     })
     setNotes(data.data)
@@ -56,7 +56,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   function handleSearch(text: string) {
     setMeta((old) => ({
       ...old,
-      text,
+      search: text,
       pagination: { ...old.pagination, current_page: 1 }
     }))
   }
