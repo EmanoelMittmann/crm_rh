@@ -1,5 +1,6 @@
 import { List } from 'contexts'
 
+import { Filter, Table } from 'components/organisms'
 import { AuthTemplate, ReleaseTemplate } from 'components/templates'
 
 const ReleaseNotes = () => {
@@ -12,7 +13,8 @@ const ReleaseNotes = () => {
           btnText='Enviar NF'
           path='/'
         >
-          <></>
+          <Filter.UserNotes />
+          <Table.UserNotes />
         </ReleaseTemplate>
       </List.UserNotes.Provider>
     </AuthTemplate>

@@ -7,11 +7,11 @@ import { TableHeader } from 'components/molecules'
 
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
-import Shelf from './Shelf'
+import Shelf from './shelf'
 
-export const Notes = () => {
+export const UserNotes = () => {
   const { isLoading, notes, handleOrder } = useContext(
-    List.Notes.Context
+    List.UserNotes.Context
   )
   const Table = useMemo(() => {
     if (isLoading)
