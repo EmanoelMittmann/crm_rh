@@ -65,8 +65,23 @@ export const routes = {
     getCompany: (id: number) => `/companies/${id}`,
     filter: '/findCompanies',
     updateStatus: (id: number) => `companie/updateStatus/${id}`
+  },
+
+  orderOfService: {
+    list: '/orderOfService',
+    register: '/orderOfService',
+    commission: '/commission',
+    createCommission: (id: number) => `/findProfessionalCommission/${id}`,
+  },
+
+  commission:{
+    list: '/commission',
   }
+
+
 }
+
+
 
 export const externRoutes = {
   banks: 'https://brasilapi.com.br/api/banks/v1',

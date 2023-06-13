@@ -11,7 +11,7 @@ import {
 import { Button, Main, PagesNumber, Row } from './style'
 
 interface ContextProps {
-  paginate: {
+    paginate: {
     current_page: number
     last_page: number
     setCurrent_page: (page: number) => void

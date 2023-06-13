@@ -45,11 +45,7 @@ export const OPTIONS = [
 
     5: createNavOption('Relatórios', <IconReports />, 'reports'),
 
-    6: createNavOption(
-      'Ordem de Serviço',
-      <IconServices />,
-      'services'
-    ),
+    6: createNavOption('Ordem de Serviço', <IconServices />,'orderOfService'),
 
     7: createNavOption('Configurações', <IconSetting />, 'settings'),
 
