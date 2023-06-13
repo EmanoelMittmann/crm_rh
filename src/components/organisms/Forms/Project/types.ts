@@ -1,4 +1,5 @@
 import { JobsProps } from 'contexts/List/Settings/Jobs/types'
+import { number } from 'yup'
 
 import type { Option, SelectOption } from 'components/atoms'
 import { TemplateProps } from 'components/organisms/Tables/types'
@@ -9,21 +10,24 @@ export interface TeamMemberProps {
   user_id: number
   job_: string
   job: string
+  job_id: number
   name: string
   isTechLead: boolean
   extra_hours_estimated: number
   hours_mounths_estimated: number
   hours_mounths_performed: number
   extra_hours_performed: number
+  extra_hours_percent: number
+  hours_mounths_percent: number
   is_active: boolean
   avatar: string
   status: boolean
   jobs: {
-    id: number
+    id: Option | null
     name: Option | null
   }
   professional: {
-    id: number
+    id: Option | null
     name: Option | null
     status: boolean
     avatar: string

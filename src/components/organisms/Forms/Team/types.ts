@@ -3,14 +3,17 @@ import { TemplateProps } from 'components/organisms/Tables/types'
 
 export interface TeamMemberProps {
   user_id: number
-  job_: Option | null
-  job: Option | null
+  job_: string
+  job: string
+  job_id: number
   name: string
   isTechLead: boolean
   extra_hours_estimated: number
   hours_mounths_estimated: number
   hours_mounths_performed: number
   extra_hours_performed: number
+  extra_hours_percent: number
+  hours_mounths_percent: number
   is_active: boolean
   avatar: string
   status: boolean
@@ -22,7 +25,7 @@ export interface TeamMemberProps {
     id: Option | null
     name: Option | null
     status: boolean
-    avatar: Option | null
+    avatar: string
   }
 }
 
@@ -95,6 +98,7 @@ export interface TeamProps {
       id: number
       name: Option | null
       status: boolean
+      is_active: boolean
       avatar: string
     }
   }
@@ -106,7 +110,6 @@ interface ProjectAttachmentProps {
 
 interface FormConfigProps {
   options: {
-    filter(arg0: (option: any) => boolean): SelectOption[]
     project_types: SelectOption[]
     permissions: SelectOption[]
     userTypes: SelectOption[]
@@ -130,6 +133,17 @@ interface ConfigProps extends TemplateProps {
 export type ShelfUserProject = {
   props: TeamMemberProps
   config: ConfigProps
+}
+
+export interface UpdateProfessionalProps {
+  hours_mounths_estimated: number
+  extra_hours_estimated: number
+  hours_mounths_performed: number
+  extra_hours_performed: number
+  isTechLead: boolean
+  job_: string
+  status: boolean
+  user_id: number
 }
 
 export interface FormTeamProps extends TeamProps, FormConfigProps {}

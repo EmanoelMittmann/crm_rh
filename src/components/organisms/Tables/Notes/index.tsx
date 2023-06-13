@@ -13,6 +13,7 @@ export const Notes = () => {
   const { isLoading, notes, handleOrder } = useContext(
     List.Notes.Context
   )
+
   const Table = useMemo(() => {
     if (isLoading)
       return (
