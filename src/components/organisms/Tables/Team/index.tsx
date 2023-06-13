@@ -1,7 +1,10 @@
 import { useContext, useMemo, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
+
 import { toast } from '@stardust-ds/react'
 import { List } from 'contexts'
+
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 import { Modal } from 'components/molecules/Modais'
@@ -15,43 +18,46 @@ import api from 'api'
 import { routes } from 'routes'
 import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
 import { Shelf } from './Shelf'
-import { useParams } from 'react-router-dom'
 
 
 export const Team = () => {
   const { watch, setValue } = useFormContext<FormTeamProps>()
   const { isLoading, handleOrder } = useContext(List.Project.Context)
   const modalRef = useRef<IHandleModalPropsUserNew>(null)
-  const Team = watch('team', [])
+  const Team = watch('team') || []; 
+
   const { id } = useParams()
   const project_id = id
 
-  const POPOVER_OPTIONS = (user_id: number, status: boolean, name: string) => {
-    const options = [];
+  const POPOVER_OPTIONS = (
+    user_id: number,
+    status: boolean,
+    name: string
+  ) => {
+    const options = []
 
     if (project_id) {
       options.push({
         label: 'Editar',
         callback: () => modalRef.current?.open(user_id)
-      });
+      })
     }
 
     options.push({
       label: 'Remover',
       callback: () => removeUser(user_id)
-    });
+    })
 
-    return options;
-  };
+    return options
+  }
 
-  async function handleUpdateUser(
-    user_id: number, 
-    data: any
-    ) {
+  async function handleUpdateUser(user_id: number, data: any) {
     try {
       if (project_id) {
-        const updatedTeam = [...Team];
-        const index = updatedTeam.findIndex(item => item.user_id === user_id);
+        const updatedTeam = [...Team]
+        const index = Team.findIndex(
+          (item) => item.user_id === user_id
+        )
 
         if (index !== -1) {
           const updatedUser = {
@@ -63,13 +69,15 @@ export const Team = () => {
             hours_mounths_performed: data.hours_mounths_performed,
             status: data.status,
             job_: data.job_,
-            isTechLead: data.isTechLead,
-          };
+            isTechLead: data.isTechLead
+          }
 
-          updatedTeam[index] = updatedUser;
-          setValue('team', updatedTeam);
+          updatedTeam[index] = updatedUser
+          setValue('team', updatedTeam)
 
-          const editTeam = routes.project.userProjects(Number(project_id));
+          const editTeam = routes.project.userProjects(
+            Number(project_id)
+          )
           const update = {
             user_id: user_id,
             hours_mounths_estimated: data.hours_mounths_estimated,
@@ -78,19 +86,19 @@ export const Team = () => {
             hours_mounths_performed: data.hours_mounths_performed,
             status: data.status,
             job_: data.job_,
-            isTechLead: data.isTechLead,
+            isTechLead: data.isTechLead
           }
-          await api.put(editTeam, update);
+          await api.put(editTeam, update)
         }
       }
 
       toast.success({
-        title: 'Profissional atualizado com sucesso',
+        title: 'Profissional atualizado com sucesso'
       })
     } catch (err) {
       toast.error({
-        title: 'Erro ao atualizar profissional',
-      });
+        title: 'Erro ao atualizar profissional'
+      })
     }
   }
 
@@ -107,7 +115,6 @@ export const Team = () => {
       title: 'Profissional removido com sucesso',
       type: 'success'
     })
-
   }
 
   const Table = useMemo(() => {

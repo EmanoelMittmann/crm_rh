@@ -4,7 +4,7 @@ import type { InputHTMLAttributes } from 'react'
 import { Input } from '@stardust-ds/react'
 import type { InputProps } from '@stardust-ds/react'
 
-import { Main, RequiredLabel, Label} from './style'
+import { Main, RequiredLabel, Label } from './style'
 
 type Props = InputProps &
   InputHTMLAttributes<HTMLInputElement> & {
@@ -29,7 +29,6 @@ export default forwardRef(
           hasError={!!error}
           helperText={error ?? props.helperText}
         />
-
       </Main>
     )
   }

@@ -53,5 +53,4 @@ export const validationSchema = yup.object().shape({
       }
     })
     .required('Campo obrigatório')
-
 })

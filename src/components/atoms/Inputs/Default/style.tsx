@@ -7,8 +7,6 @@ export const Main = styled.div<{ w: string }>`
   color: ${theme.neutrals.gray6};
   gap: 0.25rem;
 
-
-
   // FIXME: label dos formulários possui essa cor, porém alteração impacta também o helper de erro
   /* label {
     color: ${theme.neutrals.gray6} !important;

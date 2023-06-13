@@ -53,15 +53,20 @@ const RegisterProjects = () => {
           status: user.status,
           isTechLead: user.isTechLead,
           is_active: user.is_active,
-          job_: user.job_
+          job_: user.job_,
+          job: user.job,
+          job_id: user.job_id
         }
       })
     }
+    console.log('sanitizeData: ', sanitizeData);
 
     try {
       if (id) {
-        await api.put(routes.project.updateProject(Number(id)), sanitizeData);
-        console.log('sanitizeData: ', sanitizeData);
+        await api.put(
+          routes.project.updateProject(Number(id)),
+          sanitizeData
+        )
         toast({
           type: 'success',
           title: 'Projeto atualizado com sucesso.',
@@ -69,8 +74,7 @@ const RegisterProjects = () => {
         })
         navigate('/project')
         return
-
-      } 
+      }
       await api.post(routes.project.register, sanitizeData)
 
       toast({

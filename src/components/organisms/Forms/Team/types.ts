@@ -3,20 +3,20 @@ import { TemplateProps } from 'components/organisms/Tables/types'
 
 export interface TeamMemberProps {
   user_id: number
-  job_: Option | null
-  job: Option | null
+  job_: string
+  job: string
+  job_id: number
   name: string
   isTechLead: boolean
   extra_hours_estimated: number
   hours_mounths_estimated: number
   hours_mounths_performed: number
   extra_hours_performed: number
+  extra_hours_percent: number
+  hours_mounths_percent: number
   is_active: boolean
   avatar: string
-  status: {
-    id: Option | null
-    name: Option | null
-  }
+  status: boolean
   jobs: {
     id: Option | null
     name: Option | null
@@ -24,11 +24,8 @@ export interface TeamMemberProps {
   professional: {
     id: Option | null
     name: Option | null
-    status: {
-      id: Option | null
-      name: Option | null
-    }
-    avatar: Option | null
+    status: boolean
+    avatar: string
   }
 }
 
@@ -113,7 +110,6 @@ interface ProjectAttachmentProps {
 
 interface FormConfigProps {
   options: {
-    filter(arg0: (option: any) => boolean): SelectOption[]
     project_types: SelectOption[]
     permissions: SelectOption[]
     userTypes: SelectOption[]
@@ -146,12 +142,10 @@ export interface UpdateProfessionalProps {
   extra_hours_performed: number
   isTechLead: boolean
   job_: string
-  status: number
+  status: boolean
   user_id: number
-
 }
 
 export interface FormTeamProps extends TeamProps, FormConfigProps {}
 
 export type { SelectOption }
-

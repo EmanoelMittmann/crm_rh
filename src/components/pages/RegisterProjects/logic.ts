@@ -2,7 +2,6 @@ import { UseFormReturn } from 'react-hook-form'
 
 import { ProfessionalProps } from 'contexts/List/Professional/types'
 import { JobsProps } from 'contexts/List/Settings/Jobs/types'
-
 import { FormProjectProps } from 'components/organisms'
 import { getDateInput } from 'components/utils/formatDate'
 import {
@@ -13,7 +12,7 @@ import {
 import api from 'api'
 import { routes } from 'routes'
 
-import { ProjectProps, UserProjectsProps } from 'types'
+import { ProjectProps } from 'types'
 
 export async function fetchPropsProject(
   methods: UseFormReturn<FormProjectProps['Project']>
@@ -100,34 +99,38 @@ export function handlePopulateFields(
     date_end_performed: getDateInput(data.date_end_performed),
     team_cost: GenerateValue(String(data.team_cost)),
 
-    team: data.users.map((user: any) => {
+    team: data.users.map((user) => {
       const allUsers = OPTIONS.users.flatMap(
-        (selectUser: any) => selectUser.users
+        (selectUser:any) => selectUser.users
+        )
+    const userData = allUsers.find(
+      (userData) => userData.id === user.user_id
       )
-      const userData = allUsers.find(
-        (userData: any) => userData.id === user.user_id
-      )
+      console.log('userData: ', userData);
+
 
       const { name, job, job_, status, ...rest } = user
       const professional = { name: { label: name } }
       const jobs = {
-        name: { label: job_ !== null ? job_ : job }
-      }
-      const statusObj = {
-        name: { label: status  ? 'Ativo' : 'Inativo' }
-      }
+      name: { label: job_ !== null ? job_ : job }
+    }
 
       return {
-        professional: professional,
-        jobs: jobs,
-        status: statusObj,
-        extra_hours_estimated: userData.extra_hours_estimated,
-        hours_mounths_estimated: userData.hours_mounths_estimated,
-        hours_mounths_performed: userData.hours_mounths_performed,
-        extra_hours_performed: userData.extra_hours_performed,
-        ...rest
-      }
-    }),
+      professional: professional,
+      jobs: jobs,
+      status: userData.status,
+      is_active: userData.is_active,
+      job_: user.job_,
+      job: userData.job,
+      job_id: userData.job_id,
+      isTechLead: userData.isTechLead,
+      extra_hours_estimated: userData.extra_hours_estimated,
+      hours_mounths_estimated: userData.hours_mounths_estimated,
+      hours_mounths_performed: userData.hours_mounths_performed,
+      extra_hours_performed: userData.extra_hours_performed,
+      ...rest
+    }
+  }),
     options: OPTIONS
-  })
+})
 }

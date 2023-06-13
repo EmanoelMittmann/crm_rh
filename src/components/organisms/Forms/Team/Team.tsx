@@ -1,15 +1,18 @@
 import { useFormContext } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
+
+import { toast } from '@stardust-ds/react'
+
 import { Selects, Inputs, SelectOption } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { ContainerRow } from 'components/organisms/Forms/Project/style'
 import { Table } from 'components/organisms/Tables'
+
 import api from 'api'
 import { routes } from 'routes'
-import { toast } from '@stardust-ds/react'
+
 import { FormTeamProps, TeamMemberProps } from './types'
-import { useParams } from 'react-router-dom'
-
-
+import { useState } from 'react'
 
 export const Team = () => {
   const {
@@ -19,11 +22,12 @@ export const Team = () => {
     getValues,
     setError,
     formState: { errors }
-  } = useFormContext<FormTeamProps>();
+  } = useFormContext<FormTeamProps>()
+  const [isTechLead, setIsTechLead] = useState(false)
   const { id } = useParams()
+  const jobName = watch('jobs.name.label')
   const options = watch('options')
   const projectId = id
-
 
   const handleTeam = async () => {
     const professional = watch('professional')
@@ -31,83 +35,98 @@ export const Team = () => {
     const avatar = watch('professional.avatar.label')
     const jobs = watch('jobs')
     const job_ = watch('jobs.name.label')
-    const status = watch('users.professional.status')
-    const hoursMonth = Number(watch('users.hours_mounths_estimated')) || 0
-    const extraHour = Number(watch('users.extra_hours_estimated')) || 0
-    const hours_mounths_performed = Number(watch('users.hours_mounths_performed')) || 0
-    const extra_hours_performed = Number(watch('users.extra_hours_performed')) || 0
+    const status = watch('users.status')
+    const hoursMonth =
+      Number(watch('users.hours_mounths_estimated')) || 0
+    const extraHour =
+      Number(watch('users.extra_hours_estimated')) || 0
+    const hours_mounths_performed =
+      Number(watch('users.hours_mounths_performed')) || 0
+    const extra_hours_performed =
+      Number(watch('users.extra_hours_performed')) || 0
     const techLead = watch('users.isTechLead')
-    const team = watch('team') || []
 
     if (professional && jobs) {
       const validationToIncludeTeam = (errorMessage: string) => ({
         type: 'manual',
         message: errorMessage
-      });
+      })
 
       if (!professional.name) {
-        setError('professional.name',
-          validationToIncludeTeam('Campo vazio, selecione um profissional!'));
-        return;
+        setError(
+          'professional.name',
+          validationToIncludeTeam(
+            'Campo vazio, selecione um profissional!'
+          )
+        )
+        return
       }
       if (!jobs.name) {
-        setError('jobs.name',
-          validationToIncludeTeam('Campo vazio selecione um cargo!'));
-        return;
+        setError(
+          'jobs.name',
+          validationToIncludeTeam('Campo vazio selecione um cargo!')
+        )
+        return
       }
       if (!hoursMonth || hoursMonth <= 0) {
-        setError('users.hours_mounths_estimated',
-          validationToIncludeTeam('O Campo Hora/ mês deve ser maior que 0!'));
-        return;
+        setError(
+          'users.hours_mounths_estimated',
+          validationToIncludeTeam(
+            'O Campo Hora/ mês deve ser maior que 0!'
+          )
+        )
+        return
       }
-    
+
       const newTeamMember = {
         user_id: id,
         professional,
         jobs,
-        job_: job_,
+        job_: isTechLead ? 'Tech Lead' : job_,
         isTechLead: techLead,
         extra_hours_estimated: extraHour,
         hours_mounths_estimated: hoursMonth,
         hours_mounths_performed: hours_mounths_performed,
         extra_hours_performed: extra_hours_performed,
-        status: {
-          label: status ? 'Ativo' : 'Inativo',
-          value: status ? '0' : '1',
-        },
+        status: status ? 'Ativo' : 'Inativo',
         avatar: avatar
           ? avatar
-          : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png',
+          : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
       } as unknown as TeamMemberProps
 
       const currentTeam = getValues('team') || []
       const newTeam = [...currentTeam, newTeamMember]
 
       if (projectId !== undefined) {
-        await api.post(routes.project.userProjects(Number(projectId)), newTeamMember);
-        setValue('team', newTeam);
+        await api.post(
+          routes.project.userProjects(Number(projectId)),
+          newTeamMember
+        )
+        setValue('team', newTeam)
         toast({
-          title: "Profissional adicionado com sucesso!",
-          type: 'success',
+          title: 'Profissional adicionado com sucesso!',
+          type: 'success'
         })
-        return;
+        return
       }
 
-      setValue('team', newTeam);
+      setValue('team', newTeam)
       toast({
-        title: "Profissional cadastrado com sucesso!",
-        type: 'success',
+        title: 'Profissional cadastrado com sucesso!',
+        type: 'success'
       })
     }
-
   }
 
-  const teamUser = watch('team', []);
-  const listUsers = watch('options.professionals', []);
-  const currentTeamOptions = listUsers.filter((professional) =>
-    !teamUser.find((user) => user.user_id === Number(professional.value))
-  );
+  const teamUser = watch('team', [])
+  const listUsers = watch('options.professionals', [])
+  const currentTeamOptions = listUsers.filter((professional) =>!teamUser.find((user) => user.user_id === Number(professional.value)))
 
+  const TechLead = teamUser.filter((obj) => obj.job_ === "Tech Lead" || obj.job_ === "Tech Lead e Desenvolvedor")
+  let newTime = teamUser
+  if (TechLead[0] && jobName === "Tech Lead" || TechLead[0] && jobName === "Tech Lead e Desenvolvedor") {
+    newTime = teamUser.filter((obj) => obj.job_ !== "Tech Lead" && obj.job_ !== "Tech Lead e Desenvolvedor")
+  }
 
   return (
     <>
@@ -145,8 +164,7 @@ export const Team = () => {
           height={60}
         />
         <Inputs.Default
-          {...register('users.hours_mounths_estimated', {
-          })}
+          {...register('users.hours_mounths_estimated', {})}
           error={errors?.users?.hours_mounths_estimated?.message}
           label='Horas/mês estimadas'
           placeholder='Horas'
@@ -157,7 +175,6 @@ export const Team = () => {
           label='Horas extras estimadas'
           placeholder='Horas'
         />
-
         <ButtonGeneric
           top='1.5em'
           Text='Vincular'
