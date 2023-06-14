@@ -103,6 +103,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       meta.order,
       meta.orderField,
       meta.pagination.current_page,
+      meta.date_emission_nf,
       meta.search
     ]
   })

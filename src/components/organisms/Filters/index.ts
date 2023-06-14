@@ -7,6 +7,7 @@ import { Projects } from './Projects'
 import { StatusProject } from './statusProject'
 import { TypeProject } from './typeProject'
 import { OrderOfService } from './OrderOfService'
+import { UserNotes } from './UserNotes'
 
 export const Filter = Object.assign(
   {},

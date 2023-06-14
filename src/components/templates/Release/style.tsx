@@ -33,7 +33,6 @@ export const Button = styled.button`
 
 export const Row = styled.div`
   display: flex;
-  align-items: center;
   flex-direction: row;
   justify-content: space-between;
   gap: 1em;

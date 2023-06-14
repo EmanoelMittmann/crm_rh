@@ -9,6 +9,7 @@ import { Team } from './Team'
 import { TypesProject } from './TypesProject'
 import { OrderOfService } from './OrderOfService'
 
+import { UserNotes } from './UserNotes'
 
 export const Table = Object.assign(
   {},
@@ -22,6 +23,7 @@ export const Table = Object.assign(
     Companys,
     Team,
     Notes,
-    OrderOfService
+    OrderOfService,
+    UserNotes
   }
 )
