@@ -142,9 +142,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  function handleOrder(_: string) {
+  function handleOrder(field: string) {
     setMeta((old) => ({
       ...old,
+      orderField: field,
       order: old.order === 'ASC' ? 'DESC' : 'ASC'
     }))
   }

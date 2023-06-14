@@ -9,7 +9,7 @@ const ROUTES = {
   '/notes': 'Notas Fiscais',
   '/releaseNotes': 'Notas Fiscais > Enviar NF',
   '/reports': 'Relatórios',
-  '/services': 'Ordem de Serviço',
+  '/orderOfService': 'Ordem de Serviço',
   '/settings': 'Configurações',
   '/jobs': 'Configurações > Cargos',
   '/statusProject': 'Configurações > Status de Projeto',

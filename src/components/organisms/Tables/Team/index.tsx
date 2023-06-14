@@ -74,6 +74,7 @@ export const Team = () => {
 
           updatedTeam[index] = updatedUser
           setValue('team', updatedTeam)
+        
 
           const editTeam = routes.project.userProjects(
             Number(project_id)

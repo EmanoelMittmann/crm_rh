@@ -15,6 +15,7 @@ import Home from '../components/pages/MasterPage'
 import Professionals from '../components/pages/Professionals'
 import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
+import OrderOfService from 'components/pages/OrderOfService'
 
 const Router = () => {
   return (
@@ -39,7 +40,7 @@ const Router = () => {
           <Route path='/extrasHours' element={<Professionals />} />
           <Route path='/notes' element={<Notes />} />
           <Route path='/reports' element={<Professionals />} />
-          <Route path='/services' element={<Professionals />} />
+          <Route path='/orderOfService' element={<OrderOfService/>} />
           <Route path='/jobs' element={<Jobs />} />
           <Route path='/typeProject' element={<TypesProject />} />
           <Route path='/statusProject' element={<StatusProject />} />

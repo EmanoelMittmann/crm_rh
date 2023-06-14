@@ -88,15 +88,15 @@ const UsersEditor = forwardRef<
       }
       const selectedJob = {
         label: professional.jobs?.name?.label || '',
-        value: String(professional.jobs?.name?.value || '0'),
+        value: professional.jobs
       };
 
       setSelectedStatus(selectedStatus as unknown as Option)
-      setSelectedJob(selectedJob)
+      setSelectedJob(selectedJob as unknown as Option)
 
-      setTimeout(() => {
+    
         setValue('users.status', selectedStatus?.value)
-        setValue('users.jobs.name.label', selectedJob?.value);
+        setValue('users.jobs.name.label', professional.jobs?.name?.label || '')
         setValue(
           'users.hours_mounths_estimated',
           Number(professional.hours_mounths_estimated) || 0
@@ -105,7 +105,7 @@ const UsersEditor = forwardRef<
           'users.extra_hours_estimated',
           Number(professional.extra_hours_estimated) || 0
         )
-      }, 0);
+
     }
   }, [professional, setValue])
 
