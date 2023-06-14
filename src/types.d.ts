@@ -25,6 +25,8 @@ interface IContainerColumnProps {
   gap?: string
   justify?: string
   width?: string
+  text?: string
+  bgColor?: string
 }
 
 interface IJWTDecodeGoogle {

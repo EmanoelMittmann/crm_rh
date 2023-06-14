@@ -92,21 +92,21 @@ const UsersEditor = forwardRef<
       };
 
       setSelectedStatus(selectedStatus as unknown as Option)
-      setSelectedJob(selectedJob as unknown as Option)
-
-    
-        setValue('users.status', selectedStatus?.value)
-        setValue('users.jobs.name.label', professional.jobs?.name?.label || '')
-        setValue(
-          'users.hours_mounths_estimated',
-          Number(professional.hours_mounths_estimated) || 0
+      setSelectedJob(selectedJob as unknown as Option) 
+      
+      
+      setValue('users.status', selectedStatus?.value)
+      setValue('users.jobs.name.label', selectedJob?.label)
+      setValue(
+        'users.hours_mounths_estimated',
+        Number(professional.hours_mounths_estimated) || 0
         )
         setValue(
           'users.extra_hours_estimated',
           Number(professional.extra_hours_estimated) || 0
-        )
-
-    }
+          )
+          
+        }
   }, [professional, setValue])
 
   if (isOpen.id === 0) return null
@@ -143,7 +143,7 @@ const UsersEditor = forwardRef<
               />
 
               <Select
-                {...register('users.jobs.name.label', {})}
+                {...register('users.jobs.name', {})}
                 onSelect={(e: any) => setSelectedJob(e)}
                 onClear={() =>
                   setSelectedJob({ label: '', value: '' })

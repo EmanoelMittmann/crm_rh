@@ -28,9 +28,9 @@ export const Shelf = ({
     extra_hours_performed = 0,
     extra_hours_percent = 0,
     hours_mounths_percent = 0,
-    jobs,
     professional,
     status,
+    job_,
     avatar
   } = props
 
@@ -41,7 +41,7 @@ export const Shelf = ({
         <Image src={avatar} />
         <TeamJobName>
           <Text>{professional?.name?.label}</Text>
-          <TextJob>{jobs?.name?.label}</TextJob>
+          <TextJob>{job_}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
       <ContainerShelfColumn width='123px'>

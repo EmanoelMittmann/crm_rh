@@ -107,6 +107,7 @@ export function handlePopulateFields(
       (userData) => userData.id === user.user_id
       )
       console.log('userData: ', userData);
+ 
 
 
       const { name, job, job_, status, ...rest } = user
@@ -118,10 +119,9 @@ export function handlePopulateFields(
       return {
       professional: professional,
       jobs: jobs,
+      job_:userData.job_,
       status: userData.status,
       is_active: userData.is_active,
-      job_: userData.job_,
-      job: userData.job,
       job_id: userData.job_id,
       isTechLead: userData.isTechLead,
       extra_hours_estimated: userData.extra_hours_estimated,

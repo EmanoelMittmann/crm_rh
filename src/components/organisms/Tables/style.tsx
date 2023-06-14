@@ -65,3 +65,16 @@ export const Image = styled.img`
   width: 2.5em;
   border-radius: 50%;
 `
+
+export const TextStatus = styled.div < IContainerColumnProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 30px;
+  background-color:${props => props.bgColor};
+  color:${props => props.text};
+  border-radius: 40px;
+  font-weight: 700;
+
+`

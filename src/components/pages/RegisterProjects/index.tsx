@@ -59,7 +59,6 @@ const RegisterProjects = () => {
         }
       })
     }
-    console.log('sanitizeData: ', sanitizeData);
 
     try {
       if (id) {

@@ -16,7 +16,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     const [meta, setMeta] = useState(DEFAULT.META_PROPS)
     const [filterOptions, setFilterOptions] = useState(
         DEFAULT.FILTER_OPTIONS
-    )
+        )
 
     const contextOrderOfServiceProps = {
         orderOfService,
@@ -25,6 +25,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         navigateTo,
         paginate: { ...meta.paginate, setCurrent_page: setPage },
         filterOptions,
+        handleFillStatus,
+        handleFillInitialDate,
+        handleFillFinalDate,
+        handleFillRefDate,
         handleSearch,
         handleOrder,
     }
@@ -35,7 +39,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         const { data } = await api.get(routes.orderOfService.list, {
             params: {
                 page: meta.paginate.current_page,
-                commission_id: meta.commission_id,
+                initialDate: meta.initialDate,
+                finalDate: meta.finalDate,
+                reference: meta.referenceDate,
+                status: meta.status,
                 search: meta.search && meta.search,
                 order: meta.order,
                 orderField: meta.orderField
@@ -77,15 +84,48 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }
 
     async function fechFilterOptionsStatus() {
-        const { data } = await api.get(routes.commission.list)
+        const { data } = await api.get(routes.orderOfService.list)     
         setFilterOptions({
-            status_O_S: data?.data.map((name: string, id: number) => ({
-                label: name,
-                value: id
-            })
+            status_O_S: data.data.map(
+                ({ name, id, status }: { name: string; id: number, status: string }) => ({
+                    label: name, status,
+                    value: id
+                })
             )
         })
     }
+    function handleFillStatus(status: string | null) {
+        setMeta((old) => ({
+            ...old,
+            status,
+            paginate: { ...old.paginate, current_page: 1 }
+        }))
+    }
+
+    function handleFillInitialDate(initialDate: string | null) {
+        setMeta((old) => ({
+            ...old,
+            initialDate,
+            paginate: { ...old.paginate, current_page: 1 }
+        }))
+    }
+
+    function handleFillFinalDate(finalDate: string | null) {
+        setMeta((old) => ({
+            ...old,
+            finalDate,
+            paginate: { ...old.paginate, current_page: 1 }
+        }))
+    }
+
+    function handleFillRefDate(referenceDate: string | null) {
+        setMeta((old) => ({
+            ...old,
+            referenceDate,
+            paginate: { ...old.paginate, current_page: 1 }
+        }))
+    }
+
 
 
 
@@ -96,7 +136,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
             meta.search,
             meta.order,
             meta.orderField,
-            meta.commission_id
+            meta.status_O_S,
+            meta.status,
+            meta.initialDate,
+            meta.finalDate,
+            meta.referenceDate
+
         ]
     })
 
