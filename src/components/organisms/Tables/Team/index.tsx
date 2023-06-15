@@ -23,8 +23,11 @@ import { Shelf } from './Shelf'
 export const Team = () => {
   const { watch, setValue } = useFormContext<FormTeamProps>()
   const { isLoading, handleOrder } = useContext(List.Project.Context)
+
   const modalRef = useRef<IHandleModalPropsUserNew>(null)
-  const Team = watch('team') || []; 
+
+  const Team = watch('team', []);
+
 
   const { id } = useParams()
   const project_id = id
@@ -73,8 +76,8 @@ export const Team = () => {
           }
 
           updatedTeam[index] = updatedUser
+
           setValue('team', updatedTeam)
-        
 
           const editTeam = routes.project.userProjects(
             Number(project_id)
@@ -89,8 +92,12 @@ export const Team = () => {
             job_: data.job_,
             isTechLead: data.isTechLead
           }
+          setValue('team', updatedTeam)
           await api.put(editTeam, update)
+        
+
         }
+
       }
 
       toast.success({

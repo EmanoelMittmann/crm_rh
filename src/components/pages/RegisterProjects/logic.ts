@@ -106,22 +106,21 @@ export function handlePopulateFields(
     const userData = allUsers.find(
       (userData) => userData.id === user.user_id
       )
-      console.log('userData: ', userData);
-
 
       const { name, job, job_, status, ...rest } = user
       const professional = { name: { label: name } }
       const jobs = {
-      name: { label: job_ !== null ? job_ : job }
+      name: { 
+        label: job_ !== null ? job_ : job 
+      }
     }
 
       return {
       professional: professional,
       jobs: jobs,
+      job_:userData.job_,
       status: userData.status,
       is_active: userData.is_active,
-      job_: userData.job_,
-      job: userData.job,
       job_id: userData.job_id,
       isTechLead: userData.isTechLead,
       extra_hours_estimated: userData.extra_hours_estimated,

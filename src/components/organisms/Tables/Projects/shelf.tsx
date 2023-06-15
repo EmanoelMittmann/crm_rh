@@ -17,11 +17,7 @@ import {
 } from '../style'
 import { ShelfProps } from '../types'
 import { ProjectIProps } from './types'
-
-export const Shelf = ({
-  props,
-  config
-}: ShelfProps<ProjectIProps>) => {
+export const Shelf = ({ props, config }: ShelfProps<ProjectIProps>) => {
   const {
     id,
     name,
@@ -32,8 +28,22 @@ export const Shelf = ({
     date_end_performed,
     date_start_performed,
     team_cost
-  } = props
-  const modalRef = useRef<IHandleModalPropsDetails>(null)
+  } = props;
+  const modalRef = useRef<IHandleModalPropsDetails>(null);
+
+  const handleClick = () => {
+    handleOpenModal(
+      id,
+      name,
+      status.name,
+      project_type.name,
+      date_start,
+      date_end,
+      date_end_performed,
+      date_start_performed,
+      team_cost
+    );
+  };
 
   function handleOpenModal(
     id: number,
@@ -56,97 +66,26 @@ export const Shelf = ({
       date_end_performed,
       date_start_performed,
       team_cost
-    )
+    );
   }
 
   return (
     <>
       <ShelfHover>
         <ContainerShelf template={config.template}>
-          <ContainerShelfColumn
-            onClick={() =>
-              handleOpenModal(
-                id,
-                name,
-                status.name,
-                project_type.name,
-                date_start,
-                date_end,
-                date_end_performed,
-                date_start_performed,
-                team_cost
-              )
-            }
-          >
+          <ContainerShelfColumn onClick={handleClick}>
             <Text title='1.5em'>{id}</Text>
           </ContainerShelfColumn>
-          <ContainerShelfColumn
-            onClick={() =>
-              handleOpenModal(
-                id,
-                name,
-                status.name,
-                project_type.name,
-                date_start,
-                date_end,
-                date_end_performed,
-                date_start_performed,
-                team_cost
-              )
-            }
-          >
+          <ContainerShelfColumn onClick={handleClick}>
             <Text title='0.5em'>{name}</Text>
           </ContainerShelfColumn>
-          <ContainerShelfColumn
-            onClick={() =>
-              handleOpenModal(
-                id,
-                name,
-                status.name,
-                project_type.name,
-                date_start,
-                date_end,
-                date_end_performed,
-                date_start_performed,
-                team_cost
-              )
-            }
-          >
+          <ContainerShelfColumn onClick={handleClick}>
             <Text title='0.5em'>{project_type.name}</Text>
           </ContainerShelfColumn>
-          <ContainerShelfColumn
-            onClick={() =>
-              handleOpenModal(
-                id,
-                name,
-                status.name,
-                project_type.name,
-                date_start,
-                date_end,
-                date_end_performed,
-                date_start_performed,
-                team_cost
-              )
-            }
-          >
+          <ContainerShelfColumn onClick={handleClick}>
             <Text>{formatDate(date_start)}</Text>
           </ContainerShelfColumn>
-          <ContainerShelfColumn
-            width='170px'
-            onClick={() =>
-              handleOpenModal(
-                id,
-                name,
-                status.name,
-                project_type.name,
-                date_start,
-                date_end,
-                date_end_performed,
-                date_start_performed,
-                team_cost
-              )
-            }
-          >
+          <ContainerShelfColumn width='170px' onClick={handleClick}>
             <Badge
               style={{ width: '170px', border: 'none' }}
               label={status.name}
@@ -170,5 +109,5 @@ export const Shelf = ({
         EventOne={handleOpenModal}
       />
     </>
-  )
-}
+  );
+};
