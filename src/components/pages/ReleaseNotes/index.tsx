@@ -11,7 +11,7 @@ const ReleaseNotes = () => {
           arrow={true}
           title='Notas Fiscais'
           btnText='Enviar NF'
-          path='/'
+          path='/uploadNotes'
         >
           <Filter.UserNotes />
           <Table.UserNotes />
