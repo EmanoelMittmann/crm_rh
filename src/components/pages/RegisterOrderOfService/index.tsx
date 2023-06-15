@@ -48,14 +48,14 @@ return (
         <CreateTemplate title="criar nova O.S">
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
-                    {isLoading ? (
+                  {/* {isLoading ? (
                         <Container>
                             <Loading />
                         </Container>
-                    ) : (
-                        <Form.OrderOfService />
-                    )}
-
+                    ) : ( 
+                        
+                     )} */}
+                    <Form.OrderOfService />
 
                 </form>
             </FormProvider>

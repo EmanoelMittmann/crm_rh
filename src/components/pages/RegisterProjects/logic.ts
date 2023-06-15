@@ -113,7 +113,9 @@ export function handlePopulateFields(
       const { name, job, job_, status, ...rest } = user
       const professional = { name: { label: name } }
       const jobs = {
-      name: { label: job_ !== null ? job_ : job }
+      name: { 
+        label: job_ !== null ? job_ : job 
+      }
     }
 
       return {

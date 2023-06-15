@@ -25,7 +25,7 @@ export const Team = () => {
   } = useFormContext<FormTeamProps>()
   const [isTechLead, setIsTechLead] = useState(false)
   const { id } = useParams()
-  const jobName = watch('jobs.name.label')
+  const job = watch('jobs.name.label')
   const options = watch('options')
   const projectId = id
 
@@ -33,7 +33,7 @@ export const Team = () => {
     const professional = watch('professional')
     const id = Number(watch('professional.name.value'))
     const avatar = watch('professional.avatar.label')
-    const jobs = watch('jobs')
+    const job = watch('jobs')
     const job_ = watch('jobs.name.label')
     const status = watch('users.status')
     const hoursMonth =
@@ -46,7 +46,7 @@ export const Team = () => {
       Number(watch('users.extra_hours_performed')) || 0
     const techLead = watch('users.isTechLead')
 
-    if (professional && jobs) {
+    if (professional && job) {
       const validationToIncludeTeam = (errorMessage: string) => ({
         type: 'manual',
         message: errorMessage
@@ -61,7 +61,7 @@ export const Team = () => {
         )
         return
       }
-      if (!jobs.name) {
+      if (!job.name) {
         setError(
           'jobs.name',
           validationToIncludeTeam('Campo vazio selecione um cargo!')
@@ -81,7 +81,7 @@ export const Team = () => {
       const newTeamMember = {
         user_id: id,
         professional,
-        jobs,
+        job,
         job_: isTechLead ? 'Tech Lead' : job_,
         isTechLead: techLead,
         extra_hours_estimated: extraHour,
@@ -124,7 +124,7 @@ export const Team = () => {
 
   const TechLead = teamUser.filter((obj) => obj.job_ === "Tech Lead" || obj.job_ === "Tech Lead e Desenvolvedor")
   let newTime = teamUser
-  if (TechLead[0] && jobName === "Tech Lead" || TechLead[0] && jobName === "Tech Lead e Desenvolvedor") {
+  if (TechLead[0] && job === "Tech Lead" || TechLead[0] && job === "Tech Lead e Desenvolvedor") {
     newTime = teamUser.filter((obj) => obj.job_ !== "Tech Lead" && obj.job_ !== "Tech Lead e Desenvolvedor")
   }
 

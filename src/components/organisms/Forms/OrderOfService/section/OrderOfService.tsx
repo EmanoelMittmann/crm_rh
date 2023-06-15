@@ -28,15 +28,14 @@ export const OrderOfService = () => {
 
 
     return(
-     <div>oi</div>
-
-        // <Main>
+        <h1>Criar O.S </h1>
+        //  <Main>
         //     <Container>
         //         <Input
         //             value={meta.search}
         //             width={230}
         //             placeholder='Buscar...'
-        //             onChange={(e) => handleSearch(e.target.value)}
+        //             onChange={()=> {}}
         //         />
         //     </Container>  
         // </Main>

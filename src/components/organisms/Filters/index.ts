@@ -20,6 +20,7 @@ export const Filter = Object.assign(
     Companys,
     Team,
     Notes,
+    UserNotes,
     OrderOfService
   }
 )
