@@ -55,7 +55,6 @@ export const Team = () => {
   }
 
   async function handleUpdateUser(user_id: number, data: any) {
-    console.log('data: ', data);
     try {
       if (project_id) {
         const updatedTeam = [...Team]

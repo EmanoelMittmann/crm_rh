@@ -106,9 +106,6 @@ export function handlePopulateFields(
     const userData = allUsers.find(
       (userData) => userData.id === user.user_id
       )
-      console.log('userData: ', userData);
- 
-
 
       const { name, job, job_, status, ...rest } = user
       const professional = { name: { label: name } }
