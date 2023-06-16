@@ -9,6 +9,7 @@ import ReleaseNotes from 'components/pages/ReleaseNotes'
 import Settings from 'components/pages/Setting'
 import StatusProject from 'components/pages/StatusProject'
 import TypesProject from 'components/pages/TypesProject'
+import UploadNotes from 'components/pages/UploadNotes'
 
 import Login from '../components/pages/Login'
 import Home from '../components/pages/MasterPage'
@@ -58,6 +59,7 @@ const Router = () => {
           </Route>
           <Route path='/releaseHours' element={<Professionals />} />
           <Route path='/releaseNotes' element={<ReleaseNotes />} />
+          <Route path='/uploadNotes' element={<UploadNotes />} />
         </Routes>
       </BrowserRouter>
     </>
