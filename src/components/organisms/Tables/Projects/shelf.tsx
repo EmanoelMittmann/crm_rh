@@ -17,7 +17,10 @@ import {
 } from '../style'
 import { ShelfProps } from '../types'
 import { ProjectIProps } from './types'
-export const Shelf = ({ props, config }: ShelfProps<ProjectIProps>) => {
+export const Shelf = ({
+  props,
+  config
+}: ShelfProps<ProjectIProps>) => {
   const {
     id,
     name,
@@ -28,8 +31,8 @@ export const Shelf = ({ props, config }: ShelfProps<ProjectIProps>) => {
     date_end_performed,
     date_start_performed,
     team_cost
-  } = props;
-  const modalRef = useRef<IHandleModalPropsDetails>(null);
+  } = props
+  const modalRef = useRef<IHandleModalPropsDetails>(null)
 
   const handleClick = () => {
     handleOpenModal(
@@ -42,8 +45,8 @@ export const Shelf = ({ props, config }: ShelfProps<ProjectIProps>) => {
       date_end_performed,
       date_start_performed,
       team_cost
-    );
-  };
+    )
+  }
 
   function handleOpenModal(
     id: number,
@@ -66,7 +69,7 @@ export const Shelf = ({ props, config }: ShelfProps<ProjectIProps>) => {
       date_end_performed,
       date_start_performed,
       team_cost
-    );
+    )
   }
 
   return (
@@ -109,5 +112,5 @@ export const Shelf = ({ props, config }: ShelfProps<ProjectIProps>) => {
         EventOne={handleOpenModal}
       />
     </>
-  );
-};
+  )
+}

@@ -20,8 +20,7 @@ export default ({ status }: Props) => {
         width: '6rem',
         padding: '0.8rem 1rem',
         border: 'none',
-        alignItems: 'center',
-
+        alignItems: 'center'
       }}
       label={props.label}
       variant='flat'

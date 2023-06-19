@@ -18,6 +18,10 @@ export const routes = {
     list: '/userType'
   },
 
+  reports: {
+    list: '/reports'
+  },
+
   permission: {
     list: '/permissions'
   },
@@ -71,17 +75,14 @@ export const routes = {
     list: '/orderOfService',
     register: '/orderOfService',
     commission: '/commission',
-    createCommission: (id: number) => `/findProfessionalCommission/${id}`,
+    createCommission: (id: number) =>
+      `/findProfessionalCommission/${id}`
   },
 
-  commission:{
-    list: '/commission',
+  commission: {
+    list: '/commission'
   }
-
-
 }
-
-
 
 export const externRoutes = {
   banks: 'https://brasilapi.com.br/api/banks/v1',

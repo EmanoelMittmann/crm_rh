@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
@@ -12,7 +13,6 @@ import api from 'api'
 import { routes } from 'routes'
 
 import { FormTeamProps, TeamMemberProps } from './types'
-import { useState } from 'react'
 
 export const Team = () => {
   const {
@@ -120,12 +120,28 @@ export const Team = () => {
 
   const teamUser = watch('team', [])
   const listUsers = watch('options.professionals', [])
-  const currentTeamOptions = listUsers.filter((professional) =>!teamUser.find((user) => user.user_id === Number(professional.value)))
+  const currentTeamOptions = listUsers.filter(
+    (professional) =>
+      !teamUser.find(
+        (user) => user.user_id === Number(professional.value)
+      )
+  )
 
-  const TechLead = teamUser.filter((obj) => obj.job_ === "Tech Lead" || obj.job_ === "Tech Lead e Desenvolvedor")
+  const TechLead = teamUser.filter(
+    (obj) =>
+      obj.job_ === 'Tech Lead' ||
+      obj.job_ === 'Tech Lead e Desenvolvedor'
+  )
   let newTime = teamUser
-  if (TechLead[0] && job === "Tech Lead" || TechLead[0] && job === "Tech Lead e Desenvolvedor") {
-    newTime = teamUser.filter((obj) => obj.job_ !== "Tech Lead" && obj.job_ !== "Tech Lead e Desenvolvedor")
+  if (
+    (TechLead[0] && job === 'Tech Lead') ||
+    (TechLead[0] && job === 'Tech Lead e Desenvolvedor')
+  ) {
+    newTime = teamUser.filter(
+      (obj) =>
+        obj.job_ !== 'Tech Lead' &&
+        obj.job_ !== 'Tech Lead e Desenvolvedor'
+    )
   }
 
   return (

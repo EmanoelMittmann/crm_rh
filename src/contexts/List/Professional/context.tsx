@@ -26,7 +26,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
   const [filterOptions, setFilterOptions] = useState(
     DEFAULT.FILTER_OPTIONS
-    )
+  )
 
   const contextProps = {
     professionals,

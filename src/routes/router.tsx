@@ -3,9 +3,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Companys from 'components/pages/Companys'
 import Jobs from 'components/pages/Jobs'
 import Notes from 'components/pages/Notes'
+import OrderOfService from 'components/pages/OrderOfService'
 import { RegisterCompany } from 'components/pages/RegisterCompany'
+import RegisterOrderOfService from 'components/pages/RegisterOrderOfService'
 import RegisterProjects from 'components/pages/RegisterProjects'
 import ReleaseNotes from 'components/pages/ReleaseNotes'
+import Reports from 'components/pages/Reports'
 import Settings from 'components/pages/Setting'
 import StatusProject from 'components/pages/StatusProject'
 import TypesProject from 'components/pages/TypesProject'
@@ -16,8 +19,6 @@ import Home from '../components/pages/MasterPage'
 import Professionals from '../components/pages/Professionals'
 import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
-import OrderOfService from 'components/pages/OrderOfService'
-import RegisterOrderOfService from 'components/pages/RegisterOrderOfService'
 
 const Router = () => {
   return (
@@ -41,9 +42,12 @@ const Router = () => {
 
           <Route path='/extrasHours' element={<Professionals />} />
           <Route path='/notes' element={<Notes />} />
-          <Route path='/reports' element={<Professionals />} />
+          <Route path='/reports' element={<Reports />} />
 
-          <Route path='/orderOfService' element={<OrderOfService/>} />
+          <Route
+            path='/orderOfService'
+            element={<OrderOfService />}
+          />
           <Route path='/orderOfService'>
             <Route path='new' element={<RegisterOrderOfService />} />
           </Route>
