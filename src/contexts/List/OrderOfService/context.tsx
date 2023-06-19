@@ -14,9 +14,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     const [isLoading, setIsLoading] = useState(true)
     const [orderOfService, setOrderOfService] = useState<OrderOfServiceProps[]>([])
     const [meta, setMeta] = useState(DEFAULT.META_PROPS)
-    const [filterOptions, setFilterOptions] = useState(
-        DEFAULT.FILTER_OPTIONS
-        )
+    const [filterOptions, setFilterOptions] = useState(DEFAULT.FILTER_OPTIONS)
+    
 
     const contextOrderOfServiceProps = {
         orderOfService,
@@ -56,6 +55,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         setIsLoading(false)
     }
 
+    console.log('orderOfService: ', orderOfService);
+
     function navigateTo(url: string) {
         navigate(url)
     }
@@ -73,15 +74,18 @@ export const Provider = ({ children }: { children: ReactNode }) => {
             search,
             paginate: { ...old.paginate, current_page: 1 }
         }))
+        console.log('search: ', search);
     }
+
 
     function handleOrder(field: string) {
         setMeta((old) => ({
             ...old,
             orderField: field,
-            order: old.order === 'ASC' ? 'DESC' : 'ASC'
+            order: old.order === 'DESC' ? 'ASC' : 'DESC'
         }))
     }
+
 
     async function fechFilterOptionsStatus() {
         const { data } = await api.get(routes.orderOfService.list)     
@@ -94,6 +98,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
             )
         })
     }
+
     function handleFillStatus(status: string | null) {
         setMeta((old) => ({
             ...old,
@@ -123,11 +128,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
             ...old,
             referenceDate,
             paginate: { ...old.paginate, current_page: 1 }
+            
         }))
     }
-
-
-
 
     useDebounce({
         fn: fetchListOrderOfService,

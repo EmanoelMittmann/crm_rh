@@ -2,12 +2,40 @@
 import type { Option, SelectOption } from 'components/atoms'
 import { TemplateProps } from 'components/organisms/Tables/types'
 
+
+export interface OrderProps {
+    id: number
+    professional: {
+        id: number
+        name: string
+        company: string
+        cnpj: string
+        extra_hour_value: number
+        fixed_payment_value: string
+        commission: boolean
+    }
+}
+
 export interface OrderOfServiceProps {
+    order: OrderProps[]
+    GeneratedOS: {
+        id: number
+        professional: {
+            id: number
+            name: string
+            company: string
+            cnpj: string
+            extra_hour_value: number
+            fixed_payment_value: string
+            commission: boolean
+        }
+    }
     id: number
     name: string
     professional_id: number
     cnpj: number
     companies_id: number
+    commission: boolean
     created_at: string
     key_document: string
     os_generation: string

@@ -8,6 +8,7 @@ import { StatusProject } from './statusProject'
 import { TypeProject } from './typeProject'
 import { OrderOfService } from './OrderOfService'
 import { UserNotes } from './UserNotes'
+import { OrderFormFilter } from './OrderFormFilter'
 
 export const Filter = Object.assign(
   {},
@@ -21,6 +22,7 @@ export const Filter = Object.assign(
     Team,
     Notes,
     UserNotes,
-    OrderOfService
+    OrderOfService,
+    OrderFormFilter,
   }
 )

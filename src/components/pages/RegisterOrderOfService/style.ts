@@ -17,3 +17,35 @@ export const Container = styled.div`
     color: ${theme.neutrals.gray9};
   }
 `
+
+export const ContainerFixed = styled.div`
+  width: 82%;
+  height: 150px;
+  margin-bottom: 2rem;
+  margin-left: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  top: 0;
+  margin-top: 48em;
+  padding-top: 2em;
+  position: absolute;
+  border-radius: 8px;
+  background-color: ${theme.neutrals.pureWhite};
+
+  z-index: 10;
+  box-shadow: -1px 2px 5px 5px ${theme.neutrals.gray3};
+`
+
+
+export const ContainerCompany = styled.div`
+ width: 80%;
+
+`
+export const ConatinerButton = styled.div`
+  width: 20%;
+  padding-right: 2em;
+  `
+
+
+

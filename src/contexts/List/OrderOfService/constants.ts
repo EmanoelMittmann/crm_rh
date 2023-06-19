@@ -8,7 +8,7 @@ const META_PROPS = {
     status_O_S: null,
     search: '',
     orderField: 'id',
-    order: 'ASC',
+    order: 'DESC',
     paginate: {
         current_page: 1,
         last_page: 1
@@ -17,7 +17,6 @@ const META_PROPS = {
 
 const FILTER_OPTIONS = {
     status_O_S: [],
-
 }
 
-export default { META_PROPS, FILTER_OPTIONS }
+export default { META_PROPS, FILTER_OPTIONS}

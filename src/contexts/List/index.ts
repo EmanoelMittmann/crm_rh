@@ -18,6 +18,7 @@ import { ContextPropsTypeProject } from './Settings/TypesProjects'
 import { ContextTeamProps } from './Team'
 import { Team } from './Team'
 import { ContextOrderOfServiceProps, OrderOfService } from './OrderOfService'
+import { OrderOfServiceprofessionalOS,ContextPropsProfessionalOS } from './OrderOfServiceProfessional'
 
 export const List = Object.assign(
   {},
@@ -31,7 +32,8 @@ export const List = Object.assign(
     Team,
     Notes,
     UserNotes,
-    OrderOfService
+    OrderOfService,
+    OrderOfServiceprofessionalOS,
   }
 )
 
@@ -46,4 +48,5 @@ export type ListContext = {
   Notes: ContextNotesProps
   UserNotes: ContextUserNotesProps
   OrderOfService: ContextOrderOfServiceProps
+  OrderOfServiceprofessionalOS: ContextPropsProfessionalOS
 }

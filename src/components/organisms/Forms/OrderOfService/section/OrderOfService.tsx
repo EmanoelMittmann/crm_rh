@@ -1,4 +1,7 @@
-import { Input } from "@stardust-ds/react"
+import { Button, Input } from "@stardust-ds/react"
+import { Filter } from "components/organisms/Filters"
+import { Table } from "components/organisms/Tables"
+import { ListTemplate } from "components/templates"
 import { List } from "contexts"
 import { useContext } from "react"
 import { useFormContext, UseFormReturn } from "react-hook-form"
@@ -27,17 +30,12 @@ export const OrderOfService = () => {
     } = useContext(List.OrderOfService.Context)
 
 
+
+
+
     return(
-        <h1>Criar O.S </h1>
-        //  <Main>
-        //     <Container>
-        //         <Input
-        //             value={meta.search}
-        //             width={230}
-        //             placeholder='Buscar...'
-        //             onChange={()=> {}}
-        //         />
-        //     </Container>  
-        // </Main>
+      <div>
+
+      </div>
     )
 }

@@ -72,6 +72,7 @@ export const routes = {
     register: '/orderOfService',
     commission: '/commission',
     createCommission: (id: number) => `/findProfessionalCommission/${id}`,
+    createOrder: (id: number) => `/findProfessionalCommissionOrCreateOrderOfService/${id}`,
   },
 
   commission:{
