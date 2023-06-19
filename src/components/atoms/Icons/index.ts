@@ -28,5 +28,6 @@ export { IconRightArrow } from './IconRightArrow'
 export { IconClose } from './IconClose'
 export { IconReleaseHours } from './IconReleaseHours'
 export { IconReleaseNotes } from './IconReleaseNotes'
+export { IconWarn } from './IconWarn'
 
 export const Icon = Object.assign({}, { OrderBy })
