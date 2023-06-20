@@ -1,6 +1,6 @@
 import type { HeaderProps } from 'components/molecules'
 export const HEADER: HeaderProps[] = [
-  { field: 'company_id', label: 'Empresa Pagadora', on: true },
+  { field: 'companies_id', label: 'Empresa Pagadora', on: true },
   { field: 'users.name', label: 'Profissional', on: true },
   { field: 'cnpj', label: 'CNPJ' },
   { field: 'fiscal_note_id', label: 'Valor da NFe' },
