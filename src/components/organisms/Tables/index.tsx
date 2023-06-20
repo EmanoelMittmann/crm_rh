@@ -5,6 +5,7 @@ import { Notes } from './Notes'
 import { OrderOfService } from './OrderOfService'
 import { Professionals } from './Professionals'
 import { Projects } from './Projects'
+import { Reports } from './Reports'
 import { StatusProject } from './StatusProject'
 import { Team } from './Team'
 import { TypesProject } from './TypesProject'
@@ -23,6 +24,7 @@ export const Table = Object.assign(
     Team,
     Notes,
     OrderOfService,
-    UserNotes
+    UserNotes,
+    Reports
   }
 )

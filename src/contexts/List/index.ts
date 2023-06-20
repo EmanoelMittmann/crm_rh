@@ -14,6 +14,7 @@ import type { ContextProps as ProfessionalContextProps } from './Professional'
 import type { ContextProjectProps } from './Project'
 import { Project } from './Project'
 import { Reports } from './Reports'
+import { ContextReportsProps } from './Reports/types'
 import { Settings } from './Settings/Jobs'
 import type { ContextPropsSettings } from './Settings/Jobs'
 import { ContextPropsStatusProject } from './Settings/StatusProjects'
@@ -49,6 +50,7 @@ export type ListContext = {
   Companys: ContextCompanyProps
   Team: ContextTeamProps
   Notes: ContextNotesProps
+  Reports: ContextReportsProps
   UserNotes: ContextUserNotesProps
   OrderOfService: ContextOrderOfServiceProps
 }

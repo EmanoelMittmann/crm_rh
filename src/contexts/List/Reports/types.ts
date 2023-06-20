@@ -43,7 +43,11 @@ export interface ReportsProps {
   fiscal_note_id: number
   order_of_services_id: number
   date_payment: string
-  fiscal_note: string
+  fiscal_note: {
+    file_xml: {
+      value_nf: string
+    }
+  }
   order: {
     id: number
     companies_id: number

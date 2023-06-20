@@ -49,11 +49,14 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         }
       })
       setReports(data.data)
-      setMeta(data.meta)
+      setMeta((old) => ({
+        ...old,
+        paginate: { ...old.paginate, last_page: data.meta.last_page }
+      }))
     } catch (error) {
       console.error(error)
     }
-    setIsLoading(true)
+    setIsLoading(false)
   }
 
   function handleSearch(search: string) {
