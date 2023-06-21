@@ -2,6 +2,7 @@ import { UseFormReturn } from 'react-hook-form'
 
 import { ProfessionalProps } from 'contexts/List/Professional/types'
 import { JobsProps } from 'contexts/List/Settings/Jobs/types'
+
 import { FormProjectProps } from 'components/organisms'
 import { getDateInput } from 'components/utils/formatDate'
 import {
@@ -101,35 +102,35 @@ export function handlePopulateFields(
 
     team: data.users.map((user) => {
       const allUsers = OPTIONS.users.flatMap(
-        (selectUser:any) => selectUser.users
-        )
-    const userData = allUsers.find(
-      (userData) => userData.id === user.user_id
+        (selectUser: any) => selectUser.users
+      )
+      const userData = allUsers.find(
+        (userData) => userData.id === user.user_id
       )
 
       const { name, job, job_, status, ...rest } = user
       const professional = { name: { label: name } }
       const jobs = {
-      name: { 
-        label: job_ !== null ? job_ : job 
+        name: {
+          label: job_ !== null ? job_ : job
+        }
       }
-    }
 
       return {
-      professional: professional,
-      jobs: jobs,
-      job_:userData.job_,
-      status: userData.status,
-      is_active: userData.is_active,
-      job_id: userData.job_id,
-      isTechLead: userData.isTechLead,
-      extra_hours_estimated: userData.extra_hours_estimated,
-      hours_mounths_estimated: userData.hours_mounths_estimated,
-      hours_mounths_performed: userData.hours_mounths_performed,
-      extra_hours_performed: userData.extra_hours_performed,
-      ...rest
-    }
-  }),
+        professional: professional,
+        jobs: jobs,
+        job_: userData.job_,
+        status: userData.status,
+        is_active: userData.is_active,
+        job_id: userData.job_id,
+        isTechLead: userData.isTechLead,
+        extra_hours_estimated: userData.extra_hours_estimated,
+        hours_mounths_estimated: userData.hours_mounths_estimated,
+        hours_mounths_performed: userData.hours_mounths_performed,
+        extra_hours_performed: userData.extra_hours_performed,
+        ...rest
+      }
+    }),
     options: OPTIONS
-})
+  })
 }

@@ -36,5 +36,3 @@ export const Row = styled.div`
   flex-direction: row;
   gap: 1em;
 `
-
-

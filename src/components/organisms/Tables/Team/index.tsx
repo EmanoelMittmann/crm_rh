@@ -14,11 +14,12 @@ import {
   LoadingWrapper,
   Main
 } from 'components/organisms/Tables/style'
+
 import api from 'api'
 import { routes } from 'routes'
+
 import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
 import { Shelf } from './Shelf'
-
 
 export const Team = () => {
   const { watch, setValue } = useFormContext<FormTeamProps>()
@@ -26,8 +27,7 @@ export const Team = () => {
 
   const modalRef = useRef<IHandleModalPropsUserNew>(null)
 
-  const Team = watch('team', []);
-
+  const Team = watch('team', [])
 
   const { id } = useParams()
   const project_id = id
@@ -94,10 +94,7 @@ export const Team = () => {
           }
           setValue('team', updatedTeam)
           await api.put(editTeam, update)
-        
-
         }
-
       }
 
       toast.success({

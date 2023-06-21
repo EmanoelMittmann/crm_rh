@@ -2,13 +2,13 @@ import { Team } from '../Forms/Team/Team'
 import { Companys } from './Companys'
 import { Jobs } from './Jobs'
 import { Notes } from './Notes'
+import { OrderFormFilter } from './OrderFormFilter'
+import { OrderOfService } from './OrderOfService'
 import { Professionals } from './Professionals'
 import { Projects } from './Projects'
 import { StatusProject } from './statusProject'
 import { TypeProject } from './typeProject'
-import { OrderOfService } from './OrderOfService'
 import { UserNotes } from './UserNotes'
-import { OrderFormFilter } from './OrderFormFilter'
 
 export const Filter = Object.assign(
   {},
@@ -23,6 +23,6 @@ export const Filter = Object.assign(
     Notes,
     UserNotes,
     OrderOfService,
-    OrderFormFilter,
+    OrderFormFilter
   }
 )

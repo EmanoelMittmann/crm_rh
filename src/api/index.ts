@@ -15,7 +15,7 @@ api.interceptors.request.use(
     config.headers = {
       Authorization: auth,
       Accept: 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded'
+      
     }
     return config
   },

@@ -1,24 +1,22 @@
-import api from "api"
-import { useEffect } from "react"
-import { routes } from "routes"
+import { useEffect } from 'react'
+
+import api from 'api'
+import { routes } from 'routes'
 
 export const OrderForm = () => {
+  const getProfessional = async () => {
+    const { data } = await api.get(routes.professional.list)
+  }
 
- const getProfessional = async () => {
-    const {data} =  await api.get(routes.professional.list)
-    console.log('data: ', data)
- }
-
- useEffect(()=>{
+  useEffect(() => {
     getProfessional()
- },[])
+  }, [])
 
-
-    return (
-        <>
-        <div>
-            <h1>OrderForm</h1>
-        </div>
-        </>
-    )
+  return (
+    <>
+      <div>
+        <h1>OrderForm</h1>
+      </div>
+    </>
+  )
 }

@@ -69,20 +69,15 @@ export const routes = {
 
   orderOfService: {
     list: '/orderOfService',
-    register: '/orderOfService',
+    register: '/findProfessionalCommissionOrCreateOrderOfService',
     commission: '/commission',
-    createCommission: (id: number) => `/findProfessionalCommission/${id}`,
-    createOrder: (id: number) => `/findProfessionalCommissionOrCreateOrderOfService/${id}`,
+    pushOrder: (id: number) => `/orderOfService/${id}`
   },
 
-  commission:{
-    list: '/commission',
+  commission: {
+    list: '/commission'
   }
-
-
 }
-
-
 
 export const externRoutes = {
   banks: 'https://brasilapi.com.br/api/banks/v1',

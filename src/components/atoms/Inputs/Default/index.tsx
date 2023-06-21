@@ -14,7 +14,6 @@ type Props = InputProps &
   }
 
 export default forwardRef(
-
   ({ error, label, required, labelColor, ...props }: Props, ref) => {
     return (
       <Main w={(props?.width as string) ?? '100%'}>

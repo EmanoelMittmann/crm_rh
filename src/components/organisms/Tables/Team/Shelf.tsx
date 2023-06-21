@@ -34,7 +34,6 @@ export const Shelf = ({
     avatar
   } = props
 
-
   return (
     <ContainerShelf template={config.template}>
       <ContainerShelfColumn gap='0.5rem' width='205px'>

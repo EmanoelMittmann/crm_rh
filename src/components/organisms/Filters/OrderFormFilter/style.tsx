@@ -9,8 +9,7 @@ export const Main = styled.div`
   width: 100%;
   overflow-x: auto;
   gap: 1rem;
-   margin-bottom: 2rem;
-
+  margin-bottom: 2rem;
 `
 
 export const Container = styled.div<IContainerColumnProps>`
@@ -21,5 +20,4 @@ export const Container = styled.div<IContainerColumnProps>`
   padding-left: ${(props) => props.left};
   padding-right: ${(props) => props.right};
   gap: ${(props) => props.gap};
-
 `

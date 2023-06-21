@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 import { theme } from 'styles'
-import { IContainerColumnProps, IContainerRowProps } from "types";
 
+import { IContainerColumnProps, IContainerRowProps } from 'types'
 
 export const Main = styled.div`
   width: 60rem;

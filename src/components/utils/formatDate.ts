@@ -32,8 +32,20 @@ export const getDateInput = (data: any) => {
   return convertedDate
 }
 
-
-const months = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
+const months = [
+  'JAN',
+  'FEV',
+  'MAR',
+  'ABR',
+  'MAI',
+  'JUN',
+  'JUL',
+  'AGO',
+  'SET',
+  'OUT',
+  'NOV',
+  'DEZ'
+]
 export const getReferenceDate = (date: string) => {
   const dateSplitted = date.split('-')
 

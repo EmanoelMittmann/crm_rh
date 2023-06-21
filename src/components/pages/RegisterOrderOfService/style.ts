@@ -19,7 +19,7 @@ export const Container = styled.div`
 `
 
 export const ContainerFixed = styled.div`
-  width: 82%;
+  width: 81.5%;
   height: 150px;
   margin-bottom: 2rem;
   margin-left: 2em;
@@ -37,15 +37,10 @@ export const ContainerFixed = styled.div`
   box-shadow: -1px 2px 5px 5px ${theme.neutrals.gray3};
 `
 
-
 export const ContainerCompany = styled.div`
- width: 80%;
-
+  width: 80%;
 `
 export const ConatinerButton = styled.div`
   width: 20%;
   padding-right: 2em;
-  `
-
-
-
+`
