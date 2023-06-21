@@ -68,13 +68,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const handleCheckboxChange = async (isChecked: boolean) => {
     if (isChecked) {
       const dataToSend = watch('professional') || []
-      // console.log('dataToSend: ', dataToSend);
 
-      // const newIDataToSend = {
-      //   professional_id: id,
-      //   commission: thereIsCommission ? '1' : '0',
-      //   companies_id: selectedCompany
-      // }
       const newIDataToSend = {
         professional_id: id,
         commission: Number(thereIsCommission),
@@ -82,8 +76,8 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
       }
 
       const updatedValues = [...dataToSend, newIDataToSend]
-      
-      console.log('updatedValues: ', updatedValues);
+
+
 
       const hasCommission = updatedValues.some(
         (item) => item.commission === '1'
