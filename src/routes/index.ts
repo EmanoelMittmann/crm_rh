@@ -18,8 +18,17 @@ export const routes = {
     list: '/userType'
   },
 
+  reports: {
+    list: '/reports'
+  },
+
   permission: {
     list: '/permissions'
+  },
+
+  notes: {
+    list: `/fiscalNotes`,
+    user: `/fiscalNotesProfissionals`
   },
 
   project: {
@@ -60,6 +69,18 @@ export const routes = {
     getCompany: (id: number) => `/companies/${id}`,
     filter: '/findCompanies',
     updateStatus: (id: number) => `companie/updateStatus/${id}`
+  },
+
+  orderOfService: {
+    list: '/orderOfService',
+    register: '/orderOfService',
+    commission: '/commission',
+    createCommission: (id: number) =>
+      `/findProfessionalCommission/${id}`
+  },
+
+  commission: {
+    list: '/commission'
   }
 }
 

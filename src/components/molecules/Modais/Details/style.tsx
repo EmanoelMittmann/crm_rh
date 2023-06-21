@@ -3,7 +3,7 @@ import { theme } from 'styles'
 
 export const ContainerModal = styled.div`
   width: 48em;
-  height: 580px;
+  height: 700px;
   border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
   display: flex;
@@ -43,6 +43,10 @@ export const ContainerRow = styled.div`
   width: 90%;
   justify-content: space-between;
 
+  .professional {
+    display: flex;
+    flex-direction: column;
+  }
   h2 {
     color: ${theme.neutrals.gray8};
   }
@@ -58,7 +62,7 @@ export const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
   z-index: 5;
 `
-export const Text = styled.p`
+export const ContaineDetails = styled.p`
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
@@ -73,10 +77,59 @@ export const Title = styled.h4`
   color: ${(props) => props.color};
 `
 export const Container = styled.div`
-  width:492px;
+  margin-left: 1em;
+  width: 492px;
   align-items: start;
-  `
+`
 export const ContainerOne = styled.div`
-  width:450px;
+  margin-left: 1em;
+  width: 450px;
   align-items: start;
-  `
+`
+
+export const ContainerAbsolute = styled.div`
+  height: 600px;
+`
+
+export const TableLine = styled.div`
+  display: flex;
+  width: 90%;
+  flex-wrap: wrap;
+  border-bottom: 1.5px solid #eff2f4;
+  margin-left: 2em;
+  &:last-child {
+    border-bottom: none;
+  }
+`
+
+export const Image = styled.img`
+  width: 3em;
+  border-radius: 50%;
+`
+export const ProfessionalJob = styled.div`
+  font-size: 0.8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+`
+
+export const ContainerDataUser = styled.div`
+  width: 45%;
+  display: flex;
+  flex-direction: row;
+  margin: 0.5em 1em 0 0;
+`
+
+export const ProfessionalName = styled.span`
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 0.7em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (max-width: 1350px) {
+    font-size: 12px;
+  }
+`

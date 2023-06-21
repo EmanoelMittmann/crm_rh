@@ -13,7 +13,7 @@ import {
 import api from 'api'
 import { routes } from 'routes'
 
-import { ProjectProps, UserProjectsProps } from 'types'
+import { ProjectProps } from 'types'
 
 export async function fetchPropsProject(
   methods: UseFormReturn<FormProjectProps['Project']>
@@ -100,27 +100,30 @@ export function handlePopulateFields(
     date_end_performed: getDateInput(data.date_end_performed),
     team_cost: GenerateValue(String(data.team_cost)),
 
-    team: data.users.map((user: any) => {
+    team: data.users.map((user) => {
       const allUsers = OPTIONS.users.flatMap(
         (selectUser: any) => selectUser.users
       )
       const userData = allUsers.find(
-        (userData: any) => userData.id === user.user_id
+        (userData) => userData.id === user.user_id
       )
 
       const { name, job, job_, status, ...rest } = user
       const professional = { name: { label: name } }
       const jobs = {
-        name: { label: job_ !== null ? job_ : job }
-      }
-      const statusObj = {
-        name: { label: status  ? 'Ativo' : 'Inativo' }
+        name: {
+          label: job_ !== null ? job_ : job
+        }
       }
 
       return {
         professional: professional,
         jobs: jobs,
-        status: statusObj,
+        job_: userData.job_,
+        status: userData.status,
+        is_active: userData.is_active,
+        job_id: userData.job_id,
+        isTechLead: userData.isTechLead,
         extra_hours_estimated: userData.extra_hours_estimated,
         hours_mounths_estimated: userData.hours_mounths_estimated,
         hours_mounths_performed: userData.hours_mounths_performed,

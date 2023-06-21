@@ -5,7 +5,7 @@ export const DEFAULTSELECT = {
   extrasHours: false,
   notes: false,
   reports: false,
-  services: false,
+  orderOfService: false,
   settings: false,
   company: false,
   RegisterProjects: false,

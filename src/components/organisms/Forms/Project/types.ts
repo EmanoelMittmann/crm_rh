@@ -1,20 +1,19 @@
-import { JobsProps } from 'contexts/List/Settings/Jobs/types'
-
 import type { Option, SelectOption } from 'components/atoms'
 import { TemplateProps } from 'components/organisms/Tables/types'
-
-import { ProfessionalProps } from '../Professional/types'
 
 export interface TeamMemberProps {
   user_id: number
   job_: string
   job: string
+  job_id: number
   name: string
   isTechLead: boolean
   extra_hours_estimated: number
   hours_mounths_estimated: number
   hours_mounths_performed: number
   extra_hours_performed: number
+  extra_hours_percent: number
+  hours_mounths_percent: number
   is_active: boolean
   avatar: string
   status: boolean
@@ -109,7 +108,6 @@ interface ProjectAttachmentProps {
 
 interface FormConfigProps {
   options: {
-    filter(arg0: (option: any) => boolean): SelectOption[]
     project_types: SelectOption[]
     permissions: SelectOption[]
     userTypes: SelectOption[]
@@ -131,10 +129,6 @@ interface ConfigProps extends TemplateProps {
   options: OptionsProps[]
 }
 
-export type ShelfProjectsProps = {
-  props: ProjectProps
-  config: ConfigProps
-}
 export type ShelfUserProject = {
   props: TeamMemberProps
   config: ConfigProps

@@ -31,10 +31,10 @@ export const ContainerShelf = styled.div<TemplateProps>`
   }
 `
 export const ShelfHover = styled.div`
- :hover{
-  background-color: ${theme.neutrals.gray2};
-  cursor: pointer;
- }
+  :hover {
+    background-color: ${theme.neutrals.gray2};
+    cursor: pointer;
+  }
 `
 export const ContainerShelfColumn = styled.div<IContainerColumnProps>`
   width: ${(props) => props.width};
@@ -62,6 +62,18 @@ export const Text = styled.p`
   color: ${(props) => props.color};
 `
 export const Image = styled.img`
-  width: 3em;
+  width: 2.5em;
   border-radius: 50%;
+`
+
+export const TextStatus = styled.div<IContainerColumnProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 30px;
+  background-color: ${(props) => props.bgColor};
+  color: ${(props) => props.text};
+  border-radius: 40px;
+  font-weight: 700;
 `

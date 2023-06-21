@@ -1,6 +1,7 @@
 import { ReactElement, SVGProps } from 'react'
 
 import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
+import { TeamProps } from 'components/organisms/Forms/Team/types'
 
 declare module '*.svg' {
   const content: (props: SVGProps<SVGElement>) => ReactElement
@@ -24,6 +25,8 @@ interface IContainerColumnProps {
   gap?: string
   justify?: string
   width?: string
+  text?: string
+  bgColor?: string
 }
 
 interface IJWTDecodeGoogle {
@@ -77,13 +80,15 @@ interface IModalProps {
 
 export interface UserProjectsProps {
   user_id: number
-  extra_hours_estimated: string
-  extra_hours_performed: string
-  hours_mounths_estimated: string
-  hours_mounths_performed: string
+  extra_hours_estimated: number
+  extra_hours_performed: number
+  hours_mounths_estimated: number
+  hours_mounths_performed: number
+  extra_hours_percent: number
+  hours_mounths_percent: number
   avatar: string
   name: string
-  status: string
+  status: boolean
   is_active: boolean
   job_: string
   job_id: string
@@ -110,7 +115,6 @@ export interface ProjectProps {
     name: string
   }
   status: {
-    map(arg0: (status: any) => { label: any; value: any })
     color: {
       button_color: string
       text_color: string

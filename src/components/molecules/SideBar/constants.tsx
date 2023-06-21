@@ -9,6 +9,8 @@ import {
   IconNotes,
   IconProfessional,
   IconProjects,
+  IconReleaseHours,
+  IconReleaseNotes,
   IconReports,
   IconServices,
   IconSetting
@@ -46,18 +48,22 @@ export const OPTIONS = [
     6: createNavOption(
       'Ordem de Serviço',
       <IconServices />,
-      'services'
+      'orderOfService'
     ),
 
     7: createNavOption('Configurações', <IconSetting />, 'settings'),
 
     8: createNavOption('Empresas', <IconCompanies />, 'company'),
 
-    9: createNavOption('Horas Extras', <IconHours />, 'releaseHours'),
+    9: createNavOption(
+      'Lançamento de Horas',
+      <IconReleaseHours />,
+      'releaseHours'
+    ),
 
     10: createNavOption(
-      'Lançamentos de Notas',
-      <IconNotes />,
+      'Lançamento de Notas',
+      <IconReleaseNotes />,
       'releaseNotes'
     )
   }
