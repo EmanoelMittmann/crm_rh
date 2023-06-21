@@ -1,15 +1,16 @@
 import Company, { FormProps as CompanyProps } from './Company'
+import OrderOfService, {
+  FormOrderProps as OrderOfServiceProps
+} from './OrderOfService'
 import Professional, {
   FormProps as ProfessionalProps
 } from './Professional'
 import Project, { FormProjectProps as ProjectProps } from './Project'
 import Team, { FormTeamProps as TeamProps } from './Project'
-import OrderOfService, {FormOrderProps as OrderOfServiceProps} from "./OrderOfService"
-
 
 export const Form = Object.assign(
   {},
-  { Professional, Project, Company, Team, OrderOfService}
+  { Professional, Project, Company, Team, OrderOfService }
 )
 
 export type FormProps = {
@@ -31,8 +32,6 @@ export type PartialForm = {
 export type FormOrderProps = {
   OrderOfService: OrderOfServiceProps
 }
-
-
 
 export { getUfOption } from './Professional'
 export { validationSchema as SchemaCompany } from './Company/logic'

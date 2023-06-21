@@ -1,4 +1,4 @@
-import {Context, Provider } from './context'
+import { Context, Provider } from './context'
 
 export const OrderOfService = Object.assign({}, { Context, Provider })
 

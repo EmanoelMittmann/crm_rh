@@ -62,8 +62,8 @@ const UsersEditor = forwardRef<
     useFormContext<FormProjectProps>()
 
   const { team } = useFormContext<FormTeamProps>().watch()
-  const professional = team && team.find(item => item.user_id === isOpen.id);
-
+  const professional =
+    team && team.find((item) => item.user_id === isOpen.id)
 
   const close = useCallback(() => {
     setIsOpen({ id: 0 })
@@ -84,29 +84,27 @@ const UsersEditor = forwardRef<
     if (professional) {
       const selectedStatus = {
         label: professional.status ? 'Ativo' : 'Inativo',
-        value: professional.status 
+        value: professional.status
       }
       const selectedJob = {
         label: professional.jobs?.name?.label || '',
         value: professional.jobs
-      };
+      }
 
       setSelectedStatus(selectedStatus as unknown as Option)
-      setSelectedJob(selectedJob as unknown as Option) 
-      
-      
+      setSelectedJob(selectedJob as unknown as Option)
+
       setValue('users.status', selectedStatus?.value)
       setValue('users.jobs.name.label', selectedJob?.label)
       setValue(
         'users.hours_mounths_estimated',
         Number(professional.hours_mounths_estimated) || 0
-        )
-        setValue(
-          'users.extra_hours_estimated',
-          Number(professional.extra_hours_estimated) || 0
-          )
-          
-        }
+      )
+      setValue(
+        'users.extra_hours_estimated',
+        Number(professional.extra_hours_estimated) || 0
+      )
+    }
   }, [professional, setValue])
 
   if (isOpen.id === 0) return null
