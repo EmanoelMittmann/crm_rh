@@ -142,6 +142,7 @@ export const Company = () => {
           }}
           searchable
           multiSelect
+          clearable={false}
           placeholder='Selecione'
         />
       </ContainerRow>
