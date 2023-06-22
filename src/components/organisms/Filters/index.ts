@@ -5,6 +5,7 @@ import { Notes } from './Notes'
 import { OrderOfService } from './OrderOfService'
 import { Professionals } from './Professionals'
 import { Projects } from './Projects'
+import { Reports } from './Reports'
 import { StatusProject } from './statusProject'
 import { TypeProject } from './typeProject'
 import { UserNotes } from './UserNotes'
@@ -21,6 +22,7 @@ export const Filter = Object.assign(
     Team,
     Notes,
     UserNotes,
-    OrderOfService
+    OrderOfService,
+    Reports
   }
 )

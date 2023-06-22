@@ -30,10 +30,10 @@ export interface ContextReportsProps {
     status: SelectProps['options']
   }
   handleSearch(search: string): void
-  handleStatus(status: string): void
+  handleStatus(status: string | null): void
   handleDate(start: string, end: string): void
   handleOrder(field: string): void
-  handleCompany(id: number): void
+  handleCompany(id: number | null): void
 }
 
 export interface ReportsProps {
