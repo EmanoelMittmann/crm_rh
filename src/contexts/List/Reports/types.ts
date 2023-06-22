@@ -35,6 +35,7 @@ export interface ContextReportsProps {
   handleOrder(field: string): void
   handleCompany(id: number | null): void
   handleDownLoad(id: number, type: string): void
+  handleExcel(id: number): void
 }
 
 export interface ReportsProps {

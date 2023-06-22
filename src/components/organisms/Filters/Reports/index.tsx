@@ -28,7 +28,7 @@ export const Reports = () => {
       <Container width='100%' gap='1em'>
         <Inputs.Default
           placeholder='Buscar...'
-          width={'20%'}
+          width={'30%'}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleSearch(e.target.value)
           }

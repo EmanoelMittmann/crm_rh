@@ -26,3 +26,22 @@ export const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
   z-index: 5;
 `
+export const Columns = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`
+
+export const Row = styled.div`
+  display: flex;
+  height: 3em;
+  align-items: center;
+  flex-direction: row;
+  margin: auto;
+  width: 80%;
+  justify-content: space-between;
+
+  h2 {
+    color: ${theme.neutrals.gray8};
+  }
+`
