@@ -5,7 +5,7 @@ export const IconDate = () => {
     <svg
       width='22'
       height='12'
-      viewBox='8 0 14 16'
+      viewBox='6 0 14 16'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
     >

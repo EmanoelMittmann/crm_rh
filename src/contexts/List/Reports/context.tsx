@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useState } from 'react'
 
+import { saveAs } from 'file-saver'
 import { PaginateContext } from 'components/molecules'
 
 import api from 'api'
@@ -30,7 +31,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleStatus,
     handleDate,
     handleOrder,
-    handleCompany
+    handleCompany,
+    handleDownLoad
   }
 
   async function fetchReports() {
@@ -129,6 +131,18 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       ...old,
       paginate: { ...old.paginate, current_page }
     }))
+  }
+
+  async function handleDownLoad(id: number, type: string) {
+    try {
+      const { data } = await api.get(
+        routes.reports.downLoad(id, type),
+        { responseType: 'blob' }
+      )
+      saveAs(data)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   useDebounce({

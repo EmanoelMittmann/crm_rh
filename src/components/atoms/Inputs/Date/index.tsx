@@ -25,6 +25,7 @@ export default forwardRef(
             onFocus={() => setFocus(true)}
             ref={ref}
             iconRight={<IconDate />}
+            iconRightAction={() => setFocus(true)}
             type='text'
             hasError={!!error}
           />

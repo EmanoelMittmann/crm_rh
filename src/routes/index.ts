@@ -19,7 +19,9 @@ export const routes = {
   },
 
   reports: {
-    list: '/reports'
+    list: '/reports',
+    downLoad: (id: number, type: string) =>
+      `/downloadReportsFiles?user_id=${id}&type_file=${type}`
   },
 
   permission: {
