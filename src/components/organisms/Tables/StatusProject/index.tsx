@@ -23,7 +23,6 @@ export const StatusProject = () => {
     handleUpdateStatus
   } = useContext(List.Status.Context)
   const modalRef = useRef<IHandleModalColorsPropsEdit>(null)
-
   const POPOVER_OPTIONS = (
     id: number,
     name: string,
