@@ -150,7 +150,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   async function handleExcel(id: number) {
     try {
-      const { data } = await api.get(routes.reports.excel(id), { responseType: 'blob' })
+      const { data } = await api.get(routes.reports.excel(id), {
+        responseType: 'blob'
+      })
       saveAs(data)
     } catch (error: any) {
       console.log(error)
