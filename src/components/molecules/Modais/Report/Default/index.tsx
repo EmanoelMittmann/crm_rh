@@ -13,7 +13,7 @@ import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
 
-import { ContainerModal, Overlay, Columns, Row } from '../style'
+import { ContainerModal, Overlay, Columns, Row } from '../../style'
 import { Option } from 'types'
 
 interface IModalProps {

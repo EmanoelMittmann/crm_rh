@@ -1,9 +1,12 @@
-import { useContext, useMemo } from 'react'
+import { useContext, useMemo, useRef } from 'react'
 
 import { List } from 'contexts'
+import { ReportsProps } from 'contexts/List/Reports/types'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
+import { Modal as Modais } from 'components/molecules/Modais'
+import { IHandle as IDetailsReport } from 'components/molecules/Modais/Report/Details'
 
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE, HEADER } from './constants'
@@ -13,8 +16,13 @@ export const Reports = () => {
   const { isLoading, reports, handleOrder, handleDownLoad } =
     useContext(List.Reports.Context)
 
-  const POPOVER_OPTIONS = (id: number) => [
-    { label: 'Detalhes', callback: () => {} },
+  const modalRef = useRef<IDetailsReport>(null)
+
+  const POPOVER_OPTIONS = (id: number, props: ReportsProps) => [
+    {
+      label: 'Detalhes',
+      callback: () => modalRef.current?.open(props)
+    },
     {
       label: 'Baixar PDF',
       callback: () => handleDownLoad(id, 'PDF')
@@ -34,7 +42,7 @@ export const Reports = () => {
         key={props.id}
         config={{
           template: GRID_TEMPLATE,
-          options: POPOVER_OPTIONS(props.user_id)
+          options: POPOVER_OPTIONS(props.user_id, props)
         }}
         {...{ props }}
       />
@@ -49,6 +57,7 @@ export const Reports = () => {
         handleOrder={handleOrder}
       />
       {Table}
+      <Modais.Report.Details ref={modalRef} />
     </Main>
   )
 }
