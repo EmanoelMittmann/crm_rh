@@ -10,14 +10,16 @@ import { GRID_TEMPLATE, HEADER } from './constants'
 import Shelf from './shelf'
 
 export const Reports = () => {
-  const { isLoading, reports, handleOrder } = useContext(
-    List.Reports.Context
-  )
+  const { isLoading, reports, handleOrder, handleDownLoad } =
+    useContext(List.Reports.Context)
 
-  const POPOVER_OPTIONS = () => [
+  const POPOVER_OPTIONS = (id: number) => [
     { label: 'Detalhes', callback: () => {} },
-    { label: 'Baixar PDF', callback: () => {} },
-    { label: 'Baixar XML', callback: () => {} }
+    {
+      label: 'Baixar PDF',
+      callback: () => handleDownLoad(id, 'PDF')
+    },
+    { label: 'Baixar XML', callback: () => handleDownLoad(id, 'XML') }
   ]
 
   const Table = useMemo(() => {
@@ -32,7 +34,7 @@ export const Reports = () => {
         key={props.id}
         config={{
           template: GRID_TEMPLATE,
-          options: POPOVER_OPTIONS()
+          options: POPOVER_OPTIONS(props.user_id)
         }}
         {...{ props }}
       />

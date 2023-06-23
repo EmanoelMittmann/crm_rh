@@ -1,5 +1,8 @@
 import { createContext, ReactNode, useState } from 'react'
 
+import { toast } from '@stardust-ds/react'
+import { saveAs } from 'file-saver'
+
 import { PaginateContext } from 'components/molecules'
 
 import api from 'api'
@@ -30,7 +33,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleStatus,
     handleDate,
     handleOrder,
-    handleCompany
+    handleCompany,
+    handleDownLoad,
+    handleExcel
   }
 
   async function fetchReports() {
@@ -129,6 +134,33 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       ...old,
       paginate: { ...old.paginate, current_page }
     }))
+  }
+
+  async function handleDownLoad(id: number, type: string) {
+    try {
+      const { data } = await api.get(
+        routes.reports.downLoad(id, type),
+        { responseType: 'blob' }
+      )
+      saveAs(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async function handleExcel(id: number) {
+    try {
+      const { data } = await api.get(routes.reports.excel(id), { responseType: 'blob' })
+      saveAs(data)
+    } catch (error: any) {
+      console.log(error)
+      toast({
+        type: 'warning',
+        title: 'Aviso',
+        description: 'Nenhum Relatorio de Pagamento encontrado',
+        position: 'bottom-right'
+      })
+    }
   }
 
   useDebounce({

@@ -1,46 +1,43 @@
 import {
   forwardRef,
   useImperativeHandle,
-  useMemo,
   useState,
-  useCallback
+  useCallback,
+  useContext
 } from 'react'
 
-import { Input } from '@stardust-ds/react'
+import { Select } from '@stardust-ds/react'
 import { Button } from '@stardust-ds/react'
+import { List } from 'contexts'
 import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
 
 import { ContainerModal, Overlay, Columns, Row } from '../style'
+import { Option } from 'types'
 
 interface IModalProps {
   text: string
   placeholder: string
-  EventOne: (name: string) => void
 }
 
-export interface IHandleModalPropsNew {
+export interface IHandleModalReport {
   open(_: boolean): void
   close(): void
 }
 
-const New = forwardRef<IHandleModalPropsNew, IModalProps>(
+const Report = forwardRef<IHandleModalReport, IModalProps>(
   (props, ref) => {
-    const { text, placeholder, EventOne } = props
+    const { filterOptions, handleExcel } = useContext(
+      List.Reports.Context
+    )
+    const { text, placeholder } = props
     const [isOpen, setIsOpen] = useState(false)
-    const [name, setName] = useState<string>('')
+    const [Option, setOption] = useState<Option | null>()
 
     const close = useCallback(() => {
       setIsOpen(false)
     }, [])
-
-    const handleBlock = useMemo(() => {
-      if (name.trim() === '') {
-        return true
-      }
-      return false
-    }, [name])
 
     useImperativeHandle(
       ref,
@@ -60,11 +57,15 @@ const New = forwardRef<IHandleModalPropsNew, IModalProps>(
               <Close onClick={() => close()} />
             </Row>
             <Row>
-              <Input
+              <Select
                 width={385}
-                onChange={(e) => setName(e.target.value)}
-                label='Cargo'
-                color={theme.neutrals.gray8}
+                value={Option}
+                onClear={() => setOption(null)}
+                label='Empresas'
+                onSelect={(ops: Option | null) =>
+                  ops && setOption(ops)
+                }
+                options={filterOptions.companies}
                 placeholder={placeholder}
               />
             </Row>
@@ -83,9 +84,8 @@ const New = forwardRef<IHandleModalPropsNew, IModalProps>(
                   boxShadow: '0px 5px 10px 0px #0066FF40'
                 }}
                 bgColor='#0066FF'
-                disabled={handleBlock}
                 onClick={() => {
-                  EventOne(name)
+                  handleExcel(Number(Option?.value))
                   close()
                 }}
               >
@@ -100,4 +100,4 @@ const New = forwardRef<IHandleModalPropsNew, IModalProps>(
   }
 )
 
-export default New
+export default Report

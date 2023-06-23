@@ -19,7 +19,10 @@ export const routes = {
   },
 
   reports: {
-    list: '/reports'
+    list: '/reports',
+    downLoad: (id: number, type: string) =>
+      `/downloadReportsFiles?user_id=${id}&type_file=${type}`,
+    excel: (id: number) => `/generateExcelPayment?companies_id=${id}`
   },
 
   permission: {

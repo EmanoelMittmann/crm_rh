@@ -14,8 +14,7 @@ api.interceptors.request.use(
     const auth = token ? `Bearer ${token}` : ''
     config.headers = {
       Authorization: auth,
-      Accept: 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded'
+      Accept: 'application/json'
     }
     return config
   },
