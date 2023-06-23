@@ -2,9 +2,14 @@ import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
+import { yupResolver } from '@hookform/resolvers/yup'
+
 import { Button, Loading } from 'components/atoms'
 import { Form, FormProps } from 'components/organisms'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
+
+import api from 'api'
+import { routes } from 'routes'
 
 import { useDebounce } from 'hooks'
 
@@ -16,13 +21,16 @@ import {
   handleCPF,
   handleSave
 } from './logic'
+import { ProfessionalSchema } from './schema'
 import { Container } from './style'
 
 const RegisterProfessional = () => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
+  const [defaultValue, setDefaultValue] = useState()
 
   const methods = useForm<FormProps['Professional']>({
-    defaultValues: {
+    resolver: yupResolver(ProfessionalSchema),
+    defaultValues: defaultValue || {
       commission: false,
       extra_hour_activated: false
     }
@@ -77,13 +85,16 @@ const RegisterProfessional = () => {
 
   useEffect(() => {
     if (!!id) {
-      fetchAndPopulateUser(id, methods)
+      api
+        .get<any[]>(routes.professional.getUser(+id))
+        .then(({ data }) => setDefaultValue(data[0]))
+      /* fetchAndPopulateUser(id, methods)
         .catch((error) => {
           console.log(error.message)
         })
-        .finally(() => setIsLoading(false))
+        .finally(() => setIsLoading(false)) */
     } else {
-      setIsLoading(false)
+      /* setIsLoading(false) */
     }
   }, [id])
 
@@ -95,7 +106,7 @@ const RegisterProfessional = () => {
         }
       >
         <FormProvider {...methods}>
-          <form onSubmit={() => handleSave(methods, id)}>
+          <form>
             {isLoading ? (
               <Container>
                 <Loading />
@@ -104,7 +115,9 @@ const RegisterProfessional = () => {
               <Form.Professional />
             )}
             <Button.Updade
-              type='submit'
+              onClick={(e) => {
+                handleSave(methods, id)
+              }}
               saveButtonName='Salvar Profissional'
               cancelButtonName='cancelar'
             />
