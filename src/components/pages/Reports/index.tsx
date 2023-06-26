@@ -9,6 +9,7 @@ import { AuthTemplate, ReleaseTemplate } from 'components/templates'
 
 const Reports = () => {
   const ref = useRef<IReports>(null)
+  const { Report } = Modal
 
   return (
     <AuthTemplate>
@@ -22,7 +23,7 @@ const Reports = () => {
         >
           <Filter.Reports />
           <Table.Reports />
-          <Modal.Report
+          <Report.Reports
             ref={ref}
             text='Selecione Empresa'
             placeholder='Empresa'
