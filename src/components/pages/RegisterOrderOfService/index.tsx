@@ -1,21 +1,16 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { toast } from '@stardust-ds/react'
 
-import { Button, Loading } from 'components/atoms'
+import { Button } from 'components/atoms'
 import {
-  Filter,
-  FormOrderProps,
-  FormProps
-} from 'components/organisms'
-import OrderOfService from 'components/organisms/Forms/OrderOfService'
-import {
-  AuthTemplate,
-  CreateTemplate,
-  ListTemplate
-} from 'components/templates'
+  IHandleModalPropsCommission,
+  Modal
+} from 'components/molecules/Modais'
+import { FormOrderProps } from 'components/organisms'
+import { AuthTemplate } from 'components/templates'
 
 import api from 'api'
 import { routes } from 'routes'
@@ -23,60 +18,100 @@ import { routes } from 'routes'
 import OrderForm from '../OrdeForm'
 import {
   ConatinerButton,
-  Container,
   ContainerCompany,
   ContainerFixed
 } from './style'
-import { OrderProfessionalProps } from 'components/organisms/Forms/OrderOfService/types'
 
 const RegisterOrderOfService = () => {
   const navigate = useNavigate()
+  const [commissionValues, setCommissionValues] = useState<any[]>([]);
+
 
   const methods = useForm<FormOrderProps['OrderOfService']>({
     defaultValues: {},
     shouldFocusError: true
   })
+  const modalRef = useRef<IHandleModalPropsCommission>(null)
 
   const onSubmit = async (data: any) => {
-    try {
-      const response = await api.post(routes.orderOfService.register, data.professional)
-      if (response.data.msg === 'successfully generated report') {
+    if (data.professional.length > 0) {
+  
+        const professionalsToRegister = [...data.professional];
+         handleOpenModal(professionalsToRegister);
+        }
+
+     
+  };
+
+  const handleOpenModal = async (professionals: any[]) => {
+    if (modalRef.current) {
+      modalRef.current.open(professionals);
+
+      const updatedCommissionValues = professionals.map((professional) => ({
+        professional_id: professional.professional_id,
+        companies_id: professional.companies_id,
+        commission: professional.commission,
+      }));
+      
+      console.log('updatedCommissionValues: ', updatedCommissionValues);
+      setCommissionValues(updatedCommissionValues);
+
+
+      try {
+        const response = await api.post(
+          routes.orderOfService.register,
+          professionals
+        );
+
+        if (response.data.msg === 'successfully generated report') {
+          toast({
+            type: 'success',
+            title: 'Ordem de Serviço gerada com sucesso.',
+            position: 'bottom-right',
+          });
+          // navigate('/orderOfService')
+        }
+      } catch (err) {
         toast({
-          type: 'success',
-          title: 'Ordem de Serviço gerada com sucesso.',
-          position: 'bottom-right'
-        })
-        navigate('/orderOfService')
+          type: 'error',
+          title: 'Erro ao gerar ordem de serviço.',
+          position: 'bottom-right',
+        });
+        console.log(err);
       }
-    } catch (err) {
-      toast({
-        type: 'error',
-        title: 'Erro ao gerar ordem de serviço.',
-        position: 'bottom-right'
-      })
-      console.log(err)
     }
-  }
+  };
+
+
+       
 
   return (
-    <AuthTemplate>
-      <FormProvider {...methods}>
-        <form>
-          <OrderForm />
-          <ContainerFixed>
-            <ContainerCompany>Empresas</ContainerCompany>
-            <ConatinerButton>
-              <Button.Updade
-                onSave={methods.handleSubmit(onSubmit)}
-                type='button'
-                saveButtonName='Criar O.S'
-                cancelButtonName='cancelar'
-              />
-            </ConatinerButton>
-          </ContainerFixed>
-        </form>
-      </FormProvider>
-    </AuthTemplate>
+    <>
+      <AuthTemplate>
+        <FormProvider {...methods}>
+          <form>
+            <OrderForm />
+            <ContainerFixed>
+              <ContainerCompany>Empresas</ContainerCompany>
+              <ConatinerButton>
+                <Button.Updade
+                  onSave={methods.handleSubmit(onSubmit)}
+                  type='button'
+                  saveButtonName='Criar O.S'
+                  cancelButtonName='cancelar'
+                />
+              </ConatinerButton>
+            </ContainerFixed>
+          </form>
+        </FormProvider>
+      </AuthTemplate>
+      <Modal.Commission
+        ref={modalRef}
+        placeholder='Confirmar Profissionais'
+        text='Confirmar Profissionais'
+        EventOne={handleOpenModal}
+      />
+    </>
   )
 }
 

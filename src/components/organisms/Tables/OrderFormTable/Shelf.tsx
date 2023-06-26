@@ -1,13 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { Select, toast } from '@stardust-ds/react'
+import { Select } from '@stardust-ds/react'
 
-import { Inputs, Selects } from 'components/atoms'
-import {
-  IHandleModalPropsCommission,
-  Modal
-} from 'components/molecules/Modais'
+import { Inputs } from 'components/atoms'
 import {
   ContainerShelf,
   ContainerShelfColumn,
@@ -20,6 +16,7 @@ import { routes } from 'routes'
 
 import { ShelfProps } from '../types'
 import { ContainerText } from './style'
+import { CommissionItem, Order, OrderProps } from './type'
 
 export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const { setValue, watch } = useFormContext()
@@ -36,60 +33,73 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
   } = props
   const field = `professional.${id}`
   const [selectedCompany, setSelectedCompany] = useState(company_id)
-  const [selectedCommission, setSelectedCommission] = useState('0')
-  const [thereIsCommission, setThereIsCommission] =
-    useState(commission)
-  const [nameuser, setNameUser] = useState<string>(name)
-
-  const modalRef = useRef<IHandleModalPropsCommission>(null)
-
-  const handleOpenModal = () => {
-    if (modalRef.current) {
-      modalRef.current.open(
-        id,
-        name,
-        selectedCompany,
-        selectedCommission
-      )
+  const [selectedCommission, setSelectedCommission] = useState<CommissionItem[]>([])
+  
+  const getCommission = async () => {
+    const response = await api.get(routes.orderOfService.commission, {
+      params: {
+        professional_id: id,
+        companies_id: selectedCompany,
+        commission: 0
+      }
+    })
+    setSelectedCommission(response.data)
+    if (response.data) {
+      setSelectedCommission(response.data.data[0].commission)
+    } else {
+      setSelectedCommission(selectedCommission)
     }
   }
+  useEffect(() => {
+    getCommission()
+  }, [selectedCompany])
 
-  async function handleCommission(
-    id: number,
-    name: string,
-    company_id: string,
-    commission: string
-  ) {
-    setSelectedCompany(company_id)
-    setSelectedCommission(commission)
-    setNameUser(name)
-  }
+  const commissionValue: CommissionItem[] = selectedCommission.filter((item) => item.professional_id === id)
+  const calcularTotal = (id: number) => {
+    const item = commissionValue.find((item: any) => item.professional_id === id);
+    const comissao = item ? item.commission : 0;
+    const total = fixed_payment_value + comissao;
+    return total;
+  };
+
 
   const handleCheckboxChange = async (isChecked: boolean) => {
     if (isChecked) {
       const dataToSend = watch('professional') || []
 
-      const newIDataToSend = {
+      let newItem: {
+        professional_id: number
+        companies_id: number
+        commission?: number
+      } = {
         professional_id: id,
-        commission: Number(thereIsCommission),
-        companies_id: selectedCompany
+        companies_id: selectedCompany,
       }
 
-      const updatedValues = [...dataToSend, newIDataToSend]
+      if (commission === true) {
+        newItem = {
+          professional_id: id,
+          companies_id: selectedCompany
+        }
+      } else {
+        newItem = {
+          professional_id: id,
+          companies_id: selectedCompany,
+          commission: 0
+        }
+      }
 
+      const updatedValues = [...dataToSend, newItem]
 
+      setValue('professional', updatedValues)
+    } else {
+      const dataToSend = watch('professional') || []
 
-      const hasCommission = updatedValues.some(
-        (item) => item.commission === '1'
+      const updatedValues = dataToSend.filter(
+        (item: Order) => item.professional_id !== id
       )
 
       setValue('professional', updatedValues)
-
-      if (hasCommission) {
-        handleOpenModal()
-      }
-    } else {
-      setValue(field, false)
     }
   }
 
@@ -127,33 +137,25 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
         </ContainerShelfColumn>
 
         <ContainerShelfColumn>
-          <Text>R$ {GenerateValue(String(fixed_payment_value))}</Text>
+          <Text>R$ {fixed_payment_value}</Text>
+        </ContainerShelfColumn>
+
+        {commissionValue.map((item) => (
+          <ContainerShelfColumn>
+            <Text>
+              {(item.commission) ? (item.commission) : "-"}
+            </Text>
+          </ContainerShelfColumn>
+        ))}
+
+        <ContainerShelfColumn>
+          <Text>{(extra_hour_value) ? (extra_hour_value) : "-"}</Text>
         </ContainerShelfColumn>
 
         <ContainerShelfColumn>
-          <Text>{GenerateValue(String(commission))}</Text>
+          <Text>R$ {calcularTotal(id)}</Text>
         </ContainerShelfColumn>
-
-        <ContainerShelfColumn>
-          <Text>{GenerateValue(String(extra_hour_value))}</Text>
-        </ContainerShelfColumn>
-
-        <ContainerShelfColumn>
-          <Text>R$ 0,00</Text>
-        </ContainerShelfColumn>
-
-        {/* <Text>
-          <button onClick={handleOpenModal}>Abrir</button>
-        </Text> */}
       </ContainerShelf>
-
-      <Modal.Commission
-        ref={modalRef}
-        placeholder='Confirmar Profissionais'
-        text='Confirmar Profissionais'
-        EventOne={handleCommission}
-        commission={selectedCommission}
-      />
     </>
   )
 }

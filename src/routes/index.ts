@@ -73,10 +73,6 @@ export const routes = {
     commission: '/commission',
     pushOrder: (id: number) => `/orderOfService/${id}`
   },
-
-  commission: {
-    list: '/commission'
-  }
 }
 
 export const externRoutes = {
