@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { theme } from 'styles'
 
-export const ContainerModal = styled.div`
-  width: 30em;
+export const ContainerModal = styled.div<{ width?: string }>`
+  width: ${({ width }) => (width ? width : '30em')};
   height: 254px;
   border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
@@ -26,17 +26,21 @@ export const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
   z-index: 5;
 `
-export const Columns = styled.div`
+export const Columns = styled.div<{ gap?: string; content?: string }>`
   width: 100%;
   display: flex;
   flex-direction: column;
+  white-space: nowrap;
+  justify-content: ${({ content }) => content};
+  gap: ${({ gap }) => gap};
 `
 
-export const Row = styled.div`
+export const Row = styled.div<{ gap?: string }>`
   display: flex;
   height: 3em;
   align-items: center;
   flex-direction: row;
+  gap: ${({ gap }) => gap};
   margin: auto;
   width: 80%;
   justify-content: space-between;

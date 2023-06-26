@@ -155,7 +155,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       })
       saveAs(data)
     } catch (error: any) {
-      console.log(error)
+      console.error(error)
       toast({
         type: 'warning',
         title: 'Aviso',
