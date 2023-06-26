@@ -8,6 +8,7 @@ import { RegisterCompany } from 'components/pages/RegisterCompany'
 import RegisterOrderOfService from 'components/pages/RegisterOrderOfService'
 import RegisterProjects from 'components/pages/RegisterProjects'
 import ReleaseNotes from 'components/pages/ReleaseNotes'
+import Reports from 'components/pages/Reports'
 import Settings from 'components/pages/Setting'
 import StatusProject from 'components/pages/StatusProject'
 import TypesProject from 'components/pages/TypesProject'
@@ -41,7 +42,7 @@ const Router = () => {
 
           <Route path='/extrasHours' element={<Professionals />} />
           <Route path='/notes' element={<Notes />} />
-          <Route path='/reports' element={<Professionals />} />
+          <Route path='/reports' element={<Reports />} />
 
           <Route
             path='/orderOfService'

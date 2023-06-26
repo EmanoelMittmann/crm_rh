@@ -81,6 +81,7 @@ const Commission = forwardRef<
     name: item.name,
     commission: item.commission
   }))
+
   const userCommission = professionalList.map((item: any) => ({
     professional_id: item.professional_id,
     commission: item.commission
@@ -98,6 +99,7 @@ const Commission = forwardRef<
       }
       return item
     })
+    
   const professionalsWithUndefinedCommission = joinedCommission.filter((item: any) => item.commission !== 0);
   
   useEffect(() => {

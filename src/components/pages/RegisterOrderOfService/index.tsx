@@ -33,14 +33,14 @@ const RegisterOrderOfService = () => {
   })
   const modalRef = useRef<IHandleModalPropsCommission>(null)
 
+
+
   const onSubmit = async (data: any) => {
     if (data.professional.length > 0) {
   
         const professionalsToRegister = [...data.professional];
          handleOpenModal(professionalsToRegister);
-        }
-
-     
+        }  
   };
 
   const handleOpenModal = async (professionals: any[]) => {
@@ -48,6 +48,7 @@ const RegisterOrderOfService = () => {
       modalRef.current.open(professionals);
 
       const updatedCommissionValues = professionals.map((professional) => ({
+  
         professional_id: professional.professional_id,
         companies_id: professional.companies_id,
         commission: professional.commission,
@@ -62,6 +63,8 @@ const RegisterOrderOfService = () => {
           routes.orderOfService.register,
           professionals
         );
+
+        
 
         if (response.data.msg === 'successfully generated report') {
           toast({

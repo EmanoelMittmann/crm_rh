@@ -31,6 +31,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     userCompanies,
     company_id
   } = props
+
   const field = `professional.${id}`
   const [selectedCompany, setSelectedCompany] = useState(company_id)
   const [selectedCommission, setSelectedCommission] = useState<CommissionItem[]>([])
@@ -76,7 +77,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
         companies_id: selectedCompany,
       }
 
-      if (commission === true) {
+      if (commission) {
         newItem = {
           professional_id: id,
           companies_id: selectedCompany
@@ -88,9 +89,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
           commission: 0
         }
       }
-
       const updatedValues = [...dataToSend, newItem]
-
       setValue('professional', updatedValues)
     } else {
       const dataToSend = watch('professional') || []
@@ -98,7 +97,6 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
       const updatedValues = dataToSend.filter(
         (item: Order) => item.professional_id !== id
       )
-
       setValue('professional', updatedValues)
     }
   }
@@ -117,6 +115,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
               label={name}
             />
           </ContainerText>
+          
         </ContainerShelfColumn>
 
         <ContainerShelfColumn>

@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom'
+
 import { List } from 'contexts'
 
 import { Filter, Table } from 'components/organisms'
 import { AuthTemplate, ReleaseTemplate } from 'components/templates'
 
 const ReleaseNotes = () => {
+  const navigate = useNavigate()
   return (
     <AuthTemplate>
       <List.UserNotes.Provider>
@@ -11,7 +14,7 @@ const ReleaseNotes = () => {
           arrow={true}
           title='Notas Fiscais'
           btnText='Enviar NF'
-          path='/uploadNotes'
+          event={() => navigate('/uploadNotes')}
         >
           <Filter.UserNotes />
           <Table.UserNotes />

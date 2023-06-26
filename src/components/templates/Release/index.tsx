@@ -8,20 +8,27 @@ import { IconLeftArrow } from 'components/atoms'
 import { Paginate } from 'components/molecules'
 
 import { Button as Buttons } from '../../atoms/Buttons'
-import { Container, Footer, Main, Button, Row } from './style'
+import { Container, Footer, Main, Row } from './style'
 
 interface Props {
   title?: string
   arrow?: boolean
   children?: ReactNode
   btnText: string
-  path: string
+  Icon?: JSX.Element
+  event?(): void
 }
 
 const FONT_COLOR = theme.neutrals.gray8
 
-export default ({ title, arrow, btnText, path, children }: Props) => {
-  const navigate = useNavigate()
+export default ({
+  title,
+  arrow,
+  btnText,
+  children,
+  Icon,
+  event
+}: Props) => {
   return (
     <Main>
       <Container gap='2rem'>
@@ -33,7 +40,8 @@ export default ({ title, arrow, btnText, path, children }: Props) => {
           )}
           <Buttons.New
             text={btnText}
-            onClick={() => navigate(path)}
+            iconLeft={Icon}
+            onClick={event}
           />
         </Row>
         <Container gap='1rem'>{children}</Container>
