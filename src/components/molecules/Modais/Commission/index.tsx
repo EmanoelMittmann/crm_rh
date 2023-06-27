@@ -1,21 +1,15 @@
 import {
   forwardRef,
-  useImperativeHandle,
-  useState,
-  useCallback,
-  useEffect
+    useImperativeHandle,
+    useState,
+    useCallback
 } from 'react'
-
+import { useFormContext } from 'react-hook-form'
 import { Input } from '@stardust-ds/react'
 import { Button } from '@stardust-ds/react'
 import { theme } from 'styles'
-
 import Close from 'components/atoms/Buttons/Close'
 import { IconTrash } from 'components/atoms/Icons/IconTrash'
-
-import api from 'api'
-import { routes } from 'routes'
-
 import { Columns, Row } from '../Edit/style'
 import {
   ContainerAbsolute,
@@ -26,7 +20,6 @@ import {
   Overlay,
   TitleComissionProfessional
 } from './style'
-
 interface IModalProps {
   text: string
   placeholder: string
@@ -37,10 +30,9 @@ interface IModalProps {
       commission: number
     }[]
   ) => void
-
+  isOpen?: boolean
   defaultOpened?: boolean
 }
-
 export interface IHandleModalPropsCommission {
   open(
     professionals?: {
@@ -50,82 +42,33 @@ export interface IHandleModalPropsCommission {
     }[]
   ): void
   close(): void
-  
 }
-
 const Commission = forwardRef<
   IHandleModalPropsCommission,
   IModalProps
 >((props, ref) => {
-  const { text, placeholder, EventOne } = props
+  const { text, EventOne } = props
   const [isOpen, setIsOpen] = useState(false)
   const [professionalList, setProfessionalList] = useState<any[]>([])
-  const [professional, setProfessional] = useState([])
-  const [commission, setCommission] = useState(0);
-
-
-
-  const fetchProfessional = async () => {
-    try {
-      const response = await api.get(
-        routes.professional.list + '?limit=1000'
-      )
-      setProfessional(response.data.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const orderCommission = professional.map((item: any) => ({
-    id: item.id,
-    name: item.name,
-    commission: item.commission
-  }))
-
-  const userCommission = professionalList.map((item: any) => ({
-    professional_id: item.professional_id,
-    commission: item.commission
-  }))
- 
-  const joinedCommission = userCommission.map((item: any) => {
-    const matchingProfessional = orderCommission.find(
-      (professional: any) => professional.id === item.professional_id
-      )
-      if (matchingProfessional) {
-        return {
-          ...item,
-          name: matchingProfessional.name
-        }
-      }
-      return item
-    })
-    
-  const professionalsWithUndefinedCommission = joinedCommission.filter((item: any) => item.commission !== 0);
-  
-  useEffect(() => {
-    fetchProfessional()
-  }, [])
-
+  const professionalExistComission = professionalList.filter(
+    (professional) => professional.isCommission
+  )
+  console.log(professionalList)
   const close = useCallback(() => {
     setIsOpen(false)
   }, [])
-
   useImperativeHandle(
     ref,
     () => ({
       open: (professionals: any[]) => {
-        setProfessionalList(professionals);
-        setIsOpen(true);
-        setCommission(0);
+        setProfessionalList(professionals)
+        setIsOpen(true)
       },
       close
     }),
     []
-  );
-
-
+  )
   if (!isOpen) return null
-
   return (
     <>
       <ContainerModal>
@@ -139,8 +82,7 @@ const Commission = forwardRef<
               <h6>Profissional</h6>
               <h6>Comissão</h6>
             </TitleComissionProfessional>
-
-            {professionalsWithUndefinedCommission.map((item, index) => (
+            {professionalExistComission.map((item, index) => (
               <ContainerWap key={index}>
                 <ContainerLabelProfessional>
                   {item.name}
@@ -150,24 +92,15 @@ const Commission = forwardRef<
                 </ContainerLabelProfessional>
                 <Input
                   width={180}
-                  value={professionalList[index]?.commission || ''}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    const newProfessionalList = [...professionalList];
-                    newProfessionalList[index] = {
-                      ...newProfessionalList[index],
-                      commission: Number(value),
-                    };
-                    setProfessionalList(newProfessionalList);
-                  }}
-                  
-                  placeholder="R$ 0,00"
+                  value={item?.commission}
+                  onChange={(e) =>
+                    (item.commission = Number(e.target.value))
+                  }
+                  placeholder='R$ 0,00'
                 />
               </ContainerWap>
             ))}
-            
           </ContainerAbsolute>
-
           <Row>
             <Button
               style={{ borderRadius: '500px' }}
@@ -185,14 +118,23 @@ const Commission = forwardRef<
               bgColor='#0066FF'
               onClick={() => {
                 EventOne(
-                  professionalList.map((professional) => ({
-                    professional_id: professional.professional_id,
-                    companies_id: professional.companies_id,
-                    commission: professional.commission
-                  }))
+                  professionalList.map((professional) => {
+                    const findProfessional =
+                      professionalExistComission.find(
+                        (professionalCommission) =>
+                          professional.professional_id ===
+                          professionalCommission.professional_id
+                      )
+                    if (!!findProfessional) {
+                      return {
+                        ...professional,
+                        commission: findProfessional.commission
+                      }
+                    }
+                    return professional
+                  })
                 )
                 close()
-
               }}
             >
               Cadastrar
@@ -204,5 +146,4 @@ const Commission = forwardRef<
     </>
   )
 })
-
 export default Commission

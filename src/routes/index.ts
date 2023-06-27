@@ -79,7 +79,7 @@ export const routes = {
     register: '/findProfessionalCommissionOrCreateOrderOfService',
     commission: '/commission',
     pushOrder: (id: number) => `/orderOfService/${id}`
-  },
+  }
 }
 
 export const externRoutes = {

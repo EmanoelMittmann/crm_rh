@@ -18,7 +18,8 @@ export const Modal = Object.assign(
     Colors,
     UserEditor,
     Details,
-    Commission
+    Commission,
+    Report
   }
 )
 

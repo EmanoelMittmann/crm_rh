@@ -49,3 +49,45 @@ export const OrderForm = () => {
     </>
   )
 }
+
+// const handleCheckboxChange = async (isChecked: boolean) => {
+//   if (isChecked) {
+//     const dataToSend = watch('professional') || []
+
+//     let newItem: {
+//       professional_id: number
+//       companies_id: number
+//       commission?: number
+//     } = {
+//       professional_id: id,
+//       companies_id: selectedCompany
+//     }
+
+//     if (commission) {
+//       newItem = {
+//         professional_id: id,
+//         companies_id: selectedCompany
+//       }
+//     } else {
+//       newItem = {
+//         professional_id: id,
+//         companies_id: selectedCompany,
+//         commission: commissions
+//       }
+//     }
+//     const updatedValues = [...dataToSend, newItem]
+//     setValue('professional', updatedValues)
+//   } else {
+//     const dataToSend = watch('professional') || []
+
+//     console.log('dataToSend: ', dataToSend);
+
+//     const updatedValues = dataToSend.filter(
+//       (item: Order) => item.professional_id !== id
+//     )
+
+//     setValue('professional', updatedValues)
+
+//   }
+
+// }

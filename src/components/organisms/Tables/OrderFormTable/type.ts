@@ -19,4 +19,3 @@ export interface Order {
   companies_id: number
   commission: number
 }
-

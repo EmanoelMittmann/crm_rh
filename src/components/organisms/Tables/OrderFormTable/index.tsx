@@ -12,25 +12,22 @@ import { List } from 'contexts'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
-import { FormOrderProps } from 'components/organisms/Forms/OrderOfService'
 import {
   LoadingWrapper,
   Main
 } from 'components/organisms/Tables/style'
 
-import api from 'api'
-import { routes } from 'routes'
 
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './Shelf'
 import { ScrollContainer } from './style'
 
 export const OrderFormTable = () => {
-  const { watch, setValue } = useFormContext<FormOrderProps>()
   const { professionalOS, handleOrder, isLoading } = useContext(
     List.OrderOfServiceprofessionalOS.Context
   )
   const POPOVER_OPTIONS = (id: number) => []
+
 
   const professional = professionalOS.filter(
     (professional: any) => professional.professional_data !== null

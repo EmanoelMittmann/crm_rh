@@ -26,6 +26,7 @@ export const Table = Object.assign(
     Notes,
     OrderOfService,
     UserNotes,
-    OrderFormTable
+    OrderFormTable,
+    Reports
   }
 )
