@@ -1,19 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
+
 import { Select } from '@stardust-ds/react'
+
 import { Inputs } from 'components/atoms'
 import {
   ContainerShelf,
   ContainerShelfColumn,
   Text
 } from 'components/organisms/Tables/style'
-import { GenerateValue } from 'components/utils/OptionsAplication'
-import api from 'api'
-import { routes } from 'routes'
-import { ShelfProps } from '../types'
+
+import { ShelfIProps } from '../types'
 import { ContainerText } from './style'
-import { CommissionItem, Order, OrderProps } from './type'
-export const Shelf = ({ props, config }: ShelfProps<any>) => {
+import { Order } from './type'
+
+export const Shelf = ({
+  props,
+  config,
+  orderData
+}: ShelfIProps<any>) => {
   const { setValue, watch } = useFormContext()
   const {
     name,
@@ -26,24 +31,21 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     commission,
     company_id
   } = props
+  const {} = orderData
+
   const field = `professional.${id}`
   const [selectedCompany, setSelectedCompany] = useState(company_id)
 
-
-  // const calcularTotal = () => {
-  //   const total = fixed_payment_value
-  //   return total
-  // }
-
-  const selectedCommission = watch('professional') || []
+  const selectedCommission = watch('professionals') || []
   const commissionValue = selectedCommission.map((item: Order) => {
     const commission = item.commission
+    console.log('commission: ', commission)
     const professional_id = item.professional_id
     const companies_id = item.companies_id
     return {
       commission,
       professional_id,
-      companies_id,
+      companies_id
     }
   })
 
@@ -56,6 +58,13 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     return total
   }
 
+  const calcularCommission = (id: number) => {
+    const item = commissionValue.find(
+      (item: any) => item.professional_id === id
+    )
+    const comissao = item ? item.commission : '-'
+    return comissao
+  }
 
   const handleCheckboxChange = async (isChecked: boolean) => {
     if (isChecked) {
@@ -65,6 +74,10 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
         professional_id: id,
         companies_id: selectedCompany,
         commission: commission ? undefined : 0,
+        extra_hour_value: extra_hour_value,
+        fixed_payment_value: fixed_payment_value,
+        professional_data: professional_data,
+        companies: companies,
         isCommission: commission
       }
       const updatedValues = [...dataToSend, newItem]
@@ -75,9 +88,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
         (item: Order) => item.professional_id !== id
       )
       setValue('professional', updatedValues)
-      console.log('updatedValues: ', updatedValues);
     }
-
   }
 
   return (
@@ -98,7 +109,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
         <ContainerShelfColumn>
           <Select
             placeholder={companies?.razao_social}
-            options={userCompanies}
+            options={companies?.razao_social ? [] : userCompanies}
             onClear={() => setSelectedCompany(null)}
             value={selectedCompany}
             onSelect={(companyId: any) =>
@@ -114,7 +125,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
           <Text>R$ {fixed_payment_value}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>{commission || '-'}</Text>
+          <Text>{calcularCommission(id)}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text>{extra_hour_value ? extra_hour_value : '-'}</Text>

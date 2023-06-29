@@ -1,15 +1,18 @@
 import {
   forwardRef,
-    useImperativeHandle,
-    useState,
-    useCallback
+  useImperativeHandle,
+  useState,
+  useCallback
 } from 'react'
 import { useFormContext } from 'react-hook-form'
+
 import { Input } from '@stardust-ds/react'
 import { Button } from '@stardust-ds/react'
 import { theme } from 'styles'
+
 import Close from 'components/atoms/Buttons/Close'
 import { IconTrash } from 'components/atoms/Icons/IconTrash'
+
 import { Columns, Row } from '../Edit/style'
 import {
   ContainerAbsolute,
@@ -53,7 +56,6 @@ const Commission = forwardRef<
   const professionalExistComission = professionalList.filter(
     (professional) => professional.isCommission
   )
-  console.log(professionalList)
   const close = useCallback(() => {
     setIsOpen(false)
   }, [])
