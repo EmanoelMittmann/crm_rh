@@ -1,11 +1,9 @@
-
 export interface TemplateProps {
   template: string
 }
 export type ShelfProps<T> = {
   props: T
   config: ConfigProps
-
 }
 
 interface OptionsProps {

@@ -17,7 +17,6 @@ import {
   Main
 } from 'components/organisms/Tables/style'
 
-
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './Shelf'
 import { ScrollContainer } from './style'
@@ -27,11 +26,6 @@ export const OrderFormTable = () => {
     List.OrderOfServiceprofessionalOS.Context
   )
   const POPOVER_OPTIONS = (id: number) => []
-
-
-  const professional = professionalOS.filter(
-    (professional: any) => professional.professional_data !== null
-  )
 
   const Table = useMemo(() => {
     if (isLoading)
@@ -43,7 +37,7 @@ export const OrderFormTable = () => {
 
     return (
       <ScrollContainer>
-        {professional.map((props: any) => (
+        {professionalOS.map((props: any) => (
           <Shelf
             config={{
               template: GRID_TEMPLATE,
@@ -54,7 +48,7 @@ export const OrderFormTable = () => {
         ))}
       </ScrollContainer>
     )
-  }, [isLoading, professional])
+  }, [isLoading, professionalOS])
 
   return (
     <Main>

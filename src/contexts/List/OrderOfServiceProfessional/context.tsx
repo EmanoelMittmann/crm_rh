@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { toast } from '@stardust-ds/react'
+
 import { PaginateContext } from 'components/molecules'
 
 import api from 'api'
@@ -8,10 +10,7 @@ import { routes } from 'routes'
 
 import { useDebounce } from 'hooks'
 
-import {
-  ContextProps,
-  ProfessionalProps
-} from '../Professional/types'
+import { ProfessionalProps } from '../Professional/types'
 import DEFAULT from './constants'
 import { ContextPropsProfessionalOS } from './types'
 
@@ -23,17 +22,47 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [professionalOS, setProfessionalOS] = useState<
     ProfessionalProps[]
   >([])
+  const [selectSendProfessionals, setSelectSendProfessionals] =
+    useState<any[]>([])
 
   const [meta, setMeta] = useState(DEFAULT.META_PROFESSIONAL_PROPS)
 
   const ContextPropsProfessionalOS = {
+    onCreateOs,
+    setSelectSendProfessionals,
+    selectSendProfessionals,
     professionalOS,
+    setProfessionalOS,
     isLoading,
     meta,
     navigateTo,
     paginate: { ...meta.paginate, setCurrent_page: setPage },
     handleSearch,
     handleOrder
+  }
+
+  async function onCreateOs() {
+    const response = await api.post(
+      routes.orderOfService.register,
+      selectSendProfessionals
+    )
+    if (response.data.msg) {
+      toast({
+        type: 'success',
+        title: 'Ordem de Serviço gerada com sucesso.',
+        position: 'bottom-right'
+      })
+      // navigate('/orderOfService')
+      return false
+    } else {
+      toast({
+        type: 'warning',
+        title:
+          'Voce precisa declarar as comissões dos profissionais.',
+        position: 'bottom-right'
+      })
+      return true
+    }
   }
 
   async function fetchList() {
@@ -49,7 +78,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         }
       }
     )
-    setProfessionalOS(data?.data)
+    setProfessionalOS(
+      data?.data.filter(
+        (professional: any) => professional.professional_data !== null
+      )
+    )
 
     setMeta((old) => ({
       ...old,
