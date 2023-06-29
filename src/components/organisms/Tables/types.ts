@@ -1,17 +1,9 @@
-import { UserCompanies } from './OrderFormTable/type'
-
 export interface TemplateProps {
   template: string
 }
 export type ShelfProps<T> = {
   props: T
   config: ConfigProps
-}
-
-export type ShelfIProps<T> = {
-  props: T
-  config: ConfigProps
-  orderData: OrderData
 }
 
 interface OptionsProps {

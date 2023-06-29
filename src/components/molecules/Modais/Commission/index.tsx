@@ -2,12 +2,14 @@ import {
   forwardRef,
   useImperativeHandle,
   useState,
-  useCallback
+  useCallback,
+  useContext
 } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { Input } from '@stardust-ds/react'
 import { Button } from '@stardust-ds/react'
+import { List } from 'contexts'
 import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
@@ -26,44 +28,34 @@ import {
 interface IModalProps {
   text: string
   placeholder: string
-  EventOne: (
-    professionals: {
-      professional_id: number
-      companies_id: number
-      commission: number
-    }[]
-  ) => void
-  isOpen?: boolean
   defaultOpened?: boolean
 }
 export interface IHandleModalPropsCommission {
-  open(
-    professionals?: {
-      professional_id: number
-      companies_id: number
-      commission?: number
-    }[]
-  ): void
+  open(): void
   close(): void
 }
 const Commission = forwardRef<
   IHandleModalPropsCommission,
   IModalProps
 >((props, ref) => {
-  const { text, EventOne } = props
-  const [isOpen, setIsOpen] = useState(false)
-  const [professionalList, setProfessionalList] = useState<any[]>([])
-  const professionalExistComission = professionalList.filter(
+  const { text } = props
+  const { selectSendProfessionals } = useContext(
+    List.OrderOfServiceprofessionalOS.Context
+  )
+
+  const professionalsHaveCommission = selectSendProfessionals.filter(
     (professional) => professional.isCommission
   )
+
+  const [isOpen, setIsOpen] = useState(false)
+
   const close = useCallback(() => {
     setIsOpen(false)
   }, [])
   useImperativeHandle(
     ref,
     () => ({
-      open: (professionals: any[]) => {
-        setProfessionalList(professionals)
+      open: () => {
         setIsOpen(true)
       },
       close
@@ -84,7 +76,7 @@ const Commission = forwardRef<
               <h6>Profissional</h6>
               <h6>Comissão</h6>
             </TitleComissionProfessional>
-            {professionalExistComission.map((item, index) => (
+            {professionalsHaveCommission.map((item, index) => (
               <ContainerWap key={index}>
                 <ContainerLabelProfessional>
                   {item.name}
@@ -118,26 +110,7 @@ const Commission = forwardRef<
                 boxShadow: '0px 5px 10px 0px #0066FF40'
               }}
               bgColor='#0066FF'
-              onClick={() => {
-                EventOne(
-                  professionalList.map((professional) => {
-                    const findProfessional =
-                      professionalExistComission.find(
-                        (professionalCommission) =>
-                          professional.professional_id ===
-                          professionalCommission.professional_id
-                      )
-                    if (!!findProfessional) {
-                      return {
-                        ...professional,
-                        commission: findProfessional.commission
-                      }
-                    }
-                    return professional
-                  })
-                )
-                close()
-              }}
+              onClick={() => close()}
             >
               Cadastrar
             </Button>

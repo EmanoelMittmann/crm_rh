@@ -21,13 +21,6 @@ export const OrderFormTable = () => {
   const { setValue, watch, getValues } = useFormContext()
   const POPOVER_OPTIONS = (id: number) => []
 
-  const professional = professionalOS.filter(
-    (professional: any) => professional.professional_data !== null
-  )
-
-  const orderData = getValues('professionals') || []
-  console.log('atual: ', orderData)
-
   const Table = useMemo(() => {
     if (isLoading)
       return (
@@ -38,7 +31,7 @@ export const OrderFormTable = () => {
 
     return (
       <ScrollContainer>
-        {professional.map((props: any) => (
+        {professionalOS.map((props: any) => (
           <Shelf
             key={props.id}
             config={{
@@ -62,7 +55,7 @@ export const OrderFormTable = () => {
         ))}
       </ScrollContainer>
     )
-  }, [isLoading, professional])
+  }, [isLoading, professionalOS])
 
   return (
     <Main>

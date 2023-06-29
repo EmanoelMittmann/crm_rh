@@ -5,7 +5,7 @@ import { theme } from 'styles'
 
 import { IconLeftArrow } from 'components/atoms'
 
-import { Container, Footer, Main, Button, Row } from './style'
+import { Container, Main, Button, Row } from './style'
 
 interface Props {
   title?: string

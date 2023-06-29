@@ -1,4 +1,4 @@
-import type { SelectProps } from '@stardust-ds/react'
+import { Dispatch, SetStateAction } from 'react'
 
 import { ProfessionalProps } from '../Professional/types'
 
@@ -15,6 +15,10 @@ export interface DefaultMetaProps {
 }
 
 export interface ContextPropsProfessionalOS {
+  onCreateOs(): Promise<Boolean>
+  selectSendProfessionals: any[]
+  setProfessionalOS: Dispatch<SetStateAction<ProfessionalProps[]>>
+  setSelectSendProfessionals: Dispatch<SetStateAction<any[]>>
   meta: DefaultMetaProps
   professionalOS: ProfessionalProps[]
   isLoading: boolean

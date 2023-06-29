@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { Select } from '@stardust-ds/react'
+import { List } from 'contexts'
 
 import { Inputs } from 'components/atoms'
 import {
@@ -10,16 +11,16 @@ import {
   Text
 } from 'components/organisms/Tables/style'
 
-import { ShelfIProps } from '../types'
+import { ShelfProps } from '../types'
 import { ContainerText } from './style'
 import { Order } from './type'
-
-export const Shelf = ({
-  props,
-  config,
-  orderData
-}: ShelfIProps<any>) => {
+export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const { setValue, watch } = useFormContext()
+
+  const { setSelectSendProfessionals } = useContext(
+    List.OrderOfServiceprofessionalOS.Context
+  )
+
   const {
     name,
     id,
@@ -36,7 +37,7 @@ export const Shelf = ({
   const field = `professional.${id}`
   const [selectedCompany, setSelectedCompany] = useState(company_id)
 
-  const selectedCommission = watch('professionals') || []
+  const selectedCommission = watch('professional') || []
   const commissionValue = selectedCommission.map((item: Order) => {
     const commission = item.commission
     console.log('commission: ', commission)
@@ -58,18 +59,9 @@ export const Shelf = ({
     return total
   }
 
-  const calcularCommission = (id: number) => {
-    const item = commissionValue.find(
-      (item: any) => item.professional_id === id
-    )
-    const comissao = item ? item.commission : '-'
-    return comissao
-  }
-
   const handleCheckboxChange = async (isChecked: boolean) => {
     if (isChecked) {
-      const dataToSend = watch('professional') || []
-      let newItem = {
+      const newItem = {
         name: name,
         professional_id: id,
         companies_id: selectedCompany,
@@ -80,14 +72,11 @@ export const Shelf = ({
         companies: companies,
         isCommission: commission
       }
-      const updatedValues = [...dataToSend, newItem]
-      setValue('professional', updatedValues)
+      setSelectSendProfessionals((prev) => [...prev, newItem])
     } else {
-      const dataToSend = watch('professional') || []
-      const updatedValues = dataToSend.filter(
-        (item: Order) => item.professional_id !== id
+      setSelectSendProfessionals((prev) =>
+        prev.filter((item) => item.professional_id !== id)
       )
-      setValue('professional', updatedValues)
     }
   }
 
