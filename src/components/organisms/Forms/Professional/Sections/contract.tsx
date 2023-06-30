@@ -62,6 +62,7 @@ export const Contract = () => {
           error={errors.start_date?.message}
           type='date'
           label='Data de inicio'
+          required
           width={220}
         />
         <Selects.Default
@@ -75,6 +76,7 @@ export const Contract = () => {
           error={errors.professional_data?.type_person?.message}
           options={options?.jobs}
           label='Cargo'
+          required
           value={watch('job_id') as any}
           placeholder='Selecione'
           width={435}
@@ -94,6 +96,7 @@ export const Contract = () => {
           }
           onClear={() => setValue('job_type', null)}
           error={errors.job_type?.message}
+          required
           options={CONTRACT_TYPE_OPTIONS}
           value={watch('job_type') as any}
           label='Tipo de contrato'
@@ -105,6 +108,7 @@ export const Contract = () => {
           })}
           error={errors.weekly_hours?.message}
           type='number'
+          required
           min={0}
           label='Horas/semana'
           width={210}
@@ -116,6 +120,7 @@ export const Contract = () => {
           error={errors.mounth_hours?.message}
           type='number'
           min={0}
+          required
           label='Horas/mês'
           width={210}
         />
@@ -128,6 +133,7 @@ export const Contract = () => {
           value={watch('fixed_payment_value') ?? ''}
           type='number'
           min={0}
+          required
           iconLeft='R$'
           placeholder='00,00'
           label='Pagamento fixo'
@@ -140,11 +146,12 @@ export const Contract = () => {
           {...register('options.payingCompany')}
           options={watch('options.payingCompanies')}
           onSelect={(e: any) => setValue('company_id', e.value)}
+          clearable={false}
           value={
-            generateOpitionsFromBackend(
+            (generateOpitionsFromBackend(
               watch('company_id'),
               watch('options.payingCompanies', [])
-            ) as any
+            ) as any) || []
             /* watch('options.payingCompany') as any */
           }
         />

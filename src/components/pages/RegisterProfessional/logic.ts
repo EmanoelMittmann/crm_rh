@@ -14,6 +14,7 @@ import { generateOpitionsFromBackend } from 'components/utils/OptionsAplication'
 import api from 'api'
 import { externRoutes, routes } from 'routes'
 
+import { ProfessionalSchema } from './schema'
 import { CNPJValidatorResponse } from 'types'
 
 export function getPermissionsId(data: any[]) {
@@ -117,8 +118,8 @@ export function handleCEP(
       methods.setValue('street_name', data?.logradouro)
       methods.setValue('complement', data?.complemento)
       methods.setValue('city_name', data?.localidade)
+      methods.setValue('neighbourhood_name', data?.bairro)
       methods.setValue('uf', getUfOption(data?.uf))
-      methods.setValue('telephone_number', data?.ddd)
       methods.clearErrors('cep')
     })
     .catch((error) => {
@@ -219,7 +220,7 @@ export function handlePopulateFields(
 ) {
   const BANKS = methods.watch('options.banks')
   const JOBS = methods.watch('options.jobs')
-  const COMPANIES = methods.watch('options.companies')
+  // const COMPANIES = methods.watch('options.companies')
   const OPTIONS = methods.watch('options')
 
   methods.reset({
@@ -351,64 +352,57 @@ export async function onSubmit(
     cep: handleRemoveSpecialCharacters(data.cep),
     street_name: data.street_name,
     house_number: Number(data.house_number),
-    //complement: data.complement,
     neighbourhood_name: data.neighbourhood_name,
     city_name: data.city_name,
     country: 'Brasil',
     uf: data.uf?.value,
-    //tools: data.tools,
-    //extra_hour_activated: setLimitedExtraHoursToBoolean(
-    //  data.extra_hour_activated
-    //),
-    //variable1: data.extra_hour_activated ? data.variable1 : null,
-    //variable2: data.extra_hour_activated ? data.variable2 : null,
-    //extra_hour_value: data.extra_hour_value || 0,
-    //limited_extra_hours: data.limited_extra_hours || 0,
-    //extra_hour_limit: data.extra_hour_limit || 0,
-    //permissions: getPermissionsId(data.permissions),
-    //companies: getCompanies(data.options.payingCompanies),
+    projects: data.projects.attachment,
     professional_data: {
       bank: data.professional_data.bank?.value,
       account_type: data.professional_data.account_type?.value,
-      agency: +data.professional_data.agency,
-      account_number: +handleRemoveSpecialCharacters(
+      agency: Number(data.professional_data.agency),
+      account_number: handleRemoveSpecialCharacters(
         data.professional_data.account_number
       ),
-      //cnpj: data.professional_data.cnpj,
-      //razao_social: data.professional_data.razao_social,
-      //company_cep: handleRemoveSpecialCharacters(
-      //  data.professional_data.company_cep
-      //),
-      //fantasy_name: data.professional_data.fantasy_name,
-      //company_street_name:
-      //  data.professional_data.company_street_name,
-      //company_neighborhood_name:
-      //  data.professional_data.company_neighborhood_name,
-      //company_house_number:
-      //  +data.professional_data.company_house_number,
-      //company_complement: data.professional_data.company_complement,
-      //company_city_name: data.professional_data.company_city_name,
-      //uf_company: data.professional_data.uf_company?.value,
-      //company_phone_number: handleRemoveSpecialCharacters(
-      //  data.professional_data.company_phone_number
-      //),
-      //company_email: data.professional_data.company_email,
       type_person: data.professional_data.type_person?.value,
-      type_of_transfer: data.professional_data.type_of_transfer?.value
-      //pix_key_type: data.professional_data.pix_key_type?.value,
-      //pix_key: data.professional_data.pix_key
+      type_of_transfer:
+        data.professional_data.type_of_transfer?.value,
+      cnpj: data.professional_data.cnpj,
+      razao_social: data.professional_data.razao_social,
+      company_cep: handleRemoveSpecialCharacters(
+        data.professional_data.company_cep
+      ),
+      fantasy_name: data.professional_data.fantasy_name,
+      company_street_name: data.professional_data.company_street_name,
+      company_neighborhood_name:
+        data.professional_data.company_neighborhood_name,
+      company_house_number:
+        +data.professional_data.company_house_number,
+      company_complement: data.professional_data.company_complement,
+      company_city_name: data.professional_data.company_city_name,
+      uf_company: data.professional_data.uf_company?.value,
+      company_phone_number: handleRemoveSpecialCharacters(
+        data.professional_data.company_phone_number
+      ),
+      company_email: data.professional_data.company_email,
+      pix_key_type: data.professional_data.pix_key_type?.value,
+      pix_key: data.professional_data.pix_key
     },
-    projects: data.projects.attachment
+    complement: data.complement,
+    tools: data.tools,
+    extra_hour_activated: setLimitedExtraHoursToBoolean(
+      data.extra_hour_activated
+    ),
+    variable1: data.extra_hour_activated ? data.variable1 : null,
+    variable2: data.extra_hour_activated ? data.variable2 : null,
+    extra_hour_value: data.extra_hour_value || 0,
+    limited_extra_hours: data.limited_extra_hours || 0,
+    extra_hour_limit: data.extra_hour_limit || 0,
+    permissions: getPermissionsId(data.permissions),
+    companies: getCompanies(data.options.payingCompanies)
   }
 
   id
     ? await api.put(routes.professional.getUser(Number(id)), payload)
     : await api.post(routes.professional.register, payload)
-}
-
-export const handleSave = async (
-  methods: UseFormReturn<FormProps['Professional'], any>,
-  id?: string
-) => {
-  methods.handleSubmit((data) => onSubmit(data, id))
 }

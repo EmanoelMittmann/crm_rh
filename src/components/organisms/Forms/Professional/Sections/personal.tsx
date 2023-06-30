@@ -1,3 +1,4 @@
+import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { mask } from 'remask'
@@ -16,7 +17,6 @@ export const Personal = () => {
     setValue,
     formState: { errors }
   } = useFormContext<FormProps>()
-
   return (
     <>
       <ContainerRow>
@@ -26,6 +26,7 @@ export const Personal = () => {
         <Inputs.Default
           {...register('name', { required: validation.required })}
           error={errors.name?.message}
+          required
           width='100%'
           type='text'
           label='Nome do profissional'
@@ -33,6 +34,7 @@ export const Personal = () => {
         <Inputs.Default
           {...register('email', { required: validation.required })}
           error={errors.email?.message}
+          required
           type='email'
           label='Email pessoal'
           placeholder='email@email.com'
@@ -45,6 +47,7 @@ export const Personal = () => {
             required: validation.required
           })}
           error={errors.birth_date?.message}
+          required
           type='date'
           label='Data de nascimento'
           value={watch('birth_date') as any}
@@ -57,6 +60,7 @@ export const Personal = () => {
             validate: (v) =>
               validation.min(Number(v), 11, 'CPF inválido')
           })}
+          required
           error={errors.cpf?.message}
           value={watch('cpf') ?? ''}
           width='100%'
@@ -66,6 +70,7 @@ export const Personal = () => {
         <Inputs.Default
           {...register('rg', { required: validation.required })}
           error={errors.rg?.message}
+          required
           width='100%'
           type='number'
           min={0}
@@ -79,6 +84,7 @@ export const Personal = () => {
           })}
           error={errors.telephone_number?.message}
           value={watch('telephone_number') ?? ''}
+          required
           width='100%'
           label='Telefone'
           placeholder='(00) 00000-0000'
@@ -92,6 +98,7 @@ export const Personal = () => {
             setValueAs: (v: string) => mask(v, MASKER.CEP)
           })}
           error={errors.cep?.message}
+          required
           value={watch('cep') ?? ''}
           label='CEP'
           placeholder='00000-0000'
@@ -104,6 +111,7 @@ export const Personal = () => {
           error={errors.street_name?.message}
           label='Rua'
           type='text'
+          required
           width={300}
         />
         <Inputs.Default
@@ -113,6 +121,7 @@ export const Personal = () => {
           error={errors.house_number?.message}
           label='Número'
           type='number'
+          required
           width={130}
           min={0}
         />
@@ -131,6 +140,7 @@ export const Personal = () => {
           })}
           error={errors.neighbourhood_name?.message}
           label='Bairro'
+          required
           width='100%'
         />
         <Inputs.Default
@@ -139,6 +149,7 @@ export const Personal = () => {
           })}
           error={errors.city_name?.message}
           label='Cidade'
+          required
           width='100%'
         />
 
@@ -151,8 +162,9 @@ export const Personal = () => {
           onClear={() => setValue('uf', null)}
           error={errors.uf?.message}
           placeholder='Selecione'
+          required
           options={UF_OPTIONS}
-          label='Estados'
+          label='Estado'
           searchable
           width={295}
         />
