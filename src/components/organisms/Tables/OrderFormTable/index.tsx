@@ -1,5 +1,4 @@
-import { useContext, useEffect, useMemo } from 'react'
-import { useFormContext } from 'react-hook-form'
+import { useContext, useMemo } from 'react'
 
 import { List } from 'contexts'
 
@@ -10,6 +9,7 @@ import {
   Main
 } from 'components/organisms/Tables/style'
 
+import { ProfessionalProps } from '../Professionals/types'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './Shelf'
 import { ScrollContainer } from './style'
@@ -18,7 +18,6 @@ export const OrderFormTable = () => {
   const { professionalOS, handleOrder, isLoading } = useContext(
     List.OrderOfServiceprofessionalOS.Context
   )
-  const { setValue, watch, getValues } = useFormContext()
   const POPOVER_OPTIONS = (id: number) => []
 
   const Table = useMemo(() => {
@@ -31,26 +30,13 @@ export const OrderFormTable = () => {
 
     return (
       <ScrollContainer>
-        {professionalOS.map((props: any) => (
+        {professionalOS.map((props: ProfessionalProps) => (
           <Shelf
-            key={props.id}
             config={{
               template: GRID_TEMPLATE,
               options: POPOVER_OPTIONS(props.id)
             }}
-            orderData={orderData}
-            props={props}
-          />
-        ))}
-        {orderData.map((props: any) => (
-          <Shelf
-            key={props.id}
-            config={{
-              template: GRID_TEMPLATE,
-              options: POPOVER_OPTIONS(props.id)
-            }}
-            orderData={props}
-            props={props}
+            {...{ props }}
           />
         ))}
       </ScrollContainer>

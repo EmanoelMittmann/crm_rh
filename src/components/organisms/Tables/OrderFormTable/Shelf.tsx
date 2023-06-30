@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form'
 import { Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { Inputs } from 'components/atoms'
+import { Inputs, SelectOption, Selects } from 'components/atoms'
 import {
   ContainerShelf,
   ContainerShelfColumn,
@@ -14,6 +14,8 @@ import {
 import { ShelfProps } from '../types'
 import { ContainerText } from './style'
 import { Order } from './type'
+import { Option } from 'types'
+
 export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const { setValue, watch } = useFormContext()
 
@@ -24,7 +26,6 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const {
     name,
     id,
-    companies,
     professional_data,
     extra_hour_value,
     fixed_payment_value,
@@ -32,15 +33,17 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     commission,
     company_id
   } = props
-  const {} = orderData
-
   const field = `professional.${id}`
   const [selectedCompany, setSelectedCompany] = useState(company_id)
+
+  const options = userCompanies.map((company: any) => ({
+    value: company.id,
+    label: company.razao_social
+  }))
 
   const selectedCommission = watch('professional') || []
   const commissionValue = selectedCommission.map((item: Order) => {
     const commission = item.commission
-    console.log('commission: ', commission)
     const professional_id = item.professional_id
     const companies_id = item.companies_id
     return {
@@ -66,10 +69,6 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
         professional_id: id,
         companies_id: selectedCompany,
         commission: commission ? undefined : 0,
-        extra_hour_value: extra_hour_value,
-        fixed_payment_value: fixed_payment_value,
-        professional_data: professional_data,
-        companies: companies,
         isCommission: commission
       }
       setSelectSendProfessionals((prev) => [...prev, newItem])
@@ -91,19 +90,25 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
               onChange={(e) =>
                 handleCheckboxChange(e.target?.checked)
               }
+              onBlur={() => {}}
               label={name}
             />
           </ContainerText>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Select
-            placeholder={companies?.razao_social}
-            options={companies?.razao_social ? [] : userCompanies}
-            onClear={() => setSelectedCompany(null)}
-            value={selectedCompany}
-            onSelect={(companyId: any) =>
-              setSelectedCompany(companyId)
+            placeholder={
+              options.find(
+                (item: Option) => item.value === selectedCompany
+              )?.label
             }
+            options={options || []}
+            clearable={false}
+            onSelect={(option: Option | null) => {
+              if (option !== null) {
+                setSelectedCompany(option.value)
+              }
+            }}
             width={190}
           />
         </ContainerShelfColumn>
@@ -114,7 +119,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
           <Text>R$ {fixed_payment_value}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>{calcularCommission(id)}</Text>
+          <Text>{commission || '-'}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text>{extra_hour_value ? extra_hour_value : '-'}</Text>

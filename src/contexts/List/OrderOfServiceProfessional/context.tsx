@@ -13,6 +13,7 @@ import { useDebounce } from 'hooks'
 import { ProfessionalProps } from '../Professional/types'
 import DEFAULT from './constants'
 import { ContextPropsProfessionalOS } from './types'
+import { Order } from 'components/organisms/Tables/OrderFormTable/type'
 
 export const Context = createContext({} as ContextPropsProfessionalOS)
 
@@ -23,7 +24,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     ProfessionalProps[]
   >([])
   const [selectSendProfessionals, setSelectSendProfessionals] =
-    useState<any[]>([])
+    useState<Order[]>([])
 
   const [meta, setMeta] = useState(DEFAULT.META_PROFESSIONAL_PROPS)
 
@@ -42,28 +43,42 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function onCreateOs() {
-    const response = await api.post(
-      routes.orderOfService.register,
-      selectSendProfessionals
-    )
-    if (response.data.msg) {
-      toast({
-        type: 'success',
-        title: 'Ordem de Serviço gerada com sucesso.',
-        position: 'bottom-right'
-      })
-      // navigate('/orderOfService')
-      return false
+    if (selectSendProfessionals.length > 0) {
+      try {
+        const response = await api.post(
+          routes.orderOfService.register,
+          selectSendProfessionals
+        );
+
+        if (response.data.msg) {
+          toast({
+            type: 'success',
+            title: 'Ordem de Serviço gerada com sucesso.',
+            position: 'bottom-right'
+          });
+          navigate('/orderOfService')
+          return false;
+        } else {
+          return true;
+        }
+      } catch (error) {
+        toast({
+          type: 'error',
+          title: 'Erro ao gerar Ordem de Serviço.',
+          position: 'bottom-right'
+        });
+        return false;
+      }
     } else {
       toast({
-        type: 'warning',
-        title:
-          'Voce precisa declarar as comissões dos profissionais.',
+        type: 'error',
+        title: 'Selecione ao menos um profissional.',
         position: 'bottom-right'
-      })
-      return true
+      });
+      return false;
     }
   }
+
 
   async function fetchList() {
     setIsLoading(true)

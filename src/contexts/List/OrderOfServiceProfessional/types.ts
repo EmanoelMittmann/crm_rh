@@ -15,7 +15,7 @@ export interface DefaultMetaProps {
 }
 
 export interface ContextPropsProfessionalOS {
-  onCreateOs(): Promise<Boolean>
+  onCreateOs(): Promise<Boolean | undefined>
   selectSendProfessionals: any[]
   setProfessionalOS: Dispatch<SetStateAction<ProfessionalProps[]>>
   setSelectSendProfessionals: Dispatch<SetStateAction<any[]>>

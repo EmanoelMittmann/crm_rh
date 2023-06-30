@@ -62,7 +62,9 @@ const Commission = forwardRef<
     }),
     []
   )
+
   if (!isOpen) return null
+
   return (
     <>
       <ContainerModal>
