@@ -1,3 +1,4 @@
+import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { mask } from 'remask'
@@ -16,7 +17,6 @@ export const Personal = () => {
     setValue,
     formState: { errors }
   } = useFormContext<FormProps>()
-
   return (
     <>
       <ContainerRow>
@@ -164,7 +164,7 @@ export const Personal = () => {
           placeholder='Selecione'
           required
           options={UF_OPTIONS}
-          label='Estados'
+          label='Estado'
           searchable
           width={295}
         />
