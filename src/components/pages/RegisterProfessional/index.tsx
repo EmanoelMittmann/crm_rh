@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -19,7 +19,7 @@ import {
   handleCEP,
   handleCNPJ,
   handleCPF,
-  handleSave
+  onSubmit
 } from './logic'
 import { ProfessionalSchema } from './schema'
 import { Container } from './style'
@@ -27,6 +27,7 @@ import { Container } from './style'
 const RegisterProfessional = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [defaultValue, setDefaultValue] = useState()
+  const navigate = useNavigate()
 
   const methods = useForm<FormProps['Professional']>({
     resolver: yupResolver(ProfessionalSchema),
@@ -40,6 +41,14 @@ const RegisterProfessional = () => {
   const CEP = methods.watch('cep')
   const CNPJ = methods.watch('professional_data.cnpj')
   const { id } = useParams()
+
+  const handleSave = async (
+    data: FormProps['Professional'],
+    id?: string
+  ) => {
+    await onSubmit(data, id)
+    navigate(-1)
+  }
 
   // TODO: [x] Limpar campos com máscara;
   //       [] Tratar retorno de error e passa - los para: methods.setErrors();
@@ -69,7 +78,7 @@ const RegisterProfessional = () => {
   useDebounce({
     fn: () => fetchProps(methods),
     delay: 0,
-    listener: []
+    listener: [isLoading]
   })
 
   useDebounce({
@@ -115,9 +124,9 @@ const RegisterProfessional = () => {
               <Form.Professional />
             )}
             <Button.Updade
-              onClick={(e) => {
-                handleSave(methods, id)
-              }}
+              onSave={methods.handleSubmit((data) =>
+                handleSave(data, id)
+              )}
               saveButtonName='Salvar Profissional'
               cancelButtonName='cancelar'
             />
