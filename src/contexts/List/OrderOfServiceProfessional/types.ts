@@ -13,9 +13,19 @@ export interface DefaultMetaProps {
     last_page: number
   }
 }
+export interface PageMetaProps {
+  search: string
+  orderField: string | null
+  order: 'ASC' | 'DESC'
+  paginate: {
+    current_page: number
+    last_page: number
+  }
+}
 
 export interface ContextPropsProfessionalOS {
   onCreateOs(): Promise<Boolean | undefined>
+  deleteCommission(id: number): Promise<void>
   selectSendProfessionals: any[]
   setProfessionalOS: Dispatch<SetStateAction<ProfessionalProps[]>>
   setSelectSendProfessionals: Dispatch<SetStateAction<any[]>>

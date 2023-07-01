@@ -5,7 +5,6 @@ import {
   useCallback,
   useContext
 } from 'react'
-import { useFormContext } from 'react-hook-form'
 
 import { Input } from '@stardust-ds/react'
 import { Button } from '@stardust-ds/react'
@@ -18,28 +17,34 @@ import { IconTrash } from 'components/atoms/Icons/IconTrash'
 import { Columns, Row } from '../Edit/style'
 import {
   ContainerAbsolute,
+  ContainerFooter,
   ContainerLabelProfessional,
   ContainerModal,
   ContainerWap,
+  Footer,
   IconButton,
   Overlay,
   TitleComissionProfessional
 } from './style'
+import { Paginate } from 'components/molecules/Paginate'
+
 interface IModalProps {
   text: string
   placeholder: string
   defaultOpened?: boolean
 }
+
 export interface IHandleModalPropsCommission {
   open(): void
   close(): void
 }
+
 const Commission = forwardRef<
   IHandleModalPropsCommission,
   IModalProps
 >((props, ref) => {
   const { text } = props
-  const { selectSendProfessionals } = useContext(
+  const { selectSendProfessionals, deleteCommission } = useContext(
     List.OrderOfServiceprofessionalOS.Context
   )
 
@@ -49,14 +54,17 @@ const Commission = forwardRef<
 
   const [isOpen, setIsOpen] = useState(false)
 
+
   const close = useCallback(() => {
     setIsOpen(false)
   }, [])
+
   useImperativeHandle(
     ref,
     () => ({
       open: () => {
         setIsOpen(true)
+
       },
       close
     }),
@@ -83,7 +91,7 @@ const Commission = forwardRef<
                 <ContainerLabelProfessional>
                   {item.name}
                   <IconButton>
-                    <IconTrash />
+                    <IconTrash onClick={() => deleteCommission(item.professional_id)}/>
                   </IconButton>
                 </ContainerLabelProfessional>
                 <Input
@@ -97,6 +105,13 @@ const Commission = forwardRef<
               </ContainerWap>
             ))}
           </ContainerAbsolute>
+
+          <ContainerFooter>
+            <Footer>
+              <Paginate />
+            </Footer>
+          </ContainerFooter>
+
           <Row>
             <Button
               style={{ borderRadius: '500px' }}
@@ -118,7 +133,10 @@ const Commission = forwardRef<
             </Button>
           </Row>
         </Columns>
+
+
       </ContainerModal>
+
       <Overlay />
     </>
   )

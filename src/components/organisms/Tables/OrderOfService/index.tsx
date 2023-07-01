@@ -11,8 +11,8 @@ import { Shelf } from './shelf'
 
 export const OrderOfService = () => {
   const { orderOfService, navigateTo, handleOrder, isLoading } =
-    useContext(List.OrderOfService.Context)
-
+  useContext(List.OrderOfService.Context)
+  
   const POPOVER_OPTIONS = (id: number, name: string) => []
 
   const Table = useMemo(() => {

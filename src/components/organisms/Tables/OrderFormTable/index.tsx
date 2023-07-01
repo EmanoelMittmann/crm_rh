@@ -17,7 +17,9 @@ import { ScrollContainer } from './style'
 export const OrderFormTable = () => {
   const { professionalOS, handleOrder, isLoading } = useContext(
     List.OrderOfServiceprofessionalOS.Context
-  )
+    )
+
+
   const POPOVER_OPTIONS = (id: number) => []
 
   const Table = useMemo(() => {
@@ -29,7 +31,8 @@ export const OrderFormTable = () => {
       )
 
     return (
-      <ScrollContainer>
+     <ScrollContainer>
+      <>
         {professionalOS.map((props: ProfessionalProps) => (
           <Shelf
             config={{
@@ -39,7 +42,8 @@ export const OrderFormTable = () => {
             {...{ props }}
           />
         ))}
-      </ScrollContainer>
+      </>
+  </ScrollContainer>
     )
   }, [isLoading, professionalOS])
 

@@ -10,7 +10,7 @@ export const ContainerModal = styled.div`
   display: flex;
   padding-top: 1em;
   top: 50%;
-  left: 50%;
+  left: 45%;
   transform: translate(-24%, -50%);
   z-index: 10;
   box-shadow: 0px 5px 10px 10px ${theme.neutrals.gray3};
@@ -37,6 +37,7 @@ export const ContainerWap = styled.div`
   width: 90%;
   margin-bottom: 0.5em;
   position: relative;
+
 
   &:last-child {
     margin-bottom: 1em;
@@ -72,4 +73,16 @@ export const TitleComissionProfessional = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin: 0em 11.3em 1em 1em;
+`
+export const ContainerFooter = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+  width: 100%;
+  justify-content: flex-end;
+  padding: 0 1em;
+`
+export const Footer = styled.div`
+  display: flex;
+  height: 20px;
 `

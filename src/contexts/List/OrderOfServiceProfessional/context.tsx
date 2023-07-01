@@ -1,9 +1,9 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { toast } from '@stardust-ds/react'
 
-import { PaginateContext } from 'components/molecules'
+import { IHandleModalPropsCommission, PaginateContext } from 'components/molecules'
 
 import api from 'api'
 import { routes } from 'routes'
@@ -25,12 +25,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   >([])
   const [selectSendProfessionals, setSelectSendProfessionals] =
     useState<Order[]>([])
-
-  const [meta, setMeta] = useState(DEFAULT.META_PROFESSIONAL_PROPS)
-
+  const [meta, setMeta] = useState(DEFAULT.META_PROPS)
+  const modalRef = useRef<IHandleModalPropsCommission>(null)
   const ContextPropsProfessionalOS = {
     onCreateOs,
     setSelectSendProfessionals,
+    deleteCommission,
     selectSendProfessionals,
     professionalOS,
     setProfessionalOS,
@@ -41,14 +41,40 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleSearch,
     handleOrder
   }
+  async function fetchList() {
+    setIsLoading(true)
+    const { data } = await api.get(
+      routes.professional.list + '?limit=110',
+      {
+        params: {
+          page: meta.paginate.current_page,
+          search: meta.search && meta.search,
+          order: meta.order,
+          orderField: meta.orderField
+        }
+      }
+
+    )
+    setProfessionalOS(
+      data?.data.filter(
+        (professional: any) => professional.professional_data !== null
+      )
+
+    )
+    setIsLoading(false)
+  }
 
   async function onCreateOs() {
     if (selectSendProfessionals.length > 0) {
       try {
         const response = await api.post(
           routes.orderOfService.register,
-          selectSendProfessionals
-        );
+          selectSendProfessionals);
+
+        setMeta((old) => ({
+          ...old,
+          paginate: { ...old.paginate, last_page: response.data.meta.last_page }
+        }))
 
         if (response.data.msg) {
           toast({
@@ -76,35 +102,24 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         position: 'bottom-right'
       });
       return false;
+
     }
+
+  }
+
+  async function deleteCommission(id: number) {
+    setSelectSendProfessionals((old) =>
+      old.filter((professional) => professional.professional_id !== id),
+    )
+    const lastItemDeleted = selectSendProfessionals.length === 0
+    if (lastItemDeleted) {
+      modalRef.current?.close()
+      console.log('modalRef: ', modalRef);
+    }
+
   }
 
 
-  async function fetchList() {
-    setIsLoading(true)
-    const { data } = await api.get(
-      routes.professional.list + '?limit=120',
-      {
-        params: {
-          page: meta.paginate.current_page,
-          search: meta.search && meta.search,
-          order: meta.order,
-          orderField: meta.orderField
-        }
-      }
-    )
-    setProfessionalOS(
-      data?.data.filter(
-        (professional: any) => professional.professional_data !== null
-      )
-    )
-
-    setMeta((old) => ({
-      ...old,
-      paginate: { ...old.paginate, last_page: data.meta.last_page }
-    }))
-    setIsLoading(false)
-  }
 
   function navigateTo(url: string) {
     navigate(url)
@@ -115,6 +130,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       ...old,
       paginate: { ...old.paginate, current_page }
     }))
+
   }
 
   function handleSearch(search: string) {
@@ -135,7 +151,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   useDebounce({
     fn: fetchList,
-    listener: [meta.paginate.current_page, meta.search, meta.order]
+    listener: [
+      meta.paginate.current_page,
+      meta.search,
+      meta.order
+    ]
   })
 
   return (
@@ -146,5 +166,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         {children}
       </PaginateContext.Provider>
     </Context.Provider>
+
   )
 }

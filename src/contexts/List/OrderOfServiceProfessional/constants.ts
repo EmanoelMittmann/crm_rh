@@ -1,6 +1,6 @@
 import type { DefaultMetaProps } from './types'
 
-const META_PROFESSIONAL_PROPS = {
+const META_PROPS = {
   search: '',
   orderField: 'name',
   order: 'ASC',
@@ -10,4 +10,4 @@ const META_PROFESSIONAL_PROPS = {
   }
 } as DefaultMetaProps
 
-export default { META_PROFESSIONAL_PROPS }
+export default { META_PROPS }
