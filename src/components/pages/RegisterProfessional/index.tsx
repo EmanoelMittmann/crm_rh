@@ -97,13 +97,13 @@ const RegisterProfessional = () => {
       api
         .get<any[]>(routes.professional.getUser(+id))
         .then(({ data }) => setDefaultValue(data[0]))
-      /* fetchAndPopulateUser(id, methods)
+      fetchAndPopulateUser(id, methods)
         .catch((error) => {
           console.log(error.message)
         })
-        .finally(() => setIsLoading(false)) */
+        .finally(() => setIsLoading(false))
     } else {
-      /* setIsLoading(false) */
+      setIsLoading(false)
     }
   }, [id])
 

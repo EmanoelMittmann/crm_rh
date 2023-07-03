@@ -14,7 +14,6 @@ import { generateOpitionsFromBackend } from 'components/utils/OptionsAplication'
 import api from 'api'
 import { externRoutes, routes } from 'routes'
 
-import { ProfessionalSchema } from './schema'
 import { CNPJValidatorResponse } from 'types'
 
 export function getPermissionsId(data: any[]) {
@@ -148,6 +147,18 @@ export function handleCPF(
     })
 }
 
+function convertIdInIndexs(v2: any[]) {
+  const index: boolean[] = new Array(10).fill(false)
+
+  v2.forEach((v) => {
+    const id = v.id
+    if (id >= 1 && id <= 10) {
+      index[Number(id)] = true
+    }
+  })
+  return index
+}
+
 export async function fetchProps(
   methods: UseFormReturn<FormProps['Professional'], any>
 ) {
@@ -220,7 +231,6 @@ export function handlePopulateFields(
 ) {
   const BANKS = methods.watch('options.banks')
   const JOBS = methods.watch('options.jobs')
-  // const COMPANIES = methods.watch('options.companies')
   const OPTIONS = methods.watch('options')
 
   methods.reset({
@@ -238,7 +248,7 @@ export function handlePopulateFields(
     street_name: data.street_name,
     house_number: data.house_number,
     complement: data.complement,
-    professional_data: {
+    professional_data: null || {
       cnpj: data.professional_data.cnpj,
       fantasy_name: data.professional_data.fantasy_name,
       razao_social: data.professional_data.razao_social,
@@ -279,20 +289,7 @@ export function handlePopulateFields(
       )
     },
     commission: data.commission,
-    company_id: data.company_id,
-    /* options: {
-      payingCompanies: generateOpitionsFromBackend(
-        data.company_id,
-        COMPANIES
-      ) as SelectOption[],
-      companies: COMPANIES,
-      payingCompany: generateOpitionsFromBackend(
-        data.company_id,
-        COMPANIES
-      ),
-      banks: BANKS,
-      jobs: JOBS
-    }, */
+    company_id: data.userCompanies.map((prop: any) => prop.id),
     options: OPTIONS,
     extra_hour_activated: data.extra_hour_activated,
     extra_hour_limit: data.extra_hour_limit,
@@ -306,7 +303,7 @@ export function handlePopulateFields(
     fixed_payment_value: data.fixed_payment_value,
     variable1: data.variable1,
     variable2: data.variable2,
-    permissions: data.permissions,
+    permissions: convertIdInIndexs(data.permissions),
     start_date: getDateInput(data.start_date),
     limited_extra_hours: data.limited_extra_hours,
     avatar: data.avatar,
