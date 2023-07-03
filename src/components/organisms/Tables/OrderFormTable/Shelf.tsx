@@ -17,9 +17,8 @@ import { Order } from './type'
 export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const { setValue, watch } = useFormContext()
 
-  const { setSelectSendProfessionals } = useContext(
-    List.OrderOfServiceprofessionalOS.Context
-  )
+  const { setSelectSendProfessionals, setProfessionalOS } =
+    useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const {
     name,
@@ -30,6 +29,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     fixed_payment_value,
     userCompanies,
     commission,
+    commissionHave,
     company_id
   } = props
   const field = `professional.${id}`
@@ -70,6 +70,14 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
       setSelectSendProfessionals((prev) =>
         prev.filter((item) => item.professional_id !== id)
       )
+      setProfessionalOS((prev) =>
+        prev.map((professional) => {
+          if (professional.id === id) {
+            delete professional.commissionHave
+          }
+          return professional
+        })
+      )
     }
   }
 
@@ -107,7 +115,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
           <Text>R$ {fixed_payment_value}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>{commission || '-'}</Text>
+          <Text>{commissionHave || '-'}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text>{extra_hour_value ? extra_hour_value : '-'}</Text>

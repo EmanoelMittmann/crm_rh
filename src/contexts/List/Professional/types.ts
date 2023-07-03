@@ -39,4 +39,5 @@ export interface ProfessionalProps {
   telephone_number: string
   city_name: string
   is_active: boolean
+  commissionHave?: number
 }

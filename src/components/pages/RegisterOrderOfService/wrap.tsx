@@ -32,7 +32,6 @@ const RegisterOrderOfServiceWrap = () => {
 
   const handleProfessionals = async () => {
     const isExistCommission = await onCreateOs()
-    console.log(modalRef)
     if (isExistCommission) {
       modalRef.current?.open()
     }

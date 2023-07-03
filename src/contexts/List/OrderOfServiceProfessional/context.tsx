@@ -27,7 +27,13 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   const [meta, setMeta] = useState(DEFAULT.META_PROFESSIONAL_PROPS)
 
+  const professionalsHaveCommission = selectSendProfessionals.filter(
+    (professional) => professional.isCommission
+  )
+
   const ContextPropsProfessionalOS = {
+    mergeCommision,
+    professionalsHaveCommission,
     onCreateOs,
     setSelectSendProfessionals,
     selectSendProfessionals,
@@ -41,6 +47,25 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleOrder
   }
 
+  function mergeCommision() {
+    const merged = professionalOS.map(
+      (professional: ProfessionalProps) => {
+        const pCommission = professionalsHaveCommission.find(
+          (pHaveCommission) =>
+            professional.id === pHaveCommission.professional_id
+        )
+        if (!pCommission) {
+          return professional
+        }
+        return {
+          ...professional,
+          commissionHave: pCommission.commission
+        }
+      }
+    )
+    setProfessionalOS(merged)
+  }
+
   async function onCreateOs() {
     const response = await api.post(
       routes.orderOfService.register,
@@ -52,15 +77,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         title: 'Ordem de Serviço gerada com sucesso.',
         position: 'bottom-right'
       })
-      // navigate('/orderOfService')
+      navigate('/orderOfService')
       return false
     } else {
-      toast({
-        type: 'warning',
-        title:
-          'Voce precisa declarar as comissões dos profissionais.',
-        position: 'bottom-right'
-      })
       return true
     }
   }

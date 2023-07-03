@@ -15,6 +15,8 @@ export interface DefaultMetaProps {
 }
 
 export interface ContextPropsProfessionalOS {
+  mergeCommision(): void
+  professionalsHaveCommission: any[]
   onCreateOs(): Promise<Boolean>
   selectSendProfessionals: any[]
   setProfessionalOS: Dispatch<SetStateAction<ProfessionalProps[]>>
