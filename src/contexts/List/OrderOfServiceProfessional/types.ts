@@ -69,17 +69,17 @@ export interface OrderProps {
   commission: boolean
 }
 
-// export interface OrderProps {
-//   professional_id: number
-//   name: string
-//   companies: string
-//   companies_id: number
-//   userCompanies: {
-//     id: number
-//     razao_social: string
-//   }
-//   cnpj: string
-//   extra_hour_value: number
-//   fixed_payment_value: string
-//   commission?: boolean
-// }
+export interface OrderPropsProfessional {
+  professional_id: number
+  name: string
+  companies: string
+  companies_id: number
+  userCompanies: {
+    id: number
+    razao_social: string
+  }
+  cnpj: string
+  extra_hour_value: number
+  fixed_payment_value: string
+  commission?: boolean
+}

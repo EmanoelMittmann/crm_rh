@@ -69,5 +69,5 @@ export const Some = styled.span`
     display: flex;
     align-items: center;
     justify-content: end;
-   font-weight: 400;
+   font-weight: 500;
 `

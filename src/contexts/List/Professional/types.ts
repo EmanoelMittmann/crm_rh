@@ -56,7 +56,3 @@ export interface ProfessionalProps {
   razao_social: string
   hour_quantity: number
 }
-
-type HoursRelease = {
-  hour_quantity: number
-}

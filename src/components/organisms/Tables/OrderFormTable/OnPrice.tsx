@@ -7,7 +7,6 @@ const OnPrice = () =>{
     const { professionalOS, selectSendProfessionals, } = useContext(
         List.OrderOfServiceprofessionalOS.Context
         )
-        console.log('selectSendProfessionals: ', selectSendProfessionals);
 
     const [totalPayment, setTotalPayment] = useState<{ [companyId: number]: number }>({});
 
@@ -41,7 +40,6 @@ const OnPrice = () =>{
         <ContainerOnPrice>
             {Object.entries(totalPayment).map(([companyId, amount]) => {
                 const companies = professionalOS.find((prof) => prof.company_id === Number(companyId));
-                console.log('companies: ', companies);
                 return companies ? (
                     <CompaniesField key={companyId}>
                         <Text>{companies.companies.razao_social.toUpperCase()} </Text>
