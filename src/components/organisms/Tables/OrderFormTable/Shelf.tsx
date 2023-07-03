@@ -16,18 +16,13 @@ import { ShelfProps } from '../types'
 import { ContainerText } from './style'
 import { Order } from './type'
 import { Option } from 'types'
+import { GenerateValue } from 'components/utils/OptionsAplication'
 
 export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const { setValue, watch } = useFormContext()
 
-  const {
-    setSelectSendProfessionals,
-    checked,
-    checkedAll,
-    professionalOS,
-    selectSendProfessionals,
-    setCheckedAll
-  } = useContext(List.OrderOfServiceprofessionalOS.Context)
+  const { setSelectSendProfessionals, setProfessionalOS, checked, selectSendProfessionals, deleteCommission, setChecked } =
+    useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const {
     name,
@@ -37,18 +32,18 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     fixed_payment_value,
     userCompanies,
     commission,
+    commissionHave,
     company_id
   } = props
   const [selectedCompany, setSelectedCompany] = useState(company_id)
 
-  console.log('setSelectSendProfessionals: ', selectSendProfessionals)
-  console.log('checkedAll: ', checkedAll)
   const options = userCompanies.map((company: any) => ({
     value: company.id,
     label: company.razao_social
   }))
 
-  const selectedCommission = watch('professional') || []
+  const selectedCommission = selectSendProfessionals
+  
   const commissionValue = selectedCommission.map((item: Order) => {
     const commission = item.commission
     const professional_id = item.professional_id
@@ -63,7 +58,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const calcularTotal = (id: number) => {
     const item = commissionValue.find(
       (item: any) => item.professional_id === id
-    )
+      )
     const comissao = item ? item.commission : 0
     const total = fixed_payment_value + comissao
     return total
@@ -83,10 +78,16 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
       setSelectSendProfessionals((prev) =>
         prev.filter((item) => item.professional_id !== id)
       )
+      setProfessionalOS((prev) =>
+        prev.map((professional) => {
+          if (professional.id === id) {
+            delete professional.commissionHave
+          }
+          return professional
+        })
+      )
     }
-    }
-
-
+  }
 
   return (
     <>
@@ -96,9 +97,16 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
             <Inputs.Check
               key={id}
               checked={checked[id]}
-              onChange={(e) =>
-                handleCheckboxChange(e.target?.checked)
-              }
+              onChange={(e) =>{
+                setChecked((prev) => ({
+                  ...prev,
+                  [id]: e.target.checked
+                }))
+
+                handleCheckboxChange(e.target.checked)
+              }}
+              
+              
               label={name}
             />
           </ContainerText>
@@ -127,7 +135,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
           <Text>R$ {fixed_payment_value}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>{commission || '-'}</Text>
+          <Text>{GenerateValue(String(commissionHave)) || '-'}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text>{extra_hour_value ? extra_hour_value : '-'}</Text>

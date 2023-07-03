@@ -24,6 +24,8 @@ export interface PageMetaProps {
 }
 
 export interface ContextPropsProfessionalOS {
+  mergeCommision(): void
+  professionalsHaveCommission: any[]
   onCreateOs(): Promise<Boolean | undefined>
   checked: { [id: number]: boolean }
   setChecked: React.Dispatch<

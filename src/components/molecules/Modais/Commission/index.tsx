@@ -44,13 +44,11 @@ const Commission = forwardRef<
   IModalProps
 >((props, ref) => {
   const { text } = props
-  const { selectSendProfessionals, deleteCommission } = useContext(
-    List.OrderOfServiceprofessionalOS.Context
-  )
-
-  const professionalsHaveCommission = selectSendProfessionals.filter(
-    (professional) => professional.isCommission
-  )
+  const {
+    deleteCommission,
+    professionalsHaveCommission,
+    mergeCommision
+  } = useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -129,7 +127,10 @@ const Commission = forwardRef<
                 boxShadow: '0px 5px 10px 0px #0066FF40'
               }}
               bgColor='#0066FF'
-              onClick={() => close()}
+              onClick={() => {
+                mergeCommision()
+                close()
+              }}
             >
               Cadastrar
             </Button>

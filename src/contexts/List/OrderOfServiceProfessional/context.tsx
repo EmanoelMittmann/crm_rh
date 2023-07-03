@@ -6,7 +6,6 @@ import {
   useState
 } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { isHtmlElement } from 'react-router-dom/dist/dom'
 
 import { toast } from '@stardust-ds/react'
 
@@ -30,6 +29,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
   const [professionalOS, setProfessionalOS] = useState<any[]>([])
+
   const [checked, setChecked] = useState<{ [id: number]: boolean }>(
     {}
   )
@@ -41,12 +41,19 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   const modalRef = useRef<IHandleModalPropsCommission>(null)
 
+  const professionalsHaveCommission = selectSendProfessionals.filter(
+    (professional) => professional.isCommission
+    )
+ 
+
   const ContextPropsProfessionalOS = {
+    mergeCommision,
+    professionalsHaveCommission,
     onCreateOs,
     checked,
     setChecked,
-    setCheckedAll,
     checkedAll,
+    setCheckedAll,
     setSelectSendProfessionals,
     deleteCommission,
     selectSendProfessionals,
@@ -59,6 +66,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleSearch,
     handleOrder
   }
+
   async function fetchList() {
     setIsLoading(true)
     const { data } = await api.get(
@@ -80,63 +88,56 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setIsLoading(false)
   }
 
-  async function onCreateOs() {
-    if (selectSendProfessionals.length > 0) {
-      try {
-        const response = await api.post(
-          routes.orderOfService.register,
-          selectSendProfessionals
+  function mergeCommision() {
+    const merged = professionalOS.map(
+      (professional: ProfessionalProps) => {
+        const pCommission = professionalsHaveCommission.find(
+          (pHaveCommission) =>
+            professional.id === pHaveCommission.professional_id
         )
-
-        setMeta((old) => ({
-          ...old,
-          paginate: {
-            ...old.paginate,
-            last_page: response.data.meta.last_page
-          }
-        }))
-
-        if (response.data.msg) {
-          toast({
-            type: 'success',
-            title: 'Ordem de Serviço gerada com sucesso.',
-            position: 'bottom-right'
-          })
-          navigate('/orderOfService')
-          return false
-        } else {
-          return true
+        if (!pCommission) {
+          return professional
         }
-      } catch (error) {
-        toast({
-          type: 'error',
-          title: 'Erro ao gerar Ordem de Serviço.',
-          position: 'bottom-right'
-        })
-        return false
+        return {
+          ...professional,
+          commissionHave: pCommission.commission
+        }
       }
-    } else {
+    )
+    setProfessionalOS(merged)
+  }
+
+  async function onCreateOs() {
+    const response = await api.post(
+      routes.orderOfService.register,
+      selectSendProfessionals
+    )
+    if (response.data.msg === 'successfully generated report') {
       toast({
-        type: 'error',
-        title: 'Selecione ao menos um profissional.',
+        type: 'success',
+        title: 'Ordem de Serviço gerada com sucesso.',
         position: 'bottom-right'
       })
+      navigate('/orderOfService')
       return false
+    } else {
+      return true
     }
   }
 
   async function deleteCommission(id: number) {
-    setSelectSendProfessionals((old) =>
-      old.filter(
-        (professional) => professional.professional_id !== id
-      )
-    )
-    const lastItemDeleted = selectSendProfessionals.length === 0
-    if (lastItemDeleted) {
-      modalRef.current?.close()
-      console.log('modalRef: ', modalRef)
-    }
+    const updatedCommission = professionalsHaveCommission.filter(
+      (professional) => professional.professional_id !== id
+    );
+    setSelectSendProfessionals(updatedCommission);
+    setChecked((prevChecked) => {
+      const updatedChecked = { ...prevChecked };
+      delete updatedChecked[id];
+      return updatedChecked;
+    });
   }
+
+
 
   function navigateTo(url: string) {
     navigate(url)

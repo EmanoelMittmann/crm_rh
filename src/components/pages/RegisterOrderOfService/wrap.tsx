@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -20,7 +20,7 @@ import {
 } from './style'
 
 const RegisterOrderOfServiceWrap = () => {
-  const { onCreateOs, navigateTo, selectSendProfessionals } =
+  const { onCreateOs, navigateTo, selectSendProfessionals, professionalsHaveCommission} =
     useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const navigate = useNavigate()
@@ -33,22 +33,27 @@ const RegisterOrderOfServiceWrap = () => {
     shouldFocusError: true
   })
 
+
   const handleProfessionals = async () => {
     const isExistCommission = await onCreateOs()
-
-    console.log('isExistCommission: ', isExistCommission)
-
-    console.log(modalRef)
     if (isExistCommission) {
       modalRef.current?.open()
+
     } else {
       // navigateTo('/orderOfService')
     }
   }
 
+  useEffect(() => {
+    if (professionalsHaveCommission.length === 0) {
+      modalRef.current?.close();
+    }
+  }, [professionalsHaveCommission])
+  
+
   function cancelSave() {
     setIsCancel(true)
-    // navigateTo('/orderOfService')
+    navigateTo('/orderOfService')
   }
 
   return (
