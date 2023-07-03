@@ -29,3 +29,45 @@ export const ContainerText = styled.div`
   padding-left: ${(props) => props.title};
   color: ${(props) => props.color};
 `
+
+export const ContainerOnPrice = styled.div`
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  white-space: nowrap;
+  align-items: flex-start;
+  margin-top: -0.5em;
+  margin-left: 1em;
+
+    .price{
+        display: flex;
+        align-items: center;
+    }
+`
+
+
+export const CompaniesField = styled.div`
+  display: flex;
+  width: 300px;
+  padding: 0 0 0.5em 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+`;
+export const Text = styled.p`
+  width: 50px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+export const Some = styled.span`
+    width: 40%;
+    padding: 0em 0.5em 0 0em;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+   font-weight: 400;
+`

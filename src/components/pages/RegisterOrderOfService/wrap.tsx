@@ -18,9 +18,10 @@ import {
   ContainerCompany,
   ContainerFixed
 } from './style'
+import OnPrice from 'components/organisms/Tables/OrderFormTable/OnPrice'
 
 const RegisterOrderOfServiceWrap = () => {
-  const { onCreateOs, navigateTo, selectSendProfessionals, professionalsHaveCommission} =
+  const { onCreateOs, navigateTo, professionalsHaveCommission} =
     useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const navigate = useNavigate()
@@ -63,7 +64,9 @@ const RegisterOrderOfServiceWrap = () => {
           <form>
             <OrderForm />
             <ContainerFixed>
-              <ContainerCompany>Empresas</ContainerCompany>
+              <ContainerCompany>
+                <OnPrice/>
+              </ContainerCompany>
               <ConatinerButton>
                 <Button.Updade
                   onClick={handleProfessionals}

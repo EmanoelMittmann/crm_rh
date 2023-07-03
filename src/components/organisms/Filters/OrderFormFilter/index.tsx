@@ -11,10 +11,6 @@ import { Container, Main } from './style'
 export const OrderFormFilter = () => {
   const { meta, handleSearch, checked, setChecked, selectSendProfessionals, professionalOS, setSelectSendProfessionals } =
   useContext(List.OrderOfServiceprofessionalOS.Context)
-  console.log('selectSendProfessionals: ', selectSendProfessionals);
-  console.log('professionalOS: ', professionalOS);
-  
-  console.log('checked: ', checked);
 
   const handleSelectAll = () => {
     const allChecked = professionalOS.every((item) => checked[item.id]);
@@ -33,7 +29,6 @@ export const OrderFormFilter = () => {
       (acc, item) => ({ ...acc, [item.professional_id]: !allChecked }),
       {}
       )
-      console.log('allds: ', allds);
     setChecked(newChecked)
  
   }

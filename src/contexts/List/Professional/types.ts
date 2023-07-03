@@ -42,4 +42,21 @@ export interface ProfessionalProps {
   commissionHave?: number
   company_id: number
   commission : boolean
+  companies: {
+    id: number
+    razao_social: string
+  }
+  extrahour_release: [
+    {
+      hour_quantity: number
+    }
+  ]
+  fixed_payment_value: number
+  extra_hour_value: number
+  razao_social: string
+  hour_quantity: number
+}
+
+type HoursRelease = {
+  hour_quantity: number
 }
