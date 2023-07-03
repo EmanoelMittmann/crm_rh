@@ -66,7 +66,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleSearch,
     handleOrder
   }
-
+  console.log('checked: ', checked);
   async function fetchList() {
     setIsLoading(true)
     const { data } = await api.get(

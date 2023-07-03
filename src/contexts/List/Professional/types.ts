@@ -40,4 +40,6 @@ export interface ProfessionalProps {
   city_name: string
   is_active: boolean
   commissionHave?: number
+  company_id: number
+  commission : boolean
 }
