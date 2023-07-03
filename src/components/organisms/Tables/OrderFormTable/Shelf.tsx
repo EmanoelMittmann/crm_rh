@@ -1,8 +1,9 @@
 import { useContext, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { Select } from '@stardust-ds/react'
+import { Button, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
+import { parentPort } from 'worker_threads'
 
 import { Inputs, SelectOption, Selects } from 'components/atoms'
 import {
@@ -19,9 +20,14 @@ import { Option } from 'types'
 export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const { setValue, watch } = useFormContext()
 
-  const { setSelectSendProfessionals } = useContext(
-    List.OrderOfServiceprofessionalOS.Context
-  )
+  const {
+    setSelectSendProfessionals,
+    checked,
+    checkedAll,
+    professionalOS,
+    selectSendProfessionals,
+    setCheckedAll
+  } = useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const {
     name,
@@ -33,9 +39,10 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
     commission,
     company_id
   } = props
-  const field = `professional.${id}`
   const [selectedCompany, setSelectedCompany] = useState(company_id)
 
+  console.log('setSelectSendProfessionals: ', selectSendProfessionals)
+  console.log('checkedAll: ', checkedAll)
   const options = userCompanies.map((company: any) => ({
     value: company.id,
     label: company.razao_social
@@ -77,7 +84,9 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
         prev.filter((item) => item.professional_id !== id)
       )
     }
-  }
+    }
+
+
 
   return (
     <>
@@ -86,11 +95,10 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
           <ContainerText>
             <Inputs.Check
               key={id}
-              checked={watch(field)}
+              checked={checked[id]}
               onChange={(e) =>
                 handleCheckboxChange(e.target?.checked)
               }
-              onBlur={() => {}}
               label={name}
             />
           </ContainerText>

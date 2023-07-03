@@ -1,9 +1,19 @@
-import { createContext, ReactNode, useEffect, useRef, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 import { useNavigate } from 'react-router-dom'
+import { isHtmlElement } from 'react-router-dom/dist/dom'
 
 import { toast } from '@stardust-ds/react'
 
-import { IHandleModalPropsCommission, PaginateContext } from 'components/molecules'
+import {
+  IHandleModalPropsCommission,
+  PaginateContext
+} from 'components/molecules'
 
 import api from 'api'
 import { routes } from 'routes'
@@ -12,23 +22,31 @@ import { useDebounce } from 'hooks'
 
 import { ProfessionalProps } from '../Professional/types'
 import DEFAULT from './constants'
-import { ContextPropsProfessionalOS } from './types'
-import { Order } from 'components/organisms/Tables/OrderFormTable/type'
+import { ContextPropsProfessionalOS, OrderProps } from './types'
 
 export const Context = createContext({} as ContextPropsProfessionalOS)
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
-  const [professionalOS, setProfessionalOS] = useState<
-    ProfessionalProps[]
-  >([])
+  const [professionalOS, setProfessionalOS] = useState<any[]>([])
+  const [checked, setChecked] = useState<{ [id: number]: boolean }>(
+    {}
+  )
+  const [checkedAll, setCheckedAll] = useState(false)
   const [selectSendProfessionals, setSelectSendProfessionals] =
-    useState<Order[]>([])
+    useState<any[]>([])
+
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
+
   const modalRef = useRef<IHandleModalPropsCommission>(null)
+
   const ContextPropsProfessionalOS = {
     onCreateOs,
+    checked,
+    setChecked,
+    setCheckedAll,
+    checkedAll,
     setSelectSendProfessionals,
     deleteCommission,
     selectSendProfessionals,
@@ -53,13 +71,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           orderField: meta.orderField
         }
       }
-
     )
     setProfessionalOS(
       data?.data.filter(
         (professional: any) => professional.professional_data !== null
       )
-
     )
     setIsLoading(false)
   }
@@ -69,11 +85,15 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       try {
         const response = await api.post(
           routes.orderOfService.register,
-          selectSendProfessionals);
+          selectSendProfessionals
+        )
 
         setMeta((old) => ({
           ...old,
-          paginate: { ...old.paginate, last_page: response.data.meta.last_page }
+          paginate: {
+            ...old.paginate,
+            last_page: response.data.meta.last_page
+          }
         }))
 
         if (response.data.msg) {
@@ -81,45 +101,42 @@ export const Provider = ({ children }: { children: ReactNode }) => {
             type: 'success',
             title: 'Ordem de Serviço gerada com sucesso.',
             position: 'bottom-right'
-          });
+          })
           navigate('/orderOfService')
-          return false;
+          return false
         } else {
-          return true;
+          return true
         }
       } catch (error) {
         toast({
           type: 'error',
           title: 'Erro ao gerar Ordem de Serviço.',
           position: 'bottom-right'
-        });
-        return false;
+        })
+        return false
       }
     } else {
       toast({
         type: 'error',
         title: 'Selecione ao menos um profissional.',
         position: 'bottom-right'
-      });
-      return false;
-
+      })
+      return false
     }
-
   }
 
   async function deleteCommission(id: number) {
     setSelectSendProfessionals((old) =>
-      old.filter((professional) => professional.professional_id !== id),
+      old.filter(
+        (professional) => professional.professional_id !== id
+      )
     )
     const lastItemDeleted = selectSendProfessionals.length === 0
     if (lastItemDeleted) {
       modalRef.current?.close()
-      console.log('modalRef: ', modalRef);
+      console.log('modalRef: ', modalRef)
     }
-
   }
-
-
 
   function navigateTo(url: string) {
     navigate(url)
@@ -130,7 +147,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       ...old,
       paginate: { ...old.paginate, current_page }
     }))
-
   }
 
   function handleSearch(search: string) {
@@ -151,11 +167,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   useDebounce({
     fn: fetchList,
-    listener: [
-      meta.paginate.current_page,
-      meta.search,
-      meta.order
-    ]
+    listener: [meta.paginate.current_page, meta.search, meta.order]
   })
 
   return (
@@ -166,6 +178,5 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         {children}
       </PaginateContext.Provider>
     </Context.Provider>
-
   )
 }

@@ -25,6 +25,12 @@ export interface PageMetaProps {
 
 export interface ContextPropsProfessionalOS {
   onCreateOs(): Promise<Boolean | undefined>
+  checked: { [id: number]: boolean }
+  setChecked: React.Dispatch<
+    React.SetStateAction<{ [id: number]: boolean }>
+  >
+  checkedAll: boolean
+  setCheckedAll: React.Dispatch<React.SetStateAction<boolean>>
   deleteCommission(id: number): Promise<void>
   selectSendProfessionals: any[]
   setProfessionalOS: Dispatch<SetStateAction<ProfessionalProps[]>>
@@ -58,14 +64,22 @@ export interface OrderOfServiceProps {
 }
 
 export interface OrderProps {
-  id: number
-  professional: {
-    id: number
-    name: string
-    company: string
-    cnpj: string
-    extra_hour_value: number
-    fixed_payment_value: string
-    commission: boolean
-  }
+  professional_id: number
+  companies_id: number
+  commission: boolean
 }
+
+// export interface OrderProps {
+//   professional_id: number
+//   name: string
+//   companies: string
+//   companies_id: number
+//   userCompanies: {
+//     id: number
+//     razao_social: string
+//   }
+//   cnpj: string
+//   extra_hour_value: number
+//   fixed_payment_value: string
+//   commission?: boolean
+// }

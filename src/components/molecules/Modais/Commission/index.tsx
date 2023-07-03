@@ -13,6 +13,7 @@ import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
 import { IconTrash } from 'components/atoms/Icons/IconTrash'
+import { Paginate } from 'components/molecules/Paginate'
 
 import { Columns, Row } from '../Edit/style'
 import {
@@ -26,7 +27,6 @@ import {
   Overlay,
   TitleComissionProfessional
 } from './style'
-import { Paginate } from 'components/molecules/Paginate'
 
 interface IModalProps {
   text: string
@@ -54,7 +54,6 @@ const Commission = forwardRef<
 
   const [isOpen, setIsOpen] = useState(false)
 
-
   const close = useCallback(() => {
     setIsOpen(false)
   }, [])
@@ -64,7 +63,6 @@ const Commission = forwardRef<
     () => ({
       open: () => {
         setIsOpen(true)
-
       },
       close
     }),
@@ -91,7 +89,11 @@ const Commission = forwardRef<
                 <ContainerLabelProfessional>
                   {item.name}
                   <IconButton>
-                    <IconTrash onClick={() => deleteCommission(item.professional_id)}/>
+                    <IconTrash
+                      onClick={() =>
+                        deleteCommission(item.professional_id)
+                      }
+                    />
                   </IconButton>
                 </ContainerLabelProfessional>
                 <Input
@@ -133,8 +135,6 @@ const Commission = forwardRef<
             </Button>
           </Row>
         </Columns>
-
-
       </ContainerModal>
 
       <Overlay />

@@ -9,12 +9,15 @@ import { Button, IconGlass } from 'components/atoms'
 import { Container, Main } from './style'
 
 export const OrderFormFilter = () => {
-  const nagivate = useNavigate()
-  const { meta, handleSearch } = useContext(
-    List.OrderOfServiceprofessionalOS.Context
-  )
+  const { meta, handleSearch, checkedAll, setCheckedAll } =
+    useContext(List.OrderOfServiceprofessionalOS.Context)
+
+  const handleSelectAll = () => {
+    setCheckedAll(!checkedAll)
+  }
 
   const { search } = meta
+
   return (
     <Main>
       <Container gap='1em'>
@@ -26,7 +29,13 @@ export const OrderFormFilter = () => {
           onChange={(e) => handleSearch(e.target?.value)}
         />
       </Container>
-      <Button.New text='Selecionar todos' onClick={() => {}} />
+      <Button.New
+        text='Selecionar todos'
+        onClick={() => {
+          handleSelectAll()
+        }}
+        type='button'
+      />
     </Main>
   )
 }

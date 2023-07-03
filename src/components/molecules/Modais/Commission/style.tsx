@@ -38,7 +38,6 @@ export const ContainerWap = styled.div`
   margin-bottom: 0.5em;
   position: relative;
 
-
   &:last-child {
     margin-bottom: 1em;
   }
