@@ -15,7 +15,10 @@ export const OrderFormFilter = () => {
   console.log('professionalOS: ', professionalOS);
   
   console.log('checked: ', checked);
+
   const handleSelectAll = () => {
+    const allChecked = professionalOS.every((item) => checked[item.id]);
+
     const allds = professionalOS.map((item) => ({
       name: item.name,
       professional_id: item.id,
@@ -27,7 +30,7 @@ export const OrderFormFilter = () => {
     setSelectSendProfessionals(allds)
 
     const newChecked = allds.reduce(
-      (acc, item) => ({ ...acc, [item.professional_id]: true }),
+      (acc, item) => ({ ...acc, [item.professional_id]: !allChecked }),
       {}
       )
       console.log('allds: ', allds);

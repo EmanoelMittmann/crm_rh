@@ -2,7 +2,7 @@ import type { HeaderProps } from 'components/molecules'
 
 export const HEADERS = [
   { field: 'name', label: 'Profissional', on: true },
-  { field: 'companyes.razao_social', label: 'Empresa', on: true },
+  { field: 'companyes', label: 'Empresa', on: true },
   { field: 'cnpj', label: 'CNPJ', on: true },
   { field: 'fixed_payment_value', label: 'Salario', on: true },
   { field: 'commission', label: 'Comissão', on: true },
