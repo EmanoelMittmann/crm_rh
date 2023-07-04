@@ -10,6 +10,7 @@ import {
   Modal
 } from 'components/molecules/Modais'
 import { FormOrderProps } from 'components/organisms'
+import OnPrice from 'components/organisms/Tables/OrderFormTable/OnPrice'
 import { AuthTemplate } from 'components/templates'
 
 import OrderForm from '../OrdeForm'
@@ -18,10 +19,9 @@ import {
   ContainerCompany,
   ContainerFixed
 } from './style'
-import OnPrice from 'components/organisms/Tables/OrderFormTable/OnPrice'
 
 const RegisterOrderOfServiceWrap = () => {
-  const { onCreateOs, navigateTo, professionalsHaveCommission} =
+  const { onCreateOs, navigateTo, professionalsHaveCommission } =
     useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const navigate = useNavigate()
@@ -34,12 +34,10 @@ const RegisterOrderOfServiceWrap = () => {
     shouldFocusError: true
   })
 
-
   const handleProfessionals = async () => {
     const isExistCommission = await onCreateOs()
     if (isExistCommission) {
       modalRef.current?.open()
-
     } else {
       // navigateTo('/orderOfService')
     }
@@ -47,10 +45,9 @@ const RegisterOrderOfServiceWrap = () => {
 
   useEffect(() => {
     if (professionalsHaveCommission.length === 0) {
-      modalRef.current?.close();
+      modalRef.current?.close()
     }
   }, [professionalsHaveCommission])
-  
 
   function cancelSave() {
     setIsCancel(true)
@@ -65,7 +62,7 @@ const RegisterOrderOfServiceWrap = () => {
             <OrderForm />
             <ContainerFixed>
               <ContainerCompany>
-                <OnPrice/>
+                <OnPrice />
               </ContainerCompany>
               <ConatinerButton>
                 <Button.Updade

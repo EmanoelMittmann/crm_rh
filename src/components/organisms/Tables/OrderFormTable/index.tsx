@@ -1,6 +1,7 @@
 import { useContext, useMemo } from 'react'
 
 import { List } from 'contexts'
+import { OrderPropsProfessional } from 'contexts/List/OrderOfServiceProfessional/types'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
@@ -9,7 +10,6 @@ import {
   Main
 } from 'components/organisms/Tables/style'
 
-import { ProfessionalProps } from '../Professionals/types'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './Shelf'
 import { ScrollContainer } from './style'
@@ -32,7 +32,7 @@ export const OrderFormTable = () => {
     return (
       <ScrollContainer>
         <>
-          {professionalOS.map((props: ProfessionalProps) => (
+          {professionalOS.map((props: OrderPropsProfessional) => (
             <Shelf
               config={{
                 template: GRID_TEMPLATE,

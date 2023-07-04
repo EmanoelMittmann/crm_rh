@@ -41,7 +41,7 @@ export interface ProfessionalProps {
   is_active: boolean
   commissionHave?: number
   company_id: number
-  commission : boolean
+  commission: boolean
   companies: {
     id: number
     razao_social: string

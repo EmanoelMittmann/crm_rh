@@ -9,28 +9,39 @@ import { Button, IconGlass } from 'components/atoms'
 import { Container, Main } from './style'
 
 export const OrderFormFilter = () => {
-  const { meta, handleSearch, checked, setChecked, selectSendProfessionals, professionalOS, setSelectSendProfessionals } =
-  useContext(List.OrderOfServiceprofessionalOS.Context)
+  const {
+    meta,
+    handleSearch,
+    checked,
+    setChecked,
+    selectSendProfessionals,
+    professionalOS,
+    setSelectSendProfessionals
+  } = useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const handleSelectAll = () => {
-    const allChecked = professionalOS.every((item) => checked[item.id]);
+    const allChecked = professionalOS.every(
+      (item) => checked[item.id]
+    )
 
     const allds = professionalOS.map((item) => ({
       name: item.name,
       professional_id: item.id,
-      commission: item.commission ?  undefined : 0 ,
+      commission: item.commission ? undefined : 0,
       companies_id: item.company_id,
-      isCommission : item.commission
+      isCommission: item.commission
     }))
 
     setSelectSendProfessionals(allds)
 
     const newChecked = allds.reduce(
-      (acc, item) => ({ ...acc, [item.professional_id]: !allChecked }),
+      (acc, item) => ({
+        ...acc,
+        [item.professional_id]: !allChecked
+      }),
       {}
-      )
+    )
     setChecked(newChecked)
- 
   }
 
   const { search } = meta

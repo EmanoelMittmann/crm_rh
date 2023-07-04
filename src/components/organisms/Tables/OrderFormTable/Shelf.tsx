@@ -1,28 +1,27 @@
 import { useContext, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
-
-import { Button, Select } from '@stardust-ds/react'
+import {Select} from '@stardust-ds/react'
 import { List } from 'contexts'
-import { parentPort } from 'worker_threads'
-
-import { Inputs, SelectOption, Selects } from 'components/atoms'
+import { Inputs } from 'components/atoms'
 import {
   ContainerShelf,
   ContainerShelfColumn,
   Text
 } from 'components/organisms/Tables/style'
-
+import { GenerateValue } from 'components/utils/OptionsAplication'
 import { ShelfProps } from '../types'
 import { ContainerText } from './style'
 import { Order } from './type'
 import { Option } from 'types'
-import { GenerateValue } from 'components/utils/OptionsAplication'
+import { OrderPropsProfessional } from 'contexts/List/OrderOfServiceProfessional/types'
+export const Shelf = ({ props, config }: ShelfProps<OrderPropsProfessional>) => {
 
-export const Shelf = ({ props, config }: ShelfProps<any>) => {
-  const { setValue, watch } = useFormContext()
-
-  const { setSelectSendProfessionals, setProfessionalOS, checked, selectSendProfessionals, deleteCommission, setChecked } =
-    useContext(List.OrderOfServiceprofessionalOS.Context)
+  const {
+    setSelectSendProfessionals,
+    setProfessionalOS,
+    checked,
+    selectSendProfessionals,
+    setChecked
+  } = useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const {
     name,
@@ -37,13 +36,13 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
   } = props
   const [selectedCompany, setSelectedCompany] = useState(company_id)
 
-  const options = userCompanies.map((company: any) => ({
+  const options = userCompanies.map((company:{ id : number, razao_social: string}) => ({
     value: company.id,
     label: company.razao_social
   }))
 
   const selectedCommission = selectSendProfessionals
-  
+
   const commissionValue = selectedCommission.map((item: Order) => {
     const commission = item.commission ?? 0
     const professional_id = item.professional_id
@@ -58,7 +57,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const calcularTotal = (id: number) => {
     const item = commissionValue.find(
       (item: any) => item.professional_id === id
-      )
+    )
     const comissao = item ? item.commission : 0
     const total = fixed_payment_value + comissao
     return total
@@ -97,7 +96,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
             <Inputs.Check
               key={id}
               checked={checked[id]}
-              onChange={(e) =>{
+              onChange={(e) => {
                 setChecked((prev) => ({
                   ...prev,
                   [id]: e.target.checked
@@ -105,8 +104,6 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
 
                 handleCheckboxChange(e.target.checked)
               }}
-              
-              
               label={name}
             />
           </ContainerText>
@@ -115,14 +112,14 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
           <Select
             placeholder={
               options.find(
-                (item: Option) => item.value === selectedCompany
+                (item) => item.value === selectedCompany
               )?.label
             }
-            options={options || []}
+            options={options as []}
             clearable={false}
             onSelect={(option: Option | null) => {
               if (option !== null) {
-                setSelectedCompany(option.value)
+                setSelectedCompany(Number(option.value))
               }
             }}
             width={190}

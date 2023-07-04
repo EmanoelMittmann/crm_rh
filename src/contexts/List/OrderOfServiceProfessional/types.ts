@@ -1,7 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-
-import { ProfessionalProps } from '../Professional/types'
-
+import { Option } from 'types'
 export type { ReactNode } from 'react'
 
 export interface DefaultMetaProps {
@@ -33,10 +31,10 @@ export interface ContextPropsProfessionalOS {
   >
   deleteCommission(id: number): Promise<void>
   selectSendProfessionals: any[]
-  setProfessionalOS: Dispatch<SetStateAction<ProfessionalProps[]>>
+  setProfessionalOS: Dispatch<SetStateAction<OrderPropsProfessional[]>>
   setSelectSendProfessionals: Dispatch<SetStateAction<any[]>>
   meta: DefaultMetaProps
-  professionalOS: ProfessionalProps[]
+  professionalOS: OrderPropsProfessional[]
   isLoading: boolean
   paginate: {
     current_page: number
@@ -66,20 +64,45 @@ export interface OrderOfServiceProps {
 export interface OrderProps {
   professional_id: number
   companies_id: number
-  commission: boolean
+  commission: number
+  isCommission:boolean
 }
 
 export interface OrderPropsProfessional {
-  professional_id: number
+  id: number
   name: string
-  companies: string
-  companies_id: number
-  userCompanies: {
+  commissionHave?: number
+  company_id: number
+  commission: boolean
+  companies: {
     id: number
     razao_social: string
   }
-  cnpj: string
+  extrahour_release: Release[]
+  fixed_payment_value: number
   extra_hour_value: number
-  fixed_payment_value: string
-  commission?: boolean
+  razao_social: string
+  hour_quantity: number
+  professional_data:{
+    cnpj: string
+    id:number
+    name: string
+  }
+  userCompanies: UserCompanies[]
+ 
+}
+export interface UserCompanies {
+  id: number
+  razao_social: string
+  cnpj: string
+}
+
+export interface Release{
+  end_date: string
+  extra_hours_status_id: number
+  hour_quantity: number
+  justification: string
+  launch_date: string
+  project_id: string
+  type: string
 }

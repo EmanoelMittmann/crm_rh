@@ -40,12 +40,11 @@ export const ContainerOnPrice = styled.div`
   margin-top: -0.5em;
   margin-left: 1em;
 
-    .price{
-        display: flex;
-        align-items: center;
-    }
+  .price {
+    display: flex;
+    align-items: center;
+  }
 `
-
 
 export const CompaniesField = styled.div`
   display: flex;
@@ -54,20 +53,19 @@ export const CompaniesField = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-`;
+`
 export const Text = styled.p`
   width: 50px;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-`;
+`
 export const Some = styled.span`
-    width: 40%;
-    padding: 0em 0.5em 0 0em;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    font-weight: 500;
+  width: 40%;
+  padding: 0em 0.5em 0 0em;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  font-weight: 500;
 `

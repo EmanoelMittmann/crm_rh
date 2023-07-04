@@ -1,50 +1,37 @@
 import {
   createContext,
   ReactNode,
-  useEffect,
-  useRef,
   useState
 } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import { toast } from '@stardust-ds/react'
-
 import {
-  IHandleModalPropsCommission,
   PaginateContext
 } from 'components/molecules'
-
 import api from 'api'
 import { routes } from 'routes'
-
 import { useDebounce } from 'hooks'
-
-import { ProfessionalProps } from '../Professional/types'
 import DEFAULT from './constants'
-import { ContextPropsProfessionalOS, OrderProps } from './types'
+import { ContextPropsProfessionalOS, OrderProps, OrderPropsProfessional } from './types'
 
 export const Context = createContext({} as ContextPropsProfessionalOS)
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
-  const [professionalOS, setProfessionalOS] = useState<any[]>([])
+  const [professionalOS, setProfessionalOS] = useState<OrderPropsProfessional[]>([])
 
   const [checked, setChecked] = useState<{ [id: number]: boolean }>(
     {}
   )
-  const [checkedAll, setCheckedAll] = useState(false)
   const [selectSendProfessionals, setSelectSendProfessionals] =
-    useState<any[]>([])
+    useState<OrderProps[]>([])
 
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
 
-  const modalRef = useRef<IHandleModalPropsCommission>(null)
-
   const professionalsHaveCommission = selectSendProfessionals.filter(
     (professional) => professional.isCommission
-    )
- 
+  )
 
   const ContextPropsProfessionalOS = {
     mergeCommision,
@@ -79,7 +66,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     )
     setProfessionalOS(
       data?.data.filter(
-        (professional: any) => professional.professional_data !== null
+        (professional: OrderPropsProfessional) => professional.professional_data !== null
       )
     )
     setIsLoading(false)
@@ -87,7 +74,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   function mergeCommision() {
     const merged = professionalOS.map(
-      (professional: ProfessionalProps) => {
+      (professional: OrderPropsProfessional) => {
         const pCommission = professionalsHaveCommission.find(
           (pHaveCommission) =>
             professional.id === pHaveCommission.professional_id
@@ -125,16 +112,14 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   async function deleteCommission(id: number) {
     const updatedCommission = professionalsHaveCommission.filter(
       (professional) => professional.professional_id !== id
-    );
-    setSelectSendProfessionals(updatedCommission);
+    )
+    setSelectSendProfessionals(updatedCommission)
     setChecked((prevChecked) => {
-      const updatedChecked = { ...prevChecked };
-      delete updatedChecked[id];
-      return updatedChecked;
-    });
+      const updatedChecked = { ...prevChecked }
+      delete updatedChecked[id]
+      return updatedChecked
+    })
   }
-
-
 
   function navigateTo(url: string) {
     navigate(url)
