@@ -57,6 +57,7 @@ export const Bank = () => {
           }
           error={errors.professional_data?.type_person?.message}
           options={BANK_OPTIONS.PERSON_TYPE}
+          required
           width={292.5}
           label='Pessoa Física/Jurídica'
           value={watch('professional_data.type_person') as any}
@@ -74,6 +75,7 @@ export const Bank = () => {
           options={bank_options}
           width={292.5}
           label='Banco'
+          required
           value={watch('professional_data.bank') as any}
           placeholder='Selecione'
           searchable
@@ -93,6 +95,7 @@ export const Bank = () => {
           label='Tipo da conta'
           value={watch('professional_data.account_type') as any}
           width={292.5}
+          required
           placeholder='Selecione'
         />
       </ContainerRow>
@@ -105,6 +108,7 @@ export const Bank = () => {
           value={watch('professional_data.agency') ?? ''}
           error={errors.professional_data?.agency?.message}
           width={295}
+          required
           label='Agência'
         />
         <Inputs.Default
@@ -116,6 +120,7 @@ export const Bank = () => {
           value={watch('professional_data.account_number') ?? ''}
           error={errors.professional_data?.account_number?.message}
           label='Número da conta'
+          required
           width='100%'
         />
       </ContainerRow>
@@ -136,6 +141,7 @@ export const Bank = () => {
           label='Tipo de transferência'
           value={watch('professional_data.type_of_transfer') as any}
           width={292.5}
+          required
           placeholder='Selecione'
         />
         <Selects.Default
@@ -153,6 +159,7 @@ export const Bank = () => {
           options={BANK_OPTIONS.PIX_KEY_TYPE}
           label='Tipo de chave PIX'
           width={292.5}
+          required={isRequiredPixKeyType}
           value={watch('professional_data.pix_key_type') as any}
           placeholder='Selecione'
         />
@@ -163,6 +170,7 @@ export const Bank = () => {
               !!pix_key_mask?.mask ? mask(v, pix_key_mask.mask) : v
           })}
           disabled={!isRequiredPixKeyType}
+          required={isRequiredPixKeyType}
           value={watch('professional_data.pix_key') ?? ''}
           label='Chave PIX'
           placeholder={pix_key_mask?.placeHolder}

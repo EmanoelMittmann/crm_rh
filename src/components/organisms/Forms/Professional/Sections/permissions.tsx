@@ -50,9 +50,7 @@ export const Permission = () => {
                 <Inputs.Check
                   key={id}
                   checked={watch(field) === true}
-                  onChange={(e) =>
-                    setValue('field', e.target?.checked)
-                  }
+                  onChange={(e) => setValue(field, e.target?.checked)}
                   label={modulo_name}
                 />
               )
