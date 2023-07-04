@@ -36,7 +36,6 @@ import {
   IModalProps,
   TeamUserProps
 } from './type'
-import { ProjectProps } from 'types'
 
 const Detais = forwardRef<IHandleModalPropsDetails, IModalProps>(
   (props, ref) => {

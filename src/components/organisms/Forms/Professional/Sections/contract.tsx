@@ -3,8 +3,12 @@ import { useFormContext } from 'react-hook-form'
 
 import { Radio, Select } from '@stardust-ds/react'
 
-import { Inputs, Selects } from 'components/atoms'
-import { generateOpitionsFromBackend } from 'components/utils/OptionsAplication'
+
+import { Inputs, SelectOption, Selects } from 'components/atoms'
+import {
+  generateOpitionsFromBackend,
+  GenerateValue
+} from 'components/utils/OptionsAplication'
 
 import { MASKER, CONTRACT_TYPE_OPTIONS } from '../constants'
 import { validation } from '../logic'
@@ -27,6 +31,8 @@ export const Contract = () => {
   }, [watch('company_id')])
 
   const options = watch('options')
+  const paymentFixed = watch('fixed_payment_value')
+  const formattedpaymentFixed = GenerateValue(paymentFixed || '')
 
   const commissionOptions = [
     {
@@ -131,14 +137,14 @@ export const Contract = () => {
         />
         <Inputs.Default
           {...register('fixed_payment_value', {
-            setValueAs: MASKER.CURRENCY,
+            setValueAs: (value) => {
+              return value ? value.replace(/[^\d]/g, '') : ''
+            },
             required: validation.required
           })}
           error={errors.fixed_payment_value?.message}
-          value={watch('fixed_payment_value') ?? ''}
-          type='number'
-          min={0}
-          required
+          value={formattedpaymentFixed}
+          type='text'
           iconLeft='R$'
           placeholder='00,00'
           label='Pagamento fixo'

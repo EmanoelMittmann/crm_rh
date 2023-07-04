@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { Button } from 'components/atoms'
+import { Button, IconGlass, Inputs } from 'components/atoms'
 
 import { Container, Main } from '../style'
 import { Option } from 'types'
@@ -16,14 +16,10 @@ export const StatusOS = [
   { label: 'Cancelada', value: 'CANCELED' }
 ]
 
-type ValueProps = Option | null | undefined
-
 export const OrderOfService = () => {
   const nagivate = useNavigate()
   const {
     meta,
-    filterOptions,
-    orderOfService,
     handleSearch,
     handleFillStatus,
     handleFillInitialDate,
@@ -31,51 +27,47 @@ export const OrderOfService = () => {
     handleFillRefDate
   } = useContext(List.OrderOfService.Context)
 
-  const { status, initialDate, finalDate, referenceDate } = meta
+  const { search, initialDate, finalDate, referenceDate } = meta
 
-  const currentValue = useMemo(
-    () =>
-      filterOptions.status_O_S.find((obj) => obj.label === status),
-    [status]
-  ) as ValueProps
   return (
     <Main>
       <Container gap='1em'>
         <Input
-          value={meta.search}
-          width={230}
+          value={search}
+          width={170}
+          iconLeft={<IconGlass />}
           placeholder='Buscar...'
-          onChange={(e) => handleSearch(e.target.value)}
+          onChange={(e) => handleSearch(e.target?.value)}
         />
         <Select
           placeholder='Status'
-          width={230}
+          width={180}
           onClear={() => null}
-          options={StatusOS as Option[]}
-          value={currentValue ?? null}
+          options={StatusOS}
+          clearable={false}
           onSelect={(option: Option | null) =>
             option && handleFillStatus(option.value)
           }
         />
-        <Input
+        <Inputs.Default
           type={'date'}
           width={230}
           placeholder='Periodo Inicial'
-          onChange={(e) => handleFillInitialDate(e.target.value)}
+          onChange={(e) => handleFillInitialDate(e.target?.value)}
           value={initialDate ?? ''}
         />
-        <Input
+        <Inputs.Default
           type={'date'}
           width={230}
           placeholder='Periodo Final'
-          onChange={(e) => handleFillFinalDate(e.target.value)}
+          onChange={(e) => handleFillFinalDate(e.target?.value)}
           value={finalDate ?? ''}
         />
-        <Input
+        <Inputs.Default
           type={'date'}
           width={230}
-          placeholder='Referência'
-          onChange={(e) => handleFillRefDate(e.target.value)}
+          placeholder={'Referência'}
+          onChange={(e) => handleFillRefDate(e.target?.value)}
           value={referenceDate ?? ''}
         />
       </Container>

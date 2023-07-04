@@ -5,10 +5,10 @@ import {
   ContextUserNotesProps,
   UserNotes
 } from './Notes'
-import {
-  ContextOrderOfServiceProps,
-  OrderOfService
-} from './OrderOfService'
+import { ContextOrderOfServiceProps } from './OrderOfService'
+import { OrderOfService } from './OrderOfService'
+import { ContextPropsProfessionalOS } from './OrderOfServiceProfessional'
+import { OrderOfServiceprofessionalOS } from './OrderOfServiceProfessional'
 import { Professional } from './Professional'
 import type { ContextProps as ProfessionalContextProps } from './Professional'
 import type { ContextProjectProps } from './Project'
@@ -37,7 +37,8 @@ export const List = Object.assign(
     Notes,
     UserNotes,
     OrderOfService,
-    Reports
+    Reports,
+    OrderOfServiceprofessionalOS
   }
 )
 
@@ -53,4 +54,5 @@ export type ListContext = {
   Reports: ContextReportsProps
   UserNotes: ContextUserNotesProps
   OrderOfService: ContextOrderOfServiceProps
+  OrderOfServiceprofessionalOS: ContextPropsProfessionalOS
 }

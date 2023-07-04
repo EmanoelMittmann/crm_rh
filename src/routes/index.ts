@@ -76,14 +76,9 @@ export const routes = {
 
   orderOfService: {
     list: '/orderOfService',
-    register: '/orderOfService',
+    register: '/findProfessionalCommissionOrCreateOrderOfService',
     commission: '/commission',
-    createCommission: (id: number) =>
-      `/findProfessionalCommission/${id}`
-  },
-
-  commission: {
-    list: '/commission'
+    pushOrder: (id: number) => `/orderOfService/${id}`
   }
 }
 

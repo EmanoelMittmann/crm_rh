@@ -39,4 +39,20 @@ export interface ProfessionalProps {
   telephone_number: string
   city_name: string
   is_active: boolean
+  commissionHave?: number
+  company_id: number
+  commission: boolean
+  companies: {
+    id: number
+    razao_social: string
+  }
+  extrahour_release: [
+    {
+      hour_quantity: number
+    }
+  ]
+  fixed_payment_value: number
+  extra_hour_value: number
+  razao_social: string
+  hour_quantity: number
 }
