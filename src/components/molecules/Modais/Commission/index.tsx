@@ -6,7 +6,7 @@ import {
   useContext
 } from 'react'
 
-import { Input } from '@stardust-ds/react'
+import { Input, toast } from '@stardust-ds/react'
 import { Button } from '@stardust-ds/react'
 import { List } from 'contexts'
 import { theme } from 'styles'
@@ -66,8 +66,32 @@ const Commission = forwardRef<
     }),
     []
   )
-
   if (!isOpen) return null
+
+  const RegisterCommission = () => {
+    const hasPositiveCommission = professionalsHaveCommission.some(
+      (item: any) =>
+        item.commission === null ||
+        item.commission === undefined ||
+        item.commission > 0
+    )
+    const hasEmptyFields = professionalsHaveCommission.some(
+      (item: any) =>
+        item.commission === null ||
+        item.commission === undefined ||
+        item.commission < 0
+    )
+    if (hasPositiveCommission && hasEmptyFields) {
+      toast({
+        type: 'error',
+        title: 'Há campos vazios ou com valores negativos..',
+        position: 'bottom-right'
+      })
+    } else {
+      mergeCommision()
+      close()
+    }
+  }
 
   return (
     <>
@@ -82,28 +106,30 @@ const Commission = forwardRef<
               <h6>Profissional</h6>
               <h6>Comissão</h6>
             </TitleComissionProfessional>
-            {professionalsHaveCommission.map((item, index) => (
-              <ContainerWap key={index}>
-                <ContainerLabelProfessional>
-                  {item.name}
-                  <IconButton>
-                    <IconTrash
-                      onClick={() =>
-                        deleteCommission(item.professional_id)
-                      }
-                    />
-                  </IconButton>
-                </ContainerLabelProfessional>
-                <Input
-                  width={180}
-                  value={item?.commission}
-                  onChange={(e) =>
-                    (item.commission = Number(e.target.value))
-                  }
-                  placeholder='R$ 0,00'
-                />
-              </ContainerWap>
-            ))}
+            {professionalsHaveCommission.map(
+              (item: any, index: any) => (
+                <ContainerWap key={index}>
+                  <ContainerLabelProfessional>
+                    {item.name}
+                    <IconButton>
+                      <IconTrash
+                        onClick={() =>
+                          deleteCommission(item.professional_id)
+                        }
+                      />
+                    </IconButton>
+                  </ContainerLabelProfessional>
+                  <Input
+                    width={180}
+                    value={item?.commission}
+                    onChange={(e) =>
+                      (item.commission = Number(e.target.value))
+                    }
+                    placeholder='R$ 0,00'
+                  />
+                </ContainerWap>
+              )
+            )}
           </ContainerAbsolute>
 
           <ContainerFooter>
@@ -127,10 +153,7 @@ const Commission = forwardRef<
                 boxShadow: '0px 5px 10px 0px #0066FF40'
               }}
               bgColor='#0066FF'
-              onClick={() => {
-                mergeCommision()
-                close()
-              }}
+              onClick={() => RegisterCommission()}
             >
               Cadastrar
             </Button>

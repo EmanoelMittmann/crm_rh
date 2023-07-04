@@ -85,6 +85,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           (pHaveCommission) =>
             professional.id === pHaveCommission.professional_id
         )
+
         if (!pCommission) {
           return professional
         }
