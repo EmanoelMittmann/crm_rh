@@ -25,7 +25,7 @@ import { ProfessionalSchema } from './schema'
 import { Container } from './style'
 
 const RegisterProfessional = () => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [defaultValue, setDefaultValue] = useState()
   const navigate = useNavigate()
 
