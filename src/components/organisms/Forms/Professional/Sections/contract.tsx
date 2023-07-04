@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form'
 
 import { Radio } from '@stardust-ds/react'
 
-import { Inputs, Selects } from 'components/atoms'
+import { Inputs, SelectOption, Selects } from 'components/atoms'
 import {
   generateOpitionsFromBackend,
   GenerateValue
