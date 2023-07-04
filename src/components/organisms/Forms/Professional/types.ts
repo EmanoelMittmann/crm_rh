@@ -63,7 +63,7 @@ export interface ProfessionalProps {
     fantasy_name: string
     razao_social: string
     uf_company: Option | null
-  }
+  } | null
   permissions: any
   projects: {
     selected: ProjectAttachmentProps
