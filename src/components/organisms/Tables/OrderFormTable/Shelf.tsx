@@ -94,14 +94,28 @@ export const Shelf = ({
       )
     }
   }
-  const formatCurrency = (value: number, currency:string, localString: string) => {
+
+  const formatCurrency = (
+    value: number,
+    currency: string,
+    localString: string
+  ) => {
     const options = {
       style: 'currency',
-      currency: currency,
+      currency: currency
     }
-    return value.toLocaleString(localString, options)
-  }
 
+    const formattedValue = value.toLocaleString(localString, options)
+    const decimalSeparator = Intl.NumberFormat(localString)
+      .format(0.1)
+      .replace(/\d/g, '')
+    const lastTwoChars = formattedValue.slice(-2)
+
+    if (lastTwoChars === `${decimalSeparator}00`) {
+      return formattedValue.slice(0, -3)
+    }
+    return formattedValue
+  }
 
   return (
     <>
@@ -143,10 +157,15 @@ export const Shelf = ({
           <Text>{professional_data?.cnpj}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>R$ {(formatCurrency(fixed_payment_value, 'BRL', 'pt-BR'))}</Text>
+          <Text>
+            R$ {formatCurrency(fixed_payment_value, 'BRL', 'pt-BR')}
+          </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>{(commissionHave) || '-'}</Text>
+          <Text>
+            {formatCurrency(Number(commissionHave), 'BRL', 'pt-BR') ||
+              '-'}
+          </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text>{extra_hour_value ? extra_hour_value : '-'}</Text>

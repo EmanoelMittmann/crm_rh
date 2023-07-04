@@ -9,7 +9,10 @@ import {
   CONTRACT_TYPE_OPTIONS
 } from 'components/organisms/Forms/Professional/constants'
 import { getDateInput } from 'components/utils/formatDate'
-import { generateOpitionsFromBackend, GenerateValue } from 'components/utils/OptionsAplication'
+import {
+  generateOpitionsFromBackend,
+  GenerateValue
+} from 'components/utils/OptionsAplication'
 
 import api from 'api'
 import { externRoutes, routes } from 'routes'
@@ -303,7 +306,9 @@ export function handlePopulateFields(
       data.job_type,
       CONTRACT_TYPE_OPTIONS
     ),
-    fixed_payment_value: GenerateValue(String(data.fixed_payment_value)),
+    fixed_payment_value: GenerateValue(
+      String(data.fixed_payment_value)
+    ),
     variable1: data.variable1,
     variable2: data.variable2,
     permissions: data.permissions,
@@ -342,7 +347,8 @@ export async function onSubmit(
     mounth_hours: Number(data.mounth_hours),
     commission: data.commission,
     function_job: data.function_job,
-    fixed_payment_value: data.fixed_payment_value.replace(/\D/g, '') || '0',
+    fixed_payment_value:
+      data.fixed_payment_value.replace(/\D/g, '') || '0',
     telephone_number: handleRemoveSpecialCharacters(
       data.telephone_number
     ),

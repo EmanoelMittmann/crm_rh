@@ -3,7 +3,10 @@ import { useFormContext } from 'react-hook-form'
 import { Radio } from '@stardust-ds/react'
 
 import { Inputs, SelectOption, Selects } from 'components/atoms'
-import { generateOpitionsFromBackend, GenerateValue } from 'components/utils/OptionsAplication'
+import {
+  generateOpitionsFromBackend,
+  GenerateValue
+} from 'components/utils/OptionsAplication'
 
 import { MASKER, CONTRACT_TYPE_OPTIONS } from '../constants'
 import { validation } from '../logic'

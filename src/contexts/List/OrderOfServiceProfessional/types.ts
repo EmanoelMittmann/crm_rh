@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
+
 import { Option } from 'types'
 export type { ReactNode } from 'react'
 
@@ -31,7 +32,9 @@ export interface ContextPropsProfessionalOS {
   >
   deleteCommission(id: number): Promise<void>
   selectSendProfessionals: OrderProps[]
-  setProfessionalOS: Dispatch<SetStateAction<OrderPropsProfessional[]>>
+  setProfessionalOS: Dispatch<
+    SetStateAction<OrderPropsProfessional[]>
+  >
   setSelectSendProfessionals: Dispatch<SetStateAction<any[]>>
   meta: DefaultMetaProps
   professionalOS: OrderPropsProfessional[]
@@ -66,7 +69,7 @@ export interface OrderProps {
   professional_id: number
   companies_id: number
   commission: number
-  isCommission:boolean
+  isCommission: boolean
 }
 
 export interface OrderPropsProfessional {
@@ -84,13 +87,12 @@ export interface OrderPropsProfessional {
   extra_hour_value: number
   razao_social: string
   hour_quantity: number
-  professional_data:{
+  professional_data: {
     cnpj: string
-    id:number
+    id: number
     name: string
   }
   userCompanies: UserCompanies[]
- 
 }
 export interface UserCompanies {
   id: number
@@ -98,7 +100,7 @@ export interface UserCompanies {
   cnpj: string
 }
 
-export interface Release{
+export interface Release {
   end_date: string
   extra_hours_status_id: number
   hour_quantity: number
