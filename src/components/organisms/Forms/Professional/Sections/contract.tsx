@@ -26,7 +26,6 @@ export const Contract = () => {
     if (value) return value
   }, [watch('company_id')])
 
-  console.log('Company: ', Company)
   const options = watch('options')
 
   const commissionOptions = [
