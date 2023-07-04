@@ -1,14 +1,15 @@
+import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { Radio } from '@stardust-ds/react'
+import { Radio, Select } from '@stardust-ds/react'
 
-import { Inputs, SelectOption, Selects } from 'components/atoms'
+import { Inputs, Selects } from 'components/atoms'
 import { generateOpitionsFromBackend } from 'components/utils/OptionsAplication'
 
 import { MASKER, CONTRACT_TYPE_OPTIONS } from '../constants'
 import { validation } from '../logic'
 import { ContainerRow } from '../style'
-import type { FormProps } from '../types'
+import type { FormProps, SelectOption } from '../types'
 
 export const Contract = () => {
   const {
@@ -17,11 +18,16 @@ export const Contract = () => {
     formState: { errors },
     setValue
   } = useFormContext<FormProps>()
+  const Company = useMemo(() => {
+    const value = generateOpitionsFromBackend(
+      watch('company_id'),
+      watch('options.companies', [])
+    )
+    if (value) return value
+  }, [watch('company_id')])
 
+  console.log('Company: ', Company)
   const options = watch('options')
-
-  /*   const payingCompaniesIsRequired =
-    watch('options.paying_companies').length > 0 */
 
   const commissionOptions = [
     {
@@ -141,19 +147,13 @@ export const Contract = () => {
       </ContainerRow>
       <ContainerRow>
         <Selects.Default
-          label='Empresa Pagadora'
-          disabled={watch('options.payingCompanies', []).length === 0}
           {...register('options.payingCompany')}
-          options={watch('options.payingCompanies')}
+          label='Empresa Pagadora'
+          // disabled={!options.payingCompanies?.length} // [] Iniciando a edição ele fica bloqueado, apenas fazendo uma ação dentro do form ele desbloquea
+          options={options.companies} //Olhar com Calma a questao do PayingCompany chegar aqui undefined
           onSelect={(e: any) => setValue('company_id', e.value)}
           clearable={false}
-          value={
-            (generateOpitionsFromBackend(
-              watch('company_id'),
-              watch('options.payingCompanies', [])
-            ) as any) || []
-            /* watch('options.payingCompany') as any */
-          }
+          value={Company as any}
         />
       </ContainerRow>
     </>
