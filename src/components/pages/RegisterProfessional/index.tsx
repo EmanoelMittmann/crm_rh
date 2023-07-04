@@ -36,7 +36,7 @@ const RegisterProfessional = () => {
       extra_hour_activated: false
     }
   })
-
+  console.log(methods.formState.errors)
   const CPF = methods.watch('cpf')
   const CEP = methods.watch('cep')
   const CNPJ = methods.watch('professional_data.cnpj')

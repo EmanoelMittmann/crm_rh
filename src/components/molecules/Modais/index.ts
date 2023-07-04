@@ -1,4 +1,5 @@
 import { Colors } from './Colors'
+import Commission from './Commission'
 import Details from './Details'
 import Edit from './Edit'
 import EditorStatus from './EditorStatus'
@@ -17,6 +18,7 @@ export const Modal = Object.assign(
     Colors,
     UserEditor,
     Details,
+    Commission,
     Report
   }
 )
@@ -27,3 +29,4 @@ export type { IHandleModalPropsDetails } from './Details/type'
 export type { IHandleModalColorsPropsNew } from './Colors/New'
 export type { IHandleModalColorsPropsEdit } from './Colors/Edit'
 export type { IHandleModalReport as IReports } from './Report/Default'
+export type { IHandleModalPropsCommission } from './Commission'

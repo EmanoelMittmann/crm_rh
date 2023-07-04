@@ -87,7 +87,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setMeta((old) => ({
       ...old,
       orderField: field,
-      order: old.order === 'ASC' ? 'DESC' : 'ASC'
+      order: old.order === 'DESC' ? 'ASC' : 'DESC'
     }))
   }
 
@@ -111,6 +111,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       )
     })
   }
+
   function handleFillStatus(status: string | null) {
     setMeta((old) => ({
       ...old,
