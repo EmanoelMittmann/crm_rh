@@ -23,14 +23,14 @@ export interface PageMetaProps {
 
 export interface ContextPropsProfessionalOS {
   mergeCommision(): void
-  professionalsHaveCommission: any[]
+  professionalsHaveCommission: OrderProps[]
   onCreateOs(): Promise<Boolean | undefined>
   checked: { [id: number]: boolean }
   setChecked: React.Dispatch<
     React.SetStateAction<{ [id: number]: boolean }>
   >
   deleteCommission(id: number): Promise<void>
-  selectSendProfessionals: any[]
+  selectSendProfessionals: OrderProps[]
   setProfessionalOS: Dispatch<SetStateAction<OrderPropsProfessional[]>>
   setSelectSendProfessionals: Dispatch<SetStateAction<any[]>>
   meta: DefaultMetaProps
