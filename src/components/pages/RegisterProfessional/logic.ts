@@ -232,6 +232,13 @@ export function handlePopulateFields(
   const BANKS = methods.watch('options.banks')
   const JOBS = methods.watch('options.jobs')
   const OPTIONS = methods.watch('options')
+  const PAYING = data.userCompanies.map((prop: any) => ({
+    label: String(prop.razao_social),
+    value: prop.id
+  }))
+  const COMPANY = generateOpitionsFromBackend(data.company_id, PAYING)
+
+  PAYING && methods.setValue('options.payingCompanies', PAYING)
 
   methods.reset({
     name: data.name,
@@ -248,7 +255,8 @@ export function handlePopulateFields(
     street_name: data.street_name,
     house_number: data.house_number,
     complement: data.complement,
-    professional_data: null || {
+    options: OPTIONS,
+    professional_data: data.professional_data && {
       cnpj: data.professional_data.cnpj,
       fantasy_name: data.professional_data.fantasy_name,
       razao_social: data.professional_data.razao_social,
@@ -289,8 +297,7 @@ export function handlePopulateFields(
       )
     },
     commission: data.commission,
-    company_id: data.userCompanies.map((prop: any) => prop.id),
-    options: OPTIONS,
+    company_id: data.company_id,
     extra_hour_activated: data.extra_hour_activated,
     extra_hour_limit: data.extra_hour_limit,
     extra_hour_value: data.extra_hour_value,
@@ -355,35 +362,42 @@ export async function onSubmit(
     uf: data.uf?.value,
     projects: data.projects.attachment,
     professional_data: {
-      bank: data.professional_data.bank?.value,
-      account_type: data.professional_data.account_type?.value,
-      agency: Number(data.professional_data.agency),
-      account_number: handleRemoveSpecialCharacters(
-        data.professional_data.account_number
-      ),
-      type_person: data.professional_data.type_person?.value,
+      bank: data.professional_data?.bank?.value,
+      account_type: data.professional_data?.account_type?.value,
+      agency: Number(data.professional_data?.agency),
+      account_number:
+        data.professional_data &&
+        handleRemoveSpecialCharacters(
+          data.professional_data.account_number
+        ),
+      type_person: data.professional_data?.type_person?.value,
       type_of_transfer:
-        data.professional_data.type_of_transfer?.value,
-      cnpj: data.professional_data.cnpj,
-      razao_social: data.professional_data.razao_social,
-      company_cep: handleRemoveSpecialCharacters(
-        data.professional_data.company_cep
-      ),
-      fantasy_name: data.professional_data.fantasy_name,
-      company_street_name: data.professional_data.company_street_name,
+        data.professional_data?.type_of_transfer?.value,
+      cnpj: data.professional_data?.cnpj,
+      razao_social: data.professional_data?.razao_social,
+      company_cep:
+        data.professional_data &&
+        handleRemoveSpecialCharacters(
+          data.professional_data.company_cep
+        ),
+      fantasy_name: data.professional_data?.fantasy_name,
+      company_street_name:
+        data.professional_data?.company_street_name,
       company_neighborhood_name:
-        data.professional_data.company_neighborhood_name,
+        data.professional_data?.company_neighborhood_name,
       company_house_number:
-        +data.professional_data.company_house_number,
-      company_complement: data.professional_data.company_complement,
-      company_city_name: data.professional_data.company_city_name,
-      uf_company: data.professional_data.uf_company?.value,
-      company_phone_number: handleRemoveSpecialCharacters(
-        data.professional_data.company_phone_number
-      ),
-      company_email: data.professional_data.company_email,
-      pix_key_type: data.professional_data.pix_key_type?.value,
-      pix_key: data.professional_data.pix_key
+        data.professional_data?.company_house_number,
+      company_complement: data.professional_data?.company_complement,
+      company_city_name: data.professional_data?.company_city_name,
+      uf_company: data.professional_data?.uf_company?.value,
+      company_phone_number:
+        data.professional_data &&
+        handleRemoveSpecialCharacters(
+          data.professional_data.company_phone_number
+        ),
+      company_email: data.professional_data?.company_email,
+      pix_key_type: data.professional_data?.pix_key_type?.value,
+      pix_key: data.professional_data?.pix_key
     },
     complement: data.complement,
     tools: data.tools,
