@@ -2,6 +2,7 @@ import { Attachment } from './Attachment'
 import { Companys } from './Companys'
 import { Jobs } from './Jobs'
 import { Notes } from './Notes'
+import { OrderFormTable } from './OrderFormTable'
 import { OrderOfService } from './OrderOfService'
 import { Professionals } from './Professionals'
 import { Projects } from './Projects'
@@ -25,6 +26,7 @@ export const Table = Object.assign(
     Notes,
     OrderOfService,
     UserNotes,
+    OrderFormTable,
     Reports
   }
 )

@@ -1,4 +1,5 @@
 import type { SelectProps } from '@stardust-ds/react'
+
 export type { ReactNode } from 'react'
 
 export interface DefaultMetaProps {
@@ -20,7 +21,6 @@ export interface ContextOrderOfServiceProps {
   meta: DefaultMetaProps
   orderOfService: OrderOfServiceProps[]
   isLoading: boolean
-
   filterOptions: { status_O_S: SelectProps['options'] }
   paginate: {
     current_page: number
@@ -49,4 +49,17 @@ export interface OrderOfServiceProps {
   status: string
   updated_at: string
   avatar: string
+}
+
+export interface OrderProps {
+  id: number
+  professional: {
+    id: number
+    name: string
+    company: string
+    cnpj: string
+    extra_hour_value: number
+    fixed_payment_value: string
+    commission: boolean
+  }
 }

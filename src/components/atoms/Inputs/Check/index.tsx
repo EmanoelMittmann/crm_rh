@@ -24,7 +24,7 @@ export default forwardRef(({ label, ...props }: Props, ref) => {
         ref={ref}
       />
       {label && (
-        <Typography type='l1' color={color}>
+        <Typography type='l5' color={color}>
           {label}
         </Typography>
       )}
