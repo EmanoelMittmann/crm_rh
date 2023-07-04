@@ -39,10 +39,10 @@ const OnPrice = () =>{
     return (
         <ContainerOnPrice>
             {Object.entries(totalPayment).map(([companyId, amount]) => {
-                const companies = professionalOS.find((prof) => prof.company_id === Number(companyId));
-                return companies ? (
+                const data = professionalOS.find((prof) => prof.company_id === Number(companyId));
+                return data ? (
                     <CompaniesField key={companyId}>
-                        <Text>{companies.companies.razao_social.toUpperCase()} </Text>
+                        <Text>{data.companies.razao_social.toUpperCase()} </Text>
                         <Some>R$ {parseFloat(amount.toFixed(2))}
                         </Some>
                     </CompaniesField>

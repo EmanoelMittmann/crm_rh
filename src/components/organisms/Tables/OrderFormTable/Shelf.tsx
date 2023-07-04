@@ -45,7 +45,7 @@ export const Shelf = ({ props, config }: ShelfProps<any>) => {
   const selectedCommission = selectSendProfessionals
   
   const commissionValue = selectedCommission.map((item: Order) => {
-    const commission = item.commission
+    const commission = item.commission ?? 0
     const professional_id = item.professional_id
     const companies_id = item.companies_id
     return {
