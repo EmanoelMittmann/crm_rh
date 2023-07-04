@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
+import { Select } from '@stardust-ds/react'
 import { mask } from 'remask'
 
 import {
@@ -9,7 +10,6 @@ import {
   SelectOption,
   Selects
 } from 'components/atoms'
-import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 
 import { MASKER, UF_OPTIONS } from '../constants'
 import { ContainerRow } from '../style'
@@ -38,12 +38,14 @@ export const Company = () => {
           label='CNPJ'
           error={errors.professional_data?.cnpj?.message}
           placeholder='00.000.00/0000.00'
+          required
         />
         <Inputs.Default
           {...register('professional_data.razao_social')}
           width='100%'
           value={watch('professional_data.razao_social') as any}
           label='Razão social'
+          required
         />
       </ContainerRow>
       <ContainerRow gap='1rem'>
@@ -53,6 +55,7 @@ export const Company = () => {
           label='Nome fantasia'
           value={watch('professional_data.fantasy_name') as any}
           width='100%'
+          required
         />
         <Inputs.Default
           {...register('professional_data.company_phone_number', {
@@ -64,6 +67,7 @@ export const Company = () => {
           width={215}
           label='Telefone'
           placeholder='(00) 00000-0000'
+          required
         />
       </ContainerRow>
       <ContainerRow gap='1rem'>
@@ -72,6 +76,7 @@ export const Company = () => {
           type='email'
           label='Email'
           width='100%'
+          required
         />
       </ContainerRow>
       <ContainerRow gap='1rem'>
@@ -83,12 +88,14 @@ export const Company = () => {
           label='CEP'
           placeholder='00000-0000'
           width={137}
+          required
         />
         <Inputs.Default
           {...register('professional_data.company_street_name')}
           label='Rua'
           type='text'
           width={300}
+          required
         />
         <Inputs.Default
           {...register('professional_data.company_house_number')}
@@ -96,6 +103,7 @@ export const Company = () => {
           type='number'
           width={130}
           min={0}
+          required
         />
         <Inputs.Default
           {...register('professional_data.company_complement')}
@@ -109,11 +117,13 @@ export const Company = () => {
           {...register('professional_data.company_neighborhood_name')}
           label='Bairro'
           width='100%'
+          required
         />
         <Inputs.Default
           {...register('professional_data.company_city_name')}
           label='Cidade'
           width='100%'
+          required
         />
         <Selects.Default
           {...register('professional_data.uf_company')}
@@ -129,6 +139,7 @@ export const Company = () => {
           value={watch('professional_data.uf_company') as any}
           searchable
           width={295}
+          required
         />
       </ContainerRow>
       <ContainerRow gap='1rem'>
@@ -136,12 +147,13 @@ export const Company = () => {
           {...register('options.payingCompanies')}
           label='Empresa Ubistart'
           options={watch('options.companies', []) as SelectOption[]}
-          value={watch('options.payingCompanies') as any}
+          value={watch('options.payingCompanies', []) as any}
           onSelect={(v: any) => {
             setValue('options.payingCompanies', v)
           }}
           searchable
           multiSelect
+          required
           clearable={false}
           placeholder='Selecione'
         />
