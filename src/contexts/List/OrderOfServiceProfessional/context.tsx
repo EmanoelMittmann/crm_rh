@@ -98,20 +98,30 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function onCreateOs() {
-    const response = await api.post(
-      routes.orderOfService.register,
-      selectSendProfessionals
-    )
-    if (response.data.msg === 'successfully generated report') {
+    if (selectSendProfessionals.length > 0) {
+      const response = await api.post(
+        routes.orderOfService.register,
+        selectSendProfessionals
+      )
+      if (response.data.msg === 'successfully generated report') {
+        toast({
+          type: 'success',
+          title: 'Ordem de Serviço gerada com sucesso.',
+          position: 'bottom-right'
+        })
+
+        navigate('/orderOfService')
+        return false
+      } else {
+        return true
+      }
+    } else {
       toast({
-        type: 'success',
-        title: 'Ordem de Serviço gerada com sucesso.',
+        type: 'error',
+        title: 'Selecione os profissionais.',
         position: 'bottom-right'
       })
-      navigate('/orderOfService')
-      return false
-    } else {
-      return true
+      return
     }
   }
 

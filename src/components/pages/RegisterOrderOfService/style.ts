@@ -19,7 +19,7 @@ export const Container = styled.div`
 `
 
 export const ContainerFixed = styled.div`
-  width: 81.5%;
+  width: 81.6%;
   height: 200px;
   margin-bottom: 2rem;
   margin-left: 2em;
@@ -35,6 +35,17 @@ export const ContainerFixed = styled.div`
 
   z-index: 10;
   box-shadow: 0.3px 5px 3px 2px ${theme.neutrals.gray3};
+
+  @media (max-width: 1049px) {
+    width: 80%;
+    margin-left: 0;
+    justify-content: center;
+    margin-top: 1em;
+  }
+`
+export const Main = styled.div`
+  max-width: 100vw;
+  display: flex;
 `
 
 export const ContainerCompany = styled.div`
