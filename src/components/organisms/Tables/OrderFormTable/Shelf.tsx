@@ -100,7 +100,7 @@ export const Shelf = ({
       setProfessionalOS((prev) =>
         prev.map((professional) => {
           if (professional.id === id) {
-            delete professional?.commissionHave ?? '-'
+            delete professional?.commissionHave
           }
           return professional
         })
