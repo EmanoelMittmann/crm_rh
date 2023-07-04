@@ -62,6 +62,7 @@ export interface OrderOfServiceProps {
 }
 
 export interface OrderProps {
+  name: string
   professional_id: number
   companies_id: number
   commission: number

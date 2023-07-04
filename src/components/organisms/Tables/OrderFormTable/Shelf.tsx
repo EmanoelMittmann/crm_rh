@@ -1,6 +1,9 @@
 import { useContext, useState } from 'react'
-import {Select} from '@stardust-ds/react'
+
+import { Select } from '@stardust-ds/react'
 import { List } from 'contexts'
+import { OrderPropsProfessional } from 'contexts/List/OrderOfServiceProfessional/types'
+
 import { Inputs } from 'components/atoms'
 import {
   ContainerShelf,
@@ -8,13 +11,15 @@ import {
   Text
 } from 'components/organisms/Tables/style'
 import { GenerateValue } from 'components/utils/OptionsAplication'
+
 import { ShelfProps } from '../types'
 import { ContainerText } from './style'
 import { Order } from './type'
 import { Option } from 'types'
-import { OrderPropsProfessional } from 'contexts/List/OrderOfServiceProfessional/types'
-export const Shelf = ({ props, config }: ShelfProps<OrderPropsProfessional>) => {
-
+export const Shelf = ({
+  props,
+  config
+}: ShelfProps<OrderPropsProfessional>) => {
   const {
     setSelectSendProfessionals,
     setProfessionalOS,
@@ -36,10 +41,12 @@ export const Shelf = ({ props, config }: ShelfProps<OrderPropsProfessional>) => 
   } = props
   const [selectedCompany, setSelectedCompany] = useState(company_id)
 
-  const options = userCompanies.map((company:{ id : number, razao_social: string}) => ({
-    value: company.id,
-    label: company.razao_social
-  }))
+  const options = userCompanies.map(
+    (company: { id: number; razao_social: string }) => ({
+      value: company.id,
+      label: company.razao_social
+    })
+  )
 
   const selectedCommission = selectSendProfessionals
 
@@ -111,9 +118,8 @@ export const Shelf = ({ props, config }: ShelfProps<OrderPropsProfessional>) => 
         <ContainerShelfColumn>
           <Select
             placeholder={
-              options.find(
-                (item) => item.value === selectedCompany
-              )?.label
+              options.find((item) => item.value === selectedCompany)
+                ?.label
             }
             options={options as []}
             clearable={false}

@@ -1,25 +1,30 @@
-import {
-  createContext,
-  ReactNode,
-  useState
-} from 'react'
+import { createContext, ReactNode, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import { toast } from '@stardust-ds/react'
-import {
-  PaginateContext
-} from 'components/molecules'
+
+import { PaginateContext } from 'components/molecules'
+
 import api from 'api'
 import { routes } from 'routes'
+
 import { useDebounce } from 'hooks'
+
 import DEFAULT from './constants'
-import { ContextPropsProfessionalOS, OrderProps, OrderPropsProfessional } from './types'
+import {
+  ContextPropsProfessionalOS,
+  OrderProps,
+  OrderPropsProfessional
+} from './types'
 
 export const Context = createContext({} as ContextPropsProfessionalOS)
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
-  const [professionalOS, setProfessionalOS] = useState<OrderPropsProfessional[]>([])
+  const [professionalOS, setProfessionalOS] = useState<
+    OrderPropsProfessional[]
+  >([])
 
   const [checked, setChecked] = useState<{ [id: number]: boolean }>(
     {}
@@ -66,7 +71,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     )
     setProfessionalOS(
       data?.data.filter(
-        (professional: OrderPropsProfessional) => professional.professional_data !== null
+        (professional: OrderPropsProfessional) =>
+          professional.professional_data !== null
       )
     )
     setIsLoading(false)
