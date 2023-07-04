@@ -55,7 +55,7 @@ export const CompaniesField = styled.div`
   justify-content: space-between;
 `
 export const Text = styled.p`
-  width: 50px;
+  width: 150px;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
