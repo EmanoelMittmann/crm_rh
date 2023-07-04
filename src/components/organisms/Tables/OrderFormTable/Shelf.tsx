@@ -94,6 +94,14 @@ export const Shelf = ({
       )
     }
   }
+  const formatCurrency = (value: number, currency:string, localString: string) => {
+    const options = {
+      style: 'currency',
+      currency: currency,
+    }
+    return value.toLocaleString(localString, options)
+  }
+
 
   return (
     <>
@@ -135,10 +143,10 @@ export const Shelf = ({
           <Text>{professional_data?.cnpj}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>R$ {fixed_payment_value}</Text>
+          <Text>R$ {(formatCurrency(fixed_payment_value, 'BRL', 'pt-BR'))}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>{GenerateValue(String(commissionHave)) || '-'}</Text>
+          <Text>{(commissionHave) || '-'}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text>{extra_hour_value ? extra_hour_value : '-'}</Text>

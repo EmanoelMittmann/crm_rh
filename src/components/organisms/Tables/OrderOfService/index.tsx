@@ -1,16 +1,14 @@
 import { useContext, useMemo } from 'react'
-
 import { List } from 'contexts'
-
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
-
 import { LoadingWrapper, Main } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './shelf'
+import { OrderOfServiceProps } from './types'
 
 export const OrderOfService = () => {
-  const { orderOfService, navigateTo, handleOrder, isLoading } =
+  const { orderOfService, handleOrder, isLoading } =
     useContext(List.OrderOfService.Context)
 
   const POPOVER_OPTIONS = (id: number, name: string) => []
@@ -23,7 +21,7 @@ export const OrderOfService = () => {
         </LoadingWrapper>
       )
 
-    return orderOfService.map((props: any) => (
+    return orderOfService.map((props: OrderOfServiceProps) => (
       <Shelf
         key={props.id}
         config={{

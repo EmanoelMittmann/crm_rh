@@ -14,12 +14,7 @@ export interface OrderProps {
   }
 }
 
-// export interface OrderOfServiceProps {
-//     professional_id: number
-//     companies_id: number
-//     commission: number
 
-// }
 export interface OrderOfServiceProps {
   id: number
   name: string
