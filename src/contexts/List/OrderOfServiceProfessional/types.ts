@@ -73,6 +73,7 @@ export interface OrderProps {
 }
 
 export interface OrderPropsProfessional {
+  professional_id: number
   id: number
   name: string
   commissionHave?: number

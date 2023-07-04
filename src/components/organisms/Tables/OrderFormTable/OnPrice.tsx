@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react'
 
 import { List } from 'contexts'
 
+import { formatCurrency } from 'components/utils/formatCurrent'
+
 import { Text } from '../style'
 import { CompaniesField, ContainerOnPrice, Some } from './style'
 
@@ -54,7 +56,7 @@ const OnPrice = () => {
         return data ? (
           <CompaniesField key={companyId}>
             <Text>{data.companies.razao_social.toUpperCase()} </Text>
-            <Some>R$ {parseFloat(amount.toFixed(2))}</Some>
+            <Some>R$ {formatCurrency(amount, 'BRL', 'pt-BR')}</Some>
           </CompaniesField>
         ) : null
       })}
