@@ -29,7 +29,7 @@ export const Contract = () => {
     if (value) return value
   }, [watch('company_id')])
 
-  const options = watch('options')
+  const { payingCompanies, jobs } = watch('options')
   const paymentFixed = watch('fixed_payment_value')
   const formattedpaymentFixed = GenerateValue(paymentFixed || '')
 
@@ -84,7 +84,7 @@ export const Contract = () => {
           }
           onClear={() => setValue('job_id', null)}
           error={errors.professional_data?.type_person?.message}
-          options={options?.jobs}
+          options={jobs}
           label='Cargo'
           required
           value={watch('job_id') as any}
@@ -153,8 +153,8 @@ export const Contract = () => {
         <Selects.Default
           {...register('options.payingCompany')}
           label='Empresa Pagadora'
-          // disabled={!options.payingCompanies?.length} // [] Iniciando a edição ele fica bloqueado, apenas fazendo uma ação dentro do form ele desbloquea
-          options={options.companies} //Olhar com Calma a questao do PayingCompany chegar aqui undefined
+          disabled={payingCompanies?.length === 0}
+          options={payingCompanies}
           onSelect={(e: any) => setValue('company_id', e.value)}
           error={errors.company_id?.message}
           clearable={false}
