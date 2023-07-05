@@ -3,7 +3,9 @@ import {
   useImperativeHandle,
   useState,
   useCallback,
-  useContext
+  useContext,
+  useMemo,
+  useEffect
 } from 'react'
 
 import { Input, toast } from '@stardust-ds/react'
@@ -13,7 +15,7 @@ import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
 import { IconTrash } from 'components/atoms/Icons/IconTrash'
-import { Paginate } from 'components/molecules/Paginate'
+
 
 import { Columns, Row } from '../Edit/style'
 import {
@@ -27,6 +29,7 @@ import {
   Overlay,
   TitleComissionProfessional
 } from './style'
+import PaginateCommission from 'components/molecules/Modais/PaginateCommission/paginateCommission'
 
 interface IModalProps {
   text: string
@@ -47,10 +50,30 @@ const Commission = forwardRef<
   const {
     deleteCommission,
     professionalsHaveCommission,
-    mergeCommision
+    mergeCommision,
+    metaCommision,
   } = useContext(List.OrderOfServiceprofessionalOS.Context)
-
+  
   const [isOpen, setIsOpen] = useState(false)
+
+
+
+  const currentPage = metaCommision.paginate.current_page;
+  const itemsPerPage = 7;
+  const totalItems = professionalsHaveCommission.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const paginatedProfessionals = useMemo(() => {
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    return professionalsHaveCommission.slice(startIndex, endIndex);
+  }, [currentPage,totalPages ,professionalsHaveCommission]);
+
+
+
+
 
   const close = useCallback(() => {
     setIsOpen(false)
@@ -106,7 +129,7 @@ const Commission = forwardRef<
               <h6>Profissional</h6>
               <h6>Comissão</h6>
             </TitleComissionProfessional>
-            {professionalsHaveCommission.map(
+            {paginatedProfessionals.map(
               (item: any, index: any) => (
                 <ContainerWap key={index}>
                   <ContainerLabelProfessional>
@@ -134,7 +157,7 @@ const Commission = forwardRef<
 
           <ContainerFooter>
             <Footer>
-              <Paginate />
+              <PaginateCommission itemsPerPage={itemsPerPage} totalItems={totalItems} />
             </Footer>
           </ContainerFooter>
 

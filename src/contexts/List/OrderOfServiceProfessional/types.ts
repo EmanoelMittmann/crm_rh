@@ -12,15 +12,7 @@ export interface DefaultMetaProps {
     last_page: number
   }
 }
-export interface PageMetaProps {
-  search: string
-  orderField: string | null
-  order: 'ASC' | 'DESC'
-  paginate: {
-    current_page: number
-    last_page: number
-  }
-}
+
 
 export interface ContextPropsProfessionalOS {
   mergeCommision(): void
@@ -36,6 +28,7 @@ export interface ContextPropsProfessionalOS {
     SetStateAction<OrderPropsProfessional[]>
   >
   setSelectSendProfessionals: Dispatch<SetStateAction<any[]>>
+  metaCommision: DefaultMetaProps
   meta: DefaultMetaProps
   professionalOS: OrderPropsProfessional[]
   isLoading: boolean

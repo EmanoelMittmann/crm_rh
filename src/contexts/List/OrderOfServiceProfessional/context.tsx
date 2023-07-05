@@ -31,8 +31,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   )
   const [selectSendProfessionals, setSelectSendProfessionals] =
     useState<OrderProps[]>([])
-
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
+  const [metaCommision, setMetaCommision] = useState(DEFAULT.META_PROPS)
 
   const professionalsHaveCommission = selectSendProfessionals.filter(
     (professional) => professional.isCommission
@@ -41,6 +41,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const ContextPropsProfessionalOS = {
     mergeCommision,
     professionalsHaveCommission,
+    metaCommision,
     onCreateOs,
     checked,
     setChecked,
@@ -52,7 +53,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     isLoading,
     meta,
     navigateTo,
-    paginate: { ...meta.paginate, setCurrent_page: setPage },
+    paginate: { ...metaCommision.paginate, setCurrent_page: setPage },
     handleSearch,
     handleOrder
   }
@@ -62,7 +63,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       routes.professional.list + '?limit=110',
       {
         params: {
-          page: meta.paginate.current_page,
+          page: metaCommision.paginate.current_page,
           search: meta.search && meta.search,
           order: meta.order,
           orderField: meta.orderField
@@ -104,6 +105,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         routes.orderOfService.register,
         selectSendProfessionals
       )
+
+      setMetaCommision((old) => ({
+        ...old,
+        paginate: { ...old.paginate, last_page: response.data.meta.last_page }
+      }))
+
       if (response.data.msg === 'successfully generated report') {
         toast({
           type: 'success',
@@ -124,6 +131,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       })
       return
     }
+  
   }
 
   async function deleteCommission(id: number) {
@@ -143,7 +151,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   function setPage(current_page: number) {
-    setMeta((old) => ({
+    setMetaCommision((old) => ({
       ...old,
       paginate: { ...old.paginate, current_page }
     }))
