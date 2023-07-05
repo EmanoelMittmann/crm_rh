@@ -25,7 +25,7 @@ import { ProfessionalSchema } from './schema'
 import { Container } from './style'
 
 const RegisterProfessional = () => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [defaultValue, setDefaultValue] = useState()
   const navigate = useNavigate()
 
@@ -36,7 +36,7 @@ const RegisterProfessional = () => {
       extra_hour_activated: false
     }
   })
-
+  console.log(methods.formState.errors)
   const CPF = methods.watch('cpf')
   const CEP = methods.watch('cep')
   const CNPJ = methods.watch('professional_data.cnpj')
@@ -97,13 +97,13 @@ const RegisterProfessional = () => {
       api
         .get<any[]>(routes.professional.getUser(+id))
         .then(({ data }) => setDefaultValue(data[0]))
-      /* fetchAndPopulateUser(id, methods)
+      fetchAndPopulateUser(id, methods)
         .catch((error) => {
           console.log(error.message)
         })
-        .finally(() => setIsLoading(false)) */
+        .finally(() => setIsLoading(false))
     } else {
-      /* setIsLoading(false) */
+      setIsLoading(false)
     }
   }, [id])
 
