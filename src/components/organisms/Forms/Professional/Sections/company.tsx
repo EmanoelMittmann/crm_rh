@@ -43,6 +43,7 @@ export const Company = () => {
         <Inputs.Default
           {...register('professional_data.razao_social')}
           width='100%'
+          error={errors.professional_data?.razao_social?.message}
           value={watch('professional_data.razao_social') as any}
           label='Razão social'
           required
@@ -53,6 +54,7 @@ export const Company = () => {
           {...register('professional_data.fantasy_name')}
           type='text'
           label='Nome fantasia'
+          error={errors.professional_data?.fantasy_name?.message}
           value={watch('professional_data.fantasy_name') as any}
           width='100%'
           required
@@ -64,6 +66,9 @@ export const Company = () => {
           value={
             watch('professional_data.company_phone_number') ?? ''
           }
+          error={
+            errors.professional_data?.company_phone_number?.message
+          }
           width={215}
           label='Telefone'
           placeholder='(00) 00000-0000'
@@ -74,6 +79,7 @@ export const Company = () => {
         <Inputs.Default
           {...register('professional_data.company_email')}
           type='email'
+          error={errors.professional_data?.company_email?.message}
           label='Email'
           width='100%'
           required
@@ -88,12 +94,16 @@ export const Company = () => {
           label='CEP'
           placeholder='00000-0000'
           width={137}
+          error={errors.professional_data?.company_cep?.message}
           required
         />
         <Inputs.Default
           {...register('professional_data.company_street_name')}
           label='Rua'
           type='text'
+          error={
+            errors.professional_data?.company_street_name?.message
+          }
           width={300}
           required
         />
@@ -101,6 +111,9 @@ export const Company = () => {
           {...register('professional_data.company_house_number')}
           label='Número'
           type='number'
+          error={
+            errors.professional_data?.company_house_number?.message
+          }
           width={130}
           min={0}
           required
@@ -116,6 +129,10 @@ export const Company = () => {
         <Inputs.Default
           {...register('professional_data.company_neighborhood_name')}
           label='Bairro'
+          error={
+            errors.professional_data?.company_neighborhood_name
+              ?.message
+          }
           width='100%'
           required
         />
@@ -123,6 +140,7 @@ export const Company = () => {
           {...register('professional_data.company_city_name')}
           label='Cidade'
           width='100%'
+          error={errors.professional_data?.company_city_name?.message}
           required
         />
         <Selects.Default
@@ -133,6 +151,7 @@ export const Company = () => {
           onClear={() =>
             setValue('professional_data.uf_company', null)
           }
+          error={errors.professional_data?.uf_company?.message}
           placeholder='Selecione'
           options={UF_OPTIONS}
           label='Estados'
@@ -151,6 +170,7 @@ export const Company = () => {
           onSelect={(v: any) => {
             setValue('options.payingCompanies', v)
           }}
+          error={errors.options?.payingCompanies?.message}
           searchable
           multiSelect
           required

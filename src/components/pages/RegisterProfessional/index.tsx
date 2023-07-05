@@ -36,7 +36,6 @@ const RegisterProfessional = () => {
       extra_hour_activated: false
     }
   })
-  console.log(methods.formState.errors)
   const CPF = methods.watch('cpf')
   const CEP = methods.watch('cep')
   const CNPJ = methods.watch('professional_data.cnpj')
@@ -76,9 +75,12 @@ const RegisterProfessional = () => {
   })
 
   useDebounce({
-    fn: () => fetchProps(methods),
-    delay: 0,
-    listener: [isLoading]
+    fn: () => {
+      if (id) return null
+
+      fetchProps(methods)
+    },
+    listener: []
   })
 
   useDebounce({
@@ -99,7 +101,7 @@ const RegisterProfessional = () => {
         .then(({ data }) => setDefaultValue(data[0]))
       fetchAndPopulateUser(id, methods)
         .catch((error) => {
-          console.log(error.message)
+          console.error(error.message)
         })
         .finally(() => setIsLoading(false))
     } else {
@@ -127,6 +129,7 @@ const RegisterProfessional = () => {
               onSave={methods.handleSubmit((data) =>
                 handleSave(data, id)
               )}
+              onCancel={() => navigate('/professionals')}
               saveButtonName='Salvar Profissional'
               cancelButtonName='cancelar'
             />
