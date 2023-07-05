@@ -76,6 +76,24 @@ export const ProfessionalSchema = object({
     test: (value) => value && value.value !== '' && value.label !== ''
   }),
   professional_data: object({
+    cnpj: string().required(validation.required),
+    company_cep: string().required(validation.required),
+    company_city_name: string().required(validation.required),
+    company_email: string().required(validation.required),
+    company_house_number: number()
+      .typeError(validation.required)
+      .required(validation.required),
+    company_neighborhood_name: string().required(validation.required),
+    company_phone_number: string().required(validation.required),
+    company_street_name: string().required(validation.required),
+    fantasy_name: string().required(validation.required),
+    razao_social: string().required(validation.required),
+    uf_company: mixed().test({
+      name: 'required',
+      message: validation.required,
+      test: (value) =>
+        value && value.value !== '' && value.label !== ''
+    }),
     bank: mixed().test({
       name: 'required',
       message: validation.required,
@@ -104,5 +122,8 @@ export const ProfessionalSchema = object({
       test: (value) =>
         value && value.value !== '' && value.label !== ''
     })
+  }),
+  options: object({
+    payingCompanies: array().min(1, validation.required)
   })
 })
