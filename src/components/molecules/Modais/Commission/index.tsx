@@ -66,33 +66,42 @@ const Commission = forwardRef<
 
     return professionalsHaveCommission.slice(startIndex, endIndex)
   }, [currentPage, totalPages, professionalsHaveCommission])
-  
+
   function handlePaginate() {
     setMetaCommision((old) => {
-      const current_page = old.paginate.current_page;
-      const total_pages = Math.ceil(professionalsHaveCommission.length / itemsPerPage);
+      const current_page = old.paginate.current_page
+      const total_pages = Math.ceil(
+        professionalsHaveCommission.length / itemsPerPage
+      )
       if (professionalsHaveCommission.length === 0) {
-        return { ...old, paginate: { ...old.paginate, current_page: 1 } };
+        return {
+          ...old,
+          paginate: { ...old.paginate, current_page: 1 }
+        }
       }
 
       if (current_page > total_pages) {
-        return { ...old, paginate: { ...old.paginate, current_page: current_page - 1 } };
+        return {
+          ...old,
+          paginate: {
+            ...old.paginate,
+            current_page: current_page - 1
+          }
+        }
       }
 
-      return old;
-    });
+      return old
+    })
   }
 
   useEffect(() => {
-    handlePaginate();
-  }, [professionalsHaveCommission.length]);
-
+    handlePaginate()
+  }, [professionalsHaveCommission.length])
 
   const close = useCallback(() => {
     setIsOpen(false)
   }, [])
 
-  
   useImperativeHandle(
     ref,
     () => ({

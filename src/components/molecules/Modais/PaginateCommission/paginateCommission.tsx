@@ -40,7 +40,7 @@ const PaginateCommission: React.FC<PaginateCommissionProps> = ({
         )}
 
         {start > 2 && <p>...</p>}
-        
+
         {pages.map((page, index) => (
           <PagesNumber
             key={index}

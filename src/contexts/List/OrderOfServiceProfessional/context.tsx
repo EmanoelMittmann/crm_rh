@@ -32,11 +32,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [selectSendProfessionals, setSelectSendProfessionals] =
     useState<OrderProps[]>([])
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
-  
+
   const [metaCommision, setMetaCommision] = useState(
     DEFAULT.META_PROPS
-    )
-    console.log('metaCommision: ', metaCommision);
+  )
 
   const professionalsHaveCommission = selectSendProfessionals.filter(
     (professional) => professional.isCommission
@@ -141,23 +140,19 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-
   async function deleteCommission(id: number) {
     const updatedCommission = professionalsHaveCommission.filter(
       (professional) => professional.professional_id !== id
-    );
+    )
 
-    setSelectSendProfessionals(updatedCommission);
+    setSelectSendProfessionals(updatedCommission)
 
     setChecked((prevChecked) => {
-      const updatedChecked = { ...prevChecked };
-      delete updatedChecked[id];
-      return updatedChecked;
-    });
-
-   
+      const updatedChecked = { ...prevChecked }
+      delete updatedChecked[id]
+      return updatedChecked
+    })
   }
-
 
   function navigateTo(url: string) {
     navigate(url)
