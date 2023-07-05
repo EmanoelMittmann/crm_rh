@@ -20,6 +20,7 @@ import { externRoutes, routes } from 'routes'
 import { CNPJValidatorResponse } from 'types'
 
 export function getPermissionsId(data: any[]) {
+  if (!data) return []
   return (
     data
       // eslint-disable-next-line array-callback-return

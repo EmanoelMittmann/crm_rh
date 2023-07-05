@@ -156,6 +156,7 @@ export const Contract = () => {
           // disabled={!options.payingCompanies?.length} // [] Iniciando a edição ele fica bloqueado, apenas fazendo uma ação dentro do form ele desbloquea
           options={options.companies} //Olhar com Calma a questao do PayingCompany chegar aqui undefined
           onSelect={(e: any) => setValue('company_id', e.value)}
+          error={errors.company_id?.message}
           clearable={false}
           value={Company as any}
         />
