@@ -10,6 +10,7 @@ export interface DefaultMetaProps {
   paginate: {
     current_page: number
     last_page: number
+    total: number
   }
 }
 
@@ -28,6 +29,7 @@ export interface ContextPropsProfessionalOS {
   >
   setSelectSendProfessionals: Dispatch<SetStateAction<any[]>>
   metaCommision: DefaultMetaProps
+  setMetaCommision: Dispatch<SetStateAction<DefaultMetaProps>>
   meta: DefaultMetaProps
   professionalOS: OrderPropsProfessional[]
   isLoading: boolean

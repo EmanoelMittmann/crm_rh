@@ -13,7 +13,7 @@ const PaginateCommission: React.FC<PaginateCommissionProps> = ({
   totalItems
 }) => {
   const {
-    paginate: { current_page, setCurrent_page }
+    paginate: { current_page, setCurrent_page, last_page }
   } = useContext(PaginateContext)
 
   const [totalPages, setTotalPages] = useState(1)
@@ -38,6 +38,9 @@ const PaginateCommission: React.FC<PaginateCommissionProps> = ({
             1
           </PagesNumber>
         )}
+
+        {start > 2 && <p>...</p>}
+        
         {pages.map((page, index) => (
           <PagesNumber
             key={index}
@@ -47,6 +50,8 @@ const PaginateCommission: React.FC<PaginateCommissionProps> = ({
             {page}
           </PagesNumber>
         ))}
+        {end < last_page - 1 && <p>...</p>}
+
         {end < totalPages && (
           <PagesNumber onClick={() => setCurrent_page(totalPages)}>
             {totalPages}
