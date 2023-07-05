@@ -1,5 +1,6 @@
 import { UseFormReturn } from 'react-hook-form'
 
+import { toast } from '@stardust-ds/react'
 import { SelectOption } from '@stardust-ds/react/lib/esm/components/Select/interfaces'
 import axios from 'axios'
 
@@ -233,16 +234,12 @@ export function handlePopulateFields(
   data: any,
   methods: UseFormReturn<FormProps['Professional'], any>
 ) {
-  const BANKS = methods.watch('options.banks')
-  const JOBS = methods.watch('options.jobs')
-  const OPTIONS = methods.watch('options')
+  const { companies, permissions, projects, userTypes, banks, jobs } =
+    methods.watch('options')
   const PAYING = data.userCompanies.map((prop: any) => ({
     label: String(prop.razao_social),
     value: prop.id
   }))
-  const COMPANY = generateOpitionsFromBackend(data.company_id, PAYING)
-
-  PAYING && methods.setValue('options.payingCompanies', PAYING)
 
   methods.reset({
     name: data.name,
@@ -259,7 +256,15 @@ export function handlePopulateFields(
     street_name: data.street_name,
     house_number: data.house_number,
     complement: data.complement,
-    options: OPTIONS,
+    options: {
+      banks,
+      jobs,
+      payingCompanies: PAYING,
+      companies,
+      permissions,
+      projects,
+      userTypes
+    },
     professional_data: data.professional_data && {
       cnpj: data.professional_data.cnpj,
       fantasy_name: data.professional_data.fantasy_name,
@@ -284,7 +289,7 @@ export function handlePopulateFields(
       agency: data.professional_data.agency,
       bank: generateOpitionsFromBackend(
         data.professional_data.bank,
-        BANKS
+        banks
       ),
       pix_key: data.professional_data.pix_key,
       pix_key_type: generateOpitionsFromBackend(
@@ -306,7 +311,7 @@ export function handlePopulateFields(
     extra_hour_limit: data.extra_hour_limit,
     extra_hour_value: data.extra_hour_value,
     function_job: data.function_job,
-    job_id: generateOpitionsFromBackend(data.job_id, JOBS),
+    job_id: generateOpitionsFromBackend(data.job_id, jobs),
     job_type: generateOpitionsFromBackend(
       data.job_type,
       CONTRACT_TYPE_OPTIONS
@@ -419,7 +424,26 @@ export async function onSubmit(
     companies: getCompanies(data.options.payingCompanies)
   }
 
-  id
-    ? await api.put(routes.professional.getUser(Number(id)), payload)
-    : await api.post(routes.professional.register, payload)
+  try {
+    id
+      ? await api.put(
+          routes.professional.getUser(Number(id)),
+          payload
+        )
+      : await api.post(routes.professional.register, payload)
+
+    return toast({
+      type: 'success',
+      title: id
+        ? 'Profissional Editado com sucesso '
+        : 'Profissional Criado com sucesso',
+      description: 'Contrato Enviado',
+      position: 'bottom-right'
+    })
+  } catch (error) {
+    return toast({
+      type: 'error',
+      title: 'Algum campo errado'
+    })
+  }
 }
