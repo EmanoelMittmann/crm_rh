@@ -13,7 +13,6 @@ export interface DefaultMetaProps {
   }
 }
 
-
 export interface ContextPropsProfessionalOS {
   mergeCommision(): void
   professionalsHaveCommission: OrderProps[]

@@ -25,8 +25,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
   const [filterOptions, setFilterOptions] = useState(
     DEFAULT.FILTER_OPTIONS
-    )
-    console.log('meta: ', meta);
+  )
+  console.log('meta: ', meta)
 
   const contextOrderOfServiceProps = {
     orderOfService,

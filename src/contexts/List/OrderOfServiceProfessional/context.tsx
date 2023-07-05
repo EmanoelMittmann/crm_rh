@@ -32,7 +32,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [selectSendProfessionals, setSelectSendProfessionals] =
     useState<OrderProps[]>([])
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
-  const [metaCommision, setMetaCommision] = useState(DEFAULT.META_PROPS)
+  const [metaCommision, setMetaCommision] = useState(
+    DEFAULT.META_PROPS
+  )
 
   const professionalsHaveCommission = selectSendProfessionals.filter(
     (professional) => professional.isCommission
@@ -108,7 +110,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
       setMetaCommision((old) => ({
         ...old,
-        paginate: { ...old.paginate, last_page: response.data.meta.last_page }
+        paginate: {
+          ...old.paginate,
+          last_page: response.data.meta.last_page
+        }
       }))
 
       if (response.data.msg === 'successfully generated report') {
@@ -131,7 +136,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       })
       return
     }
-  
   }
 
   async function deleteCommission(id: number) {

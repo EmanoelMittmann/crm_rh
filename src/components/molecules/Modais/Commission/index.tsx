@@ -15,7 +15,7 @@ import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
 import { IconTrash } from 'components/atoms/Icons/IconTrash'
-
+import PaginateCommission from 'components/molecules/Modais/PaginateCommission/paginateCommission'
 
 import { Columns, Row } from '../Edit/style'
 import {
@@ -29,7 +29,6 @@ import {
   Overlay,
   TitleComissionProfessional
 } from './style'
-import PaginateCommission from 'components/molecules/Modais/PaginateCommission/paginateCommission'
 
 interface IModalProps {
   text: string
@@ -51,29 +50,22 @@ const Commission = forwardRef<
     deleteCommission,
     professionalsHaveCommission,
     mergeCommision,
-    metaCommision,
+    metaCommision
   } = useContext(List.OrderOfServiceprofessionalOS.Context)
-  
+
   const [isOpen, setIsOpen] = useState(false)
 
-
-
-  const currentPage = metaCommision.paginate.current_page;
-  const itemsPerPage = 7;
-  const totalItems = professionalsHaveCommission.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const currentPage = metaCommision.paginate.current_page
+  const itemsPerPage = 7
+  const totalItems = professionalsHaveCommission.length
+  const totalPages = Math.ceil(totalItems / itemsPerPage)
 
   const paginatedProfessionals = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
 
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-
-    return professionalsHaveCommission.slice(startIndex, endIndex);
-  }, [currentPage,totalPages ,professionalsHaveCommission]);
-
-
-
-
+    return professionalsHaveCommission.slice(startIndex, endIndex)
+  }, [currentPage, totalPages, professionalsHaveCommission])
 
   const close = useCallback(() => {
     setIsOpen(false)
@@ -129,35 +121,36 @@ const Commission = forwardRef<
               <h6>Profissional</h6>
               <h6>Comissão</h6>
             </TitleComissionProfessional>
-            {paginatedProfessionals.map(
-              (item: any, index: any) => (
-                <ContainerWap key={index}>
-                  <ContainerLabelProfessional>
-                    {item.name}
-                    <IconButton>
-                      <IconTrash
-                        onClick={() =>
-                          deleteCommission(item.professional_id)
-                        }
-                      />
-                    </IconButton>
-                  </ContainerLabelProfessional>
-                  <Input
-                    width={180}
-                    value={item?.commission}
-                    onChange={(e) =>
-                      (item.commission = Number(e.target.value))
-                    }
-                    placeholder='R$ 0,00'
-                  />
-                </ContainerWap>
-              )
-            )}
+            {paginatedProfessionals.map((item: any, index: any) => (
+              <ContainerWap key={index}>
+                <ContainerLabelProfessional>
+                  {item.name}
+                  <IconButton>
+                    <IconTrash
+                      onClick={() =>
+                        deleteCommission(item.professional_id)
+                      }
+                    />
+                  </IconButton>
+                </ContainerLabelProfessional>
+                <Input
+                  width={180}
+                  value={item?.commission}
+                  onChange={(e) =>
+                    (item.commission = Number(e.target.value))
+                  }
+                  placeholder='R$ 0,00'
+                />
+              </ContainerWap>
+            ))}
           </ContainerAbsolute>
 
           <ContainerFooter>
             <Footer>
-              <PaginateCommission itemsPerPage={itemsPerPage} totalItems={totalItems} />
+              <PaginateCommission
+                itemsPerPage={itemsPerPage}
+                totalItems={totalItems}
+              />
             </Footer>
           </ContainerFooter>
 

@@ -1,6 +1,5 @@
-import styled from "styled-components";
-import { theme } from "styles";
-
+import styled from 'styled-components'
+import { theme } from 'styles'
 
 export const PagesNumber = styled.p<{ Active?: boolean }>`
   font-family: 'Poppins';
@@ -14,8 +13,8 @@ export const PagesNumber = styled.p<{ Active?: boolean }>`
   width: 1.5em;
 
   ${(props) =>
-        props.Active &&
-        `
+    props.Active &&
+    `
     font-weight: 600;
     color: ${theme.brand.color.status.neutral1};
     outline: 3px solid ${theme.brand.color.status.neutral1};
