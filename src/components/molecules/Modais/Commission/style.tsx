@@ -83,5 +83,5 @@ export const ContainerFooter = styled.div`
 `
 export const Footer = styled.div`
   display: flex;
-  height: 25px;
+  height: 22.7px;
 `

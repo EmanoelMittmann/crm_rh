@@ -56,7 +56,7 @@ const Commission = forwardRef<
   const [isOpen, setIsOpen] = useState(false)
 
   const currentPage = metaCommision.paginate.current_page
-  const itemsPerPage = 7
+  const itemsPerPage = 3
   const totalItems = professionalsHaveCommission.length
   const totalPages = Math.ceil(totalItems / itemsPerPage)
 
@@ -66,6 +66,8 @@ const Commission = forwardRef<
 
     return professionalsHaveCommission.slice(startIndex, endIndex)
   }, [currentPage, totalPages, professionalsHaveCommission])
+
+  
 
   const close = useCallback(() => {
     setIsOpen(false)
