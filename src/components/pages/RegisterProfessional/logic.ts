@@ -1,5 +1,6 @@
 import { UseFormReturn } from 'react-hook-form'
 
+import { toast } from '@stardust-ds/react'
 import { SelectOption } from '@stardust-ds/react/lib/esm/components/Select/interfaces'
 import axios from 'axios'
 
@@ -419,7 +420,26 @@ export async function onSubmit(
     companies: getCompanies(data.options.payingCompanies)
   }
 
-  id
-    ? await api.put(routes.professional.getUser(Number(id)), payload)
-    : await api.post(routes.professional.register, payload)
+  try {
+    id
+      ? await api.put(
+          routes.professional.getUser(Number(id)),
+          payload
+        )
+      : await api.post(routes.professional.register, payload)
+
+    return toast({
+      type: 'success',
+      title: id
+        ? 'Profissional Editado com sucesso '
+        : 'Profissional Criado com sucesso',
+      description: 'Contrato Enviado',
+      position: 'bottom-right'
+    })
+  } catch (error) {
+    return toast({
+      type: 'error',
+      title: 'Algum campo errado'
+    })
+  }
 }
