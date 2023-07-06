@@ -10,25 +10,25 @@ interface ConfigProps extends TemplateProps {
 }
 
 export interface ExtraHoursRh {
-  type: string;
-  hour_quantity: number;
-  justification: string;
-  created_at: string;
-  updated_at: string;
-  user_id: number;
-  project_id: number;
-  extra_hours_status_id: number;
+  type: string
+  hour_quantity: number
+  justification: string
+  created_at: string
+  updated_at: string
+  user_id: number
+  project_id: number
+  extra_hours_status_id: number
   user: {
-    id: number;
-    name: string;
+    id: number
+    name: string
   }
   project: {
-    id: number;
-    name: string;
+    id: number
+    name: string
   }
   status: {
-    id: number;
-    name: string;
+    id: number
+    name: string
   }
 }
 

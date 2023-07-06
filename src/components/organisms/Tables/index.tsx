@@ -1,5 +1,6 @@
 import { Attachment } from './Attachment'
 import { Companys } from './Companys'
+import { ExtraHoursRh } from './ExtraHoursRh'
 import { Jobs } from './Jobs'
 import { Notes } from './Notes'
 import { OrderFormTable } from './OrderFormTable'
@@ -11,7 +12,6 @@ import { StatusProject } from './StatusProject'
 import { Team } from './Team'
 import { TypesProject } from './TypesProject'
 import { UserNotes } from './UserNotes'
-import { ExtraHoursRh } from './ExtraHoursRh'
 
 export const Table = Object.assign(
   {},

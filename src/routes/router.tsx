@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Companys from 'components/pages/Companys'
+import ExtraHoursRh from 'components/pages/ExtraHoursRh'
 import Jobs from 'components/pages/Jobs'
 import Notes from 'components/pages/Notes'
 import OrderOfService from 'components/pages/OrderOfService'
@@ -19,7 +20,6 @@ import Home from '../components/pages/MasterPage'
 import Professionals from '../components/pages/Professionals'
 import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
-import ExtraHoursRh from 'components/pages/ExtraHoursRh'
 
 const Router = () => {
   return (

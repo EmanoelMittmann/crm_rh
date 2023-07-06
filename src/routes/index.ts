@@ -76,7 +76,7 @@ export const routes = {
 
   orderOfService: {
     list: '/orderOfService',
-    register: '/findProfessionalCommissionOrCreateOrderOfService',
+    register: '/findProfessionalCommissionOrCreateOrderOfService'
   },
 
   extraHoursRH: {
@@ -84,10 +84,8 @@ export const routes = {
     listStatusHours: 'extraHoursStatus',
     listPending: '/extrasHoursReleases/pending?limit=6',
     register: '/extrasHoursReleases/approval',
-    getDetails: (id: number) => `/extrasHoursReleases/details/${id}`,
+    getDetails: (id: number) => `/extrasHoursReleases/details/${id}`
   }
-
-
 }
 
 export const externRoutes = {
