@@ -36,13 +36,12 @@ export const ContainerFixed = styled.div`
 
   @media (max-width: 1049px) {
     width: 100%;
-    margin-left: auto; 
+    margin-left: auto;
     margin-right: auto;
     justify-content: center;
     margin-top: 1em;
   }
 `
-
 
 export const ContainerCompany = styled.div`
   display: flex;

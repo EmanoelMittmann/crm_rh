@@ -42,7 +42,7 @@ export const Shelf = ({
     commission,
     commissionHave,
     company_id,
-    extrahour_release,
+    extrahour_release
   } = props
   const [selectedCompany, setSelectedCompany] = useState(company_id)
 

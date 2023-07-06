@@ -20,7 +20,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
   const [orderOfService, setOrderOfService] = useState<
-  OrderOfServiceProps[]
+    OrderOfServiceProps[]
   >([])
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
   const [filterOptions, setFilterOptions] = useState(
@@ -84,7 +84,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   function handleOrder(field: string) {
-    console.log("Order", field)
+    console.log('Order', field)
     setMeta((old) => ({
       ...old,
       orderField: field,

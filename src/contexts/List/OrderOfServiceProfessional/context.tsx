@@ -23,7 +23,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
   const [professionalOS, setProfessionalOS] = useState<
-  OrderPropsProfessional[]
+    OrderPropsProfessional[]
   >([])
 
   const [checked, setChecked] = useState<{ [id: number]: boolean }>(
@@ -66,7 +66,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       routes.professional.list + '?limit=110',
       {
         params: {
-          page:meta.paginate.current_page,
+          page: meta.paginate.current_page,
           pageCommission: metaCommision.paginate.current_page,
           search: meta.search && meta.search,
           order: meta.order,
@@ -166,7 +166,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   function handleSearch(search: string) {
-
     setMeta((old) => ({
       ...old,
       search,
@@ -185,10 +184,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   useDebounce({
     fn: fetchList,
     listener: [
-      meta.paginate.current_page, 
-      meta.search, 
-      meta.order, 
-      meta.orderField,
+      meta.paginate.current_page,
+      meta.search,
+      meta.order,
+      meta.orderField
     ]
   })
 
