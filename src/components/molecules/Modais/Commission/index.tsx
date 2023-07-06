@@ -167,9 +167,10 @@ const Commission = forwardRef<
                 <Input
                   width={180}
                   value={item?.commission}
-                  onChange={(e) =>
-                    (item.commission = Number(e.target.value))
-                  }
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/[^\d,]/g, '').replace(',', '.');
+                    item.commission = parseFloat(value) || undefined;
+                  }}
                   placeholder='R$ 0,00'
                 />
               </ContainerWap>
