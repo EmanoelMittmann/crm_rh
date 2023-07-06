@@ -19,6 +19,7 @@ import Home from '../components/pages/MasterPage'
 import Professionals from '../components/pages/Professionals'
 import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
+import ExtraHoursRh from 'components/pages/ExtraHoursRh'
 
 const Router = () => {
   return (
@@ -40,7 +41,7 @@ const Router = () => {
             <Route path=':id' element={<RegisterProjects />} />
           </Route>
 
-          <Route path='/extrasHours' element={<Professionals />} />
+          <Route path='/extrasHours' element={<ExtraHoursRh />} />
           <Route path='/notes' element={<Notes />} />
           <Route path='/reports' element={<Reports />} />
 

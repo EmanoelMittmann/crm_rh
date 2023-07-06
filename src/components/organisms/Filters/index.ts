@@ -10,6 +10,7 @@ import { Reports } from './Reports'
 import { StatusProject } from './statusProject'
 import { TypeProject } from './typeProject'
 import { UserNotes } from './UserNotes'
+import { ExtraHoursRh } from './ExtraHoursRh'
 
 export const Filter = Object.assign(
   {},
@@ -25,6 +26,7 @@ export const Filter = Object.assign(
     UserNotes,
     OrderOfService,
     OrderFormFilter,
-    Reports
+    Reports,
+    ExtraHoursRh
   }
 )

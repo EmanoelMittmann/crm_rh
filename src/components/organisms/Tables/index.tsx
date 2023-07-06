@@ -11,6 +11,7 @@ import { StatusProject } from './StatusProject'
 import { Team } from './Team'
 import { TypesProject } from './TypesProject'
 import { UserNotes } from './UserNotes'
+import { ExtraHoursRh } from './ExtraHoursRh'
 
 export const Table = Object.assign(
   {},
@@ -27,6 +28,7 @@ export const Table = Object.assign(
     OrderOfService,
     UserNotes,
     OrderFormTable,
-    Reports
+    Reports,
+    ExtraHoursRh
   }
 )
