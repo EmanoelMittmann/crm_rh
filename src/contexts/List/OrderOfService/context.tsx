@@ -84,7 +84,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   function handleOrder(field: string) {
-    console.log('Order', field)
     setMeta((old) => ({
       ...old,
       orderField: field,
