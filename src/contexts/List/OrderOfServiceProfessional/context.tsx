@@ -23,7 +23,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
   const [professionalOS, setProfessionalOS] = useState<
-    OrderPropsProfessional[]
+  OrderPropsProfessional[]
   >([])
 
   const [checked, setChecked] = useState<{ [id: number]: boolean }>(
@@ -32,7 +32,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [selectSendProfessionals, setSelectSendProfessionals] =
     useState<OrderProps[]>([])
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
-
   const [metaCommision, setMetaCommision] = useState(
     DEFAULT.META_PROPS
   )
@@ -67,7 +66,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       routes.professional.list + '?limit=110',
       {
         params: {
-          page: metaCommision.paginate.current_page,
+          page:meta.paginate.current_page,
+          pageCommission: metaCommision.paginate.current_page,
           search: meta.search && meta.search,
           order: meta.order,
           orderField: meta.orderField
@@ -166,6 +166,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   function handleSearch(search: string) {
+
     setMeta((old) => ({
       ...old,
       search,
@@ -183,7 +184,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   useDebounce({
     fn: fetchList,
-    listener: [meta.paginate.current_page, meta.search, meta.order]
+    listener: [
+      meta.paginate.current_page, 
+      meta.search, 
+      meta.order, 
+      meta.orderField,
+    ]
   })
 
   return (

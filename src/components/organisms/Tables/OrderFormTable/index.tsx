@@ -1,8 +1,6 @@
 import { useContext, useMemo } from 'react'
-
 import { List } from 'contexts'
 import { OrderPropsProfessional } from 'contexts/List/OrderOfServiceProfessional/types'
-
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 import {
@@ -19,7 +17,7 @@ export const OrderFormTable = () => {
     List.OrderOfServiceprofessionalOS.Context
   )
 
-  const POPOVER_OPTIONS = (id: number) => []
+  const POPOVER_OPTIONS = (id: number, name: string) => []
 
   const Table = useMemo(() => {
     if (isLoading)
@@ -36,7 +34,7 @@ export const OrderFormTable = () => {
             <Shelf
               config={{
                 template: GRID_TEMPLATE,
-                options: POPOVER_OPTIONS(props.id)
+                options: POPOVER_OPTIONS(props.id, props.name)
               }}
               {...{ props }}
             />

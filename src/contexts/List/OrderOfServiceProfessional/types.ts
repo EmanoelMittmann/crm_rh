@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
 
-import { Option } from 'types'
 export type { ReactNode } from 'react'
 
 export interface DefaultMetaProps {
@@ -88,6 +87,7 @@ export interface OrderPropsProfessional {
     name: string
   }
   userCompanies: UserCompanies[]
+  total: number
 }
 export interface UserCompanies {
   id: number
