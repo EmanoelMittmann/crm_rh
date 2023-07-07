@@ -28,7 +28,7 @@ export const Filter = Object.assign(
     OrderOfService,
     OrderFormFilter,
     Reports,
-    HoursProfessional
+    HoursProfessional,
     ExtraHoursRh
   }
 )
