@@ -1,6 +1,5 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 
 import { List } from 'contexts'
 
@@ -24,9 +23,6 @@ const RegisterOrderOfServiceWrap = () => {
   const { onCreateOs, navigateTo, professionalsHaveCommission } =
     useContext(List.OrderOfServiceprofessionalOS.Context)
 
-  const navigate = useNavigate()
-  const [iscancel, setIsCancel] = useState(false)
-
   const modalRef = useRef<IHandleModalPropsCommission>(null)
 
   const methods = useForm<FormOrderProps['OrderOfService']>({
@@ -38,9 +34,8 @@ const RegisterOrderOfServiceWrap = () => {
     const isExistCommission = await onCreateOs()
     if (isExistCommission) {
       modalRef.current?.open()
-    } else {
-      // navigateTo('/orderOfService')
     }
+    return
   }
 
   useEffect(() => {
@@ -48,11 +43,6 @@ const RegisterOrderOfServiceWrap = () => {
       modalRef.current?.close()
     }
   }, [professionalsHaveCommission])
-
-  function cancelSave() {
-    setIsCancel(true)
-    navigateTo('/orderOfService')
-  }
 
   return (
     <>
@@ -66,8 +56,8 @@ const RegisterOrderOfServiceWrap = () => {
               </ContainerCompany>
               <ConatinerButton>
                 <Button.Updade
-                  onClick={handleProfessionals}
-                  onCancel={cancelSave}
+                  onSave={handleProfessionals}
+                  onCancel={() => navigateTo('/orderOfService')}
                   type='button'
                   saveButtonName='Criar O.S'
                   cancelButtonName='cancelar'

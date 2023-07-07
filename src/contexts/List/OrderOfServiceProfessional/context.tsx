@@ -31,8 +31,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   )
   const [selectSendProfessionals, setSelectSendProfessionals] =
     useState<OrderProps[]>([])
-
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
+  const [metaCommision, setMetaCommision] = useState(
+    DEFAULT.META_PROPS
+  )
 
   const professionalsHaveCommission = selectSendProfessionals.filter(
     (professional) => professional.isCommission
@@ -41,6 +43,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const ContextPropsProfessionalOS = {
     mergeCommision,
     professionalsHaveCommission,
+    metaCommision,
+    setMetaCommision,
     onCreateOs,
     checked,
     setChecked,
@@ -52,7 +56,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     isLoading,
     meta,
     navigateTo,
-    paginate: { ...meta.paginate, setCurrent_page: setPage },
+    paginate: { ...metaCommision.paginate, setCurrent_page: setPage },
     handleSearch,
     handleOrder
   }
@@ -63,6 +67,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       {
         params: {
           page: meta.paginate.current_page,
+          pageCommission: metaCommision.paginate.current_page,
           search: meta.search && meta.search,
           order: meta.order,
           orderField: meta.orderField
@@ -85,6 +90,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           (pHaveCommission) =>
             professional.id === pHaveCommission.professional_id
         )
+
         if (!pCommission) {
           return professional
         }
@@ -98,20 +104,39 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function onCreateOs() {
-    const response = await api.post(
-      routes.orderOfService.register,
-      selectSendProfessionals
-    )
-    if (response.data.msg === 'successfully generated report') {
+    if (selectSendProfessionals.length > 0) {
+      const response = await api.post(
+        routes.orderOfService.register,
+        selectSendProfessionals
+      )
+
+      setMetaCommision((old) => ({
+        ...old,
+        paginate: {
+          ...old.paginate,
+          last_page: response.data.meta.last_page
+        }
+      }))
+
+      if (response.data.msg === 'successfully generated report') {
+        toast({
+          type: 'success',
+          title: 'Ordem de Serviço gerada com sucesso.',
+          position: 'bottom-right'
+        })
+
+        navigate('/orderOfService')
+        return false
+      } else {
+        return true
+      }
+    } else {
       toast({
-        type: 'success',
-        title: 'Ordem de Serviço gerada com sucesso.',
+        type: 'error',
+        title: 'Selecione os profissionais.',
         position: 'bottom-right'
       })
-      navigate('/orderOfService')
-      return false
-    } else {
-      return true
+      return
     }
   }
 
@@ -119,7 +144,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     const updatedCommission = professionalsHaveCommission.filter(
       (professional) => professional.professional_id !== id
     )
+
     setSelectSendProfessionals(updatedCommission)
+
     setChecked((prevChecked) => {
       const updatedChecked = { ...prevChecked }
       delete updatedChecked[id]
@@ -132,7 +159,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   function setPage(current_page: number) {
-    setMeta((old) => ({
+    setMetaCommision((old) => ({
       ...old,
       paginate: { ...old.paginate, current_page }
     }))
@@ -156,7 +183,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   useDebounce({
     fn: fetchList,
-    listener: [meta.paginate.current_page, meta.search, meta.order]
+    listener: [
+      meta.paginate.current_page,
+      meta.search,
+      meta.order,
+      meta.orderField
+    ]
   })
 
   return (

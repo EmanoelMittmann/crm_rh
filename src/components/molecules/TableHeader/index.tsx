@@ -17,6 +17,7 @@ export const TableHeader = ({
     <Container {...{ template }}>
       {headers.map(({ field, label, on = false }) => (
         <Column
+          type='button'
           disabled={!on}
           key={field}
           onClick={() => on && handleOrder(field)}
