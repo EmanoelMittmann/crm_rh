@@ -35,7 +35,6 @@ export const ContainerWap = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   width: 90%;
-  margin-bottom: 0.5em;
   position: relative;
 
   &:last-child {
@@ -74,14 +73,15 @@ export const TitleComissionProfessional = styled.div`
   margin: 0em 11.3em 1em 1em;
 `
 export const ContainerFooter = styled.div`
+  width: 90%;
   display: flex;
   flex-direction: row;
-  margin-top: 1em;
-  width: 100%;
+  margin-top: 2em;
+  margin-left: 1em;
   justify-content: flex-end;
   padding: 0 1em;
 `
 export const Footer = styled.div`
   display: flex;
-  height: 20px;
+  height: 22.7px;
 `

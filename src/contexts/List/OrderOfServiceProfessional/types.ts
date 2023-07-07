@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
 
-import { Option } from 'types'
 export type { ReactNode } from 'react'
 
 export interface DefaultMetaProps {
@@ -10,15 +9,7 @@ export interface DefaultMetaProps {
   paginate: {
     current_page: number
     last_page: number
-  }
-}
-export interface PageMetaProps {
-  search: string
-  orderField: string | null
-  order: 'ASC' | 'DESC'
-  paginate: {
-    current_page: number
-    last_page: number
+    total: number
   }
 }
 
@@ -36,6 +27,8 @@ export interface ContextPropsProfessionalOS {
     SetStateAction<OrderPropsProfessional[]>
   >
   setSelectSendProfessionals: Dispatch<SetStateAction<any[]>>
+  metaCommision: DefaultMetaProps
+  setMetaCommision: Dispatch<SetStateAction<DefaultMetaProps>>
   meta: DefaultMetaProps
   professionalOS: OrderPropsProfessional[]
   isLoading: boolean
@@ -94,6 +87,7 @@ export interface OrderPropsProfessional {
     name: string
   }
   userCompanies: UserCompanies[]
+  total: number
 }
 export interface UserCompanies {
   id: number

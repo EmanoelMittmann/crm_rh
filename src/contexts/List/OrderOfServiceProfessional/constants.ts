@@ -6,7 +6,8 @@ const META_PROPS = {
   order: 'ASC',
   paginate: {
     current_page: 1,
-    last_page: 1
+    last_page: 1,
+    total: 1
   }
 } as DefaultMetaProps
 

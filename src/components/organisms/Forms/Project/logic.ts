@@ -38,7 +38,7 @@ export const validationSchema = yup.object().shape({
             'date_range',
             'A data final deve ser maior que a data inicial',
             function (date_end_performed: string) {
-              return date_end_performed >= date_start_performed
+              return date_end_performed > date_start_performed
             }
           )
         : schema
