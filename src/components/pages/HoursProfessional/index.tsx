@@ -2,20 +2,21 @@ import React from 'react'
 
 import { List } from 'contexts'
 
-import { Table } from 'components/organisms'
-import {
-  AuthTemplate,
-  CreateTemplate,
-  ListTemplate
-} from 'components/templates'
+import { Filter, Table } from 'components/organisms'
+import { AuthTemplate, ReleaseTemplate } from 'components/templates'
 
 const HoursProfessional = () => {
   return (
     <AuthTemplate>
       <List.ProfessionalHours.Provider>
-        <ListTemplate title='Lançamento de horas' arrow={true}>
+        <ReleaseTemplate
+          title='Horas Extras'
+          arrow={true}
+          btnText='Novo lançamento'
+        >
+          <Filter.HoursProfessional />
           <Table.HoursProfessional />
-        </ListTemplate>
+        </ReleaseTemplate>
       </List.ProfessionalHours.Provider>
     </AuthTemplate>
   )
