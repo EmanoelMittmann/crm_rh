@@ -82,9 +82,15 @@ export const routes = {
 
   orderOfService: {
     list: '/orderOfService',
-    register: '/findProfessionalCommissionOrCreateOrderOfService',
-    commission: '/commission',
-    pushOrder: (id: number) => `/orderOfService/${id}`
+    register: '/findProfessionalCommissionOrCreateOrderOfService'
+  },
+
+  extraHoursRH: {
+    listProject: '/project',
+    listStatusHours: 'extraHoursStatus',
+    listPending: '/extrasHoursReleases/pending?limit=6',
+    register: '/extrasHoursReleases/approval',
+    getDetails: (id: number) => `/extrasHoursReleases/details/${id}`
   }
 }
 
