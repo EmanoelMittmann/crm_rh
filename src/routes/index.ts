@@ -14,6 +14,12 @@ export const routes = {
     updateJob: (id: number) => `/job/${id}`
   },
 
+  hours: {
+    Professional: {
+      list: '/extraHoursReleases'
+    }
+  },
+
   userType: {
     list: '/userType'
   },

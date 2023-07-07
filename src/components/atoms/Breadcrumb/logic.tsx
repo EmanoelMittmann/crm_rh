@@ -13,6 +13,7 @@ const ROUTES = {
   '/orderOfService': 'Ordens de Serviço',
   '/settings': 'Configurações',
   '/jobs': 'Configurações > Cargos',
+  '/releaseHours': 'Lançamento de Horas',
   '/statusProject': 'Configurações > Status de Projeto',
   '/typeProject': 'Configurações > Tipos de Projeto',
   '/company': 'Empresas',
