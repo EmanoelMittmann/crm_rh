@@ -32,6 +32,12 @@ export const Provider = ({
   )
   const [statusHours, setStatusHours] = useState<StatusHours[]>([])
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
+  const [filterOptions_Status, setFilterOptions_Status] = useState(
+    DEFAULT.FILTER_OPTIONS_STATUS
+  )
+  const [filterOptions_Project, setFilterOptions_Project] = useState(
+    DEFAULT.FILTER_OPTIONS_PROJECT
+  )
 
   const ContextPropsExtraHoursRh = {
     extraHoursRh,
@@ -43,13 +49,29 @@ export const Provider = ({
     navigateTo,
     paginate: { ...meta.paginate, setCurrent_page: setPage },
     handleSearch,
-    handleOrder
+    handleOrder,
+    filterOptions_Status,
+    filterOptions_Project,
+    handleFilterStatus,
+    handleFilterProject,
+    handleFillInitialDate,
+    handleFillFinalDate
+  }
+  let params = {
+    page: meta.paginate.current_page,
+    search: meta.search,
+    order: meta.order,
+    orderField: meta.orderField,
+    status_id: meta.status_id,
+    project_id: meta.project_id,
+    initialDate: meta.initialDate,
+    finalDate: meta.finalDate
   }
 
   async function fetchList() {
     setIsLoading(true)
     const { data } = await api.get(routes.extraHoursRH.listPending, {
-      params: {}
+      params: { params }
     })
     setExtraHoursRh(data.data)
     setMeta((old) => ({
@@ -62,6 +84,22 @@ export const Provider = ({
   async function fetchProjects() {
     const { data } = await api.get(routes.extraHoursRH.listProject)
     setProjects(data.data)
+
+    setFilterOptions_Project({
+      project: data.data.map(
+        ({ name, id }: { name: string; id: number }) => ({
+          label: name,
+          value: id
+        })
+      )
+    })
+  }
+  function handleFilterProject(project_id: number) {
+    setMeta((old) => ({
+      ...old,
+      project_id,
+      paginate: { ...old.paginate, current_page: 1 }
+    }))
   }
 
   async function fetchStatusHours() {
@@ -69,6 +107,39 @@ export const Provider = ({
       routes.extraHoursRH.listStatusHours
     )
     setStatusHours(data.data)
+
+    setFilterOptions_Status({
+      status: data.data.map(
+        ({ name, id }: { name: string; id: number }) => ({
+          label: name,
+          value: id
+        })
+      )
+    })
+  }
+
+  function handleFilterStatus(status_id: number) {
+    setMeta((old) => ({
+      ...old,
+      status_id,
+      paginate: { ...old.paginate, current_page: 1 }
+    }))
+  }
+
+  function handleFillInitialDate(initialDate: string | null) {
+    setMeta((old) => ({
+      ...old,
+      initialDate,
+      paginate: { ...old.paginate, current_page: 1 }
+    }))
+  }
+
+  function handleFillFinalDate(finalDate: string | null) {
+    setMeta((old) => ({
+      ...old,
+      finalDate,
+      paginate: { ...old.paginate, current_page: 1 }
+    }))
   }
 
   function navigateTo(url: string) {
@@ -104,17 +175,23 @@ export const Provider = ({
       meta.paginate.current_page,
       meta.search,
       meta.order,
-      meta.orderField
+      meta.orderField,
+      meta.status_id,
+      meta.project_id,
+      meta.initialDate,
+      meta.finalDate
     ]
   })
 
   useDebounce({
     fn: fetchProjects,
+    delay: 0,
     listener: []
   })
 
   useDebounce({
     fn: fetchStatusHours,
+    delay: 0,
     listener: []
   })
 

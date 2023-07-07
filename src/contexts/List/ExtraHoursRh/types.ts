@@ -1,4 +1,10 @@
+import { SelectProps } from '@stardust-ds/react'
+
 export interface DefaultMetaProps {
+  initialDate: string | null
+  finalDate: string | null
+  project_id: number | null
+  status_id: number | null
   search: string
   orderField: string | null
   order: 'ASC' | 'DESC'
@@ -14,6 +20,8 @@ export interface ContextPropsExtraHoursRh {
   statusHours: StatusHours[]
   meta: DefaultMetaProps
   isLoading: boolean
+  filterOptions_Status: { status: SelectProps['options'] }
+  filterOptions_Project: { project: SelectProps['options'] }
   paginate: {
     current_page: number
     last_page: number
@@ -22,6 +30,10 @@ export interface ContextPropsExtraHoursRh {
   navigateTo(url: string): void
   handleSearch(text: string): void
   handleOrder(field: string): void
+  handleFilterProject(id: number): void
+  handleFilterStatus(id: number): void
+  handleFillInitialDate(date: string): void
+  handleFillFinalDate(date: string): void
 }
 
 export interface ExtraHoursRhProps {
