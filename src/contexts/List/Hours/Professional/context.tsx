@@ -43,6 +43,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           project_id: meta.project_id,
           status_id: meta.status_id,
           order: meta.order,
+          orderField: 'id',
           date_start: meta.date_start,
           date_end: meta.date_end
         }
@@ -60,7 +61,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setIsLoading(false)
   }
 
-  function handleProject(id: number) {
+  function handleProject(id: number | null) {
     setMeta((old) => ({
       ...old,
       project_id: id,
@@ -68,7 +69,29 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  function handleStatus(id: number) {
+  async function fetchFilters() {
+    try {
+      const [{ data: extraHour }, { data: project }] =
+        await Promise.all([
+          await api.get(routes.hours.Status.list),
+          await api.get(routes.project.list)
+        ])
+      setFilterOptions({
+        project: project.data.map((prop: any) => ({
+          label: prop.name,
+          value: prop.id
+        })),
+        status: extraHour.data.map((prop: any) => ({
+          label: prop.name,
+          value: prop.id
+        }))
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  function handleStatus(id: number | null) {
     setMeta((old) => ({
       ...old,
       status_id: id,
@@ -88,7 +111,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   function handleSearch(search: number) {
     setMeta((old) => ({
       ...old,
-      search: search,
+      search: search ? search : null,
       paginate: { ...old.paginate, current_page: 1 }
     }))
   }
@@ -103,7 +126,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   function handleOrder() {
     setMeta((old) => ({
       ...old,
-      order: old.order === 'ASC' ? 'DESC' : 'ASC'
+      order: old.order === 'ASC' ? 'DESC' : 'ASC',
+      paginate: { ...old.paginate, current_page: 1 }
     }))
   }
 
@@ -117,6 +141,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       meta.status_id,
       meta.project_id
     ]
+  })
+
+  useDebounce({
+    fn: fetchFilters,
+    listener: []
   })
 
   return (
