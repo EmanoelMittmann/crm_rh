@@ -13,8 +13,6 @@ export const HoursProfessional = () => {
   const { handleOrder, isLoading, releases } = useContext(
     List.ProfessionalHours.Context
   )
-  console.log('releases: ', releases)
-
   const Table = useMemo(() => {
     if (isLoading)
       return (
