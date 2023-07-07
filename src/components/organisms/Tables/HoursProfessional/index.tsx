@@ -34,7 +34,7 @@ export const HoursProfessional = () => {
       <TableHeader
         template={GRID_TEMPLATE}
         headers={HEADERS}
-        handleOrder={() => handleOrder}
+        handleOrder={() => handleOrder()}
       />
       {Table}
     </Main>
