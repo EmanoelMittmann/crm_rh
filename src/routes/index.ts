@@ -17,6 +17,9 @@ export const routes = {
   hours: {
     Professional: {
       list: '/extraHoursReleases'
+    },
+    Status: {
+      list: '/extraHoursStatus'
     }
   },
 
