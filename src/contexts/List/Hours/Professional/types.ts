@@ -29,8 +29,8 @@ export interface ContextHoursProps {
   handleSearch(search: number): void
   handleOrder(): void
   handleDate(start: string, end: string): void
-  handleStatus(id: number): void
-  handleProject(id: number): void
+  handleStatus(id: number | null): void
+  handleProject(id: number | null): void
 }
 
 export interface HoursProps {
