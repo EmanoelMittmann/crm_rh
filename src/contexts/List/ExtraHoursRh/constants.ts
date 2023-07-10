@@ -7,7 +7,7 @@ const META_PROPS = {
   status_id: null,
   approved: null,
   search: '',
-  orderField: 'name',
+  orderField: 'id',
   order: 'ASC',
   paginate: {
     current_page: 1,

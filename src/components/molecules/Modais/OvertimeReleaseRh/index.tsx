@@ -3,7 +3,8 @@ import {
   useImperativeHandle,
   useState,
   useCallback,
-  useContext
+  useContext,
+  useEffect
 } from 'react'
 
 import {
@@ -30,6 +31,7 @@ import { routes } from 'routes'
 import {
   Columns,
   ContainerAbsolute,
+  ContainerButtons,
   ContainerData,
   ContainerModal,
   ContainerTitleJustification,
@@ -62,13 +64,17 @@ const OvertimeReleaseRh = forwardRef<
 
   const [isOpen, setIsOpen] = useState(false)
   const [currentJustification, setCurrentJustification] = useState('')
-  const [toAccept, setToAccept] = useState(true)
+  const [toAccept, setToAccept] = useState<boolean>(true);
+
 
   const data = detais.find((item) => ({ id: item.id }))
   const status: StatusHours | undefined = statusHours.find(
     (item) => item.id === data?.status.id
+
   )
   const justification = detais.find((item) => item.id === data?.id)
+
+
 
   const handleApprovalHours = async (release_id: number) => {
     try {
@@ -82,6 +88,8 @@ const OvertimeReleaseRh = forwardRef<
       console.log(err)
     }
   }
+
+
 
   const close = useCallback(() => {
     setIsOpen(false)
@@ -99,6 +107,7 @@ const OvertimeReleaseRh = forwardRef<
   )
 
   if (!isOpen) return null
+
 
   return (
     <>
@@ -140,33 +149,45 @@ const OvertimeReleaseRh = forwardRef<
                 <Text>{justification?.justification}</Text>
               </ContainerTitleJustification>
               <ContainerTitleJustification>
+           
                 <Select
                   width={200}
                   options={optionsApproval}
                   clearable={false}
-                  placeholder={optionsApproval[0]?.label}
-                  onSelect={(option: Option | null) =>
-                    option && handleFillAccept(option?.value)
-                  }
+                  value={toAccept ? optionsApproval.find(option => option.value === "Aceito") : optionsApproval.find(option => option.value === "Recusado")}
+                  onSelect={(option: Option | null) => {
+                    if (option) {
+                      setToAccept(option.value === "Aceito");
+                      handleFillAccept(option.value);
+                      if (option.value === "Aceito") {
+                        setCurrentJustification("");
+                      }
+                    }
+                  }}
                 />
               </ContainerTitleJustification>
 
+            </ContainerAbsolute>
+
+          
+          </Row>
+          <Row>
+            {toAccept === false && (
               <ContainerTitleJustification>
                 <TextTitle>Descrição</TextTitle>
                 <Textarea
-                  placeholder='Descrição'
-                  style={{ width: '100%' }}
+                  placeholder="Descrição"
+                  style={{ width: "100%" }}
                   rows={4}
                   value={currentJustification}
                   maxLength={200}
-                  onChange={(data) =>
-                    setCurrentJustification(data.target.value)
-                  }
+                  onChange={(e) => setCurrentJustification(e.target.value)}
                 />
               </ContainerTitleJustification>
-            </ContainerAbsolute>
+            )}
           </Row>
           <Row>
+            <ContainerButtons>
             <Button
               style={{ borderRadius: '500px' }}
               bgColor='#E9EBEE'
@@ -185,8 +206,9 @@ const OvertimeReleaseRh = forwardRef<
                 close()
               }}
             >
-              Cadastrar
+              Confirmar
             </Button>
+            </ContainerButtons>
           </Row>
         </Columns>
       </ContainerModal>
