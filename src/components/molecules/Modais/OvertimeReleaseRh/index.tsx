@@ -4,28 +4,20 @@ import {
   useState,
   useCallback,
   useContext,
-  useEffect,
   useRef
 } from 'react'
 
 import {
   Badge,
   Button,
-  Input,
   Select,
   Textarea
 } from '@stardust-ds/react'
 import { List } from 'contexts'
-import {
-  PendingProps,
-  StatusHours
-} from 'contexts/List/ExtraHoursRh/types'
-import { Options } from 'prettier'
+import {StatusHours} from 'contexts/List/ExtraHoursRh/types'
 import { theme } from 'styles'
-
 import Close from 'components/atoms/Buttons/Close'
 import { formatDate } from 'components/utils/formatDate'
-
 import api from 'api'
 import { routes } from 'routes'
 
@@ -51,7 +43,6 @@ import {
 } from './type'
 import { Option } from 'types'
 import { IHandleModalPropsAlert } from '../Alert'
-
 import { Modal } from '..'
 
 const OvertimeReleaseRh = forwardRef<
@@ -59,20 +50,24 @@ const OvertimeReleaseRh = forwardRef<
   IModalProps
 >((props, ref) => {
   const { text } = props
-  const { statusHours, detais, handleFillAccept } = useContext(
-    List.ExtraHoursRh.Context
-  )
+
+  const {
+    statusHours,
+    detais,
+    handleFillAccept
+  } = useContext(List.ExtraHoursRh.Context)
 
   const [isOpen, setIsOpen] = useState(false)
   const [currentJustification, setCurrentJustification] = useState('')
   const [toAccept, setToAccept] = useState<boolean>(true)
 
   const data = detais.find((item) => ({ id: item.id }))
-  console.log('data: ', data)
+
   const status: StatusHours | undefined = statusHours.find(
     (item) => item.id === data?.status.id
   )
   const justification = detais.find((item) => item.id === data?.id)
+  
   const modalRef = useRef<IHandleModalPropsAlert>(null)
 
   const handleApprovalHours = async () => {
@@ -83,10 +78,11 @@ const OvertimeReleaseRh = forwardRef<
         justification: currentJustification
       })
       close()
+
     } catch (err) {
       console.log(err)
     }
-    return
+    return;
   }
 
   const close = useCallback(() => {
@@ -159,11 +155,11 @@ const OvertimeReleaseRh = forwardRef<
                   value={
                     toAccept
                       ? optionsApproval.find(
-                          (option) => option.value === 'Aceito'
-                        )
+                        (option) => option.value === 'Aceito'
+                      )
                       : optionsApproval.find(
-                          (option) => option.value === 'Recusado'
-                        )
+                        (option) => option.value === 'Recusado'
+                      )
                   }
                   onSelect={(option: Option | null) => {
                     if (option) {
@@ -213,7 +209,8 @@ const OvertimeReleaseRh = forwardRef<
                 bgColor='#0066FF'
                 onClick={() => {
                   handleModalAlert()
-                }}
+                }
+                }
               >
                 Confirmar
               </Button>
@@ -229,7 +226,6 @@ const OvertimeReleaseRh = forwardRef<
           EventOne={handleApprovalHours}
         />
       )}
-
       {toAccept === true && (
         <Modal.AlertAccept
           ref={modalRef}
