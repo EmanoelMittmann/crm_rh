@@ -25,12 +25,11 @@ export const Shelf = ({
   props,
   config
 }: ShelfProps<PendingProps>) => {
-  const { extraHoursRh, projects, statusHours } = useContext(
-    List.ExtraHoursRh.Context
-  )
+  const { extraHoursRh, projects, statusHours, handleDetails } =
+    useContext(List.ExtraHoursRh.Context)
 
   const {
-    user_id,
+    id,
     user_name,
     status_name,
     launch_date,
@@ -42,25 +41,20 @@ export const Shelf = ({
   const status = statusHours.find(
     (item: StatusHours) => item.id === status_id
   )
+
   const modalRef = useRef<IHandleModalPropsExtrasHoursRh>(null)
 
-  const handleClick = () => {
-    handleOpenModal(user_id, user_name, project_name)
-  }
-
-  function handleOpenModal(
-    user_id: number,
-    user_name: string,
-    project_name: string
-  ) {
-    modalRef.current?.open(user_id, user_name, project_name)
+  const handleModal = async () => {
+    await handleDetails(id)
+    modalRef.current?.open()
+    return
   }
 
   return (
     <>
       <ContainerShelf template={config.template}>
         {status_name === 'Pendente - RH' ? (
-          <ContainerShelfColumn onClick={() => handleClick()}>
+          <ContainerShelfColumn onClick={handleModal}>
             <TextProfessional>{user_name}</TextProfessional>
           </ContainerShelfColumn>
         ) : (
@@ -95,9 +89,9 @@ export const Shelf = ({
       </ContainerShelf>
       <Modal.OvertimeReleaseRh
         ref={modalRef}
-        text={'Lançamento' + ' # ' + user_id}
+        text={'Lançamento' + ' # ' + id}
         placeholder='Lançamento'
-        EventOne={handleOpenModal}
+        EventOne={() => handleDetails(id)}
       />
     </>
   )

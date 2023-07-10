@@ -2,13 +2,13 @@ import styled from 'styled-components'
 import { theme } from 'styles'
 
 export const ContainerModal = styled.div`
-  width: 48em;
+  width: 45em;
   height: 700px;
   border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
   display: flex;
   top: 50%;
-  left: 33%;
+  left: 40%;
   position: fixed;
   transform: translate(-20%, -50%);
   padding-top: 0.8em;
@@ -55,12 +55,39 @@ export const TitleProject = styled.h3`
   font-size: 1.2rem;
   font-weight: 500;
 `
-export const ContainerDate = styled.div`
-  width: 93%;
+export const ContainerData = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid rgba(204, 209, 214, 1);
-  padding-bottom: 2em;
+  margin-top: 1em;
+`
+
+export const Text = styled.p`
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  padding-left: ${(props) => props.title};
+  color: ${(props) => props.color};
+  font-size: 1rem;
+  font-weight: 400;
+  margin-right: 2.5em;
+`
+
+export const ContainerTitles = styled.div`
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1em 0em;
+`
+export const ContainerTitleJustification = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 2em 0em;
+`
+export const TextTitle = styled.h4`
+  font-family: 'Poppins';
 `
