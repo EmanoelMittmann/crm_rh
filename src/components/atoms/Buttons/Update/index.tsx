@@ -12,17 +12,19 @@ interface Props
   onCancel?: () => void
   saveButtonName?: string
   cancelButtonName?: string
+  bottom?: string
 }
 
-const Updade = ({
+const Update = ({
   onSave,
   onCancel,
   saveButtonName = 'Save',
   cancelButtonName = 'Cancel',
+  bottom,
   ...props
 }: Props) => {
   return (
-    <ContainerButton>
+    <ContainerButton bottom={bottom}>
       <Button
         type='submit'
         typographyProps={{ fontWeight: 'bold', type: 'p2' }}
@@ -56,4 +58,4 @@ const Updade = ({
   )
 }
 
-export default Updade
+export default Update
