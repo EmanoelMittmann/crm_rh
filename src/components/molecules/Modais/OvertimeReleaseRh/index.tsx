@@ -115,7 +115,7 @@ const OvertimeReleaseRh = forwardRef<
               <TitleProject>{data?.project.name}</TitleProject>
               <ContainerData>
                 <Text>
-                  Lançado em {formatDate(String(status?.updated_at))}{' '}
+                  Lançado em {formatDate(String(data?.updated_at))}
                 </Text>
                 <Badge
                   style={{ width: '170px', border: 'none' }}
