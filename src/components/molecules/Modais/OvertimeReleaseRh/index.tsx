@@ -4,22 +4,12 @@ import {
   useState,
   useCallback,
   useContext,
-  useEffect
+  useRef
 } from 'react'
 
-import {
-  Badge,
-  Button,
-  Input,
-  Select,
-  Textarea
-} from '@stardust-ds/react'
+import { Badge, Button, Select, Textarea } from '@stardust-ds/react'
 import { List } from 'contexts'
-import {
-  PendingProps,
-  StatusHours
-} from 'contexts/List/ExtraHoursRh/types'
-import { Options } from 'prettier'
+import { StatusHours } from 'contexts/List/ExtraHoursRh/types'
 import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
@@ -49,34 +39,37 @@ import {
   optionsApproval
 } from './type'
 import { Option } from 'types'
+import { IHandleModalPropsAlert } from '../Alert'
+
+import { Modal } from '..'
 
 const OvertimeReleaseRh = forwardRef<
   IHandleModalPropsExtrasHoursRh,
   IModalProps
 >((props, ref) => {
   const { text } = props
-  const {
-    extraHoursRh,
-    projects,
-    statusHours,
-    detais,
-    handleFillAccept
-  } = useContext(List.ExtraHoursRh.Context)
+
+  const { statusHours, detais, handleFillAccept } = useContext(
+    List.ExtraHoursRh.Context
+  )
 
   const [isOpen, setIsOpen] = useState(false)
   const [currentJustification, setCurrentJustification] = useState('')
   const [toAccept, setToAccept] = useState<boolean>(true)
 
   const data = detais.find((item) => ({ id: item.id }))
+
   const status: StatusHours | undefined = statusHours.find(
     (item) => item.id === data?.status.id
   )
   const justification = detais.find((item) => item.id === data?.id)
 
-  const handleApprovalHours = async (release_id: number) => {
+  const modalRef = useRef<IHandleModalPropsAlert>(null)
+
+  const handleApprovalHours = async () => {
     try {
       await api.post(routes.extraHoursRH.register, {
-        release_id: release_id,
+        releases_id: detais[0].id,
         approved: toAccept,
         justification: currentJustification
       })
@@ -84,6 +77,7 @@ const OvertimeReleaseRh = forwardRef<
     } catch (err) {
       console.log(err)
     }
+    return
   }
 
   const close = useCallback(() => {
@@ -102,6 +96,10 @@ const OvertimeReleaseRh = forwardRef<
   )
 
   if (!isOpen) return null
+
+  function handleModalAlert() {
+    modalRef.current?.open(true)
+  }
 
   return (
     <>
@@ -205,7 +203,7 @@ const OvertimeReleaseRh = forwardRef<
                 }}
                 bgColor='#0066FF'
                 onClick={() => {
-                  close()
+                  handleModalAlert()
                 }}
               >
                 Confirmar
@@ -214,6 +212,23 @@ const OvertimeReleaseRh = forwardRef<
           </Row>
         </Columns>
       </ContainerModal>
+      {toAccept === false && (
+        <Modal.Alert
+          ref={modalRef}
+          text='Negar horas extras'
+          message='Tem certeza que deseja negar essas horas extras?'
+          EventOne={handleApprovalHours}
+        />
+      )}
+      {toAccept === true && (
+        <Modal.AlertAccept
+          ref={modalRef}
+          text='Aceitar horas extras'
+          message='Tem certeza que deseja aceitar essas horas extras?'
+          EventOne={handleApprovalHours}
+        />
+      )}
+
       <Overlay />
     </>
   )

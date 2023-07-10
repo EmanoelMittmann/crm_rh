@@ -3,7 +3,7 @@ import { theme } from 'styles'
 
 export const ContainerModal = styled.div`
   width: 45em;
-  height: 660px;
+  height: 700px;
   border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
   display: flex;

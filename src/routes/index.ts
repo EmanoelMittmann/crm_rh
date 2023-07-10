@@ -91,7 +91,7 @@ export const routes = {
   extraHoursRH: {
     listProject: '/project',
     listStatusHours: 'extraHoursStatus',
-    listPending: '/extrasHoursReleases/pending?limit=6',
+    listPending: '/extrasHoursReleases/pending',
     register: '/extrasHoursReleases/approval',
     getDetails: (id: number) => `/extrasHoursReleases/details/${id}`
   }

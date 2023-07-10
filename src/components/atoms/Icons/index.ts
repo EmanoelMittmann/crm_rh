@@ -32,4 +32,6 @@ export { IconWarn } from './IconWarn'
 export { IconDate } from './IconDate'
 export { IconExport } from './IconExport'
 export { IconCloseCircle } from './IconCloseCircle'
+export { IconAlert } from './IconAlert'
+export { IconAlertAccept } from './IconAlertAccept'
 export const Icon = Object.assign({}, { OrderBy })

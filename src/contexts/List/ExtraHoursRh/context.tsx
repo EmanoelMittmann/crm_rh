@@ -80,19 +80,22 @@ export const Provider = ({
 
   async function fetchList() {
     setIsLoading(true)
-    const { data } = await api.get(routes.extraHoursRH.listPending, {
-      params: {
-        page: meta.paginate.current_page,
-        search: meta.search,
-        order: meta.order,
-        // orderField: meta.orderField,
-        status_id: meta.status_id,
-        project_id: meta.project_id,
-        approved: meta.approved,
-        initialDate: meta.initialDate,
-        finalDate: meta.finalDate
+    const { data } = await api.get(
+      routes.extraHoursRH.listPending + '?limit=6',
+      {
+        params: {
+          page: meta.paginate.current_page,
+          search: meta.search,
+          order: meta.order,
+          // orderField: meta.orderField,
+          status_id: meta.status_id,
+          project_id: meta.project_id,
+          approved: meta.approved,
+          initialDate: meta.initialDate,
+          finalDate: meta.finalDate
+        }
       }
-    })
+    )
     setExtraHoursRh(data.data)
     setMeta((old) => ({
       ...old,
@@ -119,6 +122,10 @@ export const Provider = ({
         })
       )
     })
+    setMeta((old) => ({
+      ...old,
+      paginate: { ...old.paginate, last_page: data.meta.last_page }
+    }))
   }
 
   async function fetchProjects() {
