@@ -11,6 +11,7 @@ import RegisterOrderOfService from 'components/pages/RegisterOrderOfService'
 import RegisterProjects from 'components/pages/RegisterProjects'
 import ReleaseNotes from 'components/pages/ReleaseNotes'
 import Reports from 'components/pages/Reports'
+import SendingHours from 'components/pages/SendingHours'
 import Settings from 'components/pages/Setting'
 import StatusProject from 'components/pages/StatusProject'
 import TypesProject from 'components/pages/TypesProject'
@@ -64,6 +65,7 @@ const Router = () => {
             <Route path=':id' element={<RegisterCompany />} />
           </Route>
           <Route path='/releaseHours' element={<Hours />} />
+          <Route path='/sendingHours' element={<SendingHours />} />
           <Route path='/releaseNotes' element={<ReleaseNotes />} />
           <Route path='/uploadNotes' element={<UploadNotes />} />
         </Routes>
