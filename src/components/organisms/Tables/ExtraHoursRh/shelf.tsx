@@ -25,8 +25,9 @@ export const Shelf = ({
   props,
   config
 }: ShelfProps<PendingProps>) => {
-  const { extraHoursRh, projects, statusHours, handleDetails } =
-    useContext(List.ExtraHoursRh.Context)
+  const { statusHours, handleDetails } = useContext(
+    List.ExtraHoursRh.Context
+  )
 
   const {
     id,

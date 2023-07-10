@@ -9,7 +9,10 @@ import {
 
 import { Badge, Button, Select, Textarea } from '@stardust-ds/react'
 import { List } from 'contexts'
-import { StatusHours } from 'contexts/List/ExtraHoursRh/types'
+import {
+  ExtraHoursRhProps,
+  StatusHours
+} from 'contexts/List/ExtraHoursRh/types'
 import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
@@ -57,12 +60,16 @@ const OvertimeReleaseRh = forwardRef<
   const [currentJustification, setCurrentJustification] = useState('')
   const [toAccept, setToAccept] = useState<boolean>(true)
 
-  const data = detais.find((item) => ({ id: item.id }))
+  const data = detais.find((item: ExtraHoursRhProps) => ({
+    id: item.id
+  }))
 
   const status: StatusHours | undefined = statusHours.find(
-    (item) => item.id === data?.status.id
+    (item: any) => item.id === data?.status.id
   )
-  const justification = detais.find((item) => item.id === data?.id)
+  const justification = detais.find(
+    (item: ExtraHoursRhProps) => item.id === data?.id
+  )
 
   const modalRef = useRef<IHandleModalPropsAlert>(null)
 

@@ -1,10 +1,7 @@
 import { useContext, useMemo } from 'react'
 
 import { List } from 'contexts'
-import {
-  ExtraHoursRhProps,
-  PendingProps
-} from 'contexts/List/ExtraHoursRh/types'
+import { PendingProps } from 'contexts/List/ExtraHoursRh/types'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
@@ -14,8 +11,9 @@ import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './shelf'
 
 export const ExtraHoursRh = () => {
-  const { extraHoursRh, navigateTo, isLoading, handleOrder, detais } =
-    useContext(List.ExtraHoursRh.Context)
+  const { extraHoursRh, isLoading, handleOrder } = useContext(
+    List.ExtraHoursRh.Context
+  )
 
   const POPOVER_OPTIONS = (id: number) => []
 
