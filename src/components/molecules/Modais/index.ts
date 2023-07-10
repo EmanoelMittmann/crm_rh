@@ -1,3 +1,5 @@
+import Alert from './Alert'
+import AlertAccept from './AlertAccept'
 import { Colors } from './Colors'
 import Commission from './Commission'
 import Details from './Details'
@@ -21,7 +23,9 @@ export const Modal = Object.assign(
     Details,
     Commission,
     Report,
-    OvertimeReleaseRh
+    OvertimeReleaseRh,
+    Alert,
+    AlertAccept
   }
 )
 
@@ -33,3 +37,5 @@ export type { IHandleModalColorsPropsEdit } from './Colors/Edit'
 export type { IHandleModalReport as IReports } from './Report/Default'
 export type { IHandleModalPropsCommission } from './Commission'
 export type { IHandleModalPropsExtrasHoursRh } from './OvertimeReleaseRh/type'
+export type { IHandleModalPropsAlert } from './Alert'
+export type { IHandleModalPropsAlertAccept } from './AlertAccept'
