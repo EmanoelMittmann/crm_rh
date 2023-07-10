@@ -3,7 +3,7 @@ import { theme } from 'styles'
 
 export const ContainerModal = styled.div`
   width: 45em;
-  height: 700px;
+  height: 660px;
   border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
   display: flex;
@@ -48,7 +48,7 @@ export const Overlay = styled.div`
 `
 export const ContainerAbsolute = styled.div`
   width: 100%;
-  height: 510px;
+  height: 310px;
 `
 export const TitleProject = styled.h3`
   color: ${theme.neutrals.gray8};
@@ -74,7 +74,14 @@ export const Text = styled.p`
   font-weight: 400;
   margin-right: 2.5em;
 `
-
+export const TextJustification = styled.p`
+  white-space: wrap;
+  padding-left: ${(props) => props.title};
+  color: ${(props) => props.color};
+  font-size: 1rem;
+  font-weight: 400;
+  margin-right: 2.5em;
+`
 export const ContainerTitles = styled.div`
   width: 40%;
   display: flex;
@@ -86,8 +93,16 @@ export const ContainerTitleJustification = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 2em 0em;
+  margin: 1em 0em;
 `
 export const TextTitle = styled.h4`
   font-family: 'Poppins';
+`
+export const ContainerButtons = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: -2em;
+  margin-bottom: 2em;
 `

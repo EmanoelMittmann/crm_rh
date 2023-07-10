@@ -3,7 +3,8 @@ import {
   useImperativeHandle,
   useState,
   useCallback,
-  useContext
+  useContext,
+  useEffect
 } from 'react'
 
 import {
@@ -30,6 +31,7 @@ import { routes } from 'routes'
 import {
   Columns,
   ContainerAbsolute,
+  ContainerButtons,
   ContainerData,
   ContainerModal,
   ContainerTitleJustification,
@@ -37,6 +39,7 @@ import {
   Overlay,
   Row,
   Text,
+  TextJustification,
   TextTitle,
   TitleProject
 } from './style'
@@ -62,7 +65,7 @@ const OvertimeReleaseRh = forwardRef<
 
   const [isOpen, setIsOpen] = useState(false)
   const [currentJustification, setCurrentJustification] = useState('')
-  const [toAccept, setToAccept] = useState(true)
+  const [toAccept, setToAccept] = useState<boolean>(true)
 
   const data = detais.find((item) => ({ id: item.id }))
   const status: StatusHours | undefined = statusHours.find(
@@ -137,20 +140,39 @@ const OvertimeReleaseRh = forwardRef<
               </ContainerTitles>
               <ContainerTitleJustification>
                 <TextTitle>Justificativa</TextTitle>
-                <Text>{justification?.justification}</Text>
+                <TextJustification>
+                  {justification?.justification}
+                </TextJustification>
               </ContainerTitleJustification>
               <ContainerTitleJustification>
                 <Select
                   width={200}
                   options={optionsApproval}
                   clearable={false}
-                  placeholder={optionsApproval[0]?.label}
-                  onSelect={(option: Option | null) =>
-                    option && handleFillAccept(option?.value)
+                  value={
+                    toAccept
+                      ? optionsApproval.find(
+                          (option) => option.value === 'Aceito'
+                        )
+                      : optionsApproval.find(
+                          (option) => option.value === 'Recusado'
+                        )
                   }
+                  onSelect={(option: Option | null) => {
+                    if (option) {
+                      setToAccept(option.value === 'Aceito')
+                      handleFillAccept(option.value)
+                      if (option.value === 'Aceito') {
+                        setCurrentJustification('')
+                      }
+                    }
+                  }}
                 />
               </ContainerTitleJustification>
-
+            </ContainerAbsolute>
+          </Row>
+          <Row>
+            {toAccept === false && (
               <ContainerTitleJustification>
                 <TextTitle>Descrição</TextTitle>
                 <Textarea
@@ -159,34 +181,36 @@ const OvertimeReleaseRh = forwardRef<
                   rows={4}
                   value={currentJustification}
                   maxLength={200}
-                  onChange={(data) =>
-                    setCurrentJustification(data.target.value)
+                  onChange={(e) =>
+                    setCurrentJustification(e.target.value)
                   }
                 />
               </ContainerTitleJustification>
-            </ContainerAbsolute>
+            )}
           </Row>
           <Row>
-            <Button
-              style={{ borderRadius: '500px' }}
-              bgColor='#E9EBEE'
-              labelColor={theme.neutrals.gray7}
-              onClick={close}
-            >
-              Cancelar
-            </Button>
-            <Button
-              style={{
-                borderRadius: '500px',
-                boxShadow: '0px'
-              }}
-              bgColor='#0066FF'
-              onClick={() => {
-                close()
-              }}
-            >
-              Cadastrar
-            </Button>
+            <ContainerButtons>
+              <Button
+                style={{ borderRadius: '500px' }}
+                bgColor='#E9EBEE'
+                labelColor={theme.neutrals.gray7}
+                onClick={close}
+              >
+                Cancelar
+              </Button>
+              <Button
+                style={{
+                  borderRadius: '500px',
+                  boxShadow: '0px'
+                }}
+                bgColor='#0066FF'
+                onClick={() => {
+                  close()
+                }}
+              >
+                Confirmar
+              </Button>
+            </ContainerButtons>
           </Row>
         </Columns>
       </ContainerModal>
