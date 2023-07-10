@@ -15,7 +15,7 @@ export interface ExtraHoursRh {
   justification: string
   created_at: string
   updated_at: string
-  user_id: number
+  id: number
   project_id: number
   extra_hours_status_id: number
   user: {

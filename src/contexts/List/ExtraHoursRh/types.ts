@@ -5,6 +5,7 @@ export interface DefaultMetaProps {
   finalDate: string | null
   project_id: number | null
   status_id: number | null
+  approved: string | null
   search: string
   orderField: string | null
   order: 'ASC' | 'DESC'
@@ -18,10 +19,12 @@ export interface ContextPropsExtraHoursRh {
   extraHoursRh: PendingProps[]
   projects: ProjectExtraHoursProps[]
   statusHours: StatusHours[]
+  detais: ExtraHoursRhProps[]
   meta: DefaultMetaProps
   isLoading: boolean
   filterOptions_Status: { status: SelectProps['options'] }
   filterOptions_Project: { project: SelectProps['options'] }
+  filtertoAccept: { approved: SelectProps['options'] }
   paginate: {
     current_page: number
     last_page: number
@@ -34,6 +37,8 @@ export interface ContextPropsExtraHoursRh {
   handleFilterStatus(id: number): void
   handleFillInitialDate(date: string): void
   handleFillFinalDate(date: string): void
+  handleFillAccept(accept: string): void
+  handleDetails(id: number): void
 }
 
 export interface ExtraHoursRhProps {
@@ -45,6 +50,8 @@ export interface ExtraHoursRhProps {
   user_id: number
   project_id: number
   extra_hours_status_id: number
+  launch_date: string
+  id: number
   user: {
     id: number
     name: string
@@ -83,6 +90,8 @@ export interface PendingProps {
   status_name: string
   user_id: number
   user_name: string
+  created_at: string
+  justification: string
 }
 
 export interface StatusHours {

@@ -5,6 +5,7 @@ const META_PROPS = {
   finalDate: null,
   project_id: null,
   status_id: null,
+  approved: null,
   search: '',
   orderField: 'name',
   order: 'ASC',
@@ -22,8 +23,13 @@ const FILTER_OPTIONS_PROJECT = {
   project: []
 }
 
+const FILTER_OPTIONS = {
+  approved: []
+}
+
 export default {
   META_PROPS,
   FILTER_OPTIONS_STATUS,
-  FILTER_OPTIONS_PROJECT
+  FILTER_OPTIONS_PROJECT,
+  FILTER_OPTIONS
 }

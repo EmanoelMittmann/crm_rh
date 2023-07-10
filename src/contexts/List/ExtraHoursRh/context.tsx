@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { PaginateContext } from 'components/molecules'
@@ -38,6 +38,10 @@ export const Provider = ({
   const [filterOptions_Project, setFilterOptions_Project] = useState(
     DEFAULT.FILTER_OPTIONS_PROJECT
   )
+  const [detais, setDetails] = useState<ExtraHoursRhProps[]>([])
+  const [filtertoAccept, setFilterToAccept] = useState(
+    DEFAULT.FILTER_OPTIONS
+  )
 
   const ContextPropsExtraHoursRh = {
     extraHoursRh,
@@ -46,6 +50,8 @@ export const Provider = ({
     setExtraHoursRh,
     isLoading,
     meta,
+    detais,
+    filtertoAccept,
     navigateTo,
     paginate: { ...meta.paginate, setCurrent_page: setPage },
     handleSearch,
@@ -55,8 +61,11 @@ export const Provider = ({
     handleFilterStatus,
     handleFilterProject,
     handleFillInitialDate,
-    handleFillFinalDate
+    handleFillFinalDate,
+    handleFillAccept,
+    handleDetails
   }
+
   let params = {
     page: meta.paginate.current_page,
     search: meta.search,
@@ -64,6 +73,7 @@ export const Provider = ({
     orderField: meta.orderField,
     status_id: meta.status_id,
     project_id: meta.project_id,
+    approved: meta.approved,
     initialDate: meta.initialDate,
     finalDate: meta.finalDate
   }
@@ -81,6 +91,26 @@ export const Provider = ({
     setIsLoading(false)
   }
 
+  async function handleDetails(id: number) {
+    const { data } = await api.get(routes.extraHoursRH.getDetails(id))
+    setDetails(data)
+    return
+  }
+
+  async function fechFilterAccept() {
+    const { data } = await api.get(routes.extraHoursRH.listPending)
+    setProjects(data.data)
+
+    setFilterToAccept({
+      approved: data.data.map(
+        ({ name, id }: { name: string; id: number }) => ({
+          label: name,
+          value: id
+        })
+      )
+    })
+  }
+
   async function fetchProjects() {
     const { data } = await api.get(routes.extraHoursRH.listProject)
     setProjects(data.data)
@@ -94,6 +124,7 @@ export const Provider = ({
       )
     })
   }
+
   function handleFilterProject(project_id: number) {
     setMeta((old) => ({
       ...old,
@@ -142,6 +173,14 @@ export const Provider = ({
     }))
   }
 
+  function handleFillAccept(accept: string) {
+    setMeta((old) => ({
+      ...old,
+      accept,
+      paginate: { ...old.paginate, current_page: 1 }
+    }))
+  }
+
   function navigateTo(url: string) {
     navigate(url)
   }
@@ -179,7 +218,8 @@ export const Provider = ({
       meta.status_id,
       meta.project_id,
       meta.initialDate,
-      meta.finalDate
+      meta.finalDate,
+      meta.approved
     ]
   })
 
@@ -191,6 +231,12 @@ export const Provider = ({
 
   useDebounce({
     fn: fetchStatusHours,
+    delay: 0,
+    listener: []
+  })
+
+  useDebounce({
+    fn: fechFilterAccept,
     delay: 0,
     listener: []
   })

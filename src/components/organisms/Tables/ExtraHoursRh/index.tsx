@@ -14,10 +14,10 @@ import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './shelf'
 
 export const ExtraHoursRh = () => {
-  const { extraHoursRh, navigateTo, isLoading, handleOrder } =
+  const { extraHoursRh, navigateTo, isLoading, handleOrder, detais } =
     useContext(List.ExtraHoursRh.Context)
 
-  const POPOVER_OPTIONS = (user_id: number) => []
+  const POPOVER_OPTIONS = (id: number) => []
 
   const Table = useMemo(() => {
     if (isLoading)
@@ -33,7 +33,7 @@ export const ExtraHoursRh = () => {
           <Shelf
             config={{
               template: GRID_TEMPLATE,
-              options: POPOVER_OPTIONS(props.user_id)
+              options: POPOVER_OPTIONS(props.id)
             }}
             {...{ props }}
           />
