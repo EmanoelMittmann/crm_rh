@@ -79,7 +79,10 @@ export const ProfessionalSchema = object({
     cnpj: string().required(validation.required),
     company_cep: string().required(validation.required),
     company_city_name: string().required(validation.required),
-    company_email: string().required(validation.required),
+    company_email: string()
+      .trim()
+      .matches(/[A-z]+@+[A-z]+.com/, 'Preencha o Email Corretamente')
+      .required(validation.required),
     company_house_number: number()
       .typeError(validation.required)
       .required(validation.required),
