@@ -39,6 +39,7 @@ import {
   Overlay,
   Row,
   Text,
+  TextJustification,
   TextTitle,
   TitleProject
 } from './style'
@@ -64,17 +65,13 @@ const OvertimeReleaseRh = forwardRef<
 
   const [isOpen, setIsOpen] = useState(false)
   const [currentJustification, setCurrentJustification] = useState('')
-  const [toAccept, setToAccept] = useState<boolean>(true);
-
+  const [toAccept, setToAccept] = useState<boolean>(true)
 
   const data = detais.find((item) => ({ id: item.id }))
   const status: StatusHours | undefined = statusHours.find(
     (item) => item.id === data?.status.id
-
   )
   const justification = detais.find((item) => item.id === data?.id)
-
-
 
   const handleApprovalHours = async (release_id: number) => {
     try {
@@ -88,8 +85,6 @@ const OvertimeReleaseRh = forwardRef<
       console.log(err)
     }
   }
-
-
 
   const close = useCallback(() => {
     setIsOpen(false)
@@ -107,7 +102,6 @@ const OvertimeReleaseRh = forwardRef<
   )
 
   if (!isOpen) return null
-
 
   return (
     <>
@@ -146,68 +140,76 @@ const OvertimeReleaseRh = forwardRef<
               </ContainerTitles>
               <ContainerTitleJustification>
                 <TextTitle>Justificativa</TextTitle>
-                <Text>{justification?.justification}</Text>
+                <TextJustification>
+                  {justification?.justification}
+                </TextJustification>
               </ContainerTitleJustification>
               <ContainerTitleJustification>
-           
                 <Select
                   width={200}
                   options={optionsApproval}
                   clearable={false}
-                  value={toAccept ? optionsApproval.find(option => option.value === "Aceito") : optionsApproval.find(option => option.value === "Recusado")}
+                  value={
+                    toAccept
+                      ? optionsApproval.find(
+                          (option) => option.value === 'Aceito'
+                        )
+                      : optionsApproval.find(
+                          (option) => option.value === 'Recusado'
+                        )
+                  }
                   onSelect={(option: Option | null) => {
                     if (option) {
-                      setToAccept(option.value === "Aceito");
-                      handleFillAccept(option.value);
-                      if (option.value === "Aceito") {
-                        setCurrentJustification("");
+                      setToAccept(option.value === 'Aceito')
+                      handleFillAccept(option.value)
+                      if (option.value === 'Aceito') {
+                        setCurrentJustification('')
                       }
                     }
                   }}
                 />
               </ContainerTitleJustification>
-
             </ContainerAbsolute>
-
-          
           </Row>
           <Row>
             {toAccept === false && (
               <ContainerTitleJustification>
                 <TextTitle>Descrição</TextTitle>
                 <Textarea
-                  placeholder="Descrição"
-                  style={{ width: "100%" }}
+                  placeholder='Descrição'
+                  style={{ width: '100%' }}
                   rows={4}
                   value={currentJustification}
                   maxLength={200}
-                  onChange={(e) => setCurrentJustification(e.target.value)}
+                  onChange={(e) =>
+                    setCurrentJustification(e.target.value)
+                  }
                 />
               </ContainerTitleJustification>
             )}
           </Row>
           <Row>
             <ContainerButtons>
-            <Button
-              style={{ borderRadius: '500px' }}
-              bgColor='#E9EBEE'
-              labelColor={theme.neutrals.gray7}
-              onClick={close}
-            >
-              Cancelar
-            </Button>
-            <Button
-              style={{
-                borderRadius: '500px',
-                boxShadow: '0px'
-              }}
-              bgColor='#0066FF'
-              onClick={() => {
-                close()
-              }}
-            >
-              Confirmar
-            </Button>
+              <Button
+                style={{ borderRadius: '500px' }}
+                bgColor='#E9EBEE'
+                labelColor={theme.neutrals.gray7}
+                onClick={close}
+              >
+                Cancelar
+              </Button>
+              <Button
+                style={{
+                  borderRadius: '500px',
+                  boxShadow: '0px'
+                }}
+                bgColor='#0066FF'
+                onClick={() => {
+                  close()
+                }}
+              >
+                Confirmar
+              </Button>
             </ContainerButtons>
           </Row>
         </Columns>
