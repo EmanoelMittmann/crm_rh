@@ -441,9 +441,6 @@ export async function onSubmit(
       position: 'bottom-right'
     })
   } catch (error) {
-    return toast({
-      type: 'error',
-      title: 'Algum campo errado'
-    })
+    console.error(error)
   }
 }
