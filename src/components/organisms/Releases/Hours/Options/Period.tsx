@@ -34,6 +34,7 @@ export const Period = () => {
           options={projects}
           placeholder='selecione'
           onSelect={(opts: any) => setValue('project_id', opts.value)}
+          onClear={() => setValue('project_id', '')}
           label='Projeto'
           width='30em'
         />
