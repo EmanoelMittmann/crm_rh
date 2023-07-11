@@ -3,7 +3,7 @@ import React from 'react'
 export const IconDark = ({
   width = '18px',
   height = '16px',
-  color = 'black',
+  color = '#3B454F',
   ...props
 }: React.SVGProps<SVGSVGElement>) => {
   return (
