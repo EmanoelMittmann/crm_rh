@@ -9,7 +9,10 @@ import {
 
 import { Badge, Button, Select, Textarea } from '@stardust-ds/react'
 import { List } from 'contexts'
-import { StatusHours } from 'contexts/List/ExtraHoursRh/types'
+import {
+  ExtraHoursRhProps,
+  StatusHours
+} from 'contexts/List/ExtraHoursRh/types'
 import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
@@ -48,23 +51,21 @@ const OvertimeReleaseRh = forwardRef<
   IModalProps
 >((props, ref) => {
   const { text } = props
+  const { statusHours, detais, handleFillAccept, fetchList } =
+    useContext(List.ExtraHoursRh.Context)
 
-  const { statusHours, detais, handleFillAccept } = useContext(
-    List.ExtraHoursRh.Context
-  )
+  const modalRef = useRef<IHandleModalPropsAlert>(null)
 
   const [isOpen, setIsOpen] = useState(false)
   const [currentJustification, setCurrentJustification] = useState('')
   const [toAccept, setToAccept] = useState<boolean>(true)
 
-  const data = detais.find((item) => ({ id: item.id }))
-
+  const data = detais.find((item: ExtraHoursRhProps) => ({
+    id: item.id
+  }))
   const status: StatusHours | undefined = statusHours.find(
-    (item) => item.id === data?.status.id
+    (item: StatusHours) => item.id === data?.status.id
   )
-  const justification = detais.find((item) => item.id === data?.id)
-
-  const modalRef = useRef<IHandleModalPropsAlert>(null)
 
   const handleApprovalHours = async () => {
     try {
@@ -73,11 +74,26 @@ const OvertimeReleaseRh = forwardRef<
         approved: toAccept,
         justification: currentJustification
       })
+      await fetchList()
       close()
     } catch (err) {
       console.log(err)
     }
     return
+  }
+
+  const valueApproval = toAccept
+    ? optionsApproval.find((option) => option.value === 'Aceito')
+    : optionsApproval.find((option) => option.value === 'Recusado')
+
+  const handleOptionSelect = (option: Option | null) => {
+    if (option) {
+      setToAccept(option.value === 'Aceito')
+      handleFillAccept(option.value)
+      if (option.value === 'Aceito') {
+        setCurrentJustification('')
+      }
+    }
   }
 
   const close = useCallback(() => {
@@ -115,7 +131,7 @@ const OvertimeReleaseRh = forwardRef<
               <TitleProject>{data?.project.name}</TitleProject>
               <ContainerData>
                 <Text>
-                  Lançado em {formatDate(String(status?.updated_at))}{' '}
+                  Lançado em {formatDate(String(data?.updated_at))}
                 </Text>
                 <Badge
                   style={{ width: '170px', border: 'none' }}
@@ -139,7 +155,7 @@ const OvertimeReleaseRh = forwardRef<
               <ContainerTitleJustification>
                 <TextTitle>Justificativa</TextTitle>
                 <TextJustification>
-                  {justification?.justification}
+                  {data?.justification}
                 </TextJustification>
               </ContainerTitleJustification>
               <ContainerTitleJustification>
@@ -147,30 +163,14 @@ const OvertimeReleaseRh = forwardRef<
                   width={200}
                   options={optionsApproval}
                   clearable={false}
-                  value={
-                    toAccept
-                      ? optionsApproval.find(
-                          (option) => option.value === 'Aceito'
-                        )
-                      : optionsApproval.find(
-                          (option) => option.value === 'Recusado'
-                        )
-                  }
-                  onSelect={(option: Option | null) => {
-                    if (option) {
-                      setToAccept(option.value === 'Aceito')
-                      handleFillAccept(option.value)
-                      if (option.value === 'Aceito') {
-                        setCurrentJustification('')
-                      }
-                    }
-                  }}
+                  value={valueApproval}
+                  onSelect={handleOptionSelect}
                 />
               </ContainerTitleJustification>
             </ContainerAbsolute>
           </Row>
           <Row>
-            {toAccept === false && (
+            {!toAccept && (
               <ContainerTitleJustification>
                 <TextTitle>Descrição</TextTitle>
                 <Textarea
@@ -212,7 +212,7 @@ const OvertimeReleaseRh = forwardRef<
           </Row>
         </Columns>
       </ContainerModal>
-      {toAccept === false && (
+      {!toAccept && (
         <Modal.Alert
           ref={modalRef}
           text='Negar horas extras'
@@ -220,7 +220,7 @@ const OvertimeReleaseRh = forwardRef<
           EventOne={handleApprovalHours}
         />
       )}
-      {toAccept === true && (
+      {toAccept && (
         <Modal.AlertAccept
           ref={modalRef}
           text='Aceitar horas extras'

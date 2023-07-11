@@ -63,20 +63,9 @@ export const Provider = ({
     handleFillInitialDate,
     handleFillFinalDate,
     handleFillAccept,
-    handleDetails
+    handleDetails,
+    fetchList
   }
-
-  // const params = {
-  //   page: meta.paginate.current_page,
-  //   search: meta.search,
-  //   order: meta.order,
-  //   orderField: meta.orderField,
-  //   status_id: meta.status_id,
-  //   project_id: meta.project_id,
-  //   approved: meta.approved,
-  //   initialDate: meta.initialDate,
-  //   finalDate: meta.finalDate
-  // }
 
   async function fetchList() {
     setIsLoading(true)
@@ -87,7 +76,7 @@ export const Provider = ({
           page: meta.paginate.current_page,
           search: meta.search,
           order: meta.order,
-          // orderField: meta.orderField,
+          orderField: meta.orderField,
           status_id: meta.status_id,
           project_id: meta.project_id,
           approved: meta.approved,
@@ -113,7 +102,6 @@ export const Provider = ({
   async function fechFilterAccept() {
     const { data } = await api.get(routes.extraHoursRH.listPending)
     setProjects(data.data)
-
     setFilterToAccept({
       approved: data.data.map(
         ({ name, id }: { name: string; id: number }) => ({
@@ -122,10 +110,7 @@ export const Provider = ({
         })
       )
     })
-    setMeta((old) => ({
-      ...old,
-      paginate: { ...old.paginate, last_page: data.meta.last_page }
-    }))
+    fetchList()
   }
 
   async function fetchProjects() {
@@ -142,14 +127,6 @@ export const Provider = ({
     })
   }
 
-  function handleFilterProject(project_id: number) {
-    setMeta((old) => ({
-      ...old,
-      project_id,
-      paginate: { ...old.paginate, current_page: 1 }
-    }))
-  }
-
   async function fetchStatusHours() {
     const { data } = await api.get(
       routes.extraHoursRH.listStatusHours
@@ -164,6 +141,14 @@ export const Provider = ({
         })
       )
     })
+  }
+
+  function handleFilterProject(project_id: number) {
+    setMeta((old) => ({
+      ...old,
+      project_id,
+      paginate: { ...old.paginate, current_page: 1 }
+    }))
   }
 
   function handleFilterStatus(status_id: number) {
@@ -193,9 +178,9 @@ export const Provider = ({
   function handleFillAccept(accept: string) {
     setMeta((old) => ({
       ...old,
-      accept,
-      paginate: { ...old.paginate, current_page: 1 }
+      accept
     }))
+    return
   }
 
   function navigateTo(url: string) {

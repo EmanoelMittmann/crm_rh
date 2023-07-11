@@ -39,6 +39,7 @@ export interface ContextPropsExtraHoursRh {
   handleFillFinalDate(date: string): void
   handleFillAccept(accept: string): void
   handleDetails(id: number): void
+  fetchList(): Promise<void>
 }
 
 export interface ExtraHoursRhProps {

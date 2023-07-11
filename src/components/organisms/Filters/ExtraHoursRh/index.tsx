@@ -55,22 +55,22 @@ export const ExtraHoursRh = () => {
         <Select
           placeholder='Projetos'
           width={230}
-          clearable={false}
           value={currentValueProject ?? null}
           options={filterOptions_Project?.project}
           onSelect={(option: ValueProps) =>
             option && handleFilterProject(Number(option?.value))
           }
+          onClear={() => handleFilterProject(null as any)}
         />
         <Select
           placeholder='Status'
           width={230}
-          clearable={false}
           options={filterOptions_Status?.status}
           value={currentValueStatus ?? null}
           onSelect={(option: ValueProps) =>
             option && handleFilterStatus(Number(option?.value))
           }
+          onClear={() => handleFilterStatus(null as any)}
         />
         <Inputs.Date
           type={'date'}

@@ -11,7 +11,13 @@ import { theme } from 'styles'
 import { IconAlertAccept } from 'components/atoms'
 import Close from 'components/atoms/Buttons/Close'
 
-import { ContainerModal, Overlay, Columns, Row } from '../style'
+import {
+  ContainerModal,
+  Overlay,
+  Columns,
+  Row,
+  RowButton
+} from './style'
 
 interface IModalProps {
   text: string
@@ -56,7 +62,7 @@ const AlertAccept = forwardRef<
           <Row>
             <p>{message}</p>
           </Row>
-          <Row>
+          <RowButton>
             <Button
               style={{ borderRadius: '500px' }}
               bgColor='#E9EBEE'
@@ -78,7 +84,7 @@ const AlertAccept = forwardRef<
             >
               Sim, aceitar
             </Button>
-          </Row>
+          </RowButton>
         </Columns>
       </ContainerModal>
       <Overlay />
