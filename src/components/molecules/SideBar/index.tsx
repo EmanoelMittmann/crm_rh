@@ -64,7 +64,7 @@ export const Sidebar = () => {
           />
         ))}
       </ContainerColumn>
-      <ContainerColumn height='20%' top='2rem' left='0'>
+      <ContainerColumn height='17%' top='0.8rem' left='0'>
         <Button.Menu
           Text='Apagar as Luzes'
           Icon={<IconDark />}
