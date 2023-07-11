@@ -1,4 +1,8 @@
 import { Company, ContextCompanyProps } from './Company'
+import {
+  ContextPropsExtraHoursRh,
+  ExtraHoursRh
+} from './ExtraHoursRh'
 import { ProfessionalHours, ContextHoursProps } from './Hours'
 import { TechLeadHours } from './Hours'
 import { ContextTechLeadProps } from './Hours/Techlead/'
@@ -42,8 +46,9 @@ export const List = Object.assign(
     OrderOfService,
     Reports,
     OrderOfServiceprofessionalOS,
-    ProfessionalHours,
-    TechLeadHours
+    TechLeadHours,
+    ExtraHoursRh,
+    ProfessionalHours
   }
 )
 
@@ -62,4 +67,5 @@ export type ListContext = {
   OrderOfServiceprofessionalOS: ContextPropsProfessionalOS
   ProfessionalHours: ContextHoursProps
   TechLeadHours: ContextTechLeadProps
+  ExtraHoursRh: ContextPropsExtraHoursRh
 }

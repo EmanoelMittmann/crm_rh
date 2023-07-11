@@ -3,17 +3,19 @@ import {
   useImperativeHandle,
   useState,
   useCallback,
-  useContext
+  useContext,
+  useMemo,
+  useEffect
 } from 'react'
 
-import { Input } from '@stardust-ds/react'
+import { Input, toast } from '@stardust-ds/react'
 import { Button } from '@stardust-ds/react'
 import { List } from 'contexts'
 import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
 import { IconTrash } from 'components/atoms/Icons/IconTrash'
-import { Paginate } from 'components/molecules/Paginate'
+import PaginateCommission from 'components/molecules/Modais/PaginateCommission/paginateCommission'
 
 import { Columns, Row } from '../Edit/style'
 import {
@@ -47,10 +49,54 @@ const Commission = forwardRef<
   const {
     deleteCommission,
     professionalsHaveCommission,
-    mergeCommision
+    mergeCommision,
+    metaCommision,
+    setMetaCommision
   } = useContext(List.OrderOfServiceprofessionalOS.Context)
-
   const [isOpen, setIsOpen] = useState(false)
+
+  const currentPage = metaCommision.paginate.current_page
+  const itemsPerPage = 7
+  const totalItems = professionalsHaveCommission.length
+  const totalPages = Math.ceil(totalItems / itemsPerPage)
+
+  const paginatedProfessionals = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+
+    return professionalsHaveCommission.slice(startIndex, endIndex)
+  }, [currentPage, totalPages, professionalsHaveCommission])
+
+  function handlePaginate() {
+    setMetaCommision((old) => {
+      const current_page = old.paginate.current_page
+      const total_pages = Math.ceil(
+        professionalsHaveCommission.length / itemsPerPage
+      )
+      if (professionalsHaveCommission.length === 0) {
+        return {
+          ...old,
+          paginate: { ...old.paginate, current_page: 1 }
+        }
+      }
+
+      if (current_page > total_pages) {
+        return {
+          ...old,
+          paginate: {
+            ...old.paginate,
+            current_page: current_page - 1
+          }
+        }
+      }
+
+      return old
+    })
+  }
+
+  useEffect(() => {
+    handlePaginate()
+  }, [professionalsHaveCommission.length])
 
   const close = useCallback(() => {
     setIsOpen(false)
@@ -66,8 +112,32 @@ const Commission = forwardRef<
     }),
     []
   )
-
   if (!isOpen) return null
+
+  const RegisterCommission = () => {
+    const hasPositiveCommission = professionalsHaveCommission.some(
+      (item: any) =>
+        item.commission === null ||
+        item.commission === undefined ||
+        item.commission > 0
+    )
+    const hasEmptyFields = professionalsHaveCommission.some(
+      (item: any) =>
+        item.commission === null ||
+        item.commission === undefined ||
+        item.commission < 0
+    )
+    if (hasPositiveCommission && hasEmptyFields) {
+      toast({
+        type: 'error',
+        title: 'Há campos vazios ou com valores negativos..',
+        position: 'bottom-right'
+      })
+    } else {
+      mergeCommision()
+      close()
+    }
+  }
 
   return (
     <>
@@ -82,7 +152,7 @@ const Commission = forwardRef<
               <h6>Profissional</h6>
               <h6>Comissão</h6>
             </TitleComissionProfessional>
-            {professionalsHaveCommission.map((item, index) => (
+            {paginatedProfessionals.map((item: any, index: any) => (
               <ContainerWap key={index}>
                 <ContainerLabelProfessional>
                   {item.name}
@@ -97,9 +167,12 @@ const Commission = forwardRef<
                 <Input
                   width={180}
                   value={item?.commission}
-                  onChange={(e) =>
-                    (item.commission = Number(e.target.value))
-                  }
+                  onChange={(e) => {
+                    const value = e.target.value
+                      .replace(/[^\d,]/g, '')
+                      .replace(',', '.')
+                    item.commission = parseFloat(value) || undefined
+                  }}
                   placeholder='R$ 0,00'
                 />
               </ContainerWap>
@@ -108,7 +181,10 @@ const Commission = forwardRef<
 
           <ContainerFooter>
             <Footer>
-              <Paginate />
+              <PaginateCommission
+                itemsPerPage={itemsPerPage}
+                totalItems={totalItems}
+              />
             </Footer>
           </ContainerFooter>
 
@@ -127,10 +203,7 @@ const Commission = forwardRef<
                 boxShadow: '0px 5px 10px 0px #0066FF40'
               }}
               bgColor='#0066FF'
-              onClick={() => {
-                mergeCommision()
-                close()
-              }}
+              onClick={() => RegisterCommission()}
             >
               Cadastrar
             </Button>

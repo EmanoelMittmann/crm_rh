@@ -19,29 +19,36 @@ export const Container = styled.div`
 `
 
 export const ContainerFixed = styled.div`
-  width: 81.5%;
-  height: 200px;
-  margin-bottom: 2rem;
-  margin-left: 2em;
+  width: 100%;
+  max-width: 94.5%; /* Defina um valor máximo para limitar a largura do container */
+  height: 220px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   top: 0;
-  margin-top: 39.6em;
+  margin: 0 auto;
   padding-top: 2em;
-  position: absolute;
+  margin-bottom: 2em;
+  position: relative;
   border-radius: 8px;
   background-color: ${theme.neutrals.pureWhite};
-
-  z-index: 10;
   box-shadow: 0.3px 5px 3px 2px ${theme.neutrals.gray3};
+
+  @media (max-width: 1049px) {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    margin-top: 1em;
+  }
 `
 
 export const ContainerCompany = styled.div`
-  width: 80%;
+  display: flex;
 `
 export const ConatinerButton = styled.div`
-  width: 20%;
+  width: 28%;
+  display: flex;
   padding-right: 2em;
-  margin-top: 5em;
+  margin-top: 6.5em;
 `

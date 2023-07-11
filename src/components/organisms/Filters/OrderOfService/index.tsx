@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Input, Select } from '@stardust-ds/react'
@@ -49,21 +49,21 @@ export const OrderOfService = () => {
             option && handleFillStatus(option.value)
           }
         />
-        <Inputs.Default
+        <Inputs.Date
           type={'date'}
           width={230}
           placeholder='Periodo Inicial'
           onChange={(e) => handleFillInitialDate(e.target?.value)}
           value={initialDate ?? ''}
         />
-        <Inputs.Default
+        <Inputs.Date
           type={'date'}
           width={230}
           placeholder='Periodo Final'
           onChange={(e) => handleFillFinalDate(e.target?.value)}
           value={finalDate ?? ''}
         />
-        <Inputs.Default
+        <Inputs.Date
           type={'date'}
           width={230}
           placeholder={'Referência'}

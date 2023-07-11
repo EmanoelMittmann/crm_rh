@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Companys from 'components/pages/Companys'
+import ExtraHoursRh from 'components/pages/ExtraHoursRh'
 import Hours from 'components/pages/HoursProfessional'
 import Jobs from 'components/pages/Jobs'
 import Notes from 'components/pages/Notes'
@@ -42,7 +43,7 @@ const Router = () => {
             <Route path=':id' element={<RegisterProjects />} />
           </Route>
 
-          <Route path='/extrasHours' element={<Professionals />} />
+          <Route path='/extrasHours' element={<ExtraHoursRh />} />
           <Route path='/notes' element={<Notes />} />
           <Route path='/reports' element={<Reports />} />
 

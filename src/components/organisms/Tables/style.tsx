@@ -61,6 +61,18 @@ export const Text = styled.p`
   padding-left: ${(props) => props.title};
   color: ${(props) => props.color};
 `
+export const TextProfessional = styled.p`
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  padding-left: ${(props) => props.title};
+  color: ${(props) => props.color};
+  &:hover {
+    cursor: pointer;
+    color: #407bff;
+    font-weight: 500;
+  }
+`
 export const Image = styled.img`
   width: 2.5em;
   border-radius: 50%;
