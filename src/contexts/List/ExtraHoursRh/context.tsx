@@ -63,7 +63,8 @@ export const Provider = ({
     handleFillInitialDate,
     handleFillFinalDate,
     handleFillAccept,
-    handleDetails
+    handleDetails,
+    fetchList
   }
 
   async function fetchList() {
@@ -126,14 +127,6 @@ export const Provider = ({
     })
   }
 
-  function handleFilterProject(project_id: number) {
-    setMeta((old) => ({
-      ...old,
-      project_id,
-      paginate: { ...old.paginate, current_page: 1 }
-    }))
-  }
-
   async function fetchStatusHours() {
     const { data } = await api.get(
       routes.extraHoursRH.listStatusHours
@@ -148,6 +141,14 @@ export const Provider = ({
         })
       )
     })
+  }
+
+  function handleFilterProject(project_id: number) {
+    setMeta((old) => ({
+      ...old,
+      project_id,
+      paginate: { ...old.paginate, current_page: 1 }
+    }))
   }
 
   function handleFilterStatus(status_id: number) {
