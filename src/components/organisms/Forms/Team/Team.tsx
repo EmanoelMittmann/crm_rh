@@ -23,7 +23,13 @@ export const Team = () => {
     setError,
     formState: { errors }
   } = useFormContext<FormTeamProps>()
+
   const [isTechLead, setIsTechLead] = useState(false)
+  const [inputValues, setInputValues] = useState({
+    hoursMonth: '',
+    extraHour: ''
+  })
+
   const { id } = useParams()
   const job = watch('jobs.name.label')
   const options = watch('options')
@@ -115,6 +121,11 @@ export const Team = () => {
         title: 'Profissional cadastrado com sucesso!',
         type: 'success'
       })
+
+      setInputValues({
+        hoursMonth: '',
+        extraHour: ''
+      })
     }
   }
 
@@ -181,12 +192,26 @@ export const Team = () => {
         />
         <Inputs.Default
           {...register('users.hours_mounths_estimated', {})}
+          value={inputValues.hoursMonth}
+          onChange={(e) =>
+            setInputValues({
+              ...inputValues,
+              hoursMonth: e.target.value
+            })
+          }
           error={errors?.users?.hours_mounths_estimated?.message}
           label='Horas/mês estimadas'
           placeholder='Horas'
         />
         <Inputs.Default
           {...register('users.extra_hours_estimated', {})}
+          value={inputValues.extraHour}
+          onChange={(e) =>
+            setInputValues({
+              ...inputValues,
+              extraHour: e.target.value
+            })
+          }
           error={errors?.users?.extra_hours_estimated?.message}
           label='Horas extras estimadas'
           placeholder='Horas'

@@ -36,22 +36,22 @@ export const Shelf = ({
 
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn gap='0.5rem' width='205px'>
+      <ContainerShelfColumn gap='0.5rem' width='190px'>
         <Image src={avatar} />
         <TeamJobName>
           <Text>{professional?.name?.label}</Text>
           <TextJob>{job_}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
-      <ContainerShelfColumn width='123px'>
+      <ContainerShelfColumn width='110px'>
         <Text>{hours_mounths_estimated}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='105px'>
+      <ContainerShelfColumn width='90px'>
         <Text>{hours_mounths_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='60px'>
+      <ContainerShelfColumn width='35px'>
         <Text>
           {hours_mounths_percent === undefined
             ? percentCalculate(
@@ -63,15 +63,15 @@ export const Shelf = ({
         </Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='100px'>
+      <ContainerShelfColumn width='90px'>
         <Text>{extra_hours_estimated}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='100px'>
+      <ContainerShelfColumn width='90px'>
         <Text>{extra_hours_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='40px'>
+      <ContainerShelfColumn width='20px'>
         <Text>
           {extra_hours_percent === undefined
             ? percentCalculate(
@@ -83,7 +83,7 @@ export const Shelf = ({
         </Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='130px' justify='center'>
+      <ContainerShelfColumn width='125px' justify='center'>
         <Badge.Status status={status} />
         <Popover options={config.options} />
       </ContainerShelfColumn>

@@ -154,7 +154,7 @@ export const Company = () => {
           error={errors.professional_data?.uf_company?.message}
           placeholder='Selecione'
           options={UF_OPTIONS}
-          label='Estados'
+          label='Estado'
           value={watch('professional_data.uf_company') as any}
           searchable
           width={295}
