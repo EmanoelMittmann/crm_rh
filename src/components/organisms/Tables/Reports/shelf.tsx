@@ -23,9 +23,12 @@ const Shelf = ({ props, config }: ShelfProps<ReportsProps>) => {
         <Text> {props.order.companies.cnpj}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn left='0.7em'>
-        <Text> {props.fiscal_note !== null
-          ? props.fiscal_note.file_xml.value_nf
-          : 'R$ 0,00'}</Text>
+        <Text>
+          {' '}
+          {props.fiscal_note !== null
+            ? props.fiscal_note.file_xml.value_nf
+            : 'R$ 0,00'}
+        </Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn left='1em'>
         <Text>{formatDate(props.date_payment)}</Text>

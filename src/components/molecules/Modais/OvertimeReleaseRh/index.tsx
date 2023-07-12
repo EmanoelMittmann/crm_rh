@@ -128,10 +128,13 @@ const OvertimeReleaseRh = forwardRef<
 
           <Row>
             <ContainerAbsolute>
-              <TitleProject>{approvalData?.project.name}</TitleProject>
+              <TitleProject>
+                {approvalData?.project.name}
+              </TitleProject>
               <ContainerData>
                 <Text>
-                  Lançado em {formatDate(String(approvalData?.updated_at))}
+                  Lançado em{' '}
+                  {formatDate(String(approvalData?.updated_at))}
                 </Text>
                 <Badge
                   style={{ width: '170px', border: 'none' }}
@@ -149,7 +152,9 @@ const OvertimeReleaseRh = forwardRef<
                 <TextTitle>Horas</TextTitle>
               </ContainerTitles>
               <ContainerTitles>
-                <Text>{formatDate(String(approvalData?.launch_date))}</Text>
+                <Text>
+                  {formatDate(String(approvalData?.launch_date))}
+                </Text>
                 <Text>{approvalData?.hour_quantity}</Text>
               </ContainerTitles>
               <ContainerTitleJustification>

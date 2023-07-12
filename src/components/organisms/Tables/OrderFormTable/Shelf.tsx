@@ -10,8 +10,7 @@ import {
 import { Inputs } from 'components/atoms'
 import {
   ContainerShelf,
-  ContainerShelfColumn,
-
+  ContainerShelfColumn
 } from 'components/organisms/Tables/style'
 import { formatCurrency } from 'components/utils/formatCurrent'
 
