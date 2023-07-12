@@ -28,8 +28,8 @@ export interface ContextTechLeadProps {
     setCurrent_page(page: number): void
   }
   handleSearch(text: string): void
-  handleFilterProject(id: number): void
-  handleFilterStatus(id: number): void
+  handleFilterProject(id: number | null): void
+  handleFilterStatus(id: number | null): void
   handleOrder(field: string): void
   handleDate(start: string, end: string): void
 }
