@@ -14,6 +14,7 @@ import Reports from 'components/pages/Reports'
 import SendingHours from 'components/pages/SendingHours'
 import Settings from 'components/pages/Setting'
 import StatusProject from 'components/pages/StatusProject'
+import { TechLead } from 'components/pages/TechLead'
 import TypesProject from 'components/pages/TypesProject'
 import UploadNotes from 'components/pages/UploadNotes'
 
@@ -22,7 +23,6 @@ import Home from '../components/pages/MasterPage'
 import Professionals from '../components/pages/Professionals'
 import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
-import { TechLead } from 'components/pages/TechLead'
 
 const Router = () => {
   return (
@@ -65,7 +65,8 @@ const Router = () => {
             <Route path='new' element={<RegisterCompany />} />
             <Route path=':id' element={<RegisterCompany />} />
           </Route>
-          <Route path='/releaseHours' element={<TechLead />} />
+          <Route path='/releaseHours' element={<Hours />} />
+          <Route path='/techLeadReview' element={<TechLead />} />
           <Route path='/sendingHours' element={<SendingHours />} />
           <Route path='/releaseNotes' element={<ReleaseNotes />} />
           <Route path='/uploadNotes' element={<UploadNotes />} />
