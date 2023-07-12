@@ -70,6 +70,8 @@ export const ContainerShelfColumn = styled.div<IContainerColumnProps>`
 `
 
 export const Text = styled.p`
+  font-weight: 500;
+  font-size: 1em;
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
