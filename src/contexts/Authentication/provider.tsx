@@ -37,6 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const user = {
         permissions: data.permissions[0],
         avatar: picture,
+        isTechLead: data.isTechLead,
         name: data.data[0].name,
         user_type_id: data.data[0].user_type_id
       }

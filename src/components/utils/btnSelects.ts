@@ -9,6 +9,7 @@ export const DEFAULTSELECT = {
   settings: false,
   company: false,
   RegisterProjects: false,
+  techLeadReview: false,
   releaseHours: false,
   releaseNotes: false
 }

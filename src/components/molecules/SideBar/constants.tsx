@@ -1,5 +1,6 @@
 import { ReactElement } from 'react'
 
+import { LocalStorageKeys } from 'config'
 import { theme } from 'styles'
 
 import {
@@ -28,6 +29,10 @@ const createNavOption = (
   color: neutralColor,
   key
 })
+
+const { isTechLead } = JSON.parse(
+  localStorage.getItem(LocalStorageKeys.USER) as string
+)
 
 export const OPTIONS = [
   {
@@ -58,7 +63,7 @@ export const OPTIONS = [
     9: createNavOption(
       'Lançamento de Horas',
       <IconReleaseHours />,
-      'releaseHours'
+      isTechLead ? 'techLeadReview' : 'releaseHours'
     ),
 
     10: createNavOption(
