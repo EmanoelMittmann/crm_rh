@@ -19,6 +19,7 @@ interface IContainerRowProps {
 interface IContainerColumnProps {
   bottom?: string
   height?: string
+  cursor?: string
   left?: string
   right?: string
   top?: string

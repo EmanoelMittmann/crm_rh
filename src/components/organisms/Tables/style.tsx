@@ -55,6 +55,7 @@ export const ContainerShelfColumn = styled.div<IContainerColumnProps>`
   width: ${(props) => props.width};
   padding-left: ${(props) => props.left};
   display: flex;
+  cursor: ${({ cursor }) => cursor};
   justify-content: ${(props) => props.justify};
   align-items: center;
   gap: ${(props) => props.gap};
