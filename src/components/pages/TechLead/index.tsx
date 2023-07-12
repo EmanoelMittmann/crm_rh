@@ -2,7 +2,7 @@ import React from 'react'
 
 import { List } from 'contexts'
 
-import { Table } from 'components/organisms'
+import { Filter, Table } from 'components/organisms'
 import { AuthTemplate, ReleaseTemplate } from 'components/templates'
 
 export const TechLead = () => {
@@ -14,6 +14,7 @@ export const TechLead = () => {
           arrow={true}
           title='Aprovação de Horas'
         >
+          <Filter.TechLead />
           <Table.TechLead />
         </ReleaseTemplate>
       </List.TechLeadHours.Provider>
