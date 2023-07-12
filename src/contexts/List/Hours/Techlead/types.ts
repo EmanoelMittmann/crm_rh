@@ -19,7 +19,7 @@ export interface ContextTechLeadProps {
   techLead: TechLeadProps[]
   isLoading: boolean
   filterOptions: {
-    professional: SelectProps['options']
+    project: SelectProps['options']
     status: SelectProps['options']
   }
   paginate: {
@@ -42,6 +42,7 @@ export interface TechLeadProps {
   user_name: string
   project_id: number
   project_name: string
+  hour_quantity: number
   status_id: number
   status_name: string
 }

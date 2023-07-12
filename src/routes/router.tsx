@@ -22,6 +22,7 @@ import Home from '../components/pages/MasterPage'
 import Professionals from '../components/pages/Professionals'
 import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
+import { TechLead } from 'components/pages/TechLead'
 
 const Router = () => {
   return (
@@ -64,7 +65,7 @@ const Router = () => {
             <Route path='new' element={<RegisterCompany />} />
             <Route path=':id' element={<RegisterCompany />} />
           </Route>
-          <Route path='/releaseHours' element={<Hours />} />
+          <Route path='/releaseHours' element={<TechLead />} />
           <Route path='/sendingHours' element={<SendingHours />} />
           <Route path='/releaseNotes' element={<ReleaseNotes />} />
           <Route path='/uploadNotes' element={<UploadNotes />} />

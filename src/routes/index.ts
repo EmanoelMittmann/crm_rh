@@ -18,6 +18,9 @@ export const routes = {
     Professional: {
       list: '/extraHoursReleases'
     },
+    techLead: {
+      list: '/extrasHoursReleases/pending?limit=6'
+    },
     Status: {
       list: '/extraHoursStatus'
     }

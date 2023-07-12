@@ -15,7 +15,7 @@ const META: DefaultMetaProps = {
 }
 
 const FILTER_OPTIONS = {
-  professional: [],
+  project: [],
   status: []
 }
 
