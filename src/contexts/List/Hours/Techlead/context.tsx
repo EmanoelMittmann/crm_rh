@@ -89,7 +89,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  function handleFilterProject(id: number) {
+  function handleFilterProject(id: number | null) {
     setMeta((old) => ({
       ...old,
       project_id: id,
@@ -97,7 +97,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  function handleFilterStatus(id: number) {
+  function handleFilterStatus(id: number | null) {
     setMeta((old) => ({
       ...old,
       status_id: id,

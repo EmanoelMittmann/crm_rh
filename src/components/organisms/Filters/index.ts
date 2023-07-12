@@ -10,6 +10,7 @@ import { Professionals } from './Professionals'
 import { Projects } from './Projects'
 import { Reports } from './Reports'
 import { StatusProject } from './statusProject'
+import { TechLead } from './TechLead'
 import { TypeProject } from './typeProject'
 import { UserNotes } from './UserNotes'
 
@@ -29,6 +30,7 @@ export const Filter = Object.assign(
     OrderFormFilter,
     Reports,
     HoursProfessional,
-    ExtraHoursRh
+    ExtraHoursRh,
+    TechLead
   }
 )
