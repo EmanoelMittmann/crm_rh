@@ -96,6 +96,7 @@ export interface UserCompanies {
 }
 
 export interface Release {
+  user_id: number
   end_date: string
   extra_hours_status_id: number
   hour_quantity: number
