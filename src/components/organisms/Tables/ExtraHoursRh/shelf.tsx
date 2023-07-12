@@ -60,7 +60,7 @@ export const Shelf = ({
           </ContainerShelfColumn>
         ) : (
           <ContainerShelfColumn>
-            <TextProfessional>{user_name}</TextProfessional>
+            <Text>{user_name}</Text>
           </ContainerShelfColumn>
         )}
         <ContainerShelfColumn>

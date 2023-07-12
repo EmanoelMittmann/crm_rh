@@ -11,12 +11,12 @@ import { Inputs } from 'components/atoms'
 import {
   ContainerShelf,
   ContainerShelfColumn,
-  Text
+
 } from 'components/organisms/Tables/style'
 import { formatCurrency } from 'components/utils/formatCurrent'
 
 import { ShelfProps } from '../types'
-import { ContainerText } from './style'
+import { ContainerText, Text } from './style'
 import { Order } from './type'
 import { Option } from 'types'
 
@@ -141,7 +141,7 @@ export const Shelf = ({
                 setSelectedCompany(Number(option.value))
               }
             }}
-            width={190}
+            width={180}
           />
         </ContainerShelfColumn>
         <ContainerShelfColumn>

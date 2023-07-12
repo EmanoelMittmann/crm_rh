@@ -175,10 +175,10 @@ export const Provider = ({
     }))
   }
 
-  function handleFillAccept(accept: string) {
+  function handleFillAccept(toAccept: string) {
     setMeta((old) => ({
       ...old,
-      accept
+      toAccept
     }))
     return
   }

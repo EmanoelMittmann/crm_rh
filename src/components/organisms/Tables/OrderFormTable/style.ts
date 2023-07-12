@@ -56,7 +56,8 @@ export const CompaniesField = styled.div`
 `
 export const Text = styled.p`
   width: 150px;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 0.8em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

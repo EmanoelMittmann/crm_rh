@@ -1,5 +1,5 @@
 import { formatDate } from '../../../utils/formatDate'
-import { ContainerShelf, ContainerShelfColumn } from '../style'
+import { ContainerShelf, ContainerShelfColumn, Text } from '../style'
 import { GRID_TEMPLATE } from './constants'
 import { ShelfProps } from './types'
 
@@ -7,22 +7,22 @@ const Shelf = ({ props }: ShelfProps) => {
   return (
     <ContainerShelf template={GRID_TEMPLATE}>
       <ContainerShelfColumn left='0.2em'>
-        {props.id}
+        <Text>{props.id}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn left='0.4em'>
-        {formatDate(props.created_at)}
+        <Text>{formatDate(props.created_at)}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn left='0.5em'>
-        {formatDate(props.file_xml.date_emission_nf)}
+        <Text>{formatDate(props.file_xml.date_emission_nf)}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn left='0.5em'>
-        {props.file_xml.number_nf}
+        <Text>{props.file_xml.number_nf}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn left='0.7em'>
-        {props.file_xml.value_nf}
+        <Text>{props.file_xml.value_nf}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn left='0.8em'>
-        {props.file.name}
+        <Text>{props.file.name}</Text>
       </ContainerShelfColumn>
     </ContainerShelf>
   )

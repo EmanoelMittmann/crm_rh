@@ -37,7 +37,7 @@ export interface ContextPropsExtraHoursRh {
   handleFilterStatus(id: number): void
   handleFillInitialDate(date: string): void
   handleFillFinalDate(date: string): void
-  handleFillAccept(accept: string): void
+  handleFillAccept(toAccept: string): void
   handleDetails(id: number): void
   fetchList(): Promise<void>
 }
