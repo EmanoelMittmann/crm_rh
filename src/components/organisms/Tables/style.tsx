@@ -105,3 +105,11 @@ export const TextStatus = styled.div<IContainerColumnProps>`
   border-radius: 40px;
   font-weight: 700;
 `
+export const HoverText = styled.p`
+  white-space: nowrap;
+  font-weight: 500;
+  transition: all 300ms ease-in-out;
+  :hover {
+    color: #0066ff;
+  }
+`
