@@ -16,6 +16,7 @@ export interface DefaultMetaProps {
 
 export interface ContextTechLeadProps {
   meta: DefaultMetaProps
+  professional: DetailsProfessional[]
   techLead: TechLeadProps[]
   isLoading: boolean
   filterOptions: {
@@ -32,6 +33,12 @@ export interface ContextTechLeadProps {
   handleFilterStatus(id: number | null): void
   handleOrder(field: string): void
   handleDate(start: string, end: string): void
+  fetchDetailsProfessional(id: number): void
+  handleApprove(
+    id: number,
+    status: boolean,
+    justification: string
+  ): void
 }
 
 export interface TechLeadProps {
@@ -45,4 +52,36 @@ export interface TechLeadProps {
   hour_quantity: number
   status_id: number
   status_name: string
+}
+
+interface Project {
+  name: string
+  id: number
+}
+
+interface Status {
+  name: string
+  id: number
+}
+
+interface User {
+  name: string
+  id: number
+}
+
+export interface DetailsProfessional {
+  id: number
+  launch_date: string
+  end_date: null | string
+  type: string
+  hour_quantity: number
+  justification: string
+  created_at: string
+  updated_at: string
+  user_id: number
+  project_id: number
+  extra_hours_status_id: number
+  project: Project
+  status: Status
+  user: User
 }
