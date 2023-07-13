@@ -89,7 +89,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       ),
       status: [
         { label: 'Pendente', value: 'Pendente' },
-        { label: 'Pronto Para Pagar', value: 'Pronto Para Pagar' },
+        { label: 'Pronto para pagar', value: 'Pronto para pagar' },
         { label: 'Pago', value: 'Pago' }
       ] as never
     })

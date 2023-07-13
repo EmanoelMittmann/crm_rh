@@ -60,7 +60,7 @@ export const Shelf = ({
           </ContainerShelfColumn>
         ) : (
           <ContainerShelfColumn>
-            <TextProfessional>{user_name}</TextProfessional>
+            <Text>{user_name}</Text>
           </ContainerShelfColumn>
         )}
         <ContainerShelfColumn>
@@ -77,7 +77,7 @@ export const Shelf = ({
 
         <ContainerShelfColumn>
           <Badge
-            style={{ width: '170px', border: 'none' }}
+            style={{ width: '230px', border: 'none' }}
             label={status_name}
             variant='flat'
             bgColor={status?.color.text_color}

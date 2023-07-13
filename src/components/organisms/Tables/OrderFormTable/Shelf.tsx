@@ -10,13 +10,12 @@ import {
 import { Inputs } from 'components/atoms'
 import {
   ContainerShelf,
-  ContainerShelfColumn,
-  Text
+  ContainerShelfColumn
 } from 'components/organisms/Tables/style'
 import { formatCurrency } from 'components/utils/formatCurrent'
 
 import { ShelfProps } from '../types'
-import { ContainerText } from './style'
+import { ContainerText, Text } from './style'
 import { Order } from './type'
 import { Option } from 'types'
 
@@ -67,19 +66,21 @@ export const Shelf = ({
   )
 
   const hourQuantity = extrahour_release
-    .filter((item: any) => item.professional_id === id)
+    .filter((item: Release) => item.user_id === id)
     .reduce(
       (acc: number, item: Release) => acc + item.hour_quantity,
       0
     )
-  const hours = hourQuantity * extra_hour_value
 
-  const calcularTotal = (id: number) => {
+  const valueOfProfessionalOvertime = hourQuantity * extra_hour_value
+
+  const calculateTotal = (id: number) => {
     const item = commissionValue.find(
       (item: Order) => item.professional_id === id
     )
     const comissao = item ? item.commission : 0
-    const total = fixed_payment_value + comissao + hours
+    const total =
+      fixed_payment_value + comissao + valueOfProfessionalOvertime
     return total
   }
 
@@ -141,7 +142,7 @@ export const Shelf = ({
                 setSelectedCompany(Number(option.value))
               }
             }}
-            width={190}
+            width={180}
           />
         </ContainerShelfColumn>
         <ContainerShelfColumn>
@@ -158,11 +159,19 @@ export const Shelf = ({
           </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>{formatCurrency(hours, 'BRL', 'pt-BR') ?? '-'}</Text>
+          <Text>
+            {valueOfProfessionalOvertime != 0
+              ? formatCurrency(
+                  valueOfProfessionalOvertime,
+                  'BRL',
+                  'pt-BR'
+                )
+              : '-'}
+          </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text>
-            R$ {formatCurrency(calcularTotal(id), 'BRL', 'pt-BR')}
+            {formatCurrency(calculateTotal(id), 'BRL', 'pt-BR')}
           </Text>
         </ContainerShelfColumn>
       </ContainerShelf>
