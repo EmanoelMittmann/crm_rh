@@ -24,7 +24,9 @@ export const Shelf = ({
 
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn>{user_name}</ContainerShelfColumn>
+      <ContainerShelfColumn cursor='pointer'>
+        {user_name}
+      </ContainerShelfColumn>
       <ContainerShelfColumn>{hour_quantity}</ContainerShelfColumn>
       <ContainerShelfColumn>{project_name}</ContainerShelfColumn>
       <ContainerShelfColumn>

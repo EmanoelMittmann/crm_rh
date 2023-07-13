@@ -30,8 +30,8 @@ const createNavOption = (
   key
 })
 
-const { isTechLead } = JSON.parse(
-  localStorage.getItem(LocalStorageKeys.USER) as string
+const Token = JSON.parse(
+  localStorage.getItem(LocalStorageKeys.USER) as string | any
 )
 
 export const OPTIONS = [
@@ -63,7 +63,9 @@ export const OPTIONS = [
     9: createNavOption(
       'Lançamento de Horas',
       <IconReleaseHours />,
-      isTechLead ? 'techLeadReview' : 'releaseHours'
+      Token !== null && Token.isTechLead
+        ? 'techLeadReview'
+        : 'releaseHours'
     ),
 
     10: createNavOption(
