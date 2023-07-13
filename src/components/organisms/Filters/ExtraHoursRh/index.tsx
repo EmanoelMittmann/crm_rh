@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react'
+import { useContext, useMemo, useState } from 'react'
 
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
@@ -17,12 +17,11 @@ export const ExtraHoursRh = () => {
     handleFilterStatus,
     filterOptions_Project,
     filterOptions_Status,
-    handleFillFinalDate,
-    handleFillInitialDate
+    handleDateReference
   } = useContext(List.ExtraHoursRh.Context)
 
-  const { search, status_id, project_id, initialDate, finalDate } =
-    meta
+  const [initialDate, setInitialDate] = useState('')
+  const { search, status_id, project_id } = meta
 
   const currentValueProject = useMemo(
     () =>
@@ -46,7 +45,8 @@ export const ExtraHoursRh = () => {
         <Input
           type='text'
           value={search}
-          width={170}
+          width={230}
+          height={40}
           iconLeft={<IconGlass />}
           placeholder='Buscar...'
           onChange={(e) => handleSearch(e.target?.value)}
@@ -73,18 +73,19 @@ export const ExtraHoursRh = () => {
           onClear={() => handleFilterStatus(null as any)}
         />
         <Inputs.Date
-          type={'date'}
           width={230}
-          placeholder='Periodo Inicial'
-          onChange={(e) => handleFillInitialDate(e.target?.value)}
-          value={initialDate ?? ''}
+          placeholder='Período Inicial'
+          type={'date'}
+          onChange={(e) => setInitialDate(e.target.value)}
+          value={initialDate}
         />
         <Inputs.Date
-          type={'date'}
           width={230}
-          placeholder='Periodo Final'
-          onChange={(e) => handleFillFinalDate(e.target?.value)}
-          value={finalDate ?? ''}
+          type={'date'}
+          placeholder='Período Final'
+          onChange={(e) =>
+            handleDateReference(initialDate, e.target.value)
+          }
         />
       </Container>
     </Main>

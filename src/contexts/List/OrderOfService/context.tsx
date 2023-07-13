@@ -35,8 +35,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     paginate: { ...meta.paginate, setCurrent_page: setPage },
     filterOptions,
     handleFillStatus,
-    handleFillInitialDate,
-    handleFillFinalDate,
+    handleDateReference,
     handleFillRefDate,
     handleSearch,
     handleOrder
@@ -49,7 +48,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         page: meta.paginate.current_page,
         initialDate: meta.initialDate,
         finalDate: meta.finalDate,
-        reference: meta.referenceDate,
+        referencesDate: meta.referencesDate,
         status: meta.status,
         search: meta.search && meta.search,
         order: meta.order,
@@ -120,27 +119,19 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  function handleFillInitialDate(initialDate: string | null) {
+  function handleDateReference(start: string, end: string) {
     setMeta((old) => ({
       ...old,
-      initialDate,
-      paginate: { ...old.paginate, current_page: 1 }
+      initialDate: start,
+      finalDate: end,
+      pagination: { ...old.paginate, current_page: 1 }
     }))
   }
-
-  function handleFillFinalDate(finalDate: string | null) {
+  function handleFillRefDate(Date: string | null) {
     setMeta((old) => ({
       ...old,
-      finalDate,
-      paginate: { ...old.paginate, current_page: 1 }
-    }))
-  }
-
-  function handleFillRefDate(referenceDate: string | null) {
-    setMeta((old) => ({
-      ...old,
-      referenceDate,
-      paginate: { ...old.paginate, current_page: 1 }
+      referencesDate: Date,
+      pagination: { ...old.paginate, current_page: 1 }
     }))
   }
 
@@ -155,7 +146,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       meta.status,
       meta.initialDate,
       meta.finalDate,
-      meta.referenceDate
+      meta.referencesDate
     ]
   })
 

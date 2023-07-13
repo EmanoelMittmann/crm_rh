@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Input, Select } from '@stardust-ds/react'
@@ -22,12 +22,12 @@ export const OrderOfService = () => {
     meta,
     handleSearch,
     handleFillStatus,
-    handleFillInitialDate,
-    handleFillFinalDate,
-    handleFillRefDate
+    handleFillRefDate,
+    handleDateReference
   } = useContext(List.OrderOfService.Context)
 
-  const { search, initialDate, finalDate, referenceDate } = meta
+  const { search, referencesDate } = meta
+  const [initialDate, setInitialDate] = useState('')
 
   return (
     <Main>
@@ -52,23 +52,24 @@ export const OrderOfService = () => {
         <Inputs.Date
           type={'date'}
           width={230}
-          placeholder='Periodo Inicial'
-          onChange={(e) => handleFillInitialDate(e.target?.value)}
-          value={initialDate ?? ''}
+          placeholder='Período Inicial'
+          onChange={(e) => setInitialDate(e.target.value)}
+          value={initialDate}
         />
         <Inputs.Date
           type={'date'}
           width={230}
-          placeholder='Periodo Final'
-          onChange={(e) => handleFillFinalDate(e.target?.value)}
-          value={finalDate ?? ''}
+          placeholder='Período Final'
+          onChange={(e) =>
+            handleDateReference(initialDate, e.target.value)
+          }
         />
         <Inputs.Date
           type={'date'}
           width={230}
           placeholder={'Referência'}
           onChange={(e) => handleFillRefDate(e.target?.value)}
-          value={referenceDate ?? ''}
+          value={referencesDate ?? ''}
         />
       </Container>
       <Button.New

@@ -1,15 +1,15 @@
 import { SelectProps } from '@stardust-ds/react'
 
 export interface DefaultMetaProps {
-  initialDate: string | null
-  finalDate: string | null
+  date_start: string | null
+  date_end: string | null
   project_id: number | null
   status_id: number | null
   approved: string | null
   search: string
   orderField: string | null
   order: 'ASC' | 'DESC'
-  paginate: {
+  pagination: {
     current_page: number
     last_page: number
   }
@@ -35,10 +35,9 @@ export interface ContextPropsExtraHoursRh {
   handleOrder(field: string): void
   handleFilterProject(id: number): void
   handleFilterStatus(id: number): void
-  handleFillInitialDate(date: string): void
-  handleFillFinalDate(date: string): void
   handleFillAccept(toAccept: string): void
   handleDetails(id: number): void
+  handleDateReference(start: string, end: string): void
   fetchList(): Promise<void>
 }
 

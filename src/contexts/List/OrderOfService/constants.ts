@@ -3,7 +3,7 @@ import type { DefaultMetaProps } from './types'
 const META_PROPS = {
   initialDate: null,
   finalDate: null,
-  referenceDate: null,
+  referencesDate: null,
   status: null,
   status_O_S: null,
   search: '',

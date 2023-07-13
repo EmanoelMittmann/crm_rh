@@ -1,7 +1,7 @@
 import { SelectProps } from '@stardust-ds/react'
 
 export interface DefaultMetaProps {
-  search: number | null
+  search: string | null
   status_id: number | null
   project_id: number | null
   order: 'ASC' | 'DESC'
@@ -26,7 +26,7 @@ export interface ContextHoursProps {
     last_page: number
     setCurrent_page(page: number): void
   }
-  handleSearch(search: number): void
+  handleSearch(search: string): void
   handleOrder(): void
   handleDate(start: string, end: string): void
   handleStatus(id: number | null): void

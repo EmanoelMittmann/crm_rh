@@ -22,7 +22,7 @@ export interface ContextNotesProps {
   handleSearch(text: string): void
   handleOrder(field: string): void
   handleDateReference(start: string, end: string): void
-  dowloandFile(id: number, name: string): void
+  dowloandFile(id: number): void
 }
 
 export interface NotesProps {

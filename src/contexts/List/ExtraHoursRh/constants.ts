@@ -1,15 +1,15 @@
 import type { DefaultMetaProps } from './types'
 
 const META_PROPS = {
-  initialDate: null,
-  finalDate: null,
+  date_start: null,
+  date_end: null,
   project_id: null,
   status_id: null,
   approved: null,
   search: '',
   orderField: 'id',
   order: 'ASC',
-  paginate: {
+  pagination: {
     current_page: 1,
     last_page: 1
   }

@@ -2,6 +2,7 @@ import { createContext, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { AxiosError } from 'axios'
 import { saveAs } from 'file-saver'
 
 import { PaginateContext } from 'components/molecules'
@@ -89,7 +90,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  async function dowloandFile(id: number, name: string) {
+  async function dowloandFile(id: number) {
     try {
       await api
         .get(routes.notes.download(id), {
@@ -97,43 +98,13 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         })
         .then((response) => {
           const file = response.data
-          saveAs(file, name)
+          saveAs(file)
         })
     } catch (error) {
       console.error(error)
       console.log('error: ', error)
     }
   }
-
-
-  // async function dowloandFile(id: number) {
-  //   try {
-  //     const { data } = await api.get(routes.notes.download(id), {
-  //       responseType: 'blob',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Accept': 'application/json'
-
-  //       }
-  //     });
-
-  //     console.log('Blob type:', data.type);
-
-  //     const url = window.URL.createObjectURL(new Blob([data]));
-  //     const link = document.createElement('a');
-  //     link.href = url;
-  //     link.setAttribute('download', 'file.pdf');
-  //     document.body.appendChild(link);
-  //     link.click();
-  //   } catch (error) {
-  //     console.error('Error downloading file:', error);
-
-  //     if (error instanceof AxiosError && error.response) {
-  //       console.log('Error response data:', error.response.data);
-  //     }
-  //   }
-  // }
-
 
   useDebounce({
     fn: fetchList,

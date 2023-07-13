@@ -53,15 +53,14 @@ export const Provider = ({
     detais,
     filtertoAccept,
     navigateTo,
-    paginate: { ...meta.paginate, setCurrent_page: setPage },
+    paginate: { ...meta.pagination, setCurrent_page: setPage },
     handleSearch,
     handleOrder,
     filterOptions_Status,
     filterOptions_Project,
     handleFilterStatus,
     handleFilterProject,
-    handleFillInitialDate,
-    handleFillFinalDate,
+    handleDateReference,
     handleFillAccept,
     handleDetails,
     fetchList
@@ -73,22 +72,25 @@ export const Provider = ({
       routes.extraHoursRH.listPending + '?limit=6',
       {
         params: {
-          page: meta.paginate.current_page,
+          page: meta.pagination.current_page,
           search: meta.search,
           order: meta.order,
           orderField: meta.orderField,
           status_id: meta.status_id,
           project_id: meta.project_id,
           approved: meta.approved,
-          initialDate: meta.initialDate,
-          finalDate: meta.finalDate
+          date_start: meta.date_start,
+          date_end: meta.date_end
         }
       }
     )
     setExtraHoursRh(data.data)
     setMeta((old) => ({
       ...old,
-      paginate: { ...old.paginate, last_page: data.meta.last_page }
+      pagination: {
+        ...old.pagination,
+        last_page: data.meta.last_page
+      }
     }))
     setIsLoading(false)
   }
@@ -147,7 +149,7 @@ export const Provider = ({
     setMeta((old) => ({
       ...old,
       project_id,
-      paginate: { ...old.paginate, current_page: 1 }
+      pagination: { ...old.pagination, current_page: 1 }
     }))
   }
 
@@ -155,23 +157,16 @@ export const Provider = ({
     setMeta((old) => ({
       ...old,
       status_id,
-      paginate: { ...old.paginate, current_page: 1 }
+      pagination: { ...old.pagination, current_page: 1 }
     }))
   }
 
-  function handleFillInitialDate(initialDate: string | null) {
+  function handleDateReference(start: string, end: string) {
     setMeta((old) => ({
       ...old,
-      initialDate,
-      paginate: { ...old.paginate, current_page: 1 }
-    }))
-  }
-
-  function handleFillFinalDate(finalDate: string | null) {
-    setMeta((old) => ({
-      ...old,
-      finalDate,
-      paginate: { ...old.paginate, current_page: 1 }
+      date_start: start,
+      date_end: end,
+      pagination: { ...old.pagination, current_page: 1 }
     }))
   }
 
@@ -190,7 +185,7 @@ export const Provider = ({
   function setPage(current_page: number) {
     setMeta((old) => ({
       ...old,
-      paginate: { ...old.paginate, current_page }
+      pagination: { ...old.pagination, current_page }
     }))
   }
 
@@ -198,7 +193,7 @@ export const Provider = ({
     setMeta((old) => ({
       ...old,
       search,
-      paginate: { ...old.paginate, current_page: 1 }
+      pagination: { ...old.pagination, current_page: 1 }
     }))
   }
 
@@ -213,14 +208,14 @@ export const Provider = ({
   useDebounce({
     fn: fetchList,
     listener: [
-      meta.paginate.current_page,
+      meta.pagination.current_page,
       meta.search,
       meta.order,
       meta.orderField,
       meta.status_id,
       meta.project_id,
-      meta.initialDate,
-      meta.finalDate,
+      meta.date_start,
+      meta.date_end,
       meta.approved
     ]
   })
