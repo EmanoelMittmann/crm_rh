@@ -8,12 +8,19 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 
 import DEFAULT from './contants'
-import { ContextTechLeadProps, TechLeadProps } from './types'
+import {
+  ContextTechLeadProps,
+  DetailsProfessional,
+  TechLeadProps
+} from './types'
 export const Context = createContext({} as ContextTechLeadProps)
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const [meta, setMeta] = useState(DEFAULT.META)
   const [techLead, setTechLead] = useState<TechLeadProps[]>([])
+  const [professional, setProfessional] = useState<
+    DetailsProfessional[]
+  >([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [filterOptions, setFilterOptions] = useState(
     DEFAULT.FILTER_OPTIONS
@@ -23,13 +30,16 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     meta,
     techLead,
     isLoading,
+    professional,
     filterOptions,
     paginate: { ...meta.paginate, setCurrent_page: setPage },
     handleSearch,
     handleFilterProject,
     handleFilterStatus,
     handleOrder,
-    handleDate
+    handleDate,
+    fetchDetailsProfessional,
+    handleApprove
   }
 
   async function fetchList() {
@@ -64,10 +74,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       const [{ data: extraHour }, { data: project }] =
         await Promise.all([
           await api.get(routes.hours.Status.list),
-          await api.get(routes.project.list)
+          await api.get(routes.project.projectBondUser)
         ])
       setFilterOptions({
-        project: project.data.map((prop: any) => ({
+        project: project.map((prop: any) => ({
           label: prop.name,
           value: prop.id
         })),
@@ -76,6 +86,35 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           value: prop.id
         }))
       })
+      console.log(project)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async function fetchDetailsProfessional(id: number) {
+    try {
+      const { data } = await api.get(
+        routes.hours.Professional.Details(id)
+      )
+      return setProfessional(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async function handleApprove(
+    id: number,
+    status: boolean,
+    justification: string
+  ) {
+    try {
+      await api.post(routes.hours.techLead.approve, {
+        releases_id: id,
+        approved: status,
+        justification: justification
+      })
+      fetchList()
     } catch (error) {
       console.error(error)
     }

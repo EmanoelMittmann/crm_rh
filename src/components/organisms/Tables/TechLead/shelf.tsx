@@ -5,7 +5,11 @@ import { TechLeadProps } from 'contexts/List/Hours/Techlead/types'
 import { Badge } from 'components/atoms'
 import { formatDate } from 'components/utils/formatDate'
 
-import { ContainerShelf, ContainerShelfColumn } from '../style'
+import {
+  ContainerShelf,
+  ContainerShelfColumn,
+  HoverText
+} from '../style'
 import { ShelfProps } from '../types'
 
 export const Shelf = ({
@@ -13,7 +17,6 @@ export const Shelf = ({
   props
 }: ShelfProps<TechLeadProps>) => {
   const {
-    avatar,
     hour_quantity,
     launch_date,
     project_name,
@@ -25,7 +28,9 @@ export const Shelf = ({
   return (
     <ContainerShelf template={config.template}>
       <ContainerShelfColumn cursor='pointer'>
-        {user_name}
+        <HoverText onClick={() => config.options[0].callback()}>
+          {user_name}
+        </HoverText>
       </ContainerShelfColumn>
       <ContainerShelfColumn>{hour_quantity}</ContainerShelfColumn>
       <ContainerShelfColumn>{project_name}</ContainerShelfColumn>

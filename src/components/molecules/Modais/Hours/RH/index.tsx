@@ -16,11 +16,13 @@ import {
 import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
+import { Modal } from 'components/molecules/Modais'
 import { formatDate } from 'components/utils/formatDate'
 
 import api from 'api'
 import { routes } from 'routes'
 
+import { IHandleModalPropsAlert } from '../../Alert'
 import {
   Columns,
   ContainerAbsolute,
@@ -42,9 +44,6 @@ import {
   optionsApproval
 } from './type'
 import { Option } from 'types'
-import { IHandleModalPropsAlert } from '../Alert'
-
-import { Modal } from '..'
 
 const OvertimeReleaseRh = forwardRef<
   IHandleModalPropsExtrasHoursRh,
