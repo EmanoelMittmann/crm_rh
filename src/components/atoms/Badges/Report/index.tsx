@@ -10,20 +10,20 @@ export default ({ status }: Props) => {
     background:
       status === 'Pendente'
         ? colors.status.alert
-        : status === 'Pronto para Pago'
+        : status === 'Pronto para pagar'
         ? colors.positive.transparent
         : status === 'Pago' && colors.negative.transparent,
     color:
       status === 'Pendente'
         ? colors.status.alert
-        : status === 'Pronto para Pago'
+        : status === 'Pronto para pagar'
         ? colors.positive.pure
         : status === 'Pago' && colors.negative.pure,
     text:
       status === 'Pendente'
         ? 'Pendente'
-        : status === 'Pronto para Pago'
-        ? 'Pronto para Pago'
+        : status === 'Pronto para pagar'
+        ? 'Pronto para pagar'
         : status === 'Pago'
         ? 'Pago'
         : ''
@@ -32,7 +32,7 @@ export default ({ status }: Props) => {
   return (
     <Badge
       style={{
-        width: '10em',
+        width: '210px',
         display: 'flex',
         padding: '0.8rem',
         justifyContent: 'center',
