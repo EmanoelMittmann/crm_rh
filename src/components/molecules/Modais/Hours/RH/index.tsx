@@ -16,11 +16,13 @@ import {
 import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
+import { Modal } from 'components/molecules/Modais'
 import { formatDate } from 'components/utils/formatDate'
 
 import api from 'api'
 import { routes } from 'routes'
 
+import { IHandleModalPropsAlert } from '../../Alert'
 import {
   Columns,
   ContainerAbsolute,
@@ -42,9 +44,6 @@ import {
   optionsApproval
 } from './type'
 import { Option } from 'types'
-import { IHandleModalPropsAlert } from '../Alert'
-
-import { Modal } from '..'
 
 const OvertimeReleaseRh = forwardRef<
   IHandleModalPropsExtrasHoursRh,
@@ -60,11 +59,11 @@ const OvertimeReleaseRh = forwardRef<
   const [currentJustification, setCurrentJustification] = useState('')
   const [toAccept, setToAccept] = useState<boolean>(true)
 
-  const data = detais.find((item: ExtraHoursRhProps) => ({
+  const approvalData = detais.find((item: ExtraHoursRhProps) => ({
     id: item.id
   }))
   const status: StatusHours | undefined = statusHours.find(
-    (item: StatusHours) => item.id === data?.status.id
+    (item: StatusHours) => item.id === approvalData?.status.id
   )
 
   const handleApprovalHours = async () => {
@@ -128,10 +127,13 @@ const OvertimeReleaseRh = forwardRef<
 
           <Row>
             <ContainerAbsolute>
-              <TitleProject>{data?.project.name}</TitleProject>
+              <TitleProject>
+                {approvalData?.project.name}
+              </TitleProject>
               <ContainerData>
                 <Text>
-                  Lançado em {formatDate(String(data?.updated_at))}
+                  Lançado em{' '}
+                  {formatDate(String(approvalData?.updated_at))}
                 </Text>
                 <Badge
                   style={{ width: '170px', border: 'none' }}
@@ -149,13 +151,15 @@ const OvertimeReleaseRh = forwardRef<
                 <TextTitle>Horas</TextTitle>
               </ContainerTitles>
               <ContainerTitles>
-                <Text>{formatDate(String(data?.launch_date))}</Text>
-                <Text>{data?.hour_quantity}</Text>
+                <Text>
+                  {formatDate(String(approvalData?.launch_date))}
+                </Text>
+                <Text>{approvalData?.hour_quantity}</Text>
               </ContainerTitles>
               <ContainerTitleJustification>
                 <TextTitle>Justificativa</TextTitle>
                 <TextJustification>
-                  {data?.justification}
+                  {approvalData?.justification}
                 </TextJustification>
               </ContainerTitleJustification>
               <ContainerTitleJustification>
