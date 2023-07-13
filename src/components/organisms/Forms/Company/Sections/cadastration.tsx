@@ -28,6 +28,7 @@ export const Cadastration = () => {
           options={COMPANY.CADASTRATION}
           placeholder='Selecione'
           label='Situação cadastral'
+          required
         />
         <Inputs.Default
           {...register('date_of_registration_status', {
@@ -40,6 +41,7 @@ export const Cadastration = () => {
           error={errors.date_of_registration_status?.message}
           label='Data da situação cadastral'
           type='date'
+          required
         />
         <Inputs.Default
           {...register('reason_for_registration_status')}

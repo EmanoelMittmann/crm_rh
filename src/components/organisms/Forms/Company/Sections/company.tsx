@@ -72,6 +72,7 @@ export const Company = () => {
           type=''
           label='CNPJ'
           width='100%'
+          required
         />
         <Inputs.Default
           {...register('opening_date', {
@@ -85,6 +86,7 @@ export const Company = () => {
           error={errors.opening_date?.message}
           width='100%'
           type='date'
+          required
         />
         <Selects.WithCheckbox
           label='Empresa Matriz'
@@ -122,6 +124,7 @@ export const Company = () => {
           label='Porte'
           placeholder='Selecione'
           width={300}
+          required
         />
       </ContainerRow>
       <ContainerRow gap='1em'>
@@ -136,6 +139,7 @@ export const Company = () => {
           value={watch('razao_social') ?? ''}
           label='Razão Social'
           width='100%'
+          required
         />
         <Inputs.Default
           {...register('fantasy_name', {
@@ -148,6 +152,7 @@ export const Company = () => {
           value={watch('fantasy_name') ?? ''}
           label='Nome Fantasia'
           width='60%'
+          required
         />
       </ContainerRow>
       <ContainerRow gap='1em'>
@@ -164,6 +169,7 @@ export const Company = () => {
           label='Assinatura'
           searchable
           width={300}
+          required
         />
         <Selects.Default
           {...register('witnesses', {
@@ -178,6 +184,7 @@ export const Company = () => {
           label='Testemunha 1'
           searchable
           width={290}
+          required
         />
         <Selects.Default
           {...register('witnesses')}
@@ -190,6 +197,7 @@ export const Company = () => {
           label='Testemunha 2'
           searchable
           width={290}
+          required
         />
       </ContainerRow>
       <ContainerRow>
@@ -205,6 +213,7 @@ export const Company = () => {
           width={915}
           multiSelect
           searchable
+          required
         />
       </ContainerRow>
       <ContainerRow>
@@ -220,6 +229,7 @@ export const Company = () => {
           width={915}
           multiSelect
           searchable
+          required
         />
       </ContainerRow>
       <ContainerRow>
@@ -242,6 +252,7 @@ export const Company = () => {
           options={LegalNature}
           label='Codigo e Descrição de Natureza Juridica'
           width={915}
+          required
         />
       </ContainerRow>
     </>
