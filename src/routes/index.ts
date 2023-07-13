@@ -16,10 +16,12 @@ export const routes = {
 
   hours: {
     Professional: {
-      list: '/extraHoursReleases'
+      list: '/extraHoursReleases',
+      Details: (id: number) => `/extrasHoursReleases/details/${id}`
     },
     techLead: {
-      list: '/extrasHoursReleases/pending?limit=6'
+      list: '/extrasHoursReleases/pending?limit=6',
+      approve: '/extrasHoursReleases/approval'
     },
     Status: {
       list: '/extraHoursStatus'
@@ -44,7 +46,7 @@ export const routes = {
   notes: {
     list: `/fiscalNotes`,
     user: `/fiscalNotesProfissionals`,
-    download: (id: number) => `/fiscalNotes/downloadFiles/=${id}`
+    download: (id: number) => `/fiscalNotes/downloadFiles/${id}`
   },
 
   project: {
@@ -53,7 +55,8 @@ export const routes = {
       `/updateStatusProject/${projectId}`,
     updateProject: (id: number) => `/project/${id}`,
     register: '/project',
-    userProjects: (id: number) => `/userProjects/project/${id}`
+    userProjects: (id: number) => `/userProjects/project/${id}`,
+    projectBondUser: '/userProjects/user'
   },
 
   project_type: {

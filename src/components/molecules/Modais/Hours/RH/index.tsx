@@ -16,12 +16,12 @@ import {
 import { theme } from 'styles'
 
 import Close from 'components/atoms/Buttons/Close'
+import { Modal } from 'components/molecules/Modais'
 import { formatDate } from 'components/utils/formatDate'
 
 import api from 'api'
 import { routes } from 'routes'
 
-import { Modal } from '../..'
 import { IHandleModalPropsAlert } from '../../Alert'
 import {
   Columns,

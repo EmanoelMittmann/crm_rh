@@ -6,6 +6,7 @@ import Details from './Details'
 import Edit from './Edit'
 import EditorStatus from './EditorStatus'
 import OvertimeReleaseRh from './Hours/RH'
+import TechLead from './Hours/Techlead'
 import New from './New'
 import Options from './Options'
 import { Report } from './Report'
@@ -25,12 +26,14 @@ export const Modal = Object.assign(
     Report,
     OvertimeReleaseRh,
     Alert,
-    AlertAccept
+    AlertAccept,
+    TechLead
   }
 )
 
 export type { IHandleModalPropsEdit } from './Edit'
 export type { IHandleModalPropsNew } from './New'
+export type { IHandleTechLead } from './Hours/Techlead/constants'
 export type { IHandleModalPropsDetails } from './Details/type'
 export type { IHandleModalColorsPropsNew } from './Colors/New'
 export type { IHandleModalColorsPropsEdit } from './Colors/Edit'

@@ -2,7 +2,7 @@ import type { HeaderProps } from 'components/molecules'
 
 export const HEADERS: HeaderProps[] = [
   { field: 'user_name', label: 'Profissional', on: true },
-  { field: 'hour_quantity', label: 'QTD de Horas' },
+  { field: 'hour_quantity', label: 'Qtd de Horas' },
   { field: 'project_id', label: 'Projeto', on: true },
   { field: 'launch_date', label: 'Inicio', on: true }
 ]
