@@ -18,32 +18,23 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState<boolean>(true)
   const data = new FormData()
 
-  const contextProps = {
-    filePdf,
-    fileXml,
-    loading,
-    handleUploadPdf,
-    handleUploadXml,
-    handleSave
-  }
-
-  function handleUploadPdf(file: any) {
+  const handleUploadPdf = (file: File[]) => {
     const data = {
       file,
       fileSize: filesize(file[0].size)
-    } as IFileProps
+    } as unknown as IFileProps
     setFilePdf(data)
   }
 
-  function handleUploadXml(file: any) {
+  const handleUploadXml = (file: File[]) => {
     const data = {
       file,
       fileSize: filesize(file[0].size)
-    } as IFileProps
+    } as unknown as IFileProps
     setFileXml(data)
   }
 
-  function verifyFiles() {
+  const verifyFiles = () => {
     if (!filePdf) {
       toast({
         type: 'error',
@@ -63,16 +54,57 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       })
       return false
     }
+
     data.append('param_name_file', filePdf.file[0] as any)
     data.append('param_name_xml', fileXml.file[0] as any)
+
     return true
   }
 
-  async function handleSave() {
+  const handleSave = async () => {
     setLoading(true)
 
-    if (verifyFiles())
+    if (verifyFiles()) {
       try {
+        const pdfUrl =
+          'https://ubi-labs-development.s3.amazonaws.com/uploads/85/pdf/2/MatheusTesteDaSilva.pdf?AWSAccessKeyId=AKIAYABDEGGGLHNOL454&Expires=1687193476&Signature=efYCI1HNzEtg7Tpj8OGvafWUFvw%3D'
+        const xmlUrl =
+          'https://ubi-labs-development.s3.amazonaws.com/uploads/85/xml/2/MatheusTesteDaSilva.xml?AWSAccessKeyId=AKIAYABDEGGGLHNOL454&Expires=1687193476&Signature=tmihB%2FMI1SurMJ5BhrqebTVORaY%3D'
+
+        const uploadFile = async (file: File, url: string) => {
+          try {
+            const response = await fetch(url, {
+              method: 'PUT',
+              body: file
+            })
+
+            if (response.ok) {
+              console.log('Arquivo enviado com sucesso!')
+            } else {
+              console.error(
+                'Erro ao enviar arquivo:',
+                response.statusText
+              )
+            }
+          } catch (error) {
+            console.error('Erro ao enviar arquivo:', error)
+          }
+        }
+
+        const pdfFile: File | undefined =
+          filePdf?.file[0] instanceof File
+            ? filePdf?.file[0]
+            : undefined
+        const xmlFile: File | undefined =
+          fileXml?.file[0] instanceof File
+            ? fileXml?.file[0]
+            : undefined
+
+        await Promise.all([
+          pdfFile && uploadFile(pdfFile, pdfUrl),
+          xmlFile && uploadFile(xmlFile, xmlUrl)
+        ])
+
         await api
           .post(routes.notes.user, data, {
             headers: {
@@ -88,12 +120,14 @@ export const Provider = ({ children }: { children: ReactNode }) => {
                 position: 'bottom-right'
               })
             }
+
             toast({
               type: 'success',
               title: 'NF enviada com sucesso!',
-              description: 'Você será redirecionado para o inicio',
+              description: 'Você será redirecionado para o início',
               position: 'bottom-right'
             })
+
             navigate(-1)
           })
       } catch (error) {
@@ -105,7 +139,18 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           position: 'bottom-right'
         })
       }
+    }
+
     setLoading(false)
+  }
+
+  const contextProps: ContextProps = {
+    filePdf,
+    fileXml,
+    loading,
+    handleUploadPdf,
+    handleUploadXml,
+    handleSave
   }
 
   return (

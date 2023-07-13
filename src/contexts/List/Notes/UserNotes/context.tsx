@@ -8,6 +8,7 @@ import api from 'api'
 import { routes } from 'routes'
 
 import { useDebounce } from 'hooks'
+import { saveAs } from 'file-saver'
 
 import { META_PROPS } from './constants'
 import { ContextNotesProps, NotesProps } from './types'
@@ -28,7 +29,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleSearch,
     handleOrder,
     handleDateReference,
-    handleEmissionNf
+    handleEmissionNf,
+    dowloandFile
   }
 
   async function fetchList() {
@@ -93,6 +95,21 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       ...old,
       pagination: { ...old.pagination, current_page }
     }))
+  }
+  async function dowloandFile(id: number, name: string) {
+    try {
+      await api
+        .get(routes.notes.download(id), {
+          responseType: 'blob'
+        })
+        .then((response) => {
+          const file = response.data
+          saveAs(file, name)
+        })
+    } catch (error) {
+      console.error(error)
+      console.log('error: ', error)
+    }
   }
 
   useDebounce({

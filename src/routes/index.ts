@@ -43,7 +43,8 @@ export const routes = {
 
   notes: {
     list: `/fiscalNotes`,
-    user: `/fiscalNotesProfissionals`
+    user: `/fiscalNotesProfissionals`,
+    download: (id: number) => `/fiscalNotes/downloadFiles/${id}`
   },
 
   project: {

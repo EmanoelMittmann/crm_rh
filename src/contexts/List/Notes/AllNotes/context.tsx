@@ -2,6 +2,8 @@ import { createContext, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { saveAs } from 'file-saver'
+
 import { PaginateContext } from 'components/molecules'
 
 import api from 'api'
@@ -18,6 +20,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [notes, setNotes] = useState<NotesProps[]>([])
   const [meta, setMeta] = useState(META_PROPS)
+  const [fale, setFale] = useState(null)
 
   const contextProps = {
     notes,
@@ -27,7 +30,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     paginate: { ...meta.pagination, setCurrent_page: setPage },
     handleSearch,
     handleOrder,
-    handleDateReference
+    handleDateReference,
+    dowloandFile
   }
 
   async function fetchList() {
@@ -84,6 +88,52 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       pagination: { ...old.pagination, current_page }
     }))
   }
+
+  async function dowloandFile(id: number, name: string) {
+    try {
+      await api
+        .get(routes.notes.download(id), {
+          responseType: 'blob'
+        })
+        .then((response) => {
+          const file = response.data
+          saveAs(file, name)
+        })
+    } catch (error) {
+      console.error(error)
+      console.log('error: ', error)
+    }
+  }
+
+
+  // async function dowloandFile(id: number) {
+  //   try {
+  //     const { data } = await api.get(routes.notes.download(id), {
+  //       responseType: 'blob',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Accept': 'application/json'
+
+  //       }
+  //     });
+
+  //     console.log('Blob type:', data.type);
+
+  //     const url = window.URL.createObjectURL(new Blob([data]));
+  //     const link = document.createElement('a');
+  //     link.href = url;
+  //     link.setAttribute('download', 'file.pdf');
+  //     document.body.appendChild(link);
+  //     link.click();
+  //   } catch (error) {
+  //     console.error('Error downloading file:', error);
+
+  //     if (error instanceof AxiosError && error.response) {
+  //       console.log('Error response data:', error.response.data);
+  //     }
+  //   }
+  // }
+
 
   useDebounce({
     fn: fetchList,

@@ -16,7 +16,8 @@ export interface ContextProps {
   filePdf: IFileProps | undefined
   fileXml: IFileProps | undefined
   loading: boolean
-  handleUploadPdf(file: any): void
-  handleUploadXml(file: any): void
+  handleUploadPdf: (file: File[]) => void
+  handleUploadXml: (file: File[]) => void
   handleSave(): Promise<void>
 }
+

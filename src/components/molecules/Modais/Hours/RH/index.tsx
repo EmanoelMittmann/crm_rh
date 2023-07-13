@@ -21,6 +21,8 @@ import { formatDate } from 'components/utils/formatDate'
 import api from 'api'
 import { routes } from 'routes'
 
+import { Modal } from '../..'
+import { IHandleModalPropsAlert } from '../../Alert'
 import {
   Columns,
   ContainerAbsolute,
@@ -42,9 +44,6 @@ import {
   optionsApproval
 } from './type'
 import { Option } from 'types'
-import { IHandleModalPropsAlert } from '../Alert'
-
-import { Modal } from '..'
 
 const OvertimeReleaseRh = forwardRef<
   IHandleModalPropsExtrasHoursRh,
