@@ -86,7 +86,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           value: prop.id
         }))
       })
-      console.log(project)
     } catch (error) {
       console.error(error)
     }

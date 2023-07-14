@@ -88,22 +88,19 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  
-
   async function downloadFile(id: number, name: string) {
     try {
       const response = await api.get(routes.notes.download(id), {
         responseType: 'blob'
-      });
+      })
 
-      const file = new Blob([response.data]);
-      saveAs(file, name);
+      const file = new Blob([response.data])
+      saveAs(file, name)
     } catch (error) {
-      console.error('Erro ao fazer o download do arquivo:', error);
-      console.log('error: ', error);
+      console.error('Erro ao fazer o download do arquivo:', error)
+      console.log('error: ', error)
     }
   }
-
 
   useDebounce({
     fn: fetchList,

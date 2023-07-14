@@ -15,9 +15,6 @@ import { ShelfProps } from './types'
 const Shelf = ({ props }: ShelfProps) => {
   const { downloadFile, notes } = useContext(List.Notes.Context)
 
-  
-
-
   return (
     <ContainerShelf template={GRID_TEMPLATE}>
       <ContainerShelfColumn left='0.2em'>

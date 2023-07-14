@@ -79,7 +79,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
             })
 
             if (response.ok) {
-              console.log('Arquivo enviado com sucesso!')
             } else {
               console.error(
                 'Erro ao enviar arquivo:',
