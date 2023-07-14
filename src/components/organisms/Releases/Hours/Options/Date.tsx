@@ -10,11 +10,10 @@ import { Inputs, Selects } from 'components/atoms'
 import { Columns, Row } from '../style'
 
 export const Date = () => {
-  const { methods, projects, } = useContext(Release.ExtraHour.Context)
+  const { methods, projects } = useContext(Release.ExtraHour.Context)
 
   const { register, formState, setValue } =
     methods as UseFormReturn<ExtraHourProps>
-
 
   return (
     <Columns>

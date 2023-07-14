@@ -74,10 +74,8 @@ export const routes = {
 
   projectUsers: {
     list: '/userProjects/user',
-    getUserProject: (id: number) => `/userProjects/user/${id}`,
+    getUserProject: (id: number) => `/userProjects/user/${id}`
   },
-
-
 
   usersProjects: {
     list: '/userProjects/project',

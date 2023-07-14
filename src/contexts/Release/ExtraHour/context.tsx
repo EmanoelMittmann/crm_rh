@@ -17,7 +17,6 @@ export const Context = createContext({} as ContextExtraHourProps)
 export const Provider = ({ children }: { children: ReactNode }) => {
   const [projects, setProjects] = useState<SelectOption[]>([])
 
-
   const methods = useForm<ExtraHourProps>({
     defaultValues: {
       type: 'BY_DATE',
@@ -31,14 +30,14 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function fetchProjectUser() {
-    const { data } = await api.get(
-      routes.projectUsers.list)
-    setProjects(data.map((project: ProjectProps) => ({
-      value: project.id,
-      label: project.name
-    })))
+    const { data } = await api.get(routes.projectUsers.list)
+    setProjects(
+      data.map((project: ProjectProps) => ({
+        value: project.id,
+        label: project.name
+      }))
+    )
   }
-
 
   async function handleSendHours(data: ExtraHourProps) {
     try {
