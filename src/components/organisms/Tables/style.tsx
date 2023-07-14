@@ -14,6 +14,13 @@ export const LoadingWrapper = styled.div`
   margin-top: 4rem;
 `
 
+export const NotFoundWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+`
+
 export const ContainerShelf = styled.div<TemplateProps>`
   width: 100%;
   min-height: 4rem;
