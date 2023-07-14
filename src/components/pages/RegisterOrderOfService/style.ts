@@ -34,7 +34,7 @@ export const ContainerFixed = styled.div`
   background-color: ${theme.neutrals.pureWhite};
   box-shadow: 0.3px 5px 3px 2px ${theme.neutrals.gray3};
 
-  @media (max-width: 1049px) {
+  @media (max-width: 1136px) {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -47,7 +47,7 @@ export const ContainerCompany = styled.div`
   display: flex;
 `
 export const ConatinerButton = styled.div`
-  width: 28%;
+  width: 305px;
   display: flex;
   padding-right: 2em;
   margin-top: 6.5em;
