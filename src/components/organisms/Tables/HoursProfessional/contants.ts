@@ -4,7 +4,7 @@ export const HEADERS: HeaderProps[] = [
   { field: 'id', label: 'Codigo', on: true },
   { field: 'launch_date', label: 'Inicial' },
   { field: 'end_date', label: 'Final' },
-  { field: 'hour_quantity', label: 'QTD de Horas' },
+  { field: 'hour_quantity', label: 'Quantidade de Horas' },
   { field: 'project_id', label: 'Projeto' },
   { field: 'status.id', label: 'Status' }
 ]

@@ -8,9 +8,8 @@ import { Text } from './style'
 import { CompaniesField, ContainerOnPrice, Some } from './style'
 
 const OnPrice = () => {
-  const { professionalOS, selectSendProfessionals } = useContext(
-    List.OrderOfServiceprofessionalOS.Context
-  )
+  const { professionalOS, selectSendProfessionals, checked } =
+    useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const [totalPayment, setTotalPayment] = useState<{
     [companyId: number]: number
@@ -24,7 +23,7 @@ const OnPrice = () => {
         (e) => e.id === item.professional_id
       )
 
-      if (professional) {
+      if (professional && checked[item.professional_id]) {
         const hourQuantity = professional?.extrahour_release
           .map((prop) => prop.hour_quantity)
           .reduce((acc, cc) => acc + cc, 0)

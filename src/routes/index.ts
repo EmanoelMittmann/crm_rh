@@ -49,6 +49,13 @@ export const routes = {
     download: (id: number) => `/fiscalNotes/downloadFiles/${id}`
   },
 
+  status: {
+    list: '/projectStatus?limit=7',
+    create: '/projectStatus',
+    update: (id: number) => `/projectStatus/${id}`,
+    updateStatus: `updateProjectStatus`
+  },
+
   project: {
     list: '/project?limit=5',
     updateStatusproject: (projectId: number) =>
@@ -65,11 +72,9 @@ export const routes = {
     updateStatus: `/updateProjectType`
   },
 
-  status: {
-    list: '/projectStatus?limit=7',
-    create: '/projectStatus',
-    update: (id: number) => `/projectStatus/${id}`,
-    updateStatus: `updateProjectStatus`
+  projectUsers: {
+    list: '/userProjects/user',
+    getUserProject: (id: number) => `/userProjects/user/${id}`
   },
 
   usersProjects: {

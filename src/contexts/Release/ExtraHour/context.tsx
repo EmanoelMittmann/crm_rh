@@ -29,20 +29,14 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     methods
   }
 
-  async function FetchProject() {
-    try {
-      const { data } = await api.get(
-        routes.project.list + '?limit=100'
-      )
-      setProjects(
-        data.data.map((item: ProjectProps) => ({
-          label: item.name,
-          value: item.id
-        }))
-      )
-    } catch (error) {
-      console.error(error)
-    }
+  async function fetchProjectUser() {
+    const { data } = await api.get(routes.projectUsers.list)
+    setProjects(
+      data.map((project: ProjectProps) => ({
+        value: project.id,
+        label: project.name
+      }))
+    )
   }
 
   async function handleSendHours(data: ExtraHourProps) {
@@ -64,7 +58,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   useDebounce({
-    fn: FetchProject,
+    fn: fetchProjectUser,
     listener: []
   })
 
