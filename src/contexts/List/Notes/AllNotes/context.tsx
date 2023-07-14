@@ -2,7 +2,6 @@ import { createContext, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { AxiosError } from 'axios'
 import { saveAs } from 'file-saver'
 
 import { PaginateContext } from 'components/molecules'
@@ -21,7 +20,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [notes, setNotes] = useState<NotesProps[]>([])
   const [meta, setMeta] = useState(META_PROPS)
-  const [fale, setFale] = useState(null)
 
   const contextProps = {
     notes,
@@ -32,7 +30,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleSearch,
     handleOrder,
     handleDateReference,
-    dowloandFile
+    downloadFile
   }
 
   async function fetchList() {
@@ -90,21 +88,22 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  async function dowloandFile(id: number) {
+  
+
+  async function downloadFile(id: number, name: string) {
     try {
-      await api
-        .get(routes.notes.download(id), {
-          responseType: 'blob'
-        })
-        .then((response) => {
-          const file = response.data
-          saveAs(file)
-        })
+      const response = await api.get(routes.notes.download(id), {
+        responseType: 'blob'
+      });
+
+      const file = new Blob([response.data]);
+      saveAs(file, name);
     } catch (error) {
-      console.error(error)
-      console.log('error: ', error)
+      console.error('Erro ao fazer o download do arquivo:', error);
+      console.log('error: ', error);
     }
   }
+
 
   useDebounce({
     fn: fetchList,

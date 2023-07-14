@@ -13,8 +13,10 @@ import { GRID_TEMPLATE } from './constants'
 import { ShelfProps } from './types'
 
 const Shelf = ({ props }: ShelfProps) => {
-  const { dowloandFile } = useContext(List.Notes.Context)
-  // console.log('props: ', props);
+  const { downloadFile, notes } = useContext(List.Notes.Context)
+
+  
+
 
   return (
     <ContainerShelf template={GRID_TEMPLATE}>
@@ -35,7 +37,7 @@ const Shelf = ({ props }: ShelfProps) => {
       </ContainerShelfColumn>
       <ContainerShelfColumn
         left='0.8em'
-        onClick={() => dowloandFile(props.file.id)}
+        onClick={() => downloadFile(props.file_id, props.file.name)}
       >
         <TextProfessional>{props.file.name}</TextProfessional>
       </ContainerShelfColumn>
