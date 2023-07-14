@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+import { theme } from 'styles'
+
+import { TemplateProps } from '../types'
 
 export const ScrollContainer = styled.ul`
   overflow-y: scroll;
@@ -69,4 +72,20 @@ export const Some = styled.span`
   align-items: center;
   justify-content: end;
   font-weight: 500;
+`
+export const ContainerShelf = styled.div<TemplateProps>`
+  width: 100%;
+  min-height: 4rem;
+  display: grid;
+  align-items: center;
+  padding: 0px 22px;
+  border: 1px solid #ccd1d6;
+  grid-template-columns: ${({ template }) => template};
+  gap: 1rem;
+  color: ${theme.neutrals.gray7};
+  overflow-x: auto;
+
+  :last-child {
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
 `

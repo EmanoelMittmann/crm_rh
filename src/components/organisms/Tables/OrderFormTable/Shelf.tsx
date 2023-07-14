@@ -6,16 +6,14 @@ import {
   OrderPropsProfessional,
   Release
 } from 'contexts/List/OrderOfServiceProfessional/types'
+import { theme } from 'styles'
 
 import { Inputs } from 'components/atoms'
-import {
-  ContainerShelf,
-  ContainerShelfColumn
-} from 'components/organisms/Tables/style'
+import { ContainerShelfColumn } from 'components/organisms/Tables/style'
 import { formatCurrency } from 'components/utils/formatCurrent'
 
 import { ShelfProps } from '../types'
-import { ContainerText, Text } from './style'
+import { ContainerShelf, ContainerText, Text } from './style'
 import { Order } from './type'
 import { Option } from 'types'
 
@@ -27,8 +25,8 @@ export const Shelf = ({
     setSelectSendProfessionals,
     setProfessionalOS,
     checked,
-    selectSendProfessionals,
-    setChecked
+    setChecked,
+    selectSendProfessionals
   } = useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const {
@@ -111,7 +109,14 @@ export const Shelf = ({
 
   return (
     <>
-      <ContainerShelf template={config.template}>
+      <ContainerShelf
+        template={config.template}
+        style={{
+          backgroundColor: checked[id]
+            ? theme.neutrals.gray1
+            : 'initial'
+        }}
+      >
         <ContainerShelfColumn>
           <ContainerText>
             <Inputs.Check
@@ -146,20 +151,46 @@ export const Shelf = ({
           />
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>{professional_data?.cnpj}</Text>
+          <Text
+            style={{
+              color: checked[id]
+                ? theme.brand.color.status.neutral1
+                : 'initial'
+            }}
+          >
+            {professional_data?.cnpj}
+          </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>
+          <Text
+            style={{
+              color: checked[id]
+                ? theme.brand.color.status.neutral1
+                : 'initial'
+            }}
+          >
             R$ {formatCurrency(fixed_payment_value, 'BRL', 'pt-BR')}
           </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>
+          <Text
+            style={{
+              color: checked[id]
+                ? theme.brand.color.status.neutral1
+                : 'initial'
+            }}
+          >
             {formatCurrency(commissionHave, 'BRL', 'pt-BR') ?? '-'}
           </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>
+          <Text
+            style={{
+              color: checked[id]
+                ? theme.brand.color.status.neutral1
+                : 'initial'
+            }}
+          >
             {valueOfProfessionalOvertime != 0
               ? formatCurrency(
                   valueOfProfessionalOvertime,
@@ -170,7 +201,13 @@ export const Shelf = ({
           </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text>
+          <Text
+            style={{
+              color: checked[id]
+                ? theme.brand.color.status.neutral1
+                : 'initial'
+            }}
+          >
             {formatCurrency(calculateTotal(id), 'BRL', 'pt-BR')}
           </Text>
         </ContainerShelfColumn>

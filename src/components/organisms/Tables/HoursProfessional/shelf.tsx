@@ -19,10 +19,10 @@ export const Shelf = ({ config, props }: ShelfProps<HoursProps>) => {
         {formatDate(props.end_date)}
       </ContainerShelfColumn>
       <ContainerShelfColumn left='0.5em'>
-        {props.project.name}
+        {props.hour_quantity}
       </ContainerShelfColumn>
       <ContainerShelfColumn left='0.5em'>
-        {props.hour_quantity}
+        {props.project.name}
       </ContainerShelfColumn>
       <ContainerShelfColumn left='0.5em'>
         <Badge.Hours status={props.status} />
