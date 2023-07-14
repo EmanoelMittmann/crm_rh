@@ -108,10 +108,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
   }
 
-  function handleSearch(search: number) {
+  function handleSearch(search: string) {
     setMeta((old) => ({
       ...old,
-      search: search ? search : null,
+      search,
       paginate: { ...old.paginate, current_page: 1 }
     }))
   }

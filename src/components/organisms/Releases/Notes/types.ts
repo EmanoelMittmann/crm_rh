@@ -1,4 +1,4 @@
-type FilePdf = {
+export type FilePdf = {
   path: string
   lastModified: number
   lastModifiedDate: Object

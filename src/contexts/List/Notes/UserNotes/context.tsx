@@ -2,6 +2,8 @@ import { createContext, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { saveAs } from 'file-saver'
+
 import { PaginateContext } from 'components/molecules'
 
 import api from 'api'
@@ -28,7 +30,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleSearch,
     handleOrder,
     handleDateReference,
-    handleEmissionNf
+    handleEmissionNf,
+    dowloandFile
   }
 
   async function fetchList() {
@@ -93,6 +96,21 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       ...old,
       pagination: { ...old.pagination, current_page }
     }))
+  }
+  async function dowloandFile(id: number, name: string) {
+    try {
+      await api
+        .get(routes.notes.download(id), {
+          responseType: 'blob'
+        })
+        .then((response) => {
+          const file = response.data
+          saveAs(file, name)
+        })
+    } catch (error) {
+      console.error(error)
+      console.log('error: ', error)
+    }
   }
 
   useDebounce({

@@ -1,9 +1,20 @@
+import { useContext } from 'react'
+
+import { List } from 'contexts'
+
 import { formatDate } from '../../../utils/formatDate'
-import { ContainerShelf, ContainerShelfColumn, Text } from '../style'
+import {
+  ContainerShelf,
+  ContainerShelfColumn,
+  Text,
+  TextProfessional
+} from '../style'
 import { GRID_TEMPLATE } from './constants'
 import { ShelfProps } from './types'
 
 const Shelf = ({ props }: ShelfProps) => {
+  const { downloadFile, notes } = useContext(List.Notes.Context)
+
   return (
     <ContainerShelf template={GRID_TEMPLATE}>
       <ContainerShelfColumn left='0.2em'>
@@ -21,8 +32,11 @@ const Shelf = ({ props }: ShelfProps) => {
       <ContainerShelfColumn left='0.7em'>
         <Text>{props.file_xml.value_nf}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='0.8em'>
-        <Text>{props.file.name}</Text>
+      <ContainerShelfColumn
+        left='0.8em'
+        onClick={() => downloadFile(props.file_id, props.file.name)}
+      >
+        <TextProfessional>{props.file.name}</TextProfessional>
       </ContainerShelfColumn>
     </ContainerShelf>
   )

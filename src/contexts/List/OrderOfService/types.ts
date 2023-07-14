@@ -6,7 +6,7 @@ export interface DefaultMetaProps {
   status: string | null
   initialDate: string | null
   finalDate: string | null
-  referenceDate: string | null
+  referencesDate: string | null
   status_O_S: number | null
   search: string
   orderField: string | null
@@ -31,9 +31,8 @@ export interface ContextOrderOfServiceProps {
   handleSearch(text: string): void
   handleOrder(field: string): void
   handleFillStatus(label: string): void
-  handleFillInitialDate(date: string): void
-  handleFillFinalDate(date: string): void
   handleFillRefDate(date: string): void
+  handleDateReference(start: string, end: string): void
 }
 
 export interface OrderOfServiceProps {

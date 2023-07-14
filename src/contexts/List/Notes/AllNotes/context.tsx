@@ -2,6 +2,8 @@ import { createContext, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { saveAs } from 'file-saver'
+
 import { PaginateContext } from 'components/molecules'
 
 import api from 'api'
@@ -27,7 +29,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     paginate: { ...meta.pagination, setCurrent_page: setPage },
     handleSearch,
     handleOrder,
-    handleDateReference
+    handleDateReference,
+    downloadFile
   }
 
   async function fetchList() {
@@ -83,6 +86,20 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       ...old,
       pagination: { ...old.pagination, current_page }
     }))
+  }
+
+  async function downloadFile(id: number, name: string) {
+    try {
+      const response = await api.get(routes.notes.download(id), {
+        responseType: 'blob'
+      })
+
+      const file = new Blob([response.data])
+      saveAs(file, name)
+    } catch (error) {
+      console.error('Erro ao fazer o download do arquivo:', error)
+      console.log('error: ', error)
+    }
   }
 
   useDebounce({

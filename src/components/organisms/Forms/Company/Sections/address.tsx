@@ -38,6 +38,7 @@ export const Address = () => {
           error={errors.cep?.message}
           label='CEP'
           width={290}
+          required
           placeholder='00000-0000'
         />
         <Inputs.Default
@@ -51,6 +52,7 @@ export const Address = () => {
           error={errors.street_name?.message}
           label='Rua'
           width={'50%'}
+          required
         />
         <Inputs.Default
           {...register('house_number', {
@@ -63,6 +65,7 @@ export const Address = () => {
           error={errors.street_name?.message}
           label='Numero'
           width={500}
+          required
         />
         <Inputs.Default
           {...register('complement')}
@@ -85,6 +88,7 @@ export const Address = () => {
           value={watch('neighborhood_name') ?? ''}
           error={errors.neighborhood_name?.message}
           label={'Bairro'}
+          required
         />
         <Inputs.Default
           {...register('city_name', {
@@ -96,6 +100,7 @@ export const Address = () => {
           value={watch('city_name') ?? ''}
           error={errors.neighborhood_name?.message}
           label={'Cidade'}
+          required
         />
         <Selects.Default
           {...register('uf', {
@@ -110,6 +115,7 @@ export const Address = () => {
           searchable
           width={300}
           placeholder='Selecione'
+          required
         />
       </ContainerRow>
       <ContainerRow gap='1em'>
@@ -122,6 +128,7 @@ export const Address = () => {
           value={watch('phone_number') ?? ''}
           label={'Telefone'}
           placeholder='(00) 00000-0000'
+          required
         />
         <Inputs.Default
           {...register('main_email', {
@@ -134,6 +141,7 @@ export const Address = () => {
           error={errors.main_email?.message}
           label={'Email principal'}
           placeholder={'email@email.com'}
+          required
         />
         <Inputs.Default
           {...register('secondary_email')}

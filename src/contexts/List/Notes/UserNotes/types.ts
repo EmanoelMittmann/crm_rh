@@ -24,6 +24,7 @@ export interface ContextNotesProps {
   handleOrder(field: string): void
   handleDateReference(start: string, end: string): void
   handleEmissionNf(date: string): void
+  dowloandFile(id: number, name: string): void
 }
 
 export interface NotesProps {
