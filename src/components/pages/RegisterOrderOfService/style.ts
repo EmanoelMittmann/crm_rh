@@ -20,7 +20,7 @@ export const Container = styled.div`
 
 export const ContainerFixed = styled.div`
   width: 100%;
-  max-width: 94.5%; /* Defina um valor máximo para limitar a largura do container */
+  max-width: 94.5%;
   height: 220px;
   display: flex;
   flex-direction: row;

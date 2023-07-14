@@ -147,7 +147,7 @@ export const Shelf = ({
                 setSelectedCompany(Number(option.value))
               }
             }}
-            width={180}
+            width={165}
           />
         </ContainerShelfColumn>
         <ContainerShelfColumn>
