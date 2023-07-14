@@ -74,7 +74,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       const [{ data: extraHour }, { data: project }] =
         await Promise.all([
           await api.get(routes.hours.Status.list),
-          await api.get(routes.project.list)
+          await api.get(routes.projectUsers.list)
         ])
       setFilterOptions({
         project: project.data.map((prop: any) => ({
