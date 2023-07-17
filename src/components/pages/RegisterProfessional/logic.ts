@@ -320,11 +320,12 @@ export function handlePopulateFields(
       String(data.fixed_payment_value)
     ),
     variable1: data.variable1,
-    variable2: data.variable2,
+    variable2: data.variable2 === null ? '' : data.variable2,
     permissions: convertIdInIndexs(data.permissions),
     start_date: getDateInput(data.start_date),
     limited_extra_hours: data.limited_extra_hours,
     avatar: data.avatar,
+    tools: data.tools,
     is_active: data.is_active,
     user_type_id: data.user_type_id,
     weekly_hours: data.weekly_hours,

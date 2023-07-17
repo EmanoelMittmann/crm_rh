@@ -26,6 +26,7 @@ export const ContainerRow = styled.div<IContainerRowProps>`
   flex-direction: row;
   align-items: ${({ align }) => align ?? 'flex-start'};
   gap: ${(props) => props.gap};
+  white-space: nowrap;
 `
 
 export const GridContainer = styled.div`
