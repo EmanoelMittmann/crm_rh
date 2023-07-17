@@ -8,4 +8,6 @@ export const HEADERS = [
   { field: 'city_name', label: 'Local' }
 ] as HeaderProps[]
 
+export const Mask = '(99) 99999-9999'
+
 export const GRID_TEMPLATE = '1fr 1fr 1.5fr 1fr 1fr 1fr'
