@@ -82,8 +82,8 @@ const RegisterOrderOfServiceWrap = () => {
 
       <Modal.Commission
         ref={modalRef}
-        placeholder='Confirmar Profissionais'
-        text='Confirmar Profissionais'
+        placeholder='Confirmar Comissões'
+        text='Confirmar Comissões'
       />
     </>
   )
