@@ -1,3 +1,5 @@
+import { mask } from 'remask'
+
 import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
 
@@ -8,6 +10,7 @@ import {
   Text
 } from '../style'
 import type { ShelfProps } from '../types'
+import { Mask } from './constants'
 import type { ProfessionalProps } from './types'
 
 export const Shelf = ({
@@ -36,7 +39,7 @@ export const Shelf = ({
         <Text>{email}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn title={telephone_number}>
-        <Text>{telephone_number}</Text>
+        <Text>{mask(telephone_number, Mask)}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn title={city_name}>
         <Text>{city_name}</Text>
