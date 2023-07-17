@@ -325,6 +325,7 @@ export function handlePopulateFields(
     start_date: getDateInput(data.start_date),
     limited_extra_hours: data.limited_extra_hours,
     avatar: data.avatar,
+    tools: data.tools,
     is_active: data.is_active,
     user_type_id: data.user_type_id,
     weekly_hours: data.weekly_hours,
