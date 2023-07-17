@@ -1,16 +1,23 @@
+import { useNavigate } from 'react-router-dom'
+
 import { List } from 'contexts'
 
 import { Filter, Table } from 'components/organisms'
-import { AuthTemplate, ListTemplate } from 'components/templates'
+import { AuthTemplate, ReleaseTemplate } from 'components/templates'
 
 const OrderOfService = () => {
+  const navigate = useNavigate()
   return (
     <AuthTemplate>
       <List.OrderOfService.Provider>
-        <ListTemplate title='Ordem de Serviço' arrow={true}>
+        <ReleaseTemplate
+          btnText='Gerar O.S'
+          event={() => navigate('/orderOfService/new')}
+          title='Ordem de serviço'
+        >
           <Filter.OrderOfService />
           <Table.OrderOfService />
-        </ListTemplate>
+        </ReleaseTemplate>
       </List.OrderOfService.Provider>
     </AuthTemplate>
   )

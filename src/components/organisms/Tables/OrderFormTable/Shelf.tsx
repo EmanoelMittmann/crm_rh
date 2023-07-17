@@ -118,7 +118,7 @@ export const Shelf = ({
         }}
       >
         <ContainerShelfColumn>
-          <ContainerText >
+          <ContainerText>
             <Inputs.Check
               key={id}
               checked={checked[id]}
@@ -151,7 +151,8 @@ export const Shelf = ({
           />
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text title='2em'
+          <Text
+            title='2em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
@@ -162,18 +163,20 @@ export const Shelf = ({
           </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text title='2.5em'
+          <Text
+            title='2.5em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
                 : 'initial'
             }}
           >
-          {formatCurrency(fixed_payment_value, 'BRL', 'pt-BR')}
+            {formatCurrency(fixed_payment_value, 'BRL', 'pt-BR')}
           </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text title='2.5em'
+          <Text
+            title='2.5em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
@@ -184,7 +187,8 @@ export const Shelf = ({
           </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text title='2.5em'
+          <Text
+            title='2.5em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
@@ -201,7 +205,8 @@ export const Shelf = ({
           </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          <Text title='2.5em'
+          <Text
+            title='2.5em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1

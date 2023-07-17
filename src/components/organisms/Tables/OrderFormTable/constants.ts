@@ -1,7 +1,7 @@
 import type { HeaderProps } from 'components/molecules'
 
 export const HEADERS = [
-  {checked:true, field: 'name', label: 'Profissional', on: true },
+  { checked: true, field: 'name', label: 'Profissional', on: true },
   { field: 'company_id', label: 'Empresa', on: true },
   { field: 'cnpj', label: 'CNPJ', on: true },
   { field: 'fixed_payment_value', label: 'Salário', on: true },

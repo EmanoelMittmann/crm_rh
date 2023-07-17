@@ -74,10 +74,6 @@ export const TechLead = () => {
             handleDate(start, e.target.value)
           }
         />
-        <Button.New
-          text='Lançar Horas'
-          onClick={() => navigate('/releaseHours')}
-        />
       </Container>
     </Main>
   )

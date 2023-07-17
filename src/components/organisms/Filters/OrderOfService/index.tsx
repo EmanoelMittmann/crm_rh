@@ -73,10 +73,6 @@ export const OrderOfService = () => {
           value={referencesDate ?? ''}
         />
       </Container>
-      <Button.New
-        text='Gerar O.S'
-        onClick={() => nagivate('/orderOfService/new')}
-      />
     </Main>
   )
 }
