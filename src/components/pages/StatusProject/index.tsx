@@ -7,7 +7,10 @@ const StatusProject = () => {
   return (
     <AuthTemplate>
       <List.Status.Provider>
-        <ListTemplate title='Cadastro de Status de Projetos'>
+        <ListTemplate
+          title='Cadastro de Status de Projetos'
+          arrow={true}
+        >
           <Filter.StatusProject />
           <Table.StatusProject />
         </ListTemplate>

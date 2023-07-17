@@ -34,11 +34,11 @@ export const Professionals = () => {
           onChange={(e) => handleSearch(e.target?.value)}
           iconLeft={<IconGlass />}
           placeholder='Buscar...'
-          width={270}
-          style={{ marginTop: '4px' }}
+          width={230}
+          height={42}
         />
         <Select
-          width={270}
+          width={230}
           placeholder='Cargo'
           options={filterOptions.job}
           value={currentValue ?? null}

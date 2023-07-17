@@ -41,7 +41,15 @@ export const Column = styled.button<IContainerColumnProps>`
 `
 
 export const ColumnText = styled.p`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 600;
   font-size: 12px;
   font-family: 'Poppins';
+`
+export const ContainerChecked = styled.p`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `

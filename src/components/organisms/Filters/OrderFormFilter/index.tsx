@@ -9,40 +9,9 @@ import { Button, IconGlass } from 'components/atoms'
 import { Container, Main } from './style'
 
 export const OrderFormFilter = () => {
-  const {
-    meta,
-    handleSearch,
-    checked,
-    setChecked,
-    selectSendProfessionals,
-    professionalOS,
-    setSelectSendProfessionals
-  } = useContext(List.OrderOfServiceprofessionalOS.Context)
-
-  const handleSelectAll = () => {
-    const allChecked = professionalOS.every(
-      (item) => checked[item.id]
-    )
-
-    const allds = professionalOS.map((item) => ({
-      name: item.name,
-      professional_id: item.id,
-      commission: item.commission ? undefined : 0,
-      companies_id: item.company_id,
-      isCommission: item.commission
-    }))
-
-    setSelectSendProfessionals(allds)
-
-    const newChecked = allds.reduce(
-      (acc, item) => ({
-        ...acc,
-        [item.professional_id]: !allChecked
-      }),
-      {}
-    )
-    setChecked(newChecked)
-  }
+  const { meta, handleSearch } = useContext(
+    List.OrderOfServiceprofessionalOS.Context
+  )
 
   const { search } = meta
 
@@ -51,17 +20,13 @@ export const OrderFormFilter = () => {
       <Container gap='1em'>
         <Input
           width={230}
+          height={42}
           placeholder='Buscar...'
           iconLeft={<IconGlass />}
           value={search}
           onChange={(e) => handleSearch(e.target?.value)}
         />
       </Container>
-      <Button.New
-        text='Selecionar todos'
-        onClick={() => handleSelectAll()}
-        type='button'
-      />
     </Main>
   )
 }

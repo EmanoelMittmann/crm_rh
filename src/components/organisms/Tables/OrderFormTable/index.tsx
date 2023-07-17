@@ -15,9 +15,8 @@ import { Shelf } from './Shelf'
 import { ScrollContainer } from './style'
 
 export const OrderFormTable = () => {
-  const { professionalOS, handleOrder, isLoading } = useContext(
-    List.OrderOfServiceprofessionalOS.Context
-  )
+  const { professionalOS, handleOrder, isLoading, handleCheckedAll } =
+    useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const POPOVER_OPTIONS = (id: number, name: string) => []
 
@@ -52,6 +51,7 @@ export const OrderFormTable = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
+        handleCheckedAll={handleCheckedAll}
       />
       {Table}
     </Main>

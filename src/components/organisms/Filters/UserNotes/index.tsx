@@ -24,7 +24,7 @@ export const UserNotes = () => {
         <Input
           value={search}
           width={230}
-          height={40}
+          height={42}
           iconLeft={<IconGlass />}
           placeholder='Buscar...'
           onChange={(e) => handleSearch(e.target.value)}
@@ -33,12 +33,14 @@ export const UserNotes = () => {
           value={dateInitial}
           type='date'
           width={230}
+          height={42}
           placeholder='Periodo Inicial'
           onChange={(e) => setDateInitial(e.target.value)}
         />
         <Inputs.Date
           type='date'
           width={230}
+          height={42}
           placeholder='Periodo Final'
           onChange={(e) =>
             handleDateReference(dateInitial, e.target.value)
@@ -47,6 +49,7 @@ export const UserNotes = () => {
         <Inputs.Date
           type='date'
           width={230}
+          height={42}
           placeholder='Emissão da NF'
           onChange={(e) => handleEmissionNf(e.target.value)}
         />

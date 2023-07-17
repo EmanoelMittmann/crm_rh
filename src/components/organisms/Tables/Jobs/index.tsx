@@ -69,6 +69,7 @@ export const Jobs = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
+        handleCheckedAll={() => {}}
       />
       <Modal.Edit
         ref={modalRef}

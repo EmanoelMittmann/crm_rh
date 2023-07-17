@@ -25,14 +25,15 @@ export const Companys = () => {
       <Container gap='1em'>
         <Input
           value={meta.search}
-          width={270}
+          width={230}
+          height={42}
           placeholder='Buscar...'
           onChange={(e) => handleSearch(e.target.value)}
         />
         <Select
           options={filterOptions.registration}
           placeholder='Situações Cadastrais'
-          width={270}
+          width={230}
           onClear={() => handleRegistration(null)}
           onSelect={(option: Option | null) =>
             option && handleRegistration(option.value)
@@ -41,7 +42,7 @@ export const Companys = () => {
         <Select
           options={filterOptions.uf}
           placeholder='UF'
-          width={270}
+          width={230}
           onSelect={(option: Option | null) =>
             option && handleUf(option.value)
           }
@@ -50,7 +51,7 @@ export const Companys = () => {
         <Select
           options={filterOptions.typeCompany}
           placeholder='Tipos de Empresas'
-          width={270}
+          width={230}
           onSelect={(option: Option | null) =>
             option && handleTypeCompany(option.value)
           }

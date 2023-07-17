@@ -25,6 +25,7 @@ export const Footer = styled.div`
 `
 
 export const Button = styled.button`
+  width: 20px;
   background: none;
   border: none;
   cursor: pointer;

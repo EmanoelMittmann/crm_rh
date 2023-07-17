@@ -40,6 +40,31 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     (professional) => professional.isCommission
   )
 
+  const handleCheckedAll = () => {
+    const allChecked = professionalOS.every(
+      (item) => checked[item.id]
+    )
+
+    const allds = professionalOS.map((item) => ({
+      name: item.name,
+      professional_id: item.id,
+      commission: item.commission ? undefined : 0,
+      companies_id: item.company_id,
+      isCommission: item.commission
+    }))
+
+    setSelectSendProfessionals(allds as OrderProps[])
+
+    const newChecked = allds.reduce(
+      (acc, item) => ({
+        ...acc,
+        [item.professional_id]: !allChecked
+      }),
+      {}
+    )
+    setChecked(newChecked)
+  }
+
   const ContextPropsProfessionalOS = {
     mergeCommision,
     professionalsHaveCommission,
@@ -58,7 +83,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     navigateTo,
     paginate: { ...metaCommision.paginate, setCurrent_page: setPage },
     handleSearch,
-    handleOrder
+    handleOrder,
+    handleCheckedAll
   }
   async function fetchList() {
     setIsLoading(true)

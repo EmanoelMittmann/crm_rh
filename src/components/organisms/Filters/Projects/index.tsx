@@ -48,7 +48,7 @@ export const Projects = () => {
           onChange={(e) => handleSearch(e.target?.value)}
           placeholder='Buscar...'
           width={230}
-          style={{ marginTop: '4px' }}
+          height={42}
         />
         <Select
           width={230}

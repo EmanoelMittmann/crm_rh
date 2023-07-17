@@ -22,7 +22,7 @@ export default forwardRef(
           <Input
             {...props}
             width={230}
-            height={40}
+            height={42}
             onFocus={() => setFocus(true)}
             ref={ref}
             iconRight={<IconDate />}

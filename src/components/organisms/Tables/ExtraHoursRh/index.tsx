@@ -46,6 +46,7 @@ export const ExtraHoursRh = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
+        handleCheckedAll={() => {}}
       />
       {Table}
     </Main>

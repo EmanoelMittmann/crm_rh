@@ -22,7 +22,7 @@ export const Notes = () => {
           type='text'
           value={search}
           width={230}
-          height={40}
+          height={42}
           iconLeft={<IconGlass />}
           placeholder='Buscar...'
           onChange={(e) => handleSearch(e.target?.value)}

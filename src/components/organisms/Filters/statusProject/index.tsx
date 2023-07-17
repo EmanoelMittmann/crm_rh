@@ -22,17 +22,21 @@ export const StatusProject = () => {
     handleCreateStatusProject
   } = useContext(List.Status.Context)
 
+  const { search } = meta
+
   return (
     <Main>
       <Container gap='1em'>
         <Input
-          value={meta.search}
+          value={search}
           iconLeft={<IconGlass />}
           placeholder='Buscar'
           onChange={(e) => handleSearch(e.target.value)}
-          width={272}
+          width={230}
+          height={42}
         />
         <Select
+          width={230}
           options={filterOptions.status}
           placeholder='Status'
           onSelect={(option: Option | null) =>
