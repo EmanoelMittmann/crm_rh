@@ -3,7 +3,7 @@ import { theme } from 'styles'
 
 export const ContainerModal = styled.div`
   width: 38em;
-  height: 680px;
+  height: 630px;
   border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
   position: absolute;
@@ -14,6 +14,28 @@ export const ContainerModal = styled.div`
   transform: translate(-24%, -50%);
   z-index: 10;
   box-shadow: 0px 5px 10px 10px ${theme.neutrals.gray3};
+`
+
+export const Row = styled.div`
+  display: flex;
+  height: 3em;
+  align-items: center;
+  flex-direction: row;
+  margin: auto;
+  width: 93%;
+  justify-content: space-between;
+
+  h2 {
+    color: ${theme.neutrals.gray8};
+  }
+`
+export const RowButtons = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: auto;
+  width: 93%;
+  justify-content: space-between;
 `
 export const Overlay = styled.div`
   position: fixed;
@@ -27,15 +49,19 @@ export const Overlay = styled.div`
   z-index: 5;
 `
 export const ContainerAbsolute = styled.div`
-  height: 405px;
-  margin-left: 2em;
+  width: 563px;
+  height: 404px;
+  margin-left: 1.5em;
+  margin-bottom: -1.5em;
 `
 export const ContainerWap = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 90%;
-  position: relative;
+  align-items: center;
+  width: 563;
+  height: 44px;
+  margin-bottom: 5px;
 
   &:last-child {
     margin-bottom: 1em;
@@ -46,12 +72,12 @@ export const ContainerLabelProfessional = styled.div`
   height: 48px;
   border-radius: 8px;
   display: flex;
-  align-items: center;
   font-size: 12px;
-  margin: 1px 0em 7px 16px;
+  align-items: center;
+  justify-content: space-between;
 
   svg {
-    margin-left: 1em;
+    margin-left: 3em;
     cursor: pointer;
   }
 `
@@ -69,17 +95,16 @@ export const IconButton = styled.div`
 export const TitleComissionProfessional = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
-  margin: 0em 11.3em 1em 1em;
+  margin-right: 13.3em;
 `
 export const ContainerFooter = styled.div`
   width: 90%;
   display: flex;
   flex-direction: row;
-  margin-top: 2em;
-  margin-left: 1em;
   justify-content: flex-end;
-  padding: 0 1em;
+  margin-left: 2.5em;
 `
 export const Footer = styled.div`
   display: flex;

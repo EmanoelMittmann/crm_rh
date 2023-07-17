@@ -44,7 +44,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     const allChecked = professionalOS.every(
       (item) => checked[item.id]
     )
-
     const newChecked = { ...checked }
 
     professionalOS.forEach((item) => {
@@ -54,7 +53,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         newChecked[item.id] = true
       }
     })
-
     setChecked(newChecked)
 
     const checkedProfessionals = professionalOS.filter(
