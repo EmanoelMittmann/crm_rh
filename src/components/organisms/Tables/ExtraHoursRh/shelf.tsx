@@ -64,7 +64,7 @@ export const Shelf = ({
           </ContainerShelfColumn>
         )}
         <ContainerShelfColumn>
-          <Text title='0.5em'>{hour_quantity}hr</Text>
+          <Text title='0.5em'>{hour_quantity}h</Text>
         </ContainerShelfColumn>
 
         <ContainerShelfColumn>

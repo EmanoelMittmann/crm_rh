@@ -16,7 +16,6 @@ export const ContainerModal = styled.div`
   box-shadow: 0px 5px 10px 10px ${theme.neutrals.gray3};
 `
 
-
 export const Row = styled.div`
   display: flex;
   height: 3em;
@@ -54,7 +53,6 @@ export const ContainerAbsolute = styled.div`
   height: 404px;
   margin-left: 1.5em;
   margin-bottom: -1.5em;
- 
 `
 export const ContainerWap = styled.div`
   display: flex;
@@ -100,7 +98,6 @@ export const TitleComissionProfessional = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-right: 13.3em;
-
 `
 export const ContainerFooter = styled.div`
   width: 90%;

@@ -54,7 +54,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       }
     })
     setChecked(newChecked)
-    
+
     const checkedProfessionals = professionalOS.filter(
       (item) => newChecked[item.id]
     )
