@@ -31,6 +31,7 @@ export const ContainerText = styled.div`
   text-overflow: ellipsis;
   padding-left: ${(props) => props.title};
   color: ${(props) => props.color};
+  padding-left: 3.5px;
 `
 
 export const ContainerOnPrice = styled.div`
@@ -59,6 +60,7 @@ export const CompaniesField = styled.div`
 `
 export const Text = styled.p`
   width: 150px;
+  padding-left: ${(props) => props.title};
   font-weight: 500;
   font-size: 0.8em;
   white-space: nowrap;

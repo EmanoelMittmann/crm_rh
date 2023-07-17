@@ -21,7 +21,14 @@ interface Props {
 
 const FONT_COLOR = theme.neutrals.gray8
 
-export default ({ title, arrow, btnText, children }: Props) => {
+export default ({
+  title,
+  arrow,
+  btnText,
+  children,
+  Icon,
+  event
+}: Props) => {
   return (
     <Main>
       <Container gap='2rem'>
@@ -31,6 +38,11 @@ export default ({ title, arrow, btnText, children }: Props) => {
               {title}
             </Typography>
           )}
+          <Buttons.New
+            text={btnText}
+            iconLeft={Icon}
+            onClick={event}
+          />
         </Row>
         <Container gap='1rem'>{children}</Container>
       </Container>

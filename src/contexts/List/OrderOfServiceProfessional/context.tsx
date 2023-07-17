@@ -45,7 +45,23 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       (item) => checked[item.id]
     )
 
-    const allds = professionalOS.map((item) => ({
+    const newChecked = { ...checked }
+
+    professionalOS.forEach((item) => {
+      if (newChecked[item.id] !== undefined) {
+        newChecked[item.id] = !allChecked
+      } else {
+        newChecked[item.id] = true
+      }
+    })
+
+    setChecked(newChecked)
+
+    const checkedProfessionals = professionalOS.filter(
+      (item) => newChecked[item.id]
+    )
+
+    const allds = checkedProfessionals.map((item) => ({
       name: item.name,
       professional_id: item.id,
       commission: item.commission ? undefined : 0,
@@ -54,15 +70,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }))
 
     setSelectSendProfessionals(allds as OrderProps[])
-
-    const newChecked = allds.reduce(
-      (acc, item) => ({
-        ...acc,
-        [item.professional_id]: !allChecked
-      }),
-      {}
-    )
-    setChecked(newChecked)
   }
 
   const ContextPropsProfessionalOS = {

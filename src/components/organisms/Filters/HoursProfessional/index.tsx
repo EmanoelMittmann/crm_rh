@@ -68,10 +68,6 @@ export const HoursProfessional = () => {
             handleDate(start, e.target.value)
           }
         />
-        <Button.New
-          text='Novo lançamento'
-          onClick={() => navigate('/sendingHours')}
-        />
       </Container>
     </Main>
   )

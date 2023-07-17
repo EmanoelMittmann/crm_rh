@@ -152,6 +152,7 @@ export const Shelf = ({
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text
+            title='2em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
@@ -163,17 +164,19 @@ export const Shelf = ({
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text
+            title='2.5em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
                 : 'initial'
             }}
           >
-            R$ {formatCurrency(fixed_payment_value, 'BRL', 'pt-BR')}
+            {formatCurrency(fixed_payment_value, 'BRL', 'pt-BR')}
           </Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text
+            title='2.5em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
@@ -185,6 +188,7 @@ export const Shelf = ({
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text
+            title='2.5em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
@@ -202,6 +206,7 @@ export const Shelf = ({
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text
+            title='2.5em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
