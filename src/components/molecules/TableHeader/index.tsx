@@ -29,8 +29,8 @@ export const TableHeader = ({
           onClick={() => on && handleOrder(field)}
         >
           <ContainerChecked>
-            {checked && (
-              <Inputs.Check onChange={() => handleCheckedAll()} />
+            {checked && on &&(
+              <Inputs.Check onClick={(e) => { e.stopPropagation(); handleCheckedAll(); }} />
             )}
           </ContainerChecked>
           <ColumnText>
