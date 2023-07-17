@@ -34,14 +34,15 @@ export const OrderOfService = () => {
       <Container gap='1em'>
         <Input
           value={search}
-          width={170}
+          width={230}
+          height={42}
           iconLeft={<IconGlass />}
           placeholder='Buscar...'
           onChange={(e) => handleSearch(e.target?.value)}
         />
         <Select
           placeholder='Status'
-          width={180}
+          width={230}
           onClear={() => null}
           options={StatusOS}
           clearable={false}

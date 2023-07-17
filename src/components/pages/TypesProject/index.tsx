@@ -9,7 +9,10 @@ const TypesProject = () => {
   return (
     <AuthTemplate>
       <List.Types.Provider>
-        <ListTemplate title='Cadastro de Tipos de Projetos'>
+        <ListTemplate
+          title='Cadastro de Tipos de Projetos'
+          arrow={true}
+        >
           <Filter.TypeProject />
           <Table.TypesProject />
         </ListTemplate>

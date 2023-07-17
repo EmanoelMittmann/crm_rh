@@ -43,6 +43,7 @@ export const OrderOfService = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
+        handleCheckedAll={() => {}}
       />
       {Table}
     </Main>

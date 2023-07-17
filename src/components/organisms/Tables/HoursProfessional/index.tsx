@@ -35,6 +35,7 @@ export const HoursProfessional = () => {
         template={GRID_TEMPLATE}
         headers={HEADERS}
         handleOrder={() => handleOrder()}
+        handleCheckedAll={() => {}}
       />
       {Table}
     </Main>

@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { Input } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { Button, IconGlass, Inputs, Selects } from 'components/atoms'
@@ -12,27 +13,30 @@ export const TechLead = () => {
   const [start, setStart] = useState<string>('')
   const navigate = useNavigate()
   const {
+    meta,
     handleDate,
     filterOptions,
     handleFilterProject,
     handleFilterStatus,
     handleSearch
   } = useContext(List.TechLeadHours.Context)
+
+  const { search } = meta
+
   return (
     <Main>
       <Container gap='1em'>
-        <Inputs.Default
-          width={200}
-          height={40}
+        <Input
+          width={230}
+          height={42}
+          value={search}
           iconLeft={<IconGlass />}
           placeholder='Buscar ...'
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            handleSearch(e.target.value)
-          }
+          onChange={(e) => handleSearch(e.target.value)}
         />
         <Selects.Default
-          width={200}
-          height={40}
+          width={230}
+          height={42}
           options={filterOptions.project}
           placeholder='Projeto'
           onSelect={
@@ -43,8 +47,8 @@ export const TechLead = () => {
           onClear={() => handleFilterProject(null)}
         />
         <Selects.Default
-          width={200}
-          height={40}
+          width={230}
+          height={42}
           options={filterOptions.status}
           placeholder='Status'
           onSelect={
@@ -54,7 +58,8 @@ export const TechLead = () => {
           onClear={() => handleFilterStatus(null)}
         />
         <Inputs.Date
-          width={200}
+          width={230}
+          height={42}
           placeholder='Inicial'
           value={start}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -62,7 +67,8 @@ export const TechLead = () => {
           }
         />
         <Inputs.Date
-          width={200}
+          width={230}
+          height={42}
           placeholder='Final'
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleDate(start, e.target.value)

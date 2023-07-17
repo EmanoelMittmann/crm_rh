@@ -1,6 +1,11 @@
-import { Icon } from 'components/atoms'
+import { Icon, Inputs } from 'components/atoms'
 
-import { Column, ColumnText, Container } from './style'
+import {
+  Column,
+  ColumnText,
+  Container,
+  ContainerChecked
+} from './style'
 import type { TemplateProps, HeaderProps } from './types'
 
 /**
@@ -11,19 +16,27 @@ import type { TemplateProps, HeaderProps } from './types'
 export const TableHeader = ({
   template,
   headers,
-  handleOrder
+  handleOrder,
+  handleCheckedAll
 }: TemplateProps) => {
   return (
     <Container {...{ template }}>
-      {headers.map(({ field, label, on = false }) => (
+      {headers.map(({ field, label, on, checked = false }) => (
         <Column
           type='button'
           disabled={!on}
           key={field}
           onClick={() => on && handleOrder(field)}
         >
-          <ColumnText>{label}</ColumnText>
-          {on && <Icon.OrderBy />}
+          <ContainerChecked>
+            {checked && (
+              <Inputs.Check onChange={() => handleCheckedAll()} />
+            )}
+          </ContainerChecked>
+          <ColumnText>
+            {label}
+            {on && <Icon.OrderBy />}
+          </ColumnText>
         </Column>
       ))}
     </Container>

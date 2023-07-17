@@ -23,17 +23,21 @@ export const TypeProject = () => {
     handleCreateType
   } = useContext(List.Types.Context)
 
+  const { search } = meta
+
   return (
     <Main>
       <Container gap='1em'>
         <Input
-          value={meta.search}
+          value={search}
           iconLeft={<IconGlass />}
           placeholder='Buscar...'
-          width={272}
+          width={230}
+          height={42}
           onChange={(e) => handleSearch(e.target.value)}
         />
         <Select
+          width={230}
           options={filterOptions.status}
           placeholder='Status'
           onSelect={(option: Option | null) =>

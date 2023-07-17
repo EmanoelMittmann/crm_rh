@@ -5,7 +5,7 @@ import {
   useState
 } from 'react'
 
-import { Select } from '@stardust-ds/react'
+import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { Inputs } from 'components/atoms'
@@ -19,16 +19,21 @@ export const Reports = () => {
     handleStatus,
     handleDate,
     handleCompany,
-    filterOptions
+    filterOptions,
+    meta
   } = useContext(List.Reports.Context)
   const [initial, setInitial] = useState<string>('')
 
+  const { search } = meta
+
   return (
     <Main>
-      <Container width='100%' gap='1em'>
-        <Inputs.Default
+      <Container gap='1em'>
+        <Input
           placeholder='Buscar...'
-          width={'30%'}
+          value={search}
+          width={230}
+          height={42}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleSearch(e.target.value)
           }
@@ -36,7 +41,7 @@ export const Reports = () => {
         <Select
           options={filterOptions.companies}
           placeholder='Empresas'
-          width={300}
+          width={230}
           onClear={() => handleCompany(null)}
           onSelect={(option: Option | null) =>
             option && handleCompany(Number(option?.value))
@@ -45,7 +50,7 @@ export const Reports = () => {
         <Select
           options={filterOptions.status}
           placeholder='Status'
-          width={300}
+          width={230}
           onClear={() => handleStatus(null)}
           onSelect={(option: Option | null) =>
             option && handleStatus(option?.value)
@@ -58,7 +63,7 @@ export const Reports = () => {
           value={initial}
           placeholder='Período Inicial'
           type='date'
-          width={'20%'}
+          width={230}
         />
         <Inputs.Date
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -66,7 +71,7 @@ export const Reports = () => {
           }
           placeholder='Período Final'
           type='date'
-          width={'20%'}
+          width={230}
         />
       </Container>
     </Main>

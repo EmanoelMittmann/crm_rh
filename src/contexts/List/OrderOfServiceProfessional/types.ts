@@ -40,6 +40,7 @@ export interface ContextPropsProfessionalOS {
   navigateTo(url: string): void
   handleSearch(text: string): void
   handleOrder(field: string): void
+  handleCheckedAll(): void
 }
 
 export interface OrderOfServiceProps {

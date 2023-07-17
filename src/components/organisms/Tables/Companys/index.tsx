@@ -46,6 +46,7 @@ export const Companys = () => {
         handleOrder={handleOrder}
         headers={HEADERS}
         template={GRID_TEMPLATE}
+        handleCheckedAll={() => {}}
       />
       {Table}
     </Main>

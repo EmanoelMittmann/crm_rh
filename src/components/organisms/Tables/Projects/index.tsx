@@ -58,6 +58,7 @@ export const Projects = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
+        handleCheckedAll={() => {}}
       />
       <Modal.EditorStatus
         ref={modalRef}
