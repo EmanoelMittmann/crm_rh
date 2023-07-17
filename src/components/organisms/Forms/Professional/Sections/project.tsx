@@ -81,7 +81,11 @@ export const Project = () => {
         style={{ display: 'flex', flexDirection: 'column' }}
       >
         <h4>Ferramentas</h4>
-        <InputTag />
+        <Inputs.Default
+          {...register('tools')}
+          value={watch('tools')}
+          placeholder='Digite ferramentas'
+        />
       </ContainerRow>
     </>
   )
