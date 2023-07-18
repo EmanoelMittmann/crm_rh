@@ -67,7 +67,7 @@ export const ContainerWap = styled.div`
   }
 `
 export const ContainerLabelProfessional = styled.div`
- width: 270px;
+  width: 270px;
   height: 44px;
   border-radius: 8px;
   display: flex;

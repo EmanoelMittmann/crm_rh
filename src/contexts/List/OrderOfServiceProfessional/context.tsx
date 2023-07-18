@@ -40,6 +40,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     (professional) => professional.isCommission
   )
 
+  console.log('Todos: ', selectSendProfessionals)
+  console.log('com comissão : ', professionalsHaveCommission)
+
   const handleCheckedAll = () => {
     const allChecked = professionalOS.every(
       (item) => checked[item.id]
@@ -131,6 +134,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         }
       }
     )
+    console.log('merged: ', merged)
     setProfessionalOS(merged)
   }
 
@@ -172,8 +176,13 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function deleteCommission(id: number) {
-    const updatedCommission = professionalsHaveCommission.filter(
-      (professional) => professional.professional_id !== id
+    const updatedCommission = selectSendProfessionals.filter(
+      (professional) => {
+        if (professional.professional_id === id) {
+          return !professional.isCommission
+        }
+        return true
+      }
     )
 
     setSelectSendProfessionals(updatedCommission)
