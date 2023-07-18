@@ -28,7 +28,6 @@ export const Column = styled.button<IContainerColumnProps>`
   background: none;
   border: none;
   cursor: pointer;
-  gap: 1rem;
   color: ${theme.neutrals.gray6};
 
   :disabled {
@@ -44,6 +43,7 @@ export const ColumnText = styled.p`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  white-space: break-spaces;
   font-weight: 600;
   font-size: 12px;
   font-family: 'Poppins';
