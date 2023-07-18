@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { theme } from 'styles'
 
 export const ContainerModal = styled.div`
-  width: 38em;
+  width: 610px;
   height: 630px;
   border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
@@ -30,11 +30,11 @@ export const Row = styled.div`
   }
 `
 export const RowButtons = styled.div`
+  width: 563px;
   display: flex;
   align-items: center;
   flex-direction: row;
   margin: auto;
-  width: 93%;
   justify-content: space-between;
 `
 export const Overlay = styled.div`
@@ -59,7 +59,6 @@ export const ContainerWap = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  width: 563;
   height: 44px;
   margin-bottom: 5px;
 
@@ -68,8 +67,8 @@ export const ContainerWap = styled.div`
   }
 `
 export const ContainerLabelProfessional = styled.div`
-  width: 23em;
-  height: 48px;
+  width: 270px;
+  height: 44px;
   border-radius: 8px;
   display: flex;
   font-size: 12px;

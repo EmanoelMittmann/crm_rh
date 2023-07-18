@@ -7,10 +7,7 @@ const ExtraHoursRh = () => {
   return (
     <AuthTemplate>
       <List.ExtraHoursRh.Provider>
-        <ListTemplate
-          title='Aprovação de Horas Extras - RH'
-          arrow={true}
-        >
+        <ListTemplate title='Aprovação de Horas Extras - RH'>
           <Filter.ExtraHoursRh />
           <Table.ExtraHoursRh />
         </ListTemplate>

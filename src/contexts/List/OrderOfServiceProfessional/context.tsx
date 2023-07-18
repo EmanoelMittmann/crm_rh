@@ -172,8 +172,13 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function deleteCommission(id: number) {
-    const updatedCommission = professionalsHaveCommission.filter(
-      (professional) => professional.professional_id !== id
+    const updatedCommission = selectSendProfessionals.filter(
+      (professional) => {
+        if (professional.professional_id === id) {
+          return !professional.isCommission
+        }
+        return true
+      }
     )
 
     setSelectSendProfessionals(updatedCommission)
