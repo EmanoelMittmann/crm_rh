@@ -40,8 +40,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     (professional) => professional.isCommission
   )
 
-  console.log('Todos: ', selectSendProfessionals)
-  console.log('com comissão : ', professionalsHaveCommission)
 
   const handleCheckedAll = () => {
     const allChecked = professionalOS.every(
@@ -134,7 +132,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         }
       }
     )
-    console.log('merged: ', merged)
     setProfessionalOS(merged)
   }
 
