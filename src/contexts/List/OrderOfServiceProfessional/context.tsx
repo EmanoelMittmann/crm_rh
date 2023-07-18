@@ -40,7 +40,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     (professional) => professional.isCommission
   )
 
-
   const handleCheckedAll = () => {
     const allChecked = professionalOS.every(
       (item) => checked[item.id]
