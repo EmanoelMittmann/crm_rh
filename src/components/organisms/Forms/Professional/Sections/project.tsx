@@ -2,9 +2,10 @@ import { useFormContext } from 'react-hook-form'
 
 //import { Input } from '@stardust-ds/react'
 
+import { useParams } from 'react-router-dom'
+
 import { Inputs, Selects } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
-import InputTag from 'components/molecules/InputTag'
 import { Table } from 'components/organisms/Tables'
 import { ProjectPropsHours } from 'components/organisms/Tables/Attachment/types'
 
@@ -13,7 +14,6 @@ import type { FormProps } from '../types'
 
 export const Project = () => {
   const { register, watch, setValue } = useFormContext<FormProps>()
-
   const handleAddProject = () => {
     const project = watch('projects.selected.project') as any
 
