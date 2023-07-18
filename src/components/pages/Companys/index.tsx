@@ -7,7 +7,7 @@ const Companys = () => {
   return (
     <AuthTemplate>
       <List.Company.Provider>
-        <ListTemplate title='Empresas' arrow={true}>
+        <ListTemplate title='Empresas'>
           <Filter.Companys />
           <Table.Companys />
         </ListTemplate>

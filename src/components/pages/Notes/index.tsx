@@ -7,7 +7,7 @@ const Notes = () => {
   return (
     <AuthTemplate>
       <List.Notes.Provider>
-        <ListTemplate title='Notas Fiscais' arrow={true}>
+        <ListTemplate title='Notas Fiscais'>
           <Filter.Notes />
           <Table.Notes />
         </ListTemplate>

@@ -10,19 +10,22 @@ import { Container, Button, Main } from './style'
 
 interface Props {
   title: string
+  arrow?: boolean
   children?: ReactNode
 }
 
 const FONT_COLOR = theme.neutrals.gray8
 
-export default ({ title, children }: Props) => {
+export default ({ title, arrow, children }: Props) => {
   const navigate = useNavigate()
   return (
     <Main>
       <Container>
-        <Button title='Voltar' onClick={() => navigate(-1)}>
-          <IconLeftArrow fill={FONT_COLOR} />
-        </Button>
+        {arrow && (
+          <Button onClick={() => navigate(-1)}>
+            <IconLeftArrow fill={FONT_COLOR} />
+          </Button>
+        )}
         <Typography type='h3' color={FONT_COLOR}>
           {title}
         </Typography>
