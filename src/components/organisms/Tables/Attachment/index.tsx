@@ -1,9 +1,11 @@
 import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 import { FormProps } from 'components/organisms/Forms/Professional/types'
+import { deleteBindProject } from 'components/pages/RegisterProfessional/logic'
 import { percentCalculate } from 'components/utils/percentCalculate'
 
 import { LoadingWrapper, Main } from '../style'
@@ -11,17 +13,20 @@ import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './shelf'
 
 export const Attachment = () => {
-  const { watch, setValue } = useFormContext<FormProps>()
+  const methods = useFormContext<FormProps>()
 
-  const attachment = watch('projects.attachment', [])
+  const { id: UserId } = useParams()
+  const attachment = methods.watch('projects.attachment', [])
 
   const POPOVER_OPTIONS = (id: number) => [
     {
       label: 'Excluir',
       callback: () => {
-        setValue('projects.attachment', [
-          ...attachment.filter((item) => item.id !== id)
-        ])
+        UserId
+          ? deleteBindProject(Number(UserId), id, methods)
+          : methods.setValue('projects.attachment', [
+              ...attachment.filter((item) => item.id !== id)
+            ])
       }
     }
   ]
