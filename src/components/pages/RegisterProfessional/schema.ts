@@ -17,7 +17,9 @@ const imageDefault =
   'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
 
 export const ProfessionalSchema = object({
-  email: string().email().required(validation.required),
+  email: string()
+    .email('Insira um E-mail valido')
+    .required(validation.required),
   job_id: mixed().test({
     name: 'required',
     message: validation.required,
@@ -80,8 +82,7 @@ export const ProfessionalSchema = object({
     company_cep: string().required(validation.required),
     company_city_name: string().required(validation.required),
     company_email: string()
-      .trim()
-      .matches(/[A-z]+@+[A-z]+.com/, 'Preencha o Email Corretamente')
+      .email('Insira um E-mail valido')
       .required(validation.required),
     company_house_number: number()
       .typeError(validation.required)
