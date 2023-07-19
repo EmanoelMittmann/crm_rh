@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 //import { Input } from '@stardust-ds/react'
@@ -17,6 +18,7 @@ export const Project = () => {
   const { register, watch, setValue, ...methods } =
     useFormContext<FormProps>()
   const { id } = useParams()
+  const { projects } = watch()
 
   const handleAddMockProject = () => {
     const project = watch('projects.selected.project') as any
@@ -76,12 +78,24 @@ export const Project = () => {
         <Inputs.Default
           {...register('projects.selected.input1')}
           label='Horas/mês estimadas'
+          type='number'
+          error={
+            Number(projects?.selected?.input1) < 0
+              ? 'Valores Invalidos'
+              : undefined
+          }
           placeholder='Horas'
           width={225}
         />
         <Inputs.Default
           {...register('projects.selected.input2')}
           label='Horas extras estimadas'
+          type='number'
+          error={
+            Number(projects?.selected?.input2) < 0
+              ? 'Valores Invalidos'
+              : undefined
+          }
           placeholder='Horas'
           width={225}
         />
