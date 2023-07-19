@@ -7,7 +7,7 @@ const Professionals = () => {
   return (
     <AuthTemplate>
       <List.Professional.Provider>
-        <ListTemplate title='Profissionais' arrow={true}>
+        <ListTemplate title='Profissionais'>
           <Filter.Professionals />
           <Table.Professionals />
         </ListTemplate>

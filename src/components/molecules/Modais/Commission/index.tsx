@@ -17,7 +17,7 @@ import Close from 'components/atoms/Buttons/Close'
 import { IconTrash } from 'components/atoms/Icons/IconTrash'
 import PaginateCommission from 'components/molecules/Modais/PaginateCommission/paginateCommission'
 
-import { Columns, Row } from '../Edit/style'
+import { Columns } from '../Edit/style'
 import {
   ContainerAbsolute,
   ContainerFooter,
@@ -27,6 +27,8 @@ import {
   Footer,
   IconButton,
   Overlay,
+  Row,
+  RowButtons,
   TitleComissionProfessional
 } from './style'
 
@@ -165,7 +167,8 @@ const Commission = forwardRef<
                   </IconButton>
                 </ContainerLabelProfessional>
                 <Input
-                  width={180}
+                  width={270}
+                  height={40}
                   value={item?.commission}
                   onChange={(e) => {
                     const value = e.target.value
@@ -188,7 +191,7 @@ const Commission = forwardRef<
             </Footer>
           </ContainerFooter>
 
-          <Row>
+          <RowButtons>
             <Button
               style={{ borderRadius: '500px' }}
               bgColor='#E9EBEE'
@@ -205,9 +208,9 @@ const Commission = forwardRef<
               bgColor='#0066FF'
               onClick={() => RegisterCommission()}
             >
-              Cadastrar
+              Avançar
             </Button>
-          </Row>
+          </RowButtons>
         </Columns>
       </ContainerModal>
 

@@ -51,5 +51,5 @@ export const ColumnText = styled.p`
 export const ContainerChecked = styled.p`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  margin: 0 1rem 0 0;
 `
