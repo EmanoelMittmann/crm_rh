@@ -94,6 +94,7 @@ export const Company = () => {
           label='CEP'
           placeholder='00000-0000'
           width={137}
+          maxLength={9}
           error={errors.professional_data?.company_cep?.message}
           required
         />

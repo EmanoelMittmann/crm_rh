@@ -101,6 +101,7 @@ export const Personal = () => {
           required
           value={watch('cep') ?? ''}
           label='CEP'
+          maxLength={9}
           placeholder='00000-0000'
           width={137}
         />
