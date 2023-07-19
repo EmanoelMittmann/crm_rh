@@ -8,15 +8,18 @@ import { Inputs, Selects } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { Table } from 'components/organisms/Tables'
 import { ProjectPropsHours } from 'components/organisms/Tables/Attachment/types'
+import { projectBind } from 'components/pages/RegisterProfessional/logic'
 
 import { ContainerRow } from '../style'
 import type { FormProps } from '../types'
 
 export const Project = () => {
-  const { register, watch, setValue } = useFormContext<FormProps>()
-  const handleAddProject = () => {
-    const project = watch('projects.selected.project') as any
+  const { register, watch, setValue, ...methods } =
+    useFormContext<FormProps>()
+  const { id } = useParams()
 
+  const handleAddMockProject = () => {
+    const project = watch('projects.selected.project') as any
     const { id, name } = project?.value
     const payload: ProjectPropsHours = {
       id,
@@ -33,6 +36,25 @@ export const Project = () => {
     setValue('projects.attachment', [...previous_projects, payload])
   }
 
+  const handleAddProject = () => {
+    const monthHours = watch('projects.selected.input1')
+    const extraHours = watch('projects.selected.input2')
+    const project = watch('projects.selected.project') as any
+    const projectid = project?.value.id
+
+    if (!id) return null
+
+    projectBind(
+      {
+        hours_mounths_estimated: Number(monthHours),
+        extra_hours_estimated: Number(extraHours),
+        id: Number(projectid)
+      },
+      Number(id),
+      { register, watch, setValue, ...methods }
+    )
+  }
+
   return (
     <>
       <ContainerRow>
@@ -44,7 +66,8 @@ export const Project = () => {
           onSelect={(v: any) =>
             setValue('projects.selected.project', v)
           }
-          onClear={() => setValue('uf', null)}
+          value={watch('projects.selected.project') as any}
+          onClear={() => setValue('projects.selected.project', null)}
           options={watch('options.projects') ?? []}
           label='Projeto'
           placeholder='Selecione'
@@ -71,7 +94,9 @@ export const Project = () => {
           bRadius='500px'
           height='3.5em'
           type='button'
-          onClick={handleAddProject}
+          onClick={() => {
+            id ? handleAddProject() : handleAddMockProject()
+          }}
         />
       </ContainerRow>
       <ContainerRow>
