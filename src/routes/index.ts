@@ -63,7 +63,8 @@ export const routes = {
     updateProject: (id: number) => `/project/${id}`,
     register: '/project',
     userProjects: (id: number) => `/userProjects/project/${id}`,
-    projectBondUser: '/userProjects/user'
+    projectBondUser: '/userProjects/user',
+    projectBond: (id: number) => `/userProjects/user/${id}`
   },
 
   project_type: {
