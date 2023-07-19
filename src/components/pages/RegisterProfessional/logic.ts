@@ -3,11 +3,13 @@ import { UseFormReturn } from 'react-hook-form'
 import { toast } from '@stardust-ds/react'
 import { SelectOption } from '@stardust-ds/react/lib/esm/components/Select/interfaces'
 import axios from 'axios'
+import { mask } from 'remask'
 
 import { FormProps, getUfOption } from 'components/organisms'
 import {
   BANK_OPTIONS,
-  CONTRACT_TYPE_OPTIONS
+  CONTRACT_TYPE_OPTIONS,
+  MASKER
 } from 'components/organisms/Forms/Professional/constants'
 import { formatDate, getDateInput } from 'components/utils/formatDate'
 import {
@@ -246,12 +248,12 @@ export function handlePopulateFields(
 
   methods.reset({
     name: data.name,
-    cpf: data.cpf,
+    cpf: mask(data.cpf, MASKER.CPF),
     birth_date: getDateInput(data.birth_date),
     rg: data.rg,
     email: data.email,
-    telephone_number: data.telephone_number,
-    cep: data.cep,
+    telephone_number: mask(data.telephone_number, MASKER.TELEPHONE),
+    cep: mask(data.cep, MASKER.CEP),
     city_name: data.city_name,
     uf: getUfOption(data.uf),
     country: data.country,
@@ -272,12 +274,17 @@ export function handlePopulateFields(
       cnpj: data.professional_data.cnpj,
       fantasy_name: data.professional_data.fantasy_name,
       razao_social: data.professional_data.razao_social,
-      company_cep: data.professional_data.company_cep,
+      company_cep: mask(
+        data.professional_data.company_cep,
+        MASKER.CEP
+      ),
       company_email: data.professional_data.company_email,
       company_house_number:
         data.professional_data.company_house_number,
-      company_phone_number:
+      company_phone_number: mask(
         data.professional_data.company_phone_number,
+        MASKER.TELEPHONE
+      ),
       company_street_name: data.professional_data.company_street_name,
       company_complement: data.professional_data.company_complement,
       company_city_name: data.professional_data.company_city_name,
