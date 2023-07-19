@@ -18,7 +18,7 @@ import {
 import api from 'api'
 import { externRoutes, routes } from 'routes'
 
-import { CNPJValidatorResponse } from 'types'
+import { CNPJValidatorResponse, IUserProjectProps } from 'types'
 
 export function getPermissionsId(data: any[]) {
   if (!data) return []
@@ -344,7 +344,12 @@ export function handlePopulateFields(
         hours_mounths_performed: item.hours_mounths_performed,
         id: item.id,
         name: item.name
-      }))
+      })),
+      selected: {
+        input1: '',
+        input2: '',
+        project: null
+      }
     }
   })
 }
@@ -452,6 +457,54 @@ export async function onSubmit(
         ? 'Profissional Editado com sucesso '
         : 'Profissional Criado com sucesso',
       description: 'Contrato Enviado',
+      position: 'bottom-right'
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export async function projectBind(
+  data: IUserProjectProps,
+  id: number,
+  methods: UseFormReturn<FormProps['Professional'], any>
+) {
+  try {
+    await api.post(routes.project.projectBond(id), {
+      id: data.id,
+      extra_hours_estimated: data.extra_hours_estimated,
+      extra_hours_performed: 0,
+      hours_mounths_estimated: data.hours_mounths_estimated,
+      hours_mounths_performed: 0,
+      status: null,
+      job_: null
+    })
+    fetchAndPopulateUser(String(id), methods)
+    toast({
+      type: 'success',
+      title: 'Vinculado com sucesso',
+      position: 'bottom-right'
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export async function deleteBindProject(
+  id: number,
+  projectid: number,
+  methods: UseFormReturn<FormProps['Professional'], any>
+) {
+  try {
+    await api.delete(routes.projectUsers.getUserProject(id), {
+      data: {
+        project_id: projectid
+      }
+    })
+    fetchAndPopulateUser(String(id), methods)
+    return toast({
+      type: 'success',
+      title: 'Projeto Removido',
       position: 'bottom-right'
     })
   } catch (error) {

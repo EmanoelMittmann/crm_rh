@@ -153,6 +153,12 @@ interface Option {
   value: string
 }
 
+interface IUserProjectProps {
+  id: number
+  extra_hours_estimated: number
+  hours_mounths_estimated: number
+}
+
 interface IProjectsListing
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
   projects?: string | number | boolean | undefined
