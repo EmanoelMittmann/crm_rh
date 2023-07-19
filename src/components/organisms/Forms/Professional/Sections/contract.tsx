@@ -153,7 +153,7 @@ export const Contract = () => {
         <Selects.Default
           {...register('options.payingCompany')}
           label='Empresa Pagadora'
-          disabled={payingCompanies?.length === 0}
+          disabled={payingCompanies?.length === 0 || !payingCompanies}
           options={payingCompanies}
           onSelect={(e: any) => setValue('company_id', e.value)}
           error={errors.company_id?.message}
