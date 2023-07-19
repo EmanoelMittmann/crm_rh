@@ -17,6 +17,8 @@ export const Personal = () => {
     setValue,
     formState: { errors }
   } = useFormContext<FormProps>()
+
+  const { house_number } = watch()
   return (
     <>
       <ContainerRow>
@@ -119,7 +121,11 @@ export const Personal = () => {
           {...register('house_number', {
             required: validation.required
           })}
-          error={errors.house_number?.message}
+          error={
+            errors.house_number?.message || house_number < 0
+              ? 'Valores Invalidos'
+              : undefined
+          }
           label='Número'
           type='number'
           required
