@@ -23,6 +23,8 @@ export const Company = () => {
     formState: { errors }
   } = useFormContext<FormProps>()
 
+  const { professional_data } = watch()
+
   return (
     <>
       <ContainerRow>
@@ -113,7 +115,11 @@ export const Company = () => {
           label='Número'
           type='number'
           error={
-            errors.professional_data?.company_house_number?.message
+            errors.professional_data?.company_house_number?.message ||
+            (professional_data &&
+              professional_data?.company_house_number < 0)
+              ? 'Valores Invalidos'
+              : undefined
           }
           width={130}
           min={0}
