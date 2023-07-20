@@ -3,14 +3,13 @@ import { FormProvider, useForm } from 'react-hook-form'
 
 import { List } from 'contexts'
 
-import { Button, Loading } from 'components/atoms'
+import { Button} from 'components/atoms'
 import {
   IHandleModalPropsCommission,
   Modal
 } from 'components/molecules/Modais'
 import { FormOrderProps } from 'components/organisms'
 import OnPrice from 'components/organisms/Tables/OrderFormTable/OnPrice'
-import { LoadingWrapper } from 'components/organisms/Tables/style'
 import { AuthTemplate } from 'components/templates'
 
 import OrderForm from '../OrdeForm'
