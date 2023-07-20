@@ -3,11 +3,13 @@ import { UseFormReturn } from 'react-hook-form'
 import { toast } from '@stardust-ds/react'
 import { SelectOption } from '@stardust-ds/react/lib/esm/components/Select/interfaces'
 import axios from 'axios'
+import { mask } from 'remask'
 
 import { FormProps, getUfOption } from 'components/organisms'
 import {
   BANK_OPTIONS,
-  CONTRACT_TYPE_OPTIONS
+  CONTRACT_TYPE_OPTIONS,
+  MASKER
 } from 'components/organisms/Forms/Professional/constants'
 import { formatDate, getDateInput } from 'components/utils/formatDate'
 import {
@@ -180,7 +182,7 @@ export async function fetchProps(
     api.get(externRoutes.banks),
     api.get(routes.project.list),
     api.get(routes.company.list),
-    await api.get(routes.job.list, {
+    await api.get(routes.job.listAll, {
       params: { is_active: true }
     })
   ])
@@ -221,20 +223,17 @@ export async function fetchAndPopulateUser(
   id: string,
   methods: UseFormReturn<FormProps['Professional'], any>
 ) {
-  const [{ data: userData }, { data: userProject }] =
-    await Promise.all([
-      await api.get<any[]>(routes.professional.getUser(+id)),
-      await api.get<any[]>(routes.projectUsers.getUserProject(+id))
-    ])
+  const { data: userData } = await api.get(
+    routes.professional.getUser(+id)
+  )
 
   if (userData.length === 0) throw new Error('Usuário não encontrado')
 
   await fetchProps(methods)
-  handlePopulateFields(userData[0], userProject, methods)
+  handlePopulateFields(userData, methods)
 }
 export function handlePopulateFields(
   data: any,
-  project: any[],
   methods: UseFormReturn<FormProps['Professional'], any>
 ) {
   const { companies, permissions, projects, userTypes, banks, jobs } =
@@ -246,12 +245,12 @@ export function handlePopulateFields(
 
   methods.reset({
     name: data.name,
-    cpf: data.cpf,
+    cpf: mask(data.cpf, MASKER.CPF),
     birth_date: getDateInput(data.birth_date),
     rg: data.rg,
     email: data.email,
-    telephone_number: data.telephone_number,
-    cep: data.cep,
+    telephone_number: mask(data.telephone_number, MASKER.TELEPHONE),
+    cep: mask(data.cep, MASKER.CEP),
     city_name: data.city_name,
     uf: getUfOption(data.uf),
     country: data.country,
@@ -272,12 +271,17 @@ export function handlePopulateFields(
       cnpj: data.professional_data.cnpj,
       fantasy_name: data.professional_data.fantasy_name,
       razao_social: data.professional_data.razao_social,
-      company_cep: data.professional_data.company_cep,
+      company_cep: mask(
+        data.professional_data.company_cep,
+        MASKER.CEP
+      ),
       company_email: data.professional_data.company_email,
       company_house_number:
         data.professional_data.company_house_number,
-      company_phone_number:
+      company_phone_number: mask(
         data.professional_data.company_phone_number,
+        MASKER.TELEPHONE
+      ),
       company_street_name: data.professional_data.company_street_name,
       company_complement: data.professional_data.company_complement,
       company_city_name: data.professional_data.company_city_name,
@@ -334,14 +338,14 @@ export function handlePopulateFields(
     weekly_hours: data.weekly_hours,
     mounth_hours: data.mounth_hours,
     projects: {
-      attachment: project.map((item) => ({
+      attachment: data.projects.map((item: any) => ({
         date_start: formatDate(item.date_start),
-        extra_hours_estimated: item.extra_hours_estimated,
-        extra_hours_percent: item.extra_hours_percent,
-        extra_hours_performed: item.extra_hours_performed,
-        hours_mounths_estimated: item.hours_mounths_estimated,
-        hours_mounths_percent: item.hours_mounths_percent,
-        hours_mounths_performed: item.hours_mounths_performed,
+        extra_hours_estimated: item.pivot.extra_hours_estimated,
+        extra_hours_percent: item.pivot.extra_hours_percent,
+        extra_hours_performed: item.pivot.extra_hours_performed,
+        hours_mounths_estimated: item.pivot.hours_mounths_estimated,
+        hours_mounths_percent: item.pivot.hours_mounths_percent,
+        hours_mounths_performed: item.pivot.hours_mounths_performed,
         id: item.id,
         name: item.name
       })),

@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { mask } from 'remask'
@@ -33,6 +33,13 @@ export const Bank = () => {
       pix_required: isRequiredPixKeyType ? validation.required : false
     }
   }, [isRequiredPixKeyType])
+
+  useEffect(() => {
+    setValue('professional_data.pix_key', '')
+  }, [
+    watch('professional_data.pix_key_type'),
+    watch('professional_data.type_of_transfer')
+  ])
 
   const pix_key_type = watch('professional_data.pix_key_type')?.value
   const pix_key_mask = getMaskFromPixKeyType(

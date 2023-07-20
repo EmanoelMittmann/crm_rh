@@ -10,6 +10,7 @@ export const routes = {
 
   job: {
     list: '/job',
+    listAll: '/job?limit=100',
     updateStatus: `/updateJobStatus`,
     updateJob: (id: number) => `/job/${id}`
   },
