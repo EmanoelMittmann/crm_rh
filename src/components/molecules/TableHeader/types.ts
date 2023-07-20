@@ -8,7 +8,10 @@ export interface HeaderProps {
 export interface TemplateProps {
   template: string
   handleOrder(field: string): void
-  handleCheckedAll(): void
+  allProfessionalChecked?: boolean
+  setAllProfessionalChecked?: React.Dispatch<
+    React.SetStateAction<boolean>
+  >
   onsubmit?(event: React.FormEvent<HTMLFormElement>): void
   headers: HeaderProps[]
 }

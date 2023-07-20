@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { toast } from '@stardust-ds/react'
@@ -25,34 +25,42 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [professionalOS, setProfessionalOS] = useState<
     OrderPropsProfessional[]
   >([])
-
-  const [checked, setChecked] = useState<{ [id: number]: boolean }>(
-    {}
-  )
-  const [selectSendProfessionals, setSelectSendProfessionals] =
-    useState<OrderProps[]>([])
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)
   const [metaCommision, setMetaCommision] = useState(
     DEFAULT.META_PROPS
   )
+  const [checked, setChecked] = useState<{ [id: number]: boolean }>(
+    {}
+  )
+  const [allProfessionalChecked, setAllProfessionalChecked] =
+    useState(false)
+
+  const [selectSendProfessionals, setSelectSendProfessionals] =
+    useState<OrderProps[]>([])
 
   const professionalsHaveCommission = selectSendProfessionals.filter(
     (professional) => professional.isCommission
   )
 
+  const quantityProfessionalTotal = professionalOS.length
+  const quantityProfessionalSelected = selectSendProfessionals.length
+
+  const handleOneCheckedProfessional = (id: number) => {}
+
+  console.log('allProfessionalChecked: ', allProfessionalChecked)
+
+  console.log('selectSendProfessionals: ', selectSendProfessionals)
+
   const handleCheckedAll = () => {
     const allChecked = professionalOS.every(
       (item) => checked[item.id]
     )
-    const newChecked = { ...checked }
 
+    const newChecked = { ...checked }
     professionalOS.forEach((item) => {
-      if (newChecked[item.id] !== undefined) {
-        newChecked[item.id] = !allChecked
-      } else {
-        newChecked[item.id] = true
-      }
+      newChecked[item.id] = !allChecked
     })
+
     setChecked(newChecked)
 
     const checkedProfessionals = professionalOS.filter(
@@ -70,11 +78,28 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setSelectSendProfessionals(allds as OrderProps[])
   }
 
+  useEffect(() => {
+    if (allProfessionalChecked) {
+      handleCheckedAll()
+    } else {
+      setChecked([])
+      setSelectSendProfessionals([])
+    }
+  }, [allProfessionalChecked])
+
+  useEffect(() => {
+    if (quantityProfessionalTotal !== quantityProfessionalSelected) {
+      setAllProfessionalChecked(false)
+    }
+  }, [quantityProfessionalTotal, quantityProfessionalSelected])
+
   const ContextPropsProfessionalOS = {
     mergeCommision,
     professionalsHaveCommission,
     metaCommision,
     setMetaCommision,
+    allProfessionalChecked,
+    setAllProfessionalChecked,
     onCreateOs,
     checked,
     setChecked,

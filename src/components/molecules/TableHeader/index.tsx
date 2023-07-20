@@ -17,30 +17,32 @@ export const TableHeader = ({
   template,
   headers,
   handleOrder,
-  handleCheckedAll
+  allProfessionalChecked,
+  setAllProfessionalChecked
 }: TemplateProps) => {
   return (
     <Container {...{ template }}>
       {headers.map(({ field, label, on, checked = false }) => (
-        <Column
-          type='button'
-          disabled={!on}
-          key={field}
-          onClick={() => on && handleOrder(field)}
-        >
+        <Column type='button' disabled={!on} key={field}>
           <ContainerChecked>
-            {checked && on && (
+            {checked && (
               <Inputs.Check
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleCheckedAll()
-                }}
+                checked={allProfessionalChecked}
+                onChange={() =>
+                  setAllProfessionalChecked &&
+                  setAllProfessionalChecked((prev) => !prev)
+                }
               />
             )}
           </ContainerChecked>
           <ColumnText>
             {label}
-            {on && <Icon.OrderBy />}
+            {on && (
+              <div onClick={() => on && handleOrder(field)}>
+                {' '}
+                <Icon.OrderBy />
+              </div>
+            )}
           </ColumnText>
         </Column>
       ))}
