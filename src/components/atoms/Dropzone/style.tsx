@@ -5,7 +5,7 @@ export const DropContainer = styled.div`
   border-radius: 8px;
   background-color: #ffffff;
   height: 13em;
-  width: 52em;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
