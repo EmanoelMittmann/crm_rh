@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 
 import { List } from 'contexts'
 
-import { Button} from 'components/atoms'
+import { Button } from 'components/atoms'
 import {
   IHandleModalPropsCommission,
   Modal
