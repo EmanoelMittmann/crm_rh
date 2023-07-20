@@ -32,24 +32,21 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [checked, setChecked] = useState<{ [id: number]: boolean }>(
     {}
   )
-  const [allProfessionalChecked, setAllProfessionalChecked] =
-    useState(false)
+  const [allProfessionalChecked, setAllProfessionalChecked] = useState(false)
 
   const [selectSendProfessionals, setSelectSendProfessionals] =
-    useState<OrderProps[]>([])
-
+  useState<OrderProps[]>([])
+  
   const professionalsHaveCommission = selectSendProfessionals.filter(
     (professional) => professional.isCommission
-  )
-
+    )
+  
   const quantityProfessionalTotal = professionalOS.length
   const quantityProfessionalSelected = selectSendProfessionals.length
-
-  const handleOneCheckedProfessional = (id: number) => {}
-
-  console.log('allProfessionalChecked: ', allProfessionalChecked)
-
-  console.log('selectSendProfessionals: ', selectSendProfessionals)
+ 
+    console.log('allProfessionalChecked: ', allProfessionalChecked);
+    
+    console.log('selectSendProfessionals: ', selectSendProfessionals);
 
   const handleCheckedAll = () => {
     const allChecked = professionalOS.every(
@@ -78,27 +75,28 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setSelectSendProfessionals(allds as OrderProps[])
   }
 
-  useEffect(() => {
-    if (allProfessionalChecked) {
-      handleCheckedAll()
-    } else {
-      setChecked([])
-      setSelectSendProfessionals([])
-    }
-  }, [allProfessionalChecked])
+useEffect(()=>{
+  if(allProfessionalChecked){
+    handleCheckedAll()
+  }else{
+    setChecked([])
+    setSelectSendProfessionals([])
+  }
+}, [allProfessionalChecked])
 
-  useEffect(() => {
-    if (quantityProfessionalTotal !== quantityProfessionalSelected) {
-      setAllProfessionalChecked(false)
-    }
-  }, [quantityProfessionalTotal, quantityProfessionalSelected])
+useEffect(()=>{
+  if(quantityProfessionalTotal !== quantityProfessionalSelected){
+
+    setAllProfessionalChecked(false)
+  }
+}, [quantityProfessionalTotal, quantityProfessionalSelected])
 
   const ContextPropsProfessionalOS = {
     mergeCommision,
     professionalsHaveCommission,
     metaCommision,
     setMetaCommision,
-    allProfessionalChecked,
+    allProfessionalChecked, 
     setAllProfessionalChecked,
     onCreateOs,
     checked,
