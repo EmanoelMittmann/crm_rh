@@ -223,20 +223,17 @@ export async function fetchAndPopulateUser(
   id: string,
   methods: UseFormReturn<FormProps['Professional'], any>
 ) {
-  const [{ data: userData }, { data: userProject }] =
-    await Promise.all([
-      await api.get<any[]>(routes.professional.getUser(+id)),
-      await api.get<any[]>(routes.projectUsers.getUserProject(+id))
-    ])
+  const { data: userData } = await api.get(
+    routes.professional.getUser(+id)
+  )
 
   if (userData.length === 0) throw new Error('Usuário não encontrado')
 
   await fetchProps(methods)
-  handlePopulateFields(userData[0], userProject, methods)
+  handlePopulateFields(userData, methods)
 }
 export function handlePopulateFields(
   data: any,
-  project: any[],
   methods: UseFormReturn<FormProps['Professional'], any>
 ) {
   const { companies, permissions, projects, userTypes, banks, jobs } =
@@ -341,14 +338,14 @@ export function handlePopulateFields(
     weekly_hours: data.weekly_hours,
     mounth_hours: data.mounth_hours,
     projects: {
-      attachment: project.map((item) => ({
+      attachment: data.projects.map((item: any) => ({
         date_start: formatDate(item.date_start),
-        extra_hours_estimated: item.extra_hours_estimated,
-        extra_hours_percent: item.extra_hours_percent,
-        extra_hours_performed: item.extra_hours_performed,
-        hours_mounths_estimated: item.hours_mounths_estimated,
-        hours_mounths_percent: item.hours_mounths_percent,
-        hours_mounths_performed: item.hours_mounths_performed,
+        extra_hours_estimated: item.pivot.extra_hours_estimated,
+        extra_hours_percent: item.pivot.extra_hours_percent,
+        extra_hours_performed: item.pivot.extra_hours_performed,
+        hours_mounths_estimated: item.pivot.hours_mounths_estimated,
+        hours_mounths_percent: item.pivot.hours_mounths_percent,
+        hours_mounths_performed: item.pivot.hours_mounths_performed,
         id: item.id,
         name: item.name
       })),
