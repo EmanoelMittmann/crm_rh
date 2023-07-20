@@ -8,6 +8,10 @@ export const routes = {
     getUser: (id: number) => `/user/${id}`
   },
 
+  contract: {
+    list: '/contractHistory'
+  },
+
   job: {
     list: '/job',
     listAll: '/job?limit=100',
