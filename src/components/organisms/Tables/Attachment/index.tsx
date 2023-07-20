@@ -111,7 +111,6 @@ export const Attachment = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={() => {}}
-        handleCheckedAll={() => {}}
       />
       {Table}
     </Main>

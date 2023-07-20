@@ -1,5 +1,3 @@
-import { SelectProps } from '@stardust-ds/react'
-
 import type { DefaultMetaProps } from './types'
 
 const META_PROPS = {

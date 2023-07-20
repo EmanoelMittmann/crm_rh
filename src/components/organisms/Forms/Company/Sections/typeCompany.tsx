@@ -3,16 +3,11 @@ import { useFormContext } from 'react-hook-form'
 import { Radio, Typography } from '@stardust-ds/react'
 
 import { validation } from '../logic'
-import { ColumnContainer, ContainerRow } from '../style'
+import { ContainerRow } from '../style'
 import type { FormProps } from '../types'
 
 export const TypeCompany = () => {
-  const {
-    register,
-    watch,
-    formState: { errors },
-    setValue
-  } = useFormContext<FormProps>()
+  const { register, watch, setValue } = useFormContext<FormProps>()
 
   const Checked = {
     color: (Type: String) =>

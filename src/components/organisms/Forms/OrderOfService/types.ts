@@ -1,4 +1,4 @@
-import type { Option, SelectOption } from 'components/atoms'
+import type { SelectOption } from 'components/atoms'
 import { TemplateProps } from 'components/organisms/Tables/types'
 
 export interface OrderProps {

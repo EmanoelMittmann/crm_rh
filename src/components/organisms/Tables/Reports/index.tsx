@@ -55,7 +55,6 @@ export const Reports = () => {
         headers={HEADER}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
-        handleCheckedAll={() => {}}
       />
       {Table}
       <Modais.Report.Details ref={modalRef} />

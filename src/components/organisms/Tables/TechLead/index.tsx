@@ -70,7 +70,6 @@ export const TechLead = () => {
         handleOrder={handleOrder}
         template={GRID_TEMPLATE}
         headers={HEADERS}
-        handleCheckedAll={() => {}}
       />
       {Table}
       <Modal.TechLead ref={modalRef} />

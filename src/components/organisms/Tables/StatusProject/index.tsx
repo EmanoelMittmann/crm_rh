@@ -70,7 +70,6 @@ export const StatusProject = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
-        handleCheckedAll={() => {}}
       />
       <Modal.Colors.Edit
         ref={modalRef}

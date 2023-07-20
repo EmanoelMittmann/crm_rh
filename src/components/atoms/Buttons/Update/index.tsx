@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, useContext } from 'react'
+import { ButtonHTMLAttributes } from 'react'
 
 import { Button, ButtonProps } from '@stardust-ds/react'
 import { theme } from 'styles'

@@ -1,5 +1,4 @@
 import { createContext, useState, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { toast } from '@stardust-ds/react'
 
@@ -17,7 +16,6 @@ import { CompanyProps, ContextCompanyProps } from './types'
 export const Context = createContext({} as ContextCompanyProps)
 
 export const Provider = ({ children }: { children: ReactNode }) => {
-  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [companys, setCompanys] = useState<CompanyProps[]>([])
   const [meta, setMeta] = useState(DEFAULT.META_PROPS)

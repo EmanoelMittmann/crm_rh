@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { Button, IconGlass, Inputs } from 'components/atoms'
+import { IconGlass, Inputs } from 'components/atoms'
 
 import { Container, Main } from '../style'
 import { Option } from 'types'
@@ -17,7 +17,6 @@ export const StatusOS = [
 ]
 
 export const OrderOfService = () => {
-  const nagivate = useNavigate()
   const {
     meta,
     handleSearch,

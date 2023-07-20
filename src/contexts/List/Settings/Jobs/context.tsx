@@ -3,7 +3,6 @@ import { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { toast } from '@stardust-ds/react'
-import { title } from 'process'
 
 import { PaginateContext } from 'components/molecules'
 

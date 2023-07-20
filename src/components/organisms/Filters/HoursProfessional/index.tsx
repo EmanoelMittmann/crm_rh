@@ -1,10 +1,9 @@
-import React, { ChangeEvent, useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { ChangeEvent, useContext, useState } from 'react'
 
 import { Input } from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { Button, IconGlass, Inputs, Selects } from 'components/atoms'
+import { IconGlass, Inputs, Selects } from 'components/atoms'
 
 import { Container, Main } from '../style'
 import { Option } from 'types'
@@ -19,7 +18,6 @@ export const HoursProfessional = () => {
     handleProject,
     filterOptions
   } = useContext(List.ProfessionalHours.Context)
-  const navigate = useNavigate()
   const { search } = meta
 
   return (

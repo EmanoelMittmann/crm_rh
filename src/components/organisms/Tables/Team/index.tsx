@@ -156,7 +156,6 @@ export const Team = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
-        handleCheckedAll={() => {}}
       />
       <Modal.UserEditor
         ref={modalRef}

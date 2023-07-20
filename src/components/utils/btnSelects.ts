@@ -19,7 +19,7 @@ export function alterObject(
   defaultValue: string
 ) {
   let newObj: any = DEFAULTSELECT
-  for (const [key, value] of Object.entries(obj)) {
+  for (const [key] of Object.entries(obj)) {
     if (key === defaultValue) {
       newObj[key] = true
     } else {
