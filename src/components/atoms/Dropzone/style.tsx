@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const DropContainer = styled.div`
   border: 3px dashed #919eab52;
   border-radius: 8px;
   background-color: #ffffff;
   height: 13em;
-  width: 52em;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
