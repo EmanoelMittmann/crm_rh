@@ -182,7 +182,7 @@ export async function fetchProps(
     api.get(externRoutes.banks),
     api.get(routes.project.list),
     api.get(routes.company.list),
-    await api.get(routes.job.list, {
+    await api.get(routes.job.listAll, {
       params: { is_active: true }
     })
   ])
