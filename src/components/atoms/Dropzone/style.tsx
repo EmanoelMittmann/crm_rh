@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const DropContainer = styled.div`
   border: 3px dashed #919eab52;

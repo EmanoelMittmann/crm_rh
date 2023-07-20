@@ -81,7 +81,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       user: JSON.parse(ExistUser),
       token: JSON.parse(ExistToken)
     })
-  }, [])
+  }, [isLogged])
 
   return (
     <AuthContext.Provider

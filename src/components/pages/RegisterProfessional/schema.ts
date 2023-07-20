@@ -1,4 +1,4 @@
-import { object, string, number, date, array, mixed } from 'yup'
+import { object, string, number, array, mixed } from 'yup'
 
 import { handleRemoveSpecialCharacters } from './logic'
 export const validation = {

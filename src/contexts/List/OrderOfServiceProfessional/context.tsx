@@ -32,21 +32,21 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [checked, setChecked] = useState<{ [id: number]: boolean }>(
     {}
   )
-  const [allProfessionalChecked, setAllProfessionalChecked] = useState(false)
+  const [allProfessionalChecked, setAllProfessionalChecked] =
+    useState(false)
 
   const [selectSendProfessionals, setSelectSendProfessionals] =
-  useState<OrderProps[]>([])
-  
+    useState<OrderProps[]>([])
+  const [
+    lastQtdProfessionalSelected,
+    setLastQtdProfessionalSelected
+  ] = useState(0)
+
   const professionalsHaveCommission = selectSendProfessionals.filter(
     (professional) => professional.isCommission
-    )
-  
+  )
   const quantityProfessionalTotal = professionalOS.length
   const quantityProfessionalSelected = selectSendProfessionals.length
- 
-    console.log('allProfessionalChecked: ', allProfessionalChecked);
-    
-    console.log('selectSendProfessionals: ', selectSendProfessionals);
 
   const handleCheckedAll = () => {
     const allChecked = professionalOS.every(
@@ -75,28 +75,55 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setSelectSendProfessionals(allds as OrderProps[])
   }
 
-useEffect(()=>{
-  if(allProfessionalChecked){
-    handleCheckedAll()
-  }else{
-    setChecked([])
-    setSelectSendProfessionals([])
+  const handleCheckOrUncheckProfessionals = () => {
+    setLastQtdProfessionalSelected(quantityProfessionalSelected)
+    const allSelected =
+      quantityProfessionalTotal === quantityProfessionalSelected
+    const selectAllChecked = allProfessionalChecked
+    if (quantityProfessionalSelected === 0 && selectAllChecked) {
+      handleCheckedAll()
+      return
+    }
+    if (
+      allSelected &&
+      !selectAllChecked &&
+      lastQtdProfessionalSelected === quantityProfessionalTotal - 1
+    ) {
+      setAllProfessionalChecked(true)
+      return
+    }
+    if (allSelected && !selectAllChecked) {
+      setChecked({})
+      setSelectSendProfessionals([])
+      return
+    }
+    if (
+      quantityProfessionalSelected ===
+        quantityProfessionalTotal - 1 &&
+      selectAllChecked
+    ) {
+      setAllProfessionalChecked(false)
+      return
+    }
+    if (
+      quantityProfessionalSelected !== quantityProfessionalTotal &&
+      selectAllChecked
+    ) {
+      handleCheckedAll()
+      return
+    }
   }
-}, [allProfessionalChecked])
 
-useEffect(()=>{
-  if(quantityProfessionalTotal !== quantityProfessionalSelected){
-
-    setAllProfessionalChecked(false)
-  }
-}, [quantityProfessionalTotal, quantityProfessionalSelected])
+  useEffect(() => {
+    handleCheckOrUncheckProfessionals()
+  }, [allProfessionalChecked, quantityProfessionalSelected])
 
   const ContextPropsProfessionalOS = {
     mergeCommision,
     professionalsHaveCommission,
     metaCommision,
     setMetaCommision,
-    allProfessionalChecked, 
+    allProfessionalChecked,
     setAllProfessionalChecked,
     onCreateOs,
     checked,

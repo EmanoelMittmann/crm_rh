@@ -1,5 +1,3 @@
-import { useForm } from 'react-hook-form'
-
 import {
   TypeCompany,
   Company,
@@ -8,8 +6,6 @@ import {
   Cadastration
 } from './Sections'
 import { Divider, Main } from './style'
-
-import { FormProps } from '..'
 
 export default () => {
   return (

@@ -1,10 +1,9 @@
 import { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { Input } from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { Button, IconGlass } from 'components/atoms'
+import { IconGlass } from 'components/atoms'
 
 import { Container, Main } from './style'
 

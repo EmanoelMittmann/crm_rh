@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import api from 'api'
@@ -55,8 +55,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       console.log(error)
     }
   }
-  const allUsers = team.flatMap((selectUser: any) => selectUser.users)
-
   async function handleUpdateUser(id: number, name: string) {
     await api.put(routes.usersProjects.userProjects(id), {
       project_id: id
@@ -93,6 +91,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   useDebounce({
     fn: fetchFiltersUsers,
+    delay: 0,
+    listener: []
+  })
+
+  useDebounce({
+    fn: fetchUsers,
     delay: 0,
     listener: []
   })

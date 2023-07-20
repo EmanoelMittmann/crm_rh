@@ -1,13 +1,9 @@
 import { ReactElement, SVGProps } from 'react'
 
-import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
-import { TeamProps } from 'components/organisms/Forms/Team/types'
-
 declare module '*.svg' {
   const content: (props: SVGProps<SVGElement>) => ReactElement
   export default content
 }
-
 interface IContainerRowProps {
   width?: string
   paddingRight?: string

@@ -1,5 +1,3 @@
-import { List } from 'contexts'
-
 import { HeaderSettings } from 'components/molecules'
 import { AuthTemplate, CreateTemplate } from 'components/templates'
 

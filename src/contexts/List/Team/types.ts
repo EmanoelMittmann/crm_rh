@@ -1,7 +1,5 @@
 import type { SelectProps } from '@stardust-ds/react'
 
-import { JobsProps } from 'components/organisms/Tables/Jobs/types'
-
 import { UserProjectsProps } from 'types'
 export type { ReactNode } from 'react'
 

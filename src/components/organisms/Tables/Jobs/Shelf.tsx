@@ -1,6 +1,5 @@
 import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
-import { Modal } from 'components/molecules/Modais'
 
 import { ContainerShelf, ContainerShelfColumn } from '../style'
 import { ShelfProps } from './types'

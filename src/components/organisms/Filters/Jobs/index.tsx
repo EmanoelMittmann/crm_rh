@@ -1,4 +1,4 @@
-import { useContext, useMemo, useRef } from 'react'
+import { useContext, useRef } from 'react'
 
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'

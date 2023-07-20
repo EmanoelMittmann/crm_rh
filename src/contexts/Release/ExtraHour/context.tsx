@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useEffect, useState } from 'react'
+import { ReactNode, createContext, useState } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 
 import { toast } from '@stardust-ds/react'

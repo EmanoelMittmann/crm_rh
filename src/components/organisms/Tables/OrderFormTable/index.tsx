@@ -19,7 +19,6 @@ export const OrderFormTable = () => {
     professionalOS,
     handleOrder,
     isLoading,
-    handleCheckedAll,
     allProfessionalChecked,
     setAllProfessionalChecked
   } = useContext(List.OrderOfServiceprofessionalOS.Context)
