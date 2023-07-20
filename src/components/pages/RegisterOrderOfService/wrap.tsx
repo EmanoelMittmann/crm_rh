@@ -51,11 +51,6 @@ const RegisterOrderOfServiceWrap = () => {
 
   return (
     <>
-      {isLoading && (
-        <LoadingWrapper>
-          <Loading />
-        </LoadingWrapper>
-      )}
       <AuthTemplate>
         <FormProvider {...methods}>
           <form>
