@@ -1,4 +1,4 @@
-import Dropzone, { useDropzone } from 'react-dropzone'
+import Dropzone from 'react-dropzone'
 
 import { IconInvoice } from '../Icons/IconInvoice'
 import { Column, DropContainer, Message, Span, Text } from './style'

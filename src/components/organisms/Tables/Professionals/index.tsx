@@ -69,7 +69,6 @@ export const Professionals = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
-        handleCheckedAll={() => {}}
       />
       {Table}
     </Main>

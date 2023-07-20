@@ -1,15 +1,8 @@
-import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { Select } from '@stardust-ds/react'
 import { mask } from 'remask'
 
-import {
-  Inputs,
-  Option,
-  SelectOption,
-  Selects
-} from 'components/atoms'
+import { Inputs, SelectOption, Selects } from 'components/atoms'
 
 import { MASKER, UF_OPTIONS } from '../constants'
 import { ContainerRow } from '../style'

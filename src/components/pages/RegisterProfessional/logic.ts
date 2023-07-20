@@ -44,7 +44,7 @@ export function getCompanies(companies: SelectOption[]) {
 export function setLimitedExtraHoursToBoolean(
   value: string | boolean
 ) {
-  const isTrue = value == '0'
+  const isTrue = value === '0'
   return !isTrue
 }
 

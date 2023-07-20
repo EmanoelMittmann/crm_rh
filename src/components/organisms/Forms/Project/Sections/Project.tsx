@@ -1,11 +1,6 @@
 import { useFormContext, UseFormReturn } from 'react-hook-form'
 
-import {
-  Inputs,
-  Selects,
-  SelectOption,
-  Option
-} from 'components/atoms'
+import { Inputs, Selects, SelectOption } from 'components/atoms'
 import { GenerateValue } from 'components/utils/OptionsAplication'
 
 import { ContainerRow } from '../style'

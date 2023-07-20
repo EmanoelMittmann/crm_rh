@@ -15,7 +15,7 @@ export const usePermission = () => {
 
   const Licence: IPermissions[] = []
 
-  Object.entries(OPTIONS[0]).map(([property, value]) => {
+  Object.entries(OPTIONS[0]).forEach(([property, value]) => {
     for (let i = 0; i <= data.length - 1; i++) {
       if (data[i] === Number(property)) {
         Licence.push(value)

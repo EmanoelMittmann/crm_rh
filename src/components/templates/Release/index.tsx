@@ -1,10 +1,8 @@
 import type { ReactNode } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { Typography } from '@stardust-ds/react'
 import { theme } from 'styles'
 
-import { IconLeftArrow } from 'components/atoms'
 import { Paginate } from 'components/molecules'
 
 import { Button as Buttons } from '../../atoms/Buttons'

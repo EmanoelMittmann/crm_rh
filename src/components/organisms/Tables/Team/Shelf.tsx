@@ -1,8 +1,6 @@
 import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
-import { TeamUserProps } from 'components/molecules/Modais/Details/type'
 import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
-import { TeamProps } from 'components/organisms/Forms/Team/types'
 import {
   ContainerShelf,
   ContainerShelfColumn

@@ -1,7 +1,3 @@
-import { MouseEvent } from 'react'
-
-import { type } from 'os'
-
 export interface IButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   Text: string

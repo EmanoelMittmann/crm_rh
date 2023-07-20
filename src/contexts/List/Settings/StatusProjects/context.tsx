@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { SelectProps, toast } from '@stardust-ds/react'
+import { toast } from '@stardust-ds/react'
 
 import { PaginateContext } from 'components/molecules'
 
@@ -11,12 +11,7 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 
 import DEFAULT from './constants'
-import {
-  ColorProps,
-  ContextPropsStatusProject,
-  DefaultMetaProps,
-  StatusProps
-} from './types'
+import { ContextPropsStatusProject, StatusProps } from './types'
 import { ReactNode } from './types'
 
 export const Context = createContext({} as ContextPropsStatusProject)

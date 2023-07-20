@@ -69,7 +69,6 @@ export const TypesProject = () => {
         handleOrder={handleOrder}
         template={GRID_TEMPLATE}
         headers={HEADERS}
-        handleCheckedAll={() => {}}
       />
       <Modal.Edit
         text='Edição de Tipo de Projeto'

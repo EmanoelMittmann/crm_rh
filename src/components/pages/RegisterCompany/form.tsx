@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from '@stardust-ds/react'
 
-import { Button, Loading } from 'components/atoms'
+import { Button } from 'components/atoms'
 import { Form, FormProps, SchemaCompany } from 'components/organisms'
 
 import { useDebounce } from 'hooks'
@@ -12,10 +12,7 @@ import { useDebounce } from 'hooks'
 import { fetchProps, handleCEP, OnSubmit } from './logic'
 import { IFormCompany } from './types'
 
-export const FormCompany = ({
-  defaultValue,
-  isLoading
-}: IFormCompany) => {
+export const FormCompany = ({ defaultValue }: IFormCompany) => {
   const navigate = useNavigate()
 
   const { id } = useParams()

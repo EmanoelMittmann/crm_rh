@@ -21,6 +21,10 @@ export interface ContextPropsProfessionalOS {
   setChecked: React.Dispatch<
     React.SetStateAction<{ [id: number]: boolean }>
   >
+  allProfessionalChecked: boolean
+  setAllProfessionalChecked: React.Dispatch<
+    React.SetStateAction<boolean>
+  >
   deleteCommission(id: number): Promise<void>
   selectSendProfessionals: OrderProps[]
   setProfessionalOS: Dispatch<
