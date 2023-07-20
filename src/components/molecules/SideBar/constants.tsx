@@ -8,6 +8,7 @@ import {
   IconHome,
   IconHours,
   IconNotes,
+  IconPayments,
   IconProfessional,
   IconProjects,
   IconReleaseHours,
@@ -48,7 +49,7 @@ export const OPTIONS = [
 
     4: createNavOption('Notas Fiscais', <IconNotes />, 'notes'),
 
-    5: createNavOption('Relatórios', <IconReports />, 'reports'),
+    5: createNavOption('Pagamentos', <IconPayments />, 'reports'),
 
     6: createNavOption(
       'Ordem de Serviço',
@@ -72,7 +73,9 @@ export const OPTIONS = [
       'Lançamento de Notas',
       <IconReleaseNotes />,
       'releaseNotes'
-    )
+    ),
+
+    11: createNavOption('Relatórios', <IconReports />, 'report')
   }
 ]
 export const Home = createNavOption('Início', <IconHome />, 'home')

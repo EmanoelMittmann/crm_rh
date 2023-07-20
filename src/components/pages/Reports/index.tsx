@@ -15,7 +15,7 @@ const Reports = () => {
     <AuthTemplate>
       <List.Reports.Provider>
         <ReleaseTemplate
-          title='Relatorios'
+          title='Pagamentos'
           arrow={true}
           btnText='Exportar Excel'
           Icon={<IconExport />}

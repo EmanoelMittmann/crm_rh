@@ -34,4 +34,5 @@ export { IconExport } from './IconExport'
 export { IconCloseCircle } from './IconCloseCircle'
 export { IconAlert } from './IconAlert'
 export { IconAlertAccept } from './IconAlertAccept'
+export { IconPayments } from './IconPayments'
 export const Icon = Object.assign({}, { OrderBy })

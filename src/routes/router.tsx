@@ -10,7 +10,7 @@ import { RegisterCompany } from 'components/pages/RegisterCompany'
 import RegisterOrderOfService from 'components/pages/RegisterOrderOfService'
 import RegisterProjects from 'components/pages/RegisterProjects'
 import ReleaseNotes from 'components/pages/ReleaseNotes'
-import Reports from 'components/pages/Reports'
+import Payments from 'components/pages/Reports'
 import SendingHours from 'components/pages/SendingHours'
 import Settings from 'components/pages/Setting'
 import StatusProject from 'components/pages/StatusProject'
@@ -46,7 +46,8 @@ const Router = () => {
 
           <Route path='/extrasHours' element={<ExtraHoursRh />} />
           <Route path='/notes' element={<Notes />} />
-          <Route path='/reports' element={<Reports />} />
+          <Route path='/reports' element={<Payments />} />
+          <Route path='/report' element={<Home />} />
 
           <Route
             path='/orderOfService'
