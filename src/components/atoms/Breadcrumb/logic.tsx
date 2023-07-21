@@ -3,6 +3,7 @@ type PathnameProps = keyof typeof ROUTES
 const ROUTES = {
   '/home': 'Home',
   '/professionals': 'Profissionais',
+  '/contractHistory': 'Profissionais > Historico de Contrato',
   '/projects': 'Projetos',
   '/RegisterProjects': 'Projetos > Cadastrar Novo',
   '/notes': 'Notas Fiscais',
