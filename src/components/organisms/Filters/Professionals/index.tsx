@@ -1,6 +1,6 @@
 import { useMemo, useContext } from 'react'
 
-import { Input, Select } from '@stardust-ds/react'
+import * as S from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { IconGlass, Button } from 'components/atoms'
@@ -29,7 +29,7 @@ export const Professionals = () => {
   return (
     <Main>
       <Container gap='1rem'>
-        <Input
+        <S.Input
           value={search}
           onChange={(e) => handleSearch(e.target?.value)}
           iconLeft={<IconGlass />}
@@ -37,7 +37,7 @@ export const Professionals = () => {
           width={230}
           height={42}
         />
-        <Select
+        <S.Select
           width={230}
           placeholder='Cargo'
           options={filterOptions.job}
@@ -48,7 +48,18 @@ export const Professionals = () => {
           onClear={() => handleFillJob(null)}
         />
       </Container>
-      <Button.New onClick={() => navigateTo('/professional/new')} />
+      <Container gap='1em'>
+        <S.Button
+          onClick={() => navigateTo('/contractHistory')}
+          color='#0066FF'
+          style={{
+            borderRadius: '40px'
+          }}
+        >
+          Historico de contrato
+        </S.Button>
+        <Button.New onClick={() => navigateTo('/professional/new')} />
+      </Container>
     </Main>
   )
 }

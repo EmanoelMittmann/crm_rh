@@ -10,7 +10,7 @@ export const META: DefaultMetaProps = {
     current_page: 1,
     last_page: 1
   },
-  status: 'Pendente'
+  status: ''
 }
 
 export const FILTER_OPTIONS = {

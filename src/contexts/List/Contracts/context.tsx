@@ -5,6 +5,8 @@ import { PaginateContext } from 'components/molecules'
 import api from 'api'
 import { routes } from 'routes'
 
+import { useDebounce } from 'hooks'
+
 import DEFAULT from './contants'
 import {
   ContractContextProps,
@@ -98,6 +100,19 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       paginate: { ...old.paginate, current_page: 1 }
     }))
   }
+
+  useDebounce({
+    fn: fetchList,
+    listener: [
+      meta.finalDate,
+      meta.initialDate,
+      meta.order,
+      meta.orderField,
+      meta.paginate.current_page,
+      meta.search,
+      meta.status
+    ]
+  })
 
   return (
     <Context.Provider value={contextProps}>
