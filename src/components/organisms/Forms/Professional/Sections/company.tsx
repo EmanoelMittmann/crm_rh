@@ -29,7 +29,7 @@ export const Company = () => {
             setValueAs: (v: string) => mask(v, MASKER.CNPJ)
           })}
           value={watch('professional_data.cnpj') ?? ''}
-          width={295}
+          width='300px'
           label='CNPJ'
           error={errors.professional_data?.cnpj?.message}
           placeholder='00.000.00/0000.00'
@@ -77,6 +77,7 @@ export const Company = () => {
           error={errors.professional_data?.company_email?.message}
           label='Email'
           width='100%'
+          placeholder='email@email.com'
           required
         />
       </ContainerRow>
@@ -88,7 +89,7 @@ export const Company = () => {
           value={watch('professional_data.company_cep') ?? ''}
           label='CEP'
           placeholder='00000-0000'
-          width={137}
+          width='390px'
           maxLength={9}
           error={errors.professional_data?.company_cep?.message}
           required
@@ -100,7 +101,6 @@ export const Company = () => {
           error={
             errors.professional_data?.company_street_name?.message
           }
-          width={300}
           required
         />
         <Inputs.Default
@@ -114,7 +114,7 @@ export const Company = () => {
               ? 'Valores Invalidos'
               : undefined
           }
-          width={130}
+          width='300px'
           min={0}
           required
         />
@@ -122,7 +122,7 @@ export const Company = () => {
           {...register('professional_data.company_complement')}
           label='Complemento'
           type='text'
-          width={295}
+          width='300px'
         />
       </ContainerRow>
       <ContainerRow gap='1rem'>

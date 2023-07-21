@@ -114,7 +114,7 @@ export const Bank = () => {
           })}
           value={watch('professional_data.agency') ?? ''}
           error={errors.professional_data?.agency?.message}
-          width={295}
+          width='450px'
           required
           label='Agência'
         />
@@ -147,7 +147,7 @@ export const Bank = () => {
           options={BANK_OPTIONS.TRANSFER_TYPE}
           label='Tipo de transferência'
           value={watch('professional_data.type_of_transfer') as any}
-          width={292.5}
+          width='300px'
           required
           placeholder='Selecione'
         />
@@ -165,7 +165,7 @@ export const Bank = () => {
           error={errors.professional_data?.pix_key_type?.message}
           options={BANK_OPTIONS.PIX_KEY_TYPE}
           label='Tipo de chave PIX'
-          width={292.5}
+          width='300px'
           required={isRequiredPixKeyType}
           value={watch('professional_data.pix_key_type') as any}
           placeholder='Selecione'
@@ -182,7 +182,8 @@ export const Bank = () => {
           label='Chave PIX'
           placeholder={pix_key_mask?.placeHolder}
           type={pix_key_mask?.type}
-          width={292.5}
+          width='300px'
+          height={40}
           error={errors.professional_data?.pix_key?.message}
         />
       </ContainerRow>
