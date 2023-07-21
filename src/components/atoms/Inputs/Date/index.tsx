@@ -34,8 +34,9 @@ export default forwardRef(
           <Input
             {...props}
             ref={ref}
+            onBlur={() => setFocus(false)}
             width={230}
-            height={40}
+            height={42}
             type='date'
             hasError={!!error}
           />
