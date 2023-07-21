@@ -70,6 +70,7 @@ export const Project = () => {
           label='Projeto'
           placeholder='Selecione'
           width={275}
+          height={40}
         />
         <Inputs.Default
           {...register('projects.selected.input1')}
@@ -80,8 +81,9 @@ export const Project = () => {
               ? 'Valores Invalidos'
               : undefined
           }
-          placeholder='Horas'
-          width={225}
+          placeholder='Horas/mês'
+          width='350px'
+          height={40}
         />
         <Inputs.Default
           {...register('projects.selected.input2')}
@@ -92,17 +94,18 @@ export const Project = () => {
               ? 'Valores Invalidos'
               : undefined
           }
-          placeholder='Horas'
-          width={225}
+          placeholder='Horas extras'
+          width='350px'
+          height={40}
         />
         <ButtonGeneric
-          top='1em'
+          top='1.5em'
           Text='Vincular'
           bgColor='#0D2551'
           color='white'
-          width='10em'
+          width='290px'
           bRadius='500px'
-          height='3.5em'
+          height='3.3em'
           type='button'
           onClick={() => {
             id ? handleAddProject() : handleAddMockProject()

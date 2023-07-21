@@ -40,7 +40,7 @@ export const Personal = () => {
           type='email'
           label='Email pessoal'
           placeholder='email@email.com'
-          width={445}
+          width='445px'
         />
       </ContainerRow>
       <ContainerRow gap='1rem'>
@@ -105,7 +105,7 @@ export const Personal = () => {
           label='CEP'
           maxLength={9}
           placeholder='00000-0000'
-          width={137}
+          width='350px'
         />
         <Inputs.Default
           {...register('street_name', {
@@ -115,7 +115,6 @@ export const Personal = () => {
           label='Rua'
           type='text'
           required
-          width={300}
         />
         <Inputs.Default
           {...register('house_number', {
@@ -129,7 +128,7 @@ export const Personal = () => {
           label='Número'
           type='number'
           required
-          width={130}
+          width='300px'
           min={0}
         />
         <Inputs.Default
@@ -137,7 +136,7 @@ export const Personal = () => {
           error={errors.complement?.message}
           label='Complemento'
           type='text'
-          width={295}
+          width='300px'
         />
       </ContainerRow>
       <ContainerRow gap='1rem'>
