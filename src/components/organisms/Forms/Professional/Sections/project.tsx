@@ -71,7 +71,6 @@ export const Project = () => {
           placeholder='Selecione'
           width={275}
           height={40}
-         
         />
         <Inputs.Default
           {...register('projects.selected.input1')}
