@@ -78,18 +78,22 @@ export const Shelf = ({
         <ContainerShelfColumn onClick={handleClick}>
           <Text title='1.5em'>{id}</Text>
         </ContainerShelfColumn>
-        <ContainerShelfColumn onClick={handleClick}>
+        <ContainerShelfColumn onClick={handleClick} left='.7em'>
           <Text title='0.5em'>{name}</Text>
         </ContainerShelfColumn>
-        <ContainerShelfColumn onClick={handleClick}>
+        <ContainerShelfColumn onClick={handleClick} left='.9em'>
           <Text title='0.5em'>{project_type.name}</Text>
         </ContainerShelfColumn>
-        <ContainerShelfColumn onClick={handleClick}>
+        <ContainerShelfColumn onClick={handleClick} left='1.3em'>
           <Text>{formatDate(date_start)}</Text>
         </ContainerShelfColumn>
-        <ContainerShelfColumn width='170px' onClick={handleClick}>
+        <ContainerShelfColumn onClick={handleClick} left='1.4em'>
           <Badge
-            style={{ width: '170px', border: 'none' }}
+            style={{
+              width: '170px',
+              border: 'none',
+              whiteSpace: 'nowrap'
+            }}
             label={status.name}
             variant='flat'
             bgColor={status.color.text_color}

@@ -13,16 +13,16 @@ import { GRID_TEMPLATE } from './constants'
 const Shelf = ({ props, config }: ShelfProps<ReportsProps>) => {
   return (
     <ContainerShelf template={GRID_TEMPLATE}>
-      <ContainerShelfColumn>
+      <ContainerShelfColumn left='1.2em'>
         <Text> {props.order.companies.razao_social}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn>
+      <ContainerShelfColumn left='1.1em'>
         <Text>{props.user.name}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='0.5em'>
+      <ContainerShelfColumn left='1em'>
         <Text> {props.order.companies.cnpj}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='0.7em'>
+      <ContainerShelfColumn left='1em'>
         <Text>
           {' '}
           {props.fiscal_note !== null

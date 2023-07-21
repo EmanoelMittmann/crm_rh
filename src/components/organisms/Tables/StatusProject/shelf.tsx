@@ -10,7 +10,7 @@ import { ShelfProps } from '../types'
 const Shelf = ({ props, config }: ShelfProps<StatusProps>) => {
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn title={props.name} left='1em'>
+      <ContainerShelfColumn title={props.name} left='1.2em'>
         <Box
           px='xxs'
           bgColor={props.color.button_color}

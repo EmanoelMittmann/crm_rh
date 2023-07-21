@@ -52,7 +52,7 @@ export const Shelf = ({
           ? formatDate(date_finish_contract)
           : '-'}
       </ContainerShelfColumn>
-      <ContainerShelfColumn>
+      <ContainerShelfColumn left='1em'>
         <Badge.Contract status={status} />
       </ContainerShelfColumn>
     </ContainerShelf>

@@ -9,19 +9,19 @@ import { ShelfProps } from '../types'
 export const Shelf = ({ config, props }: ShelfProps<HoursProps>) => {
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn left='0.5em'>
+      <ContainerShelfColumn left='1.3em'>
         {props.id}
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='0.5em'>
+      <ContainerShelfColumn left='1em'>
         {formatDate(props.launch_date)}
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='0.5em'>
+      <ContainerShelfColumn left='1.2em'>
         {formatDate(props.end_date)}
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='0.5em'>
+      <ContainerShelfColumn left='1.2em'>
         {props.hour_quantity}
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='0.5em'>
+      <ContainerShelfColumn left='1em'>
         {props.project.name}
       </ContainerShelfColumn>
       <ContainerShelfColumn left='0.5em'>

@@ -38,7 +38,7 @@ export const Shelf = ({
 
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn gap='.5rem' title={name}>
+      <ContainerShelfColumn gap='.5rem' title={name} left='.8em'>
         <Image
           src={
             avatar
@@ -48,16 +48,16 @@ export const Shelf = ({
         />
         <Text>{name}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn>
+      <ContainerShelfColumn left='1.5em'>
         <Text>{cnpj}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn>
+      <ContainerShelfColumn left='1.5em'>
         <Text>{id}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn>
+      <ContainerShelfColumn left='1.4em'>
         <Text>{formatDate(os_generation)}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn>
+      <ContainerShelfColumn left='1.2em'>
         <Text>{reference}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn>
