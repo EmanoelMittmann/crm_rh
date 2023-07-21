@@ -202,6 +202,8 @@ export const Team = () => {
           error={errors?.users?.hours_mounths_estimated?.message}
           label='Horas/mês estimadas'
           placeholder='Horas'
+          width='300px'
+          height={40}
         />
         <Inputs.Default
           {...register('users.extra_hours_estimated', {})}
@@ -215,13 +217,15 @@ export const Team = () => {
           error={errors?.users?.extra_hours_estimated?.message}
           label='Horas extras estimadas'
           placeholder='Horas'
+          width='330px'
+          height={40}
         />
         <ButtonGeneric
           top='1.5em'
           Text='Vincular'
           bgColor='#0D2551'
           color='white'
-          width='30rem'
+          width='230px'
           bRadius='500px'
           height='3.5em'
           type='button'
