@@ -14,7 +14,11 @@ export const META: DefaultMetaProps = {
 }
 
 export const FILTER_OPTIONS = {
-  status: []
+  status: [
+    { label: 'Pendente', value: 'Pendente' },
+    { label: 'Assinado', value: 'Assinado' },
+    { label: 'Encerrado', value: 'Encerrado' }
+  ]
 }
 
 export default { META, FILTER_OPTIONS }
