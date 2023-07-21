@@ -32,7 +32,7 @@ export const Contracts = () => {
             fontWeight='bold'
             type='h3'
           >
-            Usuário não encontrado
+            Contrato não encontrado
           </S.Typography>
         </NotFoundWrapper>
       )
