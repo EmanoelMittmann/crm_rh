@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { AuthContext } from 'contexts'
@@ -10,6 +10,10 @@ import {
   IconLogout,
   IconUbistart
 } from 'components/atoms'
+import {
+  getConfigurations,
+  saveConfigurations
+} from 'components/utils/btnSelects'
 
 import { usePermission } from 'hooks'
 
@@ -22,9 +26,17 @@ export const Sidebar = () => {
   const { logout } = useContext(AuthContext)
   const [selects, setSelects] = useState(DEFAULT_SELECT)
   const { Licence } = usePermission()
+
+  useEffect(() => {
+    const currentConfigurations = getConfigurations()
+    setSelects(currentConfigurations)
+  }, [])
+
   function handleSelect(btnSelect: string) {
-    setSelects(alterObject(selects, btnSelect))
+    const updatedConfig = alterObject(selects, btnSelect)
+    setSelects(updatedConfig)
     navigate(`/${btnSelect}`)
+    saveConfigurations(updatedConfig)
   }
 
   return (

@@ -9,7 +9,7 @@ const ROUTES = {
   '/notes': 'Notas Fiscais',
   '/releaseNotes': 'Notas Fiscais',
   '/uploadNotes': 'Notas Fiscais > Enviar NF',
-  '/reports': 'Relatórios',
+  '/reports': 'Pagamentos',
   '/orderOfService': 'Ordens de Serviço',
   '/settings': 'Configurações',
   '/jobs': 'Configurações > Cargos',
@@ -22,7 +22,8 @@ const ROUTES = {
   '/company/new': 'Empresas > Cadastrar Novo',
   '/professional/new': 'Profissionais > Cadastrar Novo',
   '/professional/:id': 'Profissionais > Editar',
-  '/orderOfService/new': 'Ordens de Serviço > Criar nova O.S'
+  '/orderOfService/new': 'Ordens de Serviço > Criar nova O.S',
+  '/report': 'Relatórios'
 }
 
 export function handlePathname(pathname: PathnameProps) {
