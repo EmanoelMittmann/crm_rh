@@ -14,6 +14,7 @@ export const DEFAULTSELECT = {
   releaseNotes: false
 }
 
+// Função para criar um novo objeto com as configurações atualizadas
 export function alterObject(
   obj: typeof DEFAULTSELECT,
   defaultValue: string
@@ -28,3 +29,32 @@ export function alterObject(
   }
   return newObj
 }
+
+// Função para salvar as configurações no LocalStorage
+export function saveConfigurations(config: typeof DEFAULTSELECT) {
+  localStorage.setItem('configurations', JSON.stringify(config))
+}
+
+// Função para alterar as configurações e salvar no LocalStorage
+export function alterAndSaveConfigurations(
+  defaultValue: keyof typeof DEFAULTSELECT
+) {
+  const updatedConfig = alterObject(DEFAULTSELECT, defaultValue)
+  saveConfigurations(updatedConfig)
+}
+
+// Função para recuperar as configurações do LocalStorage
+export function getConfigurations(): typeof DEFAULTSELECT {
+  const storedConfig = localStorage.getItem('configurations')
+  if (storedConfig) {
+    return JSON.parse(storedConfig)
+  } else {
+    return DEFAULTSELECT
+  }
+}
+
+// Recupera as configurações do LocalStorage ao carregar a página
+const currentConfigurations = getConfigurations()
+
+// Restaura as configurações no objeto DEFAULTSELECT
+Object.assign(DEFAULTSELECT, currentConfigurations)
