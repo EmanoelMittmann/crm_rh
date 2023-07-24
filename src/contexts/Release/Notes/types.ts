@@ -22,7 +22,7 @@ export interface ContextProps {
 }
 
 export interface FiscalNotesProfissionalsData {
-  pdfPreSignedUrl?: string;
-  xmlPreSignedUrl?: string;
-  error?: string;
+  pdfPreSignedUrl?: string
+  xmlPreSignedUrl?: string
+  error?: string
 }

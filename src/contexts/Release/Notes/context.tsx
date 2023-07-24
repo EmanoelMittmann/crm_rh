@@ -7,7 +7,11 @@ import { filesize } from 'filesize'
 import api from 'api'
 import { routes } from 'routes'
 
-import { ContextProps, FiscalNotesProfissionalsData, IFileProps } from './types'
+import {
+  ContextProps,
+  FiscalNotesProfissionalsData,
+  IFileProps
+} from './types'
 
 export const Context = createContext({} as ContextProps)
 
@@ -63,11 +67,26 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   const handleGetUploadUrlSigned = async () => {
     try {
-      const {data} = await api.post(routes.notes.user)
-      const {pdfPreSignedUrl,xmlPreSignedUrl,error} = data as FiscalNotesProfissionalsData
-
+      const { data } = await api.post(routes.notes.user)
+      const { pdfPreSignedUrl, xmlPreSignedUrl, error } =
+        data as FiscalNotesProfissionalsData
       if (error) {
-        return alert(error)
+        toast({
+          type: 'error',
+          title: 'NF não enviada.',
+          description: 'Profissional já lançou nota fiscal neste mês',
+          position: 'bottom-right'
+        })
+        return
+      } else {
+        toast({
+          type: 'success',
+          title: 'NF enviada com sucesso.',
+          description: 'NF enviada com sucesso.',
+          position: 'bottom-right'
+        })
+
+        navigate('/releaseNotes')
       }
 
       return {
@@ -81,7 +100,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   const uploadFile = async (file: File, url: string) => {
-
     const fileBuffer = await file.arrayBuffer()
 
     try {
@@ -90,11 +108,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         headers: {
           'Content-Type': file.type
         },
-        body: file
+        body: fileBuffer
       })
 
       const data = await response.json()
-      
+
       console.log(data)
     } catch (error) {
       console.error('Erro ao enviar arquivo:', error)
@@ -105,17 +123,19 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setLoading(true)
 
     if (verifyFiles()) {
-
       const urls = await handleGetUploadUrlSigned()
-
-      if (!urls) {
-        return alert('Erro ao enviar NF')
+      const { pdfPreSignedUrl, xmlPreSignedUrl } = urls as {
+        pdfPreSignedUrl: string
+        xmlPreSignedUrl: string
       }
 
-      const {pdfPreSignedUrl,xmlPreSignedUrl} = urls
-
       if (!pdfPreSignedUrl || !xmlPreSignedUrl) {
-        return alert('Erro ao enviar NF')
+        toast({
+          type: 'error',
+          title: 'NF não enviada.',
+          description: 'Erro ao enviar as Ulrs de upload',
+          position: 'bottom-right'
+        })
       }
 
       const pdfFile: File | undefined =
@@ -127,12 +147,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           ? fileXml?.file[0]
           : undefined
 
-        const [res1, res2]=await Promise.all([
-          pdfFile && uploadFile(pdfFile, pdfPreSignedUrl),
-          xmlFile && uploadFile(xmlFile, xmlPreSignedUrl)
-        ])
+      const [res1, res2] = await Promise.all([
+        pdfFile && uploadFile(pdfFile, pdfPreSignedUrl),
+        xmlFile && uploadFile(xmlFile, xmlPreSignedUrl)
+      ])
 
-        console.log(res1,res2)
+      console.log(res1, res2)
     }
 
     setLoading(false)
