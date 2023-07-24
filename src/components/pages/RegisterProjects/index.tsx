@@ -137,6 +137,7 @@ const RegisterProjects = () => {
       <AuthTemplate>
         <CreateTemplate
           title={!!id ? 'Editar Projeto ' : 'Cadastrar novo projeto'}
+          arrow
         >
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit, OnError)}>
