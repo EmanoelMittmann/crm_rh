@@ -8,4 +8,4 @@ export const HEADERS = [
   { field: 'project_status_id', label: 'Status' }
 ] as HeaderProps[]
 
-export const GRID_TEMPLATE = '1fr 1fr 1fr 1fr 1fr 1fr'
+export const GRID_TEMPLATE = '1fr 1fr 1fr 1fr 1fr .5fr'

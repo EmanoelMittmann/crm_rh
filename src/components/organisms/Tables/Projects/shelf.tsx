@@ -9,12 +9,7 @@ import {
 } from 'components/molecules/Modais'
 import { formatDate } from 'components/utils/formatDate'
 
-import {
-  ContainerShelf,
-  ContainerShelfColumn,
-  ShelfHover,
-  Text
-} from '../style'
+import { ContainerShelfColumn, ShelfHover, Text } from '../style'
 import { ShelfProps } from '../types'
 import { ProjectIProps } from './types'
 export const Shelf = ({
@@ -76,20 +71,24 @@ export const Shelf = ({
     <>
       <ShelfHover template={config.template}>
         <ContainerShelfColumn onClick={handleClick}>
-          <Text title='1.5em'>{id}</Text>
+          <Text>{id}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn onClick={handleClick}>
-          <Text title='0.5em'>{name}</Text>
+          <Text>{name}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn onClick={handleClick}>
-          <Text title='0.5em'>{project_type.name}</Text>
+          <Text>{project_type.name}</Text>
         </ContainerShelfColumn>
         <ContainerShelfColumn onClick={handleClick}>
           <Text>{formatDate(date_start)}</Text>
         </ContainerShelfColumn>
-        <ContainerShelfColumn width='170px' onClick={handleClick}>
+        <ContainerShelfColumn onClick={handleClick}>
           <Badge
-            style={{ width: '170px', border: 'none' }}
+            style={{
+              width: '170px',
+              border: 'none',
+              whiteSpace: 'nowrap'
+            }}
             label={status.name}
             variant='flat'
             bgColor={status.color.text_color}

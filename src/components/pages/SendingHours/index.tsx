@@ -9,7 +9,7 @@ const SendingHours = () => {
   return (
     <AuthTemplate>
       <Releases.ExtraHour.Provider>
-        <CreateTemplate title='Lançar horas extras'>
+        <CreateTemplate title='Lançar horas extras' arrow>
           <Release.Hours />
         </CreateTemplate>
       </Releases.ExtraHour.Provider>

@@ -115,6 +115,7 @@ const RegisterProfessional = () => {
         title={
           !!id ? 'Editar profissional' : 'Cadastrar novo profissional'
         }
+        arrow
       >
         <FormProvider {...methods}>
           <form>

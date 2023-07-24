@@ -31,6 +31,7 @@ export const RegisterCompany = () => {
     <AuthTemplate>
       <CreateTemplate
         title={!!id ? 'Editar Empresa' : 'Cadastrar nova Empresa'}
+        arrow
       >
         {isLoading ? (
           <Container>
