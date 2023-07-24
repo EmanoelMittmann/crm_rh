@@ -78,15 +78,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           position: 'bottom-right'
         })
         return
-      } else {
-        toast({
-          type: 'success',
-          title: 'NF enviada com sucesso.',
-          description: 'NF enviada com sucesso.',
-          position: 'bottom-right'
-        })
-
-        navigate('/releaseNotes')
       }
 
       return {

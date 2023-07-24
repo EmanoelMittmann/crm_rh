@@ -89,7 +89,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function downloadFile(id: number, name: string) {
-    console.log('oi')
     try {
       const response = await api.get(routes.notes.download(id), {
         responseType: 'blob'
