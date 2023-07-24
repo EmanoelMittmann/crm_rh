@@ -73,7 +73,8 @@ export const Contract = () => {
           type='date'
           label='Data de inicio'
           required
-          width={220}
+          width='220px'
+          height={41}
         />
         <Selects.Default
           {...register('job_id', {
@@ -110,6 +111,7 @@ export const Contract = () => {
           options={CONTRACT_TYPE_OPTIONS}
           value={watch('job_type') as any}
           label='Tipo de contrato'
+          placeholder='Selecione'
           width={220}
         />
         <Inputs.Default
@@ -125,7 +127,7 @@ export const Contract = () => {
           required
           min={0}
           label='Horas/semana'
-          width={210}
+          height={40}
         />
         <Inputs.Default
           {...register('mounth_hours', {
@@ -140,7 +142,7 @@ export const Contract = () => {
           min={0}
           required
           label='Horas/mês'
-          width={210}
+          height={40}
         />
         <Inputs.Default
           {...register('fixed_payment_value', {
@@ -155,6 +157,7 @@ export const Contract = () => {
           iconLeft='R$'
           placeholder='00,00'
           label='Pagamento fixo'
+          height={40}
         />
       </ContainerRow>
       <ContainerRow>
@@ -170,6 +173,7 @@ export const Contract = () => {
           error={errors.company_id?.message}
           clearable={false}
           value={Company as any}
+          placeholder='Selecione'
         />
       </ContainerRow>
     </>
