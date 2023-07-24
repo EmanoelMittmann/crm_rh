@@ -1,12 +1,12 @@
 import { useContext, useRef } from 'react'
 
-import { Badge } from '@stardust-ds/react'
 import { List } from 'contexts'
 import {
   PendingProps,
   StatusHours
 } from 'contexts/List/ExtraHoursRh/types'
 
+import { Badge } from 'components/atoms'
 import {
   IHandleModalPropsExtrasHoursRh,
   Modal
@@ -64,27 +64,20 @@ export const Shelf = ({
           </ContainerShelfColumn>
         )}
         <ContainerShelfColumn>
-          <Text title='0.5em'>{hour_quantity}h</Text>
+          <Text>{hour_quantity}h</Text>
         </ContainerShelfColumn>
 
         <ContainerShelfColumn>
-          <Text title='0.5em'>{project_name}</Text>
+          <Text>{project_name}</Text>
         </ContainerShelfColumn>
 
         <ContainerShelfColumn>
-          <Text title='0.5em'>{formatDate(launch_date)}</Text>
+          <Text>{formatDate(launch_date)}</Text>
         </ContainerShelfColumn>
 
         <ContainerShelfColumn>
-          <Badge
-            style={{ width: '230px', border: 'none' }}
-            label={status_name}
-            variant='flat'
-            bgColor={status?.color.text_color}
-            typographyProps={{
-              textAlign: 'center',
-              color: status?.color.text_color
-            }}
+          <Badge.Hours
+            status={{ id: status_id, name: status_name }}
           />
         </ContainerShelfColumn>
       </ContainerShelf>

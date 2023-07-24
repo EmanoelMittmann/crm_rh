@@ -12,19 +12,19 @@ export const Shelf = ({ config, props }: ShelfProps) => {
       <ContainerShelfColumn title={props.razao_social}>
         <Text> {props.razao_social}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={props.cnpj} left='0.2em'>
+      <ContainerShelfColumn title={props.cnpj}>
         <Text>{props.cnpj}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={props.opening_date} left='0.5em'>
+      <ContainerShelfColumn title={props.opening_date}>
         <Text>{formatDate(props.opening_date)}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={props.city_name} left='0.5em'>
+      <ContainerShelfColumn title={props.city_name}>
         <Text>{props.city_name}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={props.type_company} left='0.5em'>
+      <ContainerShelfColumn title={props.type_company}>
         <Text>{TypesCompanys(props.type_company)}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={props.uf} left='0.7em'>
+      <ContainerShelfColumn title={props.uf}>
         <Text> {props.uf}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn
