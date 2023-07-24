@@ -9,7 +9,7 @@ const UploadNotes = () => {
   return (
     <AuthTemplate>
       <ReleaseNotes.Notes.Provider>
-        <CreateTemplate title='Enviar NF'>
+        <CreateTemplate title='Enviar NF' arrow>
           <Release.UploadNotes />
         </CreateTemplate>
       </ReleaseNotes.Notes.Provider>
