@@ -9,12 +9,7 @@ import {
 } from 'components/molecules/Modais'
 import { formatDate } from 'components/utils/formatDate'
 
-import {
-  ContainerShelf,
-  ContainerShelfColumn,
-  ShelfHover,
-  Text
-} from '../style'
+import { ContainerShelfColumn, ShelfHover, Text } from '../style'
 import { ShelfProps } from '../types'
 import { ProjectIProps } from './types'
 export const Shelf = ({
@@ -76,18 +71,18 @@ export const Shelf = ({
     <>
       <ShelfHover template={config.template}>
         <ContainerShelfColumn onClick={handleClick}>
-          <Text title='1.5em'>{id}</Text>
+          <Text>{id}</Text>
         </ContainerShelfColumn>
-        <ContainerShelfColumn onClick={handleClick} left='.7em'>
-          <Text title='0.5em'>{name}</Text>
+        <ContainerShelfColumn onClick={handleClick}>
+          <Text>{name}</Text>
         </ContainerShelfColumn>
-        <ContainerShelfColumn onClick={handleClick} left='.9em'>
-          <Text title='0.5em'>{project_type.name}</Text>
+        <ContainerShelfColumn onClick={handleClick}>
+          <Text>{project_type.name}</Text>
         </ContainerShelfColumn>
-        <ContainerShelfColumn onClick={handleClick} left='1.3em'>
+        <ContainerShelfColumn onClick={handleClick}>
           <Text>{formatDate(date_start)}</Text>
         </ContainerShelfColumn>
-        <ContainerShelfColumn onClick={handleClick} left='1.4em'>
+        <ContainerShelfColumn onClick={handleClick}>
           <Badge
             style={{
               width: '170px',

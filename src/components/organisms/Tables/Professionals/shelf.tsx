@@ -28,20 +28,20 @@ export const Shelf = ({
   } = props
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn gap='.5rem' title={name} left='.7em'>
+      <ContainerShelfColumn gap='.5rem' title={name}>
         <Image src={avatar} />
         <Text>{name}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={job.name} left='1em'>
+      <ContainerShelfColumn title={job.name}>
         <Text>{job.name}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={email} left='1em'>
+      <ContainerShelfColumn title={email}>
         <Text>{email}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={telephone_number} left='1em'>
+      <ContainerShelfColumn title={telephone_number}>
         <Text>{mask(telephone_number, Mask)}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn title={city_name} left='1em'>
+      <ContainerShelfColumn title={city_name}>
         <Text>{city_name}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn justify='center' gap='2em'>

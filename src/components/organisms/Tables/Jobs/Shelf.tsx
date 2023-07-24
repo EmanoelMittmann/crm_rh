@@ -7,7 +7,7 @@ import { ShelfProps } from './types'
 const Shelf = ({ props, config }: ShelfProps) => {
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn title={props.name} left='1.3em'>
+      <ContainerShelfColumn title={props.name}>
         {props.name}
       </ContainerShelfColumn>
       <ContainerShelfColumn gap='1em'>

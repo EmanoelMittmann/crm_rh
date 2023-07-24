@@ -27,18 +27,14 @@ export const Shelf = ({
 
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn cursor='pointer' left='1.2em'>
+      <ContainerShelfColumn cursor='pointer'>
         <HoverText onClick={() => config.options[0].callback()}>
           {user_name}
         </HoverText>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='1.2em'>
-        {hour_quantity}
-      </ContainerShelfColumn>
-      <ContainerShelfColumn left='1em'>
-        {project_name}
-      </ContainerShelfColumn>
-      <ContainerShelfColumn left='1em'>
+      <ContainerShelfColumn>{hour_quantity}</ContainerShelfColumn>
+      <ContainerShelfColumn>{project_name}</ContainerShelfColumn>
+      <ContainerShelfColumn>
         {formatDate(launch_date)}
       </ContainerShelfColumn>
       <ContainerShelfColumn>

@@ -29,30 +29,28 @@ export const Shelf = ({
   } = props
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn gap='.5em' left='.7em'>
+      <ContainerShelfColumn gap='.5em'>
         <Image src={avatar_profissional} />
         <Text>{name_profissional}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='1em'>
-        {job_profissional}
-      </ContainerShelfColumn>
-      <ContainerShelfColumn left='1em'>
+      <ContainerShelfColumn>{job_profissional}</ContainerShelfColumn>
+      <ContainerShelfColumn>
         {company_profissional}
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='1em'>
+      <ContainerShelfColumn>
         {formatDate(date_sent_contract)}
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='1em'>
+      <ContainerShelfColumn>
         {date_signature_contract
           ? formatDate(date_signature_contract)
           : '-'}
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='1em'>
+      <ContainerShelfColumn>
         {date_finish_contract
           ? formatDate(date_finish_contract)
           : '-'}
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='1em'>
+      <ContainerShelfColumn>
         <Badge.Contract status={status} />
       </ContainerShelfColumn>
     </ContainerShelf>

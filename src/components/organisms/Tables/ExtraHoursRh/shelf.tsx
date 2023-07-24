@@ -55,23 +55,23 @@ export const Shelf = ({
     <>
       <ContainerShelf template={config.template}>
         {status_name === 'Pendente - RH' ? (
-          <ContainerShelfColumn onClick={handleModal} left='1em'>
+          <ContainerShelfColumn onClick={handleModal}>
             <TextProfessional>{user_name}</TextProfessional>
           </ContainerShelfColumn>
         ) : (
-          <ContainerShelfColumn left='1em'>
+          <ContainerShelfColumn>
             <Text>{user_name}</Text>
           </ContainerShelfColumn>
         )}
-        <ContainerShelfColumn left='1.3em'>
+        <ContainerShelfColumn>
           <Text>{hour_quantity}h</Text>
         </ContainerShelfColumn>
 
-        <ContainerShelfColumn left='1.3em'>
+        <ContainerShelfColumn>
           <Text>{project_name}</Text>
         </ContainerShelfColumn>
 
-        <ContainerShelfColumn left='1.3em'>
+        <ContainerShelfColumn>
           <Text>{formatDate(launch_date)}</Text>
         </ContainerShelfColumn>
 

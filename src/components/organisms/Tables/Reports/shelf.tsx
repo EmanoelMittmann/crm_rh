@@ -13,16 +13,16 @@ import { GRID_TEMPLATE } from './constants'
 const Shelf = ({ props, config }: ShelfProps<ReportsProps>) => {
   return (
     <ContainerShelf template={GRID_TEMPLATE}>
-      <ContainerShelfColumn left='1.2em'>
+      <ContainerShelfColumn>
         <Text> {props.order.companies.razao_social}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='1.1em'>
+      <ContainerShelfColumn>
         <Text>{props.user.name}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='1em'>
+      <ContainerShelfColumn>
         <Text> {props.order.companies.cnpj}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='1em'>
+      <ContainerShelfColumn>
         <Text>
           {' '}
           {props.fiscal_note !== null
@@ -30,10 +30,10 @@ const Shelf = ({ props, config }: ShelfProps<ReportsProps>) => {
             : 'R$ 0,00'}
         </Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='1em'>
+      <ContainerShelfColumn>
         <Text>{formatDate(props.date_payment)}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='0.5em'>
+      <ContainerShelfColumn>
         <Badge.Report status={props.status_payment} />
         <Popover options={config.options} />
       </ContainerShelfColumn>

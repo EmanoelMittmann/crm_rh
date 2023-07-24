@@ -24,8 +24,8 @@ export const TableHeader = ({
     <Container {...{ template }}>
       {headers.map(({ field, label, on, checked = false }) => (
         <Column type='button' disabled={!on} key={field}>
-          <ContainerChecked>
-            {checked && (
+          {checked && (
+            <ContainerChecked>
               <Inputs.Check
                 checked={allProfessionalChecked}
                 onChange={() =>
@@ -33,8 +33,8 @@ export const TableHeader = ({
                   setAllProfessionalChecked((prev) => !prev)
                 }
               />
-            )}
-          </ContainerChecked>
+            </ContainerChecked>
+          )}
           <ColumnText>
             {label}
             {on && (

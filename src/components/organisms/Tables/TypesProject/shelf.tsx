@@ -9,9 +9,7 @@ import { ShelfProps } from './types'
 export const shelf = ({ config, props }: ShelfProps) => {
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn left='1.4em'>
-        {props.name}
-      </ContainerShelfColumn>
+      <ContainerShelfColumn>{props.name}</ContainerShelfColumn>
       <ContainerShelfColumn gap='1em'>
         <Badge.Status status={props.is_active} />
         <Popover options={config.options} />

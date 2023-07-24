@@ -17,23 +17,22 @@ const Shelf = ({ props }: ShelfProps) => {
 
   return (
     <ContainerShelf template={GRID_TEMPLATE}>
-      <ContainerShelfColumn left='0.2em'>
+      <ContainerShelfColumn>
         <Text>{props.id}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='0.4em'>
+      <ContainerShelfColumn>
         <Text>{formatDate(props.created_at)}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='0.5em'>
+      <ContainerShelfColumn>
         <Text>{formatDate(props.file_xml.date_emission_nf)}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='0.5em'>
+      <ContainerShelfColumn>
         <Text>{props.file_xml.number_nf}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='0.7em'>
+      <ContainerShelfColumn>
         <Text>{props.file_xml.value_nf}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn
-        left='0.8em'
         onClick={() => downloadFile(props.file_id, props.file.name)}
       >
         <TextProfessional>{props.file.name}</TextProfessional>
