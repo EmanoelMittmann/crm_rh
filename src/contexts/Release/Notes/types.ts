@@ -20,3 +20,9 @@ export interface ContextProps {
   handleUploadXml: (file: File[]) => void
   handleSave(): Promise<void>
 }
+
+export interface FiscalNotesProfissionalsData {
+  pdfPreSignedUrl?: string
+  xmlPreSignedUrl?: string
+  error?: string
+}
