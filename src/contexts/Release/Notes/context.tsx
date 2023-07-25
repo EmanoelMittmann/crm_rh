@@ -68,6 +68,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const handleGetUploadUrlSigned = async () => {
     try {
       const { data } = await api.post(routes.notes.user)
+      console.log('data: ', data);
       const { pdfPreSignedUrl, xmlPreSignedUrl, error } =
         data as FiscalNotesProfissionalsData
       if (error) {
@@ -115,6 +116,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
     if (verifyFiles()) {
       const urls = await handleGetUploadUrlSigned()
+
       const { pdfPreSignedUrl, xmlPreSignedUrl } = urls as {
         pdfPreSignedUrl: string
         xmlPreSignedUrl: string

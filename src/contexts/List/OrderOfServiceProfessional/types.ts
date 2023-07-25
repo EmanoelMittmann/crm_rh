@@ -44,7 +44,8 @@ export interface ContextPropsProfessionalOS {
   navigateTo(url: string): void
   handleSearch(text: string): void
   handleOrder(field: string): void
-  handleCheckedAll(): void
+  toggleCheckedAll(isChecked: boolean): void
+  toggleCheckedSingle(isChecked: boolean, id: number): void
 }
 
 export interface OrderOfServiceProps {

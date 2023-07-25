@@ -9,9 +9,7 @@ export interface TemplateProps {
   template: string
   handleOrder(field: string): void
   allProfessionalChecked?: boolean
-  setAllProfessionalChecked?: React.Dispatch<
-    React.SetStateAction<boolean>
-  >
+  toggleCheckedAll?: (isChecked: boolean) => void
   onsubmit?(event: React.FormEvent<HTMLFormElement>): void
   headers: HeaderProps[]
 }

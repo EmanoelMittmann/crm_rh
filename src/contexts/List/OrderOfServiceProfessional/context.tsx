@@ -29,94 +29,76 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [metaCommision, setMetaCommision] = useState(
     DEFAULT.META_PROPS
   )
-  const [checked, setChecked] = useState<{ [id: number]: boolean }>(
-    {}
-  )
-  const [allProfessionalChecked, setAllProfessionalChecked] =
-    useState(false)
+  const [checked, setChecked] = useState<{ [id: number]: boolean }>({})
+  const [allProfessionalChecked, setAllProfessionalChecked] = useState(false)
+  const [selectSendProfessionals, setSelectSendProfessionals] = useState<OrderProps[]>([])
+  const professionalsHaveCommission = selectSendProfessionals.filter((professional) => professional.isCommission)
 
-  const [selectSendProfessionals, setSelectSendProfessionals] =
-    useState<OrderProps[]>([])
-  const [
-    lastQtdProfessionalSelected,
-    setLastQtdProfessionalSelected
-  ] = useState(0)
 
-  const professionalsHaveCommission = selectSendProfessionals.filter(
-    (professional) => professional.isCommission
-  )
-  const quantityProfessionalTotal = professionalOS.length
-  const quantityProfessionalSelected = selectSendProfessionals.length
+  const selectedAllProfessional = async (isChecked: boolean) => {
+    if (isChecked) {
+      const temp = professionalOS.map((item) => ({
+        name: item.name,
+        professional_id: item.id,
+        companies_id: item.company_id,
+        commission: item.commission ? undefined : 0,
+        isCommission: item.commission
 
-  const handleCheckedAll = () => {
-    const allChecked = professionalOS.every(
-      (item) => checked[item.id]
-    )
-
-    const newChecked = { ...checked }
-    professionalOS.forEach((item) => {
-      newChecked[item.id] = !allChecked
-    })
-
-    setChecked(newChecked)
-
-    const checkedProfessionals = professionalOS.filter(
-      (item) => newChecked[item.id]
-    )
-
-    const allds = checkedProfessionals.map((item) => ({
-      name: item.name,
-      professional_id: item.id,
-      commission: item.commission ? undefined : 0,
-      companies_id: item.company_id,
-      isCommission: item.commission
-    }))
-
-    setSelectSendProfessionals(allds as OrderProps[])
-  }
-
-  const handleCheckOrUncheckProfessionals = () => {
-    setLastQtdProfessionalSelected(quantityProfessionalSelected)
-    const allSelected =
-      quantityProfessionalTotal === quantityProfessionalSelected
-    const selectAllChecked = allProfessionalChecked
-    if (quantityProfessionalSelected === 0 && selectAllChecked) {
-      handleCheckedAll()
-      return
-    }
-    if (
-      allSelected &&
-      !selectAllChecked &&
-      lastQtdProfessionalSelected === quantityProfessionalTotal - 1
-    ) {
-      setAllProfessionalChecked(true)
-      return
-    }
-    if (allSelected && !selectAllChecked) {
-      setChecked({})
+      }))
+      setSelectSendProfessionals((prev) => [...prev, ...temp] as OrderProps[])
+    } else {
       setSelectSendProfessionals([])
-      return
-    }
-    if (
-      quantityProfessionalSelected ===
-        quantityProfessionalTotal - 1 &&
-      selectAllChecked
-    ) {
-      setAllProfessionalChecked(false)
-      return
-    }
-    if (
-      quantityProfessionalSelected !== quantityProfessionalTotal &&
-      selectAllChecked
-    ) {
-      handleCheckedAll()
-      return
     }
   }
 
-  useEffect(() => {
-    handleCheckOrUncheckProfessionals()
-  }, [allProfessionalChecked, quantityProfessionalSelected])
+
+  const toggleCheckedAll = (isChecked: boolean) => {
+    setAllProfessionalChecked(isChecked)
+    let temp = { ...checked }
+    professionalOS.forEach((item) => {
+      temp[item.id] = isChecked
+    })
+    setChecked(temp)
+
+    selectedAllProfessional(isChecked)
+  }
+
+  const selectdSingleProfessional = async (isChecked: boolean, id: number) => {
+    if (isChecked) {
+      const temp = professionalOS.find((item) => item.id === id)
+      const newItem = {
+        name: temp?.name,
+        professional_id: temp?.id,
+        companies_id: temp?.company_id,
+        commission: temp?.commission ? undefined : 0,
+        isCommission: temp?.commission
+      }
+      setSelectSendProfessionals((prev) => [...prev, newItem] as OrderProps[])
+    } else {
+      setSelectSendProfessionals((prev) =>
+        prev.filter((item) => item.professional_id !== id)
+      )
+    }
+  }
+
+  const toggleCheckedSingle = (isCkecked: boolean, id: number) => {
+    const temp = { ...checked }
+    temp[id] = isCkecked
+    setChecked(temp)
+
+    if (!isCkecked) {
+      setAllProfessionalChecked(false)
+    } else {
+      const allChecked = professionalOS.every(
+        (item) => temp[item.id]
+      )
+      if (allChecked) {
+        setAllProfessionalChecked(true)
+      }
+    }
+    selectdSingleProfessional(isCkecked, id)
+  }
+
 
   const ContextPropsProfessionalOS = {
     mergeCommision,
@@ -139,7 +121,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     paginate: { ...metaCommision.paginate, setCurrent_page: setPage },
     handleSearch,
     handleOrder,
-    handleCheckedAll
+    toggleCheckedAll,
+    toggleCheckedSingle
   }
   async function fetchList() {
     setIsLoading(true)
