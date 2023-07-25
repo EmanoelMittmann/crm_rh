@@ -21,12 +21,9 @@ export const Shelf = ({
   props,
   config
 }: ShelfProps<OrderPropsProfessional>) => {
-  const {
-    checked,
-    selectSendProfessionals,
-    toggleCheckedSingle
-  } = useContext(List.OrderOfServiceprofessionalOS.Context)
-  
+  const { checked, selectSendProfessionals, toggleCheckedSingle } =
+    useContext(List.OrderOfServiceprofessionalOS.Context)
+
   const {
     name,
     id,

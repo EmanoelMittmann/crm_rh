@@ -98,7 +98,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       saveAs(file, name)
     } catch (error) {
       console.error('Erro ao fazer o download do arquivo:', error)
-      console.log('Erro ao fazer o download do arquivo: ', error)
     }
   }
 

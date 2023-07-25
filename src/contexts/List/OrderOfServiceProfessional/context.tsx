@@ -29,11 +29,16 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [metaCommision, setMetaCommision] = useState(
     DEFAULT.META_PROPS
   )
-  const [checked, setChecked] = useState<{ [id: number]: boolean }>({})
-  const [allProfessionalChecked, setAllProfessionalChecked] = useState(false)
-  const [selectSendProfessionals, setSelectSendProfessionals] = useState<OrderProps[]>([])
-  const professionalsHaveCommission = selectSendProfessionals.filter((professional) => professional.isCommission)
-
+  const [checked, setChecked] = useState<{ [id: number]: boolean }>(
+    {}
+  )
+  const [allProfessionalChecked, setAllProfessionalChecked] =
+    useState(false)
+  const [selectSendProfessionals, setSelectSendProfessionals] =
+    useState<OrderProps[]>([])
+  const professionalsHaveCommission = selectSendProfessionals.filter(
+    (professional) => professional.isCommission
+  )
 
   const selectedAllProfessional = async (isChecked: boolean) => {
     if (isChecked) {
@@ -43,14 +48,14 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         companies_id: item.company_id,
         commission: item.commission ? undefined : 0,
         isCommission: item.commission
-
       }))
-      setSelectSendProfessionals((prev) => [...prev, ...temp] as OrderProps[])
+      setSelectSendProfessionals(
+        (prev) => [...prev, ...temp] as OrderProps[]
+      )
     } else {
       setSelectSendProfessionals([])
     }
   }
-
 
   const toggleCheckedAll = (isChecked: boolean) => {
     setAllProfessionalChecked(isChecked)
@@ -63,7 +68,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     selectedAllProfessional(isChecked)
   }
 
-  const selectdSingleProfessional = async (isChecked: boolean, id: number) => {
+  const selectdSingleProfessional = async (
+    isChecked: boolean,
+    id: number
+  ) => {
     if (isChecked) {
       const temp = professionalOS.find((item) => item.id === id)
       const newItem = {
@@ -73,7 +81,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         commission: temp?.commission ? undefined : 0,
         isCommission: temp?.commission
       }
-      setSelectSendProfessionals((prev) => [...prev, newItem] as OrderProps[])
+      setSelectSendProfessionals(
+        (prev) => [...prev, newItem] as OrderProps[]
+      )
     } else {
       setSelectSendProfessionals((prev) =>
         prev.filter((item) => item.professional_id !== id)
@@ -89,16 +99,13 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     if (!isCkecked) {
       setAllProfessionalChecked(false)
     } else {
-      const allChecked = professionalOS.every(
-        (item) => temp[item.id]
-      )
+      const allChecked = professionalOS.every((item) => temp[item.id])
       if (allChecked) {
         setAllProfessionalChecked(true)
       }
     }
     selectdSingleProfessional(isCkecked, id)
   }
-
 
   const ContextPropsProfessionalOS = {
     mergeCommision,

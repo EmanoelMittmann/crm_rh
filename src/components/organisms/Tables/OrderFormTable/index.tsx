@@ -21,7 +21,6 @@ export const OrderFormTable = () => {
     isLoading,
     allProfessionalChecked,
     toggleCheckedAll
-
   } = useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const POPOVER_OPTIONS = (id: number, name: string) => []
