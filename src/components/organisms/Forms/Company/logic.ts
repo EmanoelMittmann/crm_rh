@@ -87,7 +87,5 @@ export const validationSchema = yup.object().shape({
   reason_for_registration_status: yup.string().nullable(),
   special_situation: yup.string().nullable(),
   account_number: yup.string().nullable(),
-  account_type: yup.array().nullable(),
-  agency: yup.string().nullable(),
-  bank: yup.array().nullable()
+  agency: yup.string().nullable()
 })
