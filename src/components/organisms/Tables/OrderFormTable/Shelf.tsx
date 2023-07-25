@@ -21,13 +21,8 @@ export const Shelf = ({
   props,
   config
 }: ShelfProps<OrderPropsProfessional>) => {
-  const {
-    setSelectSendProfessionals,
-    setProfessionalOS,
-    checked,
-    setChecked,
-    selectSendProfessionals
-  } = useContext(List.OrderOfServiceprofessionalOS.Context)
+  const { checked, selectSendProfessionals, toggleCheckedSingle } =
+    useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const {
     name,
@@ -82,31 +77,6 @@ export const Shelf = ({
     return total
   }
 
-  const handleCheckboxChange = async (isChecked: boolean) => {
-    if (isChecked) {
-      const newItem = {
-        name: name,
-        professional_id: id,
-        companies_id: selectedCompany,
-        commission: commission ? undefined : 0,
-        isCommission: commission
-      }
-      setSelectSendProfessionals((prev) => [...prev, newItem])
-    } else {
-      setSelectSendProfessionals((prev) =>
-        prev.filter((item) => item.professional_id !== id)
-      )
-      setProfessionalOS((prev) =>
-        prev.map((professional) => {
-          if (professional.id === id) {
-            delete professional?.commissionHave
-          }
-          return professional
-        })
-      )
-    }
-  }
-
   return (
     <>
       <ContainerShelf
@@ -123,12 +93,8 @@ export const Shelf = ({
               key={id}
               checked={checked[id]}
               onChange={(e) => {
-                setChecked((prev) => ({
-                  ...prev,
-                  [id]: e.target.checked
-                }))
-
-                handleCheckboxChange(e.target.checked)
+                const isChecked = e.target.checked
+                toggleCheckedSingle(isChecked, id)
               }}
               label={name}
             />

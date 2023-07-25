@@ -20,7 +20,7 @@ export const OrderFormTable = () => {
     handleOrder,
     isLoading,
     allProfessionalChecked,
-    setAllProfessionalChecked
+    toggleCheckedAll
   } = useContext(List.OrderOfServiceprofessionalOS.Context)
 
   const POPOVER_OPTIONS = (id: number, name: string) => []
@@ -56,7 +56,7 @@ export const OrderFormTable = () => {
         headers={HEADERS}
         template={GRID_TEMPLATE}
         handleOrder={handleOrder}
-        setAllProfessionalChecked={setAllProfessionalChecked}
+        toggleCheckedAll={toggleCheckedAll}
         allProfessionalChecked={allProfessionalChecked}
       />
       {Table}

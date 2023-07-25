@@ -68,6 +68,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const handleGetUploadUrlSigned = async () => {
     try {
       const { data } = await api.post(routes.notes.user)
+
       const { pdfPreSignedUrl, xmlPreSignedUrl, error } =
         data as FiscalNotesProfissionalsData
       if (error) {
@@ -103,8 +104,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       })
 
       const data = await response.json()
-
-      console.log(data)
     } catch (error) {
       console.error('Erro ao enviar arquivo:', error)
     }
@@ -115,6 +114,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
     if (verifyFiles()) {
       const urls = await handleGetUploadUrlSigned()
+
       const { pdfPreSignedUrl, xmlPreSignedUrl } = urls as {
         pdfPreSignedUrl: string
         xmlPreSignedUrl: string
@@ -142,8 +142,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         pdfFile && uploadFile(pdfFile, pdfPreSignedUrl),
         xmlFile && uploadFile(xmlFile, xmlPreSignedUrl)
       ])
-
-      console.log(res1, res2)
     }
 
     setLoading(false)
