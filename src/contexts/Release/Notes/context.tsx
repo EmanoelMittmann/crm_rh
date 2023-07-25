@@ -7,7 +7,11 @@ import { filesize } from 'filesize'
 import api from 'api'
 import { routes } from 'routes'
 
-import { ContextProps, IFileProps } from './types'
+import {
+  ContextProps,
+  FiscalNotesProfissionalsData,
+  IFileProps
+} from './types'
 
 export const Context = createContext({} as ContextProps)
 
@@ -61,83 +65,85 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     return true
   }
 
+  const handleGetUploadUrlSigned = async () => {
+    try {
+      const { data } = await api.post(routes.notes.user)
+      const { pdfPreSignedUrl, xmlPreSignedUrl, error } =
+        data as FiscalNotesProfissionalsData
+      if (error) {
+        toast({
+          type: 'error',
+          title: 'NF não enviada.',
+          description: 'Profissional já lançou nota fiscal neste mês',
+          position: 'bottom-right'
+        })
+        return
+      }
+
+      return {
+        pdfPreSignedUrl,
+        xmlPreSignedUrl
+      }
+    } catch (error) {
+      console.log(error)
+      return null
+    }
+  }
+
+  const uploadFile = async (file: File, url: string) => {
+    const fileBuffer = await file.arrayBuffer()
+
+    try {
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': file.type
+        },
+        body: fileBuffer
+      })
+
+      const data = await response.json()
+
+      console.log(data)
+    } catch (error) {
+      console.error('Erro ao enviar arquivo:', error)
+    }
+  }
+
   const handleSave = async () => {
     setLoading(true)
 
     if (verifyFiles()) {
-      try {
-        const pdfUrl =
-          'https://ubi-labs-development.s3.amazonaws.com/uploads/85/pdf/2/MatheusTesteDaSilva.pdf?AWSAccessKeyId=AKIAYABDEGGGLHNOL454&Expires=1687193476&Signature=efYCI1HNzEtg7Tpj8OGvafWUFvw%3D'
-        const xmlUrl =
-          'https://ubi-labs-development.s3.amazonaws.com/uploads/85/xml/2/MatheusTesteDaSilva.xml?AWSAccessKeyId=AKIAYABDEGGGLHNOL454&Expires=1687193476&Signature=tmihB%2FMI1SurMJ5BhrqebTVORaY%3D'
+      const urls = await handleGetUploadUrlSigned()
+      const { pdfPreSignedUrl, xmlPreSignedUrl } = urls as {
+        pdfPreSignedUrl: string
+        xmlPreSignedUrl: string
+      }
 
-        const uploadFile = async (file: File, url: string) => {
-          try {
-            const response = await fetch(url, {
-              method: 'PUT',
-              body: file
-            })
-
-            if (response.ok) {
-            } else {
-              console.error(
-                'Erro ao enviar arquivo:',
-                response.statusText
-              )
-            }
-          } catch (error) {
-            console.error('Erro ao enviar arquivo:', error)
-          }
-        }
-
-        const pdfFile: File | undefined =
-          filePdf?.file[0] instanceof File
-            ? filePdf?.file[0]
-            : undefined
-        const xmlFile: File | undefined =
-          fileXml?.file[0] instanceof File
-            ? fileXml?.file[0]
-            : undefined
-
-        await Promise.all([
-          pdfFile && uploadFile(pdfFile, pdfUrl),
-          xmlFile && uploadFile(xmlFile, xmlUrl)
-        ])
-
-        await api
-          .post(routes.notes.user, data, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          })
-          .then(({ data }) => {
-            if (data.error) {
-              return toast({
-                type: 'error',
-                title: 'NF não enviada',
-                description: data.error[0],
-                position: 'bottom-right'
-              })
-            }
-
-            toast({
-              type: 'success',
-              title: 'NF enviada com sucesso!',
-              description: 'Você será redirecionado para o início',
-              position: 'bottom-right'
-            })
-
-            navigate(-1)
-          })
-      } catch (error) {
+      if (!pdfPreSignedUrl || !xmlPreSignedUrl) {
         toast({
           type: 'error',
           title: 'NF não enviada.',
-          description:
-            'Verifique os dados de CNPJ e valor e tente enviar novamente',
+          description: 'Erro ao enviar as Ulrs de upload',
           position: 'bottom-right'
         })
       }
+
+      const pdfFile: File | undefined =
+        filePdf?.file[0] instanceof File
+          ? filePdf?.file[0]
+          : undefined
+      const xmlFile: File | undefined =
+        fileXml?.file[0] instanceof File
+          ? fileXml?.file[0]
+          : undefined
+
+      const [res1, res2] = await Promise.all([
+        pdfFile && uploadFile(pdfFile, pdfPreSignedUrl),
+        xmlFile && uploadFile(xmlFile, xmlPreSignedUrl)
+      ])
+
+      console.log(res1, res2)
     }
 
     setLoading(false)
