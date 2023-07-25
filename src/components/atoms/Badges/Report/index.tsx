@@ -11,14 +11,14 @@ export default ({ status }: Props) => {
       status === 'Pendente'
         ? colors.status.alert
         : status === 'Pronto para pagar'
-        ? colors.positive.transparent
-        : status === 'Pago' && colors.negative.transparent,
+        ? '#0066ff15'
+        : status === 'Pago' && colors.positive.transparent,
     color:
       status === 'Pendente'
         ? colors.status.alert
         : status === 'Pronto para pagar'
-        ? colors.positive.pure
-        : status === 'Pago' && colors.negative.pure,
+        ? '#0066ff'
+        : status === 'Pago' && colors.positive.pure,
     text:
       status === 'Pendente'
         ? 'Pendente'
