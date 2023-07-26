@@ -7,13 +7,17 @@ import {
   useRef
 } from 'react'
 
-import { Button, Select, Textarea, Typography } from '@stardust-ds/react'
-import { List } from 'contexts'
 import {
-  ExtraHoursRhProps,
-} from 'contexts/List/ExtraHoursRh/types'
+  Button,
+  Select,
+  Textarea,
+  Typography
+} from '@stardust-ds/react'
+import { List } from 'contexts'
+import { ExtraHoursRhProps } from 'contexts/List/ExtraHoursRh/types'
 import { theme } from 'styles'
 
+import { Badge } from 'components/atoms'
 import Close from 'components/atoms/Buttons/Close'
 import { Modal } from 'components/molecules/Modais'
 import { formatDate } from 'components/utils/formatDate'
@@ -27,8 +31,8 @@ import {
   ContainerTitleJustification,
   Overlay,
   TextTitle,
-  Columns, 
-  ContainerModal, 
+  Columns,
+  ContainerModal,
   Row
 } from './style'
 import {
@@ -37,15 +41,15 @@ import {
   optionsApproval
 } from './type'
 import { Option } from 'types'
-import { Badge } from 'components/atoms'
 
 const OvertimeReleaseRh = forwardRef<
   IHandleModalPropsExtrasHoursRh,
   IModalProps
 >((props, ref) => {
   const { text } = props
-  const {detais, handleFillAccept, fetchList } =
-    useContext(List.ExtraHoursRh.Context)
+  const { detais, handleFillAccept, fetchList } = useContext(
+    List.ExtraHoursRh.Context
+  )
 
   const modalRef = useRef<IHandleModalPropsAlert>(null)
 
@@ -56,7 +60,6 @@ const OvertimeReleaseRh = forwardRef<
   const professional = detais.find((item: ExtraHoursRhProps) => ({
     id: item.id
   }))
-
 
   const handleApprovalHours = async () => {
     try {
@@ -118,7 +121,6 @@ const OvertimeReleaseRh = forwardRef<
           </Row>
 
           <Row>
-
             <Typography type='h3' color={theme.neutrals.gray5}>
               {professional?.project.name}
             </Typography>
@@ -132,7 +134,9 @@ const OvertimeReleaseRh = forwardRef<
               Lançado em{' '}
               {formatDate(String(professional?.updated_at))}
             </Typography>
-            {professional?.status && <Badge.Hours status={professional.status} />}
+            {professional?.status && (
+              <Badge.Hours status={professional.status} />
+            )}
           </Row>
 
           <Row>

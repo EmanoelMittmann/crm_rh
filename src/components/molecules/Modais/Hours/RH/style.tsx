@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { theme } from 'styles'
 
-
 export const ContainerModal = styled.div<{
   width?: string
   height?: string
@@ -43,7 +42,6 @@ export const Row = styled.div<{ gap?: string }>`
   width: 90%;
   justify-content: space-between;
 `
-
 
 export const Overlay = styled.div`
   position: fixed;
