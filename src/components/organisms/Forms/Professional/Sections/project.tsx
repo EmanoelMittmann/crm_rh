@@ -13,44 +13,76 @@ import type { FormProps } from '../types'
 export const Project = () => {
   const { register, watch, setValue, ...methods } =
     useFormContext<FormProps>()
+  const { errors } = methods.formState
   const { id } = useParams()
   const { projects } = watch()
 
-  const handleAddMockProject = () => {
-    const project = watch('projects.selected.project') as any
-    const { id, name } = project?.value
-    const payload: ProjectPropsHours = {
-      id,
-      name,
-      date_start: new Date().toLocaleDateString('pt-BR'),
-      extra_hours_estimated:
-        Number(watch('projects.selected.input1')) || 0,
-      hours_mounths_estimated:
-        Number(watch('projects.selected.input1')) || 0,
-      extra_hours_performed: 0,
-      hours_mounths_performed: 0
+  const verifyValues = () => {
+    if (
+      Number(projects?.selected?.input1) > 160 ||
+      Number(projects?.selected?.input1) < 0
+    ) {
+      methods.setError('projects.selected.input1', {
+        message: 'Valores Invalidos',
+        type: 'required'
+      })
+      return false
     }
-    const previous_projects = watch('projects.attachment', [])
-    setValue('projects.attachment', [...previous_projects, payload])
+    if (
+      Number(projects?.selected?.input2) > 80 ||
+      Number(projects?.selected?.input2) < 0
+    ) {
+      methods.setError('projects.selected.input2', {
+        message: 'Valores Invalidos',
+        type: 'required'
+      })
+      return false
+    }
+    return true
+  }
+
+  const handleAddMockProject = () => {
+    if (verifyValues()) {
+      const project = watch('projects.selected.project') as any
+      const { id, name } = project?.value
+      const payload: ProjectPropsHours = {
+        id,
+        name,
+        date_start: new Date().toLocaleDateString('pt-BR'),
+        extra_hours_estimated:
+          Number(watch('projects.selected.input1')) || 0,
+        hours_mounths_estimated:
+          Number(watch('projects.selected.input1')) || 0,
+        extra_hours_performed: 0,
+        hours_mounths_performed: 0
+      }
+      const previous_projects = watch('projects.attachment', [])
+      setValue('projects.attachment', [...previous_projects, payload])
+      setValue('projects.selected.input1', '')
+      setValue('projects.selected.input2', '')
+      setValue('projects.selected.project', null)
+    }
   }
 
   const handleAddProject = () => {
-    const monthHours = watch('projects.selected.input1')
-    const extraHours = watch('projects.selected.input2')
-    const project = watch('projects.selected.project') as any
-    const projectid = project?.value.id
+    if (verifyValues()) {
+      const monthHours = watch('projects.selected.input1')
+      const extraHours = watch('projects.selected.input2')
+      const project = watch('projects.selected.project') as any
+      const projectid = project?.value.id
 
-    if (!id) return null
+      if (!id) return null
 
-    projectBind(
-      {
-        hours_mounths_estimated: Number(monthHours),
-        extra_hours_estimated: Number(extraHours),
-        id: Number(projectid)
-      },
-      Number(id),
-      { register, watch, setValue, ...methods }
-    )
+      projectBind(
+        {
+          hours_mounths_estimated: Number(monthHours),
+          extra_hours_estimated: Number(extraHours),
+          id: Number(projectid)
+        },
+        Number(id),
+        { register, watch, setValue, ...methods }
+      )
+    }
   }
 
   return (
@@ -70,33 +102,22 @@ export const Project = () => {
           label='Projeto'
           placeholder='Selecione'
           width={275}
-          height={40}
         />
         <Inputs.Default
           {...register('projects.selected.input1')}
           label='Horas/mês estimadas'
           type='number'
-          error={
-            Number(projects?.selected?.input1) < 0
-              ? 'Valores Invalidos'
-              : undefined
-          }
+          error={errors.projects?.selected?.input1?.message}
           placeholder='Horas/mês'
           width='350px'
-          height={40}
         />
         <Inputs.Default
           {...register('projects.selected.input2')}
           label='Horas extras estimadas'
           type='number'
-          error={
-            Number(projects?.selected?.input2) < 0
-              ? 'Valores Invalidos'
-              : undefined
-          }
+          error={errors.projects?.selected?.input2?.message}
           placeholder='Horas extras'
           width='350px'
-          height={40}
         />
         <ButtonGeneric
           top='1.5em'
