@@ -20,6 +20,7 @@ export const Contract = () => {
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleSearch(e.target.value)
           }
+          height={42}
         />
         <Selects.Default
           options={filterOptions.status}

@@ -3,7 +3,7 @@ import { ListOrderTemplate } from 'components/templates'
 
 const OrderForm = () => {
   return (
-    <ListOrderTemplate title='criar nova O.S'>
+    <ListOrderTemplate title='Criar nova O.S'>
       <Filter.OrderFormFilter />
       <Table.OrderFormTable />
     </ListOrderTemplate>

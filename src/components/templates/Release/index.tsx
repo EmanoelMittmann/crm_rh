@@ -29,7 +29,7 @@ export default ({
 }: Props) => {
   return (
     <Main>
-      <Container gap='2rem'>
+      <Container gap='1rem'>
         <Row>
           {!!title && (
             <Typography type='h3' color={FONT_COLOR}>

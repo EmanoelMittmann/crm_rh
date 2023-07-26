@@ -8,7 +8,7 @@ import {
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { Inputs } from 'components/atoms'
+import { IconGlass, Inputs } from 'components/atoms'
 
 import { Container, Main } from '../style'
 import { Option } from 'types'
@@ -34,6 +34,7 @@ export const Reports = () => {
           value={search}
           width={230}
           height={42}
+          iconLeft={<IconGlass />}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleSearch(e.target.value)
           }

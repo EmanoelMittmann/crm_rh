@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { Button } from 'components/atoms'
+import { Button, IconGlass } from 'components/atoms'
 
 import { Container, Main } from '../style'
 import { Option } from 'types'
@@ -28,6 +28,7 @@ export const Companys = () => {
           width={230}
           height={42}
           placeholder='Buscar...'
+          iconLeft={<IconGlass />}
           onChange={(e) => handleSearch(e.target.value)}
         />
         <Select
