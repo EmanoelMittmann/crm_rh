@@ -7,14 +7,17 @@ import {
   useRef
 } from 'react'
 
-import { Badge, Button, Select, Textarea } from '@stardust-ds/react'
-import { List } from 'contexts'
 import {
-  ExtraHoursRhProps,
-  StatusHours
-} from 'contexts/List/ExtraHoursRh/types'
+  Button,
+  Select,
+  Textarea,
+  Typography
+} from '@stardust-ds/react'
+import { List } from 'contexts'
+import { ExtraHoursRhProps } from 'contexts/List/ExtraHoursRh/types'
 import { theme } from 'styles'
 
+import { Badge } from 'components/atoms'
 import Close from 'components/atoms/Buttons/Close'
 import { Modal } from 'components/molecules/Modais'
 import { formatDate } from 'components/utils/formatDate'
@@ -24,19 +27,13 @@ import { routes } from 'routes'
 
 import { IHandleModalPropsAlert } from '../../Alert'
 import {
-  Columns,
-  ContainerAbsolute,
   ContainerButtons,
-  ContainerData,
-  ContainerModal,
   ContainerTitleJustification,
-  ContainerTitles,
   Overlay,
-  Row,
-  Text,
-  TextJustification,
   TextTitle,
-  TitleProject
+  Columns,
+  ContainerModal,
+  Row
 } from './style'
 import {
   IHandleModalPropsExtrasHoursRh,
@@ -50,8 +47,9 @@ const OvertimeReleaseRh = forwardRef<
   IModalProps
 >((props, ref) => {
   const { text } = props
-  const { statusHours, detais, handleFillAccept, fetchList } =
-    useContext(List.ExtraHoursRh.Context)
+  const { detais, handleFillAccept, fetchList } = useContext(
+    List.ExtraHoursRh.Context
+  )
 
   const modalRef = useRef<IHandleModalPropsAlert>(null)
 
@@ -59,12 +57,9 @@ const OvertimeReleaseRh = forwardRef<
   const [currentJustification, setCurrentJustification] = useState('')
   const [toAccept, setToAccept] = useState<boolean>(true)
 
-  const approvalData = detais.find((item: ExtraHoursRhProps) => ({
+  const professional = detais.find((item: ExtraHoursRhProps) => ({
     id: item.id
   }))
-  const status: StatusHours | undefined = statusHours.find(
-    (item: StatusHours) => item.id === approvalData?.status.id
-  )
 
   const handleApprovalHours = async () => {
     try {
@@ -118,77 +113,80 @@ const OvertimeReleaseRh = forwardRef<
 
   return (
     <>
-      <ContainerModal>
-        <Columns>
+      <ContainerModal width='40em' height='auto'>
+        <Columns content='center' gap='1em'>
           <Row>
-            <h2>{text}</h2>
+            <Typography type='h2'>{text}</Typography>
             <Close onClick={() => close()} />
           </Row>
 
           <Row>
-            <ContainerAbsolute>
-              <TitleProject>
-                {approvalData?.project.name}
-              </TitleProject>
-              <ContainerData>
-                <Text>
-                  Lançado em{' '}
-                  {formatDate(String(approvalData?.updated_at))}
-                </Text>
-                <Badge
-                  style={{ width: '170px', border: 'none' }}
-                  label={String(status?.name)}
-                  variant='flat'
-                  bgColor={status?.color.text_color}
-                  typographyProps={{
-                    textAlign: 'center',
-                    color: status?.color.text_color
-                  }}
-                />
-              </ContainerData>
-              <ContainerTitles>
-                <TextTitle>Período</TextTitle>
-                <TextTitle>Horas</TextTitle>
-              </ContainerTitles>
-              <ContainerTitles>
-                <Text>
-                  {formatDate(String(approvalData?.launch_date))}
-                </Text>
-                <Text>{approvalData?.hour_quantity}</Text>
-              </ContainerTitles>
-              <ContainerTitleJustification>
-                <TextTitle>Justificativa</TextTitle>
-                <TextJustification>
-                  {approvalData?.justification}
-                </TextJustification>
-              </ContainerTitleJustification>
-              <ContainerTitleJustification>
-                <Select
-                  width={200}
-                  options={optionsApproval}
-                  clearable={false}
-                  value={valueApproval}
-                  onSelect={handleOptionSelect}
-                />
-              </ContainerTitleJustification>
-            </ContainerAbsolute>
+            <Typography type='h3' color={theme.neutrals.gray5}>
+              {professional?.project.name}
+            </Typography>
           </Row>
           <Row>
-            {!toAccept && (
-              <ContainerTitleJustification>
-                <TextTitle>Descrição</TextTitle>
-                <Textarea
-                  placeholder='Descrição'
-                  style={{ width: '100%' }}
-                  rows={4}
-                  value={currentJustification}
-                  maxLength={200}
-                  onChange={(e) =>
-                    setCurrentJustification(e.target.value)
-                  }
-                />
-              </ContainerTitleJustification>
+            <Typography
+              type='p2'
+              color={theme.neutrals.gray4}
+              fontStyle='italic'
+            >
+              Lançado em{' '}
+              {formatDate(String(professional?.updated_at))}
+            </Typography>
+            {professional?.status && (
+              <Badge.Hours status={professional.status} />
             )}
+          </Row>
+
+          <Row>
+            <Columns align='start' gap='0.5em'>
+              <Typography type='l3'>Período</Typography>
+              <Typography type='p3' color={theme.neutrals.gray5}>
+                {formatDate(String(professional?.launch_date))}
+              </Typography>
+            </Columns>
+
+            <Columns align='start' gap='0.5em'>
+              <Typography type='l3'>Horas</Typography>
+              <Typography type='p3' color={theme.neutrals.gray5}>
+                {professional?.hour_quantity}
+              </Typography>
+            </Columns>
+          </Row>
+          <Row>
+            <Columns align='start' space='normal' gap='0.5em'>
+              <Typography type='l3'>Justificativa</Typography>
+              <Typography type='p3' color={theme.neutrals.gray5}>
+                {professional?.justification}
+              </Typography>
+            </Columns>
+          </Row>
+          <Row>
+            <Columns align='start' gap='1em'>
+              <Select
+                width={280}
+                options={optionsApproval}
+                clearable={false}
+                value={valueApproval}
+                onSelect={handleOptionSelect}
+              />
+              {!toAccept && (
+                <ContainerTitleJustification>
+                  <TextTitle>Descrição</TextTitle>
+                  <Textarea
+                    placeholder='Descrição'
+                    style={{ width: '100%' }}
+                    rows={4}
+                    value={currentJustification}
+                    maxLength={200}
+                    onChange={(e) =>
+                      setCurrentJustification(e.target.value)
+                    }
+                  />
+                </ContainerTitleJustification>
+              )}
+            </Columns>
           </Row>
           <Row>
             <ContainerButtons>
