@@ -174,6 +174,7 @@ export const Contract = () => {
           clearable={false}
           value={Company as any}
           placeholder='Selecione'
+          required
         />
       </ContainerRow>
     </>
