@@ -35,7 +35,9 @@ export const Sidebar = () => {
   function handleSelect(btnSelect: string) {
     const updatedConfig = alterObject(selects, btnSelect)
     setSelects(updatedConfig)
-    navigate(`/${btnSelect}`)
+    setTimeout(() => {
+      navigate(`/${btnSelect}`)
+    }, 120)
     saveConfigurations(updatedConfig)
   }
 
