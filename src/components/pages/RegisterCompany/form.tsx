@@ -19,7 +19,8 @@ export const FormCompany = ({ defaultValue }: IFormCompany) => {
   const methods = useForm<FormProps['Company']>({
     defaultValues: defaultValue || {
       main_cnae: null,
-      secondary_cnae: null
+      secondary_cnae: null,
+      is_matriz: false
     },
     resolver: yupResolver(SchemaCompany)
   })

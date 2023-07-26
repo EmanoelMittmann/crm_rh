@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useFormContext, WatchObserver } from 'react-hook-form'
 
 import { Typography } from '@stardust-ds/react'
@@ -27,28 +27,26 @@ export const Company = () => {
       label: 'Sim',
       input: (
         <Radio
-          id='1'
-          {...register('is_matriz', { valueAsNumber: true })}
           value={1}
           checked={watch('is_matriz')}
+          onClick={() => setValue('is_matriz', true)}
         />
       ),
-      active: !!Number(watch('is_matriz'))
+      active: watch('is_matriz')
     },
     {
       label: 'Não',
       input: (
         <Radio
-          id='2'
-          {...register('is_matriz', { valueAsNumber: true })}
           value={0}
           checked={!watch('is_matriz')}
-          defaultChecked
+          onClick={() => setValue('is_matriz', false)}
         />
       ),
-      active: !Number(watch('is_matriz'))
+      active: !watch('is_matriz')
     }
   ]
+
   useEffect(() => {}, [watch('options')])
   return (
     <>

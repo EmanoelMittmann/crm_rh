@@ -18,7 +18,7 @@ export const TableHeader = ({
   headers,
   handleOrder,
   allProfessionalChecked,
-  setAllProfessionalChecked
+  toggleCheckedAll
 }: TemplateProps) => {
   return (
     <Container {...{ template }}>
@@ -29,8 +29,8 @@ export const TableHeader = ({
               <Inputs.Check
                 checked={allProfessionalChecked}
                 onChange={() =>
-                  setAllProfessionalChecked &&
-                  setAllProfessionalChecked((prev) => !prev)
+                  toggleCheckedAll &&
+                  toggleCheckedAll(!allProfessionalChecked)
                 }
               />
             </ContainerChecked>
