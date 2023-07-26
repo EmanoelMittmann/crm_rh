@@ -1,6 +1,8 @@
 import { useContext, useRef, useMemo } from 'react'
 
+import { Typography } from '@stardust-ds/react'
 import { List } from 'contexts'
+import { theme } from 'styles'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
@@ -9,7 +11,7 @@ import {
   Modal
 } from 'components/molecules/Modais'
 
-import { LoadingWrapper, Main } from '../style'
+import { LoadingWrapper, Main, NotFoundWrapper } from '../style'
 import { GRID_TEMPLATE } from './contants'
 import { HEADERS } from './contants'
 import Shelf from './shelf'
@@ -46,6 +48,20 @@ export const TypesProject = () => {
           <Loading />
         </LoadingWrapper>
       )
+
+    if (typesProjects.length === 0) {
+      return (
+        <NotFoundWrapper>
+          <Typography
+            color={theme.neutrals.gray5}
+            fontWeight='bold'
+            type='h3'
+          >
+            Tipo de projeto não encontrado
+          </Typography>
+        </NotFoundWrapper>
+      )
+    }
 
     return typesProjects.map((props) => (
       <Shelf

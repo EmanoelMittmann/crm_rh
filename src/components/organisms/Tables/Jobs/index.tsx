@@ -1,6 +1,8 @@
 import { useContext, useMemo, useRef } from 'react'
 
+import { Typography } from '@stardust-ds/react'
 import { List } from 'contexts'
+import { theme } from 'styles'
 
 import { Loading } from 'components/atoms'
 import {
@@ -9,7 +11,7 @@ import {
 } from 'components/molecules'
 import { Modal } from 'components/molecules/Modais'
 
-import { LoadingWrapper } from '../style'
+import { LoadingWrapper, NotFoundWrapper } from '../style'
 import { Main } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import Shelf from './Shelf'
@@ -46,6 +48,20 @@ export const Jobs = () => {
           <Loading />
         </LoadingWrapper>
       )
+
+    if (jobs.length === 0) {
+      return (
+        <NotFoundWrapper>
+          <Typography
+            color={theme.neutrals.gray5}
+            fontWeight='bold'
+            type='h3'
+          >
+            Cargo não encontrado
+          </Typography>
+        </NotFoundWrapper>
+      )
+    }
 
     return jobs.map((props) => (
       <Shelf

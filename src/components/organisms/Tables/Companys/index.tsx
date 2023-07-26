@@ -6,9 +6,11 @@ import { List } from 'contexts'
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 
-import { LoadingWrapper, Main } from '../style'
+import { LoadingWrapper, Main, NotFoundWrapper } from '../style'
 import { HEADERS, GRID_TEMPLATE } from './constants'
 import { Shelf } from './Shelf'
+import { Typography } from '@stardust-ds/react'
+import { theme } from 'styles'
 
 export const Companys = () => {
   const navigate = useNavigate()
@@ -28,6 +30,19 @@ export const Companys = () => {
         </LoadingWrapper>
       )
 
+    if (companys.length === 0) {
+      return (
+        <NotFoundWrapper>
+          <Typography
+            color={theme.neutrals.gray5}
+            fontWeight='bold'
+            type='h3'
+          >
+            Empresa não encontrada
+          </Typography>
+        </NotFoundWrapper>
+      )
+    }
     return companys.map((props) => (
       <Shelf
         config={{
