@@ -21,7 +21,7 @@ export const Container = styled.div`
 export const ContainerFixed = styled.div`
   width: 100%;
   max-width: 94.5%;
-  height: 220px;
+  height: 140px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -39,7 +39,7 @@ export const ContainerFixed = styled.div`
     margin-left: auto;
     margin-right: auto;
     justify-content: center;
-    margin-top: 1em;
+    margin-top: 0.5em;
   }
 `
 
@@ -50,5 +50,5 @@ export const ConatinerButton = styled.div`
   width: 305px;
   display: flex;
   padding-right: 2em;
-  margin-top: 6.5em;
+  margin-top: 2.5em;
 `
