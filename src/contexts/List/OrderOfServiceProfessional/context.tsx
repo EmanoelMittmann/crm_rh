@@ -228,6 +228,13 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       delete updatedChecked[id]
       return updatedChecked
     })
+
+    setAllProfessionalChecked((prevCheckedAll) => {
+      if (prevCheckedAll) {
+        return false
+      }
+      return prevCheckedAll
+    })
   }
 
   function navigateTo(url: string) {
