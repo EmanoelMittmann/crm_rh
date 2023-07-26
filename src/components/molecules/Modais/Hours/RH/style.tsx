@@ -1,39 +1,49 @@
 import styled from 'styled-components'
 import { theme } from 'styles'
 
-export const ContainerModal = styled.div`
-  width: 45em;
-  height: 700px;
+
+export const ContainerModal = styled.div<{
+  width?: string
+  height?: string
+}>`
+  width: ${({ width }) => width};
+  min-height: ${({ height }) => height};
+  height: auto;
   border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
+  position: absolute;
   display: flex;
+  padding: 2em 0em;
   top: 50%;
-  left: 40%;
-  position: fixed;
-  transform: translate(-20%, -50%);
-  padding-top: 0.8em;
+  left: 50%;
+  transform: translate(-30%, -50%);
   z-index: 10;
   box-shadow: 0px 5px 10px 10px ${theme.neutrals.gray3};
 `
-export const Columns = styled.div`
+
+export const Columns = styled.div<{
+  gap?: string
+  align?: string
+  content?: string
+  space?: string
+}>`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: ${({ align }) => (align ? align : 'center')};
+  white-space: ${({ space }) => (space ? space : 'nowrap')};
+  justify-content: ${({ content }) => content};
+  gap: ${({ gap }) => gap};
 `
 
-export const Row = styled.div`
+export const Row = styled.div<{ gap?: string }>`
   display: flex;
   align-items: center;
   flex-direction: row;
-  margin: auto;
   width: 90%;
   justify-content: space-between;
-
-  h2 {
-    color: ${theme.neutrals.gray8};
-  }
 `
+
 
 export const Overlay = styled.div`
   position: fixed;
@@ -55,40 +65,7 @@ export const TitleProject = styled.h3`
   font-size: 1.2rem;
   font-weight: 500;
 `
-export const ContainerData = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1em;
-`
 
-export const Text = styled.p`
-  white-space: nowrap;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  padding-left: ${(props) => props.title};
-  color: ${(props) => props.color};
-  font-size: 1rem;
-  font-weight: 400;
-  margin-right: 2.5em;
-`
-export const TextJustification = styled.p`
-  white-space: wrap;
-  padding-left: ${(props) => props.title};
-  color: ${(props) => props.color};
-  font-size: 1rem;
-  font-weight: 400;
-  margin-right: 2.5em;
-`
-export const ContainerTitles = styled.div`
-  width: 40%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 1em 0em;
-`
 export const ContainerTitleJustification = styled.div`
   width: 100%;
   display: flex;
@@ -103,6 +80,4 @@ export const ContainerButtons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: -2em;
-  margin-bottom: 2em;
 `

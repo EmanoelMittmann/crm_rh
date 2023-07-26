@@ -83,7 +83,7 @@ export const Shelf = ({
       </ContainerShelf>
       <Modal.OvertimeReleaseRh
         ref={modalRef}
-        text={'Lançamento' + ' # ' + id}
+        text={'Lançamento' + ' #' + id}
         placeholder='Lançamento'
         EventOne={() => handleDetails(id)}
       />

@@ -52,20 +52,19 @@ export interface ExtraHoursRhProps {
   extra_hours_status_id: number
   launch_date: string
   id: number
-  user: {
-    id: number
-    name: string
-  }
-  project: {
-    id: number
-    name: string
-  }
-  status: {
-    id: number
-    name: string
-  }
+  status: Status
+  project: Iproject
 }
 
+interface Status {
+  name: string
+  id: number
+}
+
+interface Iproject {
+  name: string
+  id: number
+}
 export interface ProjectExtraHoursProps {
   id: number
   name: string
