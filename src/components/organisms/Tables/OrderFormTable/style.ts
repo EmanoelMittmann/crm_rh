@@ -5,7 +5,7 @@ import { TemplateProps } from '../types'
 
 export const ScrollContainer = styled.ul`
   overflow-y: scroll;
-  height: 440px;
+  height: 820px;
   width: 100%;
   margin-bottom: 0.5em;
   border-bottom: 1px solid #ccc;
@@ -35,13 +35,13 @@ export const ContainerText = styled.div`
 `
 
 export const ContainerOnPrice = styled.div`
-  height: auto;
   display: flex;
-  flex-direction: column;
+  width: 700px;
+  height: 95px;
+  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: start;
-  white-space: nowrap;
   align-items: flex-start;
-  margin-top: -0.5em;
   margin-left: 1em;
 
   .price {
@@ -52,16 +52,16 @@ export const ContainerOnPrice = styled.div`
 
 export const CompaniesField = styled.div`
   display: flex;
-  width: 300px;
-  padding: 0 0 0.5em 0;
+  width: 250px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-right: 5em;
 `
 export const Text = styled.p`
   width: 150px;
   padding-left: ${(props) => props.title};
-  font-weight: 500;
+  font-weight: 400;
   font-size: 0.8em;
   white-space: nowrap;
   overflow: hidden;
@@ -69,11 +69,11 @@ export const Text = styled.p`
 `
 export const Some = styled.span`
   width: 40%;
-  padding: 0em 0.5em 0 0em;
   display: flex;
   align-items: center;
   justify-content: end;
-  font-weight: 500;
+  font-size: 0.8em;
+  font-weight: 550;
 `
 export const ContainerShelf = styled.div<TemplateProps>`
   width: 100%;
