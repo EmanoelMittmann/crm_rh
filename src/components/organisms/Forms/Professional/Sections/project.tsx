@@ -23,7 +23,7 @@ export const Project = () => {
       Number(projects?.selected?.input1) < 0
     ) {
       methods.setError('projects.selected.input1', {
-        message: 'Valores Invalidos',
+        message: 'O valor não pode exceder 160h mensais',
         type: 'required'
       })
       return false
@@ -33,11 +33,14 @@ export const Project = () => {
       Number(projects?.selected?.input2) < 0
     ) {
       methods.setError('projects.selected.input2', {
-        message: 'Valores Invalidos',
+        message: 'O valor não pode exceder 80h mensais',
         type: 'required'
       })
+      methods.setError('projects.selected.input1', { message: '' })
       return false
     }
+    methods.setError('projects.selected.input1', { message: '' })
+    methods.setError('projects.selected.input2', { message: '' })
     return true
   }
 
