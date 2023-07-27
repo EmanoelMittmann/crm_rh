@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState } from 'react'
 
+import { toast } from '@stardust-ds/react'
 import { LocalStorageKeys } from 'config'
 import jwt_decode from 'jwt-decode'
 
@@ -56,6 +57,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       window.location.href = '/home'
     } catch (error: any) {
       console.error(error.message)
+      toast({
+        type: 'error',
+        title: 'Não foi possivel fazer login!',
+        description: 'Tente novamente mais tarde'
+      })
     }
   }
 
