@@ -16,6 +16,7 @@ export interface DefaultMetaProps {
 export interface ContextHoursProps {
   meta: DefaultMetaProps
   releases: any[]
+  details: HoursProps[]
   isLoading: boolean
   filterOptions: {
     project: SelectProps['options']
@@ -31,10 +32,12 @@ export interface ContextHoursProps {
   handleDate(start: string, end: string): void
   handleStatus(id: number | null): void
   handleProject(id: number | null): void
+  handleDetails(id: number): void
 }
 
 export interface HoursProps {
   id: number
+  name: string
   launch_date: string
   end_date: string
   type: string
@@ -43,12 +46,16 @@ export interface HoursProps {
   user_id: number
   project_id: number
   extra_hours_status_id: number
-  status: {
-    name: string
-    id: number
-  }
-  project: {
-    name: string
-    id: number
-  }
+  status: Status
+  project: Project
+}
+
+interface Status {
+  id: number
+  name: string
+}
+
+interface Project {
+  id: number
+  name: string
 }

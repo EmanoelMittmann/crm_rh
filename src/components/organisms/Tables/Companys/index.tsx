@@ -1,7 +1,9 @@
 import { useContext, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { Typography } from '@stardust-ds/react'
 import { List } from 'contexts'
+import { theme } from 'styles'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
@@ -9,8 +11,6 @@ import { TableHeader } from 'components/molecules'
 import { LoadingWrapper, Main, NotFoundWrapper } from '../style'
 import { HEADERS, GRID_TEMPLATE } from './constants'
 import { Shelf } from './Shelf'
-import { Typography } from '@stardust-ds/react'
-import { theme } from 'styles'
 
 export const Companys = () => {
   const navigate = useNavigate()
