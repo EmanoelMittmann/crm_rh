@@ -1,7 +1,9 @@
 import { useContext, useMemo, useRef } from 'react'
 
+import { Typography } from '@stardust-ds/react'
 import { List } from 'contexts'
 import { ColorProps } from 'contexts/List/Settings/StatusProjects/types'
+import { theme } from 'styles'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
@@ -10,7 +12,7 @@ import {
   Modal
 } from 'components/molecules/Modais'
 
-import { LoadingWrapper, Main } from '../style'
+import { LoadingWrapper, Main, NotFoundWrapper } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import Shelf from './shelf'
 
@@ -46,6 +48,20 @@ export const StatusProject = () => {
           <Loading />
         </LoadingWrapper>
       )
+
+    if (statusProjects.length === 0) {
+      return (
+        <NotFoundWrapper>
+          <Typography
+            color={theme.neutrals.gray5}
+            fontWeight='bold'
+            type='h3'
+          >
+            Status não encontrado
+          </Typography>
+        </NotFoundWrapper>
+      )
+    }
 
     return statusProjects.map((props) => (
       <Shelf
