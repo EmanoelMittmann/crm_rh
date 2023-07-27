@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState } from 'react'
 
+import { toast } from '@stardust-ds/react'
 import { LocalStorageKeys } from 'config'
 import jwt_decode from 'jwt-decode'
 
@@ -8,7 +9,6 @@ import api from 'api'
 import { AuthContext } from '.'
 import type { AuthProps } from './types'
 import { IJWTDecodeGoogle } from 'types'
-import { toast } from '@stardust-ds/react'
 
 const DEFAULT_VALUE = {
   user: {
@@ -57,11 +57,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       window.location.href = '/home'
     } catch (error: any) {
       console.error(error.message)
-        toast({
-          type: 'error',
-          title: 'Não foi possivel fazer login!',
-          description: 'Tente novamente mais tarde'
-        })
+      toast({
+        type: 'error',
+        title: 'Não foi possivel fazer login!',
+        description: 'Tente novamente mais tarde'
+      })
     }
   }
 
