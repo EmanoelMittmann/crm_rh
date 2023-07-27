@@ -69,7 +69,7 @@ export const Provider = ({
   async function fetchList() {
     setIsLoading(true)
     const { data } = await api.get(
-      routes.extraHoursRH.listPending + '?limit=6',
+      routes.extraHoursRH.listPending + '?limit=5',
       {
         params: {
           page: meta.pagination.current_page,

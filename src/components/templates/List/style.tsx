@@ -35,5 +35,6 @@ export const Button = styled.button`
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
+  height: 44.5px;
   gap: 1em;
 `
