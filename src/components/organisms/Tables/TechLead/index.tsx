@@ -1,15 +1,16 @@
 import { useContext, useMemo, useRef } from 'react'
 
-import { toast } from '@stardust-ds/react'
+import { Typography, toast } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 import { IHandleTechLead, Modal } from 'components/molecules/Modais'
 
-import { LoadingWrapper, Main } from '../style'
+import { LoadingWrapper, Main, NotFoundWrapper } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './contants'
 import { Shelf } from './shelf'
+import { theme } from 'styles'
 
 export const TechLead = () => {
   const modalRef = useRef<IHandleTechLead>(null)
@@ -51,6 +52,19 @@ export const TechLead = () => {
           <Loading />
         </LoadingWrapper>
       )
+    if (techLead.length === 0) {
+      return (
+        <NotFoundWrapper>
+          <Typography
+            color={theme.neutrals.gray5}
+            fontWeight='bold'
+            type='h3'
+          >
+            Profissional não encontrado
+          </Typography>
+        </NotFoundWrapper>
+      )
+    }
 
     return techLead.map((props) => (
       <Shelf

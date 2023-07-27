@@ -1,14 +1,16 @@
 import { useContext, useMemo, useRef } from 'react'
 
+import { Typography } from '@stardust-ds/react'
 import { List } from 'contexts'
 import { ReportsProps } from 'contexts/List/Reports/types'
+import { theme } from 'styles'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 import { Modal as Modais } from 'components/molecules/Modais'
 import { IHandle as IDetailsReport } from 'components/molecules/Modais/Report/Details'
 
-import { LoadingWrapper, Main } from '../style'
+import { LoadingWrapper, Main, NotFoundWrapper } from '../style'
 import { GRID_TEMPLATE, HEADER } from './constants'
 import Shelf from './shelf'
 
@@ -37,6 +39,21 @@ export const Reports = () => {
           <Loading />
         </LoadingWrapper>
       )
+
+    if (reports.length === 0) {
+      return (
+        <NotFoundWrapper>
+          <Typography
+            color={theme.neutrals.gray5}
+            fontWeight='bold'
+            type='h3'
+          >
+            Profissional não encontrado
+          </Typography>
+        </NotFoundWrapper>
+      )
+    }
+
     return reports.map((props) => (
       <Shelf
         key={props.id}

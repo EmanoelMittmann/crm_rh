@@ -5,9 +5,11 @@ import { List } from 'contexts'
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
 
-import { LoadingWrapper, Main } from '../style'
+import { LoadingWrapper, Main, NotFoundWrapper } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './contants'
 import { Shelf } from './shelf'
+import { Typography } from '@stardust-ds/react'
+import { theme } from 'styles'
 
 export const HoursProfessional = () => {
   const { handleOrder, isLoading, releases } = useContext(
@@ -20,6 +22,20 @@ export const HoursProfessional = () => {
           <Loading />
         </LoadingWrapper>
       )
+
+    if (releases.length === 0) {
+      return (
+        <NotFoundWrapper>
+          <Typography
+            color={theme.neutrals.gray5}
+            fontWeight='bold'
+            type='h3'
+          >
+            Nenhum Lançamento não encontrado
+          </Typography>
+        </NotFoundWrapper>
+      )
+    }
     return releases.map((props) => (
       <Shelf
         key={props.user_id}

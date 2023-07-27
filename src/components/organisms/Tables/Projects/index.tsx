@@ -7,9 +7,11 @@ import { TableHeader } from 'components/molecules'
 import { Modal } from 'components/molecules/Modais'
 import { IHandleModalColorsPropsNew } from 'components/molecules/Modais/EditorStatus'
 
-import { LoadingWrapper, Main } from '../style'
+import { LoadingWrapper, Main, NotFoundWrapper, Text } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './shelf'
+import { Typography } from '@stardust-ds/react'
+import { theme } from 'styles'
 
 export const Projects = () => {
   const modalRef = useRef<IHandleModalColorsPropsNew>(null)
@@ -40,6 +42,20 @@ export const Projects = () => {
         </LoadingWrapper>
       )
 
+    if (projects.length === 0) {
+      return (
+        <NotFoundWrapper>
+          <Typography
+            color={theme.neutrals.gray5}
+            fontWeight='bold'
+            type='h3'
+          >
+            Projeto não encontrado
+          </Typography>
+        </NotFoundWrapper>
+      )
+    }
+
     return projects.map((props) => (
       <Shelf
         key={props.id}
@@ -50,7 +66,7 @@ export const Projects = () => {
         {...{ props }}
       />
     ))
-  }, [isLoading, projects])
+  }, [isLoading])
 
   return (
     <Main>
