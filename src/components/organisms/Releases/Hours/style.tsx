@@ -29,3 +29,10 @@ export const Columns = styled.div`
   gap: 1em;
   flex-direction: column;
 `
+export const MainDetails = styled.div`
+  width: 100%;
+  border: 1px solid #ccd1d6;
+  border-radius: 8px;
+  height: auto;
+  padding: 1em;
+`

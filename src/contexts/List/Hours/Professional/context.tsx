@@ -19,18 +19,32 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   )
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [releases, setReleases] = useState<HoursProps[]>([])
+  const [details, setDetails] = useState<HoursProps[]>([])
 
   const contextProps = {
     meta,
     filterOptions,
     isLoading,
     releases,
+    details,
     paginate: { ...meta.paginate, setCurrent_page: setPage },
     handleSearch,
     handleOrder,
     handleDate,
     handleStatus,
-    handleProject
+    handleProject,
+    handleDetails
+  }
+
+  async function handleDetails(id: number) {
+    try {
+      const { data } = await api.get(
+        routes.hours.Professional.Details(id)
+      )
+      setDetails(data.data)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   async function fetchList() {
