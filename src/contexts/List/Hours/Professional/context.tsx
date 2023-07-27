@@ -77,11 +77,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           await api.get(routes.projectUsers.list)
         ])
       setFilterOptions({
-        project: project.data.map((prop: any) => ({
+        project: project.map((prop: any) => ({
           label: prop.name,
           value: prop.id
         })),
-        status: extraHour.data.map((prop: any) => ({
+        status: extraHour.map((prop: any) => ({
           label: prop.name,
           value: prop.id
         }))
@@ -144,7 +144,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   })
 
   useDebounce({
-    fn: fetchFilters,
+    fn: () => fetchFilters(),
     listener: []
   })
 
