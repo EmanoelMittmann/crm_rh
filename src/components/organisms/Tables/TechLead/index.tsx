@@ -2,6 +2,7 @@ import { useContext, useMemo, useRef } from 'react'
 
 import { Typography, toast } from '@stardust-ds/react'
 import { List } from 'contexts'
+import { theme } from 'styles'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
@@ -10,7 +11,6 @@ import { IHandleTechLead, Modal } from 'components/molecules/Modais'
 import { LoadingWrapper, Main, NotFoundWrapper } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './contants'
 import { Shelf } from './shelf'
-import { theme } from 'styles'
 
 export const TechLead = () => {
   const modalRef = useRef<IHandleTechLead>(null)

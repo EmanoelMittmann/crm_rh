@@ -17,6 +17,7 @@ const ROUTES = {
   '/extrasHours': 'Horas Extras',
   '/releaseHours': 'Horas Extras',
   '/sendingHours': 'Horas Extras > Novo Lançamento',
+  '/detaisHours/:id': 'Horas Extras > Detalhes',
   '/statusProject': 'Configurações > Status de Projeto',
   '/typeProject': 'Configurações > Tipos de Projeto',
   '/company': 'Empresas',

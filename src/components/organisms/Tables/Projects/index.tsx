@@ -1,6 +1,8 @@
 import { useContext, useMemo, useRef } from 'react'
 
+import { Typography } from '@stardust-ds/react'
 import { List } from 'contexts'
+import { theme } from 'styles'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
@@ -10,8 +12,6 @@ import { IHandleModalColorsPropsNew } from 'components/molecules/Modais/EditorSt
 import { LoadingWrapper, Main, NotFoundWrapper, Text } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import { Shelf } from './shelf'
-import { Typography } from '@stardust-ds/react'
-import { theme } from 'styles'
 
 export const Projects = () => {
   const modalRef = useRef<IHandleModalColorsPropsNew>(null)

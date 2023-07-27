@@ -1,6 +1,8 @@
 import { useContext, useMemo } from 'react'
 
+import { Typography } from '@stardust-ds/react'
 import { List } from 'contexts'
+import { theme } from 'styles'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
@@ -8,8 +10,6 @@ import { TableHeader } from 'components/molecules'
 import { LoadingWrapper, Main, NotFoundWrapper } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './constants'
 import Shelf from './shelf'
-import { Typography } from '@stardust-ds/react'
-import { theme } from 'styles'
 
 export const UserNotes = () => {
   const { isLoading, notes, handleOrder } = useContext(
