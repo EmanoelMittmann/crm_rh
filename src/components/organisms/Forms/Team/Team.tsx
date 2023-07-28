@@ -111,7 +111,8 @@ export const Team = () => {
         setValue('team', newTeam)
         toast({
           title: 'Profissional adicionado com sucesso!',
-          type: 'success'
+          type: 'success',
+          position: 'bottom-right'
         })
         return
       }
@@ -119,7 +120,8 @@ export const Team = () => {
       setValue('team', newTeam)
       toast({
         title: 'Profissional cadastrado com sucesso!',
-        type: 'success'
+        type: 'success',
+        position: 'bottom-right'
       })
 
       setInputValues({
