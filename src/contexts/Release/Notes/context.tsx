@@ -65,30 +65,24 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   const uploadFile = async (file: File, url: string) => {
-    const fileBlob = new Blob([file])
-    const fileBuffer = await file.arrayBuffer()
-
-    const form = new FormData()
-    form.append('data', fileBlob)
-
+    const fileType =
+      file.type === 'text/xml' ? 'application/xml' : file.type
     try {
-      const data = await axios.put(url, file, {
+      await axios.put(url, file, {
         headers: {
-          'Content-Type': file.type
+          'Content-Type': fileType
         }
       })
 
-      console.log(data)
+      return true
     } catch (error) {
       console.error('Erro ao enviar arquivo:', error)
+      return false
     }
   }
 
   const handleSave = async () => {
     setLoading(true)
-
-    console.log(filePdf, fileXml)
-
     if (!filePdf || !fileXml) {
       toast({
         type: 'error',
@@ -118,8 +112,22 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     const pdf = filePdf.file[0]
     const xml = fileXml.file[0]
 
-    await uploadFile(pdf, pdfPreSignedUrl)
-    await uploadFile(xml, xmlPreSignedUrl)
+    const [pdfUpload, xmlUpload] = await Promise.all([
+      await uploadFile(pdf, pdfPreSignedUrl),
+      await uploadFile(xml, xmlPreSignedUrl)
+    ])
+
+    console.log(pdfUpload, xmlUpload)
+
+    toast({
+      type: 'success',
+      title: 'Nota fiscal enviada com sucesso',
+      position: 'bottom-right'
+    })
+
+    setFilePdf(undefined)
+    setFileXml(undefined)
+
     setLoading(false)
   }
 
