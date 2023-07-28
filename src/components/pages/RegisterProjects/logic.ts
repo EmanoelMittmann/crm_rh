@@ -72,7 +72,7 @@ export async function fetchAndPopulateFields(
   if (projectData.length === 0)
     throw new Error('Projeto não encontrado.')
   await fetchPropsProject(methods)
-  handlePopulateFields(projectData[0], methods)
+  handlePopulateFields(projectData, methods)
 }
 
 export function handlePopulateFields(
