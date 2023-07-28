@@ -67,14 +67,14 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const uploadFile = async (file: File, url: string) => {
     const fileBlob = new Blob([file])
     const fileBuffer = await file.arrayBuffer()
-   
+
     const form = new FormData()
     form.append('data', fileBlob)
 
     try {
       const data = await axios.put(url, file, {
         headers: {
-          'Content-Type': file.type,
+          'Content-Type': file.type
         }
       })
 
