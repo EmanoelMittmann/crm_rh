@@ -2,6 +2,7 @@ import { ReactNode, createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { toast } from '@stardust-ds/react'
+import axios from 'axios'
 import { filesize } from 'filesize'
 
 import api from 'api'
@@ -16,11 +17,9 @@ import {
 export const Context = createContext({} as ContextProps)
 
 export const Provider = ({ children }: { children: ReactNode }) => {
-  const navigate = useNavigate()
   const [filePdf, setFilePdf] = useState<IFileProps>()
   const [fileXml, setFileXml] = useState<IFileProps>()
   const [loading, setLoading] = useState<boolean>(true)
-  const data = new FormData()
 
   const handleUploadPdf = (file: File[]) => {
     const data = {
@@ -38,72 +37,48 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setFileXml(data)
   }
 
-  const verifyFiles = () => {
-    if (!filePdf) {
-      toast({
-        type: 'error',
-        title: 'NF não enviada.',
-        description: 'Faça Upload o DANFE em PDF',
-        position: 'bottom-right'
-      })
-      return false
-    }
-
-    if (!fileXml) {
-      toast({
-        type: 'error',
-        title: 'NF não enviada.',
-        description: 'Faça Upload o NF-e em XML',
-        position: 'bottom-right'
-      })
-      return false
-    }
-
-    data.append('param_name_file', filePdf.file[0] as any)
-    data.append('param_name_xml', fileXml.file[0] as any)
-
-    return true
-  }
-
   const handleGetUploadUrlSigned = async () => {
+    let returnData = {} as FiscalNotesProfissionalsData
+
     try {
       const { data } = await api.post(routes.notes.user)
 
       const { pdfPreSignedUrl, xmlPreSignedUrl, error } =
         data as FiscalNotesProfissionalsData
       if (error) {
-        toast({
-          type: 'error',
-          title: 'NF não enviada.',
-          description: 'Profissional já lançou nota fiscal neste mês',
-          position: 'bottom-right'
-        })
-        return
+        returnData.error = error
       }
 
-      return {
-        pdfPreSignedUrl,
-        xmlPreSignedUrl
+      if (pdfPreSignedUrl) {
+        returnData.pdfPreSignedUrl = pdfPreSignedUrl
+      }
+
+      if (xmlPreSignedUrl) {
+        returnData.xmlPreSignedUrl = xmlPreSignedUrl
       }
     } catch (error) {
       console.log(error)
-      return null
+      returnData.error = 'Catch error'
     }
+
+    return returnData
   }
 
   const uploadFile = async (file: File, url: string) => {
+    const fileBlob = new Blob([file])
     const fileBuffer = await file.arrayBuffer()
 
+    const form = new FormData()
+    form.append('data', fileBlob)
+
     try {
-      const response = await fetch(url, {
-        method: 'PUT',
+      const data = await axios.put(url, file, {
         headers: {
           'Content-Type': file.type
-        },
-        body: fileBuffer
+        }
       })
 
-      const data = await response.json()
+      console.log(data)
     } catch (error) {
       console.error('Erro ao enviar arquivo:', error)
     }
@@ -112,38 +87,39 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const handleSave = async () => {
     setLoading(true)
 
-    if (verifyFiles()) {
-      const urls = await handleGetUploadUrlSigned()
+    console.log(filePdf, fileXml)
 
-      const { pdfPreSignedUrl, xmlPreSignedUrl } = urls as {
-        pdfPreSignedUrl: string
-        xmlPreSignedUrl: string
-      }
-
-      if (!pdfPreSignedUrl || !xmlPreSignedUrl) {
-        toast({
-          type: 'error',
-          title: 'NF não enviada.',
-          description: 'Erro ao enviar as Ulrs de upload',
-          position: 'bottom-right'
-        })
-      }
-
-      const pdfFile: File | undefined =
-        filePdf?.file[0] instanceof File
-          ? filePdf?.file[0]
-          : undefined
-      const xmlFile: File | undefined =
-        fileXml?.file[0] instanceof File
-          ? fileXml?.file[0]
-          : undefined
-
-      const [res1, res2] = await Promise.all([
-        pdfFile && uploadFile(pdfFile, pdfPreSignedUrl),
-        xmlFile && uploadFile(xmlFile, xmlPreSignedUrl)
-      ])
+    if (!filePdf || !fileXml) {
+      toast({
+        type: 'error',
+        title: 'NF não enviada.',
+        description: 'Selecione os arquivos para enviar.',
+        position: 'bottom-right'
+      })
+      return
     }
 
+    const urls = await handleGetUploadUrlSigned()
+    const { pdfPreSignedUrl, xmlPreSignedUrl } = urls
+
+    if (!pdfPreSignedUrl || !xmlPreSignedUrl) {
+      toast({
+        type: 'error',
+        title: 'NF não enviada.',
+        description:
+          'O Profissional já emitiu notas fiscais este  mês.',
+        position: 'bottom-right'
+      })
+      return
+    }
+
+    console.log(urls)
+
+    const pdf = filePdf.file[0]
+    const xml = fileXml.file[0]
+
+    await uploadFile(pdf, pdfPreSignedUrl)
+    await uploadFile(xml, xmlPreSignedUrl)
     setLoading(false)
   }
 
