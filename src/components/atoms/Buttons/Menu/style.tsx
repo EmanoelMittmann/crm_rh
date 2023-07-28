@@ -43,6 +43,7 @@ export const ContainerMain = styled.button<IButtonColorProps>`
   }
   &::before{
     content: '';
+    position: absolute;
     width: 5px;
     border-radius: 0px 4px 4px 0px;
     height: 3.5em;
