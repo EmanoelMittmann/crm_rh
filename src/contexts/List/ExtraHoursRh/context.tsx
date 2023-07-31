@@ -39,6 +39,7 @@ export const Provider = ({
     DEFAULT.FILTER_OPTIONS_PROJECT
   )
   const [detais, setDetails] = useState<ExtraHoursRhProps[]>([])
+
   const [filtertoAccept, setFilterToAccept] = useState(
     DEFAULT.FILTER_OPTIONS
   )

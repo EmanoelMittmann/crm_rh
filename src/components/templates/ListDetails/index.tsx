@@ -24,7 +24,7 @@ export default ({ title, arrow, children }: Props) => {
       <Container gap='1rem'>
         <Row>
           {!arrow && (
-            <Button onClick={() => navigate(-1)}>
+            <Button onClick={() => navigate('/releaseHours')}>
               <IconLeftArrow fill={FONT_COLOR} />
             </Button>
           )}

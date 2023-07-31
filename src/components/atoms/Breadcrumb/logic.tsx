@@ -19,14 +19,14 @@ const ROUTES = {
   '/extrasHours': 'Horas Extras',
   '/releaseHours': 'Horas Extras',
   '/sendingHours': 'Horas Extras > Novo Lançamento',
-  '/detaisHours/:id': 'Horas Extras > Detalhes',
   '/statusProject': 'Configurações > Status de Projeto',
   '/typeProject': 'Configurações > Tipos de Projeto',
   '/company': 'Empresas',
   '/company/new': 'Empresas > Cadastrar Novo',
   '/professional/new': 'Profissionais > Cadastrar Novo',
   '/orderOfService/new': 'Ordens de Serviço > Criar nova O.S',
-  '/report': 'Relatórios'
+  '/report': 'Relatórios',
+  '/detailsHours/:id': 'Horas Extras > Detalhes'
 }
 
 export const previousSubModules = {
@@ -42,13 +42,15 @@ export const previousSubModules = {
   '/jobs': '/settings',
   '/statusProject': '/settings',
   '/typeProject': '/settings',
-  '/uploadNotes': '/releaseNotes'
+  '/uploadNotes': '/releaseNotes',
+  '/detaisHours/:id': '/releaseHours'
 }
 
 const handleNomenclature = {
   project: 'Projetos',
   professional: 'Profissionais',
-  company: 'Empresas'
+  company: 'Empresas',
+  detailsHours: 'Horas Extras'
 }
 
 export function handlePrevious(path: Path) {
