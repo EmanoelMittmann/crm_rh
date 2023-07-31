@@ -20,7 +20,7 @@ export default ({ title, arrow, children }: Props) => {
   const navigate = useNavigate()
   return (
     <Main>
-      <Container>
+      <Container gap='2em'>
         {arrow && (
           <Button onClick={() => navigate(-1)}>
             <IconLeftArrow fill={FONT_COLOR} />
@@ -30,7 +30,7 @@ export default ({ title, arrow, children }: Props) => {
           {title}
         </Typography>
       </Container>
-      <Container>{children}</Container>
+      <Container gap='1em'>{children}</Container>
     </Main>
   )
 }

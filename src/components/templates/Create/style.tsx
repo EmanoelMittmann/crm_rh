@@ -9,10 +9,10 @@ export const Main = styled.div`
   min-height: calc(100vh - 6rem);
 `
 
-export const Container = styled.div`
+export const Container = styled.div<{ gap?: string }>`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: ${({ gap }) => gap};
 `
 
 export const Button = styled.button`

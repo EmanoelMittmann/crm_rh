@@ -21,7 +21,7 @@ export default ({ title, arrow, children }: Props) => {
   const navigate = useNavigate()
   return (
     <Main>
-      <Container gap='1rem'>
+      <Container gap='2.2rem'>
         <Row>
           {arrow && (
             <Button onClick={() => navigate(-1)}>

@@ -8,7 +8,7 @@ export type Files = {
   webkitRelativePath: string
 }
 export interface IFileProps {
-  file: Files[]
+  file: File[]
   fileSize: string
 }
 

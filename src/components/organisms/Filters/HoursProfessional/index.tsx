@@ -25,7 +25,7 @@ export const HoursProfessional = () => {
       <Container gap='1em'>
         <Input
           value={search || ''}
-          width={200}
+          width={230}
           height={42}
           iconLeft={<IconGlass />}
           placeholder='Buscar...'
@@ -52,7 +52,8 @@ export const HoursProfessional = () => {
           onClear={() => handleStatus(null)}
         />
         <Inputs.Date
-          width={190}
+          width={230}
+          height={42}
           placeholder='Inicial'
           value={start}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -60,7 +61,8 @@ export const HoursProfessional = () => {
           }
         />
         <Inputs.Date
-          width={190}
+          width={230}
+          height={42}
           placeholder='Final'
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleDate(start, e.target.value)

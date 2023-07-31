@@ -118,7 +118,8 @@ export const Team = () => {
     setValue('team', newTeam)
     toast({
       title: 'Profissional removido com sucesso',
-      type: 'success'
+      type: 'success',
+      position: 'bottom-right'
     })
   }
 

@@ -20,7 +20,7 @@ export const UserNotes = () => {
 
   return (
     <Main>
-      <Container gap='1em' width='100%'>
+      <Container gap='1em'>
         <Input
           value={search}
           width={230}
@@ -38,7 +38,6 @@ export const UserNotes = () => {
           onChange={(e) => setDateInitial(e.target.value)}
         />
         <Inputs.Date
-          type='date'
           width={230}
           height={42}
           placeholder='Periodo Final'
@@ -47,7 +46,6 @@ export const UserNotes = () => {
           }
         />
         <Inputs.Date
-          type='date'
           width={230}
           height={42}
           placeholder='Emissão da NF'

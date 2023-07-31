@@ -35,6 +35,5 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 44.5px;
   gap: 1em;
 `
