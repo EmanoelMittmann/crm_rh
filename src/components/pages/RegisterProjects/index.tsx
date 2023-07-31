@@ -74,7 +74,7 @@ const RegisterProjects = () => {
         navigate('/project')
         return
       }
-      
+
       await api.post(routes.project.register, sanitizeData)
 
       toast({
@@ -88,7 +88,7 @@ const RegisterProjects = () => {
       toast({
         type: 'error',
         title: 'Erro ao editar Projeto.',
-        description: "Número do id ja existe!",
+        description: 'Número do id ja existe!',
         position: 'bottom-right'
       })
     }
