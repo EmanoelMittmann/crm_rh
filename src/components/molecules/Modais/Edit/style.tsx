@@ -10,7 +10,7 @@ export const ContainerModal = styled.div`
   display: flex;
   top: 50%;
   left: 50%;
-  transform: translate(-24%, -50%);
+  transform: translate(-50%, -50%);
   padding-top: 1em;
   z-index: 10;
   box-shadow: 0px 5px 10px 10px ${theme.neutrals.gray3};

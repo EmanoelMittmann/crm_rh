@@ -12,7 +12,7 @@ export const ContainerModal = styled.div`
   top: 50%;
   left: 50%;
   position: fixed;
-  transform: translate(-25%, -50%);
+  transform: translate(-50%, -50%);
   padding-top: 0.8em;
   z-index: 10;
   box-shadow: 0px 5px 10px 10px ${theme.neutrals.gray3};
