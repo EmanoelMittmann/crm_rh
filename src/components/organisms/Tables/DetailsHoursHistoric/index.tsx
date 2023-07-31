@@ -14,7 +14,8 @@ import { Shelf } from './shelf'
 export const DetaislHoursHistoric = () => {
   const { handleOrder, isLoading, details } = useContext(
     List.ProfessionalHours.Context
-  )
+    )
+    console.log('details: ', details);
 
   const Table = useMemo(() => {
     if (isLoading)
@@ -47,7 +48,7 @@ export const DetaislHoursHistoric = () => {
         {...{ props }}
       />
     ))
-  }, [isLoading])
+  }, [isLoading, details])
 
   return (
     <Main>
