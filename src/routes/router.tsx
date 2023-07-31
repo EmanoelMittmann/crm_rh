@@ -74,10 +74,16 @@ const Router = () => {
           <Route path='/sendingHours' element={<SendingHours />} />
           <Route path='/releaseNotes' element={<ReleaseNotes />} />
           <Route path='/uploadNotes' element={<UploadNotes />} />
+
           <Route
-            path='/detaisHours/:id'
+            path='/detailsHours'
             element={<DetailsHoursProfessional />}
-          />
+          >
+            <Route
+              path=':id'
+              element={<DetailsHoursProfessional />}
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

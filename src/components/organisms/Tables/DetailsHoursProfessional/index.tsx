@@ -1,9 +1,7 @@
-import React, { useContext, useMemo } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useContext, useMemo } from 'react'
 
 import { Typography } from '@stardust-ds/react'
 import { List } from 'contexts'
-import { HoursProps } from 'contexts/List/Hours/Professional/types'
 import { theme } from 'styles'
 
 import { Loading } from 'components/atoms'
@@ -13,8 +11,8 @@ import { LoadingWrapper, Main, NotFoundWrapper } from '../style'
 import { GRID_TEMPLATE, HEADERS } from './contants'
 import { Shelf } from './shelf'
 
-export const HoursProfessional = () => {
-  const { handleOrder, isLoading, releases } = useContext(
+export const DetaislHoursProfessional = () => {
+  const { handleOrder, isLoading, details } = useContext(
     List.ProfessionalHours.Context
   )
 
@@ -26,7 +24,7 @@ export const HoursProfessional = () => {
         </LoadingWrapper>
       )
 
-    if (releases.length === 0) {
+    if (details.length === 0) {
       return (
         <NotFoundWrapper>
           <Typography
@@ -39,7 +37,7 @@ export const HoursProfessional = () => {
         </NotFoundWrapper>
       )
     }
-    return releases.map((props) => (
+    return details.map((props) => (
       <Shelf
         key={props.user_id}
         config={{

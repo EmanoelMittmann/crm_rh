@@ -1,34 +1,53 @@
+import { useNavigate } from 'react-router-dom'
+
 import { HoursProps } from 'contexts/List/Hours/Professional/types'
 
 import { Badge } from 'components/atoms'
-import { Popover } from 'components/molecules'
 import { formatDate } from 'components/utils/formatDate'
 
-import { ContainerShelf, ContainerShelfColumn } from '../style'
+import {
+  ContainerShelfColumn,
+  ShelfHover,
+  TextProfessional
+} from '../style'
 import { ShelfProps } from '../types'
 
 export const Shelf = ({ config, props }: ShelfProps<HoursProps>) => {
+  const navigate = useNavigate()
+
+  const Details = (id: number) => {
+    navigate(`/detailsHours/${props.id}`)
+  }
+
   return (
     <>
-      <ContainerShelf template={config.template}>
-        <ContainerShelfColumn>{props.id}</ContainerShelfColumn>
+      <ShelfHover
+        template={config.template}
+        onClick={() => Details(props.id)}
+      >
         <ContainerShelfColumn>
-          {formatDate(props.launch_date)}
+          <TextProfessional>{props.id}</TextProfessional>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          {formatDate(props.end_date)}
+          <TextProfessional>
+            {formatDate(props.launch_date)}
+          </TextProfessional>
         </ContainerShelfColumn>
         <ContainerShelfColumn>
-          {props.hour_quantity}
+          <TextProfessional>
+            {formatDate(props.end_date)}
+          </TextProfessional>
+        </ContainerShelfColumn>
+        <ContainerShelfColumn>
+          <TextProfessional> {props.hour_quantity}</TextProfessional>
         </ContainerShelfColumn>
         <ContainerShelfColumn width='130px'>
-          {props.project.name}
+          <TextProfessional> {props.project.name}</TextProfessional>
         </ContainerShelfColumn>
         <ContainerShelfColumn width='240px'>
           <Badge.Hours status={props.status} />
-          <Popover options={config.options} />
         </ContainerShelfColumn>
-      </ContainerShelf>
+      </ShelfHover>
     </>
   )
 }

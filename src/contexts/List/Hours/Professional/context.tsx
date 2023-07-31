@@ -8,7 +8,7 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 
 import DEFAULT from './contants'
-import { ContextHoursProps, HoursProps } from './types'
+import { ContextHoursProps, HistoricProps, HoursProps } from './types'
 
 export const Context = createContext({} as ContextHoursProps)
 
@@ -19,7 +19,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   )
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [releases, setReleases] = useState<HoursProps[]>([])
-  const [details, setDetails] = useState<HoursProps[]>([])
+  const [details, setDetails] = useState<HistoricProps[]>([])
 
   const contextProps = {
     meta,
@@ -39,9 +39,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   async function handleDetails(id: number) {
     try {
       const { data } = await api.get(
-        routes.hours.Professional.Details(id)
+        routes.hours.Professional.Historic(id)
       )
-      setDetails(data.data)
+      setDetails(data)
     } catch (error) {
       console.error(error)
     }

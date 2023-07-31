@@ -22,7 +22,8 @@ export const routes = {
   hours: {
     Professional: {
       list: '/extraHoursReleases',
-      Details: (id: number) => `/extrasHoursReleases/details/${id}`
+      Details: (id: number) => `/extrasHoursReleases/details/${id}`,
+      Historic: (id: number) => `/extraHoursReleases/${id}`
     },
     techLead: {
       list: '/extrasHoursReleases/pending?limit=6',
