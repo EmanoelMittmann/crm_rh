@@ -31,7 +31,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleOrder,
     handleDateReference,
     handleEmissionNf,
-    dowloandFile
+    downloadFile
   }
 
   async function fetchList() {
@@ -97,19 +97,16 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       pagination: { ...old.pagination, current_page }
     }))
   }
-  async function dowloandFile(id: number, name: string) {
+  async function downloadFile(id: number, name: string) {
     try {
-      await api
-        .get(routes.notes.download(id), {
-          responseType: 'blob'
-        })
-        .then((response) => {
-          const file = response.data
-          saveAs(file, name)
-        })
+      const response = await api.get(routes.notes.download(id), {
+        responseType: 'blob'
+      })
+
+      const file = new Blob([response.data])
+      saveAs(file, name)
     } catch (error) {
-      console.error(error)
-      console.log('error: ', error)
+      console.error('Erro ao fazer o download do arquivo:', error)
     }
   }
 
