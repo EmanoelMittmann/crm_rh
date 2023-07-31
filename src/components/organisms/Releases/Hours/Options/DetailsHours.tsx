@@ -48,7 +48,7 @@ const DetailsHours = () => {
             {professional?.project.name}
           </Typography>
           <Typography type='p2' color={theme.neutrals.gray5}>
-            Lançamento {formatDate(String(professional?.launch_date))}
+            Lançado {formatDate(String(professional?.launch_date))}
           </Typography>
         </Row>
         <Row>
