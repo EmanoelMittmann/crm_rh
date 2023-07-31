@@ -1,6 +1,8 @@
 import { useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
+import { differenceBy } from 'lodash'
+
 import { Inputs, Selects } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { Table } from 'components/organisms/Tables'
@@ -15,7 +17,17 @@ export const Project = () => {
     useFormContext<FormProps>()
   const { errors } = methods.formState
   const { id } = useParams()
-  const { projects } = watch()
+  const { projects, options } = watch()
+  const transformOption = projects?.attachment?.map((prop) => ({
+    label: prop.name,
+    value: { ...prop }
+  }))
+
+  const projectNotSelect = differenceBy(
+    options?.projects,
+    transformOption,
+    'label'
+  )
 
   const verifyValues = () => {
     if (
@@ -101,7 +113,7 @@ export const Project = () => {
           }
           value={watch('projects.selected.project') as any}
           onClear={() => setValue('projects.selected.project', null)}
-          options={watch('options.projects') ?? []}
+          options={projectNotSelect}
           label='Projeto'
           placeholder='Selecione'
           width={275}
