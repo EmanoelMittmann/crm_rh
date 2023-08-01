@@ -155,6 +155,7 @@ export const Company = () => {
           placeholder='Selecione'
           options={UF_OPTIONS}
           label='Estado'
+          style={{ height: '41px' }}
           value={watch('professional_data.uf_company') as any}
           searchable
           width={295}

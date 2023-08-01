@@ -148,6 +148,7 @@ export const Bank = () => {
           label='Tipo de transferência'
           value={watch('professional_data.type_of_transfer') as any}
           width='300px'
+          style={{ height: '41.5px' }}
           required
           placeholder='Selecione'
         />
@@ -166,6 +167,7 @@ export const Bank = () => {
           options={BANK_OPTIONS.PIX_KEY_TYPE}
           label='Tipo de chave PIX'
           width='300px'
+          style={{ height: '41.5px' }}
           required={isRequiredPixKeyType}
           value={watch('professional_data.pix_key_type') as any}
           placeholder='Selecione'
@@ -183,7 +185,6 @@ export const Bank = () => {
           placeholder={pix_key_mask?.placeHolder}
           type={pix_key_mask?.type}
           width='300px'
-          height={40}
           error={errors.professional_data?.pix_key?.message}
         />
       </ContainerRow>

@@ -1,4 +1,3 @@
-import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { mask } from 'remask'
@@ -104,7 +103,7 @@ export const Personal = () => {
           value={watch('cep') ?? ''}
           label='CEP'
           maxLength={9}
-          placeholder='00000-0000'
+          placeholder='00000-000'
           width='350px'
         />
         <Inputs.Default
@@ -170,6 +169,7 @@ export const Personal = () => {
           placeholder='Selecione'
           required
           options={UF_OPTIONS}
+          style={{ height: '42px' }}
           label='Estado'
           searchable
           width={295}
