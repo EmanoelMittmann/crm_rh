@@ -31,6 +31,7 @@ const RegisterProfessional = () => {
 
   const methods = useForm<FormProps['Professional']>({
     resolver: yupResolver(ProfessionalSchema),
+    mode: 'onBlur',
     defaultValues: defaultValue || {
       commission: false,
       extra_hour_activated: false
