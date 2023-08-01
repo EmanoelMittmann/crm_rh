@@ -30,6 +30,9 @@ export const Project = () => {
   )
 
   const verifyValues = () => {
+    if (!projects.selected.project) {
+      return false
+    }
     if (
       Number(projects?.selected?.input1) > 160 ||
       Number(projects?.selected?.input1) < 0

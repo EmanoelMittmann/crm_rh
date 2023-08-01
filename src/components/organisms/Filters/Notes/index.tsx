@@ -4,6 +4,7 @@ import { Input } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { IconGlass, Inputs } from 'components/atoms'
+import { TODAY } from 'components/utils/dateNow'
 
 import { Container, Main } from '../style'
 
@@ -31,12 +32,15 @@ export const Notes = () => {
           value={dateInitial}
           type='date'
           width={230}
+          max={TODAY}
           placeholder='Periodo Inicial'
           onChange={(e) => setDateInitial(e.target.value)}
         />
         <Inputs.Date
           type='date'
           width={230}
+          min={dateInitial}
+          max={TODAY}
           placeholder='Periodo Final'
           onChange={(e) =>
             handleDateReference(dateInitial, e.target.value)

@@ -7,6 +7,7 @@ import { IconGlass, Inputs, Selects } from 'components/atoms'
 
 import { Container, Main } from '../style'
 import { Option } from 'types'
+import { TODAY } from 'components/utils/dateNow'
 
 export const HoursProfessional = () => {
   const [start, setStart] = useState('')
@@ -55,6 +56,7 @@ export const HoursProfessional = () => {
           width={230}
           height={42}
           placeholder='Inicial'
+          max={TODAY}
           value={start}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setStart(e.target.value)
@@ -63,6 +65,8 @@ export const HoursProfessional = () => {
         <Inputs.Date
           width={230}
           height={42}
+          min={start}
+          max={TODAY}
           placeholder='Final'
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleDate(start, e.target.value)
