@@ -14,6 +14,7 @@ import { theme } from 'styles'
 import { Badge, Button, Selects } from 'components/atoms'
 import { formatDate } from 'components/utils/formatDate'
 
+import { TextTitle } from '../RH/style'
 import { IHandleTechLead, Options } from './constants'
 import { Overlay, ContainerModal, Columns, Row } from './style'
 
@@ -101,13 +102,19 @@ const TechLead = forwardRef<IHandleTechLead, any>((props, ref) => {
                 }
               />
               {justify === 0 && (
-                <Textarea
-                  width='100%'
-                  value={text}
-                  onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-                    setText(e.target.value)
-                  }
-                />
+                <>
+                  <TextTitle>Descrição</TextTitle>
+                  <Textarea
+                    width='100%'
+                    value={text}
+                    onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+                      setText(e.target.value)
+                    }
+                    maxLength={200}
+                    placeholder='Escreva sua justificativa aqui...'
+                    required
+                  />
+                </>
               )}
             </Columns>
           </Row>
