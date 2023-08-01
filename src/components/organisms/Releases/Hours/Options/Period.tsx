@@ -20,14 +20,14 @@ export const Period = () => {
         <Inputs.Default
           {...register('launch_date')}
           label='Inicio'
-          width='23em'
           type='date'
+          height={40}
         />
         <Inputs.Default
           {...register('end_date')}
           label='Fim'
-          width='23em'
           type='date'
+          height={40}
         />
         <Selects.Default
           {...register('project_id')}
@@ -36,7 +36,7 @@ export const Period = () => {
           onSelect={(opts: any) => setValue('project_id', opts.value)}
           onClear={() => setValue('project_id', '')}
           label='Projeto'
-          width='30em'
+
         />
         <Inputs.Default
           {...register('hour_quantity')}
@@ -46,13 +46,16 @@ export const Period = () => {
           label='Quantidade de Horas'
           placeholder='Horas'
           type='number'
+          height={40}
         />
       </Row>
       <Row>
         <Textarea
           {...register('justification')}
           placeholder='Escreva sua justificativa'
+          maxLength={200}
         />
+
       </Row>
     </Columns>
   )
