@@ -50,7 +50,6 @@ export const Date = () => {
           placeholder='Horas'
           type='number'
           height={40}
-
         />
       </Row>
       <Row>

@@ -36,7 +36,6 @@ export const Period = () => {
           onSelect={(opts: any) => setValue('project_id', opts.value)}
           onClear={() => setValue('project_id', '')}
           label='Projeto'
-
         />
         <Inputs.Default
           {...register('hour_quantity')}
@@ -55,7 +54,6 @@ export const Period = () => {
           placeholder='Escreva sua justificativa'
           maxLength={200}
         />
-
       </Row>
     </Columns>
   )
