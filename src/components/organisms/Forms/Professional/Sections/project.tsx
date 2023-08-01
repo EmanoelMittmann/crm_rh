@@ -115,6 +115,7 @@ export const Project = () => {
           onClear={() => setValue('projects.selected.project', null)}
           options={projectNotSelect}
           label='Projeto'
+          style={{ height: '41px' }}
           placeholder='Selecione'
           width={275}
         />

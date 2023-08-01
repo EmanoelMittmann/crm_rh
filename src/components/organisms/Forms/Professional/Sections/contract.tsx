@@ -74,7 +74,6 @@ export const Contract = () => {
           label='Data de inicio'
           required
           width='220px'
-          height={41}
         />
         <Selects.Default
           {...register('job_id', {
@@ -88,6 +87,7 @@ export const Contract = () => {
           options={options.jobs}
           label='Cargo'
           required
+          style={{ height: '42px' }}
           value={watch('job_id') as any}
           placeholder='Selecione'
           width={435}
@@ -108,6 +108,7 @@ export const Contract = () => {
           onClear={() => setValue('job_type', null)}
           error={errors.job_type?.message}
           required
+          style={{ height: '41px' }}
           options={CONTRACT_TYPE_OPTIONS}
           value={watch('job_type') as any}
           label='Tipo de contrato'
@@ -127,7 +128,6 @@ export const Contract = () => {
           required
           min={0}
           label='Horas/semana'
-          height={40}
         />
         <Inputs.Default
           {...register('mounth_hours', {
@@ -142,7 +142,6 @@ export const Contract = () => {
           min={0}
           required
           label='Horas/mês'
-          height={40}
         />
         <Inputs.Default
           {...register('fixed_payment_value', {
@@ -157,10 +156,9 @@ export const Contract = () => {
           iconLeft='R$'
           placeholder='00,00'
           label='Pagamento fixo'
-          height={40}
         />
       </ContainerRow>
-      <ContainerRow>
+      <ContainerRow gap='1em'>
         <Selects.Default
           {...register('options.payingCompany')}
           label='Empresa Pagadora'
@@ -175,6 +173,13 @@ export const Contract = () => {
           value={Company as any}
           placeholder='Selecione'
           required
+        />
+        <Selects.Default
+          label='Modelo de Contrato'
+          disabled={true}
+          options={[]}
+          clearable={false}
+          placeholder='Selecione'
         />
       </ContainerRow>
     </>
