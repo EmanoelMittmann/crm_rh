@@ -3,9 +3,9 @@ import { ChangeEvent, useContext, useState } from 'react'
 import { List } from 'contexts'
 
 import { IconGlass, Inputs, Selects } from 'components/atoms'
+import { TODAY } from 'components/utils/dateNow'
 
 import { Container, Main } from '../style'
-import { Option } from 'types'
 
 export const Contract = () => {
   const [initial, setInitial] = useState('')
@@ -34,12 +34,15 @@ export const Contract = () => {
             setInitial(e.target.value)
           }
           value={initial}
+          max={TODAY}
         />
         <Inputs.Date
           placeholder='Fim do periodo'
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleDate(initial, e.target.value)
           }
+          min={initial}
+          max={TODAY}
         />
       </Container>
     </Main>

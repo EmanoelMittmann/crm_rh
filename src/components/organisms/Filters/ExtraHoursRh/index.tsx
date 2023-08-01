@@ -4,6 +4,7 @@ import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { IconGlass, Inputs } from 'components/atoms'
+import { TODAY } from 'components/utils/dateNow'
 
 import { Container, Main } from '../style'
 import { Option } from 'types'
@@ -75,13 +76,15 @@ export const ExtraHoursRh = () => {
           width={230}
           placeholder='Período Inicial'
           type={'date'}
+          max={TODAY}
           onChange={(e) => setInitialDate(e.target.value)}
           value={initialDate}
         />
         <Inputs.Date
           width={230}
-          type={'date'}
           placeholder='Período Final'
+          min={initialDate}
+          max={TODAY}
           onChange={(e) =>
             handleDateReference(initialDate, e.target.value)
           }
