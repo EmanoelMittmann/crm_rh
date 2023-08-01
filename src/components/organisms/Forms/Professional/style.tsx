@@ -12,7 +12,7 @@ export const Main = styled.div`
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   color: ${theme.neutrals.gray6};
 
   h3 {
@@ -46,5 +46,5 @@ export const ColumnContainer = styled.div`
 export const Divider = styled.hr`
   border-top: 1px solid ${theme.neutrals.gray2};
   width: 100%;
-  margin: 2rem 0rem;
+  margin: 32px 0rem;
 `
