@@ -49,7 +49,7 @@ export const HoursProfessional = () => {
         {...{ props }}
       />
     ))
-  }, [isLoading])
+  }, [isLoading, releases])
 
   return (
     <Main>

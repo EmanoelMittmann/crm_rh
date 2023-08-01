@@ -47,7 +47,7 @@ export const DetaislHoursProfessional = () => {
         {...{ props }}
       />
     ))
-  }, [isLoading])
+  }, [isLoading, details])
 
   return (
     <Main>
