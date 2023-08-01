@@ -26,6 +26,7 @@ export const Date = () => {
           label='Data'
           width='23em'
           type='date'
+          height={40}
         />
         <Selects.Default
           {...register('project_id', {
@@ -48,6 +49,7 @@ export const Date = () => {
           label='Quantidade de Horas'
           placeholder='Horas'
           type='number'
+          height={40}
         />
       </Row>
       <Row>
@@ -55,7 +57,9 @@ export const Date = () => {
           {...register('justification', {
             required: 'Campo Obrigatorio'
           })}
-          placeholder='Escreva sua justificativa'
+          placeholder='Escreva sua justificativa aqui...'
+          required
+          maxLength={200}
         />
       </Row>
     </Columns>

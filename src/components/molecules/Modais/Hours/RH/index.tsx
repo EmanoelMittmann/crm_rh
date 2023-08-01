@@ -175,7 +175,7 @@ const OvertimeReleaseRh = forwardRef<
                 <ContainerTitleJustification>
                   <TextTitle>Descrição</TextTitle>
                   <Textarea
-                    placeholder='Descrição'
+                    placeholder='Escreva sua justificativa aqui...'
                     style={{ width: '100%' }}
                     rows={4}
                     value={currentJustification}
