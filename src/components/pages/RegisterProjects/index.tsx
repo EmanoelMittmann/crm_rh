@@ -27,7 +27,8 @@ const RegisterProjects = () => {
   const methods = useForm<FormProjectProps['Project']>({
     defaultValues: {},
     resolver: yupResolver(validationSchema),
-    shouldFocusError: true
+    shouldFocusError: true,
+    mode: 'onBlur'
   })
 
   async function onSubmit(data: FormProjectProps['Project']) {
