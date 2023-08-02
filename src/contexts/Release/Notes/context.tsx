@@ -1,13 +1,9 @@
 import { ReactNode, createContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-
 import { toast } from '@stardust-ds/react'
 import axios from 'axios'
 import { filesize } from 'filesize'
-
 import api from 'api'
 import { routes } from 'routes'
-
 import {
   ContextProps,
   FiscalNotesProfissionalsData,
@@ -43,10 +39,16 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     try {
       const { data } = await api.post(routes.notes.user)
 
-      const { pdfPreSignedUrl, xmlPreSignedUrl, error } =
-        data as FiscalNotesProfissionalsData
+      const { pdfPreSignedUrl, xmlPreSignedUrl, error } = data as FiscalNotesProfissionalsData
+
       if (error) {
         returnData.error = error
+        toast({
+          type: 'error',
+          title: 'Erro ao enviar nota fiscal',
+          description: error,
+          position: 'bottom-right'
+        })
       }
 
       if (pdfPreSignedUrl) {
@@ -57,8 +59,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         returnData.xmlPreSignedUrl = xmlPreSignedUrl
       }
     } catch (error) {
-      console.log(error)
-      returnData.error = 'Catch error'
+      console.error(error)
     }
 
     return returnData
@@ -76,20 +77,15 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
       return true
     } catch (error) {
-      console.error('Erro ao enviar arquivo:', error)
+      console.error(error)
       return false
     }
   }
 
   const handleSave = async () => {
     setLoading(true)
+
     if (!filePdf || !fileXml) {
-      toast({
-        type: 'error',
-        title: 'NF não enviada.',
-        description: 'Selecione os arquivos para enviar.',
-        position: 'bottom-right'
-      })
       return
     }
 
@@ -97,27 +93,15 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     const { pdfPreSignedUrl, xmlPreSignedUrl } = urls
 
     if (!pdfPreSignedUrl || !xmlPreSignedUrl) {
-      toast({
-        type: 'error',
-        title: 'NF não enviada.',
-        description:
-          'O Profissional já emitiu notas fiscais este  mês.',
-        position: 'bottom-right'
-      })
       return
     }
-
-    console.log(urls)
-
     const pdf = filePdf.file[0]
     const xml = fileXml.file[0]
 
-    const [pdfUpload, xmlUpload] = await Promise.all([
+    await Promise.all([
       await uploadFile(pdf, pdfPreSignedUrl),
       await uploadFile(xml, xmlPreSignedUrl)
     ])
-
-    console.log(pdfUpload, xmlUpload)
 
     toast({
       type: 'success',
