@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom'
 
 import { List } from 'contexts'
 
-import { Table } from 'components/organisms'
 import DetailsHours from 'components/organisms/Releases/Hours/Options/DetailsHours'
 import { AuthTemplate, DetailsTemplate } from 'components/templates'
 

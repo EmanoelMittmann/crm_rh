@@ -4,10 +4,10 @@ import { Input } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { IconGlass, Inputs, Selects } from 'components/atoms'
+import { TODAY } from 'components/utils/dateNow'
 
 import { Container, Main } from '../style'
 import { Option } from 'types'
-import { TODAY } from 'components/utils/dateNow'
 
 export const HoursProfessional = () => {
   const [start, setStart] = useState('')
