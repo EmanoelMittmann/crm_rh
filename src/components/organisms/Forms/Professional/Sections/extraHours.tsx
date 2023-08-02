@@ -9,11 +9,11 @@ import { ContainerRow } from '../style'
 import type { FormProps } from '../types'
 
 export const ExtraHours = () => {
-  const { register, watch } = useFormContext<FormProps>()
+  const { register, watch, setValue } = useFormContext<FormProps>()
 
   const disableExtraHours =
     watch('job_type')?.value === KEYS.CONTRACT_TYPE.FREELANCER
-  const showLimitSection = Number(watch('extra_hour_activated')) === 1
+  const showLimitSection = watch('extra_hour_activated')
   const extraHourValue =
     Number(watch('variable2')) / Number(watch('variable1')) || 0
 
@@ -30,24 +30,28 @@ export const ExtraHours = () => {
               input: (
                 <Radio
                   id='1'
-                  {...register('extra_hour_activated')}
-                  value={1}
+                  onClick={() =>
+                    setValue('extra_hour_activated', true)
+                  }
+                  checked={watch('extra_hour_activated')}
                   disabled={disableExtraHours}
                 />
               ),
-              active: showLimitSection
+              active: watch('extra_hour_activated')
             },
             {
               label: 'Não permitir horas extras',
               input: (
                 <Radio
                   id='2'
-                  {...register('extra_hour_activated')}
-                  value={0}
+                  onClick={() =>
+                    setValue('extra_hour_activated', false)
+                  }
+                  checked={!watch('extra_hour_activated')}
                   defaultChecked
                 />
               ),
-              active: !showLimitSection
+              active: !watch('extra_hour_activated')
             }
           ]}
         />
