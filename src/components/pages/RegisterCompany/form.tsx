@@ -22,7 +22,8 @@ export const FormCompany = ({ defaultValue }: IFormCompany) => {
       secondary_cnae: null,
       is_matriz: false
     },
-    resolver: yupResolver(SchemaCompany)
+    resolver: yupResolver(SchemaCompany),
+    mode: 'onBlur'
   })
   const CEP = methods.watch('cep')
 
