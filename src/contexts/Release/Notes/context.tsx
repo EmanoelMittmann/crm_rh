@@ -1,9 +1,12 @@
 import { ReactNode, createContext, useState } from 'react'
+
 import { toast } from '@stardust-ds/react'
 import axios from 'axios'
 import { filesize } from 'filesize'
+
 import api from 'api'
 import { routes } from 'routes'
+
 import {
   ContextProps,
   FiscalNotesProfissionalsData,
@@ -39,7 +42,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     try {
       const { data } = await api.post(routes.notes.user)
 
-      const { pdfPreSignedUrl, xmlPreSignedUrl, error } = data as FiscalNotesProfissionalsData
+      const { pdfPreSignedUrl, xmlPreSignedUrl, error } =
+        data as FiscalNotesProfissionalsData
 
       if (error) {
         returnData.error = error
