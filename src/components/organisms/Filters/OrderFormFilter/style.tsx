@@ -9,7 +9,7 @@ export const Main = styled.div`
   width: 100%;
   overflow-x: auto;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-top: 1.2rem;
 `
 
 export const Container = styled.div<IContainerColumnProps>`
