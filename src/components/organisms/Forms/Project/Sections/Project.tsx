@@ -1,7 +1,7 @@
 import { useFormContext, UseFormReturn } from 'react-hook-form'
 
 import { Inputs, Selects, SelectOption } from 'components/atoms'
-import { GenerateValue } from 'components/utils/OptionsAplication'
+import { GenerateCurrencyMask } from 'components/utils/OptionsAplication'
 
 import { ContainerRow } from '../style'
 import { FormProjectProps } from '../types'
@@ -16,7 +16,9 @@ export const Project = () => {
 
   const options = watch('options')
   const estimatedCost = watch('team_cost')
-  const formattedEstimatedCost = GenerateValue(estimatedCost || '')
+  const formattedEstimatedCost = GenerateCurrencyMask(
+    estimatedCost || ''
+  )
 
   return (
     <>

@@ -13,8 +13,9 @@ import {
 } from 'components/organisms/Forms/Professional/constants'
 import { formatDate, getDateInput } from 'components/utils/formatDate'
 import {
+  ConvertCurrencyStringToNumber,
   generateOpitionsFromBackend,
-  GenerateValue
+  GenerateCurrencyMask
 } from 'components/utils/OptionsAplication'
 
 import api from 'api'
@@ -323,7 +324,7 @@ export function handlePopulateFields(
       data.job_type,
       CONTRACT_TYPE_OPTIONS
     ),
-    fixed_payment_value: GenerateValue(
+    fixed_payment_value: GenerateCurrencyMask(
       String(data.fixed_payment_value)
     ),
     variable1: data.variable1,
@@ -383,7 +384,9 @@ export async function onSubmit(
     mounth_hours: Number(data.mounth_hours),
     commission: data.commission,
     function_job: data.function_job,
-    fixed_payment_value: Number(data.fixed_payment_value),
+    fixed_payment_value: ConvertCurrencyStringToNumber(
+      Number(data.fixed_payment_value)
+    ),
     telephone_number: handleRemoveSpecialCharacters(
       data.telephone_number
     ),

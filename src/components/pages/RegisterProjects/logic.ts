@@ -6,8 +6,8 @@ import { JobsProps } from 'contexts/List/Settings/Jobs/types'
 import { FormProjectProps } from 'components/organisms'
 import { getDateInput } from 'components/utils/formatDate'
 import {
-  generateOpitionsFromBackend,
-  GenerateValue
+  GenerateCurrencyMask,
+  generateOpitionsFromBackend
 } from 'components/utils/OptionsAplication'
 
 import api from 'api'
@@ -98,7 +98,7 @@ export function handlePopulateFields(
     date_end: getDateInput(data.date_end),
     date_start_performed: getDateInput(data.date_start_performed),
     date_end_performed: getDateInput(data.date_end_performed),
-    team_cost: GenerateValue(String(data.team_cost)),
+    team_cost: GenerateCurrencyMask(String(data.team_cost)),
 
     team: data.users.map((user) => {
       const allUsers = OPTIONS.users.flatMap(

@@ -24,7 +24,7 @@ export const GenerateOptionsForm = (
   })
 }
 
-export const GenerateValue = (value: string): string => {
+export const GenerateCurrencyMask = (value: string): string => {
   const numericValue = value.replace(/[^\d]/g, '')
 
   let formattedValue = numericValue
@@ -43,5 +43,21 @@ export const GenerateValue = (value: string): string => {
       formattedValue.slice(0, -2) + ',' + formattedValue.slice(-2)
   }
 
+  return formattedValue
+}
+
+export const ConvertCurrencyStringToNumber = (
+  value: number
+): string => {
+  const strNumber = String(value)
+  const numericValue = strNumber.replace(/[^\d]/g, '')
+
+  let formattedValue = numericValue
+
+  if (numericValue.length > 2) {
+    const lastTwoDigits = numericValue.slice(-2)
+    const remainingDigits = numericValue.slice(0, -2)
+    formattedValue = remainingDigits + '.' + lastTwoDigits
+  }
   return formattedValue
 }
