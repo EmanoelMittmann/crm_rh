@@ -6,7 +6,7 @@ import { Radio } from '@stardust-ds/react'
 import { Inputs, Selects } from 'components/atoms'
 import {
   generateOpitionsFromBackend,
-  GenerateValue
+  GenerateCurrencyMask
 } from 'components/utils/OptionsAplication'
 
 import { CONTRACT_TYPE_OPTIONS } from '../constants'
@@ -31,7 +31,9 @@ export const Contract = () => {
 
   const { options, weekly_hours, mounth_hours } = watch()
   const paymentFixed = watch('fixed_payment_value')
-  const formattedpaymentFixed = GenerateValue(paymentFixed || '')
+  const formattedpaymentFixed = GenerateCurrencyMask(
+    paymentFixed || ''
+  )
 
   const commissionOptions = [
     {

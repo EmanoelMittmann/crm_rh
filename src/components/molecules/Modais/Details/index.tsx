@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom'
 import Close from 'components/atoms/Buttons/Close'
 import { Image } from 'components/organisms/Tables/style'
 import { formatDate } from 'components/utils/formatDate'
-import { GenerateValue } from 'components/utils/OptionsAplication'
+import { GenerateCurrencyMask } from 'components/utils/OptionsAplication'
 
 import api from 'api'
 import { routes } from 'routes'
@@ -171,7 +171,7 @@ const Detais = forwardRef<IHandleModalPropsDetails, IModalProps>(
             <ContainerRow>
               <ContaineDetails>
                 <Title>Custo do Projeto</Title>
-                {GenerateValue(String(isOpen.team_cost))}
+                {GenerateCurrencyMask(String(isOpen.team_cost))}
               </ContaineDetails>
             </ContainerRow>
 
