@@ -441,9 +441,7 @@ export async function onSubmit(
     },
     complement: data.complement,
     tools: data.tools,
-    extra_hour_activated: setLimitedExtraHoursToBoolean(
-      data.extra_hour_activated
-    ),
+    extra_hour_activated: data.extra_hour_activated,
     variable1: data.extra_hour_activated ? data.variable1 : null,
     variable2: data.extra_hour_activated ? data.variable2 : null,
     extra_hour_value: data.extra_hour_value || 0,

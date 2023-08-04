@@ -33,7 +33,7 @@ export const ExtraHours = () => {
                   onClick={() =>
                     setValue('extra_hour_activated', true)
                   }
-                  checked={watch('extra_hour_activated')}
+                  checked={watch('extra_hour_activated') === true}
                   disabled={disableExtraHours}
                 />
               ),
@@ -47,11 +47,11 @@ export const ExtraHours = () => {
                   onClick={() =>
                     setValue('extra_hour_activated', false)
                   }
-                  checked={!watch('extra_hour_activated')}
+                  checked={watch('extra_hour_activated') === false}
                   defaultChecked
                 />
               ),
-              active: !watch('extra_hour_activated')
+              active: watch('extra_hour_activated') === false
             }
           ]}
         />
