@@ -145,6 +145,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       saveAs(data)
     } catch (error) {
       console.error(error)
+      toast({
+        type: 'warning',
+        title: 'Aviso',
+        description: 'Nenhum Relatorio de Pagamento encontrado',
+        position: 'bottom-right'
+      })
     }
   }
 
