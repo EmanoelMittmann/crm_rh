@@ -4,6 +4,7 @@ export const TODAY = new Date().toISOString().split('T')[0]
 
 export const MASKER = {
   CEP: '99999-9999',
+  RG: '9999999999999',
   CPF: '999.999.999-99',
   CNPJ: '99.999.999/9999-99',
   TELEPHONE: '(99) 99999-9999',
