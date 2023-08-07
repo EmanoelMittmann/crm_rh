@@ -36,6 +36,7 @@ export const Jobs = () => {
         />
         <Select
           width={230}
+          searchable
           options={filterOptions.status}
           placeholder='Status'
           onSelect={(option: Option | null) =>

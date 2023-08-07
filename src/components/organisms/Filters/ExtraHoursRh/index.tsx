@@ -55,6 +55,7 @@ export const ExtraHoursRh = () => {
         <Select
           placeholder='Projetos'
           width={230}
+          searchable
           value={currentValueProject ?? null}
           options={filterOptions_Project?.project}
           onSelect={(option: ValueProps) =>
@@ -65,6 +66,7 @@ export const ExtraHoursRh = () => {
         <Select
           placeholder='Status'
           width={230}
+          searchable
           options={filterOptions_Status?.status}
           value={currentValueStatus ?? null}
           onSelect={(option: ValueProps) =>
