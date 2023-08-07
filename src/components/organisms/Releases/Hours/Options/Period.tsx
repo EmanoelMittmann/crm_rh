@@ -19,7 +19,7 @@ export const Period = () => {
       <Row gap='1em'>
         <Inputs.Default
           {...register('launch_date')}
-          label='Inicio'
+          label='início'
           type='date'
           height={40}
         />

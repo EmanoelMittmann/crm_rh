@@ -36,7 +36,7 @@ export const UserNotes = () => {
           width={230}
           height={42}
           max={TODAY}
-          placeholder='Periodo Inicial'
+          placeholder='Período Inicial'
           onChange={(e) => setDateInitial(e.target.value)}
         />
         <Inputs.Date
@@ -44,7 +44,7 @@ export const UserNotes = () => {
           height={42}
           min={dateInitial}
           max={TODAY}
-          placeholder='Periodo Final'
+          placeholder='Período Final'
           onChange={(e) =>
             handleDateReference(dateInitial, e.target.value)
           }
