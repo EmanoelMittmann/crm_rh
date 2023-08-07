@@ -51,7 +51,7 @@ export const Personal = () => {
           required
           type='date'
           label='Data de nascimento'
-          value={watch('birth_date') as any}
+          value={watch('birth_date') as string}
           max={TODAY}
         />
         <Inputs.Default
