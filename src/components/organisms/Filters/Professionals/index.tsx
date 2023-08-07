@@ -56,7 +56,7 @@ export const Professionals = () => {
             borderRadius: '40px'
           }}
         >
-          Historico de contrato
+          Histórico de contrato
         </S.Button>
         <Button.New onClick={() => navigateTo('/professional/new')} />
       </Container>

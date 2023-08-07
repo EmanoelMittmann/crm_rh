@@ -67,7 +67,7 @@ export const Project = () => {
           error={errors.date_start?.message}
           value={watch('date_start')}
           type='date'
-          label='Inicio efetivo'
+          label='Início efetivo'
           width='100%'
         />
         <Inputs.Default

@@ -73,7 +73,7 @@ export const Contract = () => {
           })}
           error={errors.start_date?.message}
           type='date'
-          label='Data de inicio'
+          label='Data de início'
           required
           width='220px'
         />

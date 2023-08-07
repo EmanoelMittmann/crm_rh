@@ -137,6 +137,7 @@ export const Project = () => {
           error={errors.projects?.selected?.input2?.message}
           placeholder='Horas extras'
           width='350px'
+          disabled={!watch('extra_hour_activated')}
         />
         <ButtonGeneric
           top='1.5em'

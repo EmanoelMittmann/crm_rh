@@ -29,7 +29,7 @@ export const Contract = () => {
           onClear={() => handleStatus('')}
         />
         <Inputs.Date
-          placeholder='Inicio do periodo'
+          placeholder='Início do peróodo'
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setInitial(e.target.value)
           }
@@ -37,7 +37,7 @@ export const Contract = () => {
           max={TODAY}
         />
         <Inputs.Date
-          placeholder='Fim do periodo'
+          placeholder='Fim do período'
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleDate(initial, e.target.value)
           }

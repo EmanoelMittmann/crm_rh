@@ -7,7 +7,7 @@ const Contract = () => {
   return (
     <AuthTemplate>
       <List.Contract.Provider>
-        <ListTemplate title='Historico de Contrato' arrow={true}>
+        <ListTemplate title='Histórico de Contrato' arrow={true}>
           <Filter.Contract />
           <Table.Contracts />
         </ListTemplate>

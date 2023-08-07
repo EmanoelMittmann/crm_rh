@@ -36,7 +36,7 @@ export const Hours = () => {
       active: isDate
     },
     {
-      label: 'Por Periodo',
+      label: 'Por Período',
       input: (
         <Radio
           value={0}

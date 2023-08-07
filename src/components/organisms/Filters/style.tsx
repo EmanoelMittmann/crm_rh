@@ -13,7 +13,7 @@ export const Main = styled.div`
 
 export const Container = styled.div<IContainerColumnProps>`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   width: ${(props) => props.width && props.width};
   height: ${(props) => props.height};
   padding-left: ${(props) => props.left};

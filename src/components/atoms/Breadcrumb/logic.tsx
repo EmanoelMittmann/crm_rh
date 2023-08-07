@@ -5,7 +5,7 @@ type Nomenclature = keyof typeof handleNomenclature
 const ROUTES = {
   '/home': 'Home',
   '/professionals': 'Profissionais',
-  '/contractHistory': 'Profissionais > Historico de Contrato',
+  '/contractHistory': 'Profissionais > Histórico de Contrato',
   '/project': 'Projetos',
   '/project/new': 'Projetos > Cadastrar Novo',
   '/notes': 'Notas Fiscais',
