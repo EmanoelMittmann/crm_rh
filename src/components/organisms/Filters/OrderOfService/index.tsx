@@ -11,7 +11,6 @@ import { Container, Main } from '../style'
 import { Option } from 'types'
 
 export const StatusOS = [
-  { label: 'Todos', value: '' },
   { label: 'Enviada', value: 'SENT' },
   { label: 'Pendente', value: 'PENDING' },
   { label: 'Cancelada', value: 'CANCELED' }
@@ -41,11 +40,11 @@ export const OrderOfService = () => {
           onChange={(e) => handleSearch(e.target?.value)}
         />
         <Select
+          searchable
           placeholder='Status'
           width={230}
-          onClear={() => null}
           options={StatusOS}
-          clearable={false}
+          onClear={() => handleFillStatus('')}
           onSelect={(option: Option | null) =>
             option && handleFillStatus(option.value)
           }

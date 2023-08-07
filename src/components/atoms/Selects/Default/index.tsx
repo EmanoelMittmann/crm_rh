@@ -32,6 +32,7 @@ export const Default = forwardRef(
         </Label>
         <Select
           {...props}
+          searchable
           ref={ref as Ref<SelectRef>}
           hasError={!!error}
           helperText={error ?? props.helperText}

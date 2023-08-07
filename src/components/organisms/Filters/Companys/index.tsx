@@ -32,6 +32,7 @@ export const Companys = () => {
           onChange={(e) => handleSearch(e.target.value)}
         />
         <Select
+          searchable
           options={filterOptions.registration}
           placeholder='Situações Cadastrais'
           width={230}
@@ -41,6 +42,7 @@ export const Companys = () => {
           }
         />
         <Select
+          searchable
           options={filterOptions.uf}
           placeholder='UF'
           width={230}
@@ -50,6 +52,7 @@ export const Companys = () => {
           onClear={() => handleUf(null)}
         />
         <Select
+          searchable
           options={filterOptions.typeCompany}
           placeholder='Tipos de Empresas'
           width={230}

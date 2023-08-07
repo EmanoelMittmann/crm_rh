@@ -52,6 +52,7 @@ export const Projects = () => {
         />
         <Select
           width={230}
+          searchable
           placeholder='Tipo'
           value={currentValueType ?? null}
           options={filterOptionsType?.project_type}
@@ -62,6 +63,7 @@ export const Projects = () => {
         />
         <Select
           width={230}
+          searchable
           placeholder='Status'
           value={currentValueStatus ?? null}
           options={filterOptionsStatus?.status}

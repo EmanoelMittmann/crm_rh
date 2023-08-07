@@ -41,6 +41,7 @@ export const Reports = () => {
           }
         />
         <Select
+          searchable
           options={filterOptions.companies}
           placeholder='Empresas'
           width={230}
@@ -50,6 +51,7 @@ export const Reports = () => {
           }
         />
         <Select
+          searchable
           options={filterOptions.status}
           placeholder='Status'
           width={230}

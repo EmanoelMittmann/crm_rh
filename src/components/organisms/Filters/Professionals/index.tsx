@@ -45,6 +45,7 @@ export const Professionals = () => {
           onSelect={(option: Option | null) =>
             option && handleFillJob(Number(option?.value))
           }
+          searchable
           onClear={() => handleFillJob(null)}
         />
       </Container>
