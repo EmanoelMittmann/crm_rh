@@ -20,6 +20,10 @@ export const OrderFormFilter = () => {
         <Input
           width={230}
           height={42}
+          style={{
+            fontFamily: 'Poppins',
+            fontWeight: 500
+          }}
           placeholder='Buscar...'
           iconLeft={<IconGlass />}
           value={search}

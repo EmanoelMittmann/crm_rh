@@ -29,6 +29,10 @@ export const TechLead = () => {
         <Input
           width={230}
           height={42}
+          style={{
+            fontFamily: 'Poppins',
+            fontWeight: 500
+          }}
           value={search}
           iconLeft={<IconGlass />}
           placeholder='Buscar ...'

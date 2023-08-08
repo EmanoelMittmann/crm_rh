@@ -49,6 +49,10 @@ export const Projects = () => {
           placeholder='Buscar...'
           width={230}
           height={42}
+          style={{
+            fontFamily: 'Poppins',
+            fontWeight: 500
+          }}
         />
         <Select
           width={230}

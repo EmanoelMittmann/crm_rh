@@ -36,6 +36,10 @@ export const Professionals = () => {
           placeholder='Buscar...'
           width={230}
           height={42}
+          style={{
+            fontFamily: 'Poppins',
+            fontWeight: 500
+          }}
         />
         <S.Select
           width={230}

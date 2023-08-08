@@ -35,6 +35,10 @@ export const Reports = () => {
           value={search}
           width={230}
           height={42}
+          style={{
+            fontFamily: 'Poppins',
+            fontWeight: 500
+          }}
           iconLeft={<IconGlass />}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleSearch(e.target.value)

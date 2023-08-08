@@ -28,6 +28,10 @@ export const Companys = () => {
           width={230}
           height={42}
           placeholder='Buscar...'
+          style={{
+            fontFamily: 'Poppins',
+            fontWeight: 500
+          }}
           iconLeft={<IconGlass />}
           onChange={(e) => handleSearch(e.target.value)}
         />
