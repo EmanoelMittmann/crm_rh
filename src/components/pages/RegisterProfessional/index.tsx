@@ -47,7 +47,6 @@ const RegisterProfessional = () => {
     id?: string
   ) => {
     await onSubmit(data, id)
-    navigate(-1)
   }
 
   // TODO: [x] Limpar campos com máscara;
