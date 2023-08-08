@@ -5,7 +5,7 @@ import { mask } from 'remask'
 import { Inputs, Selects } from 'components/atoms'
 
 import { MASKER, TODAY, UF_OPTIONS } from '../constants'
-import { validation } from '../logic'
+import { convertToTitleCase, validation } from '../logic'
 import { ContainerRow } from '../style'
 import type { FormProps } from '../types'
 
@@ -25,7 +25,10 @@ export const Personal = () => {
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Inputs.Default
-          {...register('name', { required: validation.required })}
+          {...register('name', {
+            required: validation.required,
+            setValueAs: (e) => convertToTitleCase(e)
+          })}
           error={errors.name?.message}
           required
           width='100%'
@@ -113,7 +116,8 @@ export const Personal = () => {
         />
         <Inputs.Default
           {...register('street_name', {
-            required: validation.required
+            required: validation.required,
+            setValueAs: (e) => convertToTitleCase(e)
           })}
           error={errors.street_name?.message}
           label='Rua'
@@ -146,7 +150,8 @@ export const Personal = () => {
       <ContainerRow gap='1rem'>
         <Inputs.Default
           {...register('neighbourhood_name', {
-            required: validation.required
+            required: validation.required,
+            setValueAs: (e) => convertToTitleCase(e)
           })}
           error={errors.neighbourhood_name?.message}
           label='Bairro'
@@ -155,7 +160,8 @@ export const Personal = () => {
         />
         <Inputs.Default
           {...register('city_name', {
-            required: validation.required
+            required: validation.required,
+            setValueAs: (e) => convertToTitleCase(e)
           })}
           error={errors.city_name?.message}
           label='Cidade'

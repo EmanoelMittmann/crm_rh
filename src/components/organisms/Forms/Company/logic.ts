@@ -22,6 +22,19 @@ export function GenerateOption(data: Object): SelectOption[] {
   }))
 }
 
+export const convertToTitleCase = (e: string) => {
+  const words = e.split(' ')
+
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i]
+    if (word.length > 0) {
+      words[i] = word[0].toUpperCase() + word.slice(1).toLowerCase()
+    }
+  }
+
+  return words.join(' ')
+}
+
 export const validationSchema = yup.object().shape({
   razao_social: yup.string().required(validation.required),
   fantasy_name: yup.string().required(validation.required),

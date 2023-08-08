@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from 'react'
-import { useFormContext, WatchObserver } from 'react-hook-form'
+import { useEffect } from 'react'
+import { useFormContext } from 'react-hook-form'
 
 import { Typography } from '@stardust-ds/react'
 import { Radio } from '@stardust-ds/react'
@@ -9,7 +9,7 @@ import { mask } from 'remask'
 import { Inputs, SelectOption, Selects } from 'components/atoms'
 
 import { COMPANY, MASKER } from '../constants'
-import { validation } from '../logic'
+import { convertToTitleCase, validation } from '../logic'
 import { LegalNature } from '../Objects'
 import { ContainerRow } from '../style'
 import { FormProps } from '../types'
@@ -128,7 +128,8 @@ export const Company = () => {
       <ContainerRow gap='1em'>
         <Inputs.Default
           {...register('razao_social', {
-            required: validation.required
+            required: validation.required,
+            setValueAs: (e) => convertToTitleCase(e)
           })}
           onChange={({ target }: any) =>
             setValue('razao_social', target.value)
@@ -141,7 +142,8 @@ export const Company = () => {
         />
         <Inputs.Default
           {...register('fantasy_name', {
-            required: validation.required
+            required: validation.required,
+            setValueAs: (e) => convertToTitleCase(e)
           })}
           onChange={({ target }: any) =>
             setValue('fantasy_name', target.value)
