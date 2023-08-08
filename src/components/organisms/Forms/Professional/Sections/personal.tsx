@@ -69,12 +69,17 @@ export const Personal = () => {
           placeholder='000.000.000-00'
         />
         <Inputs.Default
-          {...register('rg', { required: validation.required })}
+          {...register('rg', {
+            required: validation.required,
+            setValueAs: (v: string) => mask(v, MASKER.RG),
+            validate: (v) =>
+              validation.min(Number(v), 13, 'RG inválido')
+          })}
+          value={watch('rg') ?? ''}
           error={errors.rg?.message}
           required
           width='100%'
           type='number'
-          min={0}
           label='RG'
           placeholder='000000000'
         />
