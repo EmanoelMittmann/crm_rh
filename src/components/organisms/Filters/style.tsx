@@ -20,3 +20,10 @@ export const Container = styled.div<IContainerColumnProps>`
   padding-right: ${(props) => props.right};
   gap: ${(props) => props.gap};
 `
+
+export const ContainerDate = styled.div`
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-left: -1rem;
+`

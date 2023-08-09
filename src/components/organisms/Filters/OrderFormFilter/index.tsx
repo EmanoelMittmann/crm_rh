@@ -24,6 +24,13 @@ export const OrderFormFilter = () => {
           iconLeft={<IconGlass />}
           value={search}
           onChange={(e) => handleSearch(e.target?.value)}
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
+          }}
         />
       </Container>
     </Main>

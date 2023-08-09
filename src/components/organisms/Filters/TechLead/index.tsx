@@ -6,7 +6,7 @@ import { List } from 'contexts'
 
 import { Button, IconGlass, Inputs, Selects } from 'components/atoms'
 
-import { Container, Main } from '../style'
+import { Container, ContainerDate, Main } from '../style'
 import { Option } from 'types'
 
 export const TechLead = () => {
@@ -33,6 +33,13 @@ export const TechLead = () => {
           iconLeft={<IconGlass />}
           placeholder='Buscar ...'
           onChange={(e) => handleSearch(e.target.value)}
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
+          }}
         />
         <Selects.Default
           width={230}
@@ -57,23 +64,25 @@ export const TechLead = () => {
           }
           onClear={() => handleFilterStatus(null)}
         />
-        <Inputs.Date
-          width={230}
-          height={42}
-          placeholder='Inicial'
-          value={start}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setStart(e.target.value)
-          }
-        />
-        <Inputs.Date
-          width={230}
-          height={42}
-          placeholder='Final'
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            handleDate(start, e.target.value)
-          }
-        />
+        <ContainerDate>
+          <Inputs.Date
+            width={230}
+            height={42}
+            placeholder='Inicial'
+            value={start}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setStart(e.target.value)
+            }
+          />
+          <Inputs.Date
+            width={230}
+            height={42}
+            placeholder='Final'
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              handleDate(start, e.target.value)
+            }
+          />
+        </ContainerDate>
       </Container>
     </Main>
   )

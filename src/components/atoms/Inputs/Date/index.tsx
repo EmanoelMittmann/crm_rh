@@ -29,6 +29,11 @@ export default forwardRef(
             iconRightAction={() => setFocus(true)}
             type='text'
             hasError={!!error}
+            style={{
+              fontWeight: '500',
+              fontFamily: 'Poppins, sans-serif',
+              paddingLeft: '1em'
+            }}
           />
         ) : (
           <Input
@@ -39,6 +44,11 @@ export default forwardRef(
             height={42}
             type='date'
             hasError={!!error}
+            style={{
+              fontWeight: '500',
+              fontFamily: 'Poppins, sans-serif',
+              paddingLeft: '1em'
+            }}
           />
         )}
       </Main>

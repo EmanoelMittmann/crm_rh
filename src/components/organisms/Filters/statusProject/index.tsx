@@ -34,6 +34,13 @@ export const StatusProject = () => {
           onChange={(e) => handleSearch(e.target.value)}
           width={230}
           height={42}
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
+          }}
         />
         <Select
           width={230}

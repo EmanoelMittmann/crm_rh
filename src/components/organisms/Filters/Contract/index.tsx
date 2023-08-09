@@ -5,7 +5,7 @@ import { List } from 'contexts'
 import { IconGlass, Inputs, Selects } from 'components/atoms'
 import { TODAY } from 'components/utils/dateNow'
 
-import { Container, Main } from '../style'
+import { Container, ContainerDate, Main } from '../style'
 
 export const Contract = () => {
   const [initial, setInitial] = useState('')
@@ -21,6 +21,13 @@ export const Contract = () => {
             handleSearch(e.target.value)
           }
           height={42}
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
+          }}
         />
         <Selects.Default
           options={filterOptions.status}
@@ -28,22 +35,24 @@ export const Contract = () => {
           onSelect={(e: any) => e && handleStatus(e.value)}
           onClear={() => handleStatus('')}
         />
-        <Inputs.Date
-          placeholder='Início do peróodo'
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setInitial(e.target.value)
-          }
-          value={initial}
-          max={TODAY}
-        />
-        <Inputs.Date
-          placeholder='Fim do período'
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            handleDate(initial, e.target.value)
-          }
-          min={initial}
-          max={TODAY}
-        />
+        <ContainerDate>
+          <Inputs.Date
+            placeholder='Início do peróodo'
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setInitial(e.target.value)
+            }
+            value={initial}
+            max={TODAY}
+          />
+          <Inputs.Date
+            placeholder='Fim do período'
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              handleDate(initial, e.target.value)
+            }
+            min={initial}
+            max={TODAY}
+          />
+        </ContainerDate>
       </Container>
     </Main>
   )

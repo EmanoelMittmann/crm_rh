@@ -30,6 +30,13 @@ export const Companys = () => {
           placeholder='Buscar...'
           iconLeft={<IconGlass />}
           onChange={(e) => handleSearch(e.target.value)}
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
+          }}
         />
         <Select
           searchable

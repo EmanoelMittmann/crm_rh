@@ -32,9 +32,8 @@ export const Professionals = () => {
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',
-            fontSize: '15px',
-            fontWeight: 'initial',
-            fontStyle: 'normal',
+            fontSize: '14px',
+            fontWeight: '500',
             fontFamily: 'Poppins, sans-serif'
           }}
         />
@@ -52,9 +51,7 @@ export const Professionals = () => {
             textOverflow: 'ellipsis',
             overflow: 'hidden',
             fontSize: 'inherit',
-            fontWeight: 'initial',
-            fontStyle: 'normal',
-            fontFamily: 'Poppins, sans-serif'
+            fontWeight: '500'
           }}
         />
       </Container>

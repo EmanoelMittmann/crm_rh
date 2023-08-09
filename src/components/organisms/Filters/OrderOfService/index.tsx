@@ -7,7 +7,7 @@ import { List } from 'contexts'
 import { IconGlass, Inputs } from 'components/atoms'
 import { TODAY } from 'components/utils/dateNow'
 
-import { Container, Main } from '../style'
+import { Container, ContainerDate, Main } from '../style'
 import { Option } from 'types'
 
 export const StatusOS = [
@@ -38,6 +38,13 @@ export const OrderOfService = () => {
           iconLeft={<IconGlass />}
           placeholder='Buscar...'
           onChange={(e) => handleSearch(e.target?.value)}
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
+          }}
         />
         <Select
           searchable
@@ -49,32 +56,34 @@ export const OrderOfService = () => {
             option && handleFillStatus(option.value)
           }
         />
-        <Inputs.Date
-          type={'date'}
-          width={230}
-          max={TODAY}
-          placeholder='Período Inicial'
-          onChange={(e) => setInitialDate(e.target.value)}
-          value={initialDate}
-        />
-        <Inputs.Date
-          type={'date'}
-          width={230}
-          min={initialDate}
-          max={TODAY}
-          placeholder='Período Final'
-          onChange={(e) =>
-            handleDateReference(initialDate, e.target.value)
-          }
-        />
-        <Inputs.Date
-          type={'date'}
-          width={230}
-          max={TODAY}
-          placeholder={'Referência'}
-          onChange={(e) => handleFillRefDate(e.target?.value)}
-          value={referencesDate ?? ''}
-        />
+        <ContainerDate>
+          <Inputs.Date
+            type={'date'}
+            width={230}
+            max={TODAY}
+            placeholder='Período Inicial'
+            onChange={(e) => setInitialDate(e.target.value)}
+            value={initialDate}
+          />
+          <Inputs.Date
+            type={'date'}
+            width={230}
+            min={initialDate}
+            max={TODAY}
+            placeholder='Período Final'
+            onChange={(e) =>
+              handleDateReference(initialDate, e.target.value)
+            }
+          />
+          <Inputs.Date
+            type={'date'}
+            width={230}
+            max={TODAY}
+            placeholder={'Referência'}
+            onChange={(e) => handleFillRefDate(e.target?.value)}
+            value={referencesDate ?? ''}
+          />
+        </ContainerDate>
       </Container>
     </Main>
   )
