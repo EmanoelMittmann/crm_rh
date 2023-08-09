@@ -1,7 +1,10 @@
 import { useContext } from 'react'
+
 import * as S from '@stardust-ds/react'
 import { List } from 'contexts'
+
 import { IconGlass, Button, Inputs, Selects } from 'components/atoms'
+
 import { Container, Main } from '../style'
 import { Option } from 'types'
 
