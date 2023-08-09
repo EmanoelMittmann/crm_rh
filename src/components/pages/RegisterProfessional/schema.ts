@@ -1,3 +1,4 @@
+import { parseISO, differenceInYears } from 'date-fns'
 import { object, string, number, array, mixed } from 'yup'
 
 import { handleRemoveSpecialCharacters } from './logic'
@@ -38,7 +39,19 @@ export const ProfessionalSchema = object({
     )
     .required(validation.required),
   name: string().required(validation.required),
-  birth_date: string().required(validation.required),
+  birth_date: string()
+    .test(
+      'idade',
+      'Idade deve ser maior ou igual a 18 anos.',
+      function (value) {
+        if (!value) return true
+        const selectedDate = parseISO(value)
+        const currentDate = new Date()
+        const age = differenceInYears(currentDate, selectedDate)
+        return age >= 18
+      }
+    )
+    .required(validation.required),
   start_date: string().required(validation.required),
   weekly_hours: number()
     .typeError(validation.required)
