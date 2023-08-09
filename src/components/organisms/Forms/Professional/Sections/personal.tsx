@@ -5,7 +5,11 @@ import { mask } from 'remask'
 import { Inputs, Selects } from 'components/atoms'
 
 import { MASKER, TODAY, UF_OPTIONS } from '../constants'
-import { convertToTitleCase, validation } from '../logic'
+import {
+  barricadeNumericCase,
+  convertToTitleCase,
+  validation
+} from '../logic'
 import { ContainerRow } from '../style'
 import type { FormProps } from '../types'
 
@@ -31,6 +35,7 @@ export const Personal = () => {
           })}
           error={errors.name?.message}
           required
+          onKeyDown={barricadeNumericCase}
           width='100%'
           type='text'
           label='Nome do profissional'
