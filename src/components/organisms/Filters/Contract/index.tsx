@@ -20,6 +20,10 @@ export const Contract = () => {
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleSearch(e.target.value)
           }
+          style={{
+            fontFamily: 'Poppins',
+            fontWeight: 500
+          }}
           height={42}
         />
         <Selects.Default

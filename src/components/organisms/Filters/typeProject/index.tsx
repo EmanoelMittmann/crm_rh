@@ -34,6 +34,10 @@ export const TypeProject = () => {
           placeholder='Buscar...'
           width={230}
           height={42}
+          style={{
+            fontFamily: 'Poppins',
+            fontWeight: 500
+          }}
           onChange={(e) => handleSearch(e.target.value)}
         />
         <Select

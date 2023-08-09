@@ -33,6 +33,10 @@ export const Jobs = () => {
           onChange={(e) => handleSearch(e.target.value)}
           width={230}
           height={42}
+          style={{
+            fontFamily: 'Poppins',
+            fontWeight: 500
+          }}
         />
         <Select
           width={230}
