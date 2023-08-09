@@ -459,7 +459,7 @@ export async function onSubmit(
         )
       : await api.post(routes.professional.register, payload)
 
-    return toast({
+    toast({
       type: 'success',
       title: id
         ? 'Profissional Editado com sucesso '
@@ -467,8 +467,17 @@ export async function onSubmit(
       description: 'Contrato Enviado',
       position: 'bottom-right'
     })
-  } catch (error) {
-    console.error(error)
+
+    window.history.go(-1)
+  } catch (error: any) {
+    for (const prop in error.response.data.errors) {
+      return toast({
+        type: 'error',
+        title: 'Atenção',
+        description: error.response.data.errors[prop],
+        position: 'bottom-right'
+      })
+    }
   }
 }
 
