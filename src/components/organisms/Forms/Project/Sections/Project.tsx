@@ -3,6 +3,7 @@ import { useFormContext, UseFormReturn } from 'react-hook-form'
 import { Inputs, Selects, SelectOption } from 'components/atoms'
 import { GenerateCurrencyMask } from 'components/utils/OptionsAplication'
 
+import { convertToTitleCase } from '../../Professional/logic'
 import { ContainerRow } from '../style'
 import { FormProjectProps } from '../types'
 
@@ -27,7 +28,10 @@ export const Project = () => {
       </ContainerRow>
       <ContainerRow gap='1rem'>
         <Inputs.Default
-          {...register('name', { required: true })}
+          {...register('name', {
+            required: true,
+            setValueAs: (e) => convertToTitleCase(e)
+          })}
           error={errors?.name?.message}
           required
           type='text'

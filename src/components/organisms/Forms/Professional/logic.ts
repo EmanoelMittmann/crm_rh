@@ -47,3 +47,16 @@ export function getMaskFromPixKeyType(type: getMaskFromTypePIXProps) {
 export function getUfOption(uf: string) {
   return UF_OPTIONS.find(({ value }) => value === uf) ?? null
 }
+
+export const convertToTitleCase = (e: string) => {
+  const words = e.split(' ')
+
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i]
+    if (word.length > 0) {
+      words[i] = word[0].toUpperCase() + word.slice(1).toLowerCase()
+    }
+  }
+
+  return words.join(' ')
+}
