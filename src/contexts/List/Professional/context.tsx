@@ -61,7 +61,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   async function fetchFilters() {
-    const { data } = await api.get(routes.job.list, {
+    const { data } = await api.get(routes.job.list + '?limit=100', {
       params: { is_active: 1 }
     })
 
