@@ -48,6 +48,16 @@ export function getUfOption(uf: string) {
   return UF_OPTIONS.find(({ value }) => value === uf) ?? null
 }
 
+export const barricadeNumericCase = (e: any) => {
+  const keyCode = e.keyCode ? e.keyCode : e.wich
+
+  if (
+    (keyCode >= 47 && keyCode <= 58) ||
+    (keyCode >= 96 && keyCode <= 105)
+  )
+    e.preventDefault()
+}
+
 export const convertToTitleCase = (e: string) => {
   const words = e.split(' ')
 
