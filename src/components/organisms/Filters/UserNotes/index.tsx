@@ -26,9 +26,6 @@ export const UserNotes = () => {
           value={search}
           width={230}
           height={42}
-          iconLeft={<IconGlass />}
-          placeholder='Buscar...'
-          onChange={(e) => handleSearch(e.target.value)}
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',
@@ -36,6 +33,9 @@ export const UserNotes = () => {
             fontWeight: '500',
             fontFamily: 'Poppins, sans-serif'
           }}
+          iconLeft={<IconGlass />}
+          placeholder='Buscar...'
+          onChange={(e) => handleSearch(e.target.value)}
         />
         <ContainerDate>
           <Inputs.Date

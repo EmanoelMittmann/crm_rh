@@ -20,7 +20,6 @@ export const Contract = () => {
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleSearch(e.target.value)
           }
-          height={42}
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',
@@ -28,6 +27,7 @@ export const Contract = () => {
             fontWeight: '500',
             fontFamily: 'Poppins, sans-serif'
           }}
+          height={42}
         />
         <Selects.Default
           options={filterOptions.status}

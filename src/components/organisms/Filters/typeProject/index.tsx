@@ -34,7 +34,6 @@ export const TypeProject = () => {
           placeholder='Buscar...'
           width={230}
           height={42}
-          onChange={(e) => handleSearch(e.target.value)}
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',
@@ -42,6 +41,7 @@ export const TypeProject = () => {
             fontWeight: '500',
             fontFamily: 'Poppins, sans-serif'
           }}
+          onChange={(e) => handleSearch(e.target.value)}
         />
         <Select
           width={230}

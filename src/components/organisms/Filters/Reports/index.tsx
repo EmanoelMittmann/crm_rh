@@ -35,10 +35,6 @@ export const Reports = () => {
           value={search}
           width={230}
           height={42}
-          iconLeft={<IconGlass />}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            handleSearch(e.target.value)
-          }
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',
@@ -46,6 +42,10 @@ export const Reports = () => {
             fontWeight: '500',
             fontFamily: 'Poppins, sans-serif'
           }}
+          iconLeft={<IconGlass />}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            handleSearch(e.target.value)
+          }
         />
         <Select
           searchable

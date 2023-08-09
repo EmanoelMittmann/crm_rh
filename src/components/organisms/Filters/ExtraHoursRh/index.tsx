@@ -30,9 +30,6 @@ export const ExtraHoursRh = () => {
           value={search}
           width='230px'
           height={42}
-          iconLeft={<IconGlass />}
-          placeholder='Buscar...'
-          onChange={(e) => handleSearch(e.target?.value)}
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',
@@ -40,6 +37,9 @@ export const ExtraHoursRh = () => {
             fontWeight: '500',
             fontFamily: 'Poppins, sans-serif'
           }}
+          iconLeft={<IconGlass />}
+          placeholder='Buscar...'
+          onChange={(e) => handleSearch(e.target?.value)}
         />
 
         <Selects.Default

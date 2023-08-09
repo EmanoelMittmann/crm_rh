@@ -20,10 +20,6 @@ export const OrderFormFilter = () => {
         <Input
           width={230}
           height={42}
-          placeholder='Buscar...'
-          iconLeft={<IconGlass />}
-          value={search}
-          onChange={(e) => handleSearch(e.target?.value)}
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',
@@ -31,6 +27,10 @@ export const OrderFormFilter = () => {
             fontWeight: '500',
             fontFamily: 'Poppins, sans-serif'
           }}
+          placeholder='Buscar...'
+          iconLeft={<IconGlass />}
+          value={search}
+          onChange={(e) => handleSearch(e.target?.value)}
         />
       </Container>
     </Main>

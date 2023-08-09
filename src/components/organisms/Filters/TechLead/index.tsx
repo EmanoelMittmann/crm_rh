@@ -29,10 +29,6 @@ export const TechLead = () => {
         <Input
           width={230}
           height={42}
-          value={search}
-          iconLeft={<IconGlass />}
-          placeholder='Buscar ...'
-          onChange={(e) => handleSearch(e.target.value)}
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',
@@ -40,6 +36,10 @@ export const TechLead = () => {
             fontWeight: '500',
             fontFamily: 'Poppins, sans-serif'
           }}
+          value={search}
+          iconLeft={<IconGlass />}
+          placeholder='Buscar ...'
+          onChange={(e) => handleSearch(e.target.value)}
         />
         <Selects.Default
           width={230}
