@@ -1,14 +1,12 @@
-import { useMemo, useContext } from 'react'
+import { useContext } from 'react'
 
 import * as S from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { IconGlass, Button } from 'components/atoms'
+import { IconGlass, Button, Inputs, Selects } from 'components/atoms'
 
 import { Container, Main } from '../style'
 import { Option } from 'types'
-
-type ValueProps = Option | null | undefined
 
 export const Professionals = () => {
   const {
@@ -19,34 +17,45 @@ export const Professionals = () => {
     navigateTo
   } = useContext(List.Professional.Context)
 
-  const { job_id, search } = meta
-
-  const currentValue = useMemo(
-    () => filterOptions.job.find((o) => Number(o.value) === job_id),
-    [job_id]
-  ) as ValueProps
+  const { search } = meta
 
   return (
     <Main>
       <Container gap='1rem'>
-        <S.Input
+        <Inputs.Default
           value={search}
           onChange={(e) => handleSearch(e.target?.value)}
           iconLeft={<IconGlass />}
           placeholder='Buscar...'
           width={230}
           height={42}
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '15px',
+            fontWeight: 'initial',
+            fontStyle: 'normal',
+            fontFamily: 'Poppins, sans-serif'
+          }}
         />
-        <S.Select
+        <Selects.Default
           width={230}
           placeholder='Cargo'
           options={filterOptions.job}
-          value={currentValue ?? null}
-          onSelect={(option: Option | null) =>
-            option && handleFillJob(Number(option?.value))
+          onSelect={
+            ((option: Option | null) =>
+              option && handleFillJob(Number(option.value))) as any
           }
           searchable
           onClear={() => handleFillJob(null)}
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: 'inherit',
+            fontWeight: 'initial',
+            fontStyle: 'normal',
+            fontFamily: 'Poppins, sans-serif'
+          }}
         />
       </Container>
       <Container gap='1em'>
