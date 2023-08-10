@@ -29,8 +29,11 @@ export const Companys = () => {
           height={42}
           placeholder='Buscar...'
           style={{
-            fontFamily: 'Poppins',
-            fontWeight: 500
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
           }}
           iconLeft={<IconGlass />}
           onChange={(e) => handleSearch(e.target.value)}

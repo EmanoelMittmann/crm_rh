@@ -1,9 +1,8 @@
-import { useContext, useMemo } from 'react'
+import { useContext } from 'react'
 
-import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { IconGlass, Button } from 'components/atoms'
+import { IconGlass, Button, Inputs, Selects } from 'components/atoms'
 
 import { Container, Main } from '../style'
 import { Option } from 'types'
@@ -21,28 +20,12 @@ export const Projects = () => {
     navigateTo
   } = useContext(List.Project.Context)
 
-  const { search, project_status_id, project_type_id } = meta
-
-  const currentValueType = useMemo(
-    () =>
-      filterOptionsType.project_type.find(
-        (item) => Number(item.value) === project_type_id
-      ),
-    [project_type_id]
-  ) as ValueProps
-
-  const currentValueStatus = useMemo(
-    () =>
-      filterOptionsStatus.status.find(
-        (item) => Number(item.value) === project_status_id
-      ),
-    [project_status_id]
-  ) as ValueProps
+  const { search } = meta
 
   return (
     <Main>
       <Container gap='1rem'>
-        <Input
+        <Inputs.Default
           value={search}
           iconLeft={<IconGlass />}
           onChange={(e) => handleSearch(e.target?.value)}
@@ -50,31 +33,48 @@ export const Projects = () => {
           width={230}
           height={42}
           style={{
-            fontFamily: 'Poppins',
-            fontWeight: 500
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
           }}
         />
-        <Select
+        <Selects.Default
           width={230}
           searchable
           placeholder='Tipo'
-          value={currentValueType ?? null}
           options={filterOptionsType?.project_type}
-          onSelect={(option: ValueProps) =>
-            option && handleFillProject_Type(Number(option?.value))
+          onSelect={
+            ((option: ValueProps) =>
+              option &&
+              handleFillProject_Type(Number(option?.value))) as any
           }
           onClear={() => handleFillProject_Type(null)}
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: 'inherit',
+            fontWeight: '500'
+          }}
         />
-        <Select
+        <Selects.Default
           width={230}
           searchable
           placeholder='Status'
-          value={currentValueStatus ?? null}
           options={filterOptionsStatus?.status}
-          onSelect={(option: ValueProps) =>
-            option && handleFillProject_Status(Number(option?.value))
+          onSelect={
+            ((option: ValueProps) =>
+              option &&
+              handleFillProject_Status(Number(option?.value))) as any
           }
           onClear={() => handleFillProject_Status(null)}
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: 'inherit',
+            fontWeight: '500'
+          }}
         />
       </Container>
       <Button.New onClick={() => navigateTo('/project/new')} />

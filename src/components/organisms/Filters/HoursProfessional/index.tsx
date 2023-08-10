@@ -6,7 +6,7 @@ import { List } from 'contexts'
 import { IconGlass, Inputs, Selects } from 'components/atoms'
 import { TODAY } from 'components/utils/dateNow'
 
-import { Container, Main } from '../style'
+import { Container, ContainerDate, Main } from '../style'
 import { Option } from 'types'
 
 export const HoursProfessional = () => {
@@ -29,8 +29,11 @@ export const HoursProfessional = () => {
           width={230}
           height={42}
           style={{
-            fontFamily: 'Poppins',
-            fontWeight: 500
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
           }}
           iconLeft={<IconGlass />}
           placeholder='Buscar...'
@@ -56,26 +59,28 @@ export const HoursProfessional = () => {
           }
           onClear={() => handleStatus(null)}
         />
-        <Inputs.Date
-          width={230}
-          height={42}
-          placeholder='Inicial'
-          max={TODAY}
-          value={start}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setStart(e.target.value)
-          }
-        />
-        <Inputs.Date
-          width={230}
-          height={42}
-          min={start}
-          max={TODAY}
-          placeholder='Final'
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            handleDate(start, e.target.value)
-          }
-        />
+        <ContainerDate>
+          <Inputs.Date
+            width={230}
+            height={42}
+            placeholder='Inicial'
+            max={TODAY}
+            value={start}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setStart(e.target.value)
+            }
+          />
+          <Inputs.Date
+            width={230}
+            height={42}
+            min={start}
+            max={TODAY}
+            placeholder='Final'
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              handleDate(start, e.target.value)
+            }
+          />
+        </ContainerDate>
       </Container>
     </Main>
   )

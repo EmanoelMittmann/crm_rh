@@ -1,12 +1,11 @@
-import { useContext, useMemo, useState } from 'react'
+import { useContext, useState } from 'react'
 
-import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { IconGlass, Inputs } from 'components/atoms'
+import { IconGlass, Inputs, Selects } from 'components/atoms'
 import { TODAY } from 'components/utils/dateNow'
 
-import { Container, Main } from '../style'
+import { Container, ContainerDate, Main } from '../style'
 import { Option } from 'types'
 
 type ValueProps = Option | null | undefined
@@ -22,79 +21,83 @@ export const ExtraHoursRh = () => {
   } = useContext(List.ExtraHoursRh.Context)
 
   const [initialDate, setInitialDate] = useState('')
-  const { search, status_id, project_id } = meta
-
-  const currentValueProject = useMemo(
-    () =>
-      filterOptions_Project.project.find(
-        (item) => Number(item.value) === project_id
-      ),
-    [project_id]
-  ) as ValueProps
-
-  const currentValueStatus = useMemo(
-    () =>
-      filterOptions_Status.status.find(
-        (item) => Number(item.value) === status_id
-      ),
-    [status_id]
-  ) as ValueProps
+  const { search } = meta
 
   return (
     <Main>
       <Container gap='1em'>
-        <Input
+        <Inputs.Default
           value={search}
-          width={230}
+          width='230px'
           height={42}
           style={{
-            fontFamily: 'Poppins',
-            fontWeight: 500
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
           }}
           iconLeft={<IconGlass />}
           placeholder='Buscar...'
           onChange={(e) => handleSearch(e.target?.value)}
         />
 
-        <Select
+        <Selects.Default
           placeholder='Projetos'
           width={230}
           searchable
-          value={currentValueProject ?? null}
           options={filterOptions_Project?.project}
-          onSelect={(option: ValueProps) =>
-            option && handleFilterProject(Number(option?.value))
+          onSelect={
+            ((option: ValueProps) =>
+              option &&
+              handleFilterProject(Number(option?.value))) as any
           }
           onClear={() => handleFilterProject(null as any)}
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: 'inherit',
+            fontWeight: '500'
+          }}
         />
-        <Select
+        <Selects.Default
           placeholder='Status'
           width={230}
           searchable
           options={filterOptions_Status?.status}
-          value={currentValueStatus ?? null}
-          onSelect={(option: ValueProps) =>
-            option && handleFilterStatus(Number(option?.value))
+          onSelect={
+            ((option: ValueProps) =>
+              option &&
+              handleFilterStatus(Number(option?.value))) as any
           }
           onClear={() => handleFilterStatus(null as any)}
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
+          }}
         />
-        <Inputs.Date
-          width={230}
-          placeholder='Período Inicial'
-          type={'date'}
-          max={TODAY}
-          onChange={(e) => setInitialDate(e.target.value)}
-          value={initialDate}
-        />
-        <Inputs.Date
-          width={230}
-          placeholder='Período Final'
-          min={initialDate}
-          max={TODAY}
-          onChange={(e) =>
-            handleDateReference(initialDate, e.target.value)
-          }
-        />
+        <ContainerDate>
+          <Inputs.Date
+            width={230}
+            placeholder='Período Inicial'
+            type={'date'}
+            max={TODAY}
+            onChange={(e) => setInitialDate(e.target.value)}
+            value={initialDate}
+          />
+          <Inputs.Date
+            width={230}
+            placeholder='Período Final'
+            min={initialDate}
+            max={TODAY}
+            onChange={(e) =>
+              handleDateReference(initialDate, e.target.value)
+            }
+          />
+        </ContainerDate>
       </Container>
     </Main>
   )

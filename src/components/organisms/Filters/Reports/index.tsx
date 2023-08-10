@@ -11,7 +11,7 @@ import { List } from 'contexts'
 import { IconGlass, Inputs } from 'components/atoms'
 import { TODAY } from 'components/utils/dateNow'
 
-import { Container, Main } from '../style'
+import { Container, ContainerDate, Main } from '../style'
 import { Option } from 'types'
 
 export const Reports = () => {
@@ -36,8 +36,11 @@ export const Reports = () => {
           width={230}
           height={42}
           style={{
-            fontFamily: 'Poppins',
-            fontWeight: 500
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
           }}
           iconLeft={<IconGlass />}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -64,26 +67,28 @@ export const Reports = () => {
             option && handleStatus(option?.value)
           }
         />
-        <Inputs.Date
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setInitial(e.target.value)
-          }
-          value={initial}
-          max={TODAY}
-          placeholder='Período Inicial'
-          type='date'
-          width={230}
-        />
-        <Inputs.Date
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            handleDate(initial, e.target.value)
-          }
-          min={initial}
-          max={TODAY}
-          placeholder='Período Final'
-          type='date'
-          width={230}
-        />
+        <ContainerDate>
+          <Inputs.Date
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setInitial(e.target.value)
+            }
+            value={initial}
+            max={TODAY}
+            placeholder='Período Inicial'
+            type='date'
+            width={230}
+          />
+          <Inputs.Date
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              handleDate(initial, e.target.value)
+            }
+            min={initial}
+            max={TODAY}
+            placeholder='Período Final'
+            type='date'
+            width={230}
+          />
+        </ContainerDate>
       </Container>
     </Main>
   )

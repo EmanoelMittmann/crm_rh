@@ -32,8 +32,9 @@ export const Professionals = () => {
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',
-            fontStyle: 'normal',
-            fontFamily: 'Poppins'
+            fontSize: '14px',
+            fontWeight: '500',
+            fontFamily: 'Poppins, sans-serif'
           }}
         />
         <Selects.Default
@@ -50,9 +51,7 @@ export const Professionals = () => {
             textOverflow: 'ellipsis',
             overflow: 'hidden',
             fontSize: 'inherit',
-            fontWeight: 'initial',
-            fontStyle: 'normal',
-            fontFamily: 'Poppins'
+            fontWeight: '500'
           }}
         />
       </Container>
