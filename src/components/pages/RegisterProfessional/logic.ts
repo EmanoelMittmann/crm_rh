@@ -471,6 +471,17 @@ export async function onSubmit(
     window.history.go(-1)
   } catch (error: any) {
     for (const prop in error.response.data.errors) {
+      if (prop === 'professional_data') {
+        for (const prop in error.response.data.errors
+          .professional_data)
+          return toast({
+            type: 'error',
+            title: 'Atenção',
+            description:
+              error.response.data.errors.professional_data[prop],
+            position: 'bottom-right'
+          })
+      }
       return toast({
         type: 'error',
         title: 'Atenção',
