@@ -49,11 +49,7 @@ export const Shelf = ({
         <Text>{hours_mounths_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn left='1.8em'>
-        <Text>{hours_mounths_performed}</Text>
-      </ContainerShelfColumn>
-
-      <ContainerShelfColumn justify='center'>
+      <ContainerShelfColumn justify='start'>
         <Badge.Status status={status} />
         <Popover options={config.options} />
       </ContainerShelfColumn>
