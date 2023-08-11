@@ -1,5 +1,7 @@
 import * as yup from 'yup'
 
+import { validation } from '../Professional/logic'
+
 export const validationSchema = yup.object().shape({
   name: yup.string().required('Campo obrigatório'),
   id: yup.string().required('Campo obrigatório'),
@@ -52,5 +54,12 @@ export const validationSchema = yup.object().shape({
         return value && value.value !== '' && value.label !== ''
       }
     })
-    .required('Campo obrigatório')
+    .required('Campo obrigatório'),
+
+  users: yup.object().shape({
+    allocation_end_date: yup
+      .string()
+      .nullable()
+      .required(validation.required)
+  })
 })

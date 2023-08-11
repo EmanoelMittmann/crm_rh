@@ -10,10 +10,13 @@ import { useFormContext } from 'react-hook-form'
 import { Button, Input, Select } from '@stardust-ds/react'
 import { theme } from 'styles'
 
+import { Inputs } from 'components/atoms'
 import Close from 'components/atoms/Buttons/Close'
+import { validation } from 'components/organisms/Forms/Professional/logic'
 import { FormTeamProps } from 'components/organisms/Forms/Project'
 import { FormProjectProps } from 'components/organisms/Forms/Project/types'
 import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
+import { TODAY } from 'components/utils/dateNow'
 
 import {
   Columns,
@@ -58,8 +61,13 @@ const UsersEditor = forwardRef<
   const [selectedStatus, setSelectedStatus] = useState<Option>()
   const [selectedJob, setSelectedJob] = useState<Option>()
 
-  const { register, watch, setValue } =
-    useFormContext<FormProjectProps>()
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors }
+  } = useFormContext<FormProjectProps>()
+  console.log('errors: ', errors)
 
   const { team } = useFormContext<FormTeamProps>().watch()
   const professional =
@@ -100,10 +108,6 @@ const UsersEditor = forwardRef<
         'users.hours_mounths_estimated',
         Number(professional.hours_mounths_estimated) || 0
       )
-      setValue(
-        'users.extra_hours_estimated',
-        Number(professional.extra_hours_estimated) || 0
-      )
     }
   }, [professional, setValue])
 
@@ -129,17 +133,16 @@ const UsersEditor = forwardRef<
               </TextHours>
             </ContainerShelfColumn>
           </RowUser>
-
-          <Row>
-            <Columns>
-              <Input
+          <Columns>
+            <Row>
+              <Inputs.Default
                 {...register('users.hours_mounths_estimated', {})}
                 label='Horas mensais'
                 value={watch('users.hours_mounths_estimated')}
                 placeholder={placeholder}
                 width={200}
+                height={40}
               />
-
               <Select
                 {...register('users.jobs.name', {})}
                 onSelect={(e: any) => setSelectedJob(e)}
@@ -152,30 +155,37 @@ const UsersEditor = forwardRef<
                 placeholder={placeholder}
                 width={200}
               />
-            </Columns>
-
-            <Columns>
-              <Input
-                {...register('users.extra_hours_estimated', {})}
-                label='Horas extras'
-                width={200}
-                value={watch('users.extra_hours_estimated')}
-                placeholder={placeholder}
-              />
-
-              <Select
-                onSelect={(e: any) => setSelectedStatus(e)}
-                onClear={() =>
-                  setSelectedStatus({ label: '', value: '' })
-                }
-                options={Options.status as unknown as Option[]}
-                label='Status'
-                value={selectedStatus}
-                placeholder={placeholder}
-                width={200}
-              />
-            </Columns>
-          </Row>
+            </Row>
+            <Row style={{ marginBottom: '2rem' }}>
+              <Columns>
+                <Select
+                  onSelect={(e: any) => setSelectedStatus(e)}
+                  onClear={() =>
+                    setSelectedStatus({ label: '', value: '' })
+                  }
+                  options={Options.status as unknown as Option[]}
+                  label='Status'
+                  value={selectedStatus}
+                  placeholder={placeholder}
+                  width={200}
+                />
+                {selectedStatus?.label === 'Inativo' && (
+                  <Inputs.Default
+                    {...register('users.allocation_end_date', {
+                      required: validation.required
+                    })}
+                    type='date'
+                    label='Data final de alocação'
+                    width='200px'
+                    max={TODAY}
+                    error={
+                      errors?.users?.allocation_end_date?.message
+                    }
+                  />
+                )}
+              </Columns>
+            </Row>
+          </Columns>
           <Row>
             <Button
               style={{ borderRadius: '500px' }}
@@ -196,21 +206,21 @@ const UsersEditor = forwardRef<
                   hours_mounths_estimated: Number(
                     watch('users.hours_mounths_estimated')
                   ),
-                  extra_hours_estimated: Number(
-                    watch('users.extra_hours_estimated')
-                  ),
                   hours_mounths_performed:
                     Number(watch('users.hours_mounths_performed')) ||
                     0,
-                  extra_hours_performed:
-                    Number(watch('users.extra_hours_performed')) || 0,
                   isTechLead: Boolean(professional?.isTechLead),
                   job_: String(selectedJob?.label),
                   status: Boolean(selectedStatus?.value),
-                  user_id: Number(isOpen.id)
+                  user_id: Number(isOpen.id),
+                  extra_hours_estimated: 0,
+                  extra_hours_performed: 0
                 })
-
-                close()
+                if (errors?.users?.allocation_end_date?.message) {
+                  return
+                } else {
+                  close()
+                }
               }}
             >
               Cadastrar

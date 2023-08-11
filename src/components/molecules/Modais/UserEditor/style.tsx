@@ -5,7 +5,7 @@ import { IContainerColumnProps } from 'types'
 
 export const ContainerModal = styled.div`
   width: 29em;
-  height: 470px;
+  height: 540px;
   border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
   display: flex;
@@ -26,7 +26,7 @@ export const Columns = styled.div`
 
 export const Row = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   flex-direction: row;
   margin: auto;
   width: 90%;
