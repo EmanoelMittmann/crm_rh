@@ -70,6 +70,8 @@ export const Team = () => {
             extra_hours_estimated: data.extra_hours_estimated,
             extra_hours_performed: data.extra_hours_performed,
             hours_mounths_performed: data.hours_mounths_performed,
+            date_start_allocation: data.date_start_allocation,
+            date_end_allocation: data.date_end_allocation,
             status: data.status,
             job_: data.job_,
             isTechLead: data.isTechLead
@@ -88,12 +90,16 @@ export const Team = () => {
             extra_hours_estimated: data.extra_hours_estimated,
             extra_hours_performed: data.extra_hours_performed,
             hours_mounths_performed: data.hours_mounths_performed,
+            date_start_allocation: data.date_start_allocation,
+            date_end_allocation: data.date_end_allocation,
             status: data.status,
             job_: data.job_,
             isTechLead: data.isTechLead
           }
           setValue('team', updatedTeam)
           await api.put(editTeam, update)
+
+          console.log('update: ', update);
         }
       }
 
