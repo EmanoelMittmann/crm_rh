@@ -34,54 +34,22 @@ export const Shelf = ({
 
   return (
     <ContainerShelf template={config.template}>
-      <ContainerShelfColumn gap='0.5rem' width='190px'>
+      <ContainerShelfColumn gap='0.5rem'>
         <Image src={avatar} />
         <TeamJobName>
           <Text>{professional?.name?.label}</Text>
           <TextJob>{job_}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
-      <ContainerShelfColumn width='110px'>
+      <ContainerShelfColumn left='2.5em'>
         <Text>{hours_mounths_estimated}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='90px'>
+      <ContainerShelfColumn left='2.1em'>
         <Text>{hours_mounths_performed}</Text>
       </ContainerShelfColumn>
 
-      <ContainerShelfColumn width='35px'>
-        <Text>
-          {hours_mounths_percent === undefined
-            ? percentCalculate(
-                hours_mounths_performed,
-                hours_mounths_estimated
-              ).toFixed()
-            : hours_mounths_percent.toFixed()}
-          %
-        </Text>
-      </ContainerShelfColumn>
-
-      <ContainerShelfColumn width='90px'>
-        <Text>{extra_hours_estimated}</Text>
-      </ContainerShelfColumn>
-
-      <ContainerShelfColumn width='90px'>
-        <Text>{extra_hours_performed}</Text>
-      </ContainerShelfColumn>
-
-      <ContainerShelfColumn width='20px'>
-        <Text>
-          {extra_hours_percent === undefined
-            ? percentCalculate(
-                extra_hours_performed,
-                extra_hours_estimated
-              ).toFixed()
-            : extra_hours_percent.toFixed()}
-          %
-        </Text>
-      </ContainerShelfColumn>
-
-      <ContainerShelfColumn width='125px' justify='center'>
+      <ContainerShelfColumn justify='start'>
         <Badge.Status status={status} />
         <Popover options={config.options} />
       </ContainerShelfColumn>

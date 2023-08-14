@@ -2,14 +2,15 @@ import type { HeaderProps } from 'components/molecules'
 
 export const HEADERS = [
   { field: 'professional', label: 'Profissional e cargo' },
-  { field: 'extra_hours_estimated', label: 'H/Mensais Estimadas' },
-  { field: 'hours_mounths_performed', label: 'H/Mensais Realizadas' },
-  { field: '', label: '%' },
-  { field: 'extra_hours_estimated', label: 'H/Extras Estimadas' },
-  { field: 'extra_hours_performed', label: 'H/Extras Realizadas' },
-  { field: '', label: '%' },
+  {
+    field: 'hours_mounths_estimated',
+    label: 'H/Mensais Estimadas'
+  },
+  {
+    field: 'date_start_allocation',
+    label: 'Inicio da Alocação'
+  },
   { field: 'status', label: 'Status' }
 ] as HeaderProps[]
 
-export const GRID_TEMPLATE =
-  '.7fr 0.5fr 0.5fr 0.2fr 0.3fr .5fr 0.2fr 0.5fr'
+export const GRID_TEMPLATE = '2fr .5fr .5fr .7fr'

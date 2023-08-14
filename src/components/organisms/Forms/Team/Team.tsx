@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import { toast } from '@stardust-ds/react'
+import { toast, DatePicker } from '@stardust-ds/react'
 
 import { Selects, Inputs, SelectOption } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
@@ -163,7 +163,7 @@ export const Team = () => {
         <h3>Time</h3>
       </ContainerRow>
 
-      <ContainerRow gap='1em'>
+      <ContainerRow gap='1em' align='center'>
         <Selects.Default
           {...register('professional.name', {})}
           onSelect={(value: any) =>
@@ -207,20 +207,14 @@ export const Team = () => {
           width='300px'
           height={40}
         />
-        <Inputs.Default
-          {...register('users.extra_hours_estimated', {})}
-          value={inputValues.extraHour}
-          onChange={(e) =>
-            setInputValues({
-              ...inputValues,
-              extraHour: e.target.value
-            })
-          }
-          error={errors?.users?.extra_hours_estimated?.message}
-          label='Horas extras estimadas'
-          placeholder='Horas'
-          width='330px'
-          height={40}
+        <DatePicker
+          inputStartProps={{
+            pTop: 'quark',
+            placeholder: 'Inicio da Alocação',
+            label: 'Data de Inicio da Alocação',
+            height: 66,
+            width: '195px'
+          }}
         />
         <ButtonGeneric
           top='1.5em'
