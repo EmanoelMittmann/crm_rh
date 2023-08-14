@@ -17,7 +17,6 @@ import { FormTeamProps } from 'components/organisms/Forms/Project'
 import { FormProjectProps } from 'components/organisms/Forms/Project/types'
 import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
 
-
 import {
   Columns,
   ContainerModal,
@@ -174,7 +173,7 @@ const UsersEditor = forwardRef<
                 />
                 {selectedStatus?.label === 'Inativo' && (
                   <Inputs.Default
-                    {...register('users.date_end_allocation',{
+                    {...register('users.date_end_allocation', {
                       required: validation.required
                     })}
                     error={
