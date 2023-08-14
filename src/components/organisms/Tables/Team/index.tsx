@@ -98,8 +98,6 @@ export const Team = () => {
           }
           setValue('team', updatedTeam)
           await api.put(editTeam, update)
-
-          console.log('update: ', update)
         }
       }
 
