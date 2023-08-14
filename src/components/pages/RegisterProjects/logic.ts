@@ -128,8 +128,12 @@ export function handlePopulateFields(
         hours_mounths_estimated: userData.hours_mounths_estimated,
         hours_mounths_performed: userData.hours_mounths_performed,
         extra_hours_performed: userData.extra_hours_performed,
-        date_start_allocation: getDateInput(userData.date_start_allocation),
-        date_end_allocation: getDateInput(userData.date_end_allocation),
+        date_start_allocation: getDateInput(
+          userData.date_start_allocation
+        ),
+        date_end_allocation: getDateInput(
+          userData.date_end_allocation
+        ),
         ...rest
       }
     }),
