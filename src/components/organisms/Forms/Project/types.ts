@@ -87,6 +87,7 @@ export interface ProjectProps {
     hours_mounths_estimated: number
     hours_mounths_performed: number
     extra_hours_performed: number
+    allocation_end_date: string
     is_active: boolean
     avatar: string
     status: boolean

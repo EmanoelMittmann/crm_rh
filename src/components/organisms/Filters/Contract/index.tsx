@@ -37,7 +37,7 @@ export const Contract = () => {
         />
         <ContainerDate>
           <Inputs.Date
-            placeholder='Início do peróodo'
+            placeholder='Início do período'
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setInitial(e.target.value)
             }
