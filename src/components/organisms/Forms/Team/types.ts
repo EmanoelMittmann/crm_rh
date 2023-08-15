@@ -14,6 +14,8 @@ export interface TeamMemberProps {
   extra_hours_performed: number
   extra_hours_percent: number
   hours_mounths_percent: number
+  date_end_allocation: string
+  date_start_allocation: string
   is_active: boolean
   avatar: string
   status: boolean
@@ -141,6 +143,8 @@ export interface UpdateProfessionalProps {
   extra_hours_estimated: number
   hours_mounths_performed: number
   extra_hours_performed: number
+  date_start_allocation: string
+  date_end_allocation: string
   isTechLead: boolean
   job_: string
   status: boolean
