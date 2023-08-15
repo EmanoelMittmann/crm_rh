@@ -8,6 +8,7 @@ export interface TeamMemberProps {
   job_id: number
   name: string
   isTechLead: boolean
+  date_start_allocation: string
   extra_hours_estimated: number
   hours_mounths_estimated: number
   hours_mounths_performed: number
