@@ -51,6 +51,8 @@ const RegisterProjects = () => {
           extra_hours_performed: user.extra_hours_performed,
           hours_mounths_estimated: user.hours_mounths_estimated,
           hours_mounths_performed: user.hours_mounths_performed,
+          date_end_allocation: user.date_end_allocation,
+          date_start_allocation: user.date_start_allocation,
           status: user.status,
           isTechLead: user.isTechLead,
           is_active: user.is_active,

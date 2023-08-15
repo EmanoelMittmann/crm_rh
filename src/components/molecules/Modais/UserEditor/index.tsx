@@ -16,7 +16,6 @@ import { validation } from 'components/organisms/Forms/Professional/logic'
 import { FormTeamProps } from 'components/organisms/Forms/Project'
 import { FormProjectProps } from 'components/organisms/Forms/Project/types'
 import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
-import { TODAY } from 'components/utils/dateNow'
 
 import {
   Columns,
@@ -67,7 +66,6 @@ const UsersEditor = forwardRef<
     setValue,
     formState: { errors }
   } = useFormContext<FormProjectProps>()
-  console.log('errors: ', errors)
 
   const { team } = useFormContext<FormTeamProps>().watch()
   const professional =
@@ -107,6 +105,10 @@ const UsersEditor = forwardRef<
       setValue(
         'users.hours_mounths_estimated',
         Number(professional.hours_mounths_estimated) || 0
+      )
+      setValue(
+        'users.date_end_allocation',
+        professional.date_end_allocation
       )
     }
   }, [professional, setValue])
@@ -171,16 +173,15 @@ const UsersEditor = forwardRef<
                 />
                 {selectedStatus?.label === 'Inativo' && (
                   <Inputs.Default
-                    {...register('users.allocation_end_date', {
+                    {...register('users.date_end_allocation', {
                       required: validation.required
                     })}
+                    error={
+                      errors?.users?.date_end_allocation?.message
+                    }
                     type='date'
                     label='Data final de alocação'
                     width='200px'
-                    max={TODAY}
-                    error={
-                      errors?.users?.allocation_end_date?.message
-                    }
                   />
                 )}
               </Columns>
@@ -209,6 +210,12 @@ const UsersEditor = forwardRef<
                   hours_mounths_performed:
                     Number(watch('users.hours_mounths_performed')) ||
                     0,
+                  date_end_allocation: String(
+                    watch('users.date_end_allocation')
+                  ),
+                  date_start_allocation: String(
+                    watch('users.date_start_allocation')
+                  ),
                   isTechLead: Boolean(professional?.isTechLead),
                   job_: String(selectedJob?.label),
                   status: Boolean(selectedStatus?.value),
@@ -216,7 +223,7 @@ const UsersEditor = forwardRef<
                   extra_hours_estimated: 0,
                   extra_hours_performed: 0
                 })
-                if (errors?.users?.allocation_end_date?.message) {
+                if (errors?.users?.date_end_allocation?.message) {
                   return
                 } else {
                   close()

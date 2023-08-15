@@ -14,6 +14,8 @@ export interface TeamMemberProps {
   extra_hours_performed: number
   extra_hours_percent: number
   hours_mounths_percent: number
+  date_end_allocation: string
+  date_start_allocation: string
   is_active: boolean
   avatar: string
   status: boolean
@@ -40,6 +42,8 @@ export interface ProjectProps {
   project_type_id: Option | null
   team_cost: string
   date_start_performed: string
+  date_end_allocation: string
+  date_start_allocation: string
   isTechLead: boolean
   project_type: {
     id: number
@@ -86,7 +90,8 @@ export interface ProjectProps {
     hours_mounths_estimated: number
     hours_mounths_performed: number
     extra_hours_performed: number
-    allocation_end_date: string
+    date_end_allocation?: string
+    date_start_allocation?: string
     is_active: boolean
     avatar: string
     status: boolean
