@@ -19,6 +19,11 @@ export async function bindUserAtProject(
   }
 }
 
+export function verifyFormat(date: string): boolean {
+  const padrao = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+  return padrao.test(date)
+}
+
 export function convertDateFormat(inputDate: string) {
   const months = {
     Jan: '01',
