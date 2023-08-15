@@ -9,9 +9,7 @@ import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { ContainerRow } from 'components/organisms/Forms/Project/style'
 import { Table } from 'components/organisms/Tables'
 
-import api from 'api'
-import { routes } from 'routes'
-
+import { bindUserAtProject, convertDateFormat } from './logic'
 import { FormTeamProps, TeamMemberProps } from './types'
 
 export const Team = () => {
@@ -36,23 +34,15 @@ export const Team = () => {
   const projectId = id
 
   const handleTeam = async () => {
-    const professional = watch('professional')
-    const id = Number(watch('professional.name.value'))
-    const avatar = watch('professional.avatar.label')
-    const job = watch('jobs')
+    const { jobs, users, professional } = watch()
+    const { avatar } = professional
     const job_ = watch('jobs.name.label')
-    const status = watch('users.status')
-    const hoursMonth =
-      Number(watch('users.hours_mounths_estimated')) || 0
-    const extraHour =
-      Number(watch('users.extra_hours_estimated')) || 0
-    const hours_mounths_performed =
-      Number(watch('users.hours_mounths_performed')) || 0
-    const extra_hours_performed =
-      Number(watch('users.extra_hours_performed')) || 0
-    const techLead = watch('users.isTechLead')
+    const status = users.status
+    const hoursMonth = users.hours_mounths_estimated | 0
+    const techLead = users.isTechLead
+    const job = jobs
 
-    if (professional && job) {
+    if (professional && jobs) {
       const validationToIncludeTeam = (errorMessage: string) => ({
         type: 'manual',
         message: errorMessage
@@ -67,7 +57,7 @@ export const Team = () => {
         )
         return
       }
-      if (!job.name) {
+      if (!jobs.name) {
         setError(
           'jobs.name',
           validationToIncludeTeam('Campo vazio selecione um cargo!')
@@ -85,15 +75,16 @@ export const Team = () => {
       }
 
       const newTeamMember = {
-        user_id: id,
+        user_id: professional.name.value,
         professional,
+        date_start_allocation: users.date_start_allocation,
         job,
         job_: isTechLead ? 'Tech Lead' : job_,
         isTechLead: techLead,
-        extra_hours_estimated: extraHour,
+        extra_hours_estimated: users.extra_hours_estimated | 0,
         hours_mounths_estimated: hoursMonth,
-        hours_mounths_performed: hours_mounths_performed,
-        extra_hours_performed: extra_hours_performed,
+        hours_mounths_performed: users.hours_mounths_performed | 0,
+        extra_hours_performed: users.extra_hours_performed | 0,
         status: status ? 'Ativo' : 'Inativo',
         avatar: avatar
           ? avatar
@@ -104,17 +95,7 @@ export const Team = () => {
       const newTeam = [...currentTeam, newTeamMember]
 
       if (projectId !== undefined) {
-        await api.post(
-          routes.project.userProjects(Number(projectId)),
-          newTeamMember
-        )
-        setValue('team', newTeam)
-        toast({
-          title: 'Profissional adicionado com sucesso!',
-          type: 'success',
-          position: 'bottom-right'
-        })
-        return
+        bindUserAtProject(Number(projectId), newTeamMember)
       }
 
       setValue('team', newTeam)
@@ -123,12 +104,16 @@ export const Team = () => {
         type: 'success',
         position: 'bottom-right'
       })
-
-      setInputValues({
-        hoursMonth: '',
-        extraHour: ''
-      })
     }
+    setValue('professional.name', null)
+    setValue('jobs.name', null)
+    setValue('users.date_start_allocation', undefined)
+    setValue('users.hours_mounths_estimated', 0)
+    setInputValues({
+      extraHour: '',
+      hoursMonth: ''
+    })
+    return
   }
 
   const teamUser = watch('team', [])
@@ -165,7 +150,8 @@ export const Team = () => {
 
       <ContainerRow gap='1em' align='center'>
         <Selects.Default
-          {...register('professional.name', {})}
+          {...register('professional.name')}
+          value={watch('professional.name') as any}
           onSelect={(value: any) =>
             setValue('professional.name', value, {
               shouldValidate: true
@@ -181,6 +167,7 @@ export const Team = () => {
         />
         <Selects.Default
           {...register('jobs.name', {})}
+          value={watch('jobs.name') as any}
           onSelect={(value: any) =>
             setValue('jobs.name', value, { shouldValidate: true })
           }
@@ -208,6 +195,16 @@ export const Team = () => {
           height={40}
         />
         <DatePicker
+          value={{
+            start: watch('users.date_start_allocation'),
+            end: watch('users.date_start_allocation')
+          }}
+          onChange={(e) =>
+            setValue(
+              'users.date_start_allocation',
+              convertDateFormat(String(e[0]))
+            )
+          }
           inputStartProps={{
             pTop: 'quark',
             placeholder: 'Inicio da Alocação',

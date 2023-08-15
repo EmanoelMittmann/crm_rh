@@ -1,11 +1,12 @@
 import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
 import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
+import { verifyFormat } from 'components/organisms/Forms/Team/logic'
 import {
   ContainerShelf,
   ContainerShelfColumn
 } from 'components/organisms/Tables/style'
-import { percentCalculate } from 'components/utils/percentCalculate'
+import { formatDate } from 'components/utils/formatDate'
 
 import {
   Image,
@@ -20,13 +21,13 @@ export const Shelf = ({
   config
 }: ShelfProps<TeamMemberProps>) => {
   const {
-    extra_hours_estimated = 0,
     hours_mounths_estimated = 0,
     hours_mounths_performed = 0,
     extra_hours_performed = 0,
     extra_hours_percent = 0,
     hours_mounths_percent = 0,
     professional,
+    date_start_allocation,
     status,
     job_,
     avatar
@@ -46,7 +47,11 @@ export const Shelf = ({
       </ContainerShelfColumn>
 
       <ContainerShelfColumn left='2.1em'>
-        <Text>{hours_mounths_performed}</Text>
+        <Text>
+          {verifyFormat(date_start_allocation)
+            ? formatDate(date_start_allocation)
+            : date_start_allocation}
+        </Text>
       </ContainerShelfColumn>
 
       <ContainerShelfColumn justify='start'>

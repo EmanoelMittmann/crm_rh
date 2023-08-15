@@ -8,6 +8,7 @@ export interface TeamMemberProps {
   job_id: number
   name: string
   isTechLead: boolean
+  date_start_allocation: string
   extra_hours_estimated: number
   hours_mounths_estimated: number
   hours_mounths_performed: number
@@ -15,7 +16,6 @@ export interface TeamMemberProps {
   extra_hours_percent: number
   hours_mounths_percent: number
   date_end_allocation: string
-  date_start_allocation: string
   is_active: boolean
   avatar: string
   status: boolean
