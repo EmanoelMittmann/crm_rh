@@ -67,7 +67,6 @@ export const Team = () => {
             ...updatedTeam[index],
             user_id: user_id,
             hours_mounths_estimated: data.hours_mounths_estimated,
-            date_start_allocation: data.date_start_allocation,
             extra_hours_estimated: data.extra_hours_estimated,
             extra_hours_performed: data.extra_hours_performed,
             hours_mounths_performed: data.hours_mounths_performed,
@@ -88,7 +87,6 @@ export const Team = () => {
           const update = {
             user_id: user_id,
             hours_mounths_estimated: data.hours_mounths_estimated,
-            date_start_allocation: data.date_start_allocation,
             extra_hours_estimated: data.extra_hours_estimated,
             extra_hours_performed: data.extra_hours_performed,
             hours_mounths_performed: data.hours_mounths_performed,
