@@ -50,5 +50,5 @@ export function convertDateFormat(inputDate: string) {
   const month = months[partmonth as keyof Month]
   const year = parts[3]
 
-  return `${day}/${month}/${year}`
+  return `${year}-${month}-${day}`
 }
