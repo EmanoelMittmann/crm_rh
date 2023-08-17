@@ -67,7 +67,6 @@ const UsersEditor = forwardRef<
     setValue,
     formState: { errors }
   } = useFormContext<FormProjectProps>()
-  console.log('errors: ', errors)
 
   const { team } = useFormContext<FormTeamProps>().watch()
   const professional =
