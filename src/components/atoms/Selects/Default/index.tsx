@@ -2,7 +2,7 @@ import { forwardRef, InputHTMLAttributes, Ref } from 'react'
 
 import { Select } from '@stardust-ds/react'
 import type { SelectProps } from '@stardust-ds/react'
-import type { SelectRef } from '@stardust-ds/react/lib/esm/components/Select/interfaces'
+import type { SelectRefProps } from '@stardust-ds/react/lib/esm/components/Select/interfaces'
 
 import {
   Label,
@@ -33,7 +33,7 @@ export const Default = forwardRef(
         <Select
           {...props}
           searchable
-          ref={ref as Ref<SelectRef>}
+          ref={ref as Ref<SelectRefProps>}
           hasError={!!error}
           helperText={error ?? props.helperText}
         />
