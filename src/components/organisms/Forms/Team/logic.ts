@@ -66,7 +66,7 @@ export function handleTeam(
   const { avatar } = professional
   const job_ = watch('jobs.name.label')
   const status = users.status
-  const hoursMonth = users.hours_mounths_estimated | 0
+  const hoursMonth = users.hours_mounths_estimated || 0
   const techLead = users.isTechLead
   const job = jobs
 
@@ -132,10 +132,10 @@ export function handleTeam(
       type: 'success',
       position: 'bottom-right'
     })
+    setValue('professional.name', null)
+    setValue('jobs.name', null)
+    setValue('users.date_start_allocation', undefined)
+    setValue('users.hours_mounths_estimated', null)
+    return
   }
-  setValue('professional.name', null)
-  setValue('jobs.name', null)
-  setValue('users.date_start_allocation', undefined)
-  setValue('users.hours_mounths_estimated', 0)
-  return
 }
