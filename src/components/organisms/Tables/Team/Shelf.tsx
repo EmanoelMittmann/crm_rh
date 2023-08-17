@@ -27,7 +27,7 @@ export const Shelf = ({
     job_,
     avatar
   } = props
- 
+
   return (
     <ContainerShelf template={config.template}>
       <ContainerShelfColumn gap='0.5rem'>

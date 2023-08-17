@@ -87,7 +87,6 @@ const RegisterProjects = () => {
       })
       navigate('/project')
     } catch (error) {
-      console.error('error: ', error)
       toast({
         type: 'error',
         title: 'Erro ao editar Projeto.',

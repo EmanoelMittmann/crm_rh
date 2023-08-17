@@ -100,16 +100,23 @@ export function handlePopulateFields(
     date_end_performed: getDateInput(data.date_end_performed),
     team_cost: GenerateCurrencyMask(String(data.team_cost)),
 
-
     team: data.users.map((user) => {
       const allUsers = OPTIONS.users.flatMap(
         (selectUser: any) => selectUser.users
       )
       const userData = allUsers.find(
         (userData) => userData.id === user.user_id
-        )
+      )
 
-      const { name, job, job_, status, date_start_allocation, date_end_allocation, ...rest } = user
+      const {
+        name,
+        job,
+        job_,
+        status,
+        date_start_allocation,
+        date_end_allocation,
+        ...rest
+      } = user
       const professional = { name: { label: name } }
       const jobs = {
         name: {
