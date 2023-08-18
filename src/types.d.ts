@@ -104,6 +104,8 @@ export interface ProjectProps {
   date_start_performed: string
   date_end: string
   date_end_performed: string
+  date_end_allocation: string
+  date_start_allocation: string
   project_status_id: number
   project_type_id: number
   project_type: {

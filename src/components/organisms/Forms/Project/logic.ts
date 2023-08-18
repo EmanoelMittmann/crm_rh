@@ -1,6 +1,17 @@
 import * as yup from 'yup'
 
-import { validation } from '../Professional/logic'
+export const validation = {
+  required: 'Campo obrigatório',
+  min: (
+    value: number,
+    min: number,
+    message: string = 'Campo inválido'
+  ) => {
+    if (value < min) return message
+
+    return true
+  }
+}
 
 export const validationSchema = yup.object().shape({
   name: yup.string().required('Campo obrigatório'),
@@ -57,9 +68,18 @@ export const validationSchema = yup.object().shape({
     .required('Campo obrigatório'),
 
   users: yup.object().shape({
-    allocation_end_date: yup
+    date_end_allocation: yup
       .string()
       .nullable()
-      .required(validation.required)
+      .test(
+        'data',
+        'A data deve ser igual ou anterior ao dia atual',
+        function (value) {
+          if (!value) return true
+          const today = new Date()
+          const date = new Date(value)
+          return date <= today
+        }
+      )
   })
 })

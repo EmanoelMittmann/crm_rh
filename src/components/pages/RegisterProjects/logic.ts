@@ -108,7 +108,15 @@ export function handlePopulateFields(
         (userData) => userData.id === user.user_id
       )
 
-      const { name, job, job_, status, ...rest } = user
+      const {
+        name,
+        job,
+        job_,
+        status,
+        date_start_allocation,
+        date_end_allocation,
+        ...rest
+      } = user
       const professional = { name: { label: name } }
       const jobs = {
         name: {
@@ -128,6 +136,8 @@ export function handlePopulateFields(
         hours_mounths_estimated: userData.hours_mounths_estimated,
         hours_mounths_performed: userData.hours_mounths_performed,
         extra_hours_performed: userData.extra_hours_performed,
+        date_start_allocation: getDateInput(date_start_allocation),
+        date_end_allocation: getDateInput(date_end_allocation),
         ...rest
       }
     }),

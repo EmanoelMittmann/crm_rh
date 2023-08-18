@@ -3,20 +3,22 @@ import {
   useImperativeHandle,
   useState,
   useCallback,
-  useEffect
+  useEffect,
+  useMemo
 } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { Button, Input, Select } from '@stardust-ds/react'
+import { Button, Select, toast } from '@stardust-ds/react'
 import { theme } from 'styles'
 
 import { Inputs } from 'components/atoms'
 import Close from 'components/atoms/Buttons/Close'
-import { validation } from 'components/organisms/Forms/Professional/logic'
 import { FormTeamProps } from 'components/organisms/Forms/Project'
+import { validation } from 'components/organisms/Forms/Project/logic'
 import { FormProjectProps } from 'components/organisms/Forms/Project/types'
 import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
-import { TODAY } from 'components/utils/dateNow'
+
+import { useDebounce } from 'hooks'
 
 import {
   Columns,
@@ -65,6 +67,7 @@ const UsersEditor = forwardRef<
     register,
     watch,
     setValue,
+    setError,
     formState: { errors }
   } = useFormContext<FormProjectProps>()
 
@@ -100,15 +103,41 @@ const UsersEditor = forwardRef<
 
       setSelectedStatus(selectedStatus as unknown as Option)
       setSelectedJob(selectedJob as unknown as Option)
-
       setValue('users.status', selectedStatus?.value)
       setValue('users.jobs.name.label', selectedJob?.label)
       setValue(
         'users.hours_mounths_estimated',
         Number(professional.hours_mounths_estimated) || 0
       )
+      setValue(
+        'users.date_end_allocation',
+        professional.date_end_allocation
+      )
+      setValue(
+        'users.date_start_allocation',
+        professional.date_start_allocation
+      )
     }
   }, [professional, setValue])
+
+  const validateError = () => {
+    if (
+      selectedStatus?.label === 'Inativo' &&
+      !watch(
+        'users.date_end_allocation',
+        professional?.date_end_allocation
+      )
+    ) {
+      setError('users.date_end_allocation', {
+        type: 'required',
+        message: validation.required
+      })
+    }
+  }
+
+  useEffect(() => {
+    validateError()
+  }, [selectedStatus?.label])
 
   if (isOpen.id === 0) return null
 
@@ -141,6 +170,7 @@ const UsersEditor = forwardRef<
                 placeholder={placeholder}
                 width={200}
                 height={40}
+                disabled={true}
               />
               <Select
                 {...register('users.jobs.name', {})}
@@ -153,36 +183,33 @@ const UsersEditor = forwardRef<
                 label='Cargo'
                 placeholder={placeholder}
                 width={200}
+                disabled={true}
               />
             </Row>
-            <Row style={{ marginBottom: '2rem' }}>
-              <Columns>
-                <Select
-                  onSelect={(e: any) => setSelectedStatus(e)}
-                  onClear={() =>
-                    setSelectedStatus({ label: '', value: '' })
-                  }
-                  options={Options.status as unknown as Option[]}
-                  label='Status'
-                  value={selectedStatus}
-                  placeholder={placeholder}
-                  width={200}
+
+            <Row>
+              <Select
+                onSelect={(e: any) => setSelectedStatus(e)}
+                onClear={() =>
+                  setSelectedStatus({ label: '', value: '' })
+                }
+                options={Options.status as unknown as Option[]}
+                label='Status'
+                value={selectedStatus}
+                placeholder={placeholder}
+                width={200}
+              />
+              {selectedStatus?.label === 'Inativo' && (
+                <Inputs.Default
+                  {...register('users.date_end_allocation', {})}
+                  value={watch('users.date_end_allocation')}
+                  error={errors?.users?.date_end_allocation?.message}
+                  type='date'
+                  label='Data final de alocação'
+                  width='200px'
+                  required
                 />
-                {selectedStatus?.label === 'Inativo' && (
-                  <Inputs.Default
-                    {...register('users.allocation_end_date', {
-                      required: validation.required
-                    })}
-                    type='date'
-                    label='Data final de alocação'
-                    width='200px'
-                    max={TODAY}
-                    error={
-                      errors?.users?.allocation_end_date?.message
-                    }
-                  />
-                )}
-              </Columns>
+              )}
             </Row>
           </Columns>
           <Row>
@@ -208,6 +235,12 @@ const UsersEditor = forwardRef<
                   hours_mounths_performed:
                     Number(watch('users.hours_mounths_performed')) ||
                     0,
+                  date_end_allocation: String(
+                    watch('users.date_end_allocation')
+                  ),
+                  date_start_allocation: String(
+                    watch('users.date_start_allocation')
+                  ),
                   isTechLead: Boolean(professional?.isTechLead),
                   job_: String(selectedJob?.label),
                   status: Boolean(selectedStatus?.value),
@@ -215,11 +248,7 @@ const UsersEditor = forwardRef<
                   extra_hours_estimated: 0,
                   extra_hours_performed: 0
                 })
-                if (errors?.users?.allocation_end_date?.message) {
-                  return
-                } else {
-                  close()
-                }
+                close()
               }}
             >
               Cadastrar

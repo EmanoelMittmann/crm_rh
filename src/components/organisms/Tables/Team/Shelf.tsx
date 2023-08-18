@@ -5,7 +5,7 @@ import {
   ContainerShelf,
   ContainerShelfColumn
 } from 'components/organisms/Tables/style'
-import { percentCalculate } from 'components/utils/percentCalculate'
+import { formatDate } from 'components/utils/formatDate'
 
 import {
   Image,
@@ -18,21 +18,15 @@ import { ShelfProps } from '../types'
 export const Shelf = ({
   props,
   config
-}: ShelfProps<Partial<TeamMemberProps>>) => {
+}: ShelfProps<TeamMemberProps>) => {
   const {
     hours_mounths_estimated = 0,
-    hours_mounths_performed = 0,
-    extra_hours_performed = 0,
-    extra_hours_percent = 0,
-    hours_mounths_percent = 0,
     professional,
     date_start_allocation,
     status,
     job_,
     avatar
   } = props
-
-  if (!status) return null
 
   return (
     <ContainerShelf template={config.template}>
@@ -46,11 +40,9 @@ export const Shelf = ({
       <ContainerShelfColumn left='2.5em'>
         <Text>{hours_mounths_estimated}</Text>
       </ContainerShelfColumn>
-
       <ContainerShelfColumn left='2.1em'>
-        <Text>{date_start_allocation}</Text>
+        <Text>{formatDate(date_start_allocation)}</Text>
       </ContainerShelfColumn>
-
       <ContainerShelfColumn justify='start'>
         <Badge.Status status={status} />
         <Popover options={config.options} />

@@ -23,10 +23,16 @@ export const Columns = styled.div`
   flex-direction: column;
   gap: 1rem;
 `
+export const Columns01 = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 1rem;
+`
 
 export const Row = styled.div`
   display: flex;
-  align-items: flex-end;
   flex-direction: row;
   margin: auto;
   width: 90%;
