@@ -1,5 +1,7 @@
+import { Main } from 'components/templates'
+
 import { Section } from './Sections'
-import { Divider, Main } from './style'
+import { Divider } from './style'
 
 export default () => {
   return (
