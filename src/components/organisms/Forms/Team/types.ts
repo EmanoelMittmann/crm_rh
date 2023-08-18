@@ -87,7 +87,7 @@ export interface TeamProps {
     isTechLead: boolean
     date_start_allocation: string | undefined
     extra_hours_estimated: number
-    hours_mounths_estimated: number
+    hours_mounths_estimated: number | null
     hours_mounths_performed: number
     extra_hours_performed: number
     is_active: boolean
