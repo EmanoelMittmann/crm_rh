@@ -65,7 +65,7 @@ export const Team = () => {
           width={190}
           error={errors?.professional?.name?.message}
           onClear={() => setValue('professional.name', null)}
-          options={currentTeamOptions}
+          options={currentTeamOptions as SelectOption[]}
           label='Time'
           placeholder='Selecione'
         />
