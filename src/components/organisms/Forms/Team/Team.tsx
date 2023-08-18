@@ -118,12 +118,6 @@ export const Team = () => {
 
   const teamUser = watch('team', [])
   const listUsers = watch('options.professionals', [])
-  const currentTeamOptions = listUsers.filter(
-    (professional) =>
-      !teamUser.find(
-        (user) => user.user_id === Number(professional.value)
-      )
-  )
 
   const TechLead = teamUser.filter(
     (obj) =>
@@ -159,7 +153,7 @@ export const Team = () => {
           }
           error={errors?.professional?.name?.message}
           onClear={() => setValue('professional.name', null)}
-          options={currentTeamOptions as SelectOption[]}
+          options={listUsers as SelectOption[]}
           label='Time'
           placeholder='Selecione'
           width={180}
