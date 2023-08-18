@@ -55,6 +55,24 @@ export function convertDateFormat(inputDate: string) {
   return `${year}-${month}-${day}`
 }
 
+function verifyProfessional(
+  context: UseFormReturn<FormTeamProps>,
+  professional: TeamMemberProps
+) {
+  const { watch } = context
+  const { team } = watch()
+
+  if (!team) return true
+
+  const Exist = team
+    .filter((prop) => prop.user_id === professional.user_id)
+    .find((prop) => prop.job_ === professional.job_)
+
+  if (Exist) return false
+
+  return true
+}
+
 export function handleTeam(
   Context: UseFormReturn<FormTeamProps>,
   ProjectId: number
@@ -131,16 +149,25 @@ export function handleTeam(
       bindUserAtProject(Number(ProjectId), newTeamMember)
     }
 
-    setValue('team', newTeam)
-    toast({
-      title: 'Profissional cadastrado com sucesso!',
-      type: 'success',
-      position: 'bottom-right'
-    })
-    setValue('professional.name', null)
-    setValue('jobs.name', null)
-    setValue('users.date_start_allocation', undefined)
-    setValue('users.hours_mounths_estimated', null)
-    return
+    if (verifyProfessional(Context, newTeamMember)) {
+      setValue('team', newTeam)
+      toast({
+        title: 'Profissional cadastrado com sucesso!',
+        type: 'success',
+        position: 'bottom-right'
+      })
+      setValue('professional.name', null)
+      setValue('jobs.name', null)
+      setValue('users.date_start_allocation', undefined)
+      setValue('users.hours_mounths_estimated', null)
+      return
+    }
   }
+  return toast({
+    type: 'warning',
+    title: 'Aviso',
+    description:
+      'Os Profissionais ja alocados, só podem ser anexados ao novamente com cargos diferentes',
+    position: 'bottom-right'
+  })
 }
