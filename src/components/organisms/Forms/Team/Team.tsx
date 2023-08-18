@@ -118,7 +118,6 @@ export const Team = () => {
 
   const teamUser = watch('team', [])
   const listUsers = watch('options.professionals', [])
-  
 
   const TechLead = teamUser.filter(
     (obj) =>
