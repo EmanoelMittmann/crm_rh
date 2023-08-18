@@ -3,12 +3,11 @@ import {
   useImperativeHandle,
   useState,
   useCallback,
-  useEffect,
-  useMemo
+  useEffect
 } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { Button, Select, toast } from '@stardust-ds/react'
+import { Button, Select } from '@stardust-ds/react'
 import { theme } from 'styles'
 
 import { Inputs } from 'components/atoms'
@@ -17,8 +16,6 @@ import { FormTeamProps } from 'components/organisms/Forms/Project'
 import { validation } from 'components/organisms/Forms/Project/logic'
 import { FormProjectProps } from 'components/organisms/Forms/Project/types'
 import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
-
-import { useDebounce } from 'hooks'
 
 import {
   Columns,
