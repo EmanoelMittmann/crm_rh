@@ -3,12 +3,11 @@ import {
   useImperativeHandle,
   useState,
   useCallback,
-  useEffect,
-  useMemo
+  useEffect
 } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { Button, Select, toast } from '@stardust-ds/react'
+import { Button, Select } from '@stardust-ds/react'
 import { theme } from 'styles'
 
 import { Inputs } from 'components/atoms'
@@ -17,8 +16,6 @@ import { FormTeamProps } from 'components/organisms/Forms/Project'
 import { validation } from 'components/organisms/Forms/Project/logic'
 import { FormProjectProps } from 'components/organisms/Forms/Project/types'
 import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
-
-import { useDebounce } from 'hooks'
 
 import {
   Columns,
@@ -68,6 +65,7 @@ const UsersEditor = forwardRef<
     watch,
     setValue,
     setError,
+    clearErrors,
     formState: { errors }
   } = useFormContext<FormProjectProps>()
 
@@ -120,24 +118,23 @@ const UsersEditor = forwardRef<
     }
   }, [professional, setValue])
 
+  const alocation = watch('users.date_end_allocation')
   const validateError = () => {
-    if (
-      selectedStatus?.label === 'Inativo' &&
-      !watch(
-        'users.date_end_allocation',
-        professional?.date_end_allocation
-      )
-    ) {
+    if (selectedStatus?.label === 'Inativo' && alocation === '') {
       setError('users.date_end_allocation', {
         type: 'required',
         message: validation.required
       })
+      return false
+    } else {
+      clearErrors('users.date_end_allocation')
+      return true
     }
   }
 
   useEffect(() => {
     validateError()
-  }, [selectedStatus?.label])
+  }, [selectedStatus?.label, alocation])
 
   if (isOpen.id === 0) return null
 
@@ -201,7 +198,9 @@ const UsersEditor = forwardRef<
               />
               {selectedStatus?.label === 'Inativo' && (
                 <Inputs.Default
-                  {...register('users.date_end_allocation', {})}
+                  {...register('users.date_end_allocation', {
+                    validate: () => validateError()
+                  })}
                   value={watch('users.date_end_allocation')}
                   error={errors?.users?.date_end_allocation?.message}
                   type='date'
@@ -248,8 +247,17 @@ const UsersEditor = forwardRef<
                   extra_hours_estimated: 0,
                   extra_hours_performed: 0
                 })
+
                 close()
               }}
+              onBlur={() => validateError()}
+              disabled={
+                !selectedStatus?.label ||
+                errors.users?.date_end_allocation?.message ||
+                alocation === ''
+                  ? true
+                  : false
+              }
             >
               Cadastrar
             </Button>

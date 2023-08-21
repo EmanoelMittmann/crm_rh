@@ -10,7 +10,7 @@ import { Container, Main } from '../style'
 import { Option } from 'types'
 
 export const Companys = () => {
-  const nagivate = useNavigate()
+  const navigate = useNavigate()
   const {
     meta,
     filterOptions,
@@ -25,8 +25,6 @@ export const Companys = () => {
       <Container gap='1em'>
         <Input
           value={meta.search}
-          width={230}
-          height={42}
           placeholder='Buscar...'
           style={{
             textOverflow: 'ellipsis',
@@ -42,7 +40,6 @@ export const Companys = () => {
           searchable
           options={filterOptions.registration}
           placeholder='Situações Cadastrais'
-          width={230}
           onClear={() => handleRegistration(null)}
           onSelect={(option: Option | null) =>
             option && handleRegistration(option.value)
@@ -52,7 +49,6 @@ export const Companys = () => {
           searchable
           options={filterOptions.uf}
           placeholder='UF'
-          width={230}
           onSelect={(option: Option | null) =>
             option && handleUf(option.value)
           }
@@ -62,14 +58,13 @@ export const Companys = () => {
           searchable
           options={filterOptions.typeCompany}
           placeholder='Tipos de Empresas'
-          width={230}
           onSelect={(option: Option | null) =>
             option && handleTypeCompany(option.value)
           }
           onClear={() => handleTypeCompany(null)}
         />
       </Container>
-      <Button.New onClick={() => nagivate('/company/new')} />
+      <Button.New onClick={() => navigate('/company/new')} />
     </Main>
   )
 }
