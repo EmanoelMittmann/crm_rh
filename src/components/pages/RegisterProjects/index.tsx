@@ -26,7 +26,7 @@ const RegisterProjects = () => {
 
   const methods = useForm<FormProjectProps['Project']>({
     defaultValues: {},
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema) as any,
     shouldFocusError: true,
     mode: 'onBlur'
   })

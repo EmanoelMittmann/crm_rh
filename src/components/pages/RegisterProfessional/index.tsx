@@ -30,7 +30,7 @@ const RegisterProfessional = () => {
   const navigate = useNavigate()
 
   const methods = useForm<FormProps['Professional']>({
-    resolver: yupResolver(ProfessionalSchema),
+    resolver: yupResolver(ProfessionalSchema) as any,
     mode: 'onBlur',
     defaultValues: defaultValue || {
       commission: false,
