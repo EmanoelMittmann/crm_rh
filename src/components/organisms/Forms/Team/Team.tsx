@@ -49,7 +49,7 @@ export const Team = () => {
         <h3>Time</h3>
       </ContainerRow>
 
-      <Flex gap='nano' align='flex-end'>
+      <Flex gap='nano' align='flex-start'>
         <Selects.Default
           {...register('professional.name')}
           value={watch('professional.name', null) as any}
@@ -90,6 +90,7 @@ export const Team = () => {
         <Inputs.Default
           width={180}
           {...register('users.date_start_allocation')}
+          error={errors.users?.date_start_allocation?.message}
           label='Inicio da Alocação'
           placeholder='Inicio Da Alocação'
           type='date'
