@@ -167,7 +167,7 @@ export function handleTeam(
     type: 'warning',
     title: 'Aviso',
     description:
-      'Os Profissionais ja alocados, só podem ser anexados ao novamente com cargos diferentes',
+      'Os Profissionais ja alocados, só podem ser alocados novamente com cargos diferentes',
     position: 'bottom-right'
   })
 }
