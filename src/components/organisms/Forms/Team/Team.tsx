@@ -25,7 +25,7 @@ export const Team = () => {
 
   const teamUser = watch('team', [])
   let newTime = teamUser
-  
+
   const TechLead = teamUser.filter(
     (obj) =>
       obj.job_ === 'Tech Lead' ||
