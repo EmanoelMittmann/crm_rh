@@ -25,13 +25,7 @@ export const Team = () => {
 
   const teamUser = watch('team', [])
   let newTime = teamUser
-  const currentTeamOptions = listUsers.filter(
-    (professional) =>
-      !teamUser.find(
-        (user) => user.user_id === Number(professional.value)
-      )
-  )
-
+  
   const TechLead = teamUser.filter(
     (obj) =>
       obj.job_ === 'Tech Lead' ||
@@ -55,7 +49,7 @@ export const Team = () => {
         <h3>Time</h3>
       </ContainerRow>
 
-      <Flex gap='nano' align='flex-end'>
+      <Flex gap='nano' align='flex-start'>
         <Selects.Default
           {...register('professional.name')}
           value={watch('professional.name', null) as any}
@@ -65,7 +59,7 @@ export const Team = () => {
           width={190}
           error={errors?.professional?.name?.message}
           onClear={() => setValue('professional.name', null)}
-          options={currentTeamOptions as SelectOption[]}
+          options={listUsers as SelectOption[]}
           label='Time'
           placeholder='Selecione'
         />
