@@ -166,7 +166,7 @@ const UsersEditor = forwardRef<
                 value={watch('users.hours_mounths_estimated')}
                 placeholder={placeholder}
                 width={200}
-                height={40}
+                height={42}
                 disabled={true}
               />
               <Select
@@ -184,7 +184,7 @@ const UsersEditor = forwardRef<
               />
             </Row>
 
-            <Row>
+            <Row >
               <Select
                 onSelect={(e: any) => setSelectedStatus(e)}
                 onClear={() =>
@@ -194,7 +194,7 @@ const UsersEditor = forwardRef<
                 label='Status'
                 value={selectedStatus}
                 placeholder={placeholder}
-                width={200}
+                width={205}
               />
               {selectedStatus?.label === 'Inativo' && (
                 <Inputs.Default
@@ -206,7 +206,6 @@ const UsersEditor = forwardRef<
                   type='date'
                   label='Data final de alocação'
                   width='200px'
-                  required
                 />
               )}
             </Row>

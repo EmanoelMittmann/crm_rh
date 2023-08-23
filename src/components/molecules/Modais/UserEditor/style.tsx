@@ -32,15 +32,18 @@ export const Columns01 = styled.div`
 `
 
 export const Row = styled.div`
+  width: 90%;
   display: flex;
   flex-direction: row;
-  margin: auto;
-  width: 90%;
   justify-content: space-between;
+  align-items: flex-end;
+  margin: auto;
 
   h2 {
     color: ${theme.neutrals.gray8};
   }
+  
+
 `
 export const RowUser = styled.div`
   display: flex;
