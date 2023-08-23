@@ -44,6 +44,7 @@ export const Companys = () => {
           onSelect={(option: Option | null) =>
             option && handleRegistration(option.value)
           }
+          width='230px'
         />
         <Select
           searchable
@@ -53,6 +54,7 @@ export const Companys = () => {
             option && handleUf(option.value)
           }
           onClear={() => handleUf(null)}
+          width='230px'
         />
         <Select
           searchable
@@ -62,6 +64,7 @@ export const Companys = () => {
             option && handleTypeCompany(option.value)
           }
           onClear={() => handleTypeCompany(null)}
+          width='230px'
         />
       </Container>
       <Button.New onClick={() => navigate('/company/new')} />

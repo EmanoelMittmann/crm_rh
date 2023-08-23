@@ -34,6 +34,7 @@ export const Contract = () => {
           placeholder='Status'
           onSelect={(e: any) => e && handleStatus(e.value)}
           onClear={() => handleStatus('')}
+          width={230}
         />
         <ContainerDate>
           <Inputs.Date
