@@ -28,6 +28,8 @@ export const Shelf = ({
     avatar
   } = props
 
+  const isDisabled = status === false
+
   return (
     <ContainerShelf template={config.template}>
       <ContainerShelfColumn gap='0.5rem'>
@@ -45,7 +47,7 @@ export const Shelf = ({
       </ContainerShelfColumn>
       <ContainerShelfColumn justify='start'>
         <Badge.Status status={status} />
-        <Popover options={config.options} />
+        <Popover options={config.options} disabled={isDisabled} />
       </ContainerShelfColumn>
     </ContainerShelf>
   )
