@@ -49,10 +49,7 @@ const Router = () => {
           <Route path='/extrasHours' element={<ExtraHoursRh />} />
           <Route path='/notes' element={<Notes />} />
           <Route path='/reports' element={<Payments />} />
-          <Route
-            path='*'
-            handle={() => (window.location.href = '/')}
-          />
+          <Route path='*' element={<Login />} />
 
           <Route
             path='/orderOfService'
