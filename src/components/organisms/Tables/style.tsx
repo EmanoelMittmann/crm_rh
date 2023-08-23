@@ -123,7 +123,3 @@ export const HoverText = styled.p`
     color: #0066ff;
   }
 `
-
-export const ContainerIcon = styled.div`
-  margin-left: 1.5em;
-`

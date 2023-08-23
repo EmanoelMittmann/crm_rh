@@ -1,8 +1,7 @@
-import { Badge, IconThreePoints } from 'components/atoms'
+import { Badge } from 'components/atoms'
 import { Popover } from 'components/molecules'
 import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
 import {
-  ContainerIcon,
   ContainerShelf,
   ContainerShelfColumn
 } from 'components/organisms/Tables/style'
@@ -48,13 +47,7 @@ export const Shelf = ({
       </ContainerShelfColumn>
       <ContainerShelfColumn justify='start'>
         <Badge.Status status={status} />
-        {isDisabled ? (
-          <ContainerIcon>
-            <IconThreePoints />
-          </ContainerIcon>
-        ) : (
-          <Popover options={config.options} />
-        )}
+        <Popover options={config.options} disabled={isDisabled} />
       </ContainerShelfColumn>
     </ContainerShelf>
   )
