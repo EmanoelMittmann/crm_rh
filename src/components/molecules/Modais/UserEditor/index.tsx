@@ -184,7 +184,7 @@ const UsersEditor = forwardRef<
               />
             </Row>
 
-            <Row >
+            <Row>
               <Select
                 onSelect={(e: any) => setSelectedStatus(e)}
                 onClear={() =>

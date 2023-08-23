@@ -42,8 +42,6 @@ export const Row = styled.div`
   h2 {
     color: ${theme.neutrals.gray8};
   }
-  
-
 `
 export const RowUser = styled.div`
   display: flex;
