@@ -1,4 +1,5 @@
 import { IPermissions } from 'components/molecules'
+import {} from 'react-router'
 import { OPTIONS } from 'components/molecules'
 
 interface ILocalStorageProps {
@@ -9,15 +10,17 @@ interface ILocalStorageProps {
 }
 
 export const usePermission = () => {
-  const { permissions: data }: ILocalStorageProps = JSON.parse(
+  const data: ILocalStorageProps = JSON.parse(
     localStorage.getItem('@UbiRH/USER') as string
   )
 
   const Licence: IPermissions[] = []
 
+  if (data === null) window.location.href = '/'
+
   Object.entries(OPTIONS[0]).forEach(([property, value]) => {
-    for (let i = 0; i <= data.length - 1; i++) {
-      if (data[i] === Number(property)) {
+    for (let i = 0; i <= data.permissions.length - 1; i++) {
+      if (data.permissions[i] === Number(property)) {
         Licence.push(value)
       }
     }
