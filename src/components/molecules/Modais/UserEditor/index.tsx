@@ -96,7 +96,7 @@ const UsersEditor = forwardRef<
       }
       const selectedJob = {
         label: professional.jobs?.name?.label || '',
-        value: professional.jobs
+        value: professional.jobs || ''
       }
 
       setSelectedStatus(selectedStatus as unknown as Option)
@@ -151,7 +151,7 @@ const UsersEditor = forwardRef<
               <Image src={professional?.avatar} />
               <TeamJobName>
                 <Text>{professional?.professional.name?.label}</Text>
-                <TextJob>{professional?.jobs.name?.label}</TextJob>
+                <TextJob>{selectedJob?.label}</TextJob>
               </TeamJobName>
               <TextHours>
                 {professional?.hours_mounths_estimated}
