@@ -259,7 +259,7 @@ const UsersEditor = forwardRef<
                   : false
               }
             >
-              Cadastrar
+              Salvar
             </Button>
           </Row>
         </Columns>

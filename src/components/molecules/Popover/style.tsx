@@ -11,10 +11,13 @@ export const Overlay = styled.div`
     justify-content: center;
     height: 3em;
     width: 3em;
-    cursor: pointer;
   }
 `
-
+export const ContainerIcon = styled.button`
+  border: 0 none;
+  background-color: transparent;
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+`
 export const ContainerModal = styled.div`
   box-shadow: 0px 10px 20px 0px ${theme.brand.color.black.transparent};
   background-color: ${theme.neutrals.pureWhite};

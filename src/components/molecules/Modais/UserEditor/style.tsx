@@ -51,7 +51,6 @@ export const RowUser = styled.div`
   width: 87%;
   justify-content: space-between;
   top: 0;
-  margin-top: -1em;
   margin-left: 1.5rem;
 
   h2 {
