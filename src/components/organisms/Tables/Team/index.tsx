@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useRef } from 'react'
+import { useContext, useMemo, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
@@ -10,7 +10,6 @@ import { TableHeader } from 'components/molecules'
 import { Modal } from 'components/molecules/Modais'
 import { IHandleModalPropsUserNew } from 'components/molecules/Modais/UserEditor'
 import { FormTeamProps } from 'components/organisms/Forms/Project'
-import { validation } from 'components/organisms/Forms/Project/logic'
 import {
   LoadingWrapper,
   Main
@@ -23,8 +22,7 @@ import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
 import { Shelf } from './Shelf'
 
 export const Team = () => {
-  const { watch, setValue, setError } =
-    useFormContext<FormTeamProps>()
+  const { watch, setValue } = useFormContext<FormTeamProps>()
   const { isLoading, handleOrder } = useContext(List.Project.Context)
 
   const modalRef = useRef<IHandleModalPropsUserNew>(null)
