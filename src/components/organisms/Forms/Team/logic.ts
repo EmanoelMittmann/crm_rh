@@ -55,6 +55,47 @@ export function convertDateFormat(inputDate: string) {
   return `${year}-${month}-${day}`
 }
 
+function verifyProfessional(
+  context: UseFormReturn<FormTeamProps>,
+  professional: TeamMemberProps
+) {
+  const { watch } = context
+  const { team } = watch()
+
+  if (!team) return true
+
+  const Exist = team
+    .filter((prop) => prop.user_id === professional.user_id)
+    .find((prop) => prop.job_ === professional.job_)
+
+  if (
+    Exist?.date_end_allocation &&
+    professional.date_start_allocation <= Exist.date_end_allocation
+  ) {
+    toast({
+      type: 'warning',
+      title: 'Aviso',
+      description:
+        'Os Profissionais ja alocados inativos, so podem ser alocados novamente mediante a uma data superior a atual',
+      position: 'bottom-right'
+    })
+    return false
+  }
+
+  if (Exist && !Exist.date_end_allocation) {
+    toast({
+      type: 'warning',
+      title: 'Aviso',
+      description:
+        'Os Profissionais ja alocados, só podem ser alocados novamente com cargos diferentes',
+      position: 'bottom-right'
+    })
+    return false
+  }
+
+  return true
+}
+
 export function handleTeam(
   Context: UseFormReturn<FormTeamProps>,
   ProjectId: number
@@ -64,6 +105,7 @@ export function handleTeam(
     setValue,
     getValues,
     setError,
+    clearErrors,
     formState: { errors }
   } = Context
 
@@ -90,6 +132,7 @@ export function handleTeam(
       )
       return
     }
+    clearErrors()
     if (!jobs.name) {
       setError(
         'jobs.name',
@@ -97,6 +140,7 @@ export function handleTeam(
       )
       return
     }
+    clearErrors()
     if (!hoursMonth || hoursMonth <= 0) {
       setError(
         'users.hours_mounths_estimated',
@@ -106,6 +150,15 @@ export function handleTeam(
       )
       return
     }
+    clearErrors()
+    if (!users.date_start_allocation) {
+      setError(
+        'users.date_start_allocation',
+        validationToIncludeTeam('Preencha o inicio de alocação')
+      )
+      return
+    }
+    clearErrors()
 
     const newTeamMember = {
       user_id: professional.name.value,
@@ -125,22 +178,24 @@ export function handleTeam(
     } as unknown as TeamMemberProps
 
     const currentTeam = getValues('team') || []
-    const newTeam = [...currentTeam, newTeamMember]
 
-    if (ProjectId) {
-      bindUserAtProject(Number(ProjectId), newTeamMember)
+    if (verifyProfessional(Context, newTeamMember)) {
+      if (ProjectId) {
+        bindUserAtProject(Number(ProjectId), newTeamMember)
+      }
+      const newTeam = [...currentTeam, newTeamMember]
+      setValue('team', newTeam)
+      toast({
+        title: 'Profissional cadastrado com sucesso!',
+        type: 'success',
+        position: 'bottom-right'
+      })
+      setValue('professional.name', null)
+      setValue('jobs.name', null)
+      setValue('users.date_start_allocation', undefined)
+      setValue('users.hours_mounths_estimated', null)
+      return
     }
-
-    setValue('team', newTeam)
-    toast({
-      title: 'Profissional cadastrado com sucesso!',
-      type: 'success',
-      position: 'bottom-right'
-    })
-    setValue('professional.name', null)
-    setValue('jobs.name', null)
-    setValue('users.date_start_allocation', undefined)
-    setValue('users.hours_mounths_estimated', null)
-    return
   }
+  return
 }

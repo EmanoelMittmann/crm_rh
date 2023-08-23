@@ -31,7 +31,9 @@ export async function fetchPropsProject(
       params: { is_active: true }
     }),
     api.get(routes.usersProjects.list),
-    api.get(routes.professional.list + '?limit=100')
+    api.get(routes.professional.list, {
+      params: { is_active: true, limit: 100 }
+    })
   ])
   methods.setValue('options', {
     project_types: project_type.data.map(

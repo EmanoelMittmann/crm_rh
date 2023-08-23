@@ -90,6 +90,7 @@ export const Team = () => {
         <Inputs.Default
           width={180}
           {...register('users.date_start_allocation')}
+          error={errors.users?.date_start_allocation?.message}
           label='Inicio da Alocação'
           placeholder='Inicio Da Alocação'
           type='date'
