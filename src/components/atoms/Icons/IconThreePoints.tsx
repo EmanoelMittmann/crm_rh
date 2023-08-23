@@ -9,7 +9,6 @@ export const IconThreePoints = ({
       height='16'
       viewBox='0 0 4 16'
       fill='none'
-      cursor='pointer'
       xmlns='http://www.w3.org/2000/svg'
       {...props}
     >

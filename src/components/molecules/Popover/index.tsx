@@ -7,7 +7,12 @@ import {
 
 import { IconThreePoints } from 'components/atoms'
 
-import { Overlay, ContainerModal, Options } from './style'
+import {
+  Overlay,
+  ContainerModal,
+  Options,
+  ContainerIcon
+} from './style'
 import type { PopoverProps } from './types'
 
 const Modal = forwardRef<
@@ -48,12 +53,14 @@ export const Popover = (props: PopoverProps['Data']) => {
 
   return (
     <Overlay onMouseLeave={() => modalRef.current?.onClose()}>
-      <div
+      <ContainerIcon
+        type='button'
         className='children'
         onClick={() => modalRef.current?.onOpen()}
+        disabled={props.disabled}
       >
         <IconThreePoints />
-      </div>
+      </ContainerIcon>
       <Modal ref={modalRef} {...props} />
     </Overlay>
   )
