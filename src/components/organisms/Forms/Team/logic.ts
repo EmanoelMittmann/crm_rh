@@ -190,12 +190,11 @@ export function handleTeam(
         type: 'success',
         position: 'bottom-right'
       })
-      setValue('professional.name', null)
-      setValue('jobs.name', null)
-      setValue('users.date_start_allocation', undefined)
-      setValue('users.hours_mounths_estimated', null)
-      return
     }
   }
+  setValue('professional.name', null)
+  setValue('jobs.name', null)
+  setValue('users.date_start_allocation', undefined)
+  setValue('users.hours_mounths_estimated', null)
   return
 }
