@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import { LocalStorageKeys } from 'config'
+
 import Companys from 'components/pages/Companys'
 import Contract from 'components/pages/Contract'
 import DetailsHoursProfessional from 'components/pages/DetailsHoursProfessional'
@@ -27,6 +29,7 @@ import Projects from '../components/pages/Projects'
 import RegisterProfessional from '../components/pages/RegisterProfessional'
 
 const Router = () => {
+  const TOKEN = localStorage.getItem(LocalStorageKeys.TOKEN)
   return (
     <>
       <BrowserRouter>
@@ -49,7 +52,7 @@ const Router = () => {
           <Route path='/extrasHours' element={<ExtraHoursRh />} />
           <Route path='/notes' element={<Notes />} />
           <Route path='/reports' element={<Payments />} />
-          <Route path='/report' element={<Home />} />
+          <Route path='*' element={TOKEN ? <Home /> : <Login />} />
 
           <Route
             path='/orderOfService'
