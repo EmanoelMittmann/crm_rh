@@ -20,7 +20,7 @@ const Shelf = ({ props, config }: ShelfProps<StatusProps>) => {
           {props.name}
         </Box>
       </ContainerShelfColumn>
-      <ContainerShelfColumn gap='1em'>
+      <ContainerShelfColumn gap='0.5em' width='130px'>
         <Badge.Status status={props.is_active} />
         <Popover options={config.options} />
       </ContainerShelfColumn>
