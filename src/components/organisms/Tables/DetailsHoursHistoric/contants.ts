@@ -6,4 +6,4 @@ export const HEADERS: HeaderProps[] = [
   { field: 'status', label: 'Status' }
 ]
 
-export const GRID_TEMPLATE = '0.5fr 2fr 0.5fr'
+export const GRID_TEMPLATE = '0.5fr 2fr 0.7fr'
