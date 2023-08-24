@@ -39,10 +39,10 @@ export const Shelf = ({
           <TextJob>{job_}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='2.5em'>
+      <ContainerShelfColumn left='2.8em'>
         <Text>{hours_mounths_estimated}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='2.1em'>
+      <ContainerShelfColumn left='2.5em'>
         <Text>{formatDate(date_start_allocation)}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn justify='start'>
