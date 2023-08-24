@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
@@ -9,23 +9,54 @@ import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { ContainerRow } from 'components/organisms/Forms/Project/style'
 import { Table } from 'components/organisms/Tables'
 
+import api from 'api'
+import { routes } from 'routes'
+
+import { useDebounce } from 'hooks'
+
+import { ProfessionalProps } from '../Professional/types'
 import { handleTeam } from './logic'
 import { FormTeamProps } from './types'
 
 export const Team = () => {
+  const [professional, setProfessional] = useState<
+    ProfessionalProps[]
+  >([])
   const { register, watch, setValue, ...props } =
     useFormContext<FormTeamProps>()
   const {
     formState: { errors }
   } = props
+
+  async function fetchProfessionalData() {
+    try {
+      const response = await api.get(
+        routes.professional.list + '?limit=1000'
+      )
+      setProfessional(response?.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const listOfProfessionalOfTeam = professional
+    .filter((item) => item.is_active === true)
+    .map((item) => ({
+      label: item.name,
+      value: item.id
+    }))
+
+  useDebounce({
+    fn: fetchProfessionalData,
+    delay: 0,
+    listener: []
+  })
+
   const { id } = useParams()
   const job = watch('jobs.name.label')
   const options = watch('options')
-  const listUsers = watch('options.professionals', [])
-
   const teamUser = watch('team', [])
-  let newTime = teamUser
 
+  let newTime = teamUser
   const TechLead = teamUser.filter(
     (obj) =>
       obj.job_ === 'Tech Lead' ||
@@ -59,7 +90,7 @@ export const Team = () => {
           width={190}
           error={errors?.professional?.name?.message}
           onClear={() => setValue('professional.name', null)}
-          options={listUsers as SelectOption[]}
+          options={listOfProfessionalOfTeam as any}
           label='Time'
           placeholder='Selecione'
         />

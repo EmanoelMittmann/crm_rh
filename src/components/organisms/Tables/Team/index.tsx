@@ -20,6 +20,7 @@ import { routes } from 'routes'
 
 import { GRID_TEMPLATE, HEADERS } from '../../Forms/Project/constants'
 import { Shelf } from './Shelf'
+import { ScrollContainer } from './style'
 
 export const Team = () => {
   const { watch, setValue } = useFormContext<FormTeamProps>()
@@ -134,7 +135,7 @@ export const Team = () => {
       )
 
     return (
-      <>
+      <ScrollContainer>
         {Team.map((props) => (
           <Shelf
             key={props.user_id}
@@ -149,7 +150,7 @@ export const Team = () => {
             {...{ props }}
           />
         ))}
-      </>
+      </ScrollContainer>
     )
   }, [isLoading, Team])
 
