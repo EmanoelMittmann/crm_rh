@@ -97,8 +97,8 @@ const UsersEditor = forwardRef<
         value: professional.status
       }
       const selectedJob = {
-        label: professional.jobs?.name?.label || '',
-        value: professional.jobs || ''
+        label: professional.job_ || '',
+        value: professional.job_ || ''
       }
 
       setSelectedStatus(selectedStatus as unknown as Option)
