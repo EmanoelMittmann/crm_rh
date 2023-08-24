@@ -22,3 +22,6 @@ export const ScrollContainer = styled.ul`
     background-color: #ddd;
   }
 `
+export const ContainerPopover = styled.div`
+  position: relative;
+`

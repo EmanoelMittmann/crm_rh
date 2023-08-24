@@ -26,6 +26,7 @@ export const ContainerModal = styled.div`
   border-radius: 8px;
   transform: translate(-0.5rem, -1.5rem);
   position: absolute;
+  z-index: 1;
 
   .options {
     display: flex;
