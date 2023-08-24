@@ -36,6 +36,8 @@ export const Default = forwardRef(
           ref={ref as Ref<SelectRefProps>}
           hasError={!!error}
           helperText={error ?? props.helperText}
+          height={props.height ?? '42px'}
+          minHeight={props.minHeight ?? '42px'}
         />
       </Main>
     )
