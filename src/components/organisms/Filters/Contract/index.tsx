@@ -27,7 +27,6 @@ export const Contract = () => {
             fontWeight: '500',
             fontFamily: 'Poppins, sans-serif'
           }}
-          height={42}
         />
         <Selects.Default
           options={filterOptions.status}

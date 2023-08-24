@@ -30,8 +30,6 @@ export const Projects = () => {
           iconLeft={<IconGlass />}
           onChange={(e) => handleSearch(e.target?.value)}
           placeholder='Buscar...'
-          width={230}
-          height={42}
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',

@@ -10,6 +10,7 @@ interface IContainerRowProps {
   paddingLeft?: string
   gap?: string
   align?: string
+  justify?: string
 }
 
 interface IContainerColumnProps {

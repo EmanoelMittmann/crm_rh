@@ -24,6 +24,7 @@ export const ContainerRow = styled.div<IContainerRowProps>`
   display: flex;
   width: 100%;
   flex-direction: row;
+  justify-content: ${({ justify }) => justify};
   align-items: ${({ align }) => align ?? 'flex-start'};
   gap: ${(props) => props.gap};
 `

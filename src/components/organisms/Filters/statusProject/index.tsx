@@ -3,7 +3,7 @@ import { useContext, useRef } from 'react'
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { Button, IconGlass } from 'components/atoms'
+import { Button, IconGlass, Inputs } from 'components/atoms'
 import {
   IHandleModalColorsPropsNew,
   Modal
@@ -27,13 +27,11 @@ export const StatusProject = () => {
   return (
     <Main>
       <Container gap='1em'>
-        <Input
+        <Inputs.Default
           value={search}
           iconLeft={<IconGlass />}
           placeholder='Buscar'
           onChange={(e) => handleSearch(e.target.value)}
-          width={230}
-          height={42}
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',

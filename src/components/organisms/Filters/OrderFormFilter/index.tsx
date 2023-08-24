@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { Input } from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { IconGlass } from 'components/atoms'
+import { IconGlass, Inputs } from 'components/atoms'
 
 import { Container, Main } from './style'
 
@@ -17,9 +17,7 @@ export const OrderFormFilter = () => {
   return (
     <Main>
       <Container gap='1em'>
-        <Input
-          width={230}
-          height={42}
+        <Inputs.Default
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',
