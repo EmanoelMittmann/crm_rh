@@ -1,5 +1,4 @@
 import { IPermissions } from 'components/molecules'
-import {} from 'react-router'
 import { OPTIONS } from 'components/molecules'
 
 interface ILocalStorageProps {
