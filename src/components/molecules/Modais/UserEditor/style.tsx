@@ -4,7 +4,7 @@ import { theme } from 'styles'
 import { IContainerColumnProps } from 'types'
 
 export const ContainerModal = styled.div`
-  width: 452px;
+  width: 450px;
   height: auto;
   border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};

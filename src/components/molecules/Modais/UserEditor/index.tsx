@@ -145,7 +145,7 @@ const UsersEditor = forwardRef<
       <ContainerModal>
         <Columns>
           <Row>
-            <h2>{text}</h2>
+            <h3>{text}</h3>
             <Close onClick={() => close()} />
           </Row>
           <RowUser>
@@ -197,7 +197,7 @@ const UsersEditor = forwardRef<
                 label='Status'
                 value={selectedStatus as any}
                 placeholder={placeholder}
-                width={200}
+                width={202.5}
               />
               {selectedStatus?.label === 'Inativo' && (
                 <Inputs.Default
