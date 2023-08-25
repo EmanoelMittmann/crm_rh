@@ -209,7 +209,7 @@ export const Company = () => {
           options={watch('options.cnae') as SelectOption[]}
           error={errors.main_cnae?.message}
           value={watch('main_cnae') as any}
-          label='Codigo e Descrição de Atividade Econimica Principal'
+          label='Codigo e Descrição de Atividade Economica Principal'
           width={915}
           multiSelect
           searchable
