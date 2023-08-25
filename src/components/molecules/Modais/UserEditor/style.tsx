@@ -4,8 +4,8 @@ import { theme } from 'styles'
 import { IContainerColumnProps } from 'types'
 
 export const ContainerModal = styled.div`
-  width: 29em;
-  height: 540px;
+  width: 450px;
+  height: auto;
   border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
   display: flex;
@@ -13,7 +13,6 @@ export const ContainerModal = styled.div`
   left: 50%;
   position: fixed;
   transform: translate(-50%, -50%);
-  padding-top: 0.8em;
   z-index: 10;
   box-shadow: 0px 5px 10px 10px ${theme.neutrals.gray3};
 `
@@ -21,7 +20,6 @@ export const Columns = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 `
 export const Columns01 = styled.div`
   width: 100%;
@@ -37,7 +35,7 @@ export const Row = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
-  margin: auto;
+  margin: 1.5rem 1.5rem 0.5rem 1.5rem;
 
   h2 {
     color: ${theme.neutrals.gray8};
@@ -49,10 +47,9 @@ export const RowUser = styled.div`
   align-items: center;
   flex-direction: row;
   margin: auto;
-  width: 87%;
+  width: 90%;
   justify-content: space-between;
-  top: 0;
-  margin-left: 1.5rem;
+  margin: 0.5rem 1.5rem 0.5rem 1.5rem;
 
   h2 {
     color: ${theme.neutrals.gray8};
@@ -125,4 +122,16 @@ export const TeamJobName = styled.div`
   align-items: start;
   justify-content: start;
   flex-direction: column;
+`
+
+export const Rh = styled.div`
+  width: 100%;
+  border-top: 1px solid ${theme.neutrals.gray3};
+  margin-top: 0.8rem;
+`
+export const ContainerButton = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
 `

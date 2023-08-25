@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 export const ScrollContainer = styled.ul`
   overflow-y: scroll;
-  height: 385px;
+  height: 100%;
+  max-height: 385px;
   width: 100%;
   margin-bottom: 0.5em;
   border-bottom: 1px solid #ccc;
