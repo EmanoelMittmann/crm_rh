@@ -35,8 +35,8 @@ const DetailsHours = () => {
   return (
     <MainDetails>
       <Columns>
-        <Row content='space-between'>
-          <Typography type='h3'>
+        <Row content='space-between' align='center'>
+          <Typography type='h3' color={theme.neutrals.gray8}>
             Lançamento #{professional?.id}
           </Typography>
           {professional?.status && (
@@ -44,10 +44,14 @@ const DetailsHours = () => {
           )}
         </Row>
         <Row content='space-between'>
-          <Typography type='h4' color={theme.neutrals.gray5}>
+          <Typography type='h6' color={theme.neutrals.gray6}>
             {professional?.project.name}
           </Typography>
-          <Typography type='p2' color={theme.neutrals.gray5}>
+          <Typography
+            type='p2'
+            fontStyle='italic'
+            color={theme.neutrals.gray5}
+          >
             Lançado {formatDate(String(professional?.launch_date))}
           </Typography>
         </Row>
@@ -55,7 +59,9 @@ const DetailsHours = () => {
           <Table.DetaislHoursProfessional />
         </Row>
         <Row>
-          <Typography type='h3'>Histórico</Typography>
+          <Typography type='h3' color={theme.neutrals.gray8}>
+            Histórico
+          </Typography>
         </Row>
         <Row>
           <Table.DetaislHoursHistoric />
