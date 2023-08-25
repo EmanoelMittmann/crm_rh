@@ -68,6 +68,7 @@ export const validationSchema = yup.object().shape({
     .required('Campo obrigatório'),
 
   users: yup.object().shape({
+    date_start_allocation: yup.string().nullable(),
     date_end_allocation: yup
       .string()
       .nullable()
@@ -80,6 +81,19 @@ export const validationSchema = yup.object().shape({
           const date = new Date(value)
           return date <= today
         }
+      )
+      .when(
+        'date_start_allocation',
+        (date_start_allocation, schema) =>
+          date_start_allocation
+            ? schema.test(
+                'date_range',
+                'A data final deve ser maior que a data de início de alocação',
+                function (date_end_allocation: string) {
+                  return date_end_allocation > date_start_allocation
+                }
+              )
+            : schema
       )
   })
 })
