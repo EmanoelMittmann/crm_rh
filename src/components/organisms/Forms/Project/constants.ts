@@ -8,7 +8,7 @@ export const HEADERS = [
   },
   {
     field: 'date_start_allocation',
-    label: 'Inicio da Alocação'
+    label: 'Início da Alocação'
   },
   { field: 'status', label: 'Status' }
 ] as HeaderProps[]
