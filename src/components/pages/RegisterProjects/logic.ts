@@ -84,6 +84,21 @@ export function handlePopulateFields(
   const STATUS = methods.watch('options.status_projects')
   const TYPE_PROJECT = methods.watch('options.project_types')
   const OPTIONS = methods.watch('options')
+  const team = data.users.map((prop) => ({
+    user_id: prop.user_id,
+    avatar: prop.avatar,
+    professional: { name: { label: prop.name } },
+    jobs: { name: { label: prop.job_ } },
+    job_: prop.job_,
+    status: prop.status,
+    isTechLead: prop.isTechLead,
+    extra_hours_estimated: prop.extra_hours_estimated | 0,
+    hours_mounths_estimated: prop.hours_mounths_estimated | 0,
+    hours_mounths_performed: prop.hours_mounths_performed | 0,
+    extra_hours_performed: prop.extra_hours_performed | 0,
+    date_start_allocation: prop.date_start_allocation,
+    date_end_allocation: prop.date_end_allocation
+  }))
 
   methods.reset({
     id: data.id,
@@ -101,48 +116,7 @@ export function handlePopulateFields(
     date_start_performed: getDateInput(data.date_start_performed),
     date_end_performed: getDateInput(data.date_end_performed),
     team_cost: GenerateCurrencyMask(String(data.team_cost)),
-
-    team: data.users.map((user) => {
-      const allUsers = OPTIONS.users.flatMap(
-        (selectUser: any) => selectUser.users
-      )
-      const userData = allUsers.find(
-        (userData) => userData.id === user.user_id
-      )
-
-      const {
-        name,
-        job,
-        job_,
-        status,
-        date_start_allocation,
-        date_end_allocation,
-        ...rest
-      } = user
-      const professional = { name: { label: name } }
-      const jobs = {
-        name: {
-          label: job_ !== null ? job_ : job
-        }
-      }
-
-      return {
-        professional: professional,
-        jobs: jobs,
-        job_: userData.job_,
-        status: userData.status,
-        is_active: userData.is_active,
-        job_id: userData.job_id,
-        isTechLead: userData.isTechLead,
-        extra_hours_estimated: userData.extra_hours_estimated,
-        hours_mounths_estimated: userData.hours_mounths_estimated,
-        hours_mounths_performed: userData.hours_mounths_performed,
-        extra_hours_performed: userData.extra_hours_performed,
-        date_start_allocation: getDateInput(date_start_allocation),
-        date_end_allocation: getDateInput(date_end_allocation),
-        ...rest
-      }
-    }),
+    team: team,
     options: OPTIONS
   })
 }
