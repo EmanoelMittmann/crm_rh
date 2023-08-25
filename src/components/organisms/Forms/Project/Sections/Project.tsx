@@ -85,7 +85,7 @@ export const Project = () => {
           {...register('date_start_performed', { required: true })}
           error={errors.date_start_performed?.message}
           type='date'
-          label='Incio do contrato'
+          label='Inicio do contrato'
           width='100%'
         />
         <Inputs.Default
