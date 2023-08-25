@@ -6,9 +6,10 @@ interface Props {
     name: string
     id: number
   }
+  w?: string
 }
 
-export default ({ status }: Props) => {
+export default ({ status, w }: Props) => {
   const props = {
     background:
       status.name === 'Pendente - Líder Técnico'
@@ -35,7 +36,7 @@ export default ({ status }: Props) => {
   return (
     <Badge
       style={{
-        width: '15em',
+        width: w ? w : '15em',
         display: 'flex',
         padding: '0.8rem',
         justifyContent: 'center',
