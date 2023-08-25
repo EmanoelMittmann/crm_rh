@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
@@ -8,6 +8,7 @@ import { Selects, Inputs, SelectOption } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { ContainerRow } from 'components/organisms/Forms/Project/style'
 import { Table } from 'components/organisms/Tables'
+import { TODAY } from 'components/utils/dateNow'
 
 import api from 'api'
 import { routes } from 'routes'
@@ -17,7 +18,6 @@ import { useDebounce } from 'hooks'
 import { ProfessionalProps } from '../Professional/types'
 import { handleTeam } from './logic'
 import { FormTeamProps } from './types'
-import { TODAY } from 'components/utils/dateNow'
 
 export const Team = () => {
   const [professional, setProfessional] = useState<

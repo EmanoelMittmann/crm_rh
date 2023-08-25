@@ -33,8 +33,14 @@ export const Team = () => {
   const { id } = useParams()
   const project_id = id
 
-  const POPOVER_OPTIONS = (user_id: number, job_: string) => {
+  const POPOVER_OPTIONS = (
+    user_id: number,
+    status: boolean,
+    name: string,
+    job_: string
+  ) => {
     const options = []
+
     const option = project_id
       ? {
           label: 'Editar',
@@ -70,6 +76,7 @@ export const Team = () => {
             date_end_allocation: data.date_end_allocation,
             status: data.status,
             job_: data.job_,
+            job_id: data.job_id,
             isTechLead: data.isTechLead
           }
           updatedTeam[index] = updatedUser
@@ -88,24 +95,20 @@ export const Team = () => {
             date_end_allocation: data.date_end_allocation,
             status: data.status,
             job_: data.job_,
+            job_id: data.job_.id,
             isTechLead: data.isTechLead
           }
-
           setValue('team', updatedTeam)
           await api.put(editTeam, update)
         }
       }
 
-      toast({
-        type: 'success',
-        title: 'Profissional atualizado com sucesso',
-        position: 'bottom-right'
+      toast.success({
+        title: 'Profissional atualizado com sucesso'
       })
     } catch (err) {
-      toast({
-        type: 'error',
-        title: 'Erro ao atualizar profissional',
-        position: 'bottom-right'
+      toast.error({
+        title: 'Erro ao atualizar profissional'
       })
     }
   }
@@ -116,6 +119,7 @@ export const Team = () => {
         data: { user_id }
       })
     }
+
     const indexToRemove = Team.findIndex(
       (item) => item.user_id === user_id
     )
@@ -149,16 +153,23 @@ export const Team = () => {
 
     return (
       <ScrollContainer>
-        {Team.map((props, index) => (
-          <Shelf
-            key={index}
-            config={{
-              template: GRID_TEMPLATE,
-              options: POPOVER_OPTIONS(props.user_id, props.job_)
-            }}
-            {...{ props }}
-          />
-        ))}
+        <>
+          {Team.map((props) => (
+            <Shelf
+              key={props.user_id}
+              config={{
+                template: GRID_TEMPLATE,
+                options: POPOVER_OPTIONS(
+                  props.user_id,
+                  props.is_active,
+                  props.name,
+                  props.job_
+                )
+              }}
+              {...{ props }}
+            />
+          ))}
+        </>
       </ScrollContainer>
     )
   }, [isLoading, Team])
