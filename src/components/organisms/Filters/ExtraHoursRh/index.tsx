@@ -28,8 +28,6 @@ export const ExtraHoursRh = () => {
       <Container gap='1em'>
         <Inputs.Default
           value={search}
-          width='230px'
-          height={42}
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',

@@ -34,5 +34,5 @@ export const MainDetails = styled.div`
   border: 1px solid #ccd1d6;
   border-radius: 8px;
   height: auto;
-  padding: 1em;
+  padding: 24px;
 `

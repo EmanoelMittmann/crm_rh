@@ -16,11 +16,13 @@ export const Shelf = ({
         <ContainerShelfColumn>
           <Text>{formatDate(item.updated_at)}</Text>
         </ContainerShelfColumn>
-        <ContainerShelfColumn right='-0.9em'>
+        <ContainerShelfColumn right='-0.5em'>
           <Text>{item.justification}</Text>
         </ContainerShelfColumn>
-        <ContainerShelfColumn right='-0.9em'>
-          {item.status && <Badge.Hours status={item.status} />}
+        <ContainerShelfColumn>
+          {item.status && (
+            <Badge.Hours status={item.status} w='100%' />
+          )}
         </ContainerShelfColumn>
       </ContainerShelf>
     )

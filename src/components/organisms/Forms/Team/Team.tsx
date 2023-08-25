@@ -81,7 +81,7 @@ export const Team = () => {
         <h3>Time</h3>
       </ContainerRow>
 
-      <Flex gap='nano' align='flex-start'>
+      <Flex gap='nano' align='flex-start' justify='space-between'>
         <Selects.Default
           {...register('professional.name')}
           value={watch('professional.name', null) as any}

@@ -26,9 +26,7 @@ export const TechLead = () => {
   return (
     <Main>
       <Container gap='1em'>
-        <Input
-          width={230}
-          height={42}
+        <Inputs.Default
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',

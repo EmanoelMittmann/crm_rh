@@ -14,6 +14,7 @@ import {
   TextJob
 } from '../../Forms/Project/style'
 import { ShelfProps } from '../types'
+import { ContainerPopover } from './style'
 
 export const Shelf = ({
   props,
@@ -48,7 +49,9 @@ export const Shelf = ({
       </ContainerShelfColumn>
       <ContainerShelfColumn justify='start'>
         <Badge.Status status={status} />
-        <Popover options={config.options} disabled={isDisabled} />
+        <ContainerPopover style={{ position: 'relative' }}>
+          <Popover options={config.options} disabled={isDisabled} />
+        </ContainerPopover>
       </ContainerShelfColumn>
     </ContainerShelf>
   )
