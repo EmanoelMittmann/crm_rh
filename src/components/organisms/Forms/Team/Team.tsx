@@ -120,7 +120,6 @@ export const Team = () => {
           placeholder='Horas'
         />
         <Inputs.Default
-          width={180}
           {...register('users.date_start_allocation')}
           error={errors.users?.date_start_allocation?.message}
           label='Inicio da Alocação'
@@ -129,13 +128,13 @@ export const Team = () => {
           type='date'
         />
         <ButtonGeneric
-          top='1.5em'
+          top='1.3em'
           Text='Vincular'
-          width='120px'
+          width='100%'
           bgColor='#0D2551'
           color='white'
           bRadius='500px'
-          height='3.5em'
+          height='42px'
           type='button'
           onClick={() =>
             handleTeam(

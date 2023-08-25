@@ -18,7 +18,7 @@ export const RequiredLabel = styled.span`
 
 export const Label = styled.label`
   font-size: 14px;
-  line-height: 21px;
+  line-height: 14px;
   font-weight: 700;
   white-space: nowrap;
   color: ${({ color }) => (color ? color : 'rgb(34, 39, 45)')};

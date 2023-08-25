@@ -7,10 +7,10 @@ import {
 } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { Button, Select } from '@stardust-ds/react'
+import { Button } from '@stardust-ds/react'
 import { theme } from 'styles'
 
-import { Inputs } from 'components/atoms'
+import { Inputs, Selects } from 'components/atoms'
 import Close from 'components/atoms/Buttons/Close'
 import { FormTeamProps } from 'components/organisms/Forms/Project'
 import { validation } from 'components/organisms/Forms/Project/logic'
@@ -19,10 +19,12 @@ import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
 
 import {
   Columns,
+  ContainerButton,
   ContainerModal,
   ContainerShelfColumn,
   Image,
   Overlay,
+  Rh,
   Row,
   RowUser,
   TeamJobName,
@@ -95,8 +97,8 @@ const UsersEditor = forwardRef<
         value: professional.status
       }
       const selectedJob = {
-        label: professional.jobs?.name?.label || '',
-        value: professional.jobs || ''
+        label: professional.job_ || '',
+        value: professional.job_ || ''
       }
 
       setSelectedStatus(selectedStatus as unknown as Option)
@@ -143,7 +145,7 @@ const UsersEditor = forwardRef<
       <ContainerModal>
         <Columns>
           <Row>
-            <h2>{text}</h2>
+            <h3>{text}</h3>
             <Close onClick={() => close()} />
           </Row>
           <RowUser>
@@ -165,36 +167,35 @@ const UsersEditor = forwardRef<
                 label='Horas mensais'
                 value={watch('users.hours_mounths_estimated')}
                 placeholder={placeholder}
-                width={200}
-                height={42}
+                width={190}
                 disabled={true}
               />
-              <Select
+              <Selects.Default
                 {...register('users.jobs.name', {})}
                 onSelect={(e: any) => setSelectedJob(e)}
                 onClear={() =>
                   setSelectedJob({ label: '', value: '' })
                 }
                 options={watch('options.jobs')}
-                value={selectedJob}
+                value={selectedJob as any}
                 label='Cargo'
                 placeholder={placeholder}
-                width={200}
+                width={190}
                 disabled={true}
               />
             </Row>
 
             <Row>
-              <Select
+              <Selects.Default
                 onSelect={(e: any) => setSelectedStatus(e)}
                 onClear={() =>
                   setSelectedStatus({ label: '', value: '' })
                 }
                 options={Options.status as unknown as Option[]}
                 label='Status'
-                value={selectedStatus}
+                value={selectedStatus as any}
                 placeholder={placeholder}
-                width={205}
+                width={202.5}
               />
               {selectedStatus?.label === 'Inativo' && (
                 <Inputs.Default
@@ -205,61 +206,67 @@ const UsersEditor = forwardRef<
                   error={errors?.users?.date_end_allocation?.message}
                   type='date'
                   label='Data final de alocação'
-                  width='200px'
+                  width='190px'
                 />
               )}
             </Row>
           </Columns>
           <Row>
-            <Button
-              style={{ borderRadius: '500px' }}
-              bgColor='#E9EBEE'
-              labelColor={theme.neutrals.gray7}
-              onClick={close}
-            >
-              Cancelar
-            </Button>
-            <Button
-              style={{
-                borderRadius: '500px',
-                boxShadow: '0px'
-              }}
-              bgColor='#0066FF'
-              onClick={() => {
-                EventOne(isOpen.id, {
-                  hours_mounths_estimated: Number(
-                    watch('users.hours_mounths_estimated')
-                  ),
-                  hours_mounths_performed:
-                    Number(watch('users.hours_mounths_performed')) ||
-                    0,
-                  date_end_allocation: String(
-                    watch('users.date_end_allocation')
-                  ),
-                  date_start_allocation: String(
-                    watch('users.date_start_allocation')
-                  ),
-                  isTechLead: Boolean(professional?.isTechLead),
-                  job_: String(selectedJob?.label),
-                  status: Boolean(selectedStatus?.value),
-                  user_id: Number(isOpen.id),
-                  extra_hours_estimated: 0,
-                  extra_hours_performed: 0
-                })
+            <Rh />
+          </Row>
+          <Row>
+            <ContainerButton>
+              <Button
+                style={{ borderRadius: '500px' }}
+                bgColor='#E9EBEE'
+                labelColor={theme.neutrals.gray7}
+                onClick={close}
+              >
+                Cancelar
+              </Button>
+              <Button
+                style={{
+                  borderRadius: '500px',
+                  boxShadow: '0px'
+                }}
+                bgColor='#0066FF'
+                onClick={() => {
+                  EventOne(isOpen.id, {
+                    hours_mounths_estimated: Number(
+                      watch('users.hours_mounths_estimated')
+                    ),
+                    hours_mounths_performed:
+                      Number(
+                        watch('users.hours_mounths_performed')
+                      ) || 0,
+                    date_end_allocation: String(
+                      watch('users.date_end_allocation')
+                    ),
+                    date_start_allocation: String(
+                      watch('users.date_start_allocation')
+                    ),
+                    isTechLead: Boolean(professional?.isTechLead),
+                    job_: String(selectedJob?.label),
+                    status: Boolean(selectedStatus?.value),
+                    user_id: Number(isOpen.id),
+                    extra_hours_estimated: 0,
+                    extra_hours_performed: 0
+                  })
 
-                close()
-              }}
-              onBlur={() => validateError()}
-              disabled={
-                !selectedStatus?.label ||
-                errors.users?.date_end_allocation?.message ||
-                alocation === ''
-                  ? true
-                  : false
-              }
-            >
-              Salvar
-            </Button>
+                  close()
+                }}
+                onBlur={() => validateError()}
+                disabled={
+                  !selectedStatus?.label ||
+                  errors.users?.date_end_allocation?.message ||
+                  alocation === ''
+                    ? true
+                    : false
+                }
+              >
+                Salvar
+              </Button>
+            </ContainerButton>
           </Row>
         </Columns>
       </ContainerModal>
