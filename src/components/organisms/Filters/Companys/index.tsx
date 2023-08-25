@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
-import { Button, IconGlass } from 'components/atoms'
+import { Button, IconGlass, Inputs } from 'components/atoms'
 
 import { Container, Main } from '../style'
 import { Option } from 'types'
@@ -23,7 +23,7 @@ export const Companys = () => {
   return (
     <Main>
       <Container gap='1em'>
-        <Input
+        <Inputs.Default
           value={meta.search}
           placeholder='Buscar...'
           style={{
@@ -44,7 +44,7 @@ export const Companys = () => {
           onSelect={(option: Option | null) =>
             option && handleRegistration(option.value)
           }
-          width='230px'
+          width={230}
         />
         <Select
           searchable
@@ -64,7 +64,7 @@ export const Companys = () => {
             option && handleTypeCompany(option.value)
           }
           onClear={() => handleTypeCompany(null)}
-          width='230px'
+          width={230}
         />
       </Container>
       <Button.New onClick={() => navigate('/company/new')} />

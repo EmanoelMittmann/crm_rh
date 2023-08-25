@@ -27,8 +27,6 @@ export const Professionals = () => {
           onChange={(e) => handleSearch(e.target?.value)}
           iconLeft={<IconGlass />}
           placeholder='Buscar...'
-          width={230}
-          height={42}
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',

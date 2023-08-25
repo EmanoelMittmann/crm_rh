@@ -22,10 +22,9 @@ export const UserNotes = () => {
   return (
     <Main>
       <Container gap='1em'>
-        <Input
+        <Inputs.Default
           value={search}
           width={230}
-          height={42}
           style={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',
