@@ -45,7 +45,7 @@ export const Shelf = ({
         <Text>{hours_mounths_estimated}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn left='2.5em'>
-        <Text>{formatDate(date_start_allocation)}</Text>
+        <Text>{date_start_allocation}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn justify='start'>
         <Badge.Status status={status} />
