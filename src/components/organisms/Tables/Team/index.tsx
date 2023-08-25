@@ -116,14 +116,27 @@ export const Team = () => {
         data: { user_id }
       })
     }
-    const newTeam = Team.filter((item) => item.user_id !== user_id)
+    const indexToRemove = Team.findIndex(
+      (item) => item.user_id === user_id
+    )
 
-    setValue('team', newTeam)
-    toast({
-      title: 'Profissional removido com sucesso',
-      type: 'success',
-      position: 'bottom-right'
-    })
+    if (indexToRemove !== -1) {
+      const newTeam = [...Team]
+      newTeam.splice(indexToRemove, 1)
+      setValue('team', newTeam)
+
+      toast({
+        title: 'Profissional removido com sucesso',
+        type: 'success',
+        position: 'bottom-right'
+      })
+    } else {
+      toast({
+        title: 'Profissional não encontrado na equipe',
+        type: 'error',
+        position: 'bottom-right'
+      })
+    }
   }
 
   const Table = useMemo(() => {
