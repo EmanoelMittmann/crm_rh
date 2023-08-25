@@ -42,7 +42,7 @@ interface IModalUserProps {
 }
 
 export interface IHandleModalPropsUserNew {
-  open(user_id: number): void
+  open(user_id: number, job_: string): void
   close(): void
 }
 
@@ -58,7 +58,7 @@ const UsersEditor = forwardRef<
   IModalUserProps
 >((props, ref) => {
   const { text, EventOne, placeholder } = props
-  const [isOpen, setIsOpen] = useState({ id: 0 })
+  const [isOpen, setIsOpen] = useState({ id: 0, job_: '' })
   const [selectedStatus, setSelectedStatus] = useState<Option>()
   const [selectedJob, setSelectedJob] = useState<Option>()
 
@@ -73,17 +73,21 @@ const UsersEditor = forwardRef<
 
   const { team } = useFormContext<FormTeamProps>().watch()
   const professional =
-    team && team.find((item) => item.user_id === isOpen.id)
+    team &&
+    team.find(
+      (item) =>
+        item.user_id === isOpen.id && item.job_ === isOpen.job_
+    )
 
   const close = useCallback(() => {
-    setIsOpen({ id: 0 })
+    setIsOpen({ id: 0, job_: '' })
   }, [])
 
   useImperativeHandle(
     ref,
     () => ({
-      open: (user_id) => {
-        setIsOpen({ id: user_id })
+      open: (user_id, job_) => {
+        setIsOpen({ id: user_id, job_: job_ })
       },
       close
     }),

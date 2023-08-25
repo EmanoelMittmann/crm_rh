@@ -33,17 +33,12 @@ export const Team = () => {
   const { id } = useParams()
   const project_id = id
 
-  const POPOVER_OPTIONS = (
-    user_id: number,
-    status: boolean,
-    name: string
-  ) => {
+  const POPOVER_OPTIONS = (user_id: number, job_: string) => {
     const options = []
-
     const option = project_id
       ? {
           label: 'Editar',
-          callback: () => modalRef.current?.open(user_id)
+          callback: () => modalRef.current?.open(user_id, job_)
         }
       : {
           label: 'Remover',
@@ -95,17 +90,22 @@ export const Team = () => {
             job_: data.job_,
             isTechLead: data.isTechLead
           }
+
           setValue('team', updatedTeam)
           await api.put(editTeam, update)
         }
       }
 
-      toast.success({
-        title: 'Profissional atualizado com sucesso'
+      toast({
+        type: 'success',
+        title: 'Profissional atualizado com sucesso',
+        position: 'bottom-right'
       })
     } catch (err) {
-      toast.error({
-        title: 'Erro ao atualizar profissional'
+      toast({
+        type: 'error',
+        title: 'Erro ao atualizar profissional',
+        position: 'bottom-right'
       })
     }
   }
@@ -149,22 +149,16 @@ export const Team = () => {
 
     return (
       <ScrollContainer>
-        <>
-          {Team.map((props) => (
-            <Shelf
-              key={props.user_id}
-              config={{
-                template: GRID_TEMPLATE,
-                options: POPOVER_OPTIONS(
-                  props.user_id,
-                  props.is_active,
-                  props.name
-                )
-              }}
-              {...{ props }}
-            />
-          ))}
-        </>
+        {Team.map((props, index) => (
+          <Shelf
+            key={index}
+            config={{
+              template: GRID_TEMPLATE,
+              options: POPOVER_OPTIONS(props.user_id, props.job_)
+            }}
+            {...{ props }}
+          />
+        ))}
       </ScrollContainer>
     )
   }, [isLoading, Team])
