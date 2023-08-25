@@ -136,20 +136,22 @@ export const Team = () => {
 
     return (
       <ScrollContainer>
-        {Team.map((props) => (
-          <Shelf
-            key={props.user_id}
-            config={{
-              template: GRID_TEMPLATE,
-              options: POPOVER_OPTIONS(
-                props.user_id,
-                props.is_active,
-                props.name
-              )
-            }}
-            {...{ props }}
-          />
-        ))}
+        <>
+          {Team.map((props) => (
+            <Shelf
+              key={props.user_id}
+              config={{
+                template: GRID_TEMPLATE,
+                options: POPOVER_OPTIONS(
+                  props.user_id,
+                  props.is_active,
+                  props.name
+                )
+              }}
+              {...{ props }}
+            />
+          ))}
+        </>
       </ScrollContainer>
     )
   }, [isLoading, Team])
