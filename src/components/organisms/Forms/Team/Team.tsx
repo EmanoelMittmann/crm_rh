@@ -17,6 +17,7 @@ import { useDebounce } from 'hooks'
 import { ProfessionalProps } from '../Professional/types'
 import { handleTeam } from './logic'
 import { FormTeamProps } from './types'
+import { TODAY } from 'components/utils/dateNow'
 
 export const Team = () => {
   const [professional, setProfessional] = useState<
@@ -123,6 +124,7 @@ export const Team = () => {
           {...register('users.date_start_allocation')}
           error={errors.users?.date_start_allocation?.message}
           label='Inicio da Alocação'
+          max={TODAY}
           placeholder='Inicio Da Alocação'
           type='date'
         />

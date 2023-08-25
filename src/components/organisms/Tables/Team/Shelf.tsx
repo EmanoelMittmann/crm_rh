@@ -21,6 +21,7 @@ export const Shelf = ({
 }: ShelfProps<TeamMemberProps>) => {
   const {
     hours_mounths_estimated = 0,
+    name,
     professional,
     date_start_allocation,
     status,
@@ -35,7 +36,7 @@ export const Shelf = ({
       <ContainerShelfColumn gap='0.5rem'>
         <Image src={avatar} />
         <TeamJobName>
-          <Text>{professional?.name?.label}</Text>
+          <Text>{name ? name : professional.name?.label}</Text>
           <TextJob>{job_}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
