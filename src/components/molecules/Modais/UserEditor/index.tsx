@@ -168,7 +168,6 @@ const UsersEditor = forwardRef<
                 value={watch('users.hours_mounths_estimated')}
                 placeholder={placeholder}
                 width={190}
-                height={42}
                 disabled={true}
               />
               <Selects.Default
@@ -182,7 +181,6 @@ const UsersEditor = forwardRef<
                 label='Cargo'
                 placeholder={placeholder}
                 width={190}
-                height='42px'
                 disabled={true}
               />
             </Row>

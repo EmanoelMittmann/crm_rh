@@ -28,8 +28,7 @@ export default forwardRef(
           width={'100%'}
           hasError={!!error}
           helperText={error ?? props.helperText}
-          height={props.height ?? '42px'}
-          minHeight={props.minHeight ?? '42px'}
+          minHeight={props.minHeight ?? '44px'}
         />
       </Main>
     )
