@@ -36,14 +36,15 @@ export const Team = () => {
   const POPOVER_OPTIONS = (
     user_id: number,
     status: boolean,
-    name: string
+    name: string,
+    job_: string
   ) => {
     const options = []
 
     const option = project_id
       ? {
           label: 'Editar',
-          callback: () => modalRef.current?.open(user_id)
+          callback: () => modalRef.current?.open(user_id, job_)
         }
       : {
           label: 'Remover',
@@ -75,6 +76,7 @@ export const Team = () => {
             date_end_allocation: data.date_end_allocation,
             status: data.status,
             job_: data.job_,
+            job_id: data.job_id,
             isTechLead: data.isTechLead
           }
           updatedTeam[index] = updatedUser
@@ -93,6 +95,7 @@ export const Team = () => {
             date_end_allocation: data.date_end_allocation,
             status: data.status,
             job_: data.job_,
+            job_id: data.job_.id,
             isTechLead: data.isTechLead
           }
           setValue('team', updatedTeam)
@@ -116,6 +119,7 @@ export const Team = () => {
         data: { user_id }
       })
     }
+
     const indexToRemove = Team.findIndex(
       (item) => item.user_id === user_id
     )
@@ -158,7 +162,8 @@ export const Team = () => {
                 options: POPOVER_OPTIONS(
                   props.user_id,
                   props.is_active,
-                  props.name
+                  props.name,
+                  props.job_
                 )
               }}
               {...{ props }}
