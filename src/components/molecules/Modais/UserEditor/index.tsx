@@ -119,7 +119,7 @@ const UsersEditor = forwardRef<
       )
       setValue(
         'users.date_start_allocation',
-        professional.date_start_allocation
+        String(professional.date_start_allocation)
       )
     }
   }, [professional, setValue])
@@ -259,12 +259,11 @@ const UsersEditor = forwardRef<
                 }}
                 onBlur={() => validateError()}
                 disabled={
-                  !selectedStatus?.label ||
-                  errors.users?.date_end_allocation?.message ||
-                  alocation === ''
-                    ? true
-                    : false
+                  errors?.users?.date_end_allocation?.message || selectedStatus?.label === ''
+                  ? true
+                  : false
                 }
+                
               >
                 Salvar
               </Button>
