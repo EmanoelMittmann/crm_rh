@@ -37,7 +37,8 @@ export const Team = () => {
     user_id: number,
     status: boolean,
     name: string,
-    job_: string
+    job_: string,
+    date_start_allocation: string
   ) => {
     const options = []
 
@@ -50,7 +51,7 @@ export const Team = () => {
     }
     const option = {
       label: 'Remover',
-      callback: () => removeUser(user_id)
+      callback: () => removeUser(user_id, job_, date_start_allocation)
     }
     options.push(option)
     return options
@@ -113,10 +114,14 @@ export const Team = () => {
     }
   }
 
-  function removeUser(user_id: number) {
+  function removeUser(
+    user_id: number,
+    job_: string,
+    date_start_allocation: string
+  ) {
     if (project_id) {
       api.delete(routes.project.userProjects(Number(project_id)), {
-        data: { user_id }
+        data: { user_id, job_, date_start_allocation }
       })
     }
 
@@ -163,7 +168,8 @@ export const Team = () => {
                   props.user_id,
                   props.is_active,
                   props.name,
-                  props.job_
+                  props.job_,
+                  props.date_start_allocation
                 )
               }}
               {...{ props }}
