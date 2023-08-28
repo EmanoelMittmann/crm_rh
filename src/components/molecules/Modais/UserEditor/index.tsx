@@ -259,11 +259,11 @@ const UsersEditor = forwardRef<
                 }}
                 onBlur={() => validateError()}
                 disabled={
-                  errors?.users?.date_end_allocation?.message || selectedStatus?.label === ''
-                  ? true
-                  : false
+                  errors?.users?.date_end_allocation?.message ||
+                  selectedStatus?.label === ''
+                    ? true
+                    : false
                 }
-                
               >
                 Salvar
               </Button>
