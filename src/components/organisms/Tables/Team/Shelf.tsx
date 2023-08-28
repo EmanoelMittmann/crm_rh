@@ -5,6 +5,7 @@ import {
   ContainerShelf,
   ContainerShelfColumn
 } from 'components/organisms/Tables/style'
+import { formatDate } from 'components/utils/formatDate'
 
 import {
   Image,
@@ -24,6 +25,7 @@ export const Shelf = ({
     name,
     professional,
     date_start_allocation,
+    date_end_allocation,
     status,
     job_,
     avatar
@@ -40,11 +42,14 @@ export const Shelf = ({
           <TextJob>{job_}</TextJob>
         </TeamJobName>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='2.8em'>
+      <ContainerShelfColumn left='.5em'>
         <Text>{hours_mounths_estimated}</Text>
       </ContainerShelfColumn>
-      <ContainerShelfColumn left='2.5em'>
-        <Text>{date_start_allocation}</Text>
+      <ContainerShelfColumn left='.5em'>
+        <Text>{formatDate(date_start_allocation)}</Text>
+      </ContainerShelfColumn>
+      <ContainerShelfColumn left='.5em'>
+        <Text>{formatDate(date_end_allocation)}</Text>
       </ContainerShelfColumn>
       <ContainerShelfColumn justify='start'>
         <Badge.Status status={status} />
