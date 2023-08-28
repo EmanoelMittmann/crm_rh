@@ -41,18 +41,18 @@ export const Team = () => {
   ) => {
     const options = []
 
-    const option = project_id
-      ? {
-          label: 'Editar',
-          callback: () => modalRef.current?.open(user_id, job_)
-        }
-      : {
-          label: 'Remover',
-          callback: () => removeUser(user_id)
-        }
-
+    if (project_id) {
+      const option = {
+        label: 'Editar',
+        callback: () => modalRef.current?.open(user_id, job_)
+      }
+      options.push(option)
+    }
+    const option = {
+      label: 'Remover',
+      callback: () => removeUser(user_id)
+    }
     options.push(option)
-
     return options
   }
 

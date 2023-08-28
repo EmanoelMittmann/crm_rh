@@ -172,7 +172,6 @@ const UsersEditor = forwardRef<
                 value={watch('users.hours_mounths_estimated')}
                 placeholder={placeholder}
                 width={190}
-                disabled={true}
               />
               <Selects.Default
                 {...register('users.jobs.name', {})}
@@ -185,7 +184,6 @@ const UsersEditor = forwardRef<
                 label='Cargo'
                 placeholder={placeholder}
                 width={190}
-                disabled={true}
               />
             </Row>
 
