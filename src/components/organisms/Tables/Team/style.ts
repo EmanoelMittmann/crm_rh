@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const ScrollContainer = styled.ul`
   overflow-y: scroll;
   height: 100%;
-  max-height: 385px;
+  max-height: 395px;
   width: 100%;
   margin-bottom: 0.5em;
   border-bottom: 1px solid #ccc;
@@ -25,4 +25,8 @@ export const ScrollContainer = styled.ul`
 `
 export const ContainerPopover = styled.div`
   position: relative;
+  top: 0;
+  bottom: 0;
+  margin-bottom: 1rem;
+  margin-top: 0.6rem;
 `
