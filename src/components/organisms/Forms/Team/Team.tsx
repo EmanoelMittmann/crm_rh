@@ -122,9 +122,9 @@ export const Team = () => {
         <Inputs.Default
           {...register('users.date_start_allocation')}
           error={errors.users?.date_start_allocation?.message}
-          label='Inicio da Alocação'
+          label='Início da Alocação'
           max={TODAY}
-          placeholder='Inicio Da Alocação'
+          placeholder='Início da Alocação'
           type='date'
         />
         <ButtonGeneric

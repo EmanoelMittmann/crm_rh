@@ -211,6 +211,8 @@ const UsersEditor = forwardRef<
                   type='date'
                   label='Data final de alocação'
                   width='190px'
+                  height='44px'
+                  minHeight='44px'
                 />
               )}
             </Row>

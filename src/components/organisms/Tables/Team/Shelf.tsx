@@ -53,7 +53,7 @@ export const Shelf = ({
       </ContainerShelfColumn>
       <ContainerShelfColumn justify='start'>
         <Badge.Status status={status} />
-        <ContainerPopover style={{ position: 'relative' }}>
+        <ContainerPopover>
           <Popover options={config.options} disabled={isDisabled} />
         </ContainerPopover>
       </ContainerShelfColumn>
