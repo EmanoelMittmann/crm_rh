@@ -37,22 +37,23 @@ export const Team = () => {
     user_id: number,
     status: boolean,
     name: string,
-    job_: string
+    job_: string,
+    user_projects_id: number
   ) => {
     const options = []
 
-    const option = project_id
-      ? {
-          label: 'Editar',
-          callback: () => modalRef.current?.open(user_id, job_)
-        }
-      : {
-          label: 'Remover',
-          callback: () => removeUser(user_id)
-        }
-
+    if (project_id) {
+      const option = {
+        label: 'Editar',
+        callback: () => modalRef.current?.open(user_id, job_)
+      }
+      options.push(option)
+    }
+    const option = {
+      label: 'Remover',
+      callback: () => removeUser(user_id, user_projects_id)
+    }
     options.push(option)
-
     return options
   }
 
@@ -68,6 +69,7 @@ export const Team = () => {
           const updatedUser = {
             ...updatedTeam[index],
             user_id: user_id,
+            user_projects_id: data.user_projects_id,
             hours_mounths_estimated: data.hours_mounths_estimated,
             extra_hours_estimated: data.extra_hours_estimated,
             extra_hours_performed: data.extra_hours_performed,
@@ -85,8 +87,10 @@ export const Team = () => {
           const editTeam = routes.project.userProjects(
             Number(project_id)
           )
+
           const update = {
             user_id: user_id,
+            user_projects_id: data.user_projects_id,
             hours_mounths_estimated: data.hours_mounths_estimated,
             extra_hours_estimated: data.extra_hours_estimated,
             extra_hours_performed: data.extra_hours_performed,
@@ -113,15 +117,15 @@ export const Team = () => {
     }
   }
 
-  function removeUser(user_id: number) {
+  function removeUser(user_id: number, user_projects_id: number) {
     if (project_id) {
       api.delete(routes.project.userProjects(Number(project_id)), {
-        data: { user_id }
+        data: { user_id, user_projects_id }
       })
     }
 
     const indexToRemove = Team.findIndex(
-      (item) => item.user_id === user_id
+      (item) => item.user_projects_id === user_projects_id
     )
 
     if (indexToRemove !== -1) {
@@ -163,7 +167,8 @@ export const Team = () => {
                   props.user_id,
                   props.is_active,
                   props.name,
-                  props.job_
+                  props.job_,
+                  props.user_projects_id
                 )
               }}
               {...{ props }}

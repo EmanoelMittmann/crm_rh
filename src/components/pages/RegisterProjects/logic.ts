@@ -86,6 +86,7 @@ export function handlePopulateFields(
   const OPTIONS = methods.watch('options')
   const team = data.users.map((prop) => ({
     user_id: prop.user_id,
+    user_projects_id: prop.user_projects_id,
     avatar: prop.avatar,
     professional: { name: { label: prop.name } },
     jobs: { name: { label: prop.job_ } },
@@ -97,7 +98,7 @@ export function handlePopulateFields(
     hours_mounths_performed: prop.hours_mounths_performed | 0,
     extra_hours_performed: prop.extra_hours_performed | 0,
     date_start_allocation: prop.date_start_allocation,
-    date_end_allocation: prop.date_end_allocation
+    date_end_allocation: getDateInput(prop.date_end_allocation)
   }))
 
   methods.reset({
@@ -107,6 +108,7 @@ export function handlePopulateFields(
       data.project_status_id,
       STATUS
     ),
+    user_projects_id: data.user_projects_id,
     project_type_id: generateOpitionsFromBackend(
       data.project_type_id,
       TYPE_PROJECT

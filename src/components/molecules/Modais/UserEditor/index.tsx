@@ -119,7 +119,11 @@ const UsersEditor = forwardRef<
       )
       setValue(
         'users.date_start_allocation',
-        professional.date_start_allocation
+        String(professional.date_start_allocation)
+      )
+      setValue(
+        'users.user_projects_id',
+        Number(professional.user_projects_id) || 0
       )
     }
   }, [professional, setValue])
@@ -172,7 +176,6 @@ const UsersEditor = forwardRef<
                 value={watch('users.hours_mounths_estimated')}
                 placeholder={placeholder}
                 width={190}
-                disabled={true}
               />
               <Selects.Default
                 {...register('users.jobs.name', {})}
@@ -185,7 +188,6 @@ const UsersEditor = forwardRef<
                 label='Cargo'
                 placeholder={placeholder}
                 width={190}
-                disabled={true}
               />
             </Row>
 
@@ -251,6 +253,9 @@ const UsersEditor = forwardRef<
                     date_start_allocation: String(
                       watch('users.date_start_allocation')
                     ),
+                    user_projects_id: Number(
+                      watch('users.user_projects_id')
+                    ),
                     isTechLead: Boolean(professional?.isTechLead),
                     job_: String(selectedJob?.label),
                     status: Boolean(selectedStatus?.value),
@@ -263,9 +268,8 @@ const UsersEditor = forwardRef<
                 }}
                 onBlur={() => validateError()}
                 disabled={
-                  !selectedStatus?.label ||
-                  errors.users?.date_end_allocation?.message ||
-                  alocation === ''
+                  errors?.users?.date_end_allocation?.message ||
+                  selectedStatus?.label === ''
                     ? true
                     : false
                 }
