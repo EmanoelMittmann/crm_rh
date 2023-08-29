@@ -118,7 +118,7 @@ export const Shelf = ({
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text
-            title='2em'
+            title='1em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
@@ -130,7 +130,7 @@ export const Shelf = ({
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text
-            title='2.5em'
+            title='1em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
@@ -142,7 +142,7 @@ export const Shelf = ({
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text
-            title='2.5em'
+            title='1em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
@@ -154,7 +154,7 @@ export const Shelf = ({
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text
-            title='2.5em'
+            title='1em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
@@ -172,7 +172,7 @@ export const Shelf = ({
         </ContainerShelfColumn>
         <ContainerShelfColumn>
           <Text
-            title='2.5em'
+            title='.5em'
             style={{
               color: checked[id]
                 ? theme.brand.color.status.neutral1
