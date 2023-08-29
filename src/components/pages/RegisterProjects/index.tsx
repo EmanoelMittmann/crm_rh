@@ -60,12 +60,12 @@ const RegisterProjects = () => {
           is_active: user.is_active,
           job_: user.job_,
           job: user.job,
-          job_id: user.job_id,          
+          job_id: user.job_id
         }
       })
     }
 
-    console.log('sanitizeData: ', sanitizeData);
+    console.log('sanitizeData: ', sanitizeData)
     try {
       if (id) {
         await api.put(
@@ -82,7 +82,6 @@ const RegisterProjects = () => {
       }
 
       await api.post(routes.project.register, sanitizeData)
-      
 
       toast({
         type: 'success',

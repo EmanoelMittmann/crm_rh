@@ -108,7 +108,7 @@ export function handlePopulateFields(
       data.project_status_id,
       STATUS
     ),
-    user_projects_id:data.user_projects_id,
+    user_projects_id: data.user_projects_id,
     project_type_id: generateOpitionsFromBackend(
       data.project_type_id,
       TYPE_PROJECT
