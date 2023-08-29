@@ -121,6 +121,7 @@ const UsersEditor = forwardRef<
         'users.date_start_allocation',
         String(professional.date_start_allocation)
       )
+      setValue('users.user_projects_id', Number(professional.user_projects_id) || 0)
     }
   }, [professional, setValue])
 
@@ -249,6 +250,8 @@ const UsersEditor = forwardRef<
                     date_start_allocation: String(
                       watch('users.date_start_allocation')
                     ),
+                    user_projects_id: Number(
+                      watch('users.user_projects_id')),
                     isTechLead: Boolean(professional?.isTechLead),
                     job_: String(selectedJob?.label),
                     status: Boolean(selectedStatus?.value),

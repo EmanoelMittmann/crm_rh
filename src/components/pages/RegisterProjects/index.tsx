@@ -48,6 +48,7 @@ const RegisterProjects = () => {
         return {
           ...user,
           user_id: user.professional.name?.value,
+          user_projects_id: user.user_projects_id,
           extra_hours_estimated: user.extra_hours_estimated,
           extra_hours_performed: user.extra_hours_performed,
           hours_mounths_estimated: user.hours_mounths_estimated,
@@ -59,12 +60,12 @@ const RegisterProjects = () => {
           is_active: user.is_active,
           job_: user.job_,
           job: user.job,
-          job_id: user.job_id,
-          user_projects_id: user.user_projects_id
+          job_id: user.job_id,          
         }
       })
     }
 
+    console.log('sanitizeData: ', sanitizeData);
     try {
       if (id) {
         await api.put(
@@ -81,6 +82,7 @@ const RegisterProjects = () => {
       }
 
       await api.post(routes.project.register, sanitizeData)
+      
 
       toast({
         type: 'success',

@@ -51,7 +51,7 @@ export const Team = () => {
     }
     const option = {
       label: 'Remover',
-      callback: () => removeUser(user_id, user_projects_id)
+      callback: () => removeUser(user_id,user_projects_id)
     }
     options.push(option)
     return options
@@ -86,7 +86,8 @@ export const Team = () => {
 
           const editTeam = routes.project.userProjects(
             Number(project_id)
-          )
+            )
+
           const update = {
             user_id: user_id,
             user_projects_id: data.user_projects_id,
@@ -103,6 +104,7 @@ export const Team = () => {
           }
           setValue('team', updatedTeam)
           await api.put(editTeam, update)
+          
         }
       }
 
@@ -116,15 +118,15 @@ export const Team = () => {
     }
   }
 
-  function removeUser(user_id: number, user_projects_id: number) {
+  function removeUser(user_id:number,user_projects_id: number) {
     if (project_id) {
       api.delete(routes.project.userProjects(Number(project_id)), {
-        data: { user_projects_id, user_id }
+        data: {user_id, user_projects_id }
       })
     }
 
     const indexToRemove = Team.findIndex(
-      (item) => item.user_id === user_id
+      (item) => item.user_projects_id === user_projects_id
     )
 
     if (indexToRemove !== -1) {

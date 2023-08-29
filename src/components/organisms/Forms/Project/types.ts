@@ -83,6 +83,7 @@ export interface ProjectProps {
   }
   users: {
     user_id: number
+    user_projects_id: number
     job_: string
     job: string
     job_id: number
