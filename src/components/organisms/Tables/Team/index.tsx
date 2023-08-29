@@ -116,13 +116,10 @@ export const Team = () => {
     }
   }
 
-  function removeUser(
-    user_id: number,
-    user_projects_id: number
-  ) {
+  function removeUser(user_id: number, user_projects_id: number) {
     if (project_id) {
       api.delete(routes.project.userProjects(Number(project_id)), {
-        data: {user_projects_id, user_id }
+        data: { user_projects_id, user_id }
       })
     }
 
@@ -171,7 +168,6 @@ export const Team = () => {
                   props.name,
                   props.job_,
                   props.user_projects_id
-
                 )
               }}
               {...{ props }}
