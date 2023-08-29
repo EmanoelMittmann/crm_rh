@@ -42,6 +42,7 @@ const RegisterProjects = () => {
       date_end: data.date_end,
       date_start_performed: data.date_start_performed,
       date_end_performed: data.date_end_performed,
+      user_projects_id: data.user_projects_id,
 
       users: data.team.map((user) => {
         return {
@@ -58,7 +59,8 @@ const RegisterProjects = () => {
           is_active: user.is_active,
           job_: user.job_,
           job: user.job,
-          job_id: user.job_id
+          job_id: user.job_id,
+          user_projects_id: user.user_projects_id
         }
       })
     }

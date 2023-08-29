@@ -3,6 +3,7 @@ import { TemplateProps } from 'components/organisms/Tables/types'
 
 export interface TeamMemberProps {
   user_id: number
+  user_projects_id: number
   job_: string
   job: string
   job_id: number
@@ -34,6 +35,7 @@ export interface TeamMemberProps {
 export interface ProjectProps {
   team: TeamMemberProps[]
   id: number
+  user_projects_id: number
   name: string
   date_start: string
   date_end: string

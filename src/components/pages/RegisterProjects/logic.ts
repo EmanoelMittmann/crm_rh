@@ -86,6 +86,7 @@ export function handlePopulateFields(
   const OPTIONS = methods.watch('options')
   const team = data.users.map((prop) => ({
     user_id: prop.user_id,
+    user_projects_id: prop.user_projects_id,
     avatar: prop.avatar,
     professional: { name: { label: prop.name } },
     jobs: { name: { label: prop.job_ } },

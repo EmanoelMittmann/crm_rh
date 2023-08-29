@@ -38,7 +38,7 @@ export const Team = () => {
     status: boolean,
     name: string,
     job_: string,
-    date_start_allocation: string
+    user_projects_id: number
   ) => {
     const options = []
 
@@ -51,7 +51,7 @@ export const Team = () => {
     }
     const option = {
       label: 'Remover',
-      callback: () => removeUser(user_id, job_, date_start_allocation)
+      callback: () => removeUser(user_id, user_projects_id)
     }
     options.push(option)
     return options
@@ -69,6 +69,7 @@ export const Team = () => {
           const updatedUser = {
             ...updatedTeam[index],
             user_id: user_id,
+            user_projects_id: data.user_projects_id,
             hours_mounths_estimated: data.hours_mounths_estimated,
             extra_hours_estimated: data.extra_hours_estimated,
             extra_hours_performed: data.extra_hours_performed,
@@ -88,6 +89,7 @@ export const Team = () => {
           )
           const update = {
             user_id: user_id,
+            user_projects_id: data.user_projects_id,
             hours_mounths_estimated: data.hours_mounths_estimated,
             extra_hours_estimated: data.extra_hours_estimated,
             extra_hours_performed: data.extra_hours_performed,
@@ -116,12 +118,11 @@ export const Team = () => {
 
   function removeUser(
     user_id: number,
-    job_: string,
-    date_start_allocation: string
+    user_projects_id: number
   ) {
     if (project_id) {
       api.delete(routes.project.userProjects(Number(project_id)), {
-        data: { user_id, job_, date_start_allocation }
+        data: {user_projects_id, user_id }
       })
     }
 
@@ -169,7 +170,8 @@ export const Team = () => {
                   props.is_active,
                   props.name,
                   props.job_,
-                  props.date_start_allocation
+                  props.user_projects_id
+
                 )
               }}
               {...{ props }}
