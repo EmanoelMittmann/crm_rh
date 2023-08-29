@@ -8,9 +8,13 @@ export const HEADERS = [
   },
   {
     field: 'date_start_allocation',
-    label: 'Inicio da Alocação'
+    label: 'Início da Alocação'
+  },
+  {
+    field: 'date_end_allocation',
+    label: 'Fim da Alocação'
   },
   { field: 'status', label: 'Status' }
 ] as HeaderProps[]
 
-export const GRID_TEMPLATE = '2fr .5fr .5fr .7fr'
+export const GRID_TEMPLATE = '1.5fr 1fr .9fr .9fr 1fr'
