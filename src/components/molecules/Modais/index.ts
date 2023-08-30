@@ -11,6 +11,9 @@ import New from './New'
 import Options from './Options'
 import { Report } from './Report'
 import UserEditor from './UserEditor'
+import Delete from './Delete'
+
+
 
 export const Modal = Object.assign(
   {},
@@ -27,7 +30,8 @@ export const Modal = Object.assign(
     OvertimeReleaseRh,
     Alert,
     AlertAccept,
-    TechLead
+    TechLead,
+    Delete,
   }
 )
 
@@ -42,3 +46,4 @@ export type { IHandleModalPropsCommission } from './Commission'
 export type { IHandleModalPropsExtrasHoursRh } from './Hours/RH/type'
 export type { IHandleModalPropsAlert } from './Alert'
 export type { IHandleModalPropsAlertAccept } from './AlertAccept'
+export type { IHandleModalPropsDelete } from './Delete'
