@@ -99,6 +99,7 @@ export interface UserProjectsProps {
 export interface ProjectProps {
   users: teamMemberProps[]
   id: number
+  user_projects_id: number
   name: string
   created_at: string
   date_start: string

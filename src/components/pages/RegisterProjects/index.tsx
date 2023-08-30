@@ -42,11 +42,13 @@ const RegisterProjects = () => {
       date_end: data.date_end,
       date_start_performed: data.date_start_performed,
       date_end_performed: data.date_end_performed,
+      user_projects_id: data.user_projects_id,
 
       users: data.team.map((user) => {
         return {
           ...user,
           user_id: user.professional.name?.value,
+          user_projects_id: user.user_projects_id,
           extra_hours_estimated: user.extra_hours_estimated,
           extra_hours_performed: user.extra_hours_performed,
           hours_mounths_estimated: user.hours_mounths_estimated,
@@ -63,6 +65,7 @@ const RegisterProjects = () => {
       })
     }
 
+    console.log('sanitizeData: ', sanitizeData)
     try {
       if (id) {
         await api.put(
