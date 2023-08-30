@@ -48,8 +48,8 @@ const Delete = forwardRef<IHandleModalPropsDelete, IModalProps>(
       .filter((item) => item.user_id === isOpen.user_id)
       .map((item) => item.professional.name?.label)
     const name = userName[0]
-    const firsName = name?.split(" ")[0]
-    const surName = name?.split(" ").slice(1).join(" ")
+    const firsName = name?.split(' ')[0]
+    const surName = name?.split(' ').slice(1).join(' ')
 
     const close = useCallback(() => {
       setIsOpen({ user_projects_id: 0, user_id: 0 })
@@ -86,7 +86,7 @@ const Delete = forwardRef<IHandleModalPropsDelete, IModalProps>(
             <Row>
               <p>
                 Tem certeza que deseja remover
-                <span>{" "}</span>
+                <span> </span>
                 <span>{firsName}</span>
                 <span>{surName}</span>
                 do projeto?
