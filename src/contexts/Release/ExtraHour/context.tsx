@@ -42,6 +42,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   async function handleSendHours(data: ExtraHourProps) {
     try {
       await api.post(routes.hours.Professional.list, data)
+      window.history.go(-1)
       return toast({
         type: 'success',
         title: 'Horas Enviadas com sucesso',

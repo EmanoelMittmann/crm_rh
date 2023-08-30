@@ -15,7 +15,7 @@ import { ShelfProps } from '../types'
 export const Shelf = ({ config, props }: ShelfProps<HoursProps>) => {
   const navigate = useNavigate()
 
-  const Details = (id: number) => {
+  const Details = () => {
     navigate(`/detailsHours/${props.id}`)
   }
 
@@ -23,7 +23,7 @@ export const Shelf = ({ config, props }: ShelfProps<HoursProps>) => {
     <>
       <ShelfHover
         template={config.template}
-        onClick={() => Details(props.id)}
+        onClick={() => Details()}
       >
         <ContainerShelfColumn>
           <TextProfessional>{props.id}</TextProfessional>
@@ -41,10 +41,10 @@ export const Shelf = ({ config, props }: ShelfProps<HoursProps>) => {
         <ContainerShelfColumn>
           <TextProfessional> {props.hour_quantity}</TextProfessional>
         </ContainerShelfColumn>
-        <ContainerShelfColumn width='130px'>
+        <ContainerShelfColumn>
           <TextProfessional> {props.project.name}</TextProfessional>
         </ContainerShelfColumn>
-        <ContainerShelfColumn width='240px'>
+        <ContainerShelfColumn>
           <Badge.Hours status={props.status} />
         </ContainerShelfColumn>
       </ShelfHover>
