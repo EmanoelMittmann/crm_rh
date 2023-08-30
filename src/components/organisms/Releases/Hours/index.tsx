@@ -1,8 +1,8 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { Radio } from '@stardust-ds/react'
+import { Flex, Radio } from '@stardust-ds/react'
 import { Release } from 'contexts'
 import { ExtraHourProps } from 'contexts/Release/ExtraHour/types'
 
@@ -12,12 +12,14 @@ import { Date, Period } from './Options'
 import { Columns, Main, Row } from './style'
 
 export const Hours = () => {
+  const [zoom, setZoom] = useState<number>(100)
   const [isDate, setIsDate] = useState(true)
   const { handleSendHours, methods } = useContext(
     Release.ExtraHour.Context
   )
   const { handleSubmit, setValue } =
     methods as UseFormReturn<ExtraHourProps>
+
   const navigate = useNavigate()
   const InputsData = [
     {
@@ -51,22 +53,28 @@ export const Hours = () => {
     }
   ]
 
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      const BOM = Math.round(window.devicePixelRatio * 100)
+      setZoom(BOM)
+    })
+  }, [zoom])
+
   return (
-    <Main>
+    <Main w={zoom >= 110 ? '80%' : '70%'}>
       <form
         onSubmit={handleSubmit((props) => {
           handleSendHours(props)
-          setTimeout(() => {
-            navigate('/releaseHours')
-          }, 800)
         })}
       >
         <Columns>
           <Selects.WithCheckbox label='' options={InputsData} />
-          <Row bottom='2em'>{isDate ? <Date /> : <Period />}</Row>
+          <Flex bottom='2em' flexDirection='row' wrap='nowrap'>
+            {isDate ? <Date zoom={zoom} /> : <Period zoom={zoom} />}
+          </Flex>
           <Row>
             <Button.Updade
-              bottom='0.1em'
+              bottom='.1em'
               onSave={() =>
                 handleSubmit((props) => handleSendHours(props))
               }

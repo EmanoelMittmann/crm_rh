@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
-export const Main = styled.div`
-  width: 70%;
+export const Main = styled.div<{ w?: string }>`
+  max-width: ${({ w }) => w};
+  min-width: ${({ w }) => w};
   border: 1px solid #ccd1d6;
   border-radius: 8px;
   height: auto;

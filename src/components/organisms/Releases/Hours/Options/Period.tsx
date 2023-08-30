@@ -1,40 +1,45 @@
 import { ChangeEvent, useContext } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 
-import { Textarea } from '@stardust-ds/react'
+import { Flex, Select, Textarea } from '@stardust-ds/react'
 import { Release } from 'contexts'
 import { ExtraHourProps } from 'contexts/Release/ExtraHour/types'
 
-import { Inputs, Selects } from 'components/atoms'
+import { Inputs } from 'components/atoms'
 
-import { Columns, Row } from '../style'
+import { Row } from '../style'
 
-export const Period = () => {
+export const Period = ({ zoom }: { zoom: number }) => {
   const { methods, projects } = useContext(Release.ExtraHour.Context)
 
   const { register, setValue } =
     methods as UseFormReturn<ExtraHourProps>
   return (
-    <Columns>
-      <Row gap='1em'>
+    <Flex flexDirection='column' width='100%' gap={16}>
+      <Flex
+        flexDirection='row'
+        gap={16}
+        width='100%'
+        flexWrap={zoom === 125 ? 'wrap' : 'nowrap'}
+        alignItems='flex-end'
+      >
         <Inputs.Default
           {...register('launch_date')}
           label='início'
           type='date'
-          height={40}
         />
         <Inputs.Default
           {...register('end_date')}
           label='Fim'
           type='date'
-          height={40}
         />
-        <Selects.Default
+        <Select
           {...register('project_id')}
           options={projects}
           placeholder='selecione'
           onSelect={(opts: any) => setValue('project_id', opts.value)}
           onClear={() => setValue('project_id', '')}
+          width={zoom === 125 ? '100%' : '190px'}
           label='Projeto'
         />
         <Inputs.Default
@@ -45,16 +50,15 @@ export const Period = () => {
           label='Quantidade de Horas'
           placeholder='Horas'
           type='number'
-          height={40}
         />
-      </Row>
-      <Row>
+      </Flex>
+      <Flex flexDirection='row'>
         <Textarea
           {...register('justification')}
-          placeholder='Escreva sua justificativa'
+          placeholder='Escreva sua justificativa aqui...'
           maxLength={200}
         />
-      </Row>
-    </Columns>
+      </Flex>
+    </Flex>
   )
 }

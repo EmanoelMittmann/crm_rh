@@ -1,34 +1,36 @@
 import { ChangeEvent, useContext } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 
-import { Textarea } from '@stardust-ds/react'
+import { Flex, Select, Textarea } from '@stardust-ds/react'
 import { Release } from 'contexts'
 import { ExtraHourProps } from 'contexts/Release/ExtraHour/types'
 
 import { Inputs, Selects } from 'components/atoms'
 
-import { Columns, Row } from '../style'
-
-export const Date = () => {
+export const Date = ({ zoom }: { zoom: number }) => {
   const { methods, projects } = useContext(Release.ExtraHour.Context)
 
   const { register, formState, setValue } =
     methods as UseFormReturn<ExtraHourProps>
 
   return (
-    <Columns>
-      <Row gap='1em'>
+    <Flex flexDirection='column' width='100%' gap={16}>
+      <Flex
+        gap={16}
+        flexDirection='row'
+        width='100%'
+        flexWrap={zoom === 125 ? 'wrap' : 'nowrap'}
+        alignItems='flex-end'
+      >
         <Inputs.Default
           {...register('launch_date', {
             required: 'Campo Obrigatorio'
           })}
           error={formState.errors.launch_date?.message}
           label='Data'
-          width='23em'
           type='date'
-          height={40}
         />
-        <Selects.Default
+        <Select
           {...register('project_id', {
             required: 'Campo Obrigatorio'
           })}
@@ -37,7 +39,7 @@ export const Date = () => {
           onClear={() => setValue('project_id', '')}
           placeholder='selecione'
           label='Projeto'
-          width='30em'
+          width={zoom === 125 ? '100%' : '190px'}
         />
         <Inputs.Default
           {...register('hour_quantity', {
@@ -49,10 +51,9 @@ export const Date = () => {
           label='Quantidade de Horas'
           placeholder='Horas'
           type='number'
-          height={40}
         />
-      </Row>
-      <Row>
+      </Flex>
+      <Flex flexDirection='row'>
         <Textarea
           {...register('justification', {
             required: 'Campo Obrigatorio'
@@ -61,7 +62,7 @@ export const Date = () => {
           required
           maxLength={200}
         />
-      </Row>
-    </Columns>
+      </Flex>
+    </Flex>
   )
 }
