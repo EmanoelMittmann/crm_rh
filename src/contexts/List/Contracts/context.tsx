@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useState } from 'react'
 
 import { PaginateContext } from 'components/molecules'
+import { dateThan } from 'components/utils/dateThan'
 
 import api from 'api'
 import { routes } from 'routes'
@@ -93,12 +94,14 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   }
 
   function handleDate(initial: string, end: string) {
-    setMeta((old) => ({
-      ...old,
-      initialDate: initial,
-      finalDate: end,
-      paginate: { ...old.paginate, current_page: 1 }
-    }))
+    if (dateThan(initial, end)) {
+      setMeta((old) => ({
+        ...old,
+        initialDate: initial,
+        finalDate: end,
+        paginate: { ...old.paginate, current_page: 1 }
+      }))
+    }
   }
 
   useDebounce({
