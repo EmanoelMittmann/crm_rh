@@ -79,14 +79,12 @@ const Delete = forwardRef<IHandleModalPropsDelete, IModalProps>(
               <IconAlert />
             </IconContainer>
             <Row>
-              {' '}
               <h2>{title}</h2>
             </Row>
             <Row>
               <p>
-                {' '}
                 Tem certeza que deseja remover <span>{name}</span> do
-                projeto
+                projeto?
               </p>
             </Row>
             <RowButton>
