@@ -84,6 +84,7 @@ export function handlePopulateFields(
   const STATUS = methods.watch('options.status_projects')
   const TYPE_PROJECT = methods.watch('options.project_types')
   const OPTIONS = methods.watch('options')
+
   const team = data.users.map((prop) => ({
     user_id: prop.user_id,
     user_projects_id: prop.user_projects_id,
@@ -118,7 +119,7 @@ export function handlePopulateFields(
     date_start_performed: getDateInput(data.date_start_performed),
     date_end_performed: getDateInput(data.date_end_performed),
     team_cost: GenerateCurrencyMask(String(data.team_cost)),
-    team: team,
+    team: team || [],
     options: OPTIONS
   })
 }

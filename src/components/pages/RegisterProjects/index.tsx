@@ -44,7 +44,7 @@ const RegisterProjects = () => {
       date_end_performed: data.date_end_performed,
       user_projects_id: data.user_projects_id,
 
-      users: data.team.map((user) => {
+      users: data.team && Array.isArray(data.team) ? data.team.map((user) => {
         return {
           ...user,
           user_id: user.professional.name?.value,
@@ -62,10 +62,9 @@ const RegisterProjects = () => {
           job: user.job,
           job_id: user.job_id
         }
-      })
+      }) : []
     }
 
-    console.log('sanitizeData: ', sanitizeData)
     try {
       if (id) {
         await api.put(
