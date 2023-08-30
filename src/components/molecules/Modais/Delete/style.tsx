@@ -9,8 +9,8 @@ export const ContainerModal = styled.div<{ width?: string }>`
   position: fixed;
   display: flex;
   padding-top: 1em;
-  top: 60%;
-  left: 45%;
+  top: 50%;
+  left: 42%;
   transform: translate(-24%, -50%);
   z-index: 10;
   box-shadow: 0px 5px 10px 10px ${theme.neutrals.gray3};
@@ -42,7 +42,7 @@ export const Row = styled.div<{ gap?: string }>`
   flex-direction: row;
   gap: ${({ gap }) => gap};
   margin: auto;
-  width: 80%;
+  width: 90%;
   justify-content: space-between;
 
   h2 {
@@ -50,19 +50,17 @@ export const Row = styled.div<{ gap?: string }>`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 4rem;
+    margin-left: 5rem;
   }
   p {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    width: 80%;
     font-size: 18px;
     font-weight: 500;
     color: #747679;
     font-family: poppins;
-    line-height: 27px;
     align-items: center;
   }
   span {
