@@ -4,12 +4,15 @@ import {
   useState,
   useCallback
 } from 'react'
+import { useFormContext } from 'react-hook-form'
 
 import { Button } from '@stardust-ds/react'
+import { title } from 'process'
 import { theme } from 'styles'
 
 import { IconAlert } from 'components/atoms'
 import Close from 'components/atoms/Buttons/Close'
+import { FormTeamProps } from 'components/organisms/Forms/Project'
 
 import {
   ContainerModal,
@@ -20,38 +23,50 @@ import {
   IconContainer,
   Icon
 } from './style'
-import { title } from 'process'
 
 interface IModalProps {
   title: string
-  message: string
-  EventOne: (user_id: number, user_projects_id: number) => void
+  EventOne: (user_projects_id: number, user_id: number) => void
 }
 
 export interface IHandleModalPropsDelete {
-  open(user_id: number, user_projects_id: number): void
+  open(user_projects_id: number, user_id: number): void
   close(): void
 }
 
 const Delete = forwardRef<IHandleModalPropsDelete, IModalProps>(
   (props, ref) => {
-    const { title, message, EventOne } = props
-    const [isOpen, setIsOpen] = useState({user_id: 0, user_projects_id: 0})
-    console.log('isOpen: ', isOpen);
+    const { watch } = useFormContext<FormTeamProps>()
+    const professional = watch('team', [])
+    const { title, EventOne } = props
+    const [isOpen, setIsOpen] = useState({
+      user_projects_id: 0,
+      user_id: 0
+    })
+
+    const userName = professional
+      .filter((item) => item.user_id === isOpen.user_id)
+      .map((item) => item.professional.name?.label)
+    const name = userName[0]
 
     const close = useCallback(() => {
-      setIsOpen( {user_id: 0, user_projects_id: 0})
+      setIsOpen({ user_projects_id: 0, user_id: 0 })
     }, [])
 
     useImperativeHandle(
       ref,
       () => ({
-        open: (user_id, user_projects_id) => setIsOpen({user_id: user_id, user_projects_id: user_projects_id}),
+        open: (user_projects_id, user_id) =>
+          setIsOpen({
+            user_projects_id: user_projects_id,
+            user_id: user_id
+          }),
         close
       }),
       []
     )
-    if (isOpen.user_id === 0 || isOpen.user_projects_id === 0 ) return null
+    if (isOpen.user_projects_id === 0 || isOpen.user_id === 0)
+      return null
 
     return (
       <>
@@ -64,11 +79,15 @@ const Delete = forwardRef<IHandleModalPropsDelete, IModalProps>(
               <IconAlert />
             </IconContainer>
             <Row>
-              <Columns>
-                <h2>{title}</h2>
-                <p>{message}</p>
-              </Columns>
-            
+              {' '}
+              <h2>{title}</h2>
+            </Row>
+            <Row>
+              <p>
+                {' '}
+                Tem certeza que deseja remover <span>{name}</span> do
+                projeto
+              </p>
             </Row>
             <RowButton>
               <Button
@@ -76,6 +95,8 @@ const Delete = forwardRef<IHandleModalPropsDelete, IModalProps>(
                 bgColor='#E9EBEE'
                 labelColor={theme.neutrals.gray7}
                 onClick={close}
+                width={150}
+                height={42}
               >
                 Cancelar
               </Button>
@@ -85,16 +106,16 @@ const Delete = forwardRef<IHandleModalPropsDelete, IModalProps>(
                   boxShadow:
                     '0px 5px 10px 0px rgba(255, 53, 65, 0.25)'
                 }}
+                width={155}
+                height={42}
                 bgColor='rgba(255, 53, 65, 1)'
                 onClick={() => {
-                  EventOne(isOpen.user_id, isOpen.user_projects_id)
+                  EventOne(isOpen.user_projects_id, isOpen.user_id)
                   close()
-                  
                 }}
-               
               >
                 Sim, remover
-             </Button>
+              </Button>
             </RowButton>
           </Columns>
         </ContainerModal>
@@ -105,4 +126,3 @@ const Delete = forwardRef<IHandleModalPropsDelete, IModalProps>(
 )
 
 export default Delete
-

@@ -3,7 +3,7 @@ import { theme } from 'styles'
 
 export const ContainerModal = styled.div<{ width?: string }>`
   width: ${({ width }) => (width ? width : '30em')};
-  height: 230px;
+  height: 310px;
   border-radius: 16px;
   background-color: ${theme.neutrals.pureWhite};
   position: fixed;
@@ -47,6 +47,27 @@ export const Row = styled.div<{ gap?: string }>`
 
   h2 {
     color: ${theme.neutrals.gray8};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 4rem;
+  }
+  p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 80%;
+    font-size: 18px;
+    font-weight: 500;
+    color: #747679;
+    font-family: poppins;
+    line-height: 27px;
+    align-items: center;
+  }
+  span {
+    color: rgba(255, 53, 65, 1);
+    padding: 0 0.3em 0 0;
   }
 `
 
@@ -57,12 +78,13 @@ export const RowButton = styled.div<{ gap?: string }>`
   flex-direction: row;
   gap: ${({ gap }) => gap};
   margin: auto;
-  width: 80%;
+  width: 90%;
   justify-content: space-between;
 
   h2 {
     color: ${theme.neutrals.gray8};
   }
+  margin-top: 1rem;
   margin-bottom: 2em;
 `
 
@@ -81,6 +103,4 @@ export const Icon = styled.div`
   justify-content: end;
   align-items: flex-end;
   width: 95%;
-
-  
 `

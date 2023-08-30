@@ -2,6 +2,7 @@ import Alert from './Alert'
 import AlertAccept from './AlertAccept'
 import { Colors } from './Colors'
 import Commission from './Commission'
+import Delete from './Delete'
 import Details from './Details'
 import Edit from './Edit'
 import EditorStatus from './EditorStatus'
@@ -11,9 +12,6 @@ import New from './New'
 import Options from './Options'
 import { Report } from './Report'
 import UserEditor from './UserEditor'
-import Delete from './Delete'
-
-
 
 export const Modal = Object.assign(
   {},
@@ -31,7 +29,7 @@ export const Modal = Object.assign(
     Alert,
     AlertAccept,
     TechLead,
-    Delete,
+    Delete
   }
 )
 
