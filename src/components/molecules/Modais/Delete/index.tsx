@@ -5,9 +5,7 @@ import {
   useCallback
 } from 'react'
 import { useFormContext } from 'react-hook-form'
-
 import { Button } from '@stardust-ds/react'
-import { title } from 'process'
 import { theme } from 'styles'
 
 import { IconAlert } from 'components/atoms'
