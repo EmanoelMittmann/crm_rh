@@ -2,6 +2,7 @@ import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { PaginateContext } from 'components/molecules'
+import { dateThan } from 'components/utils/dateThan'
 
 import api from 'api'
 import { routes } from 'routes'
@@ -163,12 +164,14 @@ export const Provider = ({
   }
 
   function handleDateReference(start: string, end: string) {
-    setMeta((old) => ({
-      ...old,
-      date_start: start,
-      date_end: end,
-      pagination: { ...old.pagination, current_page: 1 }
-    }))
+    if (dateThan(start, end)) {
+      setMeta((old) => ({
+        ...old,
+        date_start: start,
+        date_end: end,
+        pagination: { ...old.pagination, current_page: 1 }
+      }))
+    }
   }
 
   function handleFillAccept(toAccept: string) {
