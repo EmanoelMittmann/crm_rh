@@ -3,6 +3,7 @@ import { ChangeEvent, useContext, useState } from 'react'
 import { List } from 'contexts'
 
 import { IconGlass, Inputs, Selects } from 'components/atoms'
+import { handleDateChange } from 'components/utils/changeYear'
 import { TODAY } from 'components/utils/dateNow'
 
 import { Container, ContainerDate, Main } from '../style'
@@ -39,7 +40,7 @@ export const Contract = () => {
           <Inputs.Date
             placeholder='Início do período'
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setInitial(e.target.value)
+              setInitial(handleDateChange(e))
             }
             value={initial}
             max={TODAY}
@@ -47,7 +48,7 @@ export const Contract = () => {
           <Inputs.Date
             placeholder='Fim do período'
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleDate(initial, e.target.value)
+              handleDate(initial, handleDateChange(e))
             }
             min={initial}
             max={TODAY}

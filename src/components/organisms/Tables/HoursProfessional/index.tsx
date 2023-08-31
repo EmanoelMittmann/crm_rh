@@ -1,9 +1,7 @@
-import React, { useContext, useMemo } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useContext, useMemo } from 'react'
 
 import { Typography } from '@stardust-ds/react'
 import { List } from 'contexts'
-import { HoursProps } from 'contexts/List/Hours/Professional/types'
 import { theme } from 'styles'
 
 import { Loading } from 'components/atoms'
@@ -58,7 +56,6 @@ export const HoursProfessional = () => {
         headers={HEADERS}
         handleOrder={() => handleOrder()}
       />
-
       {Table}
     </Main>
   )
