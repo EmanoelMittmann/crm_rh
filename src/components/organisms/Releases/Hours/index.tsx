@@ -12,7 +12,10 @@ import { Date, Period } from './Options'
 import { Columns, Main, Row } from './style'
 
 export const Hours = () => {
-  const [zoom, setZoom] = useState<number>(100)
+  const [zoom, setZoom] = useState<number>(
+    Math.round(window.devicePixelRatio * 100)
+  )
+  console.log('zoom: ', zoom)
   const [isDate, setIsDate] = useState(true)
   const { handleSendHours, methods } = useContext(
     Release.ExtraHour.Context
