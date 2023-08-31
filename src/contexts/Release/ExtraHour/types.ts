@@ -7,11 +7,11 @@ export interface ContextExtraHourProps {
 }
 
 export interface ExtraHourProps {
-  end_date?: string
+  end_date: string
   extra_hours_status_id: number
   hour_quantity: number
   justification?: string
-  launch_date?: string
+  launch_date: string
   project_id?: string
   type: string
 }
