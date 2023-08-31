@@ -8,6 +8,7 @@ import { Button, IconGlass, Inputs, Selects } from 'components/atoms'
 
 import { Container, ContainerDate, Main } from '../style'
 import { Option } from 'types'
+import { handleDateChange } from 'components/utils/changeYear'
 
 export const TechLead = () => {
   const [start, setStart] = useState<string>('')
@@ -69,7 +70,7 @@ export const TechLead = () => {
             placeholder='Inicial'
             value={start}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setStart(e.target.value)
+              setStart(handleDateChange(e))
             }
           />
           <Inputs.Date
@@ -77,7 +78,7 @@ export const TechLead = () => {
             height={42}
             placeholder='Final'
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleDate(start, e.target.value)
+              handleDate(start, handleDateChange(e))
             }
           />
         </ContainerDate>

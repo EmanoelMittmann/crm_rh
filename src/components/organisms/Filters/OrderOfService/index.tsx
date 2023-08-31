@@ -5,6 +5,7 @@ import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { IconGlass, Inputs } from 'components/atoms'
+import { handleDateChange } from 'components/utils/changeYear'
 import { TODAY } from 'components/utils/dateNow'
 
 import { Container, ContainerDate, Main } from '../style'
@@ -60,7 +61,7 @@ export const OrderOfService = () => {
             width={230}
             max={TODAY}
             placeholder='Período Inicial'
-            onChange={(e) => setInitialDate(e.target.value)}
+            onChange={(e) => setInitialDate(handleDateChange(e))}
             value={initialDate}
           />
           <Inputs.Date
@@ -70,7 +71,7 @@ export const OrderOfService = () => {
             max={TODAY}
             placeholder='Período Final'
             onChange={(e) =>
-              handleDateReference(initialDate, e.target.value)
+              handleDateReference(initialDate, handleDateChange(e))
             }
           />
           <Inputs.Date

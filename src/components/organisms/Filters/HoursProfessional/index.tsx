@@ -4,6 +4,7 @@ import { Input } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { IconGlass, Inputs, Selects } from 'components/atoms'
+import { handleDateChange } from 'components/utils/changeYear'
 import { TODAY } from 'components/utils/dateNow'
 
 import { Container, ContainerDate, Main } from '../style'
@@ -65,7 +66,7 @@ export const HoursProfessional = () => {
             max={TODAY}
             value={start}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setStart(e.target.value)
+              setStart(handleDateChange(e))
             }
           />
           <Inputs.Date
@@ -75,7 +76,7 @@ export const HoursProfessional = () => {
             max={TODAY}
             placeholder='Final'
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleDate(start, e.target.value)
+              handleDate(start, handleDateChange(e))
             }
           />
         </ContainerDate>

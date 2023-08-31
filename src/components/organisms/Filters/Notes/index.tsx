@@ -4,6 +4,7 @@ import { Input } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { IconGlass, Inputs } from 'components/atoms'
+import { handleDateChange } from 'components/utils/changeYear'
 import { TODAY } from 'components/utils/dateNow'
 
 import { Container, ContainerDate, Main } from '../style'
@@ -40,7 +41,7 @@ export const Notes = () => {
             width={230}
             max={TODAY}
             placeholder='Período Inicial'
-            onChange={(e) => setDateInitial(e.target.value)}
+            onChange={(e) => setDateInitial(handleDateChange(e))}
           />
           <Inputs.Date
             type='date'
@@ -49,7 +50,7 @@ export const Notes = () => {
             max={TODAY}
             placeholder='Período Final'
             onChange={(e) =>
-              handleDateReference(dateInitial, e.target.value)
+              handleDateReference(dateInitial, handleDateChange(e))
             }
           />
         </ContainerDate>
