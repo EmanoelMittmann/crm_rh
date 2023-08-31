@@ -7,7 +7,10 @@ import { List } from 'contexts'
 
 import { Loading } from 'components/atoms'
 import { TableHeader } from 'components/molecules'
-import { Modal } from 'components/molecules/Modais'
+import {
+  IHandleModalPropsDelete,
+  Modal
+} from 'components/molecules/Modais'
 import { IHandleModalPropsUserNew } from 'components/molecules/Modais/UserEditor'
 import { FormTeamProps } from 'components/organisms/Forms/Project'
 import {
@@ -27,6 +30,8 @@ export const Team = () => {
   const { isLoading, handleOrder } = useContext(List.Project.Context)
 
   const modalRef = useRef<IHandleModalPropsUserNew>(null)
+
+  const modalRefRemove = useRef<IHandleModalPropsDelete>(null)
 
   const Team = watch('team', [])
 
@@ -51,7 +56,8 @@ export const Team = () => {
     }
     const option = {
       label: 'Remover',
-      callback: () => removeUser(user_id, user_projects_id)
+      callback: () =>
+        modalRefRemove.current?.open(user_projects_id, user_id)
     }
     options.push(option)
     return options
@@ -117,10 +123,10 @@ export const Team = () => {
     }
   }
 
-  function removeUser(user_id: number, user_projects_id: number) {
+  function removeUser(user_projects_id: number, user_id: number) {
     if (project_id) {
       api.delete(routes.project.userProjects(Number(project_id)), {
-        data: { user_id, user_projects_id }
+        data: { user_projects_id, user_id }
       })
     }
 
@@ -191,6 +197,11 @@ export const Team = () => {
         placeholder='Editar'
         text='Editar Dados do Profissional'
         EventOne={handleUpdateUser}
+      />
+      <Modal.Delete
+        ref={modalRefRemove}
+        title='Remover Profissional'
+        EventOne={removeUser}
       />
       {Table}
     </Main>
