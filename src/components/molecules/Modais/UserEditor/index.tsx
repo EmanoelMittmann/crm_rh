@@ -7,7 +7,7 @@ import {
 } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { Button } from '@stardust-ds/react'
+import { Button, SelectOption } from '@stardust-ds/react'
 import { theme } from 'styles'
 
 import { Inputs, Selects } from 'components/atoms'
@@ -37,12 +37,16 @@ import { Option } from 'types'
 interface IModalUserProps {
   text: string
   placeholder: string
-  EventOne: (user_id: number, data: UpdateProfessionalProps) => void
+  EventOne: (
+    user_id: number,
+    user_projects_id: number,
+    data: UpdateProfessionalProps
+  ) => void
   defaultOpened?: boolean
 }
 
 export interface IHandleModalPropsUserNew {
-  open(user_id: number, job_: string): void
+  open(user_id: number, user_projects_id: number, job_: string): void
   close(): void
 }
 
@@ -58,7 +62,11 @@ const UsersEditor = forwardRef<
   IModalUserProps
 >((props, ref) => {
   const { text, EventOne, placeholder } = props
-  const [isOpen, setIsOpen] = useState({ id: 0, job_: '' })
+  const [isOpen, setIsOpen] = useState({
+    id: 0,
+    user_projects_id: 0,
+    job_: ''
+  })
   const [selectedStatus, setSelectedStatus] = useState<Option>()
   const [selectedJob, setSelectedJob] = useState<Option>()
 
@@ -76,18 +84,24 @@ const UsersEditor = forwardRef<
     team &&
     team.find(
       (item) =>
-        item.user_id === isOpen.id && item.job_ === isOpen.job_
+        item.user_id === isOpen.id &&
+        item.user_projects_id === isOpen.user_projects_id &&
+        item.job_ === isOpen.job_
     )
 
   const close = useCallback(() => {
-    setIsOpen({ id: 0, job_: '' })
+    setIsOpen({ id: 0, user_projects_id: 0, job_: '' })
   }, [])
 
   useImperativeHandle(
     ref,
     () => ({
-      open: (user_id, job_) => {
-        setIsOpen({ id: user_id, job_: job_ })
+      open: (user_id, user_projects_id, job_) => {
+        setIsOpen({
+          id: user_id,
+          user_projects_id: user_projects_id,
+          job_: job_
+        })
       },
       close
     }),
@@ -129,6 +143,7 @@ const UsersEditor = forwardRef<
   }, [professional, setValue])
 
   const alocation = watch('users.date_end_allocation')
+
   const validateError = () => {
     if (selectedStatus?.label === 'Inativo' && alocation === '') {
       setError('users.date_end_allocation', {
@@ -197,7 +212,7 @@ const UsersEditor = forwardRef<
                 onClear={() =>
                   setSelectedStatus({ label: '', value: '' })
                 }
-                options={Options.status as unknown as Option[]}
+                options={Options.status as unknown as SelectOption[]}
                 label='Status'
                 value={selectedStatus as any}
                 placeholder={placeholder}
@@ -239,7 +254,7 @@ const UsersEditor = forwardRef<
                 }}
                 bgColor='#0066FF'
                 onClick={() => {
-                  EventOne(isOpen.id, {
+                  EventOne(isOpen.id, isOpen.user_projects_id, {
                     hours_mounths_estimated: Number(
                       watch('users.hours_mounths_estimated')
                     ),
@@ -253,13 +268,11 @@ const UsersEditor = forwardRef<
                     date_start_allocation: String(
                       watch('users.date_start_allocation')
                     ),
-                    user_projects_id: Number(
-                      watch('users.user_projects_id')
-                    ),
                     isTechLead: Boolean(professional?.isTechLead),
                     job_: String(selectedJob?.label),
                     status: Boolean(selectedStatus?.value),
                     user_id: Number(isOpen.id),
+                    user_projects_id: Number(isOpen.user_projects_id),
                     extra_hours_estimated: 0,
                     extra_hours_performed: 0
                   })
