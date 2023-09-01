@@ -5,9 +5,15 @@ import { Flex, Select, Textarea } from '@stardust-ds/react'
 import { Release } from 'contexts'
 import { ExtraHourProps } from 'contexts/Release/ExtraHour/types'
 
-import { Inputs, Selects } from 'components/atoms'
+import { Inputs } from 'components/atoms'
 
-export const Date = ({ zoom }: { zoom: number }) => {
+export const Date = ({
+  zoom,
+  innerWidth
+}: {
+  zoom: number
+  innerWidth: number
+}) => {
   const { methods, projects } = useContext(Release.ExtraHour.Context)
 
   const { register, formState, setValue } =
@@ -19,7 +25,9 @@ export const Date = ({ zoom }: { zoom: number }) => {
         gap={16}
         flexDirection='row'
         width='100%'
-        flexWrap={zoom === 125 ? 'wrap' : 'nowrap'}
+        flexWrap={
+          zoom === 125 || innerWidth <= 1130 ? 'wrap' : 'nowrap'
+        }
         alignItems='flex-end'
       >
         <Inputs.Default
@@ -39,7 +47,9 @@ export const Date = ({ zoom }: { zoom: number }) => {
           onClear={() => setValue('project_id', '')}
           placeholder='selecione'
           label='Projeto'
-          width={zoom === 125 ? '100%' : '190px'}
+          width={
+            zoom === 125 || innerWidth <= 1130 ? '100%' : '190px'
+          }
         />
         <Inputs.Default
           {...register('hour_quantity', {
