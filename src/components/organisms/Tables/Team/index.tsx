@@ -50,7 +50,8 @@ export const Team = () => {
     if (project_id) {
       const option = {
         label: 'Editar',
-        callback: () => modalRef.current?.open(user_id, job_)
+        callback: () =>
+          modalRef.current?.open(user_id, user_projects_id, job_)
       }
       options.push(option)
     }
@@ -63,12 +64,16 @@ export const Team = () => {
     return options
   }
 
-  async function handleUpdateUser(user_id: number, data: any) {
+  async function handleUpdateUser(
+    user_id: number,
+    user_projects_id: number,
+    data: any
+  ) {
     try {
       if (project_id) {
         const updatedTeam = [...Team]
         const index = Team.findIndex(
-          (item) => item.user_id === user_id
+          (item) => item.user_projects_id === user_projects_id
         )
 
         if (index !== -1) {
