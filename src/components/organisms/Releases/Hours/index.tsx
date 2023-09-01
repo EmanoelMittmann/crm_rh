@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,10 +12,12 @@ import { Date, Period } from './Options'
 import { Columns, Main, Row } from './style'
 
 export const Hours = () => {
+  const [innerWidth, setInnerWidth] = useState<number>(
+    window.innerWidth
+  )
   const [zoom, setZoom] = useState<number>(
     Math.round(window.devicePixelRatio * 100)
   )
-  console.log('zoom: ', zoom)
   const [isDate, setIsDate] = useState(true)
   const { handleSendHours, methods } = useContext(
     Release.ExtraHour.Context
@@ -63,6 +65,12 @@ export const Hours = () => {
     })
   }, [zoom])
 
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      setInnerWidth(window.innerWidth)
+    })
+  }, [innerWidth])
+
   return (
     <Main w={zoom >= 110 ? '80%' : '70%'}>
       <form
@@ -73,7 +81,11 @@ export const Hours = () => {
         <Columns>
           <Selects.WithCheckbox label='' options={InputsData} />
           <Flex bottom='2em' flexDirection='row' wrap='nowrap'>
-            {isDate ? <Date zoom={zoom} /> : <Period zoom={zoom} />}
+            {isDate ? (
+              <Date {...{ zoom, innerWidth }} />
+            ) : (
+              <Period {...{ zoom, innerWidth }} />
+            )}
           </Flex>
           <Row>
             <Button.Updade
