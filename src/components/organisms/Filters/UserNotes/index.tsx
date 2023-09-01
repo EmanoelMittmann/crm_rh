@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
 
 import { Input } from '@stardust-ds/react'
 import { List } from 'contexts'
@@ -19,6 +19,7 @@ export const UserNotes = () => {
 
   const { search } = meta
   const [dateInitial, setDateInitial] = useState('')
+  const [dateEnd, setDateEnd] = useState('')
 
   return (
     <Main>
@@ -45,17 +46,22 @@ export const UserNotes = () => {
             height={42}
             max={TODAY}
             placeholder='Período Inicial'
-            onChange={(e) => setDateInitial(handleDateChange(e))}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setDateInitial(handleDateChange(e))
+              handleDateReference(handleDateChange(e), dateEnd)
+            }}
           />
           <Inputs.Date
             width={230}
             height={42}
             min={dateInitial}
             max={TODAY}
+            value={dateEnd}
             placeholder='Período Final'
-            onChange={(e) =>
+            onChange={(e) => {
+              setDateEnd(handleDateChange(e))
               handleDateReference(dateInitial, handleDateChange(e))
-            }
+            }}
           />
           <Inputs.Date
             width={230}

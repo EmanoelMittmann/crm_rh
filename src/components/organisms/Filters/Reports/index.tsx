@@ -1,11 +1,6 @@
-import {
-  ChangeEvent,
-  InputHTMLAttributes,
-  useContext,
-  useState
-} from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
 
-import { Input, Select } from '@stardust-ds/react'
+import { Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { IconGlass, Inputs } from 'components/atoms'
@@ -25,6 +20,7 @@ export const Reports = () => {
     meta
   } = useContext(List.Reports.Context)
   const [initial, setInitial] = useState<string>('')
+  const [end, setEnd] = useState<string>('')
 
   const { search } = meta
 
@@ -68,9 +64,10 @@ export const Reports = () => {
         />
         <ContainerDate>
           <Inputs.Date
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setInitial(handleDateChange(e))
-            }
+              handleDate(handleDateChange(e), end)
+            }}
             value={initial}
             max={TODAY}
             placeholder='Período Inicial'
@@ -78,11 +75,13 @@ export const Reports = () => {
             width={230}
           />
           <Inputs.Date
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setEnd(handleDateChange(e))
               handleDate(initial, handleDateChange(e))
-            }
+            }}
             min={initial}
             max={TODAY}
+            value={end}
             placeholder='Período Final'
             type='date'
             width={230}

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
 
 import { List } from 'contexts'
 
@@ -22,6 +22,7 @@ export const ExtraHoursRh = () => {
   } = useContext(List.ExtraHoursRh.Context)
 
   const [initialDate, setInitialDate] = useState('')
+  const [end, setEnd] = useState('')
   const { search } = meta
 
   return (
@@ -84,7 +85,10 @@ export const ExtraHoursRh = () => {
             placeholder='Período Inicial'
             type={'date'}
             max={TODAY}
-            onChange={(e) => setInitialDate(handleDateChange(e))}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setInitialDate(handleDateChange(e))
+              handleDateReference(handleDateChange(e), end)
+            }}
             value={initialDate}
           />
           <Inputs.Date
@@ -92,9 +96,11 @@ export const ExtraHoursRh = () => {
             placeholder='Período Final'
             min={initialDate}
             max={TODAY}
-            onChange={(e) =>
+            value={end}
+            onChange={(e) => {
+              setEnd(handleDateChange(e))
               handleDateReference(initialDate, handleDateChange(e))
-            }
+            }}
           />
         </ContainerDate>
       </Container>
