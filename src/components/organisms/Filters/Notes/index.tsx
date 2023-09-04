@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
 
-import { Input } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { IconGlass, Inputs } from 'components/atoms'
+import { handleDateChange } from 'components/utils/changeYear'
 import { TODAY } from 'components/utils/dateNow'
 
 import { Container, ContainerDate, Main } from '../style'
@@ -15,6 +15,7 @@ export const Notes = () => {
 
   const { search } = meta
   const [dateInitial, setDateInitial] = useState('')
+  const [dateEnd, setDateEnd] = useState('')
 
   return (
     <Main>
@@ -40,17 +41,22 @@ export const Notes = () => {
             width={230}
             max={TODAY}
             placeholder='Período Inicial'
-            onChange={(e) => setDateInitial(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setDateInitial(handleDateChange(e))
+              handleDateReference(handleDateChange(e), dateEnd)
+            }}
           />
           <Inputs.Date
             type='date'
             width={230}
+            value={dateEnd}
             min={dateInitial}
             max={TODAY}
             placeholder='Período Final'
-            onChange={(e) =>
-              handleDateReference(dateInitial, e.target.value)
-            }
+            onChange={(e) => {
+              setDateEnd(handleDateChange(e))
+              handleDateReference(dateInitial, handleDateChange(e))
+            }}
           />
         </ContainerDate>
       </Container>

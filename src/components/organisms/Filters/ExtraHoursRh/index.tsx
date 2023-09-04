@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
 
 import { List } from 'contexts'
 
 import { IconGlass, Inputs, Selects } from 'components/atoms'
+import { handleDateChange } from 'components/utils/changeYear'
 import { TODAY } from 'components/utils/dateNow'
 
 import { Container, ContainerDate, Main } from '../style'
@@ -21,6 +22,7 @@ export const ExtraHoursRh = () => {
   } = useContext(List.ExtraHoursRh.Context)
 
   const [initialDate, setInitialDate] = useState('')
+  const [end, setEnd] = useState('')
   const { search } = meta
 
   return (
@@ -83,7 +85,10 @@ export const ExtraHoursRh = () => {
             placeholder='Período Inicial'
             type={'date'}
             max={TODAY}
-            onChange={(e) => setInitialDate(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setInitialDate(handleDateChange(e))
+              handleDateReference(handleDateChange(e), end)
+            }}
             value={initialDate}
           />
           <Inputs.Date
@@ -91,9 +96,11 @@ export const ExtraHoursRh = () => {
             placeholder='Período Final'
             min={initialDate}
             max={TODAY}
-            onChange={(e) =>
-              handleDateReference(initialDate, e.target.value)
-            }
+            value={end}
+            onChange={(e) => {
+              setEnd(handleDateChange(e))
+              handleDateReference(initialDate, handleDateChange(e))
+            }}
           />
         </ContainerDate>
       </Container>

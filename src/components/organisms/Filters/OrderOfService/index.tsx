@@ -1,10 +1,11 @@
-import { useContext, useState } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Input, Select } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { IconGlass, Inputs } from 'components/atoms'
+import { handleDateChange } from 'components/utils/changeYear'
 import { TODAY } from 'components/utils/dateNow'
 
 import { Container, ContainerDate, Main } from '../style'
@@ -27,6 +28,7 @@ export const OrderOfService = () => {
 
   const { search, referencesDate } = meta
   const [initialDate, setInitialDate] = useState('')
+  const [endDate, setEndDate] = useState('')
 
   return (
     <Main>
@@ -60,18 +62,23 @@ export const OrderOfService = () => {
             width={230}
             max={TODAY}
             placeholder='Período Inicial'
-            onChange={(e) => setInitialDate(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setInitialDate(handleDateChange(e))
+              handleDateReference(initialDate, endDate)
+            }}
             value={initialDate}
           />
           <Inputs.Date
+            value={endDate}
             type={'date'}
             width={230}
             min={initialDate}
             max={TODAY}
             placeholder='Período Final'
-            onChange={(e) =>
-              handleDateReference(initialDate, e.target.value)
-            }
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setEndDate(handleDateChange(e))
+              handleDateReference(initialDate, handleDateChange(e))
+            }}
           />
           <Inputs.Date
             type={'date'}

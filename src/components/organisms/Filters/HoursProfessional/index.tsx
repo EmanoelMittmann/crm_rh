@@ -4,6 +4,7 @@ import { Input } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { IconGlass, Inputs, Selects } from 'components/atoms'
+import { handleDateChange } from 'components/utils/changeYear'
 import { TODAY } from 'components/utils/dateNow'
 
 import { Container, ContainerDate, Main } from '../style'
@@ -11,6 +12,7 @@ import { Option } from 'types'
 
 export const HoursProfessional = () => {
   const [start, setStart] = useState('')
+  const [end, setEnd] = useState('')
   const {
     meta,
     handleDate,
@@ -64,19 +66,22 @@ export const HoursProfessional = () => {
             placeholder='Inicial'
             max={TODAY}
             value={start}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setStart(e.target.value)
-            }
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setStart(handleDateChange(e))
+              handleDate(handleDateChange(e), end)
+            }}
           />
           <Inputs.Date
+            value={end}
             width={230}
             height={42}
             min={start}
             max={TODAY}
             placeholder='Final'
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleDate(start, e.target.value)
-            }
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setEnd(handleDateChange(e))
+              handleDate(start, handleDateChange(e))
+            }}
           />
         </ContainerDate>
       </Container>
