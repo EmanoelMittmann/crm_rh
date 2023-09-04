@@ -5,12 +5,14 @@ import { Input } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { Button, IconGlass, Inputs, Selects } from 'components/atoms'
+import { handleDateChange } from 'components/utils/changeYear'
 
 import { Container, ContainerDate, Main } from '../style'
 import { Option } from 'types'
 
 export const TechLead = () => {
   const [start, setStart] = useState<string>('')
+  const [end, setEnd] = useState<string>('')
   const navigate = useNavigate()
   const {
     meta,
@@ -68,17 +70,20 @@ export const TechLead = () => {
             height={42}
             placeholder='Inicial'
             value={start}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setStart(e.target.value)
-            }
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setStart(handleDateChange(e))
+              handleDate(handleDateChange(e), end)
+            }}
           />
           <Inputs.Date
             width={230}
             height={42}
+            value={end}
             placeholder='Final'
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleDate(start, e.target.value)
-            }
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setEnd(handleDateChange(e))
+              handleDate(start, handleDateChange(e))
+            }}
           />
         </ContainerDate>
       </Container>

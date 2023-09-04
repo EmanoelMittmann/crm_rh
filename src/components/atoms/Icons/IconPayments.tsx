@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const IconPayments = ({
-  width = '10px',
+  width = '18px',
   height = '16px',
   color = '#3B454F',
   ...props
@@ -10,7 +10,7 @@ export const IconPayments = ({
     <svg
       width={width}
       height={height}
-      viewBox='0 0 10 16'
+      viewBox='0 0 18 16'
       fill={color}
       xmlns='http://www.w3.org/2000/svg'
       {...props}

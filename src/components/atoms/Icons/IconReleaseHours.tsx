@@ -1,8 +1,8 @@
 import React from 'react'
 
 export const IconReleaseHours = ({
-  width = '15px',
-  height = '30px',
+  width = '18px',
+  height = '24px',
   color = '#3B454F',
   ...props
 }: React.SVGProps<SVGSVGElement>) => {
@@ -10,7 +10,7 @@ export const IconReleaseHours = ({
     <svg
       width={width}
       height={height}
-      viewBox='5.5 1 21.5 35'
+      viewBox='5.5 1 24 37'
       fill={color}
       xmlns='http://www.w3.org/2000/svg'
       {...props}

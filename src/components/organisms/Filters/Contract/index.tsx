@@ -10,6 +10,8 @@ import { Container, ContainerDate, Main } from '../style'
 
 export const Contract = () => {
   const [initial, setInitial] = useState('')
+  const [end, setEnd] = useState('')
+
   const { filterOptions, handleDate, handleSearch, handleStatus } =
     useContext(List.Contract.Context)
   return (
@@ -39,17 +41,20 @@ export const Contract = () => {
         <ContainerDate>
           <Inputs.Date
             placeholder='Início do período'
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setInitial(handleDateChange(e))
-            }
+              handleDate(handleDateChange(e), end)
+            }}
             value={initial}
             max={TODAY}
           />
           <Inputs.Date
             placeholder='Fim do período'
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setEnd(handleDateChange(e))
               handleDate(initial, handleDateChange(e))
-            }
+            }}
+            value={end}
             min={initial}
             max={TODAY}
           />

@@ -9,7 +9,13 @@ import { Inputs } from 'components/atoms'
 
 import { Row } from '../style'
 
-export const Period = ({ zoom }: { zoom: number }) => {
+export const Period = ({
+  zoom,
+  innerWidth
+}: {
+  zoom: number
+  innerWidth: number
+}) => {
   const { methods, projects } = useContext(Release.ExtraHour.Context)
 
   const { register, setValue } =
@@ -20,7 +26,9 @@ export const Period = ({ zoom }: { zoom: number }) => {
         flexDirection='row'
         gap={16}
         width='100%'
-        flexWrap={zoom === 125 ? 'wrap' : 'nowrap'}
+        flexWrap={
+          zoom === 125 || innerWidth <= 1361 ? 'wrap' : 'nowrap'
+        }
         alignItems='flex-end'
       >
         <Inputs.Default
@@ -39,7 +47,9 @@ export const Period = ({ zoom }: { zoom: number }) => {
           placeholder='selecione'
           onSelect={(opts: any) => setValue('project_id', opts.value)}
           onClear={() => setValue('project_id', '')}
-          width={zoom === 125 ? '100%' : '190px'}
+          width={
+            zoom === 125 || innerWidth <= 1361 ? '100%' : '190px'
+          }
           label='Projeto'
         />
         <Inputs.Default
