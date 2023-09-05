@@ -95,19 +95,12 @@ function verifyProfessional(
 
   return true
 }
-
-export function handleTeam(
+export async function handleTeam(
   Context: UseFormReturn<FormTeamProps>,
   ProjectId: number
 ) {
-  const {
-    watch,
-    setValue,
-    getValues,
-    setError,
-    clearErrors,
-    formState: { errors }
-  } = Context
+  const { watch, setValue, getValues, setError, clearErrors } =
+    Context
 
   const { jobs, users, professional } = watch()
   const { avatar } = professional
@@ -162,6 +155,7 @@ export function handleTeam(
 
     const newTeamMember = {
       user_id: professional.name.value,
+      user_project_id: users.user_project_id,
       professional,
       date_start_allocation: users.date_start_allocation,
       job,
@@ -176,20 +170,28 @@ export function handleTeam(
         ? avatar
         : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
     } as unknown as TeamMemberProps
-
-    const currentTeam = getValues('team') || []
+    const { data } = await api.get(
+      routes.project.userProjects(ProjectId)
+    )
+    const currentTeam = data
 
     if (verifyProfessional(Context, newTeamMember)) {
       if (ProjectId) {
         bindUserAtProject(Number(ProjectId), newTeamMember)
       }
+
       const newTeam = [...currentTeam, newTeamMember]
+      console.log('newTeam: ', newTeam)
+
       setValue('team', newTeam)
+
       toast({
-        title: 'Profissional cadastrado com sucesso!',
+        title: 'Cadastro de profissional!',
+        description: 'Profissional cadastrado com sucesso!',
         type: 'success',
         position: 'bottom-right'
       })
+      return
     }
   }
   setValue('professional.name', null)

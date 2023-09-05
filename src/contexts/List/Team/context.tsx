@@ -1,102 +1,205 @@
-import { createContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { createContext, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { toast } from '@stardust-ds/react'
+
+import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
+import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
 
 import api from 'api'
 import { routes } from 'routes'
 
 import { useDebounce } from 'hooks'
 
-import DEFAULT from './constants'
-import { ContextTeamProps, ReactNode } from './types'
-import { UserProjectsProps } from 'types'
+import { ProfessionalProps } from '../Professional/types'
+import { ContextTeamProps, newTeamMember, ReactNode } from './types'
+import { ProjectProps, UserProjectsProps } from 'types'
 
 export const Context = createContext({} as ContextTeamProps)
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
-  const [meta, setMeta] = useState(DEFAULT.META_PROPS)
-  const [team, setTeam] = useState<UserProjectsProps[]>([])
-  const [filterOptionsTeam, setFilterOptionsTeam] = useState(
-    DEFAULT.FILTER_OPTIONS_USERS
-  )
+  const [projects, setProjects] = useState<ProjectProps[]>([])
+  const [team, setTeam] = useState<TeamMemberProps[]>([])
+  const [professional, setProfessional] = useState<
+    ProfessionalProps[]
+  >([])
+
+  const { id } = useParams()
+  const Team = team
+  const project_id = id
+
+  const fetchUsers = async (prject_id: number) => {
+    try {
+      const response = await api.get(
+        routes.project.updateProject(prject_id)
+      )
+      setTeam(response.data.users)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const contextProjectProps = {
     team,
+    projects,
+    professional,
     isLoading,
-    meta,
-    filterOptionsTeam,
     navigateTo,
-    handleUpdateUser
+    handleOrder,
+    handleUpdateUser,
+    fetchUsers,
+    removeUser,
+    fetchListProject
   }
 
-  async function fetchListUsers() {
+  async function fetchListProject() {
     setIsLoading(true)
-    const { data } = await api.get(routes.usersProjects.list, {
+    const { data } = await api.get(routes.project.list, {
       params: {
-        search: meta.search && meta.search,
-        user_id: meta.user_id && meta.user_id,
-        team: meta.team && meta.team
+        project_id: project_id
       }
     })
-    setTeam(data)
+    setProjects(data?.data)
     setIsLoading(false)
   }
 
-  const fetchUsers = async () => {
+  async function fetchProfessionalData() {
     try {
-      try {
-        const response = await api.get(routes.usersProjects.list)
-        setTeam(response.data)
-      } catch (error) {
-        console.log(error)
-      }
+      const response = await api.get(
+        routes.professional.list + '?limit=1000'
+      )
+      setProfessional(response?.data.data)
     } catch (error) {
       console.log(error)
     }
   }
-  async function handleUpdateUser(id: number, name: string) {
-    await api.put(routes.usersProjects.userProjects(id), {
-      project_id: id
-    })
-    fetchListUsers()
-  }
 
-  async function fetchFiltersUsers() {
-    const { data } = await api.get(
-      routes.professional.list + '?limit=120',
-      {
-        params: { is_active: 1 }
+  async function handleUpdateUser(
+    user_id: number,
+    user_projects_id: number,
+    data: any
+  ) {
+    try {
+      if (project_id) {
+        const updatedTeam = [...team]
+        const index = team.findIndex(
+          (item) => item.user_projects_id === user_projects_id
+        )
+
+        if (index !== -1) {
+          const updatedUser = {
+            ...updatedTeam[index],
+            user_id: user_id,
+            user_projects_id: data.user_projects_id,
+            hours_mounths_estimated: data.hours_mounths_estimated,
+            extra_hours_estimated: data.extra_hours_estimated,
+            extra_hours_performed: data.extra_hours_performed,
+            hours_mounths_performed: data.hours_mounths_performed,
+            date_start_allocation: data.date_start_allocation,
+            date_end_allocation: data.date_end_allocation,
+            status: data.status,
+            job_: data.job_,
+            job_id: data.job_id,
+            isTechLead: data.isTechLead
+          }
+
+          updatedTeam[index] = updatedUser as any
+          setTeam(updatedTeam)
+          const editTeam = routes.project.userProjects(
+            Number(project_id)
+          )
+          const update = {
+            user_id: user_id,
+            user_projects_id: data.user_projects_id,
+            hours_mounths_estimated: data.hours_mounths_estimated,
+            extra_hours_estimated: data.extra_hours_estimated,
+            extra_hours_performed: data.extra_hours_performed,
+            hours_mounths_performed: data.hours_mounths_performed,
+            date_start_allocation: data.date_start_allocation,
+            date_end_allocation: data.date_end_allocation,
+            status: data.status,
+            job_: data.job_,
+            job_id: data.job_.id,
+            isTechLead: data.isTechLead
+          }
+          setTeam(updatedTeam)
+          console.log('updatedTeam: ', updatedTeam)
+          await api.put(editTeam, update)
+
+          toast({
+            type: 'success',
+            title: 'Atualização do Time de projeto',
+            description: 'Profissional atualizado com sucesso',
+            position: 'bottom-right'
+          })
+        }
       }
-    )
-
-    setFilterOptionsTeam({
-      users: data.data.map(
-        ({ name, id }: { name: string; id: number }) => ({
-          label: name,
-          value: id
-        })
-      )
-    })
+    } catch (err) {
+      toast({
+        type: 'error',
+        title: 'Erro ao atualizar profissional',
+        description: 'Tente novamente mais tarde',
+        position: 'bottom-right'
+      })
+      fetchUsers(Number(project_id))
+    }
   }
+
+  function removeUser(user_projects_id: number, user_id: number) {
+    if (project_id) {
+      api.delete(routes.project.userProjects(Number(project_id)), {
+        data: { user_projects_id, user_id }
+      })
+    }
+    const indexToRemove = Team.findIndex(
+      (item) => item.user_projects_id === user_projects_id
+    )
+    if (indexToRemove !== -1) {
+      const newTeam = [...Team]
+      newTeam.splice(indexToRemove, 1)
+      setTeam(newTeam)
+
+      toast({
+        title: 'Removendo profissional da equipe',
+        description: 'Profissional removido com sucesso',
+        type: 'success',
+        position: 'bottom-right'
+      })
+    } else {
+      toast({
+        title: 'Removendo profissional da equipe',
+        description: 'Erro ao remover profissional',
+        type: 'error',
+        position: 'bottom-right'
+      })
+      fetchUsers(Number(project_id))
+    }
+  }
+
+  function handleOrder(field: string) {}
 
   function navigateTo(url: string) {
     navigate(url)
   }
 
   useDebounce({
-    fn: fetchListUsers,
-    listener: [meta.search, meta.team, meta.user_id]
-  })
-
-  useDebounce({
-    fn: fetchFiltersUsers,
+    fn: () => {
+      fetchUsers(Number(project_id))
+    },
     delay: 0,
     listener: []
   })
 
   useDebounce({
-    fn: fetchUsers,
+    fn: fetchListProject,
+    delay: 0,
+    listener: []
+  })
+
+  useDebounce({
+    fn: fetchProfessionalData,
     delay: 0,
     listener: []
   })

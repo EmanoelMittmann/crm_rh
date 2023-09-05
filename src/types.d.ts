@@ -84,11 +84,26 @@ export interface UserProjectsProps {
   hours_mounths_performed: number
   extra_hours_percent: number
   hours_mounths_percent: number
+  date_start_allocation: string
+  date_end_allocation: string
+  user_projects_id: number
+  isTechLead: boolean
+  jobs: {
+    id: number
+    name: string
+  }
+  professional: {
+    id: Option | null
+    name: Option | null
+  }
+  job_: {
+    id: number
+    name: string
+  }
   avatar: string
   name: string
   status: boolean
   is_active: boolean
-  job_: string
   job_id: string
   job: {
     id: number

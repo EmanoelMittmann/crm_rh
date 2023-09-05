@@ -81,6 +81,7 @@ export interface TeamProps {
   users: {
     team: TeamMemberProps[]
     user_id: number
+    user_project_id: number
     job_: string
     job: string
     job_id: number

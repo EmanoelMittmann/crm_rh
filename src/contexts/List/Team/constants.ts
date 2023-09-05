@@ -7,8 +7,4 @@ const META_PROPS = {
   search: ''
 } as unknown as DefaultMetaProps
 
-const FILTER_OPTIONS_USERS = {
-  users: []
-}
-
-export default { META_PROPS, FILTER_OPTIONS_USERS }
+export default { META_PROPS }
