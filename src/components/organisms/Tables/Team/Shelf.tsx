@@ -15,7 +15,6 @@ import {
 } from '../../Forms/Project/style'
 import { ShelfProps } from '../types'
 import { ContainerPopover } from './style'
-import { UserProjectsProps } from 'types'
 
 export const Shelf = ({
   props,

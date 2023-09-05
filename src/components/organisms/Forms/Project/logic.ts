@@ -82,18 +82,5 @@ export const validationSchema = yup.object().shape({
           return date <= today
         }
       )
-      .when(
-        'date_start_allocation',
-        (date_start_allocation, schema) =>
-          date_start_allocation
-            ? schema.test(
-                'date_range',
-                'A data final deve ser maior que a data de início de alocação',
-                function (date_end_allocation: string) {
-                  return date_end_allocation > date_start_allocation
-                }
-              )
-            : schema
-      )
   })
 })

@@ -1,8 +1,4 @@
-import type { SelectProps } from '@stardust-ds/react'
-import { type } from 'os'
-
 import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
-import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
 
 import { ProfessionalProps } from '../Professional/types'
 import { ProjectProps, UserProjectsProps } from 'types'
@@ -12,6 +8,7 @@ export interface DefaultMetaProps {
   user_id: number | null
   job: number | null
   team: number | null
+  project_id: number | null
   search: string
 }
 
@@ -29,7 +26,7 @@ export interface ContextTeamProps {
     idUser: number,
     data: any
   ) => Promise<void>
-  fetchListProject(): void
+  bindUserAtProject(id: number, payload: TeamMemberProps): void
 }
 
 export interface newTeamMember {

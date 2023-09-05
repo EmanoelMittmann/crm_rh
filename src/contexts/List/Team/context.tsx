@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from '@stardust-ds/react'
 
 import { TeamMemberProps } from 'components/organisms/Forms/Project/types'
-import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
 
 import api from 'api'
 import { routes } from 'routes'
@@ -12,14 +11,13 @@ import { routes } from 'routes'
 import { useDebounce } from 'hooks'
 
 import { ProfessionalProps } from '../Professional/types'
-import { ContextTeamProps, newTeamMember, ReactNode } from './types'
-import { ProjectProps, UserProjectsProps } from 'types'
+import { ContextTeamProps, ReactNode } from './types'
+import { ProjectProps } from 'types'
 
 export const Context = createContext({} as ContextTeamProps)
-
 export const Provider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [projects, setProjects] = useState<ProjectProps[]>([])
   const [team, setTeam] = useState<TeamMemberProps[]>([])
   const [professional, setProfessional] = useState<
@@ -30,10 +28,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const Team = team
   const project_id = id
 
-  const fetchUsers = async (prject_id: number) => {
+  const fetchUsers = async (project_id: number) => {
     try {
       const response = await api.get(
-        routes.project.updateProject(prject_id)
+        routes.project.updateProject(project_id)
       )
       setTeam(response.data.users)
     } catch (error) {
@@ -51,18 +49,30 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     handleUpdateUser,
     fetchUsers,
     removeUser,
-    fetchListProject
+    bindUserAtProject
   }
 
-  async function fetchListProject() {
-    setIsLoading(true)
-    const { data } = await api.get(routes.project.list, {
-      params: {
-        project_id: project_id
-      }
-    })
-    setProjects(data?.data)
-    setIsLoading(false)
+  async function bindUserAtProject(
+    id: number,
+    payload: TeamMemberProps
+  ) {
+    try {
+      await api.post(routes.project.userProjects(id), payload)
+      toast({
+        type: 'success',
+        title: 'Sucesso',
+        description: 'Profissional adicionado com sucesso',
+        position: 'bottom-right'
+      })
+    } catch (error: any) {
+      return toast({
+        type: 'warning',
+        title: 'Atenção',
+        description: error.response.data.message,
+        position: 'bottom-right'
+      })
+    }
+    fetchUsers(id)
   }
 
   async function fetchProfessionalData() {
@@ -125,7 +135,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
             isTechLead: data.isTechLead
           }
           setTeam(updatedTeam)
-          console.log('updatedTeam: ', updatedTeam)
           await api.put(editTeam, update)
 
           toast({
@@ -183,20 +192,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   function navigateTo(url: string) {
     navigate(url)
   }
-
-  useDebounce({
-    fn: () => {
-      fetchUsers(Number(project_id))
-    },
-    delay: 0,
-    listener: []
-  })
-
-  useDebounce({
-    fn: fetchListProject,
-    delay: 0,
-    listener: []
-  })
 
   useDebounce({
     fn: fetchProfessionalData,

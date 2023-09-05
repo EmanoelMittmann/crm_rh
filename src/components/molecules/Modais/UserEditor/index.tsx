@@ -3,11 +3,13 @@ import {
   useImperativeHandle,
   useState,
   useCallback,
-  useEffect
+  useEffect,
+  useContext
 } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { Button, SelectOption } from '@stardust-ds/react'
+import { List } from 'contexts'
 import { theme } from 'styles'
 
 import { Inputs, Selects } from 'components/atoms'
@@ -15,7 +17,10 @@ import Close from 'components/atoms/Buttons/Close'
 import { FormTeamProps } from 'components/organisms/Forms/Project'
 import { validation } from 'components/organisms/Forms/Project/logic'
 import { FormProjectProps } from 'components/organisms/Forms/Project/types'
-import { UpdateProfessionalProps } from 'components/organisms/Forms/Team/types'
+import {
+  TeamMemberProps,
+  UpdateProfessionalProps
+} from 'components/organisms/Forms/Team/types'
 
 import {
   Columns,
@@ -46,7 +51,7 @@ interface IModalUserProps {
 }
 
 export interface IHandleModalPropsUserNew {
-  open(user_id: number, user_projects_id: number, job_: string): void
+  open(user_projects_id: number): void
   close(): void
 }
 
@@ -63,9 +68,7 @@ const UsersEditor = forwardRef<
 >((props, ref) => {
   const { text, EventOne, placeholder } = props
   const [isOpen, setIsOpen] = useState({
-    id: 0,
-    user_projects_id: 0,
-    job_: ''
+    user_projects_id: 0
   })
   const [selectedStatus, setSelectedStatus] = useState<Option>()
   const [selectedJob, setSelectedJob] = useState<Option>()
@@ -79,28 +82,23 @@ const UsersEditor = forwardRef<
     formState: { errors }
   } = useFormContext<FormProjectProps>()
 
-  const { team } = useFormContext<FormTeamProps>().watch()
+  const { team } = useContext(List.Team.Context)
   const professional =
     team &&
-    team.find(
-      (item) =>
-        item.user_id === isOpen.id &&
-        item.user_projects_id === isOpen.user_projects_id &&
-        item.job_ === isOpen.job_
-    )
+    (team.find(
+      (item) => item.user_projects_id === isOpen.user_projects_id
+    ) as TeamMemberProps)
 
   const close = useCallback(() => {
-    setIsOpen({ id: 0, user_projects_id: 0, job_: '' })
+    setIsOpen({ user_projects_id: 0 })
   }, [])
 
   useImperativeHandle(
     ref,
     () => ({
-      open: (user_id, user_projects_id, job_) => {
+      open: (user_projects_id) => {
         setIsOpen({
-          id: user_id,
-          user_projects_id: user_projects_id,
-          job_: job_
+          user_projects_id: user_projects_id
         })
       },
       close
@@ -161,7 +159,7 @@ const UsersEditor = forwardRef<
     validateError()
   }, [selectedStatus?.label, alocation])
 
-  if (isOpen.id === 0) return null
+  if (isOpen.user_projects_id === 0) return null
 
   return (
     <>
@@ -175,7 +173,7 @@ const UsersEditor = forwardRef<
             <ContainerShelfColumn gap='.5rem' width='210px'>
               <Image src={professional?.avatar} />
               <TeamJobName>
-                <Text>{professional?.professional.name?.label}</Text>
+                <Text>{professional.name}</Text>
                 <TextJob>{selectedJob?.label}</TextJob>
               </TeamJobName>
               <TextHours>
@@ -254,28 +252,36 @@ const UsersEditor = forwardRef<
                 }}
                 bgColor='#0066FF'
                 onClick={() => {
-                  EventOne(isOpen.id, isOpen.user_projects_id, {
-                    hours_mounths_estimated: Number(
-                      watch('users.hours_mounths_estimated')
-                    ),
-                    hours_mounths_performed:
-                      Number(
-                        watch('users.hours_mounths_performed')
-                      ) || 0,
-                    date_end_allocation: String(
-                      watch('users.date_end_allocation')
-                    ),
-                    date_start_allocation: String(
-                      watch('users.date_start_allocation')
-                    ),
-                    isTechLead: Boolean(professional?.isTechLead),
-                    job_: String(selectedJob?.label),
-                    status: Boolean(selectedStatus?.value),
-                    user_id: Number(isOpen.id),
-                    user_projects_id: Number(isOpen.user_projects_id),
-                    extra_hours_estimated: 0,
-                    extra_hours_performed: 0
-                  })
+                  EventOne(
+                    professional.user_id,
+                    isOpen.user_projects_id,
+                    {
+                      hours_mounths_estimated: Number(
+                        watch('users.hours_mounths_estimated')
+                      ),
+                      hours_mounths_performed:
+                        Number(
+                          watch('users.hours_mounths_performed')
+                        ) || 0,
+                      date_end_allocation: watch(
+                        'users.date_end_allocation'
+                      )
+                        ? String(watch('users.date_end_allocation'))
+                        : null,
+                      date_start_allocation: String(
+                        watch('users.date_start_allocation')
+                      ),
+                      isTechLead: Boolean(professional?.isTechLead),
+                      job_: String(selectedJob?.label),
+                      status: Boolean(selectedStatus?.value),
+                      user_id: Number(professional?.user_id),
+                      user_projects_id: Number(
+                        isOpen.user_projects_id
+                      ),
+                      extra_hours_estimated: 0,
+                      extra_hours_performed: 0
+                    }
+                  )
 
                   close()
                 }}

@@ -79,9 +79,7 @@ const RegisterProjects = () => {
         navigate('/project')
         return
       }
-
       await api.post(routes.project.register, sanitizeData)
-
       toast({
         type: 'success',
         title: 'Projeto cadastrado com sucesso.',

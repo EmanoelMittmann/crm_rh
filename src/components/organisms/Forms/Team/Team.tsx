@@ -1,8 +1,8 @@
 import { ChangeEvent, useContext, useState } from 'react'
-import { useFormContext, UseFormReturn } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import { Flex, toast } from '@stardust-ds/react'
+import { Flex } from '@stardust-ds/react'
 import { List } from 'contexts'
 
 import { Selects, Inputs, SelectOption } from 'components/atoms'
@@ -10,20 +10,22 @@ import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { ContainerRow } from 'components/organisms/Forms/Project/style'
 import { TODAY } from 'components/utils/dateNow'
 
-import { handleTeam } from './logic'
+import { builderPayload, handleTeam } from './logic'
 import { FormTeamProps, TeamMemberProps } from './types'
 
 export const Team = () => {
-  const { register, watch, setValue, ...props } =
-    useFormContext<FormTeamProps>()
+  const Context = useFormContext<FormTeamProps>()
   const {
+    watch,
+    setValue,
+    register,
     formState: { errors }
-  } = props
+  } = Context
 
   const { id } = useParams()
-  const project_id = id
+  const project_id = Number(id)
 
-  const { professional, team, fetchUsers } = useContext(
+  const { professional, team, bindUserAtProject } = useContext(
     List.Team.Context
   )
 
@@ -119,16 +121,13 @@ export const Team = () => {
           height='42px'
           type='button'
           onClick={() => {
-            handleTeam(
-              {
-                register,
-                watch,
-                setValue,
-                ...props
-              },
-              Number(id)
-            )
-            fetchUsers(Number(id))
+            if (project_id) {
+              return bindUserAtProject(
+                project_id,
+                builderPayload(Context) as TeamMemberProps
+              )
+            }
+            handleTeam(Context)
           }}
         />
       </Flex>

@@ -12,6 +12,8 @@ import {
 } from 'components/molecules/Modais'
 import { IHandleModalPropsUserNew } from 'components/molecules/Modais/UserEditor'
 import { FormTeamProps } from 'components/organisms/Forms/Project'
+import { handleDeleteTeam } from 'components/organisms/Forms/Team/logic'
+import { TeamMemberProps } from 'components/organisms/Forms/Team/types'
 import {
   LoadingWrapper,
   Main
@@ -29,20 +31,20 @@ export const Team = () => {
     team,
     removeUser
   } = useContext(List.Team.Context)
-  const { watch, setValue } = useFormContext<FormTeamProps>()
+  const Context = useFormContext<FormTeamProps>()
+  const { watch } = Context
+
   const modalRef = useRef<IHandleModalPropsUserNew>(null)
   const modalRefRemove = useRef<IHandleModalPropsDelete>(null)
 
-  const Team = team
-  //const Team = watch('team', [])
+  const TeamUserForms = watch('team') || []
+  const Team = team.length == 0 ? TeamUserForms : team
+
   const { id } = useParams()
   const project_id = id
 
   const POPOVER_OPTIONS = (
-    user_id: number,
-    status: boolean,
-    name: string,
-    job_: string,
+    payload: TeamMemberProps,
     user_projects_id: number
   ) => {
     const options = []
@@ -50,15 +52,19 @@ export const Team = () => {
     if (project_id) {
       const option = {
         label: 'Editar',
-        callback: () =>
-          modalRef.current?.open(user_id, user_projects_id, job_)
+        callback: () => modalRef.current?.open(user_projects_id)
       }
       options.push(option)
     }
     const option = {
       label: 'Remover',
       callback: () =>
-        modalRefRemove.current?.open(user_projects_id, user_id)
+        project_id
+          ? modalRefRemove.current?.open(
+              user_projects_id,
+              payload.user_id
+            )
+          : handleDeleteTeam(Context, payload)
     }
     options.push(option)
     return options
@@ -77,14 +83,11 @@ export const Team = () => {
         <>
           {Team.map((props) => (
             <Shelf
-              key={props.user_id}
+              key={props.user_projects_id}
               config={{
                 template: GRID_TEMPLATE,
                 options: POPOVER_OPTIONS(
-                  props.user_id,
-                  props.is_active,
-                  props.name,
-                  props.job_,
+                  props,
                   props.user_projects_id
                 )
               }}
