@@ -7,20 +7,6 @@ import { routes } from 'routes'
 
 import { FormTeamProps, TeamMemberProps } from './types'
 
-export async function bindUserAtProject(
-  id: number,
-  payload: TeamMemberProps
-) {
-  try {
-    await api.post(routes.project.userProjects(id), payload)
-  } catch (error) {
-    return toast({
-      title: 'Error',
-      position: 'bottom-right'
-    })
-  }
-}
-
 export function verifyFormat(date: string): boolean {
   const padrao = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
   return padrao.test(date)
@@ -57,12 +43,14 @@ export function convertDateFormat(inputDate: string) {
 
 function verifyProfessional(
   context: UseFormReturn<FormTeamProps>,
-  professional: TeamMemberProps
+  professional: TeamMemberProps | undefined
 ) {
   const { watch } = context
   const { team } = watch()
 
   if (!team) return true
+
+  if (!professional) return false
 
   const Exist = team
     .filter((prop) => prop.user_id === professional.user_id)
@@ -95,19 +83,10 @@ function verifyProfessional(
 
   return true
 }
-
-export function handleTeam(
-  Context: UseFormReturn<FormTeamProps>,
-  ProjectId: number
-) {
-  const {
-    watch,
-    setValue,
-    getValues,
-    setError,
-    clearErrors,
-    formState: { errors }
-  } = Context
+export const builderPayload = (
+  Context: UseFormReturn<FormTeamProps>
+) => {
+  const { watch } = Context
 
   const { jobs, users, professional } = watch()
   const { avatar } = professional
@@ -116,6 +95,37 @@ export function handleTeam(
   const hoursMonth = users.hours_mounths_estimated || 0
   const techLead = users.isTechLead
   const job = jobs
+
+  if (professional.name != null) {
+    const newTeamMember = {
+      user_id: professional.name.value,
+      user_project_id: users.user_project_id,
+      professional,
+      date_start_allocation: users.date_start_allocation,
+      job,
+      job_: techLead ? 'Tech Lead' : job_,
+      isTechLead: techLead,
+      extra_hours_estimated: users.extra_hours_estimated | 0,
+      hours_mounths_estimated: hoursMonth,
+      hours_mounths_performed: users.hours_mounths_performed | 0,
+      extra_hours_performed: users.extra_hours_performed | 0,
+      status: status ? 'Ativo' : 'Inativo',
+      avatar: avatar
+        ? avatar
+        : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
+    } as unknown as TeamMemberProps
+
+    return newTeamMember
+  }
+}
+
+export async function handleTeam(
+  Context: UseFormReturn<FormTeamProps>
+) {
+  const { watch, setValue, setError, clearErrors, getValues } =
+    Context
+  const { jobs, users, professional } = watch()
+  const hoursMonth = users.hours_mounths_estimated || 0
 
   if (professional && jobs) {
     const validationToIncludeTeam = (errorMessage: string) => ({
@@ -160,36 +170,25 @@ export function handleTeam(
     }
     clearErrors()
 
-    const newTeamMember = {
-      user_id: professional.name.value,
-      professional,
-      date_start_allocation: users.date_start_allocation,
-      job,
-      job_: techLead ? 'Tech Lead' : job_,
-      isTechLead: techLead,
-      extra_hours_estimated: users.extra_hours_estimated | 0,
-      hours_mounths_estimated: hoursMonth,
-      hours_mounths_performed: users.hours_mounths_performed | 0,
-      extra_hours_performed: users.extra_hours_performed | 0,
-      status: status ? 'Ativo' : 'Inativo',
-      avatar: avatar
-        ? avatar
-        : 'https://www.fiscalti.com.br/wp-content/uploads/2021/02/default-user-image.png'
-    } as unknown as TeamMemberProps
+    const newTeamMember = builderPayload(Context)
 
     const currentTeam = getValues('team') || []
 
     if (verifyProfessional(Context, newTeamMember)) {
-      if (ProjectId) {
-        bindUserAtProject(Number(ProjectId), newTeamMember)
-      }
-      const newTeam = [...currentTeam, newTeamMember]
+      const newTeam = [
+        ...currentTeam,
+        newTeamMember
+      ] as TeamMemberProps[]
+
       setValue('team', newTeam)
+
       toast({
-        title: 'Profissional cadastrado com sucesso!',
+        title: 'Cadastro de profissional!',
+        description: 'Profissional cadastrado com sucesso!',
         type: 'success',
         position: 'bottom-right'
       })
+      return
     }
   }
   setValue('professional.name', null)
@@ -197,4 +196,16 @@ export function handleTeam(
   setValue('users.date_start_allocation', undefined)
   setValue('users.hours_mounths_estimated', null)
   return
+}
+
+export const handleDeleteTeam = (
+  Context: UseFormReturn<FormTeamProps>,
+  payload: TeamMemberProps
+) => {
+  const { setValue, getValues } = Context
+  const currentTeam = getValues('team') || []
+  const newTeam = currentTeam.indexOf(payload)
+  currentTeam.splice(newTeam, 1)
+  const newTeamMember = [...currentTeam] as TeamMemberProps[]
+  setValue('team', newTeamMember)
 }

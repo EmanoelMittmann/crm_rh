@@ -4,11 +4,8 @@ const META_PROPS = {
   users: null,
   user_id: null,
   team: null,
+  project_id: null,
   search: ''
 } as unknown as DefaultMetaProps
 
-const FILTER_OPTIONS_USERS = {
-  users: []
-}
-
-export default { META_PROPS, FILTER_OPTIONS_USERS }
+export default { META_PROPS }

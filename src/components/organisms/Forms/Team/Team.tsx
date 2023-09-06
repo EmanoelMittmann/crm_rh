@@ -3,42 +3,32 @@ import { useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import { Flex } from '@stardust-ds/react'
+import { List } from 'contexts'
 
 import { Selects, Inputs, SelectOption } from 'components/atoms'
 import { ButtonGeneric } from 'components/atoms/ButtonGeneric'
 import { ContainerRow } from 'components/organisms/Forms/Project/style'
-import { Table } from 'components/organisms/Tables'
 import { TODAY } from 'components/utils/dateNow'
 
-import api from 'api'
-import { routes } from 'routes'
-
-import { useDebounce } from 'hooks'
-
-import { ProfessionalProps } from '../Professional/types'
-import { handleTeam } from './logic'
-import { FormTeamProps } from './types'
+import { builderPayload, handleTeam } from './logic'
+import { FormTeamProps, TeamMemberProps } from './types'
 
 export const Team = () => {
-  const [professional, setProfessional] = useState<
-    ProfessionalProps[]
-  >([])
-  const { register, watch, setValue, ...props } =
-    useFormContext<FormTeamProps>()
+  const Context = useFormContext<FormTeamProps>()
   const {
+    watch,
+    setValue,
+    register,
     formState: { errors }
-  } = props
+  } = Context
 
-  async function fetchProfessionalData() {
-    try {
-      const response = await api.get(
-        routes.professional.list + '?limit=1000'
-      )
-      setProfessional(response?.data.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const { id } = useParams()
+  const project_id = Number(id)
+
+  const { professional, team, bindUserAtProject } = useContext(
+    List.Team.Context
+  )
+
   const listOfProfessionalOfTeam = professional
     .filter((item) => item.is_active === true)
     .map((item) => ({
@@ -46,18 +36,12 @@ export const Team = () => {
       value: item.id
     }))
 
-  useDebounce({
-    fn: fetchProfessionalData,
-    delay: 0,
-    listener: []
-  })
-
-  const { id } = useParams()
   const job = watch('jobs.name.label')
   const options = watch('options')
-  const teamUser = watch('team', [])
+  const teamUser = team
 
   let newTime = teamUser
+
   const TechLead = teamUser.filter(
     (obj) =>
       obj.job_ === 'Tech Lead' ||
@@ -136,22 +120,17 @@ export const Team = () => {
           bRadius='500px'
           height='42px'
           type='button'
-          onClick={() =>
-            handleTeam(
-              {
-                register,
-                watch,
-                setValue,
-                ...props
-              },
-              Number(id)
-            )
-          }
+          onClick={() => {
+            if (project_id) {
+              return bindUserAtProject(
+                project_id,
+                builderPayload(Context) as TeamMemberProps
+              )
+            }
+            handleTeam(Context)
+          }}
         />
       </Flex>
-      <ContainerRow>
-        <Table.Team />
-      </ContainerRow>
     </>
   )
 }

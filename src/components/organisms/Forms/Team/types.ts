@@ -81,6 +81,7 @@ export interface TeamProps {
   users: {
     team: TeamMemberProps[]
     user_id: number
+    user_project_id: number
     job_: string
     job: string
     job_id: number
@@ -144,7 +145,7 @@ export interface UpdateProfessionalProps {
   extra_hours_estimated: number
   hours_mounths_performed: number
   extra_hours_performed: number
-  date_end_allocation: string
+  date_end_allocation: string | null
   user_projects_id: number
   date_start_allocation?: string | undefined
   isTechLead: boolean

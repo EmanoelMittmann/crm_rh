@@ -99,7 +99,7 @@ export function handlePopulateFields(
     hours_mounths_performed: prop.hours_mounths_performed | 0,
     extra_hours_performed: prop.extra_hours_performed | 0,
     date_start_allocation: prop.date_start_allocation,
-    date_end_allocation: getDateInput(prop.date_end_allocation)
+    date_end_allocation: prop.date_end_allocation
   }))
 
   methods.reset({
