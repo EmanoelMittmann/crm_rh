@@ -132,12 +132,11 @@ export const Project = () => {
         />
         <Inputs.Default
           {...register('projects.selected.input2')}
-          label='Horas extras estimadas'
-          type='number'
+          label='Inicio de Alocação'
+          type='date'
           error={errors.projects?.selected?.input2?.message}
-          placeholder='Horas extras'
+          placeholder='Inicio de Alocação'
           width='350px'
-          disabled={!watch('extra_hour_activated')}
         />
         <ButtonGeneric
           top='1.5em'
